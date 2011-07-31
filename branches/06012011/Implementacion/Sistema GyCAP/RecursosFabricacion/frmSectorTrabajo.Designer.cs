@@ -75,7 +75,7 @@
             this.txtDescripcion.Location = new System.Drawing.Point(85, 98);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(305, 63);
+            this.txtDescripcion.Size = new System.Drawing.Size(305, 83);
             this.txtDescripcion.TabIndex = 3;
             this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
             // 
@@ -183,6 +183,7 @@
             this.dgvLista.Size = new System.Drawing.Size(471, 153);
             this.dgvLista.TabIndex = 0;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
+            this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // groupBox1
             // 
@@ -292,7 +293,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 13);
             this.label6.TabIndex = 6;
-            this.label6.Text = "Descripcion:";
+            this.label6.Text = "Descripción:";
             // 
             // label3
             // 

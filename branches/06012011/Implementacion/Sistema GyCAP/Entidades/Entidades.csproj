@@ -101,6 +101,7 @@
     <Compile Include="Excepciones\ErrorValidacionException.cs" />
     <Compile Include="Excepciones\ImageNotFoundException.cs" />
     <Compile Include="Excepciones\OrdenTrabajoException.cs" />
+    <Compile Include="Excepciones\SaveImageException.cs" />
     <Compile Include="Excepciones\ValorNoNegativoException.cs" />
     <Compile Include="FabricanteMaquina.cs" />
     <Compile Include="GrupoEstructura.cs" />

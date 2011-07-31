@@ -219,13 +219,18 @@ namespace GyCAP.UI.EstructuraProducto
                     {
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
+                    catch (Entidades.Excepciones.SaveImageException ex)
+                    {
+                        MensajesABM.MsjExcepcion(string.Concat(ex.Message, "\nSin embargo la parte fue creada correctamente."), this.Text, MensajesABM.Operaciones.Guardado);
+                        SetInterface(estadoUI.inicio);
+                    }
                 }
                 else
                 {
                     int numero = Convert.ToInt32(dvPartes[dgvLista.SelectedRows[0].Index]["part_numero"]);
 
                     try
-                    {                        
+                    {
                         dsParte.PARTES.FindByPART_NUMERO(numero).BeginEdit();
                         dsParte.PARTES.FindByPART_NUMERO(numero).PART_NOMBRE = txtNombre.Text;
                         dsParte.PARTES.FindByPART_NUMERO(numero).PART_DESCRIPCION = txtDescripcion.Text;
@@ -245,11 +250,10 @@ namespace GyCAP.UI.EstructuraProducto
                         dsParte.PARTES.FindByPART_NUMERO(numero).EndEdit();
                         BLL.ParteBLL.Actualizar(dsParte);
                         dsParte.PARTES.AcceptChanges();
-                        
-                        MensajesABM.MsjConfirmaGuardar("Parte", this.Text, MensajesABM.Operaciones.Modificación);
 
                         BLL.ParteBLL.GuardarImagen(numero, pbImagen.Image);
-                        
+                        MensajesABM.MsjConfirmaGuardar("Parte", this.Text, MensajesABM.Operaciones.Modificación);
+
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
@@ -259,6 +263,11 @@ namespace GyCAP.UI.EstructuraProducto
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
+                    }
+                    catch (Entidades.Excepciones.SaveImageException ex)
+                    {
+                        MensajesABM.MsjExcepcion(string.Concat(ex.Message, "\nSin embargo los datos de la parte fueron guardados correctamente."), this.Text, MensajesABM.Operaciones.Guardado);
+                        SetInterface(estadoUI.inicio);
                     }
                 }
             }

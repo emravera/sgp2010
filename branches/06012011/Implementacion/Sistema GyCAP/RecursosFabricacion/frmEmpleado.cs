@@ -402,13 +402,14 @@ namespace GyCAP.UI.RecursosFabricacion
                         rowEmpleado.EndEdit();
                         Image imagen = pbImagen.Image;
                         dsEmpleado.EMPLEADOS.AddEMPLEADOSRow(rowEmpleado);
-                        int codigo = BLL.EmpleadoBLL.Insertar(dsEmpleado);
-                        BLL.EmpleadoBLL.GuardarFoto(codigo, imagen);
+                        int codigo = BLL.EmpleadoBLL.Insertar(dsEmpleado);                        
                         rowEmpleado.BeginEdit();
                         rowEmpleado.E_CODIGO = codigo;
                         rowEmpleado.EndEdit();
                         dsEmpleado.EMPLEADOS.AcceptChanges();
                         dsEmpleado.CAPACIDADESXEMPLEADO.AcceptChanges();
+
+                        BLL.EmpleadoBLL.GuardarFoto(codigo, imagen);
                         imagen.Dispose();
 
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
@@ -427,22 +428,28 @@ namespace GyCAP.UI.RecursosFabricacion
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
                         dsEmpleado.EMPLEADOS.RejectChanges();
+                        dsEmpleado.CAPACIDAD_EMPLEADOS.RejectChanges();
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         dsEmpleado.EMPLEADOS.RejectChanges();
+                        dsEmpleado.CAPACIDAD_EMPLEADOS.RejectChanges();
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                    }
+                    catch (Entidades.Excepciones.SaveImageException ex)
+                    {
+                        MensajesABM.MsjExcepcion(string.Concat(ex.Message, "\nSin embargo el empleado fue creado correctamente."), this.Text, MensajesABM.Operaciones.Guardado);
+                        SetInterface(estadoUI.inicio);
                     }
                 }
                 else
                 {
                     try
                     {
-                        //Está modificando una designacion
                         //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada                
                         int codigo = Convert.ToInt32(dvEmpleado[dgvLista.SelectedRows[0].Index]["e_codigo"]);
-                        
+
                         //Segundo obtenemos los nuevos datos que ingresó el usuario
                         dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).BeginEdit();
                         dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).E_APELLIDO = txtApellido.Text.Trim();
@@ -457,25 +464,32 @@ namespace GyCAP.UI.RecursosFabricacion
                         dsEmpleado.EMPLEADOS.FindByE_CODIGO(codigo).EndEdit();
 
                         //Lo actualizamos en la DB
-                        BLL.EmpleadoBLL.Actualizar(dsEmpleado);
-                        MensajesABM.MsjConfirmaGuardar("Empleado", this.Text, MensajesABM.Operaciones.Modificación);
+                        BLL.EmpleadoBLL.Actualizar(dsEmpleado);                        
                         dsEmpleado.EMPLEADOS.AcceptChanges();
                         dsEmpleado.CAPACIDADESXEMPLEADO.AcceptChanges();
 
                         BLL.EmpleadoBLL.GuardarFoto(codigo, pbImagen.Image);
-                        
+                        MensajesABM.MsjConfirmaGuardar("Empleado", this.Text, MensajesABM.Operaciones.Modificación);
                         //Y por último seteamos el estado de la interfaz
-                        SetInterface(estadoUI.inicio);                        
+
+                        SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
                         dsEmpleado.EMPLEADOS.RejectChanges();
+                        dsEmpleado.CAPACIDAD_EMPLEADOS.RejectChanges();
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         dsEmpleado.EMPLEADOS.RejectChanges();
+                        dsEmpleado.CAPACIDAD_EMPLEADOS.RejectChanges();
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                    }
+                    catch (Entidades.Excepciones.SaveImageException ex)
+                    {
+                        MensajesABM.MsjExcepcion(string.Concat(ex.Message, "\nSin embargo los datos del empleado fueron guardados correctamente."), this.Text, MensajesABM.Operaciones.Guardado);
+                        SetInterface(estadoUI.inicio);
                     }
                 }
 
@@ -587,7 +601,7 @@ namespace GyCAP.UI.RecursosFabricacion
 
         private void control_Enter(object sender, EventArgs e)
         {
-            if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
+            //if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
         }
 
         #endregion

@@ -8,73 +8,61 @@ using System.Data;
 namespace GyCAP.DAL
 {
     public class SectorDAL
-    {
-        //BUSQUEDA
-        //Metodo sobrecargado (3 Sobrecargas)
-        //Busqueda por nombre o por abreviatura
+    {        
         public static void ObtenerSector(string nombre, string abrev, Data.dsHojaRuta ds)
         {
-           string sql, dato;
+            string sql = @"SELECT sec_codigo, sec_nombre, sec_descripcion, sec_abreviatura
+                              FROM SECTORES WHERE 1=1 ";
 
-            if (nombre != String.Empty && abrev == string.Empty)
+            //Sirve para armar el nombre de los parámetros
+            int cantidadParametros = 0;
+            //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
+            object[] valoresFiltros = new object[2];
+            
+            if (nombre != String.Empty)
             {
-                    sql = @"SELECT sec_codigo, sec_nombre, sec_descripcion, sec_abreviatura
-                              FROM SECTORES
-                              WHERE sec_nombre LIKE @p0";
-                    dato= nombre;
+                sql += " AND sec_nombre LIKE @p" + cantidadParametros;
+                
                 //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
-                dato = "%" + dato + "%";
-                object[] valorParametros = { dato };
-                try
-                {
-                    DB.FillDataSet(ds, "SECTORES", sql, valorParametros);
-                }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+                nombre = "%" + nombre + "%";
+                valoresFiltros[cantidadParametros] = nombre;
+                cantidadParametros++;
             }
            
-            if (abrev != string.Empty && nombre == string.Empty)
+            if (abrev != string.Empty)
             {
-                    sql = @"SELECT sec_codigo, sec_nombre, sec_descripcion, sec_abreviatura
-                              FROM SECTORES
-                              WHERE sec_abreviatura LIKE @p0";
-                    dato= abrev;
+                sql += " AND sec_abreviatura LIKE @p" + cantidadParametros;
+                
                 //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
-                dato = "%" + dato + "%";
-                object[] valorParametros = { dato };
-                try
-                {
-                    DB.FillDataSet(ds, "SECTORES", sql, valorParametros);
-                }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-            }
-            if (abrev != string.Empty && nombre != string.Empty)
-            {
-                 sql = @"SELECT sec_codigo, sec_nombre, sec_descripcion, sec_abreviatura
-                              FROM SECTORES
-                              WHERE sec_abreviatura LIKE @p0 and sec_nombre LIKE @p1";
-               
-                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
-                nombre = "%" + nombre + "%";           
                 abrev = "%" + abrev + "%";
-                object[] valorParametros = { nombre, abrev };
+                valoresFiltros[cantidadParametros] = abrev;
+                cantidadParametros++;
+            }            
+
+            if (cantidadParametros > 0)
+            {
+                //Buscamos con filtro, armemos el array de los valores de los parametros
+                object[] valorParametros = new object[cantidadParametros];
+                for (int i = 0; i < cantidadParametros; i++)
+                {
+                    valorParametros[i] = valoresFiltros[i];
+                }
                 try
                 {
-                    DB.FillDataSet(ds, "SECTORES", sql, valorParametros);
+                    DB.FillDataTable(ds.SECTORES, sql, valorParametros);
                 }
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
             else
             {
-                sql = @"SELECT sec_codigo, sec_nombre, sec_descripcion, sec_abreviatura
-                              FROM SECTORES";
+                //Buscamos sin filtro
                 try
                 {
-                    DB.FillDataSet(ds, "SECTORES", sql, null);
+                    DB.FillDataTable(ds.SECTORES, sql, null);
                 }
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-            }
-         
-        }
+            }         
+       }
 
        public static void ObtenerSector(DataTable dtSectores)
         {
@@ -91,18 +79,16 @@ namespace GyCAP.DAL
         {
             string sql1 = "SELECT count(sec_codigo) FROM EMPLEADOS WHERE sec_codigo = @p0";
             string sql2 = "SELECT count(sec_codigo) FROM CENTROS_TRABAJOS WHERE sec_codigo = @p0";
-            string sql3 = "SELECT count(sec_codigo) FROM PROCESOS WHERE sec_codigo = @p0";
-            string sql4 = "SELECT count(sec_codigo) FROM PROVEEDORES WHERE sec_codigo = @p0";
+            string sql3 = "SELECT count(sec_codigo) FROM PROVEEDORES WHERE sec_codigo = @p0";
             
             object[] valorParametros = { codigo };
             try
             {
                 int resultadoSql1 = Convert.ToInt32(DB.executeScalar(sql1, valorParametros, null));
-                int resultadoSql2 = Convert.ToInt32(DB.executeScalar(sql2, valorParametros, null));
+                int resultadoSql2 = Convert.ToInt32(DB.executeScalar(sql2, valorParametros, null));                
                 int resultadoSql3 = Convert.ToInt32(DB.executeScalar(sql3, valorParametros, null));
-                int resultadoSql4 = Convert.ToInt32(DB.executeScalar(sql4, valorParametros, null));
                 
-                if (resultadoSql1 + resultadoSql2 + resultadoSql3 + resultadoSql4 == 0) { return true; }
+                if (resultadoSql1 + resultadoSql2 + resultadoSql3 == 0) { return true; }
                 else { return false; }
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }

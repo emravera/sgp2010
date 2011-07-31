@@ -342,7 +342,7 @@ SELECT E_CODIGO, E_LEGAJO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHAN
         <xs:element name="CAPACIDAD_EMPLEADOS" msprop:Generator_UserTableName="CAPACIDAD_EMPLEADOS" msprop:Generator_RowDeletedName="CAPACIDAD_EMPLEADOSRowDeleted" msprop:Generator_RowChangedName="CAPACIDAD_EMPLEADOSRowChanged" msprop:Generator_RowClassName="CAPACIDAD_EMPLEADOSRow" msprop:Generator_RowChangingName="CAPACIDAD_EMPLEADOSRowChanging" msprop:Generator_RowEvArgName="CAPACIDAD_EMPLEADOSRowChangeEvent" msprop:Generator_RowEvHandlerName="CAPACIDAD_EMPLEADOSRowChangeEventHandler" msprop:Generator_TableClassName="CAPACIDAD_EMPLEADOSDataTable" msprop:Generator_TableVarName="tableCAPACIDAD_EMPLEADOS" msprop:Generator_RowDeletingName="CAPACIDAD_EMPLEADOSRowDeleting" msprop:Generator_TablePropName="CAPACIDAD_EMPLEADOS">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="CEMP_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="CEMP_CODIGO" msprop:Generator_ColumnPropNameInRow="CEMP_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCEMP_CODIGO" msprop:Generator_ColumnPropNameInTable="CEMP_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="CEMP_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="CEMP_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCEMP_CODIGO" msprop:Generator_ColumnPropNameInRow="CEMP_CODIGO" msprop:Generator_ColumnPropNameInTable="CEMP_CODIGOColumn" type="xs:decimal" />
               <xs:element name="CEMP_NOMBRE" msprop:Generator_UserColumnName="CEMP_NOMBRE" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnCEMP_NOMBRE" msprop:Generator_ColumnPropNameInTable="CEMP_NOMBREColumn" msprop:Generator_ColumnPropNameInRow="CEMP_NOMBRE" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -363,16 +363,16 @@ SELECT E_CODIGO, E_LEGAJO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHAN
         <xs:element name="CAPACIDADESXEMPLEADO" msprop:Generator_UserTableName="CAPACIDADESXEMPLEADO" msprop:Generator_RowDeletedName="CAPACIDADESXEMPLEADORowDeleted" msprop:Generator_RowChangedName="CAPACIDADESXEMPLEADORowChanged" msprop:Generator_RowClassName="CAPACIDADESXEMPLEADORow" msprop:Generator_RowChangingName="CAPACIDADESXEMPLEADORowChanging" msprop:Generator_RowEvArgName="CAPACIDADESXEMPLEADORowChangeEvent" msprop:Generator_RowEvHandlerName="CAPACIDADESXEMPLEADORowChangeEventHandler" msprop:Generator_TableClassName="CAPACIDADESXEMPLEADODataTable" msprop:Generator_TableVarName="tableCAPACIDADESXEMPLEADO" msprop:Generator_RowDeletingName="CAPACIDADESXEMPLEADORowDeleting" msprop:Generator_TablePropName="CAPACIDADESXEMPLEADO">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="CXE_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="CXE_CODIGO" msprop:Generator_ColumnPropNameInRow="CXE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCXE_CODIGO" msprop:Generator_ColumnPropNameInTable="CXE_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="E_CODIGO" msprop:Generator_UserColumnName="E_CODIGO" msprop:Generator_ColumnPropNameInRow="E_CODIGO" msprop:Generator_ColumnVarNameInTable="columnE_CODIGO" msprop:Generator_ColumnPropNameInTable="E_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="CEMP_CODIGO" msprop:Generator_UserColumnName="CEMP_CODIGO" msprop:Generator_ColumnPropNameInRow="CEMP_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCEMP_CODIGO" msprop:Generator_ColumnPropNameInTable="CEMP_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="CXE_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="CXE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCXE_CODIGO" msprop:Generator_ColumnPropNameInRow="CXE_CODIGO" msprop:Generator_ColumnPropNameInTable="CXE_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="E_CODIGO" msprop:Generator_UserColumnName="E_CODIGO" msprop:Generator_ColumnVarNameInTable="columnE_CODIGO" msprop:Generator_ColumnPropNameInRow="E_CODIGO" msprop:Generator_ColumnPropNameInTable="E_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="CEMP_CODIGO" msprop:Generator_UserColumnName="CEMP_CODIGO" msprop:Generator_ColumnVarNameInTable="columnCEMP_CODIGO" msprop:Generator_ColumnPropNameInRow="CEMP_CODIGO" msprop:Generator_ColumnPropNameInTable="CEMP_CODIGOColumn" type="xs:decimal" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
         <xs:element name="SECTORES" msprop:Generator_UserTableName="SECTORES" msprop:Generator_RowDeletedName="SECTORESRowDeleted" msprop:Generator_RowChangedName="SECTORESRowChanged" msprop:Generator_RowClassName="SECTORESRow" msprop:Generator_RowChangingName="SECTORESRowChanging" msprop:Generator_RowEvArgName="SECTORESRowChangeEvent" msprop:Generator_RowEvHandlerName="SECTORESRowChangeEventHandler" msprop:Generator_TableClassName="SECTORESDataTable" msprop:Generator_TableVarName="tableSECTORES" msprop:Generator_RowDeletingName="SECTORESRowDeleting" msprop:Generator_TablePropName="SECTORES">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="SEC_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="SEC_CODIGO" msprop:Generator_ColumnPropNameInRow="SEC_CODIGO" msprop:Generator_ColumnVarNameInTable="columnSEC_CODIGO" msprop:Generator_ColumnPropNameInTable="SEC_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="SEC_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="SEC_CODIGO" msprop:Generator_ColumnVarNameInTable="columnSEC_CODIGO" msprop:Generator_ColumnPropNameInRow="SEC_CODIGO" msprop:Generator_ColumnPropNameInTable="SEC_CODIGOColumn" type="xs:decimal" />
               <xs:element name="SEC_NOMBRE" msprop:Generator_UserColumnName="SEC_NOMBRE" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnSEC_NOMBRE" msprop:Generator_ColumnPropNameInTable="SEC_NOMBREColumn" msprop:Generator_ColumnPropNameInRow="SEC_NOMBRE" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -400,7 +400,7 @@ SELECT E_CODIGO, E_LEGAJO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHAN
         <xs:element name="ESTADO_EMPLEADOS" msprop:Generator_UserTableName="ESTADO_EMPLEADOS" msprop:Generator_RowDeletedName="ESTADO_EMPLEADOSRowDeleted" msprop:Generator_RowChangedName="ESTADO_EMPLEADOSRowChanged" msprop:Generator_RowClassName="ESTADO_EMPLEADOSRow" msprop:Generator_RowChangingName="ESTADO_EMPLEADOSRowChanging" msprop:Generator_RowEvArgName="ESTADO_EMPLEADOSRowChangeEvent" msprop:Generator_RowEvHandlerName="ESTADO_EMPLEADOSRowChangeEventHandler" msprop:Generator_TableClassName="ESTADO_EMPLEADOSDataTable" msprop:Generator_TableVarName="tableESTADO_EMPLEADOS" msprop:Generator_RowDeletingName="ESTADO_EMPLEADOSRowDeleting" msprop:Generator_TablePropName="ESTADO_EMPLEADOS">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="EE_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="EE_CODIGO" msprop:Generator_ColumnPropNameInRow="EE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEE_CODIGO" msprop:Generator_ColumnPropNameInTable="EE_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="EE_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="EE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEE_CODIGO" msprop:Generator_ColumnPropNameInRow="EE_CODIGO" msprop:Generator_ColumnPropNameInTable="EE_CODIGOColumn" type="xs:decimal" />
               <xs:element name="EE_NOMBRE" msprop:Generator_UserColumnName="EE_NOMBRE" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnEE_NOMBRE" msprop:Generator_ColumnPropNameInTable="EE_NOMBREColumn" msprop:Generator_ColumnPropNameInRow="EE_NOMBRE" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -418,37 +418,37 @@ SELECT E_CODIGO, E_LEGAJO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE, E_FECHAN
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="EMPLEADOS" msprop:Generator_UserTableName="EMPLEADOS" msprop:Generator_RowDeletedName="EMPLEADOSRowDeleted" msprop:Generator_TableClassName="EMPLEADOSDataTable" msprop:Generator_RowChangedName="EMPLEADOSRowChanged" msprop:Generator_RowClassName="EMPLEADOSRow" msprop:Generator_RowChangingName="EMPLEADOSRowChanging" msprop:Generator_RowEvArgName="EMPLEADOSRowChangeEvent" msprop:Generator_RowEvHandlerName="EMPLEADOSRowChangeEventHandler" msprop:Generator_TablePropName="EMPLEADOS" msprop:Generator_TableVarName="tableEMPLEADOS" msprop:Generator_RowDeletingName="EMPLEADOSRowDeleting">
+        <xs:element name="EMPLEADOS" msprop:Generator_UserTableName="EMPLEADOS" msprop:Generator_RowDeletedName="EMPLEADOSRowDeleted" msprop:Generator_RowChangedName="EMPLEADOSRowChanged" msprop:Generator_RowClassName="EMPLEADOSRow" msprop:Generator_RowChangingName="EMPLEADOSRowChanging" msprop:Generator_RowEvArgName="EMPLEADOSRowChangeEvent" msprop:Generator_RowEvHandlerName="EMPLEADOSRowChangeEventHandler" msprop:Generator_TableClassName="EMPLEADOSDataTable" msprop:Generator_TableVarName="tableEMPLEADOS" msprop:Generator_RowDeletingName="EMPLEADOSRowDeleting" msprop:Generator_TablePropName="EMPLEADOS">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="E_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="E_CODIGO" msprop:Generator_ColumnPropNameInRow="E_CODIGO" msprop:Generator_ColumnVarNameInTable="columnE_CODIGO" msprop:Generator_ColumnPropNameInTable="E_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="E_LEGAJO" msprop:Generator_UserColumnName="E_LEGAJO" msprop:Generator_ColumnPropNameInRow="E_LEGAJO" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnE_LEGAJO" msprop:Generator_ColumnPropNameInTable="E_LEGAJOColumn" minOccurs="0">
+              <xs:element name="E_CODIGO" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="E_CODIGO" msprop:Generator_ColumnVarNameInTable="columnE_CODIGO" msprop:Generator_ColumnPropNameInRow="E_CODIGO" msprop:Generator_ColumnPropNameInTable="E_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="E_LEGAJO" msprop:Generator_UserColumnName="E_LEGAJO" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="E_LEGAJO" msprop:Generator_ColumnPropNameInTable="E_LEGAJOColumn" msprop:Generator_ColumnVarNameInTable="columnE_LEGAJO" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="20" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="EE_CODIGO" msprop:Generator_UserColumnName="EE_CODIGO" msprop:Generator_ColumnPropNameInRow="EE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEE_CODIGO" msprop:Generator_ColumnPropNameInTable="EE_CODIGOColumn" type="xs:decimal" />
-              <xs:element name="SEC_CODIGO" msprop:Generator_UserColumnName="SEC_CODIGO" msprop:Generator_ColumnPropNameInRow="SEC_CODIGO" msprop:Generator_ColumnVarNameInTable="columnSEC_CODIGO" msprop:Generator_ColumnPropNameInTable="SEC_CODIGOColumn" type="xs:decimal" minOccurs="0" />
-              <xs:element name="E_APELLIDO" msprop:Generator_UserColumnName="E_APELLIDO" msprop:Generator_ColumnPropNameInRow="E_APELLIDO" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnE_APELLIDO" msprop:Generator_ColumnPropNameInTable="E_APELLIDOColumn" minOccurs="0">
+              <xs:element name="EE_CODIGO" msprop:Generator_UserColumnName="EE_CODIGO" msprop:Generator_ColumnVarNameInTable="columnEE_CODIGO" msprop:Generator_ColumnPropNameInRow="EE_CODIGO" msprop:Generator_ColumnPropNameInTable="EE_CODIGOColumn" type="xs:decimal" />
+              <xs:element name="SEC_CODIGO" msprop:Generator_UserColumnName="SEC_CODIGO" msprop:Generator_ColumnVarNameInTable="columnSEC_CODIGO" msprop:Generator_ColumnPropNameInRow="SEC_CODIGO" msprop:Generator_ColumnPropNameInTable="SEC_CODIGOColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="E_APELLIDO" msprop:Generator_UserColumnName="E_APELLIDO" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="E_APELLIDO" msprop:Generator_ColumnPropNameInTable="E_APELLIDOColumn" msprop:Generator_ColumnVarNameInTable="columnE_APELLIDO" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="80" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="E_NOMBRE" msprop:Generator_UserColumnName="E_NOMBRE" msprop:Generator_ColumnPropNameInRow="E_NOMBRE" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnE_NOMBRE" msprop:Generator_ColumnPropNameInTable="E_NOMBREColumn" minOccurs="0">
+              <xs:element name="E_NOMBRE" msprop:Generator_UserColumnName="E_NOMBRE" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="E_NOMBRE" msprop:Generator_ColumnPropNameInTable="E_NOMBREColumn" msprop:Generator_ColumnVarNameInTable="columnE_NOMBRE" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="80" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="E_FECHANACIMIENTO" msprop:Generator_UserColumnName="E_FECHANACIMIENTO" msprop:Generator_ColumnPropNameInRow="E_FECHANACIMIENTO" msprop:Generator_ColumnVarNameInTable="columnE_FECHANACIMIENTO" msprop:Generator_ColumnPropNameInTable="E_FECHANACIMIENTOColumn" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="E_FECHA_ALTA" msprop:Generator_UserColumnName="E_FECHA_ALTA" msprop:Generator_ColumnPropNameInRow="E_FECHA_ALTA" msprop:Generator_ColumnVarNameInTable="columnE_FECHA_ALTA" msprop:Generator_ColumnPropNameInTable="E_FECHA_ALTAColumn" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="E_FECHA_BAJA" msprop:Generator_UserColumnName="E_FECHA_BAJA" msprop:Generator_ColumnPropNameInRow="E_FECHA_BAJA" msprop:Generator_ColumnVarNameInTable="columnE_FECHA_BAJA" msprop:Generator_ColumnPropNameInTable="E_FECHA_BAJAColumn" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="E_HAS_IMAGE" msprop:Generator_UserColumnName="E_HAS_IMAGE" msprop:Generator_ColumnPropNameInRow="E_HAS_IMAGE" msprop:Generator_ColumnVarNameInTable="columnE_HAS_IMAGE" msprop:Generator_ColumnPropNameInTable="E_HAS_IMAGEColumn" type="xs:decimal" />
+              <xs:element name="E_FECHANACIMIENTO" msprop:Generator_UserColumnName="E_FECHANACIMIENTO" msprop:Generator_ColumnVarNameInTable="columnE_FECHANACIMIENTO" msprop:Generator_ColumnPropNameInRow="E_FECHANACIMIENTO" msprop:Generator_ColumnPropNameInTable="E_FECHANACIMIENTOColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="E_FECHA_ALTA" msprop:Generator_UserColumnName="E_FECHA_ALTA" msprop:Generator_ColumnVarNameInTable="columnE_FECHA_ALTA" msprop:Generator_ColumnPropNameInRow="E_FECHA_ALTA" msprop:Generator_ColumnPropNameInTable="E_FECHA_ALTAColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="E_FECHA_BAJA" msprop:Generator_UserColumnName="E_FECHA_BAJA" msprop:Generator_ColumnVarNameInTable="columnE_FECHA_BAJA" msprop:Generator_ColumnPropNameInRow="E_FECHA_BAJA" msprop:Generator_ColumnPropNameInTable="E_FECHA_BAJAColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="E_HAS_IMAGE" msprop:Generator_UserColumnName="E_HAS_IMAGE" msprop:Generator_ColumnVarNameInTable="columnE_HAS_IMAGE" msprop:Generator_ColumnPropNameInRow="E_HAS_IMAGE" msprop:Generator_ColumnPropNameInTable="E_HAS_IMAGEColumn" type="xs:decimal" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

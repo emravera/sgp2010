@@ -333,7 +333,6 @@
             // 
             // sfFechaNac
             // 
-            this.sfFechaNac.CausesValidation = false;
             this.sfFechaNac.CustomFormat = " ";
             this.sfFechaNac.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.sfFechaNac.Location = new System.Drawing.Point(88, 116);
