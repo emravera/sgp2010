@@ -59,7 +59,7 @@ namespace GyCAP.DAL
             if (sector != null && sector.GetType().Equals(typeof(int)))
             {
                 sql += " AND SEC_CODIGO = @p" + cantidadParametros;
-                valoresFiltros[cantidadParametros] = Convert.ToInt32(estado);
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(sector);
                 cantidadParametros++;
             }
 
@@ -239,8 +239,8 @@ namespace GyCAP.DAL
                                          row.E_NOMBRE,
                                          fecha,
                                          fechaBaja,
-                                         row.E_CODIGO,
-                                         row.E_HAS_IMAGE
+                                         row.E_HAS_IMAGE,
+                                         row.E_CODIGO
                                        };
             SqlTransaction transaccion = null;
 

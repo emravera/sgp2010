@@ -54,9 +54,9 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvLista.DataSource = dvListaSector;
 
             //Seteo el maxlenght de los textbox para que no de error en la bd
-            txtDescripcion.MaxLength = 80;
-            txtNombre.MaxLength = 30;
-            txtAbreviatura.MaxLength = 10;
+            txtDescripcion.MaxLength = 200;
+            txtNombre.MaxLength = 80;
+            txtAbreviatura.MaxLength = 20;
 
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
@@ -128,7 +128,7 @@ namespace GyCAP.UI.RecursosFabricacion
                 dsSectorTrabajo.SECTORES.Clear();
 
                 //Función de búsqueda
-                BLL.SectorBLL.ObtenerTodos(txtNombreBuscar.Text, txtAbreviatura.Text, dsSectorTrabajo);
+                BLL.SectorBLL.ObtenerTodos(txtNombreBuscar.Text, txtAbreviaturaBuscar.Text, dsSectorTrabajo);
 
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
@@ -244,7 +244,7 @@ namespace GyCAP.UI.RecursosFabricacion
         //Metodos para seleccionar todo lo que contienen los textbox
         private void control_Enter(object sender, EventArgs e)
         {
-            if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
+            //if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
         }        
       
         #endregion
@@ -393,6 +393,11 @@ namespace GyCAP.UI.RecursosFabricacion
                 }
             }
         }
+
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }  
 
         #endregion
 

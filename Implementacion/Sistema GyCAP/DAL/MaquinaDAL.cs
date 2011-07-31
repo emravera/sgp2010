@@ -80,7 +80,7 @@ namespace GyCAP.DAL
                     DB.FillDataSet(ds, "MAQUINAS", sql, null);
                 }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         //ELIMINACION
@@ -88,19 +88,17 @@ namespace GyCAP.DAL
         public static bool PuedeEliminarse(long codigo)
         {
             string sql = "SELECT count(RMAN_CODIGO) FROM REGISTROS_MANTENIMIENTOS WHERE MAQ_CODIGO = @p0";
+            string sql2 = "SELECT count(maq_codigo) FROM CIERRE_ORDEN_TRABAJO WHERE maq_codigo = @p0";
             object[] valorParametros = { codigo };
             try
             {
-                //if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
-                //{
-                return true;
-                //}
-                //else
-                //{
-                //    return false;
-                //}
+                int r1 = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                int r2 = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+                
+                if (r1 + r2 == 0) { return true; }
+                else { return false; }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         //Metodo que elimina de la base de datos
@@ -112,7 +110,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         //INSERTAR
@@ -127,7 +125,7 @@ namespace GyCAP.DAL
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return false; }
                 else { return true; }
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         //Metodo que inserta en la base de datos
@@ -144,7 +142,7 @@ namespace GyCAP.DAL
             {
                 return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message ); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         //MODIFICAR 
@@ -162,7 +160,7 @@ namespace GyCAP.DAL
             {
                 DB.executeNonQuery(sql, valorParametros, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         /// <summary>
@@ -179,7 +177,7 @@ namespace GyCAP.DAL
             {
                 DB.FillDataTable(dtMaquina, sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
         public static void ObtenerMaquinas(Data.dsMantenimiento ds)
@@ -192,7 +190,7 @@ namespace GyCAP.DAL
                 //Se llena el Dataset
                 DB.FillDataSet(ds, "MAQUINAS", sql, null);
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
     }
 }

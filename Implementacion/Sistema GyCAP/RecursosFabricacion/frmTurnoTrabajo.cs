@@ -245,7 +245,7 @@ namespace GyCAP.UI.RecursosFabricacion
 
         private void txtNombre_Enter(object sender, EventArgs e)
         {
-            txtNombre.SelectAll();
+            //txtNombre.SelectAll();
         }
 
         private void InicializarDatos()
@@ -298,6 +298,12 @@ namespace GyCAP.UI.RecursosFabricacion
                 }
             }
         }
+
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }  
+
         #endregion
 
 

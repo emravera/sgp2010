@@ -169,6 +169,7 @@
             this.dgvLista.Size = new System.Drawing.Size(376, 207);
             this.dgvLista.TabIndex = 6;
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
+            this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // groupBox1
             // 
@@ -190,6 +191,7 @@
             // 
             // dtpHoraFin
             // 
+            this.dtpHoraFin.CausesValidation = false;
             this.dtpHoraFin.CustomFormat = "HH:mm";
             this.dtpHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpHoraFin.Location = new System.Drawing.Point(84, 78);
@@ -201,6 +203,7 @@
             // 
             // dtpHoraInicio
             // 
+            this.dtpHoraInicio.CausesValidation = false;
             this.dtpHoraInicio.CustomFormat = "HH:mm";
             this.dtpHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpHoraInicio.Location = new System.Drawing.Point(84, 51);

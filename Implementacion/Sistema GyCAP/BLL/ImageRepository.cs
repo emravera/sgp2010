@@ -21,12 +21,17 @@ namespace GyCAP.BLL
             string nombreImagen = GetFileName(codigoElemento, elementType);
 
             if (!Directory.Exists(directorioImagenes)) { Directory.CreateDirectory(directorioImagenes); }
-            if (!Directory.Exists(Path.GetDirectoryName(nombreImagen))) { Directory.CreateDirectory(Path.GetDirectoryName(nombreImagen)); }            
+            if (!Directory.Exists(Path.GetDirectoryName(nombreImagen))) { Directory.CreateDirectory(Path.GetDirectoryName(nombreImagen)); }
 
-            using (FileStream file = new FileStream(nombreImagen, FileMode.Create))
+            try
             {
-                imagen.Save(file, System.Drawing.Imaging.ImageFormat.Jpeg);
-            }            
+                using (FileStream file = new FileStream(nombreImagen, FileMode.Create))
+                {
+                    imagen.Save(file, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    file.Close();
+                }
+            }
+            catch (Exception) { throw new Entidades.Excepciones.SaveImageException(); }
         }
 
         public static Image GetImage(int codigoElemento, ElementType elementType)
@@ -34,8 +39,10 @@ namespace GyCAP.BLL
             try
             {
                 string archivo = GetFileName(codigoElemento, elementType);                              
-                
-                return Image.FromFile(archivo);
+                Image img = Image.FromFile(archivo);
+                Image toReturn = new Bitmap(img);
+                img.Dispose();
+                return toReturn;
             }
             catch (System.IO.FileNotFoundException) { return BLL.Properties.Resources.sinimagen; }
         }
