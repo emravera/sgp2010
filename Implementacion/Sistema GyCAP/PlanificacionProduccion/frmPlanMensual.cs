@@ -880,8 +880,11 @@ namespace GyCAP.UI.PlanificacionProduccion
                 {
                     //Si existen excepciones relacionadas con el Plan mensual
                     PlanificacionProduccion.frmExcepcionesPlan frmExcepciones= new frmExcepcionesPlan();
+                    frmExcepciones.TopLevel = false;
+                    frmExcepciones.Parent = this.Parent;
                     frmExcepciones.CargarGrilla(excepciones);
                     frmExcepciones.Show();
+                    frmExcepciones.BringToFront();
 
                     //Cambio el valor de checkeo excepciones a TRUE para que pase una vez
                     checkeoExcepciones = true;
@@ -1235,9 +1238,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
 
-        #endregion
-
-       
+        #endregion       
 
     }
 }
