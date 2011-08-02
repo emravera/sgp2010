@@ -49,12 +49,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.gbDatosPrincipales = new System.Windows.Forms.GroupBox();
-            this.cbSemanaDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label12 = new System.Windows.Forms.Label();
             this.btnCargaDetalle = new System.Windows.Forms.Button();
-            this.cbPlanAnual = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label3 = new System.Windows.Forms.Label();
-            this.cbMesDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
             this.gbDetalleGrillaDatos = new System.Windows.Forms.GroupBox();
@@ -66,10 +63,7 @@
             this.gbGrillaDemanda = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbAnio = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbSemana = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label11 = new System.Windows.Forms.Label();
-            this.cbMes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label2 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -84,6 +78,12 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.cbAnio = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbSemana = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbMes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbSemanaDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbPlanAnual = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbMesDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.gbCargaDetalle.SuspendLayout();
             this.gbPlanMensual.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanMensual)).BeginInit();
@@ -109,6 +109,8 @@
             // 
             // gbCargaDetalle
             // 
+            this.gbCargaDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.gbCargaDetalle.Controls.Add(this.gbPlanMensual);
             this.gbCargaDetalle.Controls.Add(this.btnAgregar);
             this.gbCargaDetalle.Controls.Add(this.groupBox3);
@@ -118,7 +120,7 @@
             this.gbCargaDetalle.Controls.Add(this.label5);
             this.gbCargaDetalle.Location = new System.Drawing.Point(3, 70);
             this.gbCargaDetalle.Name = "gbCargaDetalle";
-            this.gbCargaDetalle.Size = new System.Drawing.Size(392, 318);
+            this.gbCargaDetalle.Size = new System.Drawing.Size(392, 387);
             this.gbCargaDetalle.TabIndex = 16;
             this.gbCargaDetalle.TabStop = false;
             this.gbCargaDetalle.Text = "Carga Plan Semanal";
@@ -126,9 +128,9 @@
             // gbPlanMensual
             // 
             this.gbPlanMensual.Controls.Add(this.dgvPlanMensual);
-            this.gbPlanMensual.Location = new System.Drawing.Point(7, 42);
+            this.gbPlanMensual.Location = new System.Drawing.Point(4, 49);
             this.gbPlanMensual.Name = "gbPlanMensual";
-            this.gbPlanMensual.Size = new System.Drawing.Size(379, 165);
+            this.gbPlanMensual.Size = new System.Drawing.Size(379, 212);
             this.gbPlanMensual.TabIndex = 16;
             this.gbPlanMensual.TabStop = false;
             this.gbPlanMensual.Text = "Plan Mensual";
@@ -140,21 +142,24 @@
             this.dgvPlanMensual.AllowUserToResizeColumns = false;
             this.dgvPlanMensual.AllowUserToResizeRows = false;
             this.dgvPlanMensual.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPlanMensual.Location = new System.Drawing.Point(6, 16);
+            this.dgvPlanMensual.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPlanMensual.Location = new System.Drawing.Point(3, 17);
             this.dgvPlanMensual.Name = "dgvPlanMensual";
             this.dgvPlanMensual.ReadOnly = true;
             this.dgvPlanMensual.RowHeadersVisible = false;
             this.dgvPlanMensual.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvPlanMensual.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPlanMensual.Size = new System.Drawing.Size(367, 143);
+            this.dgvPlanMensual.Size = new System.Drawing.Size(373, 192);
             this.dgvPlanMensual.TabIndex = 7;
             this.dgvPlanMensual.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPlanMensual_CellFormatting);
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(305, 289);
+            this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAgregar.Location = new System.Drawing.Point(308, 351);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(81, 23);
+            this.btnAgregar.Size = new System.Drawing.Size(75, 26);
             this.btnAgregar.TabIndex = 9;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -166,9 +171,9 @@
             this.groupBox3.Controls.Add(this.numPorcentaje);
             this.groupBox3.Controls.Add(this.rbPorcentaje);
             this.groupBox3.Controls.Add(this.rbUnidades);
-            this.groupBox3.Location = new System.Drawing.Point(8, 207);
+            this.groupBox3.Location = new System.Drawing.Point(7, 267);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(378, 70);
+            this.groupBox3.Size = new System.Drawing.Size(376, 70);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Cantidad";
@@ -224,7 +229,7 @@
             // 
             this.dtpFechaDia.CustomFormat = "dd/MM/yyyy";
             this.dtpFechaDia.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaDia.Location = new System.Drawing.Point(272, 16);
+            this.dtpFechaDia.Location = new System.Drawing.Point(275, 22);
             this.dtpFechaDia.Name = "dtpFechaDia";
             this.dtpFechaDia.Size = new System.Drawing.Size(89, 21);
             this.dtpFechaDia.TabIndex = 6;
@@ -232,7 +237,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(240, 20);
+            this.label8.Location = new System.Drawing.Point(243, 26);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(26, 13);
             this.label8.TabIndex = 2;
@@ -240,7 +245,7 @@
             // 
             // txtSemana
             // 
-            this.txtSemana.Location = new System.Drawing.Point(108, 16);
+            this.txtSemana.Location = new System.Drawing.Point(111, 22);
             this.txtSemana.Name = "txtSemana";
             this.txtSemana.Size = new System.Drawing.Size(71, 21);
             this.txtSemana.TabIndex = 5;
@@ -248,7 +253,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 20);
+            this.label5.Location = new System.Drawing.Point(10, 26);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(103, 13);
             this.label5.TabIndex = 0;
@@ -257,7 +262,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(205, 6);
+            this.label7.Location = new System.Drawing.Point(235, 6);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(61, 13);
             this.label7.TabIndex = 20;
@@ -265,16 +270,19 @@
             // 
             // panelAcciones
             // 
+            this.panelAcciones.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panelAcciones.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelAcciones.Controls.Add(this.label7);
             this.panelAcciones.Controls.Add(this.btnRestar);
             this.panelAcciones.Controls.Add(this.btnSumar);
             this.panelAcciones.Controls.Add(this.label6);
             this.panelAcciones.Controls.Add(this.btnDelete);
-            this.panelAcciones.Location = new System.Drawing.Point(10, 224);
+            this.panelAcciones.Location = new System.Drawing.Point(3, 259);
             this.panelAcciones.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelAcciones.Name = "panelAcciones";
-            this.panelAcciones.Size = new System.Drawing.Size(304, 53);
+            this.panelAcciones.Size = new System.Drawing.Size(346, 53);
             this.panelAcciones.TabIndex = 12;
             // 
             // btnRestar
@@ -285,7 +293,7 @@
             this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestar.Image = ((System.Drawing.Image)(resources.GetObject("btnRestar.Image")));
             this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestar.Location = new System.Drawing.Point(245, 18);
+            this.btnRestar.Location = new System.Drawing.Point(275, 18);
             this.btnRestar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRestar.Name = "btnRestar";
             this.btnRestar.Size = new System.Drawing.Size(30, 30);
@@ -304,7 +312,7 @@
             this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSumar.Image = ((System.Drawing.Image)(resources.GetObject("btnSumar.Image")));
             this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSumar.Location = new System.Drawing.Point(197, 18);
+            this.btnSumar.Location = new System.Drawing.Point(227, 18);
             this.btnSumar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSumar.Name = "btnSumar";
             this.btnSumar.Size = new System.Drawing.Size(30, 30);
@@ -318,7 +326,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(26, 6);
+            this.label6.Location = new System.Drawing.Point(34, 6);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(108, 13);
             this.label6.TabIndex = 17;
@@ -332,7 +340,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(58, 16);
+            this.btnDelete.Location = new System.Drawing.Point(66, 16);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(30, 30);
@@ -345,6 +353,8 @@
             // 
             // gbDatosPrincipales
             // 
+            this.gbDatosPrincipales.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbDatosPrincipales.Controls.Add(this.cbSemanaDatos);
             this.gbDatosPrincipales.Controls.Add(this.label12);
             this.gbDatosPrincipales.Controls.Add(this.btnCargaDetalle);
@@ -354,20 +364,10 @@
             this.gbDatosPrincipales.Controls.Add(this.label4);
             this.gbDatosPrincipales.Location = new System.Drawing.Point(3, 3);
             this.gbDatosPrincipales.Name = "gbDatosPrincipales";
-            this.gbDatosPrincipales.Size = new System.Drawing.Size(721, 61);
+            this.gbDatosPrincipales.Size = new System.Drawing.Size(753, 61);
             this.gbDatosPrincipales.TabIndex = 10;
             this.gbDatosPrincipales.TabStop = false;
             this.gbDatosPrincipales.Text = "Datos Principales";
-            // 
-            // cbSemanaDatos
-            // 
-            this.cbSemanaDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSemanaDatos.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbSemanaDatos.FormattingEnabled = true;
-            this.cbSemanaDatos.Location = new System.Drawing.Point(529, 20);
-            this.cbSemanaDatos.Name = "cbSemanaDatos";
-            this.cbSemanaDatos.Size = new System.Drawing.Size(85, 21);
-            this.cbSemanaDatos.TabIndex = 3;
             // 
             // label12
             // 
@@ -380,24 +380,14 @@
             // 
             // btnCargaDetalle
             // 
-            this.btnCargaDetalle.Location = new System.Drawing.Point(633, 19);
+            this.btnCargaDetalle.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnCargaDetalle.Location = new System.Drawing.Point(657, 16);
             this.btnCargaDetalle.Name = "btnCargaDetalle";
-            this.btnCargaDetalle.Size = new System.Drawing.Size(82, 23);
+            this.btnCargaDetalle.Size = new System.Drawing.Size(75, 26);
             this.btnCargaDetalle.TabIndex = 4;
             this.btnCargaDetalle.Text = "Cargar Detalle";
             this.btnCargaDetalle.UseVisualStyleBackColor = true;
             this.btnCargaDetalle.Click += new System.EventHandler(this.btnCargaDetalle_Click);
-            // 
-            // cbPlanAnual
-            // 
-            this.cbPlanAnual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbPlanAnual.FormattingEnabled = true;
-            this.cbPlanAnual.Location = new System.Drawing.Point(144, 20);
-            this.cbPlanAnual.Name = "cbPlanAnual";
-            this.cbPlanAnual.Size = new System.Drawing.Size(94, 21);
-            this.cbPlanAnual.TabIndex = 1;
-            this.cbPlanAnual.DropDownClosed += new System.EventHandler(this.cbPlanAnual_DropDownClosed);
             // 
             // label3
             // 
@@ -407,17 +397,6 @@
             this.label3.Size = new System.Drawing.Size(122, 13);
             this.label3.TabIndex = 24;
             this.label3.Text = "Plan Anual Planificación:";
-            // 
-            // cbMesDatos
-            // 
-            this.cbMesDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMesDatos.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbMesDatos.FormattingEnabled = true;
-            this.cbMesDatos.Location = new System.Drawing.Point(338, 20);
-            this.cbMesDatos.Name = "cbMesDatos";
-            this.cbMesDatos.Size = new System.Drawing.Size(121, 21);
-            this.cbMesDatos.TabIndex = 2;
-            this.cbMesDatos.DropDownClosed += new System.EventHandler(this.cbMesDatos_DropDownClosed);
             // 
             // label4
             // 
@@ -434,21 +413,25 @@
             this.dgvDatos.AllowUserToDeleteRows = false;
             this.dgvDatos.AllowUserToResizeRows = false;
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDatos.Location = new System.Drawing.Point(10, 16);
+            this.dgvDatos.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvDatos.Location = new System.Drawing.Point(3, 17);
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(304, 203);
+            this.dgvDatos.Size = new System.Drawing.Size(349, 238);
             this.dgvDatos.TabIndex = 5;
             this.dgvDatos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDatos_CellFormatting);
             // 
             // gbDetalleGrillaDatos
             // 
+            this.gbDetalleGrillaDatos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbDetalleGrillaDatos.Controls.Add(this.panelAcciones);
             this.gbDetalleGrillaDatos.Controls.Add(this.dgvDatos);
             this.gbDetalleGrillaDatos.Location = new System.Drawing.Point(401, 70);
             this.gbDetalleGrillaDatos.Name = "gbDetalleGrillaDatos";
-            this.gbDetalleGrillaDatos.Size = new System.Drawing.Size(321, 282);
+            this.gbDetalleGrillaDatos.Size = new System.Drawing.Size(355, 325);
             this.gbDetalleGrillaDatos.TabIndex = 17;
             this.gbDetalleGrillaDatos.TabStop = false;
             this.gbDetalleGrillaDatos.Text = "Detalle Plan Semanal";
@@ -459,23 +442,28 @@
             this.dgvDetalle.AllowUserToDeleteRows = false;
             this.dgvDetalle.AllowUserToResizeColumns = false;
             this.dgvDetalle.AllowUserToResizeRows = false;
+            this.dgvDetalle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDetalle.Enabled = false;
-            this.dgvDetalle.Location = new System.Drawing.Point(11, 19);
+            this.dgvDetalle.Location = new System.Drawing.Point(3, 17);
             this.dgvDetalle.MultiSelect = false;
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.ReadOnly = true;
             this.dgvDetalle.RowHeadersVisible = false;
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalle.Size = new System.Drawing.Size(291, 290);
+            this.dgvDetalle.Size = new System.Drawing.Size(353, 362);
             this.dgvDetalle.TabIndex = 1;
             this.dgvDetalle.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetalle_CellFormatting);
+            this.dgvDetalle.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDetalle_DataBindingComplete);
             // 
             // gbGrillaDetalle
             // 
+            this.gbGrillaDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbGrillaDetalle.Controls.Add(this.dgvDetalle);
-            this.gbGrillaDetalle.Location = new System.Drawing.Point(416, 75);
+            this.gbGrillaDetalle.Location = new System.Drawing.Point(397, 75);
             this.gbGrillaDetalle.Name = "gbGrillaDetalle";
-            this.gbGrillaDetalle.Size = new System.Drawing.Size(308, 320);
+            this.gbGrillaDetalle.Size = new System.Drawing.Size(359, 382);
             this.gbGrillaDetalle.TabIndex = 2;
             this.gbGrillaDetalle.TabStop = false;
             this.gbGrillaDetalle.Text = "Detalle del día del Plan Semanal";
@@ -493,7 +481,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(740, 459);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 528);
             this.tableLayoutPanel1.TabIndex = 15;
             // 
             // tcPlanAnual
@@ -509,7 +497,7 @@
             this.tcPlanAnual.Name = "tcPlanAnual";
             this.tcPlanAnual.Padding = new System.Drawing.Point(0, 0);
             this.tcPlanAnual.SelectedIndex = 0;
-            this.tcPlanAnual.Size = new System.Drawing.Size(736, 403);
+            this.tcPlanAnual.Size = new System.Drawing.Size(770, 472);
             this.tcPlanAnual.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcPlanAnual.TabIndex = 8;
             // 
@@ -521,16 +509,18 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(728, 394);
+            this.tpBuscar.Size = new System.Drawing.Size(762, 463);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
             // gbGrillaDemanda
             // 
+            this.gbGrillaDemanda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.gbGrillaDemanda.Controls.Add(this.dgvLista);
             this.gbGrillaDemanda.Location = new System.Drawing.Point(6, 75);
             this.gbGrillaDemanda.Name = "gbGrillaDemanda";
-            this.gbGrillaDemanda.Size = new System.Drawing.Size(404, 320);
+            this.gbGrillaDemanda.Size = new System.Drawing.Size(385, 382);
             this.gbGrillaDemanda.TabIndex = 1;
             this.gbGrillaDemanda.TabStop = false;
             this.gbGrillaDemanda.Text = "Días Planificados en el  Plan Semanal";
@@ -540,16 +530,18 @@
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
             this.dgvLista.AllowUserToResizeRows = false;
-            this.dgvLista.Location = new System.Drawing.Point(10, 19);
+            this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvLista.Location = new System.Drawing.Point(3, 17);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(376, 290);
+            this.dgvLista.Size = new System.Drawing.Size(379, 362);
             this.dgvLista.TabIndex = 1;
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             this.dgvLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellClick);
+            this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // groupBox1
             // 
@@ -563,56 +555,24 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(722, 66);
+            this.groupBox1.Size = new System.Drawing.Size(756, 66);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
-            // cbAnio
-            // 
-            this.cbAnio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAnio.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbAnio.FormattingEnabled = true;
-            this.cbAnio.Location = new System.Drawing.Point(45, 21);
-            this.cbAnio.Name = "cbAnio";
-            this.cbAnio.Size = new System.Drawing.Size(115, 21);
-            this.cbAnio.TabIndex = 9;
-            this.cbAnio.DropDownClosed += new System.EventHandler(this.cbAnio_DropDownClosed);
-            // 
-            // cbSemana
-            // 
-            this.cbSemana.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSemana.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbSemana.FormattingEnabled = true;
-            this.cbSemana.Location = new System.Drawing.Point(424, 21);
-            this.cbSemana.Name = "cbSemana";
-            this.cbSemana.Size = new System.Drawing.Size(84, 21);
-            this.cbSemana.TabIndex = 7;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(376, 25);
+            this.label11.Location = new System.Drawing.Point(419, 29);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(49, 13);
             this.label11.TabIndex = 8;
             this.label11.Text = "Semana:";
             // 
-            // cbMes
-            // 
-            this.cbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMes.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbMes.FormattingEnabled = true;
-            this.cbMes.Location = new System.Drawing.Point(226, 21);
-            this.cbMes.Name = "cbMes";
-            this.cbMes.Size = new System.Drawing.Size(128, 21);
-            this.cbMes.TabIndex = 3;
-            this.cbMes.DropDownClosed += new System.EventHandler(this.cbMes_DropDownClosed);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(190, 25);
+            this.label2.Location = new System.Drawing.Point(226, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 6;
@@ -620,9 +580,10 @@
             // 
             // btnBuscar
             // 
+            this.btnBuscar.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnBuscar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(598, 18);
+            this.btnBuscar.Location = new System.Drawing.Point(650, 22);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(73, 26);
             this.btnBuscar.TabIndex = 4;
@@ -634,7 +595,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 25);
+            this.label1.Location = new System.Drawing.Point(30, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(30, 13);
             this.label1.TabIndex = 1;
@@ -650,25 +611,28 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(728, 394);
+            this.tpDatos.Size = new System.Drawing.Size(762, 463);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
             // gbBotones
             // 
+            this.gbBotones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbBotones.Controls.Add(this.btnVolver);
             this.gbBotones.Controls.Add(this.btnGuardar);
-            this.gbBotones.Location = new System.Drawing.Point(401, 347);
+            this.gbBotones.Location = new System.Drawing.Point(401, 401);
             this.gbBotones.Name = "gbBotones";
-            this.gbBotones.Size = new System.Drawing.Size(324, 40);
+            this.gbBotones.Size = new System.Drawing.Size(355, 59);
             this.gbBotones.TabIndex = 13;
             this.gbBotones.TabStop = false;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(250, 13);
+            this.btnVolver.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnVolver.Location = new System.Drawing.Point(274, 20);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(64, 22);
+            this.btnVolver.Size = new System.Drawing.Size(75, 26);
             this.btnVolver.TabIndex = 13;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -676,9 +640,10 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(180, 13);
+            this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnGuardar.Location = new System.Drawing.Point(193, 20);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(64, 22);
+            this.btnGuardar.Size = new System.Drawing.Size(75, 26);
             this.btnGuardar.TabIndex = 12;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -703,7 +668,7 @@
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(736, 50);
+            this.tsMenu.Size = new System.Drawing.Size(770, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
@@ -767,11 +732,75 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // cbAnio
+            // 
+            this.cbAnio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAnio.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbAnio.FormattingEnabled = true;
+            this.cbAnio.Location = new System.Drawing.Point(65, 25);
+            this.cbAnio.Name = "cbAnio";
+            this.cbAnio.Size = new System.Drawing.Size(115, 21);
+            this.cbAnio.TabIndex = 9;
+            this.cbAnio.DropDownClosed += new System.EventHandler(this.cbAnio_DropDownClosed);
+            // 
+            // cbSemana
+            // 
+            this.cbSemana.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSemana.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbSemana.FormattingEnabled = true;
+            this.cbSemana.Location = new System.Drawing.Point(467, 25);
+            this.cbSemana.Name = "cbSemana";
+            this.cbSemana.Size = new System.Drawing.Size(84, 21);
+            this.cbSemana.TabIndex = 7;
+            // 
+            // cbMes
+            // 
+            this.cbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMes.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbMes.FormattingEnabled = true;
+            this.cbMes.Location = new System.Drawing.Point(262, 25);
+            this.cbMes.Name = "cbMes";
+            this.cbMes.Size = new System.Drawing.Size(128, 21);
+            this.cbMes.TabIndex = 3;
+            this.cbMes.DropDownClosed += new System.EventHandler(this.cbMes_DropDownClosed);
+            // 
+            // cbSemanaDatos
+            // 
+            this.cbSemanaDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSemanaDatos.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbSemanaDatos.FormattingEnabled = true;
+            this.cbSemanaDatos.Location = new System.Drawing.Point(529, 20);
+            this.cbSemanaDatos.Name = "cbSemanaDatos";
+            this.cbSemanaDatos.Size = new System.Drawing.Size(85, 21);
+            this.cbSemanaDatos.TabIndex = 3;
+            // 
+            // cbPlanAnual
+            // 
+            this.cbPlanAnual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlanAnual.FormattingEnabled = true;
+            this.cbPlanAnual.Location = new System.Drawing.Point(144, 20);
+            this.cbPlanAnual.Name = "cbPlanAnual";
+            this.cbPlanAnual.Size = new System.Drawing.Size(94, 21);
+            this.cbPlanAnual.TabIndex = 1;
+            this.cbPlanAnual.DropDownClosed += new System.EventHandler(this.cbPlanAnual_DropDownClosed);
+            // 
+            // cbMesDatos
+            // 
+            this.cbMesDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMesDatos.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbMesDatos.FormattingEnabled = true;
+            this.cbMesDatos.Location = new System.Drawing.Point(338, 20);
+            this.cbMesDatos.Name = "cbMesDatos";
+            this.cbMesDatos.Size = new System.Drawing.Size(121, 21);
+            this.cbMesDatos.TabIndex = 2;
+            this.cbMesDatos.DropDownClosed += new System.EventHandler(this.cbMesDatos_DropDownClosed);
+            // 
             // frmPlanSemanal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(740, 459);
+            this.ClientSize = new System.Drawing.Size(774, 528);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

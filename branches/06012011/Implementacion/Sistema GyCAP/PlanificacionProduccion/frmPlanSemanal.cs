@@ -21,6 +21,8 @@ namespace GyCAP.UI.PlanificacionProduccion
         private static estadoUI estadoActual;
         int codigoDetalle = -1; bool esPrimero = true; int codigoPlanSemanal = 0;
 
+        
+        #region Inicio
 
         public frmPlanSemanal()
         {
@@ -33,7 +35,10 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvPlanMensual.AutoGenerateColumns = false;
 
             //Para cada Lista
-            //LISTAS DE BUSQUEDA
+            //*******************************************************************************
+            //                                  LISTAS DE BUSQUEDA
+            //*******************************************************************************
+
             //Lista de los Dias de los Planes Semanales
             //Agregamos la columnas
             dgvLista.Columns.Add("DIAPSEM_CODIGO", "Código");
@@ -45,13 +50,16 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["DIAPSEM_CODIGO"].DataPropertyName = "DIAPSEM_CODIGO";
             dgvLista.Columns["PSEM_CODIGO"].DataPropertyName = "PSEM_CODIGO";
             dgvLista.Columns["DIAPSEM_DIA"].DataPropertyName = "DIAPSEM_DIA";
             dgvLista.Columns["DIAPSEM_FECHA"].DataPropertyName = "DIAPSEM_FECHA";
+
+            //Ponemos las columnas de las grillas en visible false
+            dgvLista.Columns["DIAPSEM_CODIGO"].Visible = false;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaPlanes = new DataView(dsPlanSemanal.DIAS_PLAN_SEMANAL);
@@ -73,17 +81,24 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns["DPSEM_CANTIDADREAL"].DataPropertyName = "DPSEM_CANTIDADREAL";
 
             //Seteamos el modo de tamaño de las columnas
-            dgvDetalle.Columns[0].Visible = false;
             dgvDetalle.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetalle.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvDetalle.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+
+            //Ponemos las columnas de las grillas en visible false
+            dgvDetalle.Columns["DIAPSEM_CODIGO"].Visible = false;
+            dgvDetalle.Columns["DPSEM_CODIGO"].Visible = false;
+            dgvDetalle.Columns["DPSEM_CANTIDADREAL"].Visible = false;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetalle = new DataView(dsPlanSemanal.DETALLE_PLANES_SEMANALES);
             dgvDetalle.DataSource = dvListaDetalle;
 
-            //GRILLAS DE DATOS
+            //***************************************************************************
+            //                                GRILLAS DE DATOS
+            //***************************************************************************
+
             //Lista de Planes Mensuales
             //Agregamos la columnas
             dgvPlanMensual.Columns.Add("DPMES_CODIGO", "Código");
@@ -169,7 +184,10 @@ namespace GyCAP.UI.PlanificacionProduccion
             SetInterface(estadoUI.inicio);
 
         }
+        #endregion
+        
         #region Servicios
+        
         //Método para evitar la creación de más de una pantalla
         public static frmPlanSemanal Instancia
         {
@@ -197,8 +215,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 //Cuando Arranca la pantalla
                 case estadoUI.inicio:
-                    gbGrillaDemanda.Visible = false;
-                    gbGrillaDetalle.Visible = false;
                     cbAnio.Enabled = true;
                     cbMes.Enabled = false;
                     cbSemana.Enabled = false;
@@ -217,8 +233,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                     cbSemana.DataSource = null;
                     dsPlanSemanal.PLANES_SEMANALES.Clear();
-                    cbSemana.Items.Clear();
-                    
+                    cbSemana.Items.Clear();                    
             
                     tcPlanAnual.SelectedTab = tpBuscar;
                     estadoActual = estadoUI.inicio;
@@ -236,16 +251,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnConsultar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
                     btnModificar.Enabled = hayDatos;
-                    gbGrillaDemanda.Visible = hayDatos;
-                    gbGrillaDetalle.Visible = false;
                     tcPlanAnual.SelectedTab = tpBuscar;
                     estadoActual = estadoUI.buscar;
-                    //Columnas de las grillas
-                    //Ponemos las columnas de las grillas en visible false
-                    dgvLista.Columns["DIAPSEM_CODIGO"].Visible = false;
-                    dgvDetalle.Columns["DIAPSEM_CODIGO"].Visible = false;
-                    dgvDetalle.Columns["DPSEM_CODIGO"].Visible = false;
-                    dgvDetalle.Columns["DPSEM_CANTIDADREAL"].Visible = false;
                     break;
 
                 //Cuando se presiona el boton nuevo
@@ -313,7 +320,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     dgvDatos.Columns["DPSEM_ESTADO"].Visible = false;
                     dgvDatos.Columns["DPSEM_CANTIDADREAL"].Visible = false;
 
-                    //blanqueo el dataset
+                    //Limpiamos el dataset
                     dsPlanSemanal.DETALLE_PLANES_SEMANALES.Clear();
                     break;
 
@@ -351,6 +358,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             }
         }
+        
         //Metodo que me determina que dia de la semana cae una fecha
         private string getDia(DateTime fecha)
         {
@@ -382,7 +390,10 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             return dia;
         }
-        //VALIDACIONES
+        //********************************************************************
+        //                              VALIDACIONES
+        //********************************************************************
+
         private string ValidarCargaDetalle()
         {
             string msjerror = string.Empty;
@@ -519,9 +530,20 @@ namespace GyCAP.UI.PlanificacionProduccion
             numPorcentaje.Value = 0;
             numUnidades.Value = 0;
         }
+
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
+        private void dgvDetalle_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
         #endregion
 
-        #region PestañaBuscar
+        #region Pestaña Buscar
         private void cbAnio_DropDownClosed(object sender, EventArgs e)
         {
             try
@@ -551,8 +573,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Plan Semanal - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                SetInterface(estadoUI.inicio);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
             }
         }
 
@@ -579,7 +600,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     else
                     {
                         cbSemana.Enabled = false;
-                        MessageBox.Show("-No hay planes Semanales creados para ese mes", "Información: Plan Semanal - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Entidades.Mensajes.MensajesABM.MsjValidacion("No hay planes Semanales creados para ese mes", this.Text);
                         SetInterface(estadoUI.inicio);
                     }
 
@@ -587,10 +608,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Plan Semanal - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }
-
         }       
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -612,14 +632,14 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                 if (dsPlanSemanal.DIAS_PLAN_SEMANAL.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Días para la semama ingresada.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Dias Planificados", this.Text);
                 }
 
                 SetInterface(estadoUI.buscar);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Plan Semanal - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }
         }    
@@ -643,7 +663,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                 if (dsPlanSemanal.DETALLE_PLANES_SEMANALES.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Detalles para ese día del plan semanal.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Detalles de Plan Semanal", this.Text);                    
                 }
                 else
                 {
@@ -655,16 +675,16 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Plan Semanal - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }
         }
 #endregion
 
-        #region FormatoGrillas
+        #region Controles
+
         private void dgvDetalle_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            
+        {            
             if (e.Value != null)
             {
                 switch (dgvDetalle.Columns[e.ColumnIndex].Name)
@@ -676,7 +696,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     default:
                         break;
                 }
-
             }
         }
         private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -692,7 +711,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     default:
                         break;
                 }
-
             }
         }
         private void dgvDatos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -708,7 +726,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     default:
                         break;
                 }
-
             }
         }
 
@@ -725,27 +742,12 @@ namespace GyCAP.UI.PlanificacionProduccion
                     default:
                         break;
                 }
-
             }
         }
-        #endregion
 
-        #region Botones
-        private void btnNuevo_Click(object sender, EventArgs e)
-        {
-            SetInterface(estadoUI.nuevo);
-        }
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-        }
-        private void btnConsultar_Click(object sender, EventArgs e)
-        {
-            SetInterface(estadoUI.inicio);
-        }
-        #endregion
-
-        #region Combos Datos
+        //**********************************************************************************************
+        //                                          COMBO DATOS
+        //**********************************************************************************************
 
         private void cbPlanAnual_DropDownClosed(object sender, EventArgs e)
         {
@@ -768,10 +770,9 @@ namespace GyCAP.UI.PlanificacionProduccion
                     }
                     else
                     {
-                        cbPlanAnual .Enabled = true;
+                        cbPlanAnual.Enabled = true;
                         cbMesDatos.Enabled = false;
                     }
-
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -786,7 +787,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Se busca el mes y el año que quedaron seleccionados
             int anio = Convert.ToInt32(cbPlanAnual.GetSelectedText());
             string mes = cbMesDatos.GetSelectedText().ToString();
-            int numeroMes=-1;
+            int numeroMes = -1;
 
             //Verifico que numero de mes es            
             string[] Meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
@@ -802,7 +803,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 cont++;
             }
 
-           //Calculo las semanas que tine cada mes en el año
+            //Calculo las semanas que tine cada mes en el año
             int[] SemanasXMes = new int[12];
             SemanasXMes = SemanasAño(anio);
 
@@ -819,7 +820,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Creo las estructuras para cargar el combo
             int[] valoresSemanas = new int[cantidadSemanas];
             string[] textoSemanas = new string[cantidadSemanas];
-            
+
             for (int i = 0; i < cantidadSemanas; i++)
             {
                 valoresSemanas[i] = (semanasAcum + i + 1);
@@ -831,11 +832,52 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Cargo el combo con las semanas
             cbSemanaDatos.SetDatos(textoSemanas, valoresSemanas, "Seleccione", false);
             cbSemanaDatos.Enabled = true;
+        }
 
+        private void button_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
+                (sender as Button).Location = punto;
+            }
+        }
 
+        private void button_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
+                (sender as Button).Location = punto;
+            }
+        }
+
+        private void numUnidades_Enter(object sender, EventArgs e)
+        {
+            numUnidades.Select(0, 10);
+        }
+
+        private void numPorcentaje_Enter(object sender, EventArgs e)
+        {
+            numPorcentaje.Select(0, 10);
         }
         #endregion
 
+        #region Pestaña Datos
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.nuevo);
+        }
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.inicio);
+        }
+        
         private void btnCargaDetalle_Click(object sender, EventArgs e)
         {
             string validacion = ValidarCargaDetalle();
@@ -913,12 +955,12 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
                 else
                 {
-                    MessageBox.Show(validacion, "Error: Plan Semanal - Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);                    
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Plan Semanal - Carga de Detalle", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);                
             }
         }
 
@@ -998,23 +1040,21 @@ namespace GyCAP.UI.PlanificacionProduccion
                                     rows.EndEdit();
                                 }
                             }
-                        }
-                    
+                        }                   
 
                     //Seteo los valores de los controles en cero
                     rbUnidades.Checked = true;
                     numPorcentaje.Value = 0;
                     numUnidades.Value = 0;
-
                 }
                 else
                 {
-                    MessageBox.Show(validacion, "Error: Plan Semanal - Validación Detalle", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);                    
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Plan Semanal - Agregar Detalle", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);                
             }
         }
 
@@ -1056,8 +1096,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                     if (dvListaDatos[dgvDatos.SelectedRows[0].Index]["dped_codigo"].ToString() != string.Empty)
                     {
                         pedido = Convert.ToString(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dped_codigo"]);
-
                     }
+
                     //Se calcula la cantidad ya planificada para cada cocina
                     foreach (Data.dsPlanSemanal.DETALLE_PLANES_MENSUALESRow rows in dsPlanSemanal.DETALLE_PLANES_MENSUALES.Rows)
                     {
@@ -1080,12 +1120,12 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
                 else
                 {
-                    MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Modelo de Cocina", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);                    
                 }
             }
             else
             {
-                MessageBox.Show("La cantidad a planificar en la semana no puede ser mayor que la de todo el mes", "Información: Cantidad Mayor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjValidacion("La cantidad a planificar en la semana no puede ser mayor que la de todo el mes", this.Text);                
             }
         }
 
@@ -1106,8 +1146,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                     if (dvListaDatos[dgvDatos.SelectedRows[0].Index]["dped_codigo"].ToString() != string.Empty)
                     {
                         pedido = Convert.ToString(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dped_codigo"]);
-
                     }
+
                     //Se calcula la cantidad ya planificada para cada cocina
                     foreach (Data.dsPlanSemanal.DETALLE_PLANES_MENSUALESRow rows in dsPlanSemanal.DETALLE_PLANES_MENSUALES.Rows)
                     {
@@ -1130,12 +1170,12 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
                 else
                 {
-                    MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Modelo de Cocina", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);                    
                 }
             }
             else
             {
-                MessageBox.Show("La cantidad a planificar en la semana no puede ser menor que cero", "Información: Cantidad Mayor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjValidacion("La cantidad a planificar en la semana no puede ser menor que cero", this.Text);                
             }
         }
 
@@ -1163,7 +1203,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un modelo de cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Modelo de Cocina", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
             }
         }
 
@@ -1214,15 +1254,14 @@ namespace GyCAP.UI.PlanificacionProduccion
                 //Verificamos si esta modificando
                 if (estadoActual == estadoUI.modificar)
                 {
-                    MessageBox.Show("Los datos del día modificado se han almacenado correctamente", "Informacion: Plan Semanal - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Día de Plan Semanal", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     SetInterface(estadoUI.inicio);
-
                 }
                 else if (estadoActual == estadoUI.cargaDetalle)
                 {
                     //Verifico si quiere continuar cargando
-                    MessageBox.Show("Los datos del día se han almacenado correctamente", "Informacion: Plan Semanal - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    DialogResult respuesta = MessageBox.Show("¿Desea continuar Cargando otro día de la semana?", "Pregunta: Guardado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Día de Plan Semanal", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                    DialogResult respuesta = MessageBox.Show("¿Desea continuar cargando otro día de la semana?", "Pregunta: Guardado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (respuesta == DialogResult.Yes)
                     {
@@ -1237,9 +1276,8 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Plan Semanal - Agregar Detalle", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);                
             }
-
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -1305,24 +1343,21 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
                 else
                 {
-                    MessageBox.Show("Debe seleccionar un elemento de la Lista de Días para Modificar.", "Error: Plan Semanal - Modificar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Día de Plan Semanal", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);                    
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Plan Semanal - Modificar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);                
             }
-
-
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Plan Semanal seleccionada y todo su detalle?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Plan Semanal y su Detalle", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -1344,58 +1379,29 @@ namespace GyCAP.UI.PlanificacionProduccion
                        dsPlanSemanal.PLANES_SEMANALES.AcceptChanges();
 
                        //Avisamos que se elimino 
-                       MessageBox.Show("Se han eliminado los datos correctamente", "Información: Elemento Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                      //Ponemos la ventana en el estado inicial
-                      SetInterface(estadoUI.inicio);
+                       Entidades.Mensajes.MensajesABM.MsjConfirmaEliminar(this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
+                       
+                       //Ponemos la ventana en el estado inicial
+                       SetInterface(estadoUI.inicio);
                                              
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);                        
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);                        
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Designación de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            
-        }
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Designación", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);                
+            }            
+        } 
 
-        private void button_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                Point punto = new Point((sender as Button).Location.X + 2, (sender as Button).Location.Y + 2);
-                (sender as Button).Location = punto;
-            }
-        }
-
-        private void button_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                Point punto = new Point((sender as Button).Location.X - 2, (sender as Button).Location.Y - 2);
-                (sender as Button).Location = punto;
-            }
-        }
-
-        private void numUnidades_Enter(object sender, EventArgs e)
-        {
-            numUnidades.Select(0, 10);
-        }
-
-        private void numPorcentaje_Enter(object sender, EventArgs e)
-        {
-            numPorcentaje.Select(0, 10);
-        }
-
-       
+        #endregion
 
     }
 }
