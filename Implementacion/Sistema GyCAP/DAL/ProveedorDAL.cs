@@ -10,7 +10,6 @@ namespace GyCAP.DAL
 {
     public class ProveedorDAL
     {
-
         //Metodo para la búsqueda de Proveedores
         public static void ObtenerProveedores(object razonSocial, object codigoSector, DataTable dtProveedor)
         {        
@@ -66,7 +65,7 @@ namespace GyCAP.DAL
         }
 
         //Metodo para guardar un proveedor nuevo
-        public static void GuardarProveedor(Entidades.Proveedor proveedor, Data.dsProveedor dsProveedor)
+        public static int GuardarProveedor(Entidades.Proveedor proveedor, Data.dsProveedor dsProveedor)
         {
             SqlTransaction transaccion = null;
 
@@ -77,8 +76,7 @@ namespace GyCAP.DAL
 
                 //Inserto la cabecera
                 sql = "INSERT INTO [PROVEEDORES] ([sec_codigo], [prove_razonsocial], [prove_telprincipal], [prove_telalternativo])VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
-
-
+                
                 if (proveedor.TelSecundario == string.Empty)
                 {
                     object[] valoresParametros = { proveedor.Sector.Codigo, proveedor.RazonSocial, proveedor.TelPrincipal, DBNull.Value };
@@ -133,7 +131,8 @@ namespace GyCAP.DAL
 
                 transaccion.Commit();
                 DB.FinalizarTransaccion();
-                
+
+                return proveedor.Codigo;
             }
             catch (SqlException ex)
             {
@@ -252,6 +251,32 @@ namespace GyCAP.DAL
                 throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
             } 
 
+        }
+
+        public static bool EsProveedorActualizar(Entidades.Proveedor proveedor)
+        {
+            string sql = "SELECT count(prove_codigo) FROM PROVEEDORES WHERE prove_razonsocial = @p0 and prove_codigo <> @p1";
+            object[] valoresParametros = { proveedor.RazonSocial, proveedor.Codigo };
+
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valoresParametros, null)) != 0) { return false; }
+                else { return true; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool EsProveedorNuevo(Entidades.Proveedor proveedor)
+        {
+            string sql = "SELECT count(prove_codigo) FROM PROVEEDORES WHERE prove_razonsocial = @p0";
+            object[] valoresParametros = { proveedor.RazonSocial };
+
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valoresParametros, null)) != 0) { return false; }
+                else { return true; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
     }

@@ -454,7 +454,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                             //Se debe recargar el control de los años base
                             CargarAñosBase();
 
-                            Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Estimacion de Demanda Anual", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                            Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Estimación de Demanda Anual", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                             
                             //Seteo el estado de la interface a nuevo
                             SetInterface(estadoUI.nuevo);
@@ -578,7 +578,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 //Se asigna el valor al total
                 txtTotal.Enabled = false;
                 txtTotal.Text = totalsistema.ToString();
-                lblTotalSistema.Text = totalsistema.ToString();
+                txtTotalSistema.Text = totalsistema.ToString();
 
                 //Se pone el estado de la interface
                 SetInterface(estadoUI.calcularEstimacion);
@@ -600,41 +600,47 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            //Selecciono el codigo de la demanda anual
-            int codigo = Convert.ToInt32(dvListaDemanda[dgvLista.SelectedRows[0].Index]["deman_codigo"]);
-            txtAnio.Text = dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(codigo).DEMAN_ANIO.ToString();
-            txtIdentificacion.Text = dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(codigo).DEMAN_NOMBRE;
-            numCrecimiento.Value = dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(codigo).DEMAN_PARAMCRECIMIENTO;
-
-
-            decimal[] promedio = new decimal[12];
-            int cont = 0;
-            foreach (Data.dsEstimarDemanda.DETALLE_DEMANDAS_ANUALESRow dr in dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Rows)
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0 && dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Count != 0)
             {
-                promedio[cont] = Convert.ToDecimal(dr.DDEMAN_CANTIDADMES);
-                cont += 1;
+                //Selecciono el codigo de la demanda anual
+                int codigo = Convert.ToInt32(dvListaDemanda[dgvLista.SelectedRows[0].Index]["deman_codigo"]);
+                txtAnio.Text = dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(codigo).DEMAN_ANIO.ToString();
+                txtIdentificacion.Text = dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(codigo).DEMAN_NOMBRE;
+                numCrecimiento.Value = dsEstimarDemanda.DEMANDAS_ANUALES.FindByDEMAN_CODIGO(codigo).DEMAN_PARAMCRECIMIENTO;
+
+
+                decimal[] promedio = new decimal[12];
+                int cont = 0;
+                foreach (Data.dsEstimarDemanda.DETALLE_DEMANDAS_ANUALESRow dr in dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Rows)
+                {
+                    promedio[cont] = Convert.ToDecimal(dr.DDEMAN_CANTIDADMES);
+                    cont += 1;
+                }
+                //Asigno los valores
+                //Se asignan los valores calculados a los textbox
+                numEnero.Value = promedio[0];
+                numFebrero.Value = promedio[1];
+                numMarzo.Value = promedio[2];
+                numAbril.Value = promedio[3];
+                numMayo.Value = promedio[4];
+                numJunio.Value = promedio[5];
+                numJulio.Value = promedio[6];
+                numAgosto.Value = promedio[7];
+                numSeptiembre.Value = promedio[8];
+                numOctubre.Value = promedio[9];
+                numNoviembre.Value = promedio[10];
+                numDiciembre.Value = promedio[11];
+
+                //Se genera el grafico
+                GenerarGrafico(promedio);
+
+                //se setea el estado
+                SetInterface(estadoUI.modificar);
             }
-            //Asigno los valores
-            //Se asignan los valores calculados a los textbox
-            numEnero.Value = promedio[0];
-            numFebrero.Value = promedio[1];
-            numMarzo.Value = promedio[2];
-            numAbril.Value = promedio[3];
-            numMayo.Value = promedio[4];
-            numJunio.Value = promedio[5];
-            numJulio.Value = promedio[6];
-            numAgosto.Value = promedio[7];
-            numSeptiembre.Value = promedio[8];
-            numOctubre.Value = promedio[9];
-            numNoviembre.Value = promedio[10];
-            numDiciembre.Value = promedio[11];
-
-            //Se genera el grafico
-            GenerarGrafico(promedio);
-
-            //se setea el estado
-            SetInterface(estadoUI.modificar);
-
+            else
+            {
+                Entidades.Mensajes.MensajesABM.MsjValidacion("Debe seleccionar una Estimación de Demanda Anual con su detalle para modificarla", this.Text);
+            }
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
@@ -693,7 +699,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Estimación de Demanda Anual", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
             }
-
         }
 
         private void dgvLista_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -1010,7 +1015,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             numCrecimiento.Select(0, 10);
         }
-        #endregion 
-               
+        #endregion         
+
     }
 }

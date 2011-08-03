@@ -17,7 +17,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private DataView dvListaPlanes, dvListaDetalle, dvChAnios, dvComboEstimaciones;
         private enum estadoUI { inicio, nuevo, buscar, modificar, calcularPlanificacion };
         private static estadoUI estadoActual;
-        private static decimal seriesGraficos, totalsistema = 0, totalActual;
+        private static decimal seriesGraficos, totalsistema=0, totalActual;
 
         #region Inicio
         public frmPlanAnual()
@@ -1189,9 +1189,8 @@ namespace GyCAP.UI.PlanificacionProduccion
         private void btnModificar_Click(object sender, EventArgs e)
         {
              //Controlamos que esté seleccionado algo
-            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0 && dsPlanAnual.DETALLE_PLAN_ANUAL.Count != 0)
             {
-
                 //Selecciono el codigo de la demanda anual
                 int codigo = Convert.ToInt32(dvListaPlanes[dgvLista.SelectedRows[0].Index]["pan_codigo"]);
                 txtAnio.Text = dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).PAN_ANIO.ToString();
@@ -1234,7 +1233,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             else
             {
-                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Plan Anual", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
+                Entidades.Mensajes.MensajesABM.MsjValidacion("Debe seleccionar un Plan Anual con su detalle para modificarlo", this.Text);
             }
         }        
 

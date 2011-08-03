@@ -17,15 +17,17 @@ namespace GyCAP.BLL
         }
 
         //Metodo de Guardado de proveedor nuevo
-        public static void GuardarProveedor(Entidades.Proveedor proveedor, Data.dsProveedor dsProveedor)
+        public static int GuardarProveedor(Entidades.Proveedor proveedor, Data.dsProveedor dsProveedor)
         {
-            DAL.ProveedorDAL.GuardarProveedor(proveedor, dsProveedor);
+            if (DAL.ProveedorDAL.EsProveedorNuevo(proveedor)) { return DAL.ProveedorDAL.GuardarProveedor(proveedor, dsProveedor); }
+            else { throw new Entidades.Excepciones.ElementoExistenteException(); }             
         }
 
         //Metodo que se usa para guardar las modificaciones hechas sobre un proveedor
         public static void ModificarProveedor(Entidades.Proveedor proveedor, Data.dsProveedor dsProveedor)
         {
-            DAL.ProveedorDAL.ModificarProveedor(proveedor, dsProveedor);
+            if (DAL.ProveedorDAL.EsProveedorActualizar(proveedor)) { DAL.ProveedorDAL.ModificarProveedor(proveedor, dsProveedor); }
+            else { throw new Entidades.Excepciones.ElementoExistenteException(); }           
         }
 
         //Metodo para eliminar el proveedor de la BD
