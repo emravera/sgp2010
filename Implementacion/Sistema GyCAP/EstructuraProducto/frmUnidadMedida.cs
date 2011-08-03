@@ -421,41 +421,16 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void control_Enter(object sender, EventArgs e)
         {
-            if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
+            //if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
         }
+
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        } 
                
         #endregion
-
-        
-
-        
-
-        
-
-
-       
-       
-        
-
-        
-
-        
-
-        
-        
-
-        
-        
-
-      
-
-       
-
-        
-
-       
-
-        
+  
 
     }
 }

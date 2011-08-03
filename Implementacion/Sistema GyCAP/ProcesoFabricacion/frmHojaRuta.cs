@@ -201,6 +201,11 @@ namespace GyCAP.UI.ProcesoFabricacion
                         dsHojaRuta.HOJAS_RUTA.RejectChanges();
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        dsHojaRuta.HOJAS_RUTA.RejectChanges();
+                        MensajesABM.MsjValidacion(ex.Message, this.Text);
+                    }
                 }
                 else
                 {
@@ -241,6 +246,11 @@ namespace GyCAP.UI.ProcesoFabricacion
                         //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
                         dsHojaRuta.HOJAS_RUTA.RejectChanges();
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        dsHojaRuta.HOJAS_RUTA.RejectChanges();
+                        MensajesABM.MsjValidacion(ex.Message, this.Text);
                     }
                 }
                 //dgvHojasRuta.Refresh();

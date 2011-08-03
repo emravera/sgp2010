@@ -263,7 +263,9 @@ namespace GyCAP.UI.RecursosFabricacion
 
                         //Todavia no aceptamos los cambios porque necesitamos que queden marcadas como nuevas las filas
                         //para que la entidad BLL y DAL sepan cuales insertar
-                        BLL.CentroTrabajoBLL.Insertar(dsCentroTrabajo);
+                        rowCentro.BeginEdit();
+                        rowCentro.CTO_CODIGO = BLL.CentroTrabajoBLL.Insertar(dsCentroTrabajo);
+                        rowCentro.EndEdit();
                         //Ahora si aceptamos los cambios
                         dsCentroTrabajo.CENTROS_TRABAJOS.AcceptChanges();
                         dsCentroTrabajo.TURNOSXCENTROTRABAJO.AcceptChanges();

@@ -25,11 +25,15 @@ namespace GyCAP.BLL
 
         public static int Insertar(Data.dsHojaRuta dsHojaRuta)
         {
+            Data.dsHojaRuta.HOJAS_RUTARow rowhoja = dsHojaRuta.HOJAS_RUTA.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsHojaRuta.HOJAS_RUTARow;
+            if (DAL.HojaRutaDAL.EsHojaRuta(rowhoja.HR_NOMBRE, Convert.ToInt32(rowhoja.HR_CODIGO))) { throw new Entidades.Excepciones.ElementoExistenteException(); }
             return DAL.HojaRutaDAL.Insertar(dsHojaRuta);
         }
         
         public static void Actualizar(Data.dsHojaRuta dsHojaRuta)
         {
+            Data.dsHojaRuta.HOJAS_RUTARow rowhoja = dsHojaRuta.HOJAS_RUTA.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsHojaRuta.HOJAS_RUTARow;
+            if (DAL.HojaRutaDAL.EsHojaRuta(rowhoja.HR_NOMBRE, Convert.ToInt32(rowhoja.HR_CODIGO))) { throw new Entidades.Excepciones.ElementoExistenteException(); }
             DAL.HojaRutaDAL.Actualizar(dsHojaRuta);
         }
 

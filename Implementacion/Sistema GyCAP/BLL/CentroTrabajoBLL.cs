@@ -13,7 +13,7 @@ namespace GyCAP.BLL
         public static readonly int CentroInactivo = 0;
         public static readonly int CentroActivo = 1;
         
-        public static void Insertar(Data.dsHojaRuta ds)
+        public static int Insertar(Data.dsHojaRuta ds)
         {
             Entidades.CentroTrabajo centro = new GyCAP.Entidades.CentroTrabajo();
             Data.dsHojaRuta.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsHojaRuta.CENTROS_TRABAJOSRow;
@@ -21,7 +21,7 @@ namespace GyCAP.BLL
             centro.Sector = new GyCAP.Entidades.SectorTrabajo();
             centro.Sector.Codigo = Convert.ToInt32(row.SEC_CODIGO);
             if (DAL.CentroTrabajoDAL.EsCentroTrabajo(centro)) { throw new Entidades.Excepciones.ElementoExistenteException(); }
-            DAL.CentroTrabajoDAL.Insertar(ds);
+            return DAL.CentroTrabajoDAL.Insertar(ds);
         }
 
         public static void Actualizar(Data.dsHojaRuta ds)

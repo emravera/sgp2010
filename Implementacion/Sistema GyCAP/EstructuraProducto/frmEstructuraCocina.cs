@@ -156,22 +156,7 @@ namespace GyCAP.UI.EstructuraProducto
             else
             {
                 MensajesABM.MsjSinSeleccion("Estructura", MensajesABM.Generos.Femenino, this.Text);
-            }
-
-            /*tcEstructuraProducto.SelectedTab = tpTemp;
-            tvTemp.Nodes.Clear();
-            tvTemp.BeginUpdate();
-            TreeNode nodoraiz = new TreeNode(arbolEstructura.NodoRaiz.Text);
-
-            foreach (Entidades.ArbolEstructura.NodoEstructura nodoEstr in arbolEstructura.NodoRaiz.NodosHijos)
-            {
-                TreeNode nodo = new TreeNode(nodoEstr.Text);
-                nodoraiz.Nodes.Add(nodo);
-                Add(nodoEstr, nodo);
-            }
-            tvTemp.Nodes.Add(nodoraiz);
-            tvTemp.EndUpdate();
-            tvTemp.ExpandAll();*/
+            }            
         }
 
         private void Add(Entidades.ArbolEstructura.NodoEstructura nodoEstr, TreeNode nodoAdd)
@@ -1118,7 +1103,20 @@ namespace GyCAP.UI.EstructuraProducto
                 nudcosto.Value = arbolEstructura.GetCostoEstructura();
             }
             else { tvEstructura.Nodes.Clear(); }
-            tvEstructura.EndUpdate();            
+            tvEstructura.EndUpdate();
+
+            tvTemp.Columns.Clear();
+            tvTemp.Columns.Add("partes", "Partes", 350);
+            tvTemp.Columns.Add("cantidad", "Cantidad", 100);
+            tvTemp.Columns.Add("umed", "Unidad de Medida", 100);
+            tvTemp.TreeView.Nodes.Clear();
+            TreeView temp = arbolEstructura.AsTreeView();
+            TreeNode nodo = temp.Nodes[0];
+            temp.Nodes.Clear();
+            temp.Dispose();
+            tvTemp.TreeView.Nodes.Add(nodo);
+            tvTemp.TreeView.ExpandAll();
+            tvTemp.TreeView.CheckBoxes = false;
         }        
 
         #endregion
@@ -1265,7 +1263,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         #endregion
 
-        
+              
 
     }
 }
