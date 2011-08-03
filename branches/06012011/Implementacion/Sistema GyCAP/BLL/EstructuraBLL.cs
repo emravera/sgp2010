@@ -205,15 +205,15 @@ namespace GyCAP.BLL
             arbolEstructura.NodoRaiz.Compuesto = new CompuestoParte
                                                 (
                                                     Convert.ToInt32(rowCompuestoInicio.COMP_CODIGO),
-                                                    new Parte(),
-                                                    new Parte(),
+                                                    null,
+                                                    new Parte() { Nombre = rowCompuestoInicio.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE },
                                                     null,
                                                     rowCompuestoInicio.COMP_CANTIDAD,
                                                     new UnidadMedida(Convert.ToInt32(rowCompuestoInicio.UMED_CODIGO)),
                                                     new Estructura()
                                                 );
 
-            arbolEstructura.NodoRaiz.Text = "Inicio";
+            arbolEstructura.NodoRaiz.Text = rowCompuestoInicio.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE;
             
             foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowComp in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select
                     ("estr_codigo = " + codigoEstructura + " AND (part_numero_hijo <> " + rowCompuestoInicio.PART_NUMERO_HIJO.ToString() + " OR part_numero_hijo IS NULL)"))
@@ -228,10 +228,10 @@ namespace GyCAP.BLL
                                 (
                                     key,
                                     new Parte(),
-                                    ((rowComp.IsMP_CODIGONull()) ? new Parte() : null),
-                                    ((rowComp.IsMP_CODIGONull()) ? null : new MateriaPrima() { Costo = rowComp.MATERIAS_PRIMASRow.MP_COSTO }),
+                                    ((rowComp.IsMP_CODIGONull()) ? new Parte() { Nombre = rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE } : null),
+                                    ((rowComp.IsMP_CODIGONull()) ? null : new MateriaPrima() { Nombre = rowComp.MATERIAS_PRIMASRow.MP_NOMBRE, Costo = rowComp.MATERIAS_PRIMASRow.MP_COSTO }),
                                     rowComp.COMP_CANTIDAD,
-                                    new UnidadMedida(Convert.ToInt32(rowComp.UMED_CODIGO)),
+                                    new UnidadMedida() { Codigo = Convert.ToInt32(rowComp.UMED_CODIGO), Abreviatura = rowComp.UNIDADES_MEDIDARow.UMED_ABREVIATURA },
                                     new Estructura()
                                 );
                 arbolEstructura.Find(key).NodosHijos.Add(nodo);

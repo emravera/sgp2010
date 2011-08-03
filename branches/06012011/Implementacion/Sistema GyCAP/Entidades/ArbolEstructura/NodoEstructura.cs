@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace GyCAP.Entidades.ArbolEstructura
 {
@@ -98,11 +99,18 @@ namespace GyCAP.Entidades.ArbolEstructura
             if (this.compuesto != null) { this.compuesto.Cantidad -= cantidad; }
         }
 
-        public bool AddChild(NodoEstructura nodo, bool allowDuplicated)
+        public bool AddChild(NodoEstructura nodo, bool allowDuplicated, bool AddQuantityIfExists)
         {
             NodoEstructura finded = this.FindInChilds(nodo.codigoNodo);
             
-            if (finded != null && !allowDuplicated) { return false; }
+            if (finded != null && !allowDuplicated) 
+            {
+                if (!AddQuantityIfExists) { return false; }
+
+                finded.compuesto.Cantidad += nodo.compuesto.Cantidad;
+
+                return true;
+            }
 
             this.nodosHijos.Add(nodo);
 
@@ -119,6 +127,51 @@ namespace GyCAP.Entidades.ArbolEstructura
             }
 
             return nodo;
-        }        
+        }
+
+        public TreeNode AsTreeNode()
+        {
+            TreeNode nodo = new TreeNode();
+            nodo.Text = (compuesto.ParteHijo != null) ? compuesto.ParteHijo.Nombre : compuesto.MateriaPrima.Nombre;
+            nodo.Name = this.codigoNodo.ToString();
+            nodo.Tag = new string[] { compuesto.Cantidad.ToString(), compuesto.UnidadMedida.Abreviatura };
+
+            foreach (NodoEstructura item in this.nodosHijos)
+            {
+                nodo.Nodes.Add(item.AsTreeNode());
+            }
+
+            return nodo;
+        }
+
+        private IList<string> ValidateAddChild(NodoEstructura nodo)
+        {
+            IList<string> validaciones = new List<string>();
+
+            //if (nodo.nodoPadre.compuesto.PartePadre != null && this.Equals(nodo)) { validaciones.Add(""); }
+
+            if (this.contenido == tipoContenido.MateriaPrima) { validaciones.Add(""); }
+
+            //agrego la parte
+                    //Condiciones:
+                    //              - que el padre no sea ella misma
+                    //              - que el padre no sea una MP
+                    //              - si ya está dentro del mismo padre, avisar y preguntar si quiere aumentar la cantidad ingresada
+                    //              - si ya está en otro padre, que no arme una estructura diferente para la misma parte
+                    //              - que ella misma no sea ancestro
+                    //              - solo una parte del tipo producto terminado puede ser raíz
+                    //              - un producto terminado no puede ser hijo de nadie
+                    
+                
+            
+                
+                    //agrego la MP
+                    //Condiciones:
+                    //              - que no sea raíz
+                    //              - que no sea hija de otra MP
+                    //              - si ya está en el mismo padre, avisar y preguntar si quiere aumentar la cantidad ingresada
+
+            return validaciones;
+        }
     }
 }

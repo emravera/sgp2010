@@ -115,11 +115,14 @@ namespace GyCAP.DAL
 
         public static bool PuedeEliminarse(int codigo)
         {
-            string sql = "SELECT count(COC_CODIGO) FROM COCINA WHERE TE_CODIGO = @p0";
+            string sql1 = "SELECT count(coc_codigo) FROM COCINAS WHERE te_codigo = @p0";
+            string sql2 = "SELECT count(part_codigo) FROM PARTES WHERE te_codigo = @p0";
             object[] valorParametros = { codigo };
             try
             {
-                if (Convert.ToInt64(DB.executeScalar(sql, valorParametros, null)) == 0) { return true; }
+                int r1 = Convert.ToInt32(DB.executeScalar(sql1, valorParametros, null));
+                int r2 = Convert.ToInt32(DB.executeScalar(sql2, valorParametros, null));
+                if (r1 + r2 == 0) { return true; }
                 else { return false; }
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }

@@ -262,5 +262,18 @@ namespace GyCAP.DAL
                 OperacionDAL.ObtenerOperacion(Convert.ToInt32(rowDHR.OPR_NUMERO), ds);
             }
         }
+
+        public static bool EsHojaRuta(string nombre, int codigo)
+        {
+            string sql = "SELECT count(hr_codigo) FROM HOJAS_RUTA WHERE hr_nombre = @p0 AND hr_codigo <> @p1";
+            object[] parametros = { nombre, codigo };
+
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, parametros, null)) == 0) { return false; }
+                else { return true; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
     }
 }

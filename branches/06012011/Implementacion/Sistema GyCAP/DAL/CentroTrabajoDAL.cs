@@ -14,7 +14,7 @@ namespace GyCAP.DAL
         public static readonly int CentroInactivo = 0;
         public static readonly int CentroActivo = 1;
         
-        public static void Insertar(Data.dsHojaRuta ds)
+        public static int Insertar(Data.dsHojaRuta ds)
         {
             string sql = @"INSERT INTO [CENTROS_TRABAJOS] 
                            ([cto_nombre], 
@@ -57,18 +57,19 @@ namespace GyCAP.DAL
             try
             {
                 transaccion = DB.IniciarTransaccion();
-                row.BeginEdit();
-                row.CTO_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
-                row.EndEdit();
+                
+                int codigo = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
+                
                 foreach (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow rows in (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow[])ds.TURNOSXCENTROTRABAJO.Select(null, null, DataViewRowState.Added))
                 {
-                    valoresParametros = new object[] { rows.TUR_CODIGO, row.CTO_CODIGO };
+                    valoresParametros = new object[] { rows.TUR_CODIGO, codigo };
                     rows.BeginEdit();
                     rows.TXCT_CODIGO = Convert.ToInt32(DB.executeScalar(sqlTurnos, valoresParametros, transaccion));
-                    rows.CTO_CODIGO = row.CTO_CODIGO;
+                    rows.CTO_CODIGO = codigo;
                     rows.EndEdit();
                 }
                 transaccion.Commit();
+                return codigo;
             }
             catch (SqlException ex) 
             { 
@@ -187,17 +188,15 @@ namespace GyCAP.DAL
         public static bool PuedeEliminarse(int codigoCentro)
         {
             string sql1 = "SELECT count(cto_codigo) FROM DETALLE_HOJARUTA WHERE cto_codigo = @p0";
-            string sql2 = "SELECT count(cto_codigo) FROM TURNOSXCENTROTRABAJO WHERE cto_codigo = @p0";
             string sql3 = "SELECT count(cto_codigo) FROM ORDENES_TRABAJO WHERE cto_codigo = @p0";
             object[] parametros = { codigoCentro };
 
             try
             {
-                int r1 = Convert.ToInt32(DB.executeScalar(sql1, parametros, null));
-                int r2 = Convert.ToInt32(DB.executeScalar(sql2, parametros, null));
-                int r3 = Convert.ToInt32(DB.executeScalar(sql3, parametros, null));
+                int r1 = Convert.ToInt32(DB.executeScalar(sql1, parametros, null));                
+                int r2 = Convert.ToInt32(DB.executeScalar(sql3, parametros, null));
 
-                if (r1 + r2 + r3 == 0) { return true; }
+                if (r1 + r2 == 0) { return true; }
                 else { return false; }
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace GyCAP.Entidades.ArbolEstructura
 {
@@ -78,6 +79,25 @@ namespace GyCAP.Entidades.ArbolEstructura
             }
 
             return nodo;
+        }
+
+        public TreeView AsTreeView()
+        {
+            TreeView treeReturn = new TreeView();
+            treeReturn.BeginUpdate();
+            TreeNode nodoInicio = new TreeNode();
+            nodoInicio.Text = nodoRaiz.Compuesto.ParteHijo.Nombre;
+            nodoInicio.Name = nodoRaiz.CodigoNodo.ToString();
+            nodoInicio.Tag = new string[] { nodoRaiz.Compuesto.Cantidad.ToString(), nodoRaiz.Compuesto.UnidadMedida.Abreviatura };
+
+            foreach (NodoEstructura item in nodoRaiz.NodosHijos)
+            {
+                nodoInicio.Nodes.Add(item.AsTreeNode());
+            }
+
+            treeReturn.Nodes.Add(nodoInicio);
+            treeReturn.EndUpdate();
+            return treeReturn;
         }
     }
 }
