@@ -606,9 +606,7 @@ namespace GyCAP.UI.EstructuraProducto
             numCantidad.Value = 0;
         }
 
-        #endregion
-
-        
+        #endregion       
 
     }       
         

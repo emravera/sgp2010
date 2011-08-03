@@ -47,12 +47,12 @@
             this.txtAnioBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tpDatos = new System.Windows.Forms.TabPage();
+            this.gbTotales = new System.Windows.Forms.GroupBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.gbBotones = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbModificacion = new System.Windows.Forms.GroupBox();
-            this.lblTotalSistema = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
             this.btnModificarEstimacion = new System.Windows.Forms.Button();
             this.gbEstimacionMes = new System.Windows.Forms.GroupBox();
             this.numDiciembre = new System.Windows.Forms.NumericUpDown();
@@ -108,6 +108,7 @@
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtTotalSistema = new System.Windows.Forms.TextBox();
             this.tcDemanda.SuspendLayout();
             this.tpBuscar.SuspendLayout();
             this.gbGrillaDetalle.SuspendLayout();
@@ -116,6 +117,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tpDatos.SuspendLayout();
+            this.gbTotales.SuspendLayout();
             this.gbBotones.SuspendLayout();
             this.gbModificacion.SuspendLayout();
             this.gbEstimacionMes.SuspendLayout();
@@ -340,6 +342,29 @@
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
+            // gbTotales
+            // 
+            this.gbTotales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbTotales.Controls.Add(this.txtTotalSistema);
+            this.gbTotales.Controls.Add(this.label23);
+            this.gbTotales.Controls.Add(this.txtTotal);
+            this.gbTotales.Controls.Add(this.label18);
+            this.gbTotales.Location = new System.Drawing.Point(11, 200);
+            this.gbTotales.Name = "gbTotales";
+            this.gbTotales.Size = new System.Drawing.Size(278, 73);
+            this.gbTotales.TabIndex = 25;
+            this.gbTotales.TabStop = false;
+            this.gbTotales.Text = "Totales";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(6, 48);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(142, 13);
+            this.label23.TabIndex = 23;
+            this.label23.Text = "Total Calculado por Sistema:";
+            // 
             // gbBotones
             // 
             this.gbBotones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
@@ -357,7 +382,7 @@
             this.btnVolver.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnVolver.Location = new System.Drawing.Point(361, 18);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(75, 25);
             this.btnVolver.TabIndex = 22;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -368,7 +393,7 @@
             this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnGuardar.Location = new System.Drawing.Point(280, 18);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.Size = new System.Drawing.Size(75, 25);
             this.btnGuardar.TabIndex = 21;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -377,8 +402,6 @@
             // gbModificacion
             // 
             this.gbModificacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.gbModificacion.Controls.Add(this.lblTotalSistema);
-            this.gbModificacion.Controls.Add(this.label21);
             this.gbModificacion.Controls.Add(this.btnModificarEstimacion);
             this.gbModificacion.Location = new System.Drawing.Point(6, 393);
             this.gbModificacion.Name = "gbModificacion";
@@ -386,31 +409,13 @@
             this.gbModificacion.TabIndex = 15;
             this.gbModificacion.TabStop = false;
             // 
-            // lblTotalSistema
-            // 
-            this.lblTotalSistema.AutoSize = true;
-            this.lblTotalSistema.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalSistema.Location = new System.Drawing.Point(20, 26);
-            this.lblTotalSistema.Name = "lblTotalSistema";
-            this.lblTotalSistema.Size = new System.Drawing.Size(0, 20);
-            this.lblTotalSistema.TabIndex = 24;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(5, 8);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(142, 13);
-            this.label21.TabIndex = 23;
-            this.label21.Text = "Total Calculado por Sistema:";
-            // 
             // btnModificarEstimacion
             // 
-            this.btnModificarEstimacion.Location = new System.Drawing.Point(182, 16);
+            this.btnModificarEstimacion.Location = new System.Drawing.Point(83, 18);
             this.btnModificarEstimacion.Name = "btnModificarEstimacion";
-            this.btnModificarEstimacion.Size = new System.Drawing.Size(114, 23);
+            this.btnModificarEstimacion.Size = new System.Drawing.Size(153, 25);
             this.btnModificarEstimacion.TabIndex = 23;
-            this.btnModificarEstimacion.Text = "Modificar Estimación";
+            this.btnModificarEstimacion.Text = "Modificar Valores Estimación";
             this.btnModificarEstimacion.UseVisualStyleBackColor = true;
             this.btnModificarEstimacion.Click += new System.EventHandler(this.btnModificarEstimacion_Click);
             // 
@@ -418,6 +423,7 @@
             // 
             this.gbEstimacionMes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbEstimacionMes.Controls.Add(this.gbTotales);
             this.gbEstimacionMes.Controls.Add(this.numDiciembre);
             this.gbEstimacionMes.Controls.Add(this.numNoviembre);
             this.gbEstimacionMes.Controls.Add(this.numOctubre);
@@ -430,8 +436,6 @@
             this.gbEstimacionMes.Controls.Add(this.numFebrero);
             this.gbEstimacionMes.Controls.Add(this.numJulio);
             this.gbEstimacionMes.Controls.Add(this.numEnero);
-            this.gbEstimacionMes.Controls.Add(this.txtTotal);
-            this.gbEstimacionMes.Controls.Add(this.label18);
             this.gbEstimacionMes.Controls.Add(this.label16);
             this.gbEstimacionMes.Controls.Add(this.label15);
             this.gbEstimacionMes.Controls.Add(this.label14);
@@ -454,7 +458,7 @@
             // numDiciembre
             // 
             this.numDiciembre.CausesValidation = false;
-            this.numDiciembre.Location = new System.Drawing.Point(207, 190);
+            this.numDiciembre.Location = new System.Drawing.Point(207, 174);
             this.numDiciembre.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -470,7 +474,7 @@
             // numNoviembre
             // 
             this.numNoviembre.CausesValidation = false;
-            this.numNoviembre.Location = new System.Drawing.Point(207, 158);
+            this.numNoviembre.Location = new System.Drawing.Point(207, 142);
             this.numNoviembre.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -486,7 +490,7 @@
             // numOctubre
             // 
             this.numOctubre.CausesValidation = false;
-            this.numOctubre.Location = new System.Drawing.Point(207, 127);
+            this.numOctubre.Location = new System.Drawing.Point(207, 111);
             this.numOctubre.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -502,7 +506,7 @@
             // numSeptiembre
             // 
             this.numSeptiembre.CausesValidation = false;
-            this.numSeptiembre.Location = new System.Drawing.Point(207, 97);
+            this.numSeptiembre.Location = new System.Drawing.Point(207, 81);
             this.numSeptiembre.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -518,7 +522,7 @@
             // numAgosto
             // 
             this.numAgosto.CausesValidation = false;
-            this.numAgosto.Location = new System.Drawing.Point(207, 67);
+            this.numAgosto.Location = new System.Drawing.Point(207, 51);
             this.numAgosto.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -534,7 +538,7 @@
             // numJunio
             // 
             this.numJunio.CausesValidation = false;
-            this.numJunio.Location = new System.Drawing.Point(51, 190);
+            this.numJunio.Location = new System.Drawing.Point(51, 174);
             this.numJunio.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -550,7 +554,7 @@
             // numMayo
             // 
             this.numMayo.CausesValidation = false;
-            this.numMayo.Location = new System.Drawing.Point(51, 158);
+            this.numMayo.Location = new System.Drawing.Point(51, 142);
             this.numMayo.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -566,7 +570,7 @@
             // numAbril
             // 
             this.numAbril.CausesValidation = false;
-            this.numAbril.Location = new System.Drawing.Point(51, 127);
+            this.numAbril.Location = new System.Drawing.Point(51, 111);
             this.numAbril.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -582,7 +586,7 @@
             // numMarzo
             // 
             this.numMarzo.CausesValidation = false;
-            this.numMarzo.Location = new System.Drawing.Point(51, 97);
+            this.numMarzo.Location = new System.Drawing.Point(51, 81);
             this.numMarzo.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -598,7 +602,7 @@
             // numFebrero
             // 
             this.numFebrero.CausesValidation = false;
-            this.numFebrero.Location = new System.Drawing.Point(51, 67);
+            this.numFebrero.Location = new System.Drawing.Point(51, 51);
             this.numFebrero.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -614,7 +618,7 @@
             // numJulio
             // 
             this.numJulio.CausesValidation = false;
-            this.numJulio.Location = new System.Drawing.Point(207, 34);
+            this.numJulio.Location = new System.Drawing.Point(207, 18);
             this.numJulio.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -630,7 +634,7 @@
             // numEnero
             // 
             this.numEnero.CausesValidation = false;
-            this.numEnero.Location = new System.Drawing.Point(51, 35);
+            this.numEnero.Location = new System.Drawing.Point(51, 19);
             this.numEnero.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -646,24 +650,24 @@
             // txtTotal
             // 
             this.txtTotal.CausesValidation = false;
-            this.txtTotal.Location = new System.Drawing.Point(194, 244);
+            this.txtTotal.Location = new System.Drawing.Point(152, 19);
             this.txtTotal.Name = "txtTotal";
-            this.txtTotal.Size = new System.Drawing.Size(100, 20);
+            this.txtTotal.Size = new System.Drawing.Size(120, 20);
             this.txtTotal.TabIndex = 18;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(143, 247);
+            this.label18.Location = new System.Drawing.Point(6, 22);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(31, 13);
+            this.label18.Size = new System.Drawing.Size(121, 13);
             this.label18.TabIndex = 24;
-            this.label18.Text = "Total";
+            this.label18.Text = "Total Estimación Actual:";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(143, 192);
+            this.label16.Location = new System.Drawing.Point(143, 176);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(54, 13);
             this.label16.TabIndex = 22;
@@ -672,7 +676,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(143, 159);
+            this.label15.Location = new System.Drawing.Point(143, 143);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(58, 13);
             this.label15.TabIndex = 20;
@@ -681,7 +685,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(143, 129);
+            this.label14.Location = new System.Drawing.Point(143, 113);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(45, 13);
             this.label14.TabIndex = 18;
@@ -690,7 +694,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(143, 99);
+            this.label13.Location = new System.Drawing.Point(143, 83);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(60, 13);
             this.label13.TabIndex = 16;
@@ -699,7 +703,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(143, 69);
+            this.label12.Location = new System.Drawing.Point(143, 53);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(40, 13);
             this.label12.TabIndex = 14;
@@ -708,7 +712,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(143, 36);
+            this.label11.Location = new System.Drawing.Point(143, 20);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(28, 13);
             this.label11.TabIndex = 12;
@@ -717,7 +721,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(5, 193);
+            this.label10.Location = new System.Drawing.Point(5, 177);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(32, 13);
             this.label10.TabIndex = 10;
@@ -726,7 +730,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(5, 160);
+            this.label9.Location = new System.Drawing.Point(5, 144);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(33, 13);
             this.label9.TabIndex = 8;
@@ -735,7 +739,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(5, 130);
+            this.label8.Location = new System.Drawing.Point(5, 114);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(27, 13);
             this.label8.TabIndex = 6;
@@ -744,7 +748,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(5, 100);
+            this.label7.Location = new System.Drawing.Point(5, 84);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(36, 13);
             this.label7.TabIndex = 4;
@@ -753,7 +757,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(5, 70);
+            this.label6.Location = new System.Drawing.Point(5, 54);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 13);
             this.label6.TabIndex = 2;
@@ -762,7 +766,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(5, 37);
+            this.label5.Location = new System.Drawing.Point(5, 21);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 13);
             this.label5.TabIndex = 0;
@@ -803,9 +807,9 @@
             // btnCalcularEstimacion
             // 
             this.btnCalcularEstimacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCalcularEstimacion.Location = new System.Drawing.Point(636, 57);
+            this.btnCalcularEstimacion.Location = new System.Drawing.Point(636, 56);
             this.btnCalcularEstimacion.Name = "btnCalcularEstimacion";
-            this.btnCalcularEstimacion.Size = new System.Drawing.Size(111, 23);
+            this.btnCalcularEstimacion.Size = new System.Drawing.Size(109, 23);
             this.btnCalcularEstimacion.TabIndex = 6;
             this.btnCalcularEstimacion.Text = "Calcular Estimación";
             this.btnCalcularEstimacion.UseVisualStyleBackColor = true;
@@ -1078,6 +1082,15 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 518);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
+            // txtTotalSistema
+            // 
+            this.txtTotalSistema.CausesValidation = false;
+            this.txtTotalSistema.Location = new System.Drawing.Point(152, 45);
+            this.txtTotalSistema.Name = "txtTotalSistema";
+            this.txtTotalSistema.ReadOnly = true;
+            this.txtTotalSistema.Size = new System.Drawing.Size(120, 20);
+            this.txtTotalSistema.TabIndex = 25;
+            // 
             // frmEstimarDemandaAnual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1098,9 +1111,10 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tpDatos.ResumeLayout(false);
+            this.gbTotales.ResumeLayout(false);
+            this.gbTotales.PerformLayout();
             this.gbBotones.ResumeLayout(false);
             this.gbModificacion.ResumeLayout(false);
-            this.gbModificacion.PerformLayout();
             this.gbEstimacionMes.ResumeLayout(false);
             this.gbEstimacionMes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDiciembre)).EndInit();
@@ -1199,10 +1213,11 @@
         private System.Windows.Forms.Button btnCalcularEstimacion;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.GroupBox gbModificacion;
-        private System.Windows.Forms.Label lblTotalSistema;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button btnModificarEstimacion;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartDemanda;
         public System.Windows.Forms.ToolStripButton btnNuevo;
+        private System.Windows.Forms.GroupBox gbTotales;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox txtTotalSistema;
     }
 }

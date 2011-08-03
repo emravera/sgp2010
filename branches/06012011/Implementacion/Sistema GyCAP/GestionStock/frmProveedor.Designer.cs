@@ -156,6 +156,7 @@
             // 
             this.txtRazonSocial.Location = new System.Drawing.Point(89, 14);
             this.txtRazonSocial.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtRazonSocial.MaxLength = 80;
             this.txtRazonSocial.Name = "txtRazonSocial";
             this.txtRazonSocial.Size = new System.Drawing.Size(370, 20);
             this.txtRazonSocial.TabIndex = 1;
@@ -167,12 +168,13 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(73, 13);
             this.label9.TabIndex = 16;
-            this.label9.Text = "Razón Social:";
+            this.label9.Text = "Razon Social:";
             // 
             // txtTelefonoPcipal
             // 
             this.txtTelefonoPcipal.Location = new System.Drawing.Point(89, 40);
             this.txtTelefonoPcipal.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTelefonoPcipal.MaxLength = 80;
             this.txtTelefonoPcipal.Name = "txtTelefonoPcipal";
             this.txtTelefonoPcipal.Size = new System.Drawing.Size(146, 20);
             this.txtTelefonoPcipal.TabIndex = 2;
@@ -248,17 +250,15 @@
             // 
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
-            this.dgvLista.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvLista.CausesValidation = false;
+            this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLista.Location = new System.Drawing.Point(9, 22);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(596, 271);
+            this.dgvLista.Size = new System.Drawing.Size(596, 274);
             this.dgvLista.TabIndex = 1;
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             // 
@@ -320,6 +320,7 @@
             this.txtRazonBuscar.CausesValidation = false;
             this.txtRazonBuscar.Location = new System.Drawing.Point(85, 28);
             this.txtRazonBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtRazonBuscar.MaxLength = 80;
             this.txtRazonBuscar.Name = "txtRazonBuscar";
             this.txtRazonBuscar.Size = new System.Drawing.Size(161, 20);
             this.txtRazonBuscar.TabIndex = 4;
