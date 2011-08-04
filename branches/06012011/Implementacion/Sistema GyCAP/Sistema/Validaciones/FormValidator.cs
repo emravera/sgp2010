@@ -20,7 +20,8 @@ namespace GyCAP.UI.Sistema.Validaciones
         ///     - dateTimePicker (.NET) sin fecha seleccionada o una hora seleccionada
         ///     - DataGridView (.NET) con al menos una fila seleccionada
         ///     - DataGridView (.NET) con al menos una fila agregada (default)
-        ///     - NumericUpDown (.NET) con value > 0
+        ///     - NumericUpDown (.NET) sin tag => con value > 0
+        ///     - NumericUpDown (.NET) con tag => los límites
         /// </summary>
         /// <param name="formulario">El formulario a validar</param>
         /// <returns>true si es válido, false en caso contrario</returns>
@@ -154,12 +155,27 @@ namespace GyCAP.UI.Sistema.Validaciones
             else if (ctrl.GetType().Equals(typeof(NumericUpDown)))
             {
                 NumericUpDown nud = (NumericUpDown)ctrl;
-                if (nud.CausesValidation && nud.Value == 0)
+                if (nud.Tag == null)
                 {
-                    provider.SetError(ctrl, "Debe ingresar un valor mayor que 0.");
-                    provider.Tag = false;
+                    if (nud.CausesValidation && nud.Value == 0)
+                    {
+                        provider.SetError(ctrl, "Debe ingresar un valor mayor que 0.");
+                        provider.Tag = false;
+                    }
+                    else { provider.SetError(ctrl, string.Empty); }
                 }
-                else { provider.SetError(ctrl, string.Empty); }
+                else
+                {
+                    NumericLimitValues limits = (NumericLimitValues)nud.Tag;
+                    if (nud.CausesValidation && !limits.IsValid(nud))
+                    {
+                        string mensaje = "Debe ingresar un valor mayor que 0.";
+                        if (limits.OnErrorMessage != string.Empty) { mensaje = limits.OnErrorMessage; }
+                        provider.SetError(ctrl, mensaje);
+                        provider.Tag = false;
+                    }
+                    else { provider.SetError(ctrl, string.Empty); }
+                }
             }
             else if (ctrl.GetType().Equals(typeof(System.Windows.Forms.DateTimePicker)))
             {
