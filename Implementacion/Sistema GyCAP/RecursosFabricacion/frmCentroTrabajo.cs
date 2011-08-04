@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GyCAP.Entidades.Mensajes;
+using GyCAP.UI.Sistema.Validaciones;
 
 namespace GyCAP.UI.RecursosFabricacion
 {
@@ -568,6 +569,7 @@ namespace GyCAP.UI.RecursosFabricacion
             dvTurnoTrabajo = new DataView(dsCentroTrabajo.TURNOS_TRABAJO);
             dvTurnoTrabajo.Sort = "TUR_NOMBRE ASC";
 
+            nudHorasNormal.Tag = new NumericLimitValues("0,01", "999,99");
         }
 
         private void CargarTurnos()

@@ -786,10 +786,10 @@
             65536});
             this.nudHorasNormal.Location = new System.Drawing.Point(446, 24);
             this.nudHorasNormal.Maximum = new decimal(new int[] {
-            99999,
+            10000,
             0,
             0,
-            131072});
+            0});
             this.nudHorasNormal.Name = "nudHorasNormal";
             this.nudHorasNormal.Size = new System.Drawing.Size(95, 21);
             this.nudHorasNormal.TabIndex = 11;
