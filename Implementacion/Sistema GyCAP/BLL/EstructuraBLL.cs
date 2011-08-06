@@ -228,7 +228,14 @@ namespace GyCAP.BLL
                                 (
                                     key,
                                     new Parte(),
-                                    ((rowComp.IsMP_CODIGONull()) ? new Parte() { Nombre = rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE } : null),
+                                    ((rowComp.IsMP_CODIGONull()) ? new Parte()
+                                        {
+                                            Nombre = rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE,
+                                            Tipo = new TipoParte()
+                                            {
+                                                Adquirido = Convert.ToInt32(rowCompuestoInicio.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.TIPOS_PARTESRow.TPAR_ADQUIRIDO)
+                                            }
+                                        } : null),
                                     ((rowComp.IsMP_CODIGONull()) ? null : new MateriaPrima() { Nombre = rowComp.MATERIAS_PRIMASRow.MP_NOMBRE, Costo = rowComp.MATERIAS_PRIMASRow.MP_COSTO }),
                                     rowComp.COMP_CANTIDAD,
                                     new UnidadMedida() { Codigo = Convert.ToInt32(rowComp.UMED_CODIGO), Abreviatura = rowComp.UNIDADES_MEDIDARow.UMED_ABREVIATURA },

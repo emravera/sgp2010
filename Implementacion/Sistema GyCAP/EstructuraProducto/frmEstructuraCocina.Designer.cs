@@ -471,7 +471,7 @@
             65536});
             this.nudcosto.Location = new System.Drawing.Point(150, 217);
             this.nudcosto.Maximum = new decimal(new int[] {
-            10000,
+            10000000,
             0,
             0,
             0});
