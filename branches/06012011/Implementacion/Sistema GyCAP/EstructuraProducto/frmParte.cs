@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GyCAP.Entidades.Mensajes;
+using GyCAP.UI.Sistema.Validaciones;
 
 namespace GyCAP.UI.EstructuraProducto
 {
@@ -375,7 +376,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cboHojaRuta.Enabled = true;
                     cboProveedor.SetSelectedValue(-1);
                     pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
-                    nudCosto.Enabled = true;                   
+                    nudCosto.Value = 0;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
                     btnNuevo.Enabled = false;
@@ -516,6 +517,8 @@ namespace GyCAP.UI.EstructuraProducto
             cboUnidadMedida.SetDatos(dvUnidadMedida, "UMED_CODIGO", "UMED_NOMBRE", "UMED_NOMBRE ASC", "Seleccione...", false);
             cboHojaRuta.SetDatos(dvHojaRuta, "HR_CODIGO", "HR_NOMBRE", "HR_NOMBRE ASC", "--Sin especificar--", true);
             cboProveedor.SetDatos(dvProveedor, "PROVE_CODIGO", "PROVE_RAZONSOCIAL", "PROVE_RAZONSOCIAL ASC", "--Sin especificar--", true);
+
+            nudCosto.Tag = new NumericLimitValues("0", "99999999,99");
         }
 
         private void control_Enter(object sender, EventArgs e)

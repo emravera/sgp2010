@@ -308,11 +308,10 @@
             // 
             // nudCosto
             // 
-            this.nudCosto.CausesValidation = false;
             this.nudCosto.DecimalPlaces = 2;
             this.nudCosto.Location = new System.Drawing.Point(102, 286);
             this.nudCosto.Maximum = new decimal(new int[] {
-            100000,
+            100000000,
             0,
             0,
             0});

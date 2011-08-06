@@ -78,7 +78,8 @@ namespace GyCAP.Entidades.ArbolEstructura
         public decimal GetCosto()
         {
             if (this.contenido == tipoContenido.MateriaPrima) { return this.compuesto.MateriaPrima.Costo * this.compuesto.Cantidad; }
-            
+            if (this.contenido == tipoContenido.Parte && this.compuesto.ParteHijo.Tipo.Adquirido == 1) { return this.compuesto.ParteHijo.Costo; }
+
             decimal costo = 0;
             
             foreach (NodoEstructura nodo in nodosHijos)
