@@ -31,8 +31,6 @@ namespace GyCAP.Data {
         
         private TURNOSXCENTROTRABAJODataTable tableTURNOSXCENTROTRABAJO;
         
-        private CENTROS_TRABAJOSDataTable tableCENTROS_TRABAJOS;
-        
         private OPERACIONESDataTable tableOPERACIONES;
         
         private DETALLE_HOJARUTADataTable tableDETALLE_HOJARUTA;
@@ -43,13 +41,9 @@ namespace GyCAP.Data {
         
         private CONTENIDO_UBICACION_STOCKDataTable tableCONTENIDO_UBICACION_STOCK;
         
+        private CENTROS_TRABAJOSDataTable tableCENTROS_TRABAJOS;
+        
         private global::System.Data.DataRelation relationTURNOS_TRABAJO_TURNOSXCENTROTRABAJO;
-        
-        private global::System.Data.DataRelation relationSECTORES_CENTROS_TRABAJOS;
-        
-        private global::System.Data.DataRelation relationCENTROS_TRABAJOS_TURNOSXCENTROTRABAJO;
-        
-        private global::System.Data.DataRelation relationFK_DETALLE_HOJARUTA_CENTROS_TRABAJOS;
         
         private global::System.Data.DataRelation relationFK_DETALLE_HOJARUTA_OPERACIONES;
         
@@ -64,6 +58,12 @@ namespace GyCAP.Data {
         private global::System.Data.DataRelation relationFK_HOJAS_RUTA_UBICACIONES_STOCK;
         
         private global::System.Data.DataRelation relationFK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK;
+        
+        private global::System.Data.DataRelation relationFK_TURNOSXCENTROTRABAJO_CENTROS_TRABAJOS;
+        
+        private global::System.Data.DataRelation relationFK_DETALLE_HOJARUTA_CENTROS_TRABAJOS;
+        
+        private global::System.Data.DataRelation relationFK_CENTROS_TRABAJOS_SECTORES;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -100,9 +100,6 @@ namespace GyCAP.Data {
                 if ((ds.Tables["TURNOSXCENTROTRABAJO"] != null)) {
                     base.Tables.Add(new TURNOSXCENTROTRABAJODataTable(ds.Tables["TURNOSXCENTROTRABAJO"]));
                 }
-                if ((ds.Tables["CENTROS_TRABAJOS"] != null)) {
-                    base.Tables.Add(new CENTROS_TRABAJOSDataTable(ds.Tables["CENTROS_TRABAJOS"]));
-                }
                 if ((ds.Tables["OPERACIONES"] != null)) {
                     base.Tables.Add(new OPERACIONESDataTable(ds.Tables["OPERACIONES"]));
                 }
@@ -117,6 +114,9 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["CONTENIDO_UBICACION_STOCK"] != null)) {
                     base.Tables.Add(new CONTENIDO_UBICACION_STOCKDataTable(ds.Tables["CONTENIDO_UBICACION_STOCK"]));
+                }
+                if ((ds.Tables["CENTROS_TRABAJOS"] != null)) {
+                    base.Tables.Add(new CENTROS_TRABAJOSDataTable(ds.Tables["CENTROS_TRABAJOS"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -166,15 +166,6 @@ namespace GyCAP.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public CENTROS_TRABAJOSDataTable CENTROS_TRABAJOS {
-            get {
-                return this.tableCENTROS_TRABAJOS;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public OPERACIONESDataTable OPERACIONES {
             get {
                 return this.tableOPERACIONES;
@@ -214,6 +205,15 @@ namespace GyCAP.Data {
         public CONTENIDO_UBICACION_STOCKDataTable CONTENIDO_UBICACION_STOCK {
             get {
                 return this.tableCONTENIDO_UBICACION_STOCK;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public CENTROS_TRABAJOSDataTable CENTROS_TRABAJOS {
+            get {
+                return this.tableCENTROS_TRABAJOS;
             }
         }
         
@@ -285,9 +285,6 @@ namespace GyCAP.Data {
                 if ((ds.Tables["TURNOSXCENTROTRABAJO"] != null)) {
                     base.Tables.Add(new TURNOSXCENTROTRABAJODataTable(ds.Tables["TURNOSXCENTROTRABAJO"]));
                 }
-                if ((ds.Tables["CENTROS_TRABAJOS"] != null)) {
-                    base.Tables.Add(new CENTROS_TRABAJOSDataTable(ds.Tables["CENTROS_TRABAJOS"]));
-                }
                 if ((ds.Tables["OPERACIONES"] != null)) {
                     base.Tables.Add(new OPERACIONESDataTable(ds.Tables["OPERACIONES"]));
                 }
@@ -302,6 +299,9 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["CONTENIDO_UBICACION_STOCK"] != null)) {
                     base.Tables.Add(new CONTENIDO_UBICACION_STOCKDataTable(ds.Tables["CONTENIDO_UBICACION_STOCK"]));
+                }
+                if ((ds.Tables["CENTROS_TRABAJOS"] != null)) {
+                    base.Tables.Add(new CENTROS_TRABAJOSDataTable(ds.Tables["CENTROS_TRABAJOS"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -351,12 +351,6 @@ namespace GyCAP.Data {
                     this.tableTURNOSXCENTROTRABAJO.InitVars();
                 }
             }
-            this.tableCENTROS_TRABAJOS = ((CENTROS_TRABAJOSDataTable)(base.Tables["CENTROS_TRABAJOS"]));
-            if ((initTable == true)) {
-                if ((this.tableCENTROS_TRABAJOS != null)) {
-                    this.tableCENTROS_TRABAJOS.InitVars();
-                }
-            }
             this.tableOPERACIONES = ((OPERACIONESDataTable)(base.Tables["OPERACIONES"]));
             if ((initTable == true)) {
                 if ((this.tableOPERACIONES != null)) {
@@ -387,10 +381,13 @@ namespace GyCAP.Data {
                     this.tableCONTENIDO_UBICACION_STOCK.InitVars();
                 }
             }
+            this.tableCENTROS_TRABAJOS = ((CENTROS_TRABAJOSDataTable)(base.Tables["CENTROS_TRABAJOS"]));
+            if ((initTable == true)) {
+                if ((this.tableCENTROS_TRABAJOS != null)) {
+                    this.tableCENTROS_TRABAJOS.InitVars();
+                }
+            }
             this.relationTURNOS_TRABAJO_TURNOSXCENTROTRABAJO = this.Relations["TURNOS_TRABAJO_TURNOSXCENTROTRABAJO"];
-            this.relationSECTORES_CENTROS_TRABAJOS = this.Relations["SECTORES_CENTROS_TRABAJOS"];
-            this.relationCENTROS_TRABAJOS_TURNOSXCENTROTRABAJO = this.Relations["CENTROS_TRABAJOS_TURNOSXCENTROTRABAJO"];
-            this.relationFK_DETALLE_HOJARUTA_CENTROS_TRABAJOS = this.Relations["FK_DETALLE_HOJARUTA_CENTROS_TRABAJOS"];
             this.relationFK_DETALLE_HOJARUTA_OPERACIONES = this.Relations["FK_DETALLE_HOJARUTA_OPERACIONES"];
             this.relationFK_DETALLE_HOJARUTA_HOJAS_RUTA = this.Relations["FK_DETALLE_HOJARUTA_HOJAS_RUTA"];
             this.relationFK_UBICACIONES_STOCK_UBICACION_STOCK = this.Relations["FK_UBICACIONES_STOCK_UBICACION_STOCK"];
@@ -398,6 +395,9 @@ namespace GyCAP.Data {
             this.relationFK_DETALLE_HOJARUTA_UBICACIONES_STOCK1 = this.Relations["FK_DETALLE_HOJARUTA_UBICACIONES_STOCK1"];
             this.relationFK_HOJAS_RUTA_UBICACIONES_STOCK = this.Relations["FK_HOJAS_RUTA_UBICACIONES_STOCK"];
             this.relationFK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK = this.Relations["FK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK"];
+            this.relationFK_TURNOSXCENTROTRABAJO_CENTROS_TRABAJOS = this.Relations["FK_TURNOSXCENTROTRABAJO_CENTROS_TRABAJOS"];
+            this.relationFK_DETALLE_HOJARUTA_CENTROS_TRABAJOS = this.Relations["FK_DETALLE_HOJARUTA_CENTROS_TRABAJOS"];
+            this.relationFK_CENTROS_TRABAJOS_SECTORES = this.Relations["FK_CENTROS_TRABAJOS_SECTORES"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -413,8 +413,6 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tableTURNOS_TRABAJO);
             this.tableTURNOSXCENTROTRABAJO = new TURNOSXCENTROTRABAJODataTable();
             base.Tables.Add(this.tableTURNOSXCENTROTRABAJO);
-            this.tableCENTROS_TRABAJOS = new CENTROS_TRABAJOSDataTable();
-            base.Tables.Add(this.tableCENTROS_TRABAJOS);
             this.tableOPERACIONES = new OPERACIONESDataTable();
             base.Tables.Add(this.tableOPERACIONES);
             this.tableDETALLE_HOJARUTA = new DETALLE_HOJARUTADataTable();
@@ -425,22 +423,12 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tableUBICACIONES_STOCK);
             this.tableCONTENIDO_UBICACION_STOCK = new CONTENIDO_UBICACION_STOCKDataTable();
             base.Tables.Add(this.tableCONTENIDO_UBICACION_STOCK);
+            this.tableCENTROS_TRABAJOS = new CENTROS_TRABAJOSDataTable();
+            base.Tables.Add(this.tableCENTROS_TRABAJOS);
             this.relationTURNOS_TRABAJO_TURNOSXCENTROTRABAJO = new global::System.Data.DataRelation("TURNOS_TRABAJO_TURNOSXCENTROTRABAJO", new global::System.Data.DataColumn[] {
                         this.tableTURNOS_TRABAJO.TUR_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableTURNOSXCENTROTRABAJO.TUR_CODIGOColumn}, false);
             this.Relations.Add(this.relationTURNOS_TRABAJO_TURNOSXCENTROTRABAJO);
-            this.relationSECTORES_CENTROS_TRABAJOS = new global::System.Data.DataRelation("SECTORES_CENTROS_TRABAJOS", new global::System.Data.DataColumn[] {
-                        this.tableSECTORES.SEC_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCENTROS_TRABAJOS.SEC_CODIGOColumn}, false);
-            this.Relations.Add(this.relationSECTORES_CENTROS_TRABAJOS);
-            this.relationCENTROS_TRABAJOS_TURNOSXCENTROTRABAJO = new global::System.Data.DataRelation("CENTROS_TRABAJOS_TURNOSXCENTROTRABAJO", new global::System.Data.DataColumn[] {
-                        this.tableCENTROS_TRABAJOS.CTO_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableTURNOSXCENTROTRABAJO.CTO_CODIGOColumn}, false);
-            this.Relations.Add(this.relationCENTROS_TRABAJOS_TURNOSXCENTROTRABAJO);
-            this.relationFK_DETALLE_HOJARUTA_CENTROS_TRABAJOS = new global::System.Data.DataRelation("FK_DETALLE_HOJARUTA_CENTROS_TRABAJOS", new global::System.Data.DataColumn[] {
-                        this.tableCENTROS_TRABAJOS.CTO_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableDETALLE_HOJARUTA.CTO_CODIGOColumn}, false);
-            this.Relations.Add(this.relationFK_DETALLE_HOJARUTA_CENTROS_TRABAJOS);
             this.relationFK_DETALLE_HOJARUTA_OPERACIONES = new global::System.Data.DataRelation("FK_DETALLE_HOJARUTA_OPERACIONES", new global::System.Data.DataColumn[] {
                         this.tableOPERACIONES.OPR_NUMEROColumn}, new global::System.Data.DataColumn[] {
                         this.tableDETALLE_HOJARUTA.OPR_NUMEROColumn}, false);
@@ -469,6 +457,18 @@ namespace GyCAP.Data {
                         this.tableCONTENIDO_UBICACION_STOCK.CON_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableUBICACIONES_STOCK.CON_CODIGOColumn}, false);
             this.Relations.Add(this.relationFK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK);
+            this.relationFK_TURNOSXCENTROTRABAJO_CENTROS_TRABAJOS = new global::System.Data.DataRelation("FK_TURNOSXCENTROTRABAJO_CENTROS_TRABAJOS", new global::System.Data.DataColumn[] {
+                        this.tableCENTROS_TRABAJOS.CTO_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableTURNOSXCENTROTRABAJO.CTO_CODIGOColumn}, false);
+            this.Relations.Add(this.relationFK_TURNOSXCENTROTRABAJO_CENTROS_TRABAJOS);
+            this.relationFK_DETALLE_HOJARUTA_CENTROS_TRABAJOS = new global::System.Data.DataRelation("FK_DETALLE_HOJARUTA_CENTROS_TRABAJOS", new global::System.Data.DataColumn[] {
+                        this.tableCENTROS_TRABAJOS.CTO_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDETALLE_HOJARUTA.CTO_CODIGOColumn}, false);
+            this.Relations.Add(this.relationFK_DETALLE_HOJARUTA_CENTROS_TRABAJOS);
+            this.relationFK_CENTROS_TRABAJOS_SECTORES = new global::System.Data.DataRelation("FK_CENTROS_TRABAJOS_SECTORES", new global::System.Data.DataColumn[] {
+                        this.tableSECTORES.SEC_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCENTROS_TRABAJOS.SEC_CODIGOColumn}, false);
+            this.Relations.Add(this.relationFK_CENTROS_TRABAJOS_SECTORES);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -483,11 +483,6 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeTURNOSXCENTROTRABAJO() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeCENTROS_TRABAJOS() {
             return false;
         }
         
@@ -513,6 +508,11 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeCONTENIDO_UBICACION_STOCK() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeCENTROS_TRABAJOS() {
             return false;
         }
         
@@ -575,8 +575,6 @@ namespace GyCAP.Data {
         
         public delegate void TURNOSXCENTROTRABAJORowChangeEventHandler(object sender, TURNOSXCENTROTRABAJORowChangeEvent e);
         
-        public delegate void CENTROS_TRABAJOSRowChangeEventHandler(object sender, CENTROS_TRABAJOSRowChangeEvent e);
-        
         public delegate void OPERACIONESRowChangeEventHandler(object sender, OPERACIONESRowChangeEvent e);
         
         public delegate void DETALLE_HOJARUTARowChangeEventHandler(object sender, DETALLE_HOJARUTARowChangeEvent e);
@@ -586,6 +584,8 @@ namespace GyCAP.Data {
         public delegate void UBICACIONES_STOCKRowChangeEventHandler(object sender, UBICACIONES_STOCKRowChangeEvent e);
         
         public delegate void CONTENIDO_UBICACION_STOCKRowChangeEventHandler(object sender, CONTENIDO_UBICACION_STOCKRowChangeEvent e);
+        
+        public delegate void CENTROS_TRABAJOSRowChangeEventHandler(object sender, CENTROS_TRABAJOSRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1239,7 +1239,7 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TURNOSXCENTROTRABAJORow AddTURNOSXCENTROTRABAJORow(TURNOS_TRABAJORow parentTURNOS_TRABAJORowByTURNOS_TRABAJO_TURNOSXCENTROTRABAJO, CENTROS_TRABAJOSRow parentCENTROS_TRABAJOSRowByCENTROS_TRABAJOS_TURNOSXCENTROTRABAJO) {
+            public TURNOSXCENTROTRABAJORow AddTURNOSXCENTROTRABAJORow(TURNOS_TRABAJORow parentTURNOS_TRABAJORowByTURNOS_TRABAJO_TURNOSXCENTROTRABAJO, CENTROS_TRABAJOSRow parentCENTROS_TRABAJOSRowByFK_TURNOSXCENTROTRABAJO_CENTROS_TRABAJOS) {
                 TURNOSXCENTROTRABAJORow rowTURNOSXCENTROTRABAJORow = ((TURNOSXCENTROTRABAJORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1248,8 +1248,8 @@ namespace GyCAP.Data {
                 if ((parentTURNOS_TRABAJORowByTURNOS_TRABAJO_TURNOSXCENTROTRABAJO != null)) {
                     columnValuesArray[1] = parentTURNOS_TRABAJORowByTURNOS_TRABAJO_TURNOSXCENTROTRABAJO[0];
                 }
-                if ((parentCENTROS_TRABAJOSRowByCENTROS_TRABAJOS_TURNOSXCENTROTRABAJO != null)) {
-                    columnValuesArray[2] = parentCENTROS_TRABAJOSRowByCENTROS_TRABAJOS_TURNOSXCENTROTRABAJO[0];
+                if ((parentCENTROS_TRABAJOSRowByFK_TURNOSXCENTROTRABAJO_CENTROS_TRABAJOS != null)) {
+                    columnValuesArray[2] = parentCENTROS_TRABAJOSRowByFK_TURNOSXCENTROTRABAJO_CENTROS_TRABAJOS[0];
                 }
                 rowTURNOSXCENTROTRABAJORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTURNOSXCENTROTRABAJORow);
@@ -1375,442 +1375,6 @@ namespace GyCAP.Data {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "TURNOSXCENTROTRABAJODataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class CENTROS_TRABAJOSDataTable : global::System.Data.TypedTableBase<CENTROS_TRABAJOSRow> {
-            
-            private global::System.Data.DataColumn columnCTO_CODIGO;
-            
-            private global::System.Data.DataColumn columnCTO_NOMBRE;
-            
-            private global::System.Data.DataColumn columnSEC_CODIGO;
-            
-            private global::System.Data.DataColumn columnCTO_TIPO;
-            
-            private global::System.Data.DataColumn columnCTO_HORASTRABAJONORMAL;
-            
-            private global::System.Data.DataColumn columnCTO_HORASTRABAJOEXTENDIDO;
-            
-            private global::System.Data.DataColumn columnCTO_ACTIVO;
-            
-            private global::System.Data.DataColumn columnCTO_DESCRIPCION;
-            
-            private global::System.Data.DataColumn columnCTO_CAPACIDADCICLO;
-            
-            private global::System.Data.DataColumn columnCTO_HORASCICLO;
-            
-            private global::System.Data.DataColumn columnCTO_TIEMPOANTES;
-            
-            private global::System.Data.DataColumn columnCTO_TIEMPODESPUES;
-            
-            private global::System.Data.DataColumn columnCTO_EFICIENCIA;
-            
-            private global::System.Data.DataColumn columnCTO_COSTOHORA;
-            
-            private global::System.Data.DataColumn columnCTO_COSTOCICLO;
-            
-            private global::System.Data.DataColumn columnCTO_CAPACIDADUNIDADHORA;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROS_TRABAJOSDataTable() {
-                this.TableName = "CENTROS_TRABAJOS";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal CENTROS_TRABAJOSDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected CENTROS_TRABAJOSDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_CODIGOColumn {
-                get {
-                    return this.columnCTO_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_NOMBREColumn {
-                get {
-                    return this.columnCTO_NOMBRE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn SEC_CODIGOColumn {
-                get {
-                    return this.columnSEC_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_TIPOColumn {
-                get {
-                    return this.columnCTO_TIPO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_HORASTRABAJONORMALColumn {
-                get {
-                    return this.columnCTO_HORASTRABAJONORMAL;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_HORASTRABAJOEXTENDIDOColumn {
-                get {
-                    return this.columnCTO_HORASTRABAJOEXTENDIDO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_ACTIVOColumn {
-                get {
-                    return this.columnCTO_ACTIVO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_DESCRIPCIONColumn {
-                get {
-                    return this.columnCTO_DESCRIPCION;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_CAPACIDADCICLOColumn {
-                get {
-                    return this.columnCTO_CAPACIDADCICLO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_HORASCICLOColumn {
-                get {
-                    return this.columnCTO_HORASCICLO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_TIEMPOANTESColumn {
-                get {
-                    return this.columnCTO_TIEMPOANTES;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_TIEMPODESPUESColumn {
-                get {
-                    return this.columnCTO_TIEMPODESPUES;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_EFICIENCIAColumn {
-                get {
-                    return this.columnCTO_EFICIENCIA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_COSTOHORAColumn {
-                get {
-                    return this.columnCTO_COSTOHORA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_COSTOCICLOColumn {
-                get {
-                    return this.columnCTO_COSTOCICLO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CTO_CAPACIDADUNIDADHORAColumn {
-                get {
-                    return this.columnCTO_CAPACIDADUNIDADHORA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROS_TRABAJOSRow this[int index] {
-                get {
-                    return ((CENTROS_TRABAJOSRow)(this.Rows[index]));
-                }
-            }
-            
-            public event CENTROS_TRABAJOSRowChangeEventHandler CENTROS_TRABAJOSRowChanging;
-            
-            public event CENTROS_TRABAJOSRowChangeEventHandler CENTROS_TRABAJOSRowChanged;
-            
-            public event CENTROS_TRABAJOSRowChangeEventHandler CENTROS_TRABAJOSRowDeleting;
-            
-            public event CENTROS_TRABAJOSRowChangeEventHandler CENTROS_TRABAJOSRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddCENTROS_TRABAJOSRow(CENTROS_TRABAJOSRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROS_TRABAJOSRow AddCENTROS_TRABAJOSRow(string CTO_NOMBRE, SECTORESRow parentSECTORESRowBySECTORES_CENTROS_TRABAJOS, decimal CTO_TIPO, decimal CTO_HORASTRABAJONORMAL, decimal CTO_HORASTRABAJOEXTENDIDO, decimal CTO_ACTIVO, string CTO_DESCRIPCION, decimal CTO_CAPACIDADCICLO, decimal CTO_HORASCICLO, decimal CTO_TIEMPOANTES, decimal CTO_TIEMPODESPUES, decimal CTO_EFICIENCIA, decimal CTO_COSTOHORA, decimal CTO_COSTOCICLO, decimal CTO_CAPACIDADUNIDADHORA) {
-                CENTROS_TRABAJOSRow rowCENTROS_TRABAJOSRow = ((CENTROS_TRABAJOSRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        CTO_NOMBRE,
-                        null,
-                        CTO_TIPO,
-                        CTO_HORASTRABAJONORMAL,
-                        CTO_HORASTRABAJOEXTENDIDO,
-                        CTO_ACTIVO,
-                        CTO_DESCRIPCION,
-                        CTO_CAPACIDADCICLO,
-                        CTO_HORASCICLO,
-                        CTO_TIEMPOANTES,
-                        CTO_TIEMPODESPUES,
-                        CTO_EFICIENCIA,
-                        CTO_COSTOHORA,
-                        CTO_COSTOCICLO,
-                        CTO_CAPACIDADUNIDADHORA};
-                if ((parentSECTORESRowBySECTORES_CENTROS_TRABAJOS != null)) {
-                    columnValuesArray[2] = parentSECTORESRowBySECTORES_CENTROS_TRABAJOS[0];
-                }
-                rowCENTROS_TRABAJOSRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowCENTROS_TRABAJOSRow);
-                return rowCENTROS_TRABAJOSRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROS_TRABAJOSRow FindByCTO_CODIGO(decimal CTO_CODIGO) {
-                return ((CENTROS_TRABAJOSRow)(this.Rows.Find(new object[] {
-                            CTO_CODIGO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                CENTROS_TRABAJOSDataTable cln = ((CENTROS_TRABAJOSDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new CENTROS_TRABAJOSDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnCTO_CODIGO = base.Columns["CTO_CODIGO"];
-                this.columnCTO_NOMBRE = base.Columns["CTO_NOMBRE"];
-                this.columnSEC_CODIGO = base.Columns["SEC_CODIGO"];
-                this.columnCTO_TIPO = base.Columns["CTO_TIPO"];
-                this.columnCTO_HORASTRABAJONORMAL = base.Columns["CTO_HORASTRABAJONORMAL"];
-                this.columnCTO_HORASTRABAJOEXTENDIDO = base.Columns["CTO_HORASTRABAJOEXTENDIDO"];
-                this.columnCTO_ACTIVO = base.Columns["CTO_ACTIVO"];
-                this.columnCTO_DESCRIPCION = base.Columns["CTO_DESCRIPCION"];
-                this.columnCTO_CAPACIDADCICLO = base.Columns["CTO_CAPACIDADCICLO"];
-                this.columnCTO_HORASCICLO = base.Columns["CTO_HORASCICLO"];
-                this.columnCTO_TIEMPOANTES = base.Columns["CTO_TIEMPOANTES"];
-                this.columnCTO_TIEMPODESPUES = base.Columns["CTO_TIEMPODESPUES"];
-                this.columnCTO_EFICIENCIA = base.Columns["CTO_EFICIENCIA"];
-                this.columnCTO_COSTOHORA = base.Columns["CTO_COSTOHORA"];
-                this.columnCTO_COSTOCICLO = base.Columns["CTO_COSTOCICLO"];
-                this.columnCTO_CAPACIDADUNIDADHORA = base.Columns["CTO_CAPACIDADUNIDADHORA"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnCTO_CODIGO = new global::System.Data.DataColumn("CTO_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_CODIGO);
-                this.columnCTO_NOMBRE = new global::System.Data.DataColumn("CTO_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_NOMBRE);
-                this.columnSEC_CODIGO = new global::System.Data.DataColumn("SEC_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSEC_CODIGO);
-                this.columnCTO_TIPO = new global::System.Data.DataColumn("CTO_TIPO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_TIPO);
-                this.columnCTO_HORASTRABAJONORMAL = new global::System.Data.DataColumn("CTO_HORASTRABAJONORMAL", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_HORASTRABAJONORMAL);
-                this.columnCTO_HORASTRABAJOEXTENDIDO = new global::System.Data.DataColumn("CTO_HORASTRABAJOEXTENDIDO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_HORASTRABAJOEXTENDIDO);
-                this.columnCTO_ACTIVO = new global::System.Data.DataColumn("CTO_ACTIVO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_ACTIVO);
-                this.columnCTO_DESCRIPCION = new global::System.Data.DataColumn("CTO_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_DESCRIPCION);
-                this.columnCTO_CAPACIDADCICLO = new global::System.Data.DataColumn("CTO_CAPACIDADCICLO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_CAPACIDADCICLO);
-                this.columnCTO_HORASCICLO = new global::System.Data.DataColumn("CTO_HORASCICLO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_HORASCICLO);
-                this.columnCTO_TIEMPOANTES = new global::System.Data.DataColumn("CTO_TIEMPOANTES", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_TIEMPOANTES);
-                this.columnCTO_TIEMPODESPUES = new global::System.Data.DataColumn("CTO_TIEMPODESPUES", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_TIEMPODESPUES);
-                this.columnCTO_EFICIENCIA = new global::System.Data.DataColumn("CTO_EFICIENCIA", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_EFICIENCIA);
-                this.columnCTO_COSTOHORA = new global::System.Data.DataColumn("CTO_COSTOHORA", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_COSTOHORA);
-                this.columnCTO_COSTOCICLO = new global::System.Data.DataColumn("CTO_COSTOCICLO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_COSTOCICLO);
-                this.columnCTO_CAPACIDADUNIDADHORA = new global::System.Data.DataColumn("CTO_CAPACIDADUNIDADHORA", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCTO_CAPACIDADUNIDADHORA);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnCTO_CODIGO}, true));
-                this.columnCTO_CODIGO.AutoIncrement = true;
-                this.columnCTO_CODIGO.AutoIncrementSeed = -1;
-                this.columnCTO_CODIGO.AutoIncrementStep = -1;
-                this.columnCTO_CODIGO.AllowDBNull = false;
-                this.columnCTO_CODIGO.Unique = true;
-                this.columnCTO_NOMBRE.MaxLength = 80;
-                this.columnCTO_DESCRIPCION.MaxLength = 200;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROS_TRABAJOSRow NewCENTROS_TRABAJOSRow() {
-                return ((CENTROS_TRABAJOSRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new CENTROS_TRABAJOSRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(CENTROS_TRABAJOSRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.CENTROS_TRABAJOSRowChanged != null)) {
-                    this.CENTROS_TRABAJOSRowChanged(this, new CENTROS_TRABAJOSRowChangeEvent(((CENTROS_TRABAJOSRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.CENTROS_TRABAJOSRowChanging != null)) {
-                    this.CENTROS_TRABAJOSRowChanging(this, new CENTROS_TRABAJOSRowChangeEvent(((CENTROS_TRABAJOSRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.CENTROS_TRABAJOSRowDeleted != null)) {
-                    this.CENTROS_TRABAJOSRowDeleted(this, new CENTROS_TRABAJOSRowChangeEvent(((CENTROS_TRABAJOSRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.CENTROS_TRABAJOSRowDeleting != null)) {
-                    this.CENTROS_TRABAJOSRowDeleting(this, new CENTROS_TRABAJOSRowChangeEvent(((CENTROS_TRABAJOSRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveCENTROS_TRABAJOSRow(CENTROS_TRABAJOSRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsHojaRuta ds = new dsHojaRuta();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "CENTROS_TRABAJOSDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -3441,6 +3005,442 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class CENTROS_TRABAJOSDataTable : global::System.Data.TypedTableBase<CENTROS_TRABAJOSRow> {
+            
+            private global::System.Data.DataColumn columnCTO_CODIGO;
+            
+            private global::System.Data.DataColumn columnCTO_NOMBRE;
+            
+            private global::System.Data.DataColumn columnSEC_CODIGO;
+            
+            private global::System.Data.DataColumn columnCTO_TIPO;
+            
+            private global::System.Data.DataColumn columnCTO_HORASTRABAJONORMAL;
+            
+            private global::System.Data.DataColumn columnCTO_HORASTRABAJOEXTENDIDO;
+            
+            private global::System.Data.DataColumn columnCTO_ACTIVO;
+            
+            private global::System.Data.DataColumn columnCTO_DESCRIPCION;
+            
+            private global::System.Data.DataColumn columnCTO_CAPACIDADCICLO;
+            
+            private global::System.Data.DataColumn columnCTO_HORASCICLO;
+            
+            private global::System.Data.DataColumn columnCTO_TIEMPOANTES;
+            
+            private global::System.Data.DataColumn columnCTO_TIEMPODESPUES;
+            
+            private global::System.Data.DataColumn columnCTO_EFICIENCIA;
+            
+            private global::System.Data.DataColumn columnCTO_COSTOHORA;
+            
+            private global::System.Data.DataColumn columnCTO_COSTOCICLO;
+            
+            private global::System.Data.DataColumn columnCTO_CAPACIDADUNIDADHORA;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROS_TRABAJOSDataTable() {
+                this.TableName = "CENTROS_TRABAJOS";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal CENTROS_TRABAJOSDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected CENTROS_TRABAJOSDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_CODIGOColumn {
+                get {
+                    return this.columnCTO_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_NOMBREColumn {
+                get {
+                    return this.columnCTO_NOMBRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SEC_CODIGOColumn {
+                get {
+                    return this.columnSEC_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_TIPOColumn {
+                get {
+                    return this.columnCTO_TIPO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_HORASTRABAJONORMALColumn {
+                get {
+                    return this.columnCTO_HORASTRABAJONORMAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_HORASTRABAJOEXTENDIDOColumn {
+                get {
+                    return this.columnCTO_HORASTRABAJOEXTENDIDO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_ACTIVOColumn {
+                get {
+                    return this.columnCTO_ACTIVO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_DESCRIPCIONColumn {
+                get {
+                    return this.columnCTO_DESCRIPCION;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_CAPACIDADCICLOColumn {
+                get {
+                    return this.columnCTO_CAPACIDADCICLO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_HORASCICLOColumn {
+                get {
+                    return this.columnCTO_HORASCICLO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_TIEMPOANTESColumn {
+                get {
+                    return this.columnCTO_TIEMPOANTES;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_TIEMPODESPUESColumn {
+                get {
+                    return this.columnCTO_TIEMPODESPUES;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_EFICIENCIAColumn {
+                get {
+                    return this.columnCTO_EFICIENCIA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_COSTOHORAColumn {
+                get {
+                    return this.columnCTO_COSTOHORA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_COSTOCICLOColumn {
+                get {
+                    return this.columnCTO_COSTOCICLO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CTO_CAPACIDADUNIDADHORAColumn {
+                get {
+                    return this.columnCTO_CAPACIDADUNIDADHORA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROS_TRABAJOSRow this[int index] {
+                get {
+                    return ((CENTROS_TRABAJOSRow)(this.Rows[index]));
+                }
+            }
+            
+            public event CENTROS_TRABAJOSRowChangeEventHandler CENTROS_TRABAJOSRowChanging;
+            
+            public event CENTROS_TRABAJOSRowChangeEventHandler CENTROS_TRABAJOSRowChanged;
+            
+            public event CENTROS_TRABAJOSRowChangeEventHandler CENTROS_TRABAJOSRowDeleting;
+            
+            public event CENTROS_TRABAJOSRowChangeEventHandler CENTROS_TRABAJOSRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddCENTROS_TRABAJOSRow(CENTROS_TRABAJOSRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROS_TRABAJOSRow AddCENTROS_TRABAJOSRow(string CTO_NOMBRE, SECTORESRow parentSECTORESRowByFK_CENTROS_TRABAJOS_SECTORES, decimal CTO_TIPO, decimal CTO_HORASTRABAJONORMAL, decimal CTO_HORASTRABAJOEXTENDIDO, decimal CTO_ACTIVO, string CTO_DESCRIPCION, decimal CTO_CAPACIDADCICLO, decimal CTO_HORASCICLO, decimal CTO_TIEMPOANTES, decimal CTO_TIEMPODESPUES, decimal CTO_EFICIENCIA, decimal CTO_COSTOHORA, decimal CTO_COSTOCICLO, decimal CTO_CAPACIDADUNIDADHORA) {
+                CENTROS_TRABAJOSRow rowCENTROS_TRABAJOSRow = ((CENTROS_TRABAJOSRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        CTO_NOMBRE,
+                        null,
+                        CTO_TIPO,
+                        CTO_HORASTRABAJONORMAL,
+                        CTO_HORASTRABAJOEXTENDIDO,
+                        CTO_ACTIVO,
+                        CTO_DESCRIPCION,
+                        CTO_CAPACIDADCICLO,
+                        CTO_HORASCICLO,
+                        CTO_TIEMPOANTES,
+                        CTO_TIEMPODESPUES,
+                        CTO_EFICIENCIA,
+                        CTO_COSTOHORA,
+                        CTO_COSTOCICLO,
+                        CTO_CAPACIDADUNIDADHORA};
+                if ((parentSECTORESRowByFK_CENTROS_TRABAJOS_SECTORES != null)) {
+                    columnValuesArray[2] = parentSECTORESRowByFK_CENTROS_TRABAJOS_SECTORES[0];
+                }
+                rowCENTROS_TRABAJOSRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowCENTROS_TRABAJOSRow);
+                return rowCENTROS_TRABAJOSRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROS_TRABAJOSRow FindByCTO_CODIGO(decimal CTO_CODIGO) {
+                return ((CENTROS_TRABAJOSRow)(this.Rows.Find(new object[] {
+                            CTO_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                CENTROS_TRABAJOSDataTable cln = ((CENTROS_TRABAJOSDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new CENTROS_TRABAJOSDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnCTO_CODIGO = base.Columns["CTO_CODIGO"];
+                this.columnCTO_NOMBRE = base.Columns["CTO_NOMBRE"];
+                this.columnSEC_CODIGO = base.Columns["SEC_CODIGO"];
+                this.columnCTO_TIPO = base.Columns["CTO_TIPO"];
+                this.columnCTO_HORASTRABAJONORMAL = base.Columns["CTO_HORASTRABAJONORMAL"];
+                this.columnCTO_HORASTRABAJOEXTENDIDO = base.Columns["CTO_HORASTRABAJOEXTENDIDO"];
+                this.columnCTO_ACTIVO = base.Columns["CTO_ACTIVO"];
+                this.columnCTO_DESCRIPCION = base.Columns["CTO_DESCRIPCION"];
+                this.columnCTO_CAPACIDADCICLO = base.Columns["CTO_CAPACIDADCICLO"];
+                this.columnCTO_HORASCICLO = base.Columns["CTO_HORASCICLO"];
+                this.columnCTO_TIEMPOANTES = base.Columns["CTO_TIEMPOANTES"];
+                this.columnCTO_TIEMPODESPUES = base.Columns["CTO_TIEMPODESPUES"];
+                this.columnCTO_EFICIENCIA = base.Columns["CTO_EFICIENCIA"];
+                this.columnCTO_COSTOHORA = base.Columns["CTO_COSTOHORA"];
+                this.columnCTO_COSTOCICLO = base.Columns["CTO_COSTOCICLO"];
+                this.columnCTO_CAPACIDADUNIDADHORA = base.Columns["CTO_CAPACIDADUNIDADHORA"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnCTO_CODIGO = new global::System.Data.DataColumn("CTO_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_CODIGO);
+                this.columnCTO_NOMBRE = new global::System.Data.DataColumn("CTO_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_NOMBRE);
+                this.columnSEC_CODIGO = new global::System.Data.DataColumn("SEC_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSEC_CODIGO);
+                this.columnCTO_TIPO = new global::System.Data.DataColumn("CTO_TIPO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_TIPO);
+                this.columnCTO_HORASTRABAJONORMAL = new global::System.Data.DataColumn("CTO_HORASTRABAJONORMAL", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_HORASTRABAJONORMAL);
+                this.columnCTO_HORASTRABAJOEXTENDIDO = new global::System.Data.DataColumn("CTO_HORASTRABAJOEXTENDIDO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_HORASTRABAJOEXTENDIDO);
+                this.columnCTO_ACTIVO = new global::System.Data.DataColumn("CTO_ACTIVO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_ACTIVO);
+                this.columnCTO_DESCRIPCION = new global::System.Data.DataColumn("CTO_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_DESCRIPCION);
+                this.columnCTO_CAPACIDADCICLO = new global::System.Data.DataColumn("CTO_CAPACIDADCICLO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_CAPACIDADCICLO);
+                this.columnCTO_HORASCICLO = new global::System.Data.DataColumn("CTO_HORASCICLO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_HORASCICLO);
+                this.columnCTO_TIEMPOANTES = new global::System.Data.DataColumn("CTO_TIEMPOANTES", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_TIEMPOANTES);
+                this.columnCTO_TIEMPODESPUES = new global::System.Data.DataColumn("CTO_TIEMPODESPUES", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_TIEMPODESPUES);
+                this.columnCTO_EFICIENCIA = new global::System.Data.DataColumn("CTO_EFICIENCIA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_EFICIENCIA);
+                this.columnCTO_COSTOHORA = new global::System.Data.DataColumn("CTO_COSTOHORA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_COSTOHORA);
+                this.columnCTO_COSTOCICLO = new global::System.Data.DataColumn("CTO_COSTOCICLO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_COSTOCICLO);
+                this.columnCTO_CAPACIDADUNIDADHORA = new global::System.Data.DataColumn("CTO_CAPACIDADUNIDADHORA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCTO_CAPACIDADUNIDADHORA);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnCTO_CODIGO}, true));
+                this.columnCTO_CODIGO.AutoIncrement = true;
+                this.columnCTO_CODIGO.AutoIncrementSeed = -1;
+                this.columnCTO_CODIGO.AutoIncrementStep = -1;
+                this.columnCTO_CODIGO.AllowDBNull = false;
+                this.columnCTO_CODIGO.Unique = true;
+                this.columnCTO_NOMBRE.MaxLength = 80;
+                this.columnCTO_DESCRIPCION.MaxLength = 200;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROS_TRABAJOSRow NewCENTROS_TRABAJOSRow() {
+                return ((CENTROS_TRABAJOSRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new CENTROS_TRABAJOSRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(CENTROS_TRABAJOSRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.CENTROS_TRABAJOSRowChanged != null)) {
+                    this.CENTROS_TRABAJOSRowChanged(this, new CENTROS_TRABAJOSRowChangeEvent(((CENTROS_TRABAJOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.CENTROS_TRABAJOSRowChanging != null)) {
+                    this.CENTROS_TRABAJOSRowChanging(this, new CENTROS_TRABAJOSRowChangeEvent(((CENTROS_TRABAJOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.CENTROS_TRABAJOSRowDeleted != null)) {
+                    this.CENTROS_TRABAJOSRowDeleted(this, new CENTROS_TRABAJOSRowChangeEvent(((CENTROS_TRABAJOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.CENTROS_TRABAJOSRowDeleting != null)) {
+                    this.CENTROS_TRABAJOSRowDeleting(this, new CENTROS_TRABAJOSRowChangeEvent(((CENTROS_TRABAJOSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveCENTROS_TRABAJOSRow(CENTROS_TRABAJOSRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsHojaRuta ds = new dsHojaRuta();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "CENTROS_TRABAJOSDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -3541,11 +3541,11 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public CENTROS_TRABAJOSRow[] GetCENTROS_TRABAJOSRows() {
-                if ((this.Table.ChildRelations["SECTORES_CENTROS_TRABAJOS"] == null)) {
+                if ((this.Table.ChildRelations["FK_CENTROS_TRABAJOS_SECTORES"] == null)) {
                     return new CENTROS_TRABAJOSRow[0];
                 }
                 else {
-                    return ((CENTROS_TRABAJOSRow[])(base.GetChildRows(this.Table.ChildRelations["SECTORES_CENTROS_TRABAJOS"])));
+                    return ((CENTROS_TRABAJOSRow[])(base.GetChildRows(this.Table.ChildRelations["FK_CENTROS_TRABAJOS_SECTORES"])));
                 }
             }
         }
@@ -3672,443 +3672,10 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public CENTROS_TRABAJOSRow CENTROS_TRABAJOSRow {
                 get {
-                    return ((CENTROS_TRABAJOSRow)(this.GetParentRow(this.Table.ParentRelations["CENTROS_TRABAJOS_TURNOSXCENTROTRABAJO"])));
+                    return ((CENTROS_TRABAJOSRow)(this.GetParentRow(this.Table.ParentRelations["FK_TURNOSXCENTROTRABAJO_CENTROS_TRABAJOS"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["CENTROS_TRABAJOS_TURNOSXCENTROTRABAJO"]);
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class CENTROS_TRABAJOSRow : global::System.Data.DataRow {
-            
-            private CENTROS_TRABAJOSDataTable tableCENTROS_TRABAJOS;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal CENTROS_TRABAJOSRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableCENTROS_TRABAJOS = ((CENTROS_TRABAJOSDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CTO_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.CTO_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string CTO_NOMBRE {
-                get {
-                    try {
-                        return ((string)(this[this.tableCENTROS_TRABAJOS.CTO_NOMBREColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_NOMBRE\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.CTO_NOMBREColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal SEC_CODIGO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.SEC_CODIGOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SEC_CODIGO\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.SEC_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CTO_TIPO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_TIPOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_TIPO\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.CTO_TIPOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CTO_HORASTRABAJONORMAL {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJONORMALColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_HORASTRABAJONORMAL\' in table \'CENTROS_TRABAJOS\' is DBNu" +
-                                "ll.", e);
-                    }
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJONORMALColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CTO_HORASTRABAJOEXTENDIDO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJOEXTENDIDOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_HORASTRABAJOEXTENDIDO\' in table \'CENTROS_TRABAJOS\' is D" +
-                                "BNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJOEXTENDIDOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CTO_ACTIVO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_ACTIVOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_ACTIVO\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.CTO_ACTIVOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string CTO_DESCRIPCION {
-                get {
-                    try {
-                        return ((string)(this[this.tableCENTROS_TRABAJOS.CTO_DESCRIPCIONColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_DESCRIPCION\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.CTO_DESCRIPCIONColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CTO_CAPACIDADCICLO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_CAPACIDADCICLOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_CAPACIDADCICLO\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.CTO_CAPACIDADCICLOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CTO_HORASCICLO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_HORASCICLOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_HORASCICLO\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.CTO_HORASCICLOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CTO_TIEMPOANTES {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_TIEMPOANTESColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_TIEMPOANTES\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.CTO_TIEMPOANTESColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CTO_TIEMPODESPUES {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_TIEMPODESPUESColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_TIEMPODESPUES\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.CTO_TIEMPODESPUESColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CTO_EFICIENCIA {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_EFICIENCIAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_EFICIENCIA\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.CTO_EFICIENCIAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CTO_COSTOHORA {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_COSTOHORAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_COSTOHORA\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.CTO_COSTOHORAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CTO_COSTOCICLO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_COSTOCICLOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_COSTOCICLO\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.CTO_COSTOCICLOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CTO_CAPACIDADUNIDADHORA {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_CAPACIDADUNIDADHORAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_CAPACIDADUNIDADHORA\' in table \'CENTROS_TRABAJOS\' is DBN" +
-                                "ull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCENTROS_TRABAJOS.CTO_CAPACIDADUNIDADHORAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SECTORESRow SECTORESRow {
-                get {
-                    return ((SECTORESRow)(this.GetParentRow(this.Table.ParentRelations["SECTORES_CENTROS_TRABAJOS"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["SECTORES_CENTROS_TRABAJOS"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCTO_NOMBRENull() {
-                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_NOMBREColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCTO_NOMBRENull() {
-                this[this.tableCENTROS_TRABAJOS.CTO_NOMBREColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsSEC_CODIGONull() {
-                return this.IsNull(this.tableCENTROS_TRABAJOS.SEC_CODIGOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetSEC_CODIGONull() {
-                this[this.tableCENTROS_TRABAJOS.SEC_CODIGOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCTO_TIPONull() {
-                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_TIPOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCTO_TIPONull() {
-                this[this.tableCENTROS_TRABAJOS.CTO_TIPOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCTO_HORASTRABAJONORMALNull() {
-                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJONORMALColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCTO_HORASTRABAJONORMALNull() {
-                this[this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJONORMALColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCTO_HORASTRABAJOEXTENDIDONull() {
-                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJOEXTENDIDOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCTO_HORASTRABAJOEXTENDIDONull() {
-                this[this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJOEXTENDIDOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCTO_ACTIVONull() {
-                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_ACTIVOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCTO_ACTIVONull() {
-                this[this.tableCENTROS_TRABAJOS.CTO_ACTIVOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCTO_DESCRIPCIONNull() {
-                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_DESCRIPCIONColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCTO_DESCRIPCIONNull() {
-                this[this.tableCENTROS_TRABAJOS.CTO_DESCRIPCIONColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCTO_CAPACIDADCICLONull() {
-                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_CAPACIDADCICLOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCTO_CAPACIDADCICLONull() {
-                this[this.tableCENTROS_TRABAJOS.CTO_CAPACIDADCICLOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCTO_HORASCICLONull() {
-                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_HORASCICLOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCTO_HORASCICLONull() {
-                this[this.tableCENTROS_TRABAJOS.CTO_HORASCICLOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCTO_TIEMPOANTESNull() {
-                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_TIEMPOANTESColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCTO_TIEMPOANTESNull() {
-                this[this.tableCENTROS_TRABAJOS.CTO_TIEMPOANTESColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCTO_TIEMPODESPUESNull() {
-                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_TIEMPODESPUESColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCTO_TIEMPODESPUESNull() {
-                this[this.tableCENTROS_TRABAJOS.CTO_TIEMPODESPUESColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCTO_EFICIENCIANull() {
-                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_EFICIENCIAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCTO_EFICIENCIANull() {
-                this[this.tableCENTROS_TRABAJOS.CTO_EFICIENCIAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCTO_COSTOHORANull() {
-                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_COSTOHORAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCTO_COSTOHORANull() {
-                this[this.tableCENTROS_TRABAJOS.CTO_COSTOHORAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCTO_COSTOCICLONull() {
-                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_COSTOCICLOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCTO_COSTOCICLONull() {
-                this[this.tableCENTROS_TRABAJOS.CTO_COSTOCICLOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCTO_CAPACIDADUNIDADHORANull() {
-                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_CAPACIDADUNIDADHORAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCTO_CAPACIDADUNIDADHORANull() {
-                this[this.tableCENTROS_TRABAJOS.CTO_CAPACIDADUNIDADHORAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TURNOSXCENTROTRABAJORow[] GetTURNOSXCENTROTRABAJORows() {
-                if ((this.Table.ChildRelations["CENTROS_TRABAJOS_TURNOSXCENTROTRABAJO"] == null)) {
-                    return new TURNOSXCENTROTRABAJORow[0];
-                }
-                else {
-                    return ((TURNOSXCENTROTRABAJORow[])(base.GetChildRows(this.Table.ChildRelations["CENTROS_TRABAJOS_TURNOSXCENTROTRABAJO"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_HOJARUTARow[] GetDETALLE_HOJARUTARows() {
-                if ((this.Table.ChildRelations["FK_DETALLE_HOJARUTA_CENTROS_TRABAJOS"] == null)) {
-                    return new DETALLE_HOJARUTARow[0];
-                }
-                else {
-                    return ((DETALLE_HOJARUTARow[])(base.GetChildRows(this.Table.ChildRelations["FK_DETALLE_HOJARUTA_CENTROS_TRABAJOS"])));
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_TURNOSXCENTROTRABAJO_CENTROS_TRABAJOS"]);
                 }
             }
         }
@@ -4343,16 +3910,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROS_TRABAJOSRow CENTROS_TRABAJOSRow {
-                get {
-                    return ((CENTROS_TRABAJOSRow)(this.GetParentRow(this.Table.ParentRelations["FK_DETALLE_HOJARUTA_CENTROS_TRABAJOS"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_DETALLE_HOJARUTA_CENTROS_TRABAJOS"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public OPERACIONESRow OPERACIONESRow {
                 get {
                     return ((OPERACIONESRow)(this.GetParentRow(this.Table.ParentRelations["FK_DETALLE_HOJARUTA_OPERACIONES"])));
@@ -4389,6 +3946,16 @@ namespace GyCAP.Data {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_DETALLE_HOJARUTA_UBICACIONES_STOCK1"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROS_TRABAJOSRow CENTROS_TRABAJOSRow {
+                get {
+                    return ((CENTROS_TRABAJOSRow)(this.GetParentRow(this.Table.ParentRelations["FK_DETALLE_HOJARUTA_CENTROS_TRABAJOS"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_DETALLE_HOJARUTA_CENTROS_TRABAJOS"]);
                 }
             }
             
@@ -4940,6 +4507,439 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class CENTROS_TRABAJOSRow : global::System.Data.DataRow {
+            
+            private CENTROS_TRABAJOSDataTable tableCENTROS_TRABAJOS;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal CENTROS_TRABAJOSRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableCENTROS_TRABAJOS = ((CENTROS_TRABAJOSDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CTO_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.CTO_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string CTO_NOMBRE {
+                get {
+                    if (this.IsCTO_NOMBRENull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableCENTROS_TRABAJOS.CTO_NOMBREColumn]));
+                    }
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.CTO_NOMBREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal SEC_CODIGO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.SEC_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SEC_CODIGO\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.SEC_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CTO_TIPO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_TIPOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_TIPO\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.CTO_TIPOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CTO_HORASTRABAJONORMAL {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJONORMALColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_HORASTRABAJONORMAL\' in table \'CENTROS_TRABAJOS\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJONORMALColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CTO_HORASTRABAJOEXTENDIDO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJOEXTENDIDOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_HORASTRABAJOEXTENDIDO\' in table \'CENTROS_TRABAJOS\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJOEXTENDIDOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CTO_ACTIVO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_ACTIVOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_ACTIVO\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.CTO_ACTIVOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string CTO_DESCRIPCION {
+                get {
+                    if (this.IsCTO_DESCRIPCIONNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableCENTROS_TRABAJOS.CTO_DESCRIPCIONColumn]));
+                    }
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.CTO_DESCRIPCIONColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CTO_CAPACIDADCICLO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_CAPACIDADCICLOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_CAPACIDADCICLO\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.CTO_CAPACIDADCICLOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CTO_HORASCICLO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_HORASCICLOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_HORASCICLO\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.CTO_HORASCICLOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CTO_TIEMPOANTES {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_TIEMPOANTESColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_TIEMPOANTES\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.CTO_TIEMPOANTESColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CTO_TIEMPODESPUES {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_TIEMPODESPUESColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_TIEMPODESPUES\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.CTO_TIEMPODESPUESColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CTO_EFICIENCIA {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_EFICIENCIAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_EFICIENCIA\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.CTO_EFICIENCIAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CTO_COSTOHORA {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_COSTOHORAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_COSTOHORA\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.CTO_COSTOHORAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CTO_COSTOCICLO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_COSTOCICLOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_COSTOCICLO\' in table \'CENTROS_TRABAJOS\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.CTO_COSTOCICLOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CTO_CAPACIDADUNIDADHORA {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCENTROS_TRABAJOS.CTO_CAPACIDADUNIDADHORAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CTO_CAPACIDADUNIDADHORA\' in table \'CENTROS_TRABAJOS\' is DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCENTROS_TRABAJOS.CTO_CAPACIDADUNIDADHORAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SECTORESRow SECTORESRow {
+                get {
+                    return ((SECTORESRow)(this.GetParentRow(this.Table.ParentRelations["FK_CENTROS_TRABAJOS_SECTORES"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_CENTROS_TRABAJOS_SECTORES"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCTO_NOMBRENull() {
+                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_NOMBREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCTO_NOMBRENull() {
+                this[this.tableCENTROS_TRABAJOS.CTO_NOMBREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSEC_CODIGONull() {
+                return this.IsNull(this.tableCENTROS_TRABAJOS.SEC_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSEC_CODIGONull() {
+                this[this.tableCENTROS_TRABAJOS.SEC_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCTO_TIPONull() {
+                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_TIPOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCTO_TIPONull() {
+                this[this.tableCENTROS_TRABAJOS.CTO_TIPOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCTO_HORASTRABAJONORMALNull() {
+                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJONORMALColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCTO_HORASTRABAJONORMALNull() {
+                this[this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJONORMALColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCTO_HORASTRABAJOEXTENDIDONull() {
+                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJOEXTENDIDOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCTO_HORASTRABAJOEXTENDIDONull() {
+                this[this.tableCENTROS_TRABAJOS.CTO_HORASTRABAJOEXTENDIDOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCTO_ACTIVONull() {
+                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_ACTIVOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCTO_ACTIVONull() {
+                this[this.tableCENTROS_TRABAJOS.CTO_ACTIVOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCTO_DESCRIPCIONNull() {
+                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_DESCRIPCIONColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCTO_DESCRIPCIONNull() {
+                this[this.tableCENTROS_TRABAJOS.CTO_DESCRIPCIONColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCTO_CAPACIDADCICLONull() {
+                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_CAPACIDADCICLOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCTO_CAPACIDADCICLONull() {
+                this[this.tableCENTROS_TRABAJOS.CTO_CAPACIDADCICLOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCTO_HORASCICLONull() {
+                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_HORASCICLOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCTO_HORASCICLONull() {
+                this[this.tableCENTROS_TRABAJOS.CTO_HORASCICLOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCTO_TIEMPOANTESNull() {
+                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_TIEMPOANTESColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCTO_TIEMPOANTESNull() {
+                this[this.tableCENTROS_TRABAJOS.CTO_TIEMPOANTESColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCTO_TIEMPODESPUESNull() {
+                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_TIEMPODESPUESColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCTO_TIEMPODESPUESNull() {
+                this[this.tableCENTROS_TRABAJOS.CTO_TIEMPODESPUESColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCTO_EFICIENCIANull() {
+                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_EFICIENCIAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCTO_EFICIENCIANull() {
+                this[this.tableCENTROS_TRABAJOS.CTO_EFICIENCIAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCTO_COSTOHORANull() {
+                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_COSTOHORAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCTO_COSTOHORANull() {
+                this[this.tableCENTROS_TRABAJOS.CTO_COSTOHORAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCTO_COSTOCICLONull() {
+                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_COSTOCICLOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCTO_COSTOCICLONull() {
+                this[this.tableCENTROS_TRABAJOS.CTO_COSTOCICLOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCTO_CAPACIDADUNIDADHORANull() {
+                return this.IsNull(this.tableCENTROS_TRABAJOS.CTO_CAPACIDADUNIDADHORAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCTO_CAPACIDADUNIDADHORANull() {
+                this[this.tableCENTROS_TRABAJOS.CTO_CAPACIDADUNIDADHORAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TURNOSXCENTROTRABAJORow[] GetTURNOSXCENTROTRABAJORows() {
+                if ((this.Table.ChildRelations["FK_TURNOSXCENTROTRABAJO_CENTROS_TRABAJOS"] == null)) {
+                    return new TURNOSXCENTROTRABAJORow[0];
+                }
+                else {
+                    return ((TURNOSXCENTROTRABAJORow[])(base.GetChildRows(this.Table.ChildRelations["FK_TURNOSXCENTROTRABAJO_CENTROS_TRABAJOS"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public DETALLE_HOJARUTARow[] GetDETALLE_HOJARUTARows() {
+                if ((this.Table.ChildRelations["FK_DETALLE_HOJARUTA_CENTROS_TRABAJOS"] == null)) {
+                    return new DETALLE_HOJARUTARow[0];
+                }
+                else {
+                    return ((DETALLE_HOJARUTARow[])(base.GetChildRows(this.Table.ChildRelations["FK_DETALLE_HOJARUTA_CENTROS_TRABAJOS"])));
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -5019,37 +5019,6 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public TURNOSXCENTROTRABAJORow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class CENTROS_TRABAJOSRowChangeEvent : global::System.EventArgs {
-            
-            private CENTROS_TRABAJOSRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROS_TRABAJOSRowChangeEvent(CENTROS_TRABAJOSRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CENTROS_TRABAJOSRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -5205,6 +5174,37 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public CONTENIDO_UBICACION_STOCKRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class CENTROS_TRABAJOSRowChangeEvent : global::System.EventArgs {
+            
+            private CENTROS_TRABAJOSRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROS_TRABAJOSRowChangeEvent(CENTROS_TRABAJOSRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CENTROS_TRABAJOSRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -6205,935 +6205,6 @@ SELECT TXCT_CODIGO, TUR_CODIGO, CTO_CODIGO FROM TURNOSXCENTROTRABAJO WHERE (TXCT
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(decimal TUR_CODIGO, decimal CTO_CODIGO, decimal Original_TXCT_CODIGO, decimal Original_TUR_CODIGO, decimal Original_CTO_CODIGO) {
             return this.Update(TUR_CODIGO, CTO_CODIGO, Original_TXCT_CODIGO, Original_TUR_CODIGO, Original_CTO_CODIGO, Original_TXCT_CODIGO);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class CENTROS_TRABAJOSTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public CENTROS_TRABAJOSTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "CENTROS_TRABAJOS";
-            tableMapping.ColumnMappings.Add("CTO_CODIGO", "CTO_CODIGO");
-            tableMapping.ColumnMappings.Add("CTO_NOMBRE", "CTO_NOMBRE");
-            tableMapping.ColumnMappings.Add("SEC_CODIGO", "SEC_CODIGO");
-            tableMapping.ColumnMappings.Add("CTO_TIPO", "CTO_TIPO");
-            tableMapping.ColumnMappings.Add("CTO_HORASTRABAJONORMAL", "CTO_HORASTRABAJONORMAL");
-            tableMapping.ColumnMappings.Add("CTO_HORASTRABAJOEXTENDIDO", "CTO_HORASTRABAJOEXTENDIDO");
-            tableMapping.ColumnMappings.Add("CTO_ACTIVO", "CTO_ACTIVO");
-            tableMapping.ColumnMappings.Add("CTO_DESCRIPCION", "CTO_DESCRIPCION");
-            tableMapping.ColumnMappings.Add("CTO_CAPACIDADCICLO", "CTO_CAPACIDADCICLO");
-            tableMapping.ColumnMappings.Add("CTO_HORASCICLO", "CTO_HORASCICLO");
-            tableMapping.ColumnMappings.Add("CTO_TIEMPOANTES", "CTO_TIEMPOANTES");
-            tableMapping.ColumnMappings.Add("CTO_TIEMPODESPUES", "CTO_TIEMPODESPUES");
-            tableMapping.ColumnMappings.Add("CTO_EFICIENCIA", "CTO_EFICIENCIA");
-            tableMapping.ColumnMappings.Add("CTO_COSTOHORA", "CTO_COSTOHORA");
-            tableMapping.ColumnMappings.Add("CTO_COSTOCICLO", "CTO_COSTOCICLO");
-            tableMapping.ColumnMappings.Add("CTO_CAPACIDADUNIDADHORA", "CTO_CAPACIDADUNIDADHORA");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[CENTROS_TRABAJOS] WHERE (([CTO_CODIGO] = @Original_CTO_CODIGO)" +
-                " AND ((@IsNull_CTO_NOMBRE = 1 AND [CTO_NOMBRE] IS NULL) OR ([CTO_NOMBRE] = @Orig" +
-                "inal_CTO_NOMBRE)) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS NULL) OR ([SE" +
-                "C_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_CTO_TIPO = 1 AND [CTO_TIPO] IS " +
-                "NULL) OR ([CTO_TIPO] = @Original_CTO_TIPO)) AND ((@IsNull_CTO_HORASTRABAJONORMAL" +
-                " = 1 AND [CTO_HORASTRABAJONORMAL] IS NULL) OR ([CTO_HORASTRABAJONORMAL] = @Origi" +
-                "nal_CTO_HORASTRABAJONORMAL)) AND ((@IsNull_CTO_HORASTRABAJOEXTENDIDO = 1 AND [CT" +
-                "O_HORASTRABAJOEXTENDIDO] IS NULL) OR ([CTO_HORASTRABAJOEXTENDIDO] = @Original_CT" +
-                "O_HORASTRABAJOEXTENDIDO)) AND ((@IsNull_CTO_ACTIVO = 1 AND [CTO_ACTIVO] IS NULL)" +
-                " OR ([CTO_ACTIVO] = @Original_CTO_ACTIVO)) AND ((@IsNull_CTO_DESCRIPCION = 1 AND" +
-                " [CTO_DESCRIPCION] IS NULL) OR ([CTO_DESCRIPCION] = @Original_CTO_DESCRIPCION)) " +
-                "AND ((@IsNull_CTO_CAPACIDADCICLO = 1 AND [CTO_CAPACIDADCICLO] IS NULL) OR ([CTO_" +
-                "CAPACIDADCICLO] = @Original_CTO_CAPACIDADCICLO)) AND ((@IsNull_CTO_HORASCICLO = " +
-                "1 AND [CTO_HORASCICLO] IS NULL) OR ([CTO_HORASCICLO] = @Original_CTO_HORASCICLO)" +
-                ") AND ((@IsNull_CTO_TIEMPOANTES = 1 AND [CTO_TIEMPOANTES] IS NULL) OR ([CTO_TIEM" +
-                "POANTES] = @Original_CTO_TIEMPOANTES)) AND ((@IsNull_CTO_TIEMPODESPUES = 1 AND [" +
-                "CTO_TIEMPODESPUES] IS NULL) OR ([CTO_TIEMPODESPUES] = @Original_CTO_TIEMPODESPUE" +
-                "S)) AND ((@IsNull_CTO_EFICIENCIA = 1 AND [CTO_EFICIENCIA] IS NULL) OR ([CTO_EFIC" +
-                "IENCIA] = @Original_CTO_EFICIENCIA)) AND ((@IsNull_CTO_COSTOHORA = 1 AND [CTO_CO" +
-                "STOHORA] IS NULL) OR ([CTO_COSTOHORA] = @Original_CTO_COSTOHORA)) AND ((@IsNull_" +
-                "CTO_COSTOCICLO = 1 AND [CTO_COSTOCICLO] IS NULL) OR ([CTO_COSTOCICLO] = @Origina" +
-                "l_CTO_COSTOCICLO)) AND ((@IsNull_CTO_CAPACIDADUNIDADHORA = 1 AND [CTO_CAPACIDADU" +
-                "NIDADHORA] IS NULL) OR ([CTO_CAPACIDADUNIDADHORA] = @Original_CTO_CAPACIDADUNIDA" +
-                "DHORA)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_TIPO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_TIPO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_TIPO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_TIPO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_HORASTRABAJONORMAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_HORASTRABAJONORMAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_HORASTRABAJONORMAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASTRABAJONORMAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_HORASTRABAJOEXTENDIDO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_HORASTRABAJOEXTENDIDO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_HORASTRABAJOEXTENDIDO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASTRABAJOEXTENDIDO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_ACTIVO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_ACTIVO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_ACTIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_CAPACIDADCICLO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_CAPACIDADCICLO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CAPACIDADCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_CAPACIDADCICLO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_HORASCICLO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_HORASCICLO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_HORASCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASCICLO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_TIEMPOANTES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_TIEMPOANTES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_TIEMPOANTES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPOANTES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_TIEMPODESPUES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_TIEMPODESPUES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_TIEMPODESPUES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPODESPUES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_EFICIENCIA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_EFICIENCIA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_EFICIENCIA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_EFICIENCIA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_COSTOHORA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_COSTOHORA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_COSTOHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_COSTOHORA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_COSTOCICLO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_COSTOCICLO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_COSTOCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_COSTOCICLO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_CAPACIDADUNIDADHORA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_CAPACIDADUNIDADHORA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CAPACIDADUNIDADHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_CAPACIDADUNIDADHORA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[CENTROS_TRABAJOS] ([CTO_NOMBRE], [SEC_CODIGO], [CTO_TIPO], [CTO_HORASTRABAJONORMAL], [CTO_HORASTRABAJOEXTENDIDO], [CTO_ACTIVO], [CTO_DESCRIPCION], [CTO_CAPACIDADCICLO], [CTO_HORASCICLO], [CTO_TIEMPOANTES], [CTO_TIEMPODESPUES], [CTO_EFICIENCIA], [CTO_COSTOHORA], [CTO_COSTOCICLO], [CTO_CAPACIDADUNIDADHORA]) VALUES (@CTO_NOMBRE, @SEC_CODIGO, @CTO_TIPO, @CTO_HORASTRABAJONORMAL, @CTO_HORASTRABAJOEXTENDIDO, @CTO_ACTIVO, @CTO_DESCRIPCION, @CTO_CAPACIDADCICLO, @CTO_HORASCICLO, @CTO_TIEMPOANTES, @CTO_TIEMPODESPUES, @CTO_EFICIENCIA, @CTO_COSTOHORA, @CTO_COSTOCICLO, @CTO_CAPACIDADUNIDADHORA);
-SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO_HORASTRABAJOEXTENDIDO, CTO_ACTIVO, CTO_DESCRIPCION, CTO_CAPACIDADCICLO, CTO_HORASCICLO, CTO_TIEMPOANTES, CTO_TIEMPODESPUES, CTO_EFICIENCIA, CTO_COSTOHORA, CTO_COSTOCICLO, CTO_CAPACIDADUNIDADHORA FROM CENTROS_TRABAJOS WHERE (CTO_CODIGO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_TIPO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_TIPO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_HORASTRABAJONORMAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASTRABAJONORMAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_HORASTRABAJOEXTENDIDO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASTRABAJOEXTENDIDO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CAPACIDADCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_CAPACIDADCICLO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_HORASCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASCICLO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_TIEMPOANTES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPOANTES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_TIEMPODESPUES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPODESPUES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_EFICIENCIA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_EFICIENCIA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_COSTOHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_COSTOHORA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_COSTOCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_COSTOCICLO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CAPACIDADUNIDADHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_CAPACIDADUNIDADHORA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[CENTROS_TRABAJOS] SET [CTO_NOMBRE] = @CTO_NOMBRE, [SEC_CODIGO] = @S" +
-                "EC_CODIGO, [CTO_TIPO] = @CTO_TIPO, [CTO_HORASTRABAJONORMAL] = @CTO_HORASTRABAJON" +
-                "ORMAL, [CTO_HORASTRABAJOEXTENDIDO] = @CTO_HORASTRABAJOEXTENDIDO, [CTO_ACTIVO] = " +
-                "@CTO_ACTIVO, [CTO_DESCRIPCION] = @CTO_DESCRIPCION, [CTO_CAPACIDADCICLO] = @CTO_C" +
-                "APACIDADCICLO, [CTO_HORASCICLO] = @CTO_HORASCICLO, [CTO_TIEMPOANTES] = @CTO_TIEM" +
-                "POANTES, [CTO_TIEMPODESPUES] = @CTO_TIEMPODESPUES, [CTO_EFICIENCIA] = @CTO_EFICI" +
-                "ENCIA, [CTO_COSTOHORA] = @CTO_COSTOHORA, [CTO_COSTOCICLO] = @CTO_COSTOCICLO, [CT" +
-                "O_CAPACIDADUNIDADHORA] = @CTO_CAPACIDADUNIDADHORA WHERE (([CTO_CODIGO] = @Origin" +
-                "al_CTO_CODIGO) AND ((@IsNull_CTO_NOMBRE = 1 AND [CTO_NOMBRE] IS NULL) OR ([CTO_N" +
-                "OMBRE] = @Original_CTO_NOMBRE)) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS" +
-                " NULL) OR ([SEC_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_CTO_TIPO = 1 AND " +
-                "[CTO_TIPO] IS NULL) OR ([CTO_TIPO] = @Original_CTO_TIPO)) AND ((@IsNull_CTO_HORA" +
-                "STRABAJONORMAL = 1 AND [CTO_HORASTRABAJONORMAL] IS NULL) OR ([CTO_HORASTRABAJONO" +
-                "RMAL] = @Original_CTO_HORASTRABAJONORMAL)) AND ((@IsNull_CTO_HORASTRABAJOEXTENDI" +
-                "DO = 1 AND [CTO_HORASTRABAJOEXTENDIDO] IS NULL) OR ([CTO_HORASTRABAJOEXTENDIDO] " +
-                "= @Original_CTO_HORASTRABAJOEXTENDIDO)) AND ((@IsNull_CTO_ACTIVO = 1 AND [CTO_AC" +
-                "TIVO] IS NULL) OR ([CTO_ACTIVO] = @Original_CTO_ACTIVO)) AND ((@IsNull_CTO_DESCR" +
-                "IPCION = 1 AND [CTO_DESCRIPCION] IS NULL) OR ([CTO_DESCRIPCION] = @Original_CTO_" +
-                "DESCRIPCION)) AND ((@IsNull_CTO_CAPACIDADCICLO = 1 AND [CTO_CAPACIDADCICLO] IS N" +
-                "ULL) OR ([CTO_CAPACIDADCICLO] = @Original_CTO_CAPACIDADCICLO)) AND ((@IsNull_CTO" +
-                "_HORASCICLO = 1 AND [CTO_HORASCICLO] IS NULL) OR ([CTO_HORASCICLO] = @Original_C" +
-                "TO_HORASCICLO)) AND ((@IsNull_CTO_TIEMPOANTES = 1 AND [CTO_TIEMPOANTES] IS NULL)" +
-                " OR ([CTO_TIEMPOANTES] = @Original_CTO_TIEMPOANTES)) AND ((@IsNull_CTO_TIEMPODES" +
-                "PUES = 1 AND [CTO_TIEMPODESPUES] IS NULL) OR ([CTO_TIEMPODESPUES] = @Original_CT" +
-                "O_TIEMPODESPUES)) AND ((@IsNull_CTO_EFICIENCIA = 1 AND [CTO_EFICIENCIA] IS NULL)" +
-                " OR ([CTO_EFICIENCIA] = @Original_CTO_EFICIENCIA)) AND ((@IsNull_CTO_COSTOHORA =" +
-                " 1 AND [CTO_COSTOHORA] IS NULL) OR ([CTO_COSTOHORA] = @Original_CTO_COSTOHORA)) " +
-                "AND ((@IsNull_CTO_COSTOCICLO = 1 AND [CTO_COSTOCICLO] IS NULL) OR ([CTO_COSTOCIC" +
-                "LO] = @Original_CTO_COSTOCICLO)) AND ((@IsNull_CTO_CAPACIDADUNIDADHORA = 1 AND [" +
-                "CTO_CAPACIDADUNIDADHORA] IS NULL) OR ([CTO_CAPACIDADUNIDADHORA] = @Original_CTO_" +
-                "CAPACIDADUNIDADHORA)));\r\nSELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CT" +
-                "O_HORASTRABAJONORMAL, CTO_HORASTRABAJOEXTENDIDO, CTO_ACTIVO, CTO_DESCRIPCION, CT" +
-                "O_CAPACIDADCICLO, CTO_HORASCICLO, CTO_TIEMPOANTES, CTO_TIEMPODESPUES, CTO_EFICIE" +
-                "NCIA, CTO_COSTOHORA, CTO_COSTOCICLO, CTO_CAPACIDADUNIDADHORA FROM CENTROS_TRABAJ" +
-                "OS WHERE (CTO_CODIGO = @CTO_CODIGO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_TIPO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_TIPO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_HORASTRABAJONORMAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASTRABAJONORMAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_HORASTRABAJOEXTENDIDO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASTRABAJOEXTENDIDO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CAPACIDADCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_CAPACIDADCICLO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_HORASCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASCICLO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_TIEMPOANTES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPOANTES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_TIEMPODESPUES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPODESPUES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_EFICIENCIA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_EFICIENCIA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_COSTOHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_COSTOHORA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_COSTOCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_COSTOCICLO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CAPACIDADUNIDADHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_CAPACIDADUNIDADHORA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_TIPO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_TIPO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_TIPO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_TIPO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_HORASTRABAJONORMAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_HORASTRABAJONORMAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_HORASTRABAJONORMAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASTRABAJONORMAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_HORASTRABAJOEXTENDIDO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_HORASTRABAJOEXTENDIDO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_HORASTRABAJOEXTENDIDO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASTRABAJOEXTENDIDO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_ACTIVO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_ACTIVO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_ACTIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_CAPACIDADCICLO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_CAPACIDADCICLO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CAPACIDADCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_CAPACIDADCICLO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_HORASCICLO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_HORASCICLO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_HORASCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASCICLO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_TIEMPOANTES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_TIEMPOANTES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_TIEMPOANTES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPOANTES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_TIEMPODESPUES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_TIEMPODESPUES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_TIEMPODESPUES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPODESPUES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_EFICIENCIA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_EFICIENCIA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_EFICIENCIA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_EFICIENCIA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_COSTOHORA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_COSTOHORA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_COSTOHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_COSTOHORA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_COSTOCICLO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_COSTOCICLO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_COSTOCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_COSTOCICLO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_CAPACIDADUNIDADHORA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_CAPACIDADUNIDADHORA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CAPACIDADUNIDADHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_CAPACIDADUNIDADHORA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO_HORASTRABAJOEXTENDIDO, CTO_ACTIVO, CTO_DESCRIPCION, CTO_CAPACIDADCICLO, CTO_HORASCICLO, CTO_TIEMPOANTES, CTO_TIEMPODESPUES, CTO_EFICIENCIA, CTO_COSTOHORA, CTO_COSTOCICLO, CTO_CAPACIDADUNIDADHORA FROM dbo.CENTROS_TRABAJOS";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsHojaRuta.CENTROS_TRABAJOSDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsHojaRuta.CENTROS_TRABAJOSDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsHojaRuta.CENTROS_TRABAJOSDataTable dataTable = new dsHojaRuta.CENTROS_TRABAJOSDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsHojaRuta.CENTROS_TRABAJOSDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsHojaRuta dataSet) {
-            return this.Adapter.Update(dataSet, "CENTROS_TRABAJOS");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(
-                    decimal Original_CTO_CODIGO, 
-                    string Original_CTO_NOMBRE, 
-                    global::System.Nullable<decimal> Original_SEC_CODIGO, 
-                    global::System.Nullable<decimal> Original_CTO_TIPO, 
-                    global::System.Nullable<decimal> Original_CTO_HORASTRABAJONORMAL, 
-                    global::System.Nullable<decimal> Original_CTO_HORASTRABAJOEXTENDIDO, 
-                    global::System.Nullable<decimal> Original_CTO_ACTIVO, 
-                    string Original_CTO_DESCRIPCION, 
-                    global::System.Nullable<decimal> Original_CTO_CAPACIDADCICLO, 
-                    global::System.Nullable<decimal> Original_CTO_HORASCICLO, 
-                    global::System.Nullable<decimal> Original_CTO_TIEMPOANTES, 
-                    global::System.Nullable<decimal> Original_CTO_TIEMPODESPUES, 
-                    global::System.Nullable<decimal> Original_CTO_EFICIENCIA, 
-                    global::System.Nullable<decimal> Original_CTO_COSTOHORA, 
-                    global::System.Nullable<decimal> Original_CTO_COSTOCICLO, 
-                    global::System.Nullable<decimal> Original_CTO_CAPACIDADUNIDADHORA) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_CTO_CODIGO));
-            if ((Original_CTO_NOMBRE == null)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_CTO_NOMBRE));
-            }
-            if ((Original_SEC_CODIGO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_SEC_CODIGO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_TIPO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((decimal)(Original_CTO_TIPO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_HORASTRABAJONORMAL.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((decimal)(Original_CTO_HORASTRABAJONORMAL.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_HORASTRABAJOEXTENDIDO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((decimal)(Original_CTO_HORASTRABAJOEXTENDIDO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_ACTIVO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((decimal)(Original_CTO_ACTIVO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_DESCRIPCION == null)) {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((string)(Original_CTO_DESCRIPCION));
-            }
-            if ((Original_CTO_CAPACIDADCICLO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[16].Value = ((decimal)(Original_CTO_CAPACIDADCICLO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_HORASCICLO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[18].Value = ((decimal)(Original_CTO_HORASCICLO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_TIEMPOANTES.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[20].Value = ((decimal)(Original_CTO_TIEMPOANTES.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_TIEMPODESPUES.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[22].Value = ((decimal)(Original_CTO_TIEMPODESPUES.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[22].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_EFICIENCIA.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[24].Value = ((decimal)(Original_CTO_EFICIENCIA.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[24].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_COSTOHORA.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[26].Value = ((decimal)(Original_CTO_COSTOHORA.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[26].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_COSTOCICLO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[28].Value = ((decimal)(Original_CTO_COSTOCICLO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[28].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_CAPACIDADUNIDADHORA.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[29].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[30].Value = ((decimal)(Original_CTO_CAPACIDADUNIDADHORA.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[29].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[30].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string CTO_NOMBRE, global::System.Nullable<decimal> SEC_CODIGO, global::System.Nullable<decimal> CTO_TIPO, global::System.Nullable<decimal> CTO_HORASTRABAJONORMAL, global::System.Nullable<decimal> CTO_HORASTRABAJOEXTENDIDO, global::System.Nullable<decimal> CTO_ACTIVO, string CTO_DESCRIPCION, global::System.Nullable<decimal> CTO_CAPACIDADCICLO, global::System.Nullable<decimal> CTO_HORASCICLO, global::System.Nullable<decimal> CTO_TIEMPOANTES, global::System.Nullable<decimal> CTO_TIEMPODESPUES, global::System.Nullable<decimal> CTO_EFICIENCIA, global::System.Nullable<decimal> CTO_COSTOHORA, global::System.Nullable<decimal> CTO_COSTOCICLO, global::System.Nullable<decimal> CTO_CAPACIDADUNIDADHORA) {
-            if ((CTO_NOMBRE == null)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(CTO_NOMBRE));
-            }
-            if ((SEC_CODIGO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(SEC_CODIGO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_TIPO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(CTO_TIPO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_HORASTRABAJONORMAL.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(CTO_HORASTRABAJONORMAL.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_HORASTRABAJOEXTENDIDO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(CTO_HORASTRABAJOEXTENDIDO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_ACTIVO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(CTO_ACTIVO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_DESCRIPCION == null)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(CTO_DESCRIPCION));
-            }
-            if ((CTO_CAPACIDADCICLO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(CTO_CAPACIDADCICLO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_HORASCICLO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(CTO_HORASCICLO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_TIEMPOANTES.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(CTO_TIEMPOANTES.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_TIEMPODESPUES.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((decimal)(CTO_TIEMPODESPUES.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_EFICIENCIA.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[11].Value = ((decimal)(CTO_EFICIENCIA.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_COSTOHORA.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[12].Value = ((decimal)(CTO_COSTOHORA.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_COSTOCICLO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[13].Value = ((decimal)(CTO_COSTOCICLO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_CAPACIDADUNIDADHORA.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[14].Value = ((decimal)(CTO_CAPACIDADUNIDADHORA.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string CTO_NOMBRE, 
-                    global::System.Nullable<decimal> SEC_CODIGO, 
-                    global::System.Nullable<decimal> CTO_TIPO, 
-                    global::System.Nullable<decimal> CTO_HORASTRABAJONORMAL, 
-                    global::System.Nullable<decimal> CTO_HORASTRABAJOEXTENDIDO, 
-                    global::System.Nullable<decimal> CTO_ACTIVO, 
-                    string CTO_DESCRIPCION, 
-                    global::System.Nullable<decimal> CTO_CAPACIDADCICLO, 
-                    global::System.Nullable<decimal> CTO_HORASCICLO, 
-                    global::System.Nullable<decimal> CTO_TIEMPOANTES, 
-                    global::System.Nullable<decimal> CTO_TIEMPODESPUES, 
-                    global::System.Nullable<decimal> CTO_EFICIENCIA, 
-                    global::System.Nullable<decimal> CTO_COSTOHORA, 
-                    global::System.Nullable<decimal> CTO_COSTOCICLO, 
-                    global::System.Nullable<decimal> CTO_CAPACIDADUNIDADHORA, 
-                    decimal Original_CTO_CODIGO, 
-                    string Original_CTO_NOMBRE, 
-                    global::System.Nullable<decimal> Original_SEC_CODIGO, 
-                    global::System.Nullable<decimal> Original_CTO_TIPO, 
-                    global::System.Nullable<decimal> Original_CTO_HORASTRABAJONORMAL, 
-                    global::System.Nullable<decimal> Original_CTO_HORASTRABAJOEXTENDIDO, 
-                    global::System.Nullable<decimal> Original_CTO_ACTIVO, 
-                    string Original_CTO_DESCRIPCION, 
-                    global::System.Nullable<decimal> Original_CTO_CAPACIDADCICLO, 
-                    global::System.Nullable<decimal> Original_CTO_HORASCICLO, 
-                    global::System.Nullable<decimal> Original_CTO_TIEMPOANTES, 
-                    global::System.Nullable<decimal> Original_CTO_TIEMPODESPUES, 
-                    global::System.Nullable<decimal> Original_CTO_EFICIENCIA, 
-                    global::System.Nullable<decimal> Original_CTO_COSTOHORA, 
-                    global::System.Nullable<decimal> Original_CTO_COSTOCICLO, 
-                    global::System.Nullable<decimal> Original_CTO_CAPACIDADUNIDADHORA, 
-                    decimal CTO_CODIGO) {
-            if ((CTO_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(CTO_NOMBRE));
-            }
-            if ((SEC_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(SEC_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_TIPO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(CTO_TIPO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_HORASTRABAJONORMAL.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(CTO_HORASTRABAJONORMAL.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_HORASTRABAJOEXTENDIDO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(CTO_HORASTRABAJOEXTENDIDO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_ACTIVO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(CTO_ACTIVO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(CTO_DESCRIPCION));
-            }
-            if ((CTO_CAPACIDADCICLO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(CTO_CAPACIDADCICLO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_HORASCICLO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(CTO_HORASCICLO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_TIEMPOANTES.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(CTO_TIEMPOANTES.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_TIEMPODESPUES.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(CTO_TIEMPODESPUES.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_EFICIENCIA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(CTO_EFICIENCIA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_COSTOHORA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(CTO_COSTOHORA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_COSTOCICLO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(CTO_COSTOCICLO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            if ((CTO_CAPACIDADUNIDADHORA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(CTO_CAPACIDADUNIDADHORA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[15].Value = ((decimal)(Original_CTO_CODIGO));
-            if ((Original_CTO_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_CTO_NOMBRE));
-            }
-            if ((Original_SEC_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((decimal)(Original_SEC_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_TIPO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((decimal)(Original_CTO_TIPO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_HORASTRABAJONORMAL.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((decimal)(Original_CTO_HORASTRABAJONORMAL.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_HORASTRABAJOEXTENDIDO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((decimal)(Original_CTO_HORASTRABAJOEXTENDIDO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_ACTIVO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((decimal)(Original_CTO_ACTIVO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((string)(Original_CTO_DESCRIPCION));
-            }
-            if ((Original_CTO_CAPACIDADCICLO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((decimal)(Original_CTO_CAPACIDADCICLO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[31].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_HORASCICLO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((decimal)(Original_CTO_HORASCICLO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_TIEMPOANTES.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((decimal)(Original_CTO_TIEMPOANTES.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[35].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_TIEMPODESPUES.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[37].Value = ((decimal)(Original_CTO_TIEMPODESPUES.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[37].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_EFICIENCIA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[39].Value = ((decimal)(Original_CTO_EFICIENCIA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[39].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_COSTOHORA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[40].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[41].Value = ((decimal)(Original_CTO_COSTOHORA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[40].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[41].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_COSTOCICLO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[42].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[43].Value = ((decimal)(Original_CTO_COSTOCICLO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[42].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[43].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CTO_CAPACIDADUNIDADHORA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[44].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[45].Value = ((decimal)(Original_CTO_CAPACIDADUNIDADHORA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[44].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[45].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[46].Value = ((decimal)(CTO_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string CTO_NOMBRE, 
-                    global::System.Nullable<decimal> SEC_CODIGO, 
-                    global::System.Nullable<decimal> CTO_TIPO, 
-                    global::System.Nullable<decimal> CTO_HORASTRABAJONORMAL, 
-                    global::System.Nullable<decimal> CTO_HORASTRABAJOEXTENDIDO, 
-                    global::System.Nullable<decimal> CTO_ACTIVO, 
-                    string CTO_DESCRIPCION, 
-                    global::System.Nullable<decimal> CTO_CAPACIDADCICLO, 
-                    global::System.Nullable<decimal> CTO_HORASCICLO, 
-                    global::System.Nullable<decimal> CTO_TIEMPOANTES, 
-                    global::System.Nullable<decimal> CTO_TIEMPODESPUES, 
-                    global::System.Nullable<decimal> CTO_EFICIENCIA, 
-                    global::System.Nullable<decimal> CTO_COSTOHORA, 
-                    global::System.Nullable<decimal> CTO_COSTOCICLO, 
-                    global::System.Nullable<decimal> CTO_CAPACIDADUNIDADHORA, 
-                    decimal Original_CTO_CODIGO, 
-                    string Original_CTO_NOMBRE, 
-                    global::System.Nullable<decimal> Original_SEC_CODIGO, 
-                    global::System.Nullable<decimal> Original_CTO_TIPO, 
-                    global::System.Nullable<decimal> Original_CTO_HORASTRABAJONORMAL, 
-                    global::System.Nullable<decimal> Original_CTO_HORASTRABAJOEXTENDIDO, 
-                    global::System.Nullable<decimal> Original_CTO_ACTIVO, 
-                    string Original_CTO_DESCRIPCION, 
-                    global::System.Nullable<decimal> Original_CTO_CAPACIDADCICLO, 
-                    global::System.Nullable<decimal> Original_CTO_HORASCICLO, 
-                    global::System.Nullable<decimal> Original_CTO_TIEMPOANTES, 
-                    global::System.Nullable<decimal> Original_CTO_TIEMPODESPUES, 
-                    global::System.Nullable<decimal> Original_CTO_EFICIENCIA, 
-                    global::System.Nullable<decimal> Original_CTO_COSTOHORA, 
-                    global::System.Nullable<decimal> Original_CTO_COSTOCICLO, 
-                    global::System.Nullable<decimal> Original_CTO_CAPACIDADUNIDADHORA) {
-            return this.Update(CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO_HORASTRABAJOEXTENDIDO, CTO_ACTIVO, CTO_DESCRIPCION, CTO_CAPACIDADCICLO, CTO_HORASCICLO, CTO_TIEMPOANTES, CTO_TIEMPODESPUES, CTO_EFICIENCIA, CTO_COSTOHORA, CTO_COSTOCICLO, CTO_CAPACIDADUNIDADHORA, Original_CTO_CODIGO, Original_CTO_NOMBRE, Original_SEC_CODIGO, Original_CTO_TIPO, Original_CTO_HORASTRABAJONORMAL, Original_CTO_HORASTRABAJOEXTENDIDO, Original_CTO_ACTIVO, Original_CTO_DESCRIPCION, Original_CTO_CAPACIDADCICLO, Original_CTO_HORASCICLO, Original_CTO_TIEMPOANTES, Original_CTO_TIEMPODESPUES, Original_CTO_EFICIENCIA, Original_CTO_COSTOHORA, Original_CTO_COSTOCICLO, Original_CTO_CAPACIDADUNIDADHORA, Original_CTO_CODIGO);
         }
     }
     
@@ -9276,6 +8347,935 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class CENTROS_TRABAJOSTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public CENTROS_TRABAJOSTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "CENTROS_TRABAJOS";
+            tableMapping.ColumnMappings.Add("CTO_CODIGO", "CTO_CODIGO");
+            tableMapping.ColumnMappings.Add("CTO_NOMBRE", "CTO_NOMBRE");
+            tableMapping.ColumnMappings.Add("SEC_CODIGO", "SEC_CODIGO");
+            tableMapping.ColumnMappings.Add("CTO_TIPO", "CTO_TIPO");
+            tableMapping.ColumnMappings.Add("CTO_HORASTRABAJONORMAL", "CTO_HORASTRABAJONORMAL");
+            tableMapping.ColumnMappings.Add("CTO_HORASTRABAJOEXTENDIDO", "CTO_HORASTRABAJOEXTENDIDO");
+            tableMapping.ColumnMappings.Add("CTO_ACTIVO", "CTO_ACTIVO");
+            tableMapping.ColumnMappings.Add("CTO_DESCRIPCION", "CTO_DESCRIPCION");
+            tableMapping.ColumnMappings.Add("CTO_CAPACIDADCICLO", "CTO_CAPACIDADCICLO");
+            tableMapping.ColumnMappings.Add("CTO_HORASCICLO", "CTO_HORASCICLO");
+            tableMapping.ColumnMappings.Add("CTO_TIEMPOANTES", "CTO_TIEMPOANTES");
+            tableMapping.ColumnMappings.Add("CTO_TIEMPODESPUES", "CTO_TIEMPODESPUES");
+            tableMapping.ColumnMappings.Add("CTO_EFICIENCIA", "CTO_EFICIENCIA");
+            tableMapping.ColumnMappings.Add("CTO_COSTOHORA", "CTO_COSTOHORA");
+            tableMapping.ColumnMappings.Add("CTO_COSTOCICLO", "CTO_COSTOCICLO");
+            tableMapping.ColumnMappings.Add("CTO_CAPACIDADUNIDADHORA", "CTO_CAPACIDADUNIDADHORA");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[CENTROS_TRABAJOS] WHERE (([CTO_CODIGO] = @Original_CTO_CODIGO)" +
+                " AND ((@IsNull_CTO_NOMBRE = 1 AND [CTO_NOMBRE] IS NULL) OR ([CTO_NOMBRE] = @Orig" +
+                "inal_CTO_NOMBRE)) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS NULL) OR ([SE" +
+                "C_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_CTO_TIPO = 1 AND [CTO_TIPO] IS " +
+                "NULL) OR ([CTO_TIPO] = @Original_CTO_TIPO)) AND ((@IsNull_CTO_HORASTRABAJONORMAL" +
+                " = 1 AND [CTO_HORASTRABAJONORMAL] IS NULL) OR ([CTO_HORASTRABAJONORMAL] = @Origi" +
+                "nal_CTO_HORASTRABAJONORMAL)) AND ((@IsNull_CTO_HORASTRABAJOEXTENDIDO = 1 AND [CT" +
+                "O_HORASTRABAJOEXTENDIDO] IS NULL) OR ([CTO_HORASTRABAJOEXTENDIDO] = @Original_CT" +
+                "O_HORASTRABAJOEXTENDIDO)) AND ((@IsNull_CTO_ACTIVO = 1 AND [CTO_ACTIVO] IS NULL)" +
+                " OR ([CTO_ACTIVO] = @Original_CTO_ACTIVO)) AND ((@IsNull_CTO_DESCRIPCION = 1 AND" +
+                " [CTO_DESCRIPCION] IS NULL) OR ([CTO_DESCRIPCION] = @Original_CTO_DESCRIPCION)) " +
+                "AND ((@IsNull_CTO_CAPACIDADCICLO = 1 AND [CTO_CAPACIDADCICLO] IS NULL) OR ([CTO_" +
+                "CAPACIDADCICLO] = @Original_CTO_CAPACIDADCICLO)) AND ((@IsNull_CTO_HORASCICLO = " +
+                "1 AND [CTO_HORASCICLO] IS NULL) OR ([CTO_HORASCICLO] = @Original_CTO_HORASCICLO)" +
+                ") AND ((@IsNull_CTO_TIEMPOANTES = 1 AND [CTO_TIEMPOANTES] IS NULL) OR ([CTO_TIEM" +
+                "POANTES] = @Original_CTO_TIEMPOANTES)) AND ((@IsNull_CTO_TIEMPODESPUES = 1 AND [" +
+                "CTO_TIEMPODESPUES] IS NULL) OR ([CTO_TIEMPODESPUES] = @Original_CTO_TIEMPODESPUE" +
+                "S)) AND ((@IsNull_CTO_EFICIENCIA = 1 AND [CTO_EFICIENCIA] IS NULL) OR ([CTO_EFIC" +
+                "IENCIA] = @Original_CTO_EFICIENCIA)) AND ((@IsNull_CTO_COSTOHORA = 1 AND [CTO_CO" +
+                "STOHORA] IS NULL) OR ([CTO_COSTOHORA] = @Original_CTO_COSTOHORA)) AND ((@IsNull_" +
+                "CTO_COSTOCICLO = 1 AND [CTO_COSTOCICLO] IS NULL) OR ([CTO_COSTOCICLO] = @Origina" +
+                "l_CTO_COSTOCICLO)) AND ((@IsNull_CTO_CAPACIDADUNIDADHORA = 1 AND [CTO_CAPACIDADU" +
+                "NIDADHORA] IS NULL) OR ([CTO_CAPACIDADUNIDADHORA] = @Original_CTO_CAPACIDADUNIDA" +
+                "DHORA)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_TIPO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_TIPO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_TIPO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_TIPO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_HORASTRABAJONORMAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_HORASTRABAJONORMAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_HORASTRABAJONORMAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_HORASTRABAJONORMAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_HORASTRABAJOEXTENDIDO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_HORASTRABAJOEXTENDIDO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_HORASTRABAJOEXTENDIDO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_HORASTRABAJOEXTENDIDO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_ACTIVO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_ACTIVO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_ACTIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_CAPACIDADCICLO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_CAPACIDADCICLO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CAPACIDADCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_CAPACIDADCICLO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_HORASCICLO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_HORASCICLO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_HORASCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASCICLO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_TIEMPOANTES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_TIEMPOANTES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_TIEMPOANTES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPOANTES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_TIEMPODESPUES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_TIEMPODESPUES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_TIEMPODESPUES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPODESPUES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_EFICIENCIA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_EFICIENCIA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_EFICIENCIA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 2, "CTO_EFICIENCIA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_COSTOHORA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_COSTOHORA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_COSTOHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_COSTOHORA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_COSTOCICLO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_COSTOCICLO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_COSTOCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_COSTOCICLO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_CAPACIDADUNIDADHORA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_CAPACIDADUNIDADHORA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CAPACIDADUNIDADHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_CAPACIDADUNIDADHORA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[CENTROS_TRABAJOS] ([CTO_NOMBRE], [SEC_CODIGO], [CTO_TIPO], [CTO_HORASTRABAJONORMAL], [CTO_HORASTRABAJOEXTENDIDO], [CTO_ACTIVO], [CTO_DESCRIPCION], [CTO_CAPACIDADCICLO], [CTO_HORASCICLO], [CTO_TIEMPOANTES], [CTO_TIEMPODESPUES], [CTO_EFICIENCIA], [CTO_COSTOHORA], [CTO_COSTOCICLO], [CTO_CAPACIDADUNIDADHORA]) VALUES (@CTO_NOMBRE, @SEC_CODIGO, @CTO_TIPO, @CTO_HORASTRABAJONORMAL, @CTO_HORASTRABAJOEXTENDIDO, @CTO_ACTIVO, @CTO_DESCRIPCION, @CTO_CAPACIDADCICLO, @CTO_HORASCICLO, @CTO_TIEMPOANTES, @CTO_TIEMPODESPUES, @CTO_EFICIENCIA, @CTO_COSTOHORA, @CTO_COSTOCICLO, @CTO_CAPACIDADUNIDADHORA);
+SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO_HORASTRABAJOEXTENDIDO, CTO_ACTIVO, CTO_DESCRIPCION, CTO_CAPACIDADCICLO, CTO_HORASCICLO, CTO_TIEMPOANTES, CTO_TIEMPODESPUES, CTO_EFICIENCIA, CTO_COSTOHORA, CTO_COSTOCICLO, CTO_CAPACIDADUNIDADHORA FROM CENTROS_TRABAJOS WHERE (CTO_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_TIPO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_TIPO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_HORASTRABAJONORMAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_HORASTRABAJONORMAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_HORASTRABAJOEXTENDIDO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_HORASTRABAJOEXTENDIDO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CAPACIDADCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_CAPACIDADCICLO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_HORASCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASCICLO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_TIEMPOANTES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPOANTES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_TIEMPODESPUES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPODESPUES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_EFICIENCIA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 2, "CTO_EFICIENCIA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_COSTOHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_COSTOHORA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_COSTOCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_COSTOCICLO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CAPACIDADUNIDADHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_CAPACIDADUNIDADHORA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[CENTROS_TRABAJOS] SET [CTO_NOMBRE] = @CTO_NOMBRE, [SEC_CODIGO] = @S" +
+                "EC_CODIGO, [CTO_TIPO] = @CTO_TIPO, [CTO_HORASTRABAJONORMAL] = @CTO_HORASTRABAJON" +
+                "ORMAL, [CTO_HORASTRABAJOEXTENDIDO] = @CTO_HORASTRABAJOEXTENDIDO, [CTO_ACTIVO] = " +
+                "@CTO_ACTIVO, [CTO_DESCRIPCION] = @CTO_DESCRIPCION, [CTO_CAPACIDADCICLO] = @CTO_C" +
+                "APACIDADCICLO, [CTO_HORASCICLO] = @CTO_HORASCICLO, [CTO_TIEMPOANTES] = @CTO_TIEM" +
+                "POANTES, [CTO_TIEMPODESPUES] = @CTO_TIEMPODESPUES, [CTO_EFICIENCIA] = @CTO_EFICI" +
+                "ENCIA, [CTO_COSTOHORA] = @CTO_COSTOHORA, [CTO_COSTOCICLO] = @CTO_COSTOCICLO, [CT" +
+                "O_CAPACIDADUNIDADHORA] = @CTO_CAPACIDADUNIDADHORA WHERE (([CTO_CODIGO] = @Origin" +
+                "al_CTO_CODIGO) AND ((@IsNull_CTO_NOMBRE = 1 AND [CTO_NOMBRE] IS NULL) OR ([CTO_N" +
+                "OMBRE] = @Original_CTO_NOMBRE)) AND ((@IsNull_SEC_CODIGO = 1 AND [SEC_CODIGO] IS" +
+                " NULL) OR ([SEC_CODIGO] = @Original_SEC_CODIGO)) AND ((@IsNull_CTO_TIPO = 1 AND " +
+                "[CTO_TIPO] IS NULL) OR ([CTO_TIPO] = @Original_CTO_TIPO)) AND ((@IsNull_CTO_HORA" +
+                "STRABAJONORMAL = 1 AND [CTO_HORASTRABAJONORMAL] IS NULL) OR ([CTO_HORASTRABAJONO" +
+                "RMAL] = @Original_CTO_HORASTRABAJONORMAL)) AND ((@IsNull_CTO_HORASTRABAJOEXTENDI" +
+                "DO = 1 AND [CTO_HORASTRABAJOEXTENDIDO] IS NULL) OR ([CTO_HORASTRABAJOEXTENDIDO] " +
+                "= @Original_CTO_HORASTRABAJOEXTENDIDO)) AND ((@IsNull_CTO_ACTIVO = 1 AND [CTO_AC" +
+                "TIVO] IS NULL) OR ([CTO_ACTIVO] = @Original_CTO_ACTIVO)) AND ((@IsNull_CTO_DESCR" +
+                "IPCION = 1 AND [CTO_DESCRIPCION] IS NULL) OR ([CTO_DESCRIPCION] = @Original_CTO_" +
+                "DESCRIPCION)) AND ((@IsNull_CTO_CAPACIDADCICLO = 1 AND [CTO_CAPACIDADCICLO] IS N" +
+                "ULL) OR ([CTO_CAPACIDADCICLO] = @Original_CTO_CAPACIDADCICLO)) AND ((@IsNull_CTO" +
+                "_HORASCICLO = 1 AND [CTO_HORASCICLO] IS NULL) OR ([CTO_HORASCICLO] = @Original_C" +
+                "TO_HORASCICLO)) AND ((@IsNull_CTO_TIEMPOANTES = 1 AND [CTO_TIEMPOANTES] IS NULL)" +
+                " OR ([CTO_TIEMPOANTES] = @Original_CTO_TIEMPOANTES)) AND ((@IsNull_CTO_TIEMPODES" +
+                "PUES = 1 AND [CTO_TIEMPODESPUES] IS NULL) OR ([CTO_TIEMPODESPUES] = @Original_CT" +
+                "O_TIEMPODESPUES)) AND ((@IsNull_CTO_EFICIENCIA = 1 AND [CTO_EFICIENCIA] IS NULL)" +
+                " OR ([CTO_EFICIENCIA] = @Original_CTO_EFICIENCIA)) AND ((@IsNull_CTO_COSTOHORA =" +
+                " 1 AND [CTO_COSTOHORA] IS NULL) OR ([CTO_COSTOHORA] = @Original_CTO_COSTOHORA)) " +
+                "AND ((@IsNull_CTO_COSTOCICLO = 1 AND [CTO_COSTOCICLO] IS NULL) OR ([CTO_COSTOCIC" +
+                "LO] = @Original_CTO_COSTOCICLO)) AND ((@IsNull_CTO_CAPACIDADUNIDADHORA = 1 AND [" +
+                "CTO_CAPACIDADUNIDADHORA] IS NULL) OR ([CTO_CAPACIDADUNIDADHORA] = @Original_CTO_" +
+                "CAPACIDADUNIDADHORA)));\r\nSELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CT" +
+                "O_HORASTRABAJONORMAL, CTO_HORASTRABAJOEXTENDIDO, CTO_ACTIVO, CTO_DESCRIPCION, CT" +
+                "O_CAPACIDADCICLO, CTO_HORASCICLO, CTO_TIEMPOANTES, CTO_TIEMPODESPUES, CTO_EFICIE" +
+                "NCIA, CTO_COSTOHORA, CTO_COSTOCICLO, CTO_CAPACIDADUNIDADHORA FROM CENTROS_TRABAJ" +
+                "OS WHERE (CTO_CODIGO = @CTO_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_TIPO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_TIPO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_HORASTRABAJONORMAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_HORASTRABAJONORMAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_HORASTRABAJOEXTENDIDO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_HORASTRABAJOEXTENDIDO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CAPACIDADCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_CAPACIDADCICLO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_HORASCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASCICLO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_TIEMPOANTES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPOANTES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_TIEMPODESPUES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPODESPUES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_EFICIENCIA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 2, "CTO_EFICIENCIA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_COSTOHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_COSTOHORA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_COSTOCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_COSTOCICLO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CAPACIDADUNIDADHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_CAPACIDADUNIDADHORA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SEC_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SEC_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "SEC_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_TIPO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_TIPO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_TIPO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_TIPO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_HORASTRABAJONORMAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_HORASTRABAJONORMAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_HORASTRABAJONORMAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_HORASTRABAJONORMAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_HORASTRABAJOEXTENDIDO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_HORASTRABAJOEXTENDIDO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_HORASTRABAJOEXTENDIDO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_HORASTRABAJOEXTENDIDO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_ACTIVO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_ACTIVO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "CTO_ACTIVO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_CAPACIDADCICLO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_CAPACIDADCICLO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CAPACIDADCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_CAPACIDADCICLO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_HORASCICLO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_HORASCICLO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_HORASCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_HORASCICLO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_TIEMPOANTES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_TIEMPOANTES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_TIEMPOANTES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPOANTES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_TIEMPODESPUES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_TIEMPODESPUES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_TIEMPODESPUES", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CTO_TIEMPODESPUES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_EFICIENCIA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_EFICIENCIA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_EFICIENCIA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 3, 2, "CTO_EFICIENCIA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_COSTOHORA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_COSTOHORA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_COSTOHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_COSTOHORA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_COSTOCICLO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_COSTOCICLO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_COSTOCICLO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_COSTOCICLO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CTO_CAPACIDADUNIDADHORA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CTO_CAPACIDADUNIDADHORA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CTO_CAPACIDADUNIDADHORA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 7, 2, "CTO_CAPACIDADUNIDADHORA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CTO_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "CTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO_HORASTRABAJOEXTENDIDO, CTO_ACTIVO, CTO_DESCRIPCION, CTO_CAPACIDADCICLO, CTO_HORASCICLO, CTO_TIEMPOANTES, CTO_TIEMPODESPUES, CTO_EFICIENCIA, CTO_COSTOHORA, CTO_COSTOCICLO, CTO_CAPACIDADUNIDADHORA FROM dbo.CENTROS_TRABAJOS";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsHojaRuta.CENTROS_TRABAJOSDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsHojaRuta.CENTROS_TRABAJOSDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsHojaRuta.CENTROS_TRABAJOSDataTable dataTable = new dsHojaRuta.CENTROS_TRABAJOSDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsHojaRuta.CENTROS_TRABAJOSDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsHojaRuta dataSet) {
+            return this.Adapter.Update(dataSet, "CENTROS_TRABAJOS");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(
+                    decimal Original_CTO_CODIGO, 
+                    string Original_CTO_NOMBRE, 
+                    global::System.Nullable<decimal> Original_SEC_CODIGO, 
+                    global::System.Nullable<decimal> Original_CTO_TIPO, 
+                    global::System.Nullable<decimal> Original_CTO_HORASTRABAJONORMAL, 
+                    global::System.Nullable<decimal> Original_CTO_HORASTRABAJOEXTENDIDO, 
+                    global::System.Nullable<decimal> Original_CTO_ACTIVO, 
+                    string Original_CTO_DESCRIPCION, 
+                    global::System.Nullable<decimal> Original_CTO_CAPACIDADCICLO, 
+                    global::System.Nullable<decimal> Original_CTO_HORASCICLO, 
+                    global::System.Nullable<decimal> Original_CTO_TIEMPOANTES, 
+                    global::System.Nullable<decimal> Original_CTO_TIEMPODESPUES, 
+                    global::System.Nullable<decimal> Original_CTO_EFICIENCIA, 
+                    global::System.Nullable<decimal> Original_CTO_COSTOHORA, 
+                    global::System.Nullable<decimal> Original_CTO_COSTOCICLO, 
+                    global::System.Nullable<decimal> Original_CTO_CAPACIDADUNIDADHORA) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_CTO_CODIGO));
+            if ((Original_CTO_NOMBRE == null)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_CTO_NOMBRE));
+            }
+            if ((Original_SEC_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_SEC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_TIPO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((decimal)(Original_CTO_TIPO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_HORASTRABAJONORMAL.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((decimal)(Original_CTO_HORASTRABAJONORMAL.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_HORASTRABAJOEXTENDIDO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((decimal)(Original_CTO_HORASTRABAJOEXTENDIDO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_ACTIVO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((decimal)(Original_CTO_ACTIVO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_DESCRIPCION == null)) {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((string)(Original_CTO_DESCRIPCION));
+            }
+            if ((Original_CTO_CAPACIDADCICLO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((decimal)(Original_CTO_CAPACIDADCICLO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_HORASCICLO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((decimal)(Original_CTO_HORASCICLO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_TIEMPOANTES.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((decimal)(Original_CTO_TIEMPOANTES.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_TIEMPODESPUES.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[22].Value = ((decimal)(Original_CTO_TIEMPODESPUES.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[22].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_EFICIENCIA.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[24].Value = ((decimal)(Original_CTO_EFICIENCIA.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_COSTOHORA.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[26].Value = ((decimal)(Original_CTO_COSTOHORA.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_COSTOCICLO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[28].Value = ((decimal)(Original_CTO_COSTOCICLO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_CAPACIDADUNIDADHORA.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[29].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[30].Value = ((decimal)(Original_CTO_CAPACIDADUNIDADHORA.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[29].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[30].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string CTO_NOMBRE, global::System.Nullable<decimal> SEC_CODIGO, global::System.Nullable<decimal> CTO_TIPO, global::System.Nullable<decimal> CTO_HORASTRABAJONORMAL, global::System.Nullable<decimal> CTO_HORASTRABAJOEXTENDIDO, global::System.Nullable<decimal> CTO_ACTIVO, string CTO_DESCRIPCION, global::System.Nullable<decimal> CTO_CAPACIDADCICLO, global::System.Nullable<decimal> CTO_HORASCICLO, global::System.Nullable<decimal> CTO_TIEMPOANTES, global::System.Nullable<decimal> CTO_TIEMPODESPUES, global::System.Nullable<decimal> CTO_EFICIENCIA, global::System.Nullable<decimal> CTO_COSTOHORA, global::System.Nullable<decimal> CTO_COSTOCICLO, global::System.Nullable<decimal> CTO_CAPACIDADUNIDADHORA) {
+            if ((CTO_NOMBRE == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(CTO_NOMBRE));
+            }
+            if ((SEC_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(SEC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_TIPO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(CTO_TIPO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_HORASTRABAJONORMAL.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(CTO_HORASTRABAJONORMAL.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_HORASTRABAJOEXTENDIDO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(CTO_HORASTRABAJOEXTENDIDO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_ACTIVO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(CTO_ACTIVO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_DESCRIPCION == null)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(CTO_DESCRIPCION));
+            }
+            if ((CTO_CAPACIDADCICLO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(CTO_CAPACIDADCICLO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_HORASCICLO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(CTO_HORASCICLO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_TIEMPOANTES.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(CTO_TIEMPOANTES.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_TIEMPODESPUES.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((decimal)(CTO_TIEMPODESPUES.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_EFICIENCIA.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[11].Value = ((decimal)(CTO_EFICIENCIA.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_COSTOHORA.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[12].Value = ((decimal)(CTO_COSTOHORA.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_COSTOCICLO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[13].Value = ((decimal)(CTO_COSTOCICLO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_CAPACIDADUNIDADHORA.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[14].Value = ((decimal)(CTO_CAPACIDADUNIDADHORA.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string CTO_NOMBRE, 
+                    global::System.Nullable<decimal> SEC_CODIGO, 
+                    global::System.Nullable<decimal> CTO_TIPO, 
+                    global::System.Nullable<decimal> CTO_HORASTRABAJONORMAL, 
+                    global::System.Nullable<decimal> CTO_HORASTRABAJOEXTENDIDO, 
+                    global::System.Nullable<decimal> CTO_ACTIVO, 
+                    string CTO_DESCRIPCION, 
+                    global::System.Nullable<decimal> CTO_CAPACIDADCICLO, 
+                    global::System.Nullable<decimal> CTO_HORASCICLO, 
+                    global::System.Nullable<decimal> CTO_TIEMPOANTES, 
+                    global::System.Nullable<decimal> CTO_TIEMPODESPUES, 
+                    global::System.Nullable<decimal> CTO_EFICIENCIA, 
+                    global::System.Nullable<decimal> CTO_COSTOHORA, 
+                    global::System.Nullable<decimal> CTO_COSTOCICLO, 
+                    global::System.Nullable<decimal> CTO_CAPACIDADUNIDADHORA, 
+                    decimal Original_CTO_CODIGO, 
+                    string Original_CTO_NOMBRE, 
+                    global::System.Nullable<decimal> Original_SEC_CODIGO, 
+                    global::System.Nullable<decimal> Original_CTO_TIPO, 
+                    global::System.Nullable<decimal> Original_CTO_HORASTRABAJONORMAL, 
+                    global::System.Nullable<decimal> Original_CTO_HORASTRABAJOEXTENDIDO, 
+                    global::System.Nullable<decimal> Original_CTO_ACTIVO, 
+                    string Original_CTO_DESCRIPCION, 
+                    global::System.Nullable<decimal> Original_CTO_CAPACIDADCICLO, 
+                    global::System.Nullable<decimal> Original_CTO_HORASCICLO, 
+                    global::System.Nullable<decimal> Original_CTO_TIEMPOANTES, 
+                    global::System.Nullable<decimal> Original_CTO_TIEMPODESPUES, 
+                    global::System.Nullable<decimal> Original_CTO_EFICIENCIA, 
+                    global::System.Nullable<decimal> Original_CTO_COSTOHORA, 
+                    global::System.Nullable<decimal> Original_CTO_COSTOCICLO, 
+                    global::System.Nullable<decimal> Original_CTO_CAPACIDADUNIDADHORA, 
+                    decimal CTO_CODIGO) {
+            if ((CTO_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(CTO_NOMBRE));
+            }
+            if ((SEC_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(SEC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_TIPO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(CTO_TIPO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_HORASTRABAJONORMAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(CTO_HORASTRABAJONORMAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_HORASTRABAJOEXTENDIDO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(CTO_HORASTRABAJOEXTENDIDO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_ACTIVO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(CTO_ACTIVO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(CTO_DESCRIPCION));
+            }
+            if ((CTO_CAPACIDADCICLO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(CTO_CAPACIDADCICLO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_HORASCICLO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(CTO_HORASCICLO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_TIEMPOANTES.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(CTO_TIEMPOANTES.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_TIEMPODESPUES.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(CTO_TIEMPODESPUES.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_EFICIENCIA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(CTO_EFICIENCIA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_COSTOHORA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(CTO_COSTOHORA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_COSTOCICLO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(CTO_COSTOCICLO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            if ((CTO_CAPACIDADUNIDADHORA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(CTO_CAPACIDADUNIDADHORA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((decimal)(Original_CTO_CODIGO));
+            if ((Original_CTO_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_CTO_NOMBRE));
+            }
+            if ((Original_SEC_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((decimal)(Original_SEC_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_TIPO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((decimal)(Original_CTO_TIPO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_HORASTRABAJONORMAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((decimal)(Original_CTO_HORASTRABAJONORMAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_HORASTRABAJOEXTENDIDO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((decimal)(Original_CTO_HORASTRABAJOEXTENDIDO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_ACTIVO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((decimal)(Original_CTO_ACTIVO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((string)(Original_CTO_DESCRIPCION));
+            }
+            if ((Original_CTO_CAPACIDADCICLO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((decimal)(Original_CTO_CAPACIDADCICLO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[31].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_HORASCICLO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((decimal)(Original_CTO_HORASCICLO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_TIEMPOANTES.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((decimal)(Original_CTO_TIEMPOANTES.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[35].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_TIEMPODESPUES.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((decimal)(Original_CTO_TIEMPODESPUES.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[37].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_EFICIENCIA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[39].Value = ((decimal)(Original_CTO_EFICIENCIA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[39].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_COSTOHORA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[40].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[41].Value = ((decimal)(Original_CTO_COSTOHORA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[40].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[41].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_COSTOCICLO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[42].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[43].Value = ((decimal)(Original_CTO_COSTOCICLO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[42].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[43].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CTO_CAPACIDADUNIDADHORA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[44].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[45].Value = ((decimal)(Original_CTO_CAPACIDADUNIDADHORA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[44].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[45].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[46].Value = ((decimal)(CTO_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string CTO_NOMBRE, 
+                    global::System.Nullable<decimal> SEC_CODIGO, 
+                    global::System.Nullable<decimal> CTO_TIPO, 
+                    global::System.Nullable<decimal> CTO_HORASTRABAJONORMAL, 
+                    global::System.Nullable<decimal> CTO_HORASTRABAJOEXTENDIDO, 
+                    global::System.Nullable<decimal> CTO_ACTIVO, 
+                    string CTO_DESCRIPCION, 
+                    global::System.Nullable<decimal> CTO_CAPACIDADCICLO, 
+                    global::System.Nullable<decimal> CTO_HORASCICLO, 
+                    global::System.Nullable<decimal> CTO_TIEMPOANTES, 
+                    global::System.Nullable<decimal> CTO_TIEMPODESPUES, 
+                    global::System.Nullable<decimal> CTO_EFICIENCIA, 
+                    global::System.Nullable<decimal> CTO_COSTOHORA, 
+                    global::System.Nullable<decimal> CTO_COSTOCICLO, 
+                    global::System.Nullable<decimal> CTO_CAPACIDADUNIDADHORA, 
+                    decimal Original_CTO_CODIGO, 
+                    string Original_CTO_NOMBRE, 
+                    global::System.Nullable<decimal> Original_SEC_CODIGO, 
+                    global::System.Nullable<decimal> Original_CTO_TIPO, 
+                    global::System.Nullable<decimal> Original_CTO_HORASTRABAJONORMAL, 
+                    global::System.Nullable<decimal> Original_CTO_HORASTRABAJOEXTENDIDO, 
+                    global::System.Nullable<decimal> Original_CTO_ACTIVO, 
+                    string Original_CTO_DESCRIPCION, 
+                    global::System.Nullable<decimal> Original_CTO_CAPACIDADCICLO, 
+                    global::System.Nullable<decimal> Original_CTO_HORASCICLO, 
+                    global::System.Nullable<decimal> Original_CTO_TIEMPOANTES, 
+                    global::System.Nullable<decimal> Original_CTO_TIEMPODESPUES, 
+                    global::System.Nullable<decimal> Original_CTO_EFICIENCIA, 
+                    global::System.Nullable<decimal> Original_CTO_COSTOHORA, 
+                    global::System.Nullable<decimal> Original_CTO_COSTOCICLO, 
+                    global::System.Nullable<decimal> Original_CTO_CAPACIDADUNIDADHORA) {
+            return this.Update(CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO_HORASTRABAJOEXTENDIDO, CTO_ACTIVO, CTO_DESCRIPCION, CTO_CAPACIDADCICLO, CTO_HORASCICLO, CTO_TIEMPOANTES, CTO_TIEMPODESPUES, CTO_EFICIENCIA, CTO_COSTOHORA, CTO_COSTOCICLO, CTO_CAPACIDADUNIDADHORA, Original_CTO_CODIGO, Original_CTO_NOMBRE, Original_SEC_CODIGO, Original_CTO_TIPO, Original_CTO_HORASTRABAJONORMAL, Original_CTO_HORASTRABAJOEXTENDIDO, Original_CTO_ACTIVO, Original_CTO_DESCRIPCION, Original_CTO_CAPACIDADCICLO, Original_CTO_HORASCICLO, Original_CTO_TIEMPOANTES, Original_CTO_TIEMPODESPUES, Original_CTO_EFICIENCIA, Original_CTO_COSTOHORA, Original_CTO_COSTOCICLO, Original_CTO_CAPACIDADUNIDADHORA, Original_CTO_CODIGO);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -9294,8 +9294,6 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
         
         private TURNOSXCENTROTRABAJOTableAdapter _tURNOSXCENTROTRABAJOTableAdapter;
         
-        private CENTROS_TRABAJOSTableAdapter _cENTROS_TRABAJOSTableAdapter;
-        
         private OPERACIONESTableAdapter _oPERACIONESTableAdapter;
         
         private DETALLE_HOJARUTATableAdapter _dETALLE_HOJARUTATableAdapter;
@@ -9305,6 +9303,8 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
         private UBICACIONES_STOCKTableAdapter _uBICACIONES_STOCKTableAdapter;
         
         private CONTENIDO_UBICACION_STOCKTableAdapter _cONTENIDO_UBICACION_STOCKTableAdapter;
+        
+        private CENTROS_TRABAJOSTableAdapter _cENTROS_TRABAJOSTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -9356,19 +9356,6 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
             }
             set {
                 this._tURNOSXCENTROTRABAJOTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
-        public CENTROS_TRABAJOSTableAdapter CENTROS_TRABAJOSTableAdapter {
-            get {
-                return this._cENTROS_TRABAJOSTableAdapter;
-            }
-            set {
-                this._cENTROS_TRABAJOSTableAdapter = value;
             }
         }
         
@@ -9438,6 +9425,19 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public CENTROS_TRABAJOSTableAdapter CENTROS_TRABAJOSTableAdapter {
+            get {
+                return this._cENTROS_TRABAJOSTableAdapter;
+            }
+            set {
+                this._cENTROS_TRABAJOSTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -9466,10 +9466,6 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                             && (this._tURNOSXCENTROTRABAJOTableAdapter.Connection != null))) {
                     return this._tURNOSXCENTROTRABAJOTableAdapter.Connection;
                 }
-                if (((this._cENTROS_TRABAJOSTableAdapter != null) 
-                            && (this._cENTROS_TRABAJOSTableAdapter.Connection != null))) {
-                    return this._cENTROS_TRABAJOSTableAdapter.Connection;
-                }
                 if (((this._oPERACIONESTableAdapter != null) 
                             && (this._oPERACIONESTableAdapter.Connection != null))) {
                     return this._oPERACIONESTableAdapter.Connection;
@@ -9489,6 +9485,10 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                 if (((this._cONTENIDO_UBICACION_STOCKTableAdapter != null) 
                             && (this._cONTENIDO_UBICACION_STOCKTableAdapter.Connection != null))) {
                     return this._cONTENIDO_UBICACION_STOCKTableAdapter.Connection;
+                }
+                if (((this._cENTROS_TRABAJOSTableAdapter != null) 
+                            && (this._cENTROS_TRABAJOSTableAdapter.Connection != null))) {
+                    return this._cENTROS_TRABAJOSTableAdapter.Connection;
                 }
                 return null;
             }
@@ -9511,9 +9511,6 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                 if ((this._tURNOSXCENTROTRABAJOTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._oPERACIONESTableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -9527,6 +9524,9 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                     count = (count + 1);
                 }
                 if ((this._cONTENIDO_UBICACION_STOCKTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -9548,15 +9548,6 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._sECTORESTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SECTORES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._sECTORESTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._uBICACIONES_STOCKTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -9567,12 +9558,30 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._sECTORESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SECTORES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._sECTORESTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._hOJAS_RUTATableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.HOJAS_RUTA.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._hOJAS_RUTATableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.CENTROS_TRABAJOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._cENTROS_TRABAJOSTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -9591,15 +9600,6 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._oPERACIONESTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.CENTROS_TRABAJOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._cENTROS_TRABAJOSTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -9638,14 +9638,6 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._sECTORESTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SECTORES.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._sECTORESTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._uBICACIONES_STOCKTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -9655,11 +9647,27 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._sECTORESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SECTORES.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._sECTORESTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._hOJAS_RUTATableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.HOJAS_RUTA.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._hOJAS_RUTATableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.CENTROS_TRABAJOS.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._cENTROS_TRABAJOSTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -9676,14 +9684,6 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._oPERACIONESTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.CENTROS_TRABAJOS.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._cENTROS_TRABAJOSTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -9728,14 +9728,6 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.CENTROS_TRABAJOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._cENTROS_TRABAJOSTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._oPERACIONESTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.OPERACIONES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -9752,11 +9744,27 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.CENTROS_TRABAJOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._cENTROS_TRABAJOSTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._hOJAS_RUTATableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.HOJAS_RUTA.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._hOJAS_RUTATableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._sECTORESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SECTORES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._sECTORESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -9766,14 +9774,6 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                             && (0 < deletedRows.Length))) {
                     this.SortSelfReferenceRows(deletedRows, dataSet.Relations["FK_UBICACIONES_STOCK_UBICACION_STOCK"], true);
                     result = (result + this._uBICACIONES_STOCKTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._sECTORESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SECTORES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._sECTORESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -9837,11 +9837,6 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._cENTROS_TRABAJOSTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._cENTROS_TRABAJOSTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._oPERACIONESTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._oPERACIONESTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -9864,6 +9859,11 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
             }
             if (((this._cONTENIDO_UBICACION_STOCKTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._cONTENIDO_UBICACION_STOCKTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._cENTROS_TRABAJOSTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._cENTROS_TRABAJOSTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -9926,15 +9926,6 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                         adaptersWithAcceptChangesDuringUpdate.Add(this._tURNOSXCENTROTRABAJOTableAdapter.Adapter);
                     }
                 }
-                if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
-                    revertConnections.Add(this._cENTROS_TRABAJOSTableAdapter, this._cENTROS_TRABAJOSTableAdapter.Connection);
-                    this._cENTROS_TRABAJOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._cENTROS_TRABAJOSTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._cENTROS_TRABAJOSTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._cENTROS_TRABAJOSTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._cENTROS_TRABAJOSTableAdapter.Adapter);
-                    }
-                }
                 if ((this._oPERACIONESTableAdapter != null)) {
                     revertConnections.Add(this._oPERACIONESTableAdapter, this._oPERACIONESTableAdapter.Connection);
                     this._oPERACIONESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -9978,6 +9969,15 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                     if (this._cONTENIDO_UBICACION_STOCKTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._cONTENIDO_UBICACION_STOCKTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._cONTENIDO_UBICACION_STOCKTableAdapter.Adapter);
+                    }
+                }
+                if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
+                    revertConnections.Add(this._cENTROS_TRABAJOSTableAdapter, this._cENTROS_TRABAJOSTableAdapter.Connection);
+                    this._cENTROS_TRABAJOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._cENTROS_TRABAJOSTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._cENTROS_TRABAJOSTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._cENTROS_TRABAJOSTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._cENTROS_TRABAJOSTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -10050,10 +10050,6 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                     this._tURNOSXCENTROTRABAJOTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._tURNOSXCENTROTRABAJOTableAdapter]));
                     this._tURNOSXCENTROTRABAJOTableAdapter.Transaction = null;
                 }
-                if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
-                    this._cENTROS_TRABAJOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cENTROS_TRABAJOSTableAdapter]));
-                    this._cENTROS_TRABAJOSTableAdapter.Transaction = null;
-                }
                 if ((this._oPERACIONESTableAdapter != null)) {
                     this._oPERACIONESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._oPERACIONESTableAdapter]));
                     this._oPERACIONESTableAdapter.Transaction = null;
@@ -10073,6 +10069,10 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
                 if ((this._cONTENIDO_UBICACION_STOCKTableAdapter != null)) {
                     this._cONTENIDO_UBICACION_STOCKTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cONTENIDO_UBICACION_STOCKTableAdapter]));
                     this._cONTENIDO_UBICACION_STOCKTableAdapter.Transaction = null;
+                }
+                if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
+                    this._cENTROS_TRABAJOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cENTROS_TRABAJOSTableAdapter]));
+                    this._cENTROS_TRABAJOSTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
