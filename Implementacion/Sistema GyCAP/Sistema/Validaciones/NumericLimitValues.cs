@@ -89,7 +89,7 @@ namespace GyCAP.UI.Sistema.Validaciones
                 this.onErrorMessage = string.Concat("El rango del valor es: ",
                     string.Concat(MinValue, (this.margenInferior == IncludeExclude.Inclusivo) ? " inclusivo" : " exclusivo"),
                     " a ",
-                    string.Concat(MaxValue, (this.margenSuperior == IncludeExclude.Exclusivo) ? " inclusivo" : " exclusivo."));
+                    string.Concat(MaxValue, (this.margenSuperior == IncludeExclude.Inclusivo) ? " inclusivo" : " exclusivo."));
             }
             else
             {

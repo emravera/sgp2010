@@ -333,7 +333,6 @@
             // 
             // nudCostoCiclo
             // 
-            this.nudCostoCiclo.CausesValidation = false;
             this.nudCostoCiclo.DecimalPlaces = 2;
             this.nudCostoCiclo.Increment = new decimal(new int[] {
             1,
@@ -342,10 +341,10 @@
             65536});
             this.nudCostoCiclo.Location = new System.Drawing.Point(114, 27);
             this.nudCostoCiclo.Maximum = new decimal(new int[] {
-            99999,
+            100000,
             0,
             0,
-            131072});
+            0});
             this.nudCostoCiclo.Name = "nudCostoCiclo";
             this.nudCostoCiclo.Size = new System.Drawing.Size(120, 21);
             this.nudCostoCiclo.TabIndex = 21;
@@ -354,7 +353,6 @@
             // 
             // nudCostoHora
             // 
-            this.nudCostoHora.CausesValidation = false;
             this.nudCostoHora.DecimalPlaces = 2;
             this.nudCostoHora.Increment = new decimal(new int[] {
             1,
@@ -363,10 +361,10 @@
             65536});
             this.nudCostoHora.Location = new System.Drawing.Point(369, 27);
             this.nudCostoHora.Maximum = new decimal(new int[] {
-            99999,
+            100000,
             0,
             0,
-            131072});
+            0});
             this.nudCostoHora.Name = "nudCostoHora";
             this.nudCostoHora.Size = new System.Drawing.Size(120, 21);
             this.nudCostoHora.TabIndex = 22;
@@ -414,7 +412,6 @@
             // 
             // nudCapacidadUnidadHora
             // 
-            this.nudCapacidadUnidadHora.CausesValidation = false;
             this.nudCapacidadUnidadHora.DecimalPlaces = 2;
             this.nudCapacidadUnidadHora.Increment = new decimal(new int[] {
             1,
@@ -423,10 +420,10 @@
             65536});
             this.nudCapacidadUnidadHora.Location = new System.Drawing.Point(434, 27);
             this.nudCapacidadUnidadHora.Maximum = new decimal(new int[] {
-            99999,
+            100000,
             0,
             0,
-            131072});
+            0});
             this.nudCapacidadUnidadHora.Name = "nudCapacidadUnidadHora";
             this.nudCapacidadUnidadHora.Size = new System.Drawing.Size(107, 21);
             this.nudCapacidadUnidadHora.TabIndex = 18;
@@ -443,7 +440,6 @@
             // 
             // nudTiempoDespues
             // 
-            this.nudTiempoDespues.CausesValidation = false;
             this.nudTiempoDespues.DecimalPlaces = 2;
             this.nudTiempoDespues.Increment = new decimal(new int[] {
             1,
@@ -452,10 +448,10 @@
             65536});
             this.nudTiempoDespues.Location = new System.Drawing.Point(434, 83);
             this.nudTiempoDespues.Maximum = new decimal(new int[] {
-            99999,
+            100000,
             0,
             0,
-            131072});
+            0});
             this.nudTiempoDespues.Name = "nudTiempoDespues";
             this.nudTiempoDespues.Size = new System.Drawing.Size(107, 21);
             this.nudTiempoDespues.TabIndex = 20;
@@ -464,7 +460,6 @@
             // 
             // nudTiempoAntes
             // 
-            this.nudTiempoAntes.CausesValidation = false;
             this.nudTiempoAntes.DecimalPlaces = 2;
             this.nudTiempoAntes.Increment = new decimal(new int[] {
             1,
@@ -473,10 +468,10 @@
             65536});
             this.nudTiempoAntes.Location = new System.Drawing.Point(434, 54);
             this.nudTiempoAntes.Maximum = new decimal(new int[] {
-            99999,
+            100000,
             0,
             0,
-            131072});
+            0});
             this.nudTiempoAntes.Name = "nudTiempoAntes";
             this.nudTiempoAntes.Size = new System.Drawing.Size(107, 21);
             this.nudTiempoAntes.TabIndex = 19;
@@ -485,7 +480,6 @@
             // 
             // nudCapacidadCiclo
             // 
-            this.nudCapacidadCiclo.CausesValidation = false;
             this.nudCapacidadCiclo.DecimalPlaces = 2;
             this.nudCapacidadCiclo.Increment = new decimal(new int[] {
             1,
@@ -494,10 +488,10 @@
             65536});
             this.nudCapacidadCiclo.Location = new System.Drawing.Point(121, 25);
             this.nudCapacidadCiclo.Maximum = new decimal(new int[] {
-            99999,
+            100000,
             0,
             0,
-            131072});
+            0});
             this.nudCapacidadCiclo.Name = "nudCapacidadCiclo";
             this.nudCapacidadCiclo.Size = new System.Drawing.Size(120, 21);
             this.nudCapacidadCiclo.TabIndex = 15;
@@ -506,7 +500,6 @@
             // 
             // nudEficiencia
             // 
-            this.nudEficiencia.CausesValidation = false;
             this.nudEficiencia.DecimalPlaces = 2;
             this.nudEficiencia.Increment = new decimal(new int[] {
             1,
@@ -515,7 +508,7 @@
             65536});
             this.nudEficiencia.Location = new System.Drawing.Point(121, 83);
             this.nudEficiencia.Maximum = new decimal(new int[] {
-            1,
+            100000,
             0,
             0,
             0});
@@ -527,7 +520,6 @@
             // 
             // nudTiempoCiclo
             // 
-            this.nudTiempoCiclo.CausesValidation = false;
             this.nudTiempoCiclo.DecimalPlaces = 2;
             this.nudTiempoCiclo.Increment = new decimal(new int[] {
             1,
@@ -536,10 +528,10 @@
             65536});
             this.nudTiempoCiclo.Location = new System.Drawing.Point(121, 54);
             this.nudTiempoCiclo.Maximum = new decimal(new int[] {
-            99999,
+            100000,
             0,
             0,
-            131072});
+            0});
             this.nudTiempoCiclo.Name = "nudTiempoCiclo";
             this.nudTiempoCiclo.Size = new System.Drawing.Size(120, 21);
             this.nudTiempoCiclo.TabIndex = 16;
@@ -786,7 +778,7 @@
             65536});
             this.nudHorasNormal.Location = new System.Drawing.Point(446, 24);
             this.nudHorasNormal.Maximum = new decimal(new int[] {
-            10000,
+            100000,
             0,
             0,
             0});
@@ -805,10 +797,10 @@
             65536});
             this.nudHorasExtendido.Location = new System.Drawing.Point(446, 53);
             this.nudHorasExtendido.Maximum = new decimal(new int[] {
-            99999,
+            100000,
             0,
             0,
-            131072});
+            0});
             this.nudHorasExtendido.Name = "nudHorasExtendido";
             this.nudHorasExtendido.Size = new System.Drawing.Size(95, 21);
             this.nudHorasExtendido.TabIndex = 12;

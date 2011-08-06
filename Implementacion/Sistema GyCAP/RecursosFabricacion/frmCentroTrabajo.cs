@@ -569,7 +569,16 @@ namespace GyCAP.UI.RecursosFabricacion
             dvTurnoTrabajo = new DataView(dsCentroTrabajo.TURNOS_TRABAJO);
             dvTurnoTrabajo.Sort = "TUR_NOMBRE ASC";
 
-            nudHorasNormal.Tag = new NumericLimitValues("0,01", "999,99");
+            nudHorasNormal.Tag = new NumericLimitValues("0,01", "99999,99");
+            nudHorasExtendido.Tag = new NumericLimitValues("0,01", "99999,99");
+            nudCapacidadCiclo.Tag = new NumericLimitValues("0", "99999,99");
+            nudCapacidadUnidadHora.Tag = new NumericLimitValues("0", "99999,99");
+            nudCostoCiclo.Tag = new NumericLimitValues("0", "999,99");
+            nudCostoHora.Tag = new NumericLimitValues("0", "999,99");            
+            nudEficiencia.Tag = new NumericLimitValues("0", "1");            
+            nudTiempoCiclo.Tag = new NumericLimitValues("0", "999,99");
+            nudTiempoAntes.Tag = new NumericLimitValues("0", "999,99");
+            nudTiempoDespues.Tag = new NumericLimitValues("0", "999,99");
         }
 
         private void CargarTurnos()
