@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
+using GyCAP.UI.Sistema.Validaciones;
 
 namespace GyCAP.UI.PlanificacionProduccion
 {
@@ -17,9 +18,10 @@ namespace GyCAP.UI.PlanificacionProduccion
         private DataView dvListaPlanes, dvListaDetalle, dvChAnios, dvComboEstimaciones;
         private enum estadoUI { inicio, nuevo, buscar, modificar, calcularPlanificacion };
         private static estadoUI estadoActual;
-        private static decimal seriesGraficos, totalsistema=0, totalActual;
+        private static decimal seriesGraficos, totalsistema = 0, totalActual;
 
         #region Inicio
+
         public frmPlanAnual()
         {
             InitializeComponent();
@@ -64,7 +66,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns["DPAN_MES"].DataPropertyName = "DPAN_MES";
             dgvDetalle.Columns["DPAN_CANTIDADMES"].DataPropertyName = "DPAN_CANTIDADMES";
             
-
             //Seteamos el modo de tamaño de las columnas
             dgvDetalle.Columns[0].Visible = false;
             dgvDetalle.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -86,6 +87,8 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Seteamos los maxlength de los controles y los tipos de numeros
             txtAnio.MaxLength = 4;
             txtAnioBuscar.MaxLength = 4;
+
+            //Configuracion de los numeric
             numAdelantamiento.Increment = 1;
             numCapacidadProducción.Increment = 1;
             numCapacidadStock.Increment = 1;
@@ -95,6 +98,28 @@ namespace GyCAP.UI.PlanificacionProduccion
             numCostoVariable.DecimalPlaces = 2;
             numPrecioVenta.Increment =Convert.ToDecimal(0.01);
             numPrecioVenta.DecimalPlaces = 2;
+
+            //Configuracion de limites
+            numAdelantamiento.Tag = new Sistema.Validaciones.NumericLimitValues("0", NumericLimitValues.IncludeExclude.Inclusivo, "52", NumericLimitValues.IncludeExclude.Inclusivo);
+            numCapacidadProducción.Tag = new Sistema.Validaciones.NumericLimitValues("0", NumericLimitValues.IncludeExclude.Inclusivo, "9000000", NumericLimitValues.IncludeExclude.Inclusivo);
+            numCapacidadStock.Tag = new Sistema.Validaciones.NumericLimitValues("0", NumericLimitValues.IncludeExclude.Inclusivo, "9000000", NumericLimitValues.IncludeExclude.Inclusivo);
+            numCostofijo.Tag = new Sistema.Validaciones.NumericLimitValues("0", NumericLimitValues.IncludeExclude.Inclusivo, "9000000", NumericLimitValues.IncludeExclude.Inclusivo);
+            numCostoVariable.Tag = new Sistema.Validaciones.NumericLimitValues("0", NumericLimitValues.IncludeExclude.Inclusivo, "9000000", NumericLimitValues.IncludeExclude.Inclusivo);
+            numPrecioVenta.Tag = new Sistema.Validaciones.NumericLimitValues("0", NumericLimitValues.IncludeExclude.Inclusivo, "9000000", NumericLimitValues.IncludeExclude.Inclusivo);
+
+            //Limites de cantidades en los meses
+            numEnero.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numFebrero.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numMarzo.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numAbril.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numMayo.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numJunio.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numJulio.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numAgosto.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numSeptiembre.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numOctubre.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numNoviembre.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numDiciembre.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
             
             //Seteamos el estado de la interface
             SetInterface(estadoUI.inicio);

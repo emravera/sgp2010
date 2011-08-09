@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.UI.Sistema.Validaciones;
 
 namespace GyCAP.UI.PlanificacionProduccion
 {
@@ -233,6 +234,10 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Seteamos los maxlength de los controles y los tipos de numeros
             txtAnioBuscar.MaxLength = 4;
 
+            //Seteamos los valores máximos de los numeric
+            numPorcentaje.Tag = new Sistema.Validaciones.NumericLimitValues("0", NumericLimitValues.IncludeExclude.Inclusivo, "100", NumericLimitValues.IncludeExclude.Inclusivo);
+            numUnidades.Tag = new Sistema.Validaciones.NumericLimitValues("0", NumericLimitValues.IncludeExclude.Inclusivo, "9000000", NumericLimitValues.IncludeExclude.Inclusivo);
+
             //Setemoa el valor de la interface
             SetInterface(estadoUI.inicio);
         }
@@ -388,6 +393,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         #endregion
 
         #region Controles
+       
         //Detalle de Planes Mensuales Busqueda
         private void dgvDetalle_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {

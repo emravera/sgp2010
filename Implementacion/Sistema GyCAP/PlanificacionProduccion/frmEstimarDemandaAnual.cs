@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections;
+using GyCAP.UI.Sistema.Validaciones;
 
 namespace GyCAP.UI.PlanificacionProduccion
 {
@@ -21,6 +22,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private static decimal totalsistema = 0, totalActual, seriesGraficos;
 
         #region Inicio
+
         public frmEstimarDemandaAnual()
         {
             InitializeComponent();
@@ -80,12 +82,29 @@ namespace GyCAP.UI.PlanificacionProduccion
             txtIdentificacion.MaxLength = 80;
             txtDenominacionHistorico.MaxLength = 80;
             txtAnio.MaxLength = 4;
+            
             numCrecimiento.Increment =Convert.ToDecimal(0.01);
             numCrecimiento.DecimalPlaces = 2;
-           
+            
+            //Seteamos los límites
+            numCrecimiento.Tag = new Sistema.Validaciones.NumericLimitValues("0", "1000");
+            
+            //Limites de cantidades en los meses
+            numEnero.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numFebrero.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numMarzo.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numAbril.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numMayo.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numJunio.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numJulio.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numAgosto.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numSeptiembre.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numOctubre.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numNoviembre.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+            numDiciembre.Tag = new Sistema.Validaciones.NumericLimitValues("0", "5000000");
+
             //Seteo el estado de inicio de la pantalla
             SetInterface(estadoUI.inicio);
-
         }
         #endregion
 

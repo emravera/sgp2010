@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.UI.Sistema.Validaciones;
 
 namespace GyCAP.UI.EstructuraProducto
 {
@@ -106,32 +107,15 @@ namespace GyCAP.UI.EstructuraProducto
             numCantidad.DecimalPlaces = 2;
             numCosto.Increment = Convert.ToDecimal("0,01");
             numCantidad.Increment = Convert.ToDecimal("0,01");
-
+            //Seteamos los límites
+            numCantidad.Tag = new Sistema.Validaciones.NumericLimitValues("0", "1000000");
+            numCosto.Tag = new Sistema.Validaciones.NumericLimitValues("0", "1000000");
+            
             //Seteamos el estado de la interface
             SetInterface(estadoUI.inicio);                      
         }
 
-        public static frmMateriaPrimaPrincipal Instancia
-        {
-            get
-            {
-                if (_frmMateriaPrima == null || _frmMateriaPrima.IsDisposed)
-                {
-                    _frmMateriaPrima = new frmMateriaPrimaPrincipal();
-                }
-                else
-                {
-                    _frmMateriaPrima.BringToFront();
-                }
-                return _frmMateriaPrima;
-            }
-            set
-            {
-                _frmMateriaPrima = value;
-            }
-        }
-
-        #endregion
+       #endregion
         
         #region Botones Formulario
 
@@ -412,6 +396,26 @@ namespace GyCAP.UI.EstructuraProducto
 
         #region Servicios
 
+        public static frmMateriaPrimaPrincipal Instancia
+        {
+            get
+            {
+                if (_frmMateriaPrima == null || _frmMateriaPrima.IsDisposed)
+                {
+                    _frmMateriaPrima = new frmMateriaPrimaPrincipal();
+                }
+                else
+                {
+                    _frmMateriaPrima.BringToFront();
+                }
+                return _frmMateriaPrima;
+            }
+            set
+            {
+                _frmMateriaPrima = value;
+            }
+        }
+        
         private void SetInterface(estadoUI estado)
         {
             switch (estado)
@@ -606,8 +610,13 @@ namespace GyCAP.UI.EstructuraProducto
             numCantidad.Value = 0;
         }
 
-        #endregion       
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
 
+        #endregion       
+        
     }       
         
 }
