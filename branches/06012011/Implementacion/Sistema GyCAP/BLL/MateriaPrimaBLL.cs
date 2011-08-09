@@ -58,7 +58,7 @@ namespace GyCAP.BLL
         
         public static void Eliminar(int codigo)
         {
-            if (DAL.MateriaPrimaDAL.ValidarEliminar(codigo)) throw new Entidades.Excepciones.ElementoExistenteException();
+            if (DAL.MateriaPrimaDAL.ValidarEliminar(codigo)) throw new Entidades.Excepciones.ElementoEnTransaccionException();
             else DAL.MateriaPrimaDAL.Eliminar(codigo);
         }
 
@@ -68,7 +68,7 @@ namespace GyCAP.BLL
 
         public static void Actualizar(Entidades.MateriaPrima materiaPrima)
         {
-            if (DAL.MateriaPrimaDAL.EsMateriaPrima(materiaPrima)) throw new Entidades.Excepciones.ElementoExistenteException();
+            if (DAL.MateriaPrimaDAL.EsMateriaPrimaActualizar(materiaPrima)) throw new Entidades.Excepciones.ElementoExistenteException();
             else if (DAL.MateriaPrimaDAL.EsMPHojaRuta(materiaPrima)) throw new Entidades.Excepciones.ElementoEnTransaccionException();
             else DAL.MateriaPrimaDAL.Actualizar(materiaPrima);
         }

@@ -237,11 +237,11 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(243, 26);
+            this.label8.Location = new System.Drawing.Point(189, 26);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(26, 13);
+            this.label8.Size = new System.Drawing.Size(80, 13);
             this.label8.TabIndex = 2;
-            this.label8.Text = "Dia:";
+            this.label8.Text = "Dia Planificado:";
             // 
             // txtSemana
             // 

@@ -189,6 +189,28 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
         }
+
+        //Metodo que valida que no se quiera insertar algo que ya existe
+        public static bool EsMateriaPrimaActualizar(Entidades.MateriaPrima materiaPrima)
+        {
+            string sql = "SELECT count(mp_codigo) FROM MATERIAS_PRIMAS WHERE mp_nombre = @p0 and mp_codigo <> @p1";
+
+
+            object[] valorParametros = { materiaPrima.Nombre, materiaPrima.CodigoMateriaPrima };
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+        }
         //*****************************************************************************************
         //                              MODIFICAR MATERIAS PRIMAS
         //*****************************************************************************************
@@ -217,7 +239,7 @@ namespace GyCAP.DAL
             string sql = "SELECT count(ustck_origen) FROM DETALLE_HOJARUTA WHERE ustck_origen = @p0";
 
 
-            object[] valorParametros = { materiaPrima.UbicacionStock };
+            object[] valorParametros = { materiaPrima.UbicacionStock.Numero };
             try
             {
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)

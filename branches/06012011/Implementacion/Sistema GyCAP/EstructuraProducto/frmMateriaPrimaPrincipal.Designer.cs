@@ -128,6 +128,7 @@
             this.dgvLista.Size = new System.Drawing.Size(598, 254);
             this.dgvLista.TabIndex = 0;
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting_1);
+            this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // gbBusqueda
             // 
@@ -385,7 +386,7 @@
             131072});
             this.numCosto.Location = new System.Drawing.Point(153, 145);
             this.numCosto.Maximum = new decimal(new int[] {
-            1000000,
+            2000000,
             0,
             0,
             0});
@@ -473,7 +474,7 @@
             131072});
             this.numCantidad.Location = new System.Drawing.Point(314, 15);
             this.numCantidad.Maximum = new decimal(new int[] {
-            1000000,
+            2000000,
             0,
             0,
             0});

@@ -261,6 +261,7 @@
             this.dgvLista.Size = new System.Drawing.Size(596, 274);
             this.dgvLista.TabIndex = 1;
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
+            this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // groupBox1
             // 

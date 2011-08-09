@@ -374,6 +374,12 @@ namespace GyCAP.UI.GestionStock
                 }
             }
         }
+
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
         #endregion
         
         #region Pestaña Busqueda
@@ -669,7 +675,7 @@ namespace GyCAP.UI.GestionStock
                }
            }
        }
-        #endregion    
+        #endregion          
 
     }
 }

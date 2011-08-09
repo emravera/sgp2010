@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Globalization;
+using GyCAP.UI.Sistema.Validaciones;
 
 namespace GyCAP.UI.PlanificacionProduccion
 {
@@ -14,14 +15,12 @@ namespace GyCAP.UI.PlanificacionProduccion
     {
         private static frmPlanSemanal _frmPlanSemanal = null;
         private Data.dsPlanSemanal dsPlanSemanal = new GyCAP.Data.dsPlanSemanal();
-        private DataView dvListaPlanes, dvListaDetalle, dvListaDatos, dvListaPlanesMensuales;
-        private DataView dvComboPlanesAnuales, dvComboMes, dvComboSemBuscar;
-        private DataView dvComboAnio, dvComboMesDatos, dvComboSemanaDatos;
+        private DataView dvListaPlanes, dvListaDetalle, dvListaDatos, dvListaPlanesMensuales,
+        dvComboPlanesAnuales, dvComboMes, dvComboSemBuscar, dvComboAnio, dvComboMesDatos, dvComboSemanaDatos;
         private enum estadoUI { inicio, nuevo, buscar, modificar, cargaDetalle };
         private static estadoUI estadoActual;
         int codigoDetalle = -1; bool esPrimero = true; int codigoPlanSemanal = 0;
-
-        
+                
         #region Inicio
 
         public frmPlanSemanal()
@@ -180,10 +179,15 @@ namespace GyCAP.UI.PlanificacionProduccion
             dvComboAnio = new DataView(dsPlanSemanal.PLANES_ANUALES);
             cbAnio.SetDatos(dvComboAnio, "pan_codigo", "pan_anio", "Seleccione", false);
 
+            //Seteamos los valores máximos de los numeric
+            numPorcentaje.Tag = new Sistema.Validaciones.NumericLimitValues("0", NumericLimitValues.IncludeExclude.Inclusivo, "100", NumericLimitValues.IncludeExclude.Inclusivo);
+            numUnidades.Tag = new Sistema.Validaciones.NumericLimitValues("0", NumericLimitValues.IncludeExclude.Inclusivo, "9000000", NumericLimitValues.IncludeExclude.Inclusivo);
+
             //Setemoa el valor de la interface
             SetInterface(estadoUI.inicio);
 
         }
+
         #endregion
         
         #region Servicios
