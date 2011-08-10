@@ -45,7 +45,7 @@ namespace GyCAP.Entidades.Mensajes
         public enum Generos { Femenino, Masculino }
         public enum Validaciones { Seleccion, CompletarDatos, SoloEspacios, Logica }
 
-        public static string EscribirValidacion(Validaciones validacion, List<string> datos)
+        public static string EscribirValidacion(Validaciones validacion, IList<string> datos)
         {
             string mensaje = string.Empty;
             string lista = string.Empty;
@@ -80,7 +80,7 @@ namespace GyCAP.Entidades.Mensajes
             return mensaje;
         }
 
-        public static string EscribirValidacion(List<ItemValidacion> datos)
+        public static string EscribirValidacion(IList<ItemValidacion> datos)
         {
             string mensaje = string.Empty;
             string listaCompletar = string.Empty;
@@ -96,7 +96,7 @@ namespace GyCAP.Entidades.Mensajes
                         listaSeleccionar += "- " + item.Dato + "\n";                        
                         break;
                     case Validaciones.CompletarDatos:
-                        listaCompletar+= "- " + item.Dato + "\n";
+                        listaCompletar += "- " + item.Dato + "\n";
                         break;
                     case Validaciones.SoloEspacios:
                         listaEspacios += "- " + item.Dato + "\n";

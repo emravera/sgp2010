@@ -11,5 +11,17 @@ namespace GyCAP.BLL
         {
             DAL.EstadoParteDAL.ObtenerTodos(dtEstados);
         }
+
+        public static Entidades.EstadoParte AsEstadoParteEntity(Data.dsEstructuraProducto.ESTADO_PARTESRow row)
+        {
+            Entidades.EstadoParte estado = new GyCAP.Entidades.EstadoParte()
+            {
+                Codigo = Convert.ToInt32(row.PAR_CODIGO),
+                Descripcion = row.PAR_DESCRIPCION,
+                Nombre = row.PAR_NOMBRE
+            };
+
+            return estado;
+        }
     }
 }

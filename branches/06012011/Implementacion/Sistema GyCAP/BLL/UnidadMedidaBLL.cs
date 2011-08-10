@@ -66,5 +66,18 @@ namespace GyCAP.BLL
             if (EsUnidadMedida(unidadMedida)) throw new Entidades.Excepciones.ElementoExistenteException();
             DAL.UnidadMedidaDAL.Actualizar(unidadMedida);
         }
+
+        public static Entidades.UnidadMedida AsUnidadMedidaEntity(Data.dsEstructuraProducto.UNIDADES_MEDIDARow row)
+        {
+            Entidades.UnidadMedida umed = new GyCAP.Entidades.UnidadMedida()
+            {
+                Codigo = Convert.ToInt32(row.UMED_CODIGO),
+                Nombre = row.UMED_ABREVIATURA,
+                Abreviatura = row.UMED_ABREVIATURA,
+                Tipo = BLL.TipoUnidadMedidaBLL.AsTipoUnidadMedidaEntity(row.TIPOS_UNIDADES_MEDIDARow)
+            };
+
+            return umed;
+        }
     }
 }

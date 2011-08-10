@@ -200,7 +200,7 @@ namespace GyCAP.BLL
             string filtro = "estr_codigo = " + codigoEstructura + " AND part_numero_padre IS NULL";
             Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuestoInicio = (dsEstructura.COMPUESTOS_PARTES.Select(filtro) as Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])[0];
             
-            arbolEstructura.NodoRaiz.CodigoNodo = Convert.ToInt32(rowCompuestoInicio.COMP_CODIGO);
+            arbolEstructura.NodoRaiz.CodigoNodo = arbolEstructura.GetNextCodigoNodo();
             arbolEstructura.NodoRaiz.Contenido = NodoEstructura.tipoContenido.ProductoFinal;
             arbolEstructura.NodoRaiz.Compuesto = new CompuestoParte
                                                 (
@@ -241,7 +241,7 @@ namespace GyCAP.BLL
                                     new UnidadMedida() { Codigo = Convert.ToInt32(rowComp.UMED_CODIGO), Abreviatura = rowComp.UNIDADES_MEDIDARow.UMED_ABREVIATURA },
                                     new Estructura()
                                 );
-                arbolEstructura.Find(key).NodosHijos.Add(nodo);
+                arbolEstructura.Find(key, null).NodosHijos.Add(nodo);
             }
 
             return arbolEstructura;

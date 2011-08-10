@@ -16,6 +16,7 @@ namespace GyCAP.Entidades.ArbolEstructura
             this.codigoEstructura = codEstructura;
             this.nodoRaiz = new NodoEstructura();
             this.nodoRaiz.NodosHijos = new List<NodoEstructura>();
+            this.SelectedNodeCode = 0;
         }
 
         private int codigosNodo;
@@ -41,6 +42,18 @@ namespace GyCAP.Entidades.ArbolEstructura
             set { codigoEstructura = value; }
         }
 
+        private int SelectedNodeCode;
+
+        public NodoEstructura GetSelectedNode()
+        {
+            return Find(this.SelectedNodeCode, null);
+        }
+
+        public void SetSelectedNode(int codigoNodo)
+        {
+            this.SelectedNodeCode = codigoNodo;
+        }
+
         public void ClearAll()
         {
             if (nodoRaiz != null && nodoRaiz.NodosHijos != null) { nodoRaiz.NodosHijos.Clear(); }
@@ -52,14 +65,16 @@ namespace GyCAP.Entidades.ArbolEstructura
             return nodoRaiz.GetCosto();
         }        
 
-        public NodoEstructura Find(int codigo)
+        public NodoEstructura Find(int? codigoNodo, int? codigoCompuesto)
         {
-            if (this.nodoRaiz != null) { return BuscarNodo(codigo); }
+            
+            if (this.nodoRaiz != null && codigoNodo != null) { return BuscarNodoByCodigoNodo(codigoNodo); }
+            if (this.nodoRaiz != null && codigoCompuesto != null) { return BuscarNodoByCodigoCompuesto(codigoCompuesto); }
 
             return null;
         }
 
-        private NodoEstructura BuscarNodo(int codigo)
+        private NodoEstructura BuscarNodoByCodigoNodo(int? codigoNodo)
         {
             NodoEstructura nodo = null;
 
@@ -71,7 +86,29 @@ namespace GyCAP.Entidades.ArbolEstructura
                 if (abierta.Count == 0) { break; }
                 nodo = abierta.First();
                 abierta.RemoveAt(0);
-                if (nodo.CodigoNodo == codigo) { break; }
+                if (nodo.CodigoNodo == codigoNodo) { break; }
+                else
+                {
+                    abierta.AddRange(nodo.NodosHijos);
+                }
+            }
+
+            return nodo;
+        }
+
+        private NodoEstructura BuscarNodoByCodigoCompuesto(int? codigoCompuesto)
+        {
+            NodoEstructura nodo = null;
+
+            List<NodoEstructura> abierta = new List<NodoEstructura>();
+            abierta.Add(this.NodoRaiz);
+
+            while (true)
+            {
+                if (abierta.Count == 0) { break; }
+                nodo = abierta.First();
+                abierta.RemoveAt(0);
+                if (nodo.Compuesto.Codigo == codigoCompuesto) { break; }
                 else
                 {
                     abierta.AddRange(nodo.NodosHijos);
@@ -98,6 +135,41 @@ namespace GyCAP.Entidades.ArbolEstructura
             treeReturn.Nodes.Add(nodoInicio);
             treeReturn.EndUpdate();
             return treeReturn;
+        }
+
+        public IList<NodoEstructura> AsList(bool IncluirRaiz)
+        {
+            IList<NodoEstructura> lista = new List<NodoEstructura>();
+            if (IncluirRaiz) { lista.Add(nodoRaiz); }
+            return lista;
+        }
+
+        public IList<string> AddRaiz(NodoEstructura nodo)
+        {
+            IList<string> validaciones = new List<string>();
+
+            if (this.nodoRaiz.Compuesto != null) { validaciones.Add("La estructura ya contiene el producto raíz."); }
+            if (nodo.Contenido != NodoEstructura.tipoContenido.ProductoFinal) { validaciones.Add("Unicamente un producto terminado puede ser raíz"); }
+
+            this.nodoRaiz = nodo;
+
+            return validaciones;
+        }
+
+        public IList<string> AddNodo(NodoEstructura nodoHijo, int? codigoCompuestoPadre)
+        {
+            if (codigoCompuestoPadre == null) { return AddRaiz(nodoHijo); }
+
+            NodoEstructura finded = this.BuscarNodoByCodigoCompuesto(codigoCompuestoPadre);
+
+            if (finded != null)
+            {
+                return finded.AddChild(nodoHijo, false, false);
+            }
+
+            IList<string> validaciones = new List<string>();
+            validaciones.Add("El nodo padre especificado no existe en la estructura.");
+            return validaciones;
         }
     }
 }
