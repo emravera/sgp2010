@@ -77,5 +77,103 @@ namespace GyCAP.BLL
             DAL.PlanSemanalDAL.obtenerPlanesMensuales(codigoPlanAnual,dsPlanSemanal);
         }
 
+        //*************************************************************************
+        //                         Chequeo excepciones Plan Semanal
+        //**************************************************************************       
+        public static List<Entidades.ExcepcionesPlan> CheckeoExcepciones(DataTable dtDetallePlanSemanal)
+        {
+            //Defino las listas genericas a utilizar
+            List<Entidades.ExcepcionesPlan> excepciones = new List<GyCAP.Entidades.ExcepcionesPlan>();
+            List<Entidades.DetallePlanSemanal> detallePlanSemanal = new List<GyCAP.Entidades.DetallePlanSemanal>();
+
+            //Metodo que pasa el datatatable de detalle a objetos
+            detallePlanSemanal = GenerarDetalle(dtDetallePlanSemanal);
+
+            //Metodo que checkea los faltantes de MP
+            excepciones = Checkeo_MP(detallePlanSemanal);
+
+            //Para otros checkeos se van concatenando las listas genericas en una sola
+            //CHEQUEO2 (Ejemplo de como concatenar las listas)
+            //excepciones.Concat(Checkeo_2(detallePlanMes)); 
+
+            return excepciones;
+        }
+
+        private static List<Entidades.DetallePlanSemanal> GenerarDetalle(DataTable dtDetallePlanSemanal)
+        {
+            //Creo la lista generica
+            List<Entidades.DetallePlanSemanal> detallePlan = new List<GyCAP.Entidades.DetallePlanSemanal>();
+
+            //Creo el objeto generico para cargar e la lista
+            Entidades.DetallePlanSemanal detalle = new GyCAP.Entidades.DetallePlanSemanal();
+            Entidades.Cocina cocina = new GyCAP.Entidades.Cocina();
+            Entidades.DiasPlanSemanal diaPlanSemanal = new GyCAP.Entidades.DiasPlanSemanal();
+            Entidades.DetallePedido detallePedido = new GyCAP.Entidades.DetallePedido();
+
+            foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow row in dtDetallePlanSemanal.Rows)
+            {
+                detalle.Codigo = Convert.ToInt32(row.DPSEM_CODIGO);
+                cocina.CodigoCocina = Convert.ToInt32(row.COC_CODIGO);
+                detalle.Cocina = cocina;
+                diaPlanSemanal.Codigo = Convert.ToInt32(row.DIAPSEM_CODIGO);
+                detalle.DiaPlanSemanal = diaPlanSemanal;
+                detalle.CantidadEstimada = Convert.ToInt32(row.DPSEM_CANTIDADESTIMADA);
+                detallePedido.Codigo = Convert.ToInt32(row.DPED_CODIGO);
+                detalle.DetallePedido = detallePedido;
+
+                //Agregamos el objeto a la lista generica
+                detallePlan.Add(detalle);
+            }
+
+            return detallePlan;
+        }
+
+        private static List<Entidades.ExcepcionesPlan> Checkeo_MP(List<Entidades.DetallePlanSemanal> detallePlanSemanal)
+        {
+            //Defino la lista que va a devolver las excepciones
+            List<Entidades.ExcepcionesPlan> listaExcepciones = new List<GyCAP.Entidades.ExcepcionesPlan>();
+
+            //Defino la lista que va a contener las materias primas y cantidades
+            List<Entidades.MPEstructura> listaMPEstructura = new List<GyCAP.Entidades.MPEstructura>();
+
+            //Metodo que checkea que se tenga en cuenta las cantidades de materia prima
+            foreach (Entidades.DetallePlanSemanal psem in detallePlanSemanal)
+            {
+                List<Entidades.MPEstructura> listaAuxiliar = new List<GyCAP.Entidades.MPEstructura>();
+                listaAuxiliar = EstructuraBLL.MateriasPrimasCocina(psem.Cocina.CodigoCocina, psem.CantidadEstimada);
+
+                listaMPEstructura = listaMPEstructura.Concat(listaAuxiliar).ToList();
+            }
+
+            //Genero una lista unica de objetos que sume las cantidades de MP
+            List<Entidades.MPEstructura> listaAux = new List<GyCAP.Entidades.MPEstructura>();
+
+            foreach (Entidades.MPEstructura mp in listaMPEstructura)
+            {
+                if (listaAux.Exists(x => x.MateriaPrima.CodigoMateriaPrima == mp.MateriaPrima.CodigoMateriaPrima))
+                {
+                    listaAux.Find(x => x.MateriaPrima.CodigoMateriaPrima == mp.MateriaPrima.CodigoMateriaPrima).Cantidad += mp.Cantidad;
+                }
+                else
+                {
+                    listaAux.Add(mp);
+                }
+            }
+
+            //Checkeo las cantidades de materia prima en stock y voy generando las excepciones
+            foreach (Entidades.MPEstructura mp in listaAux)
+            {
+                //Obtengo la cantidad disponible
+                decimal cantidadDisponible = BLL.UbicacionStockBLL.CantidadMateriaPrima(mp.MateriaPrima);
+
+                //Genero excepciones si la cantidad es mayor a la cantidad disponible
+                if (mp.Cantidad > cantidadDisponible)
+                {
+                    listaExcepciones.Add(BLL.ExcepcionesPlanBLL.Add_ExcepcionMP(Convert.ToDecimal(cantidadDisponible - mp.Cantidad), mp.MateriaPrima));
+                }
+            }
+
+            return listaExcepciones;
+        }
     }
 }

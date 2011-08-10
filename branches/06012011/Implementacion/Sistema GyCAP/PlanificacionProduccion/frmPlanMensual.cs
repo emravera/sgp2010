@@ -692,7 +692,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Validamos que no se quiera agregar un modelo que ya está en el dataset
             foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])dsPlanMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.Added))
             {
-                if (row["DPED_CODIGO"].ToString() == string.Empty)
+                if (row["DPED_CODIGO"].ToString() == "0")
                 {
                     if (row["COC_CODIGO"].ToString() == Convert.ToString(cbCocinas.GetSelectedValue()))
                     {
