@@ -72,5 +72,32 @@ namespace GyCAP.BLL
         {
             ImageRepository.DeleteImage(numeroParte, ImageRepository.ElementType.Parte);
         }
+
+        /// <summary>
+        /// Transforma un data row de parte a una entidad parte.
+        /// </summary>
+        /// <param name="row">El data row con los datos.</param>
+        /// <returns>La entidad Parte.</returns>
+        public static Entidades.Parte AsParteEntity(int numeroParte, Data.dsEstructuraProducto dsEstructura)
+        {
+            Data.dsEstructuraProducto.PARTESRow row = dsEstructura.PARTES.FindByPART_NUMERO(numeroParte);
+
+            Entidades.Parte parte = new GyCAP.Entidades.Parte()
+            {
+                Numero = Convert.ToInt32(row.PART_NUMERO),
+                Codigo = row.PART_CODIGO,
+                Descripcion = row.PART_DESCRIPCION,
+                Tipo = BLL.TipoParteBLL.AsTipoParteEntity(row.TIPOS_PARTESRow),
+                Costo = row.PART_COSTO,
+                Estado = BLL.EstadoParteBLL.AsEstadoParteEntity(row.ESTADO_PARTESRow),
+                HojaRuta = null,
+                Nombre = row.PART_NOMBRE,
+                Plano = null,
+                Proveedor = null,
+                Terminacion = null
+            };
+
+            return parte;
+        }
     }
 }

@@ -100,22 +100,21 @@ namespace GyCAP.Entidades.ArbolEstructura
             if (this.compuesto != null) { this.compuesto.Cantidad -= cantidad; }
         }
 
-        public bool AddChild(NodoEstructura nodo, bool allowDuplicated, bool AddQuantityIfExists)
+        public IList<string> AddChild(NodoEstructura nodo, bool allowDuplicated, bool AddQuantityIfExists)
         {
             NodoEstructura finded = this.FindInChilds(nodo.codigoNodo);
-            
-            if (finded != null && !allowDuplicated) 
+
+            if (finded != null && !allowDuplicated && AddQuantityIfExists)
             {
-                if (!AddQuantityIfExists) { return false; }
-
                 finded.compuesto.Cantidad += nodo.compuesto.Cantidad;
-
-                return true;
+                List<string> validaciones = new List<string>();
+                validaciones.Add("Ya existe un nodo con los valores especificados.");
+                return validaciones;
             }
 
             this.nodosHijos.Add(nodo);
 
-            return true;
+            return new List<string>();
         }
 
         public NodoEstructura FindInChilds(int codigo)
@@ -145,34 +144,43 @@ namespace GyCAP.Entidades.ArbolEstructura
             return nodo;
         }
 
+        public IList<NodoEstructura> AsList(bool IncludeSelf)
+        {
+            return new List<NodoEstructura>();
+        }
+
         private IList<string> ValidateAddChild(NodoEstructura nodo)
         {
             IList<string> validaciones = new List<string>();
 
-            //if (nodo.nodoPadre.compuesto.PartePadre != null && this.Equals(nodo)) { validaciones.Add(""); }
-
-            if (this.contenido == tipoContenido.MateriaPrima) { validaciones.Add(""); }
-
-            //agrego la parte
-                    //Condiciones:
-                    //              - que el padre no sea ella misma
-                    //              - que el padre no sea una MP
-                    //              - si ya está dentro del mismo padre, avisar y preguntar si quiere aumentar la cantidad ingresada
-                    //              - si ya está en otro padre, que no arme una estructura diferente para la misma parte
-                    //              - que ella misma no sea ancestro
-                    //              - solo una parte del tipo producto terminado puede ser raíz
-                    //              - un producto terminado no puede ser hijo de nadie
-                    
-                
+            if (this.Equals(nodo)) { validaciones.Add("Una parte no puede ser padre e hijo al mismo tiempo."); }
             
-                
-                    //agrego la MP
-                    //Condiciones:
-                    //              - que no sea raíz
-                    //              - que no sea hija de otra MP
-                    //              - si ya está en el mismo padre, avisar y preguntar si quiere aumentar la cantidad ingresada
-
+            if (this.contenido == tipoContenido.MateriaPrima) { validaciones.Add("Una parte no puede ser hijo de una materia prima."); }
+            NodoEstructura nodoTemp = nodo.nodoPadre;
+            while (nodoTemp != null)
+            {
+                if (nodoTemp.nodoPadre.Equals(nodo)) { validaciones.Add("Una parte no puede ser padre e hijo al mismo tiempo."); }
+            }
+            if (nodo.Contenido == tipoContenido.ProductoFinal) { validaciones.Add("Un producto terminado no puede ser hijo."); }
+            if (this.Contenido == tipoContenido.MateriaPrima) { validaciones.Add("Una materia prima no puede ser hijo de una materia prima."); }
+            
             return validaciones;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj != null || obj.GetType() != typeof(NodoEstructura)) { return false; }
+            NodoEstructura nodo = (NodoEstructura)obj;
+
+            if (nodo.contenido != this.contenido) { return false; }
+            if (nodo.compuesto.Codigo != this.compuesto.Codigo) { return false; }
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

@@ -68,5 +68,27 @@ namespace GyCAP.BLL
         {
             return DAL.TipoParteDAL.EsTipoAdquiridoConOrden(codigoTipoParte);
         }
+
+        /// <summary>
+        /// Transforma un data row de tipo parte a una entidad tipo parte.
+        /// </summary>
+        /// <param name="row">El data row con los datos del tipo de parte.</param>
+        /// <returns>La entidad Tipo Parte.</returns>
+        public static Entidades.TipoParte AsTipoParteEntity(Data.dsEstructuraProducto.TIPOS_PARTESRow row)
+        {
+            Entidades.TipoParte tipo = new GyCAP.Entidades.TipoParte()
+                                                        {
+                                                            Adquirido = Convert.ToInt32(row.TPAR_ADQUIRIDO),
+                                                            Codigo = Convert.ToInt32(row.TPAR_CODIGO),
+                                                            Descripcion = row.TPAR_DESCRIPCION,
+                                                            Ensamblado = Convert.ToInt32(row.TPAR_ENSAMBLADO),
+                                                            Fantasma = Convert.ToInt32(row.TPAR_FANTASMA),
+                                                            Nombre = row.TPAR_NOMBRE,
+                                                            Ordentrabajo = Convert.ToInt32(row.TPAR_ORDENTRABAJO),
+                                                            ProductoTerminado = Convert.ToInt32(row.TPAR_PRODUCTOTERMINADO)
+                                                        };
+
+            return tipo;
+        }
     }
 }

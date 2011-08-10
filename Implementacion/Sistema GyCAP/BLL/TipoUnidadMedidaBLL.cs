@@ -51,5 +51,16 @@ namespace GyCAP.BLL
         {
             DAL.TipoUnidadMedidaDAL.ObtenerTipoUnidadMedida(dtTipoUnidad);
         }
+
+        public static Entidades.TipoUnidadMedida AsTipoUnidadMedidaEntity(Data.dsEstructuraProducto.TIPOS_UNIDADES_MEDIDARow row)
+        {
+            Entidades.TipoUnidadMedida tumed = new GyCAP.Entidades.TipoUnidadMedida()
+            {
+                Codigo = Convert.ToInt32(row.TUMED_CODIGO),
+                Nombre = row.TUMED_NOMBRE
+            };
+
+            return tumed;
+        }
     }
 }
