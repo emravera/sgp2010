@@ -749,7 +749,7 @@
             // 
             // btnConsultar
             // 
-            this.btnConsultar.Image = ((System.Drawing.Image)(resources.GetObject("btnConsultar.Image")));
+            this.btnConsultar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.lupa_25;
             this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConsultar.Name = "btnConsultar";
