@@ -118,9 +118,12 @@ namespace GyCAP.BLL
                 diaPlanSemanal.Codigo = Convert.ToInt32(row.DIAPSEM_CODIGO);
                 detalle.DiaPlanSemanal = diaPlanSemanal;
                 detalle.CantidadEstimada = Convert.ToInt32(row.DPSEM_CANTIDADESTIMADA);
-                detallePedido.Codigo = Convert.ToInt32(row.DPED_CODIGO);
-                detalle.DetallePedido = detallePedido;
-
+                if (row.DPED_CODIGO != null)
+                {
+                    detallePedido.Codigo = Convert.ToInt32(row.DPED_CODIGO);
+                    detalle.DetallePedido = detallePedido;
+                }
+                
                 //Agregamos el objeto a la lista generica
                 detallePlan.Add(detalle);
             }

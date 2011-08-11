@@ -223,6 +223,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     cbAnio.Enabled = true;
                     cbMes.Enabled = false;
                     cbSemana.Enabled = false;
+                   
                     btnNuevo.Enabled = true;
                     btnConsultar.Enabled = true;
                     btnEliminar.Enabled = false;
@@ -241,7 +242,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     cbSemana.Items.Clear();                    
             
                     //Limpio el dataset de detalle de plan semanal 
-                    dsPlanSemanal.DETALLE_PLANES_SEMANALES.Clear();
+                    //dsPlanSemanal.DETALLE_PLANES_SEMANALES.Clear();
 
                     tcPlanAnual.SelectedTab = tpBuscar;
                     estadoActual = estadoUI.inicio;
@@ -259,6 +260,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnConsultar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
                     btnModificar.Enabled = hayDatos;
+                   
                     tcPlanAnual.SelectedTab = tpBuscar;
                     estadoActual = estadoUI.buscar;
                     break;
@@ -1312,7 +1314,6 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             try
             {
-
                 if (dgvDatos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
                 {
                     //Obtenemos los códigos
@@ -1333,8 +1334,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     cbSemanaDatos.DataSource = null;
                     dsPlanSemanal.PLANES_SEMANALES.Clear();
                     cbSemanaDatos.Items.Clear();
-
-
+                    
                     //Se los seteamos a cada uno de los controles
                     EventArgs ev = new EventArgs();
                     cbPlanAnual.SetSelectedValue(codigoPlanAnual);
@@ -1427,9 +1427,10 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Designación", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);                
             }            
-        } 
+        }       
 
         #endregion
+
 
     }
 }
