@@ -37,8 +37,6 @@ namespace GyCAP.Data {
         
         private UNIDADES_MEDIDADataTable tableUNIDADES_MEDIDA;
         
-        private COMPUESTOS_PARTESDataTable tableCOMPUESTOS_PARTES;
-        
         private ESTRUCTURASDataTable tableESTRUCTURAS;
         
         private MATERIAS_PRIMASDataTable tableMATERIAS_PRIMAS;
@@ -49,13 +47,9 @@ namespace GyCAP.Data {
         
         private PARTESDataTable tablePARTES;
         
-        private global::System.Data.DataRelation relationFK_COMPUESTOS_PARTES_UNIDADES_MEDIDA;
-        
-        private global::System.Data.DataRelation relationFK_COMPUESTOS_PARTES_ESTRUCTURAS;
+        private COMPUESTOS_PARTESDataTable tableCOMPUESTOS_PARTES;
         
         private global::System.Data.DataRelation relationestructura_plano_fk;
-        
-        private global::System.Data.DataRelation relationMATERIAS_PRIMAS_COMPUESTOS_PARTES;
         
         private global::System.Data.DataRelation relationUNIDADES_MEDIDA_MATERIAS_PRIMAS;
         
@@ -64,10 +58,6 @@ namespace GyCAP.Data {
         private global::System.Data.DataRelation relationFK_UBICACIONES_STOCK_UBICACION_STOCK;
         
         private global::System.Data.DataRelation relationFK_MATERIAS_PRIMAS_UBICACIONES_STOCK;
-        
-        private global::System.Data.DataRelation relationFK_COMPUESTOS_PARTES_PARTES_HIJO;
-        
-        private global::System.Data.DataRelation relationFK_COMPUESTOS_PARTES_PARTES_PADRE;
         
         private global::System.Data.DataRelation relationFK_PARTES_ESTADO_PARTES;
         
@@ -80,6 +70,16 @@ namespace GyCAP.Data {
         private global::System.Data.DataRelation relationFK_PARTES_TIPOS_PARTES;
         
         private global::System.Data.DataRelation relationFK_PARTES_UNIDADES_MEDIDA;
+        
+        private global::System.Data.DataRelation relationFK_COMPUESTOS_PARTES_COMPUESTOS_PARTES;
+        
+        private global::System.Data.DataRelation relationFK_COMPUESTOS_PARTES_ESTRUCTURAS;
+        
+        private global::System.Data.DataRelation relationFK_COMPUESTOS_PARTES_PARTES;
+        
+        private global::System.Data.DataRelation relationFK_COMPUESTOS_PARTES_UNIDADES_MEDIDA;
+        
+        private global::System.Data.DataRelation relationMATERIAS_PRIMAS_COMPUESTOS_PARTES;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -125,9 +125,6 @@ namespace GyCAP.Data {
                 if ((ds.Tables["UNIDADES_MEDIDA"] != null)) {
                     base.Tables.Add(new UNIDADES_MEDIDADataTable(ds.Tables["UNIDADES_MEDIDA"]));
                 }
-                if ((ds.Tables["COMPUESTOS_PARTES"] != null)) {
-                    base.Tables.Add(new COMPUESTOS_PARTESDataTable(ds.Tables["COMPUESTOS_PARTES"]));
-                }
                 if ((ds.Tables["ESTRUCTURAS"] != null)) {
                     base.Tables.Add(new ESTRUCTURASDataTable(ds.Tables["ESTRUCTURAS"]));
                 }
@@ -142,6 +139,9 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["PARTES"] != null)) {
                     base.Tables.Add(new PARTESDataTable(ds.Tables["PARTES"]));
+                }
+                if ((ds.Tables["COMPUESTOS_PARTES"] != null)) {
+                    base.Tables.Add(new COMPUESTOS_PARTESDataTable(ds.Tables["COMPUESTOS_PARTES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -218,15 +218,6 @@ namespace GyCAP.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public COMPUESTOS_PARTESDataTable COMPUESTOS_PARTES {
-            get {
-                return this.tableCOMPUESTOS_PARTES;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public ESTRUCTURASDataTable ESTRUCTURAS {
             get {
                 return this.tableESTRUCTURAS;
@@ -266,6 +257,15 @@ namespace GyCAP.Data {
         public PARTESDataTable PARTES {
             get {
                 return this.tablePARTES;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public COMPUESTOS_PARTESDataTable COMPUESTOS_PARTES {
+            get {
+                return this.tableCOMPUESTOS_PARTES;
             }
         }
         
@@ -346,9 +346,6 @@ namespace GyCAP.Data {
                 if ((ds.Tables["UNIDADES_MEDIDA"] != null)) {
                     base.Tables.Add(new UNIDADES_MEDIDADataTable(ds.Tables["UNIDADES_MEDIDA"]));
                 }
-                if ((ds.Tables["COMPUESTOS_PARTES"] != null)) {
-                    base.Tables.Add(new COMPUESTOS_PARTESDataTable(ds.Tables["COMPUESTOS_PARTES"]));
-                }
                 if ((ds.Tables["ESTRUCTURAS"] != null)) {
                     base.Tables.Add(new ESTRUCTURASDataTable(ds.Tables["ESTRUCTURAS"]));
                 }
@@ -363,6 +360,9 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["PARTES"] != null)) {
                     base.Tables.Add(new PARTESDataTable(ds.Tables["PARTES"]));
+                }
+                if ((ds.Tables["COMPUESTOS_PARTES"] != null)) {
+                    base.Tables.Add(new COMPUESTOS_PARTESDataTable(ds.Tables["COMPUESTOS_PARTES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -430,12 +430,6 @@ namespace GyCAP.Data {
                     this.tableUNIDADES_MEDIDA.InitVars();
                 }
             }
-            this.tableCOMPUESTOS_PARTES = ((COMPUESTOS_PARTESDataTable)(base.Tables["COMPUESTOS_PARTES"]));
-            if ((initTable == true)) {
-                if ((this.tableCOMPUESTOS_PARTES != null)) {
-                    this.tableCOMPUESTOS_PARTES.InitVars();
-                }
-            }
             this.tableESTRUCTURAS = ((ESTRUCTURASDataTable)(base.Tables["ESTRUCTURAS"]));
             if ((initTable == true)) {
                 if ((this.tableESTRUCTURAS != null)) {
@@ -466,22 +460,28 @@ namespace GyCAP.Data {
                     this.tablePARTES.InitVars();
                 }
             }
-            this.relationFK_COMPUESTOS_PARTES_UNIDADES_MEDIDA = this.Relations["FK_COMPUESTOS_PARTES_UNIDADES_MEDIDA"];
-            this.relationFK_COMPUESTOS_PARTES_ESTRUCTURAS = this.Relations["FK_COMPUESTOS_PARTES_ESTRUCTURAS"];
+            this.tableCOMPUESTOS_PARTES = ((COMPUESTOS_PARTESDataTable)(base.Tables["COMPUESTOS_PARTES"]));
+            if ((initTable == true)) {
+                if ((this.tableCOMPUESTOS_PARTES != null)) {
+                    this.tableCOMPUESTOS_PARTES.InitVars();
+                }
+            }
             this.relationestructura_plano_fk = this.Relations["estructura_plano_fk"];
-            this.relationMATERIAS_PRIMAS_COMPUESTOS_PARTES = this.Relations["MATERIAS_PRIMAS_COMPUESTOS_PARTES"];
             this.relationUNIDADES_MEDIDA_MATERIAS_PRIMAS = this.Relations["UNIDADES_MEDIDA_MATERIAS_PRIMAS"];
             this.relationTIPOS_UNIDADES_MEDIDA_UNIDADES_MEDIDA = this.Relations["TIPOS_UNIDADES_MEDIDA_UNIDADES_MEDIDA"];
             this.relationFK_UBICACIONES_STOCK_UBICACION_STOCK = this.Relations["FK_UBICACIONES_STOCK_UBICACION_STOCK"];
             this.relationFK_MATERIAS_PRIMAS_UBICACIONES_STOCK = this.Relations["FK_MATERIAS_PRIMAS_UBICACIONES_STOCK"];
-            this.relationFK_COMPUESTOS_PARTES_PARTES_HIJO = this.Relations["FK_COMPUESTOS_PARTES_PARTES_HIJO"];
-            this.relationFK_COMPUESTOS_PARTES_PARTES_PADRE = this.Relations["FK_COMPUESTOS_PARTES_PARTES_PADRE"];
             this.relationFK_PARTES_ESTADO_PARTES = this.Relations["FK_PARTES_ESTADO_PARTES"];
             this.relationFK_PARTES_HOJAS_RUTA = this.Relations["FK_PARTES_HOJAS_RUTA"];
             this.relationFK_PARTES_PLANOS = this.Relations["FK_PARTES_PLANOS"];
             this.relationFK_PARTES_TERMINACIONES = this.Relations["FK_PARTES_TERMINACIONES"];
             this.relationFK_PARTES_TIPOS_PARTES = this.Relations["FK_PARTES_TIPOS_PARTES"];
             this.relationFK_PARTES_UNIDADES_MEDIDA = this.Relations["FK_PARTES_UNIDADES_MEDIDA"];
+            this.relationFK_COMPUESTOS_PARTES_COMPUESTOS_PARTES = this.Relations["FK_COMPUESTOS_PARTES_COMPUESTOS_PARTES"];
+            this.relationFK_COMPUESTOS_PARTES_ESTRUCTURAS = this.Relations["FK_COMPUESTOS_PARTES_ESTRUCTURAS"];
+            this.relationFK_COMPUESTOS_PARTES_PARTES = this.Relations["FK_COMPUESTOS_PARTES_PARTES"];
+            this.relationFK_COMPUESTOS_PARTES_UNIDADES_MEDIDA = this.Relations["FK_COMPUESTOS_PARTES_UNIDADES_MEDIDA"];
+            this.relationMATERIAS_PRIMAS_COMPUESTOS_PARTES = this.Relations["MATERIAS_PRIMAS_COMPUESTOS_PARTES"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -503,8 +503,6 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tableTIPOS_PARTES);
             this.tableUNIDADES_MEDIDA = new UNIDADES_MEDIDADataTable();
             base.Tables.Add(this.tableUNIDADES_MEDIDA);
-            this.tableCOMPUESTOS_PARTES = new COMPUESTOS_PARTESDataTable();
-            base.Tables.Add(this.tableCOMPUESTOS_PARTES);
             this.tableESTRUCTURAS = new ESTRUCTURASDataTable();
             base.Tables.Add(this.tableESTRUCTURAS);
             this.tableMATERIAS_PRIMAS = new MATERIAS_PRIMASDataTable();
@@ -515,22 +513,12 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tableUBICACIONES_STOCK);
             this.tablePARTES = new PARTESDataTable();
             base.Tables.Add(this.tablePARTES);
-            this.relationFK_COMPUESTOS_PARTES_UNIDADES_MEDIDA = new global::System.Data.DataRelation("FK_COMPUESTOS_PARTES_UNIDADES_MEDIDA", new global::System.Data.DataColumn[] {
-                        this.tableUNIDADES_MEDIDA.UMED_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCOMPUESTOS_PARTES.UMED_CODIGOColumn}, false);
-            this.Relations.Add(this.relationFK_COMPUESTOS_PARTES_UNIDADES_MEDIDA);
-            this.relationFK_COMPUESTOS_PARTES_ESTRUCTURAS = new global::System.Data.DataRelation("FK_COMPUESTOS_PARTES_ESTRUCTURAS", new global::System.Data.DataColumn[] {
-                        this.tableESTRUCTURAS.ESTR_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCOMPUESTOS_PARTES.ESTR_CODIGOColumn}, false);
-            this.Relations.Add(this.relationFK_COMPUESTOS_PARTES_ESTRUCTURAS);
+            this.tableCOMPUESTOS_PARTES = new COMPUESTOS_PARTESDataTable();
+            base.Tables.Add(this.tableCOMPUESTOS_PARTES);
             this.relationestructura_plano_fk = new global::System.Data.DataRelation("estructura_plano_fk", new global::System.Data.DataColumn[] {
                         this.tablePLANOS.PNO_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableESTRUCTURAS.PNO_CODIGOColumn}, false);
             this.Relations.Add(this.relationestructura_plano_fk);
-            this.relationMATERIAS_PRIMAS_COMPUESTOS_PARTES = new global::System.Data.DataRelation("MATERIAS_PRIMAS_COMPUESTOS_PARTES", new global::System.Data.DataColumn[] {
-                        this.tableMATERIAS_PRIMAS.MP_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCOMPUESTOS_PARTES.MP_CODIGOColumn}, false);
-            this.Relations.Add(this.relationMATERIAS_PRIMAS_COMPUESTOS_PARTES);
             this.relationUNIDADES_MEDIDA_MATERIAS_PRIMAS = new global::System.Data.DataRelation("UNIDADES_MEDIDA_MATERIAS_PRIMAS", new global::System.Data.DataColumn[] {
                         this.tableUNIDADES_MEDIDA.UMED_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableMATERIAS_PRIMAS.UMED_CODIGOColumn}, false);
@@ -547,14 +535,6 @@ namespace GyCAP.Data {
                         this.tableUBICACIONES_STOCK.USTCK_NUMEROColumn}, new global::System.Data.DataColumn[] {
                         this.tableMATERIAS_PRIMAS.USTCK_NUMEROColumn}, false);
             this.Relations.Add(this.relationFK_MATERIAS_PRIMAS_UBICACIONES_STOCK);
-            this.relationFK_COMPUESTOS_PARTES_PARTES_HIJO = new global::System.Data.DataRelation("FK_COMPUESTOS_PARTES_PARTES_HIJO", new global::System.Data.DataColumn[] {
-                        this.tablePARTES.PART_NUMEROColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCOMPUESTOS_PARTES.PART_NUMERO_HIJOColumn}, false);
-            this.Relations.Add(this.relationFK_COMPUESTOS_PARTES_PARTES_HIJO);
-            this.relationFK_COMPUESTOS_PARTES_PARTES_PADRE = new global::System.Data.DataRelation("FK_COMPUESTOS_PARTES_PARTES_PADRE", new global::System.Data.DataColumn[] {
-                        this.tablePARTES.PART_NUMEROColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCOMPUESTOS_PARTES.PART_NUMERO_PADREColumn}, false);
-            this.Relations.Add(this.relationFK_COMPUESTOS_PARTES_PARTES_PADRE);
             this.relationFK_PARTES_ESTADO_PARTES = new global::System.Data.DataRelation("FK_PARTES_ESTADO_PARTES", new global::System.Data.DataColumn[] {
                         this.tableESTADO_PARTES.PAR_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tablePARTES.PAR_CODIGOColumn}, false);
@@ -579,6 +559,26 @@ namespace GyCAP.Data {
                         this.tableUNIDADES_MEDIDA.UMED_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tablePARTES.UMED_CODIGOColumn}, false);
             this.Relations.Add(this.relationFK_PARTES_UNIDADES_MEDIDA);
+            this.relationFK_COMPUESTOS_PARTES_COMPUESTOS_PARTES = new global::System.Data.DataRelation("FK_COMPUESTOS_PARTES_COMPUESTOS_PARTES", new global::System.Data.DataColumn[] {
+                        this.tableCOMPUESTOS_PARTES.COMP_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCOMPUESTOS_PARTES.COMP_CODIGO_PADREColumn}, false);
+            this.Relations.Add(this.relationFK_COMPUESTOS_PARTES_COMPUESTOS_PARTES);
+            this.relationFK_COMPUESTOS_PARTES_ESTRUCTURAS = new global::System.Data.DataRelation("FK_COMPUESTOS_PARTES_ESTRUCTURAS", new global::System.Data.DataColumn[] {
+                        this.tableESTRUCTURAS.ESTR_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCOMPUESTOS_PARTES.ESTR_CODIGOColumn}, false);
+            this.Relations.Add(this.relationFK_COMPUESTOS_PARTES_ESTRUCTURAS);
+            this.relationFK_COMPUESTOS_PARTES_PARTES = new global::System.Data.DataRelation("FK_COMPUESTOS_PARTES_PARTES", new global::System.Data.DataColumn[] {
+                        this.tablePARTES.PART_NUMEROColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCOMPUESTOS_PARTES.PART_NUMEROColumn}, false);
+            this.Relations.Add(this.relationFK_COMPUESTOS_PARTES_PARTES);
+            this.relationFK_COMPUESTOS_PARTES_UNIDADES_MEDIDA = new global::System.Data.DataRelation("FK_COMPUESTOS_PARTES_UNIDADES_MEDIDA", new global::System.Data.DataColumn[] {
+                        this.tableUNIDADES_MEDIDA.UMED_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCOMPUESTOS_PARTES.UMED_CODIGOColumn}, false);
+            this.Relations.Add(this.relationFK_COMPUESTOS_PARTES_UNIDADES_MEDIDA);
+            this.relationMATERIAS_PRIMAS_COMPUESTOS_PARTES = new global::System.Data.DataRelation("MATERIAS_PRIMAS_COMPUESTOS_PARTES", new global::System.Data.DataColumn[] {
+                        this.tableMATERIAS_PRIMAS.MP_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCOMPUESTOS_PARTES.MP_CODIGOColumn}, false);
+            this.Relations.Add(this.relationMATERIAS_PRIMAS_COMPUESTOS_PARTES);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -612,11 +612,6 @@ namespace GyCAP.Data {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeCOMPUESTOS_PARTES() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeESTRUCTURAS() {
             return false;
         }
@@ -638,6 +633,11 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializePARTES() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeCOMPUESTOS_PARTES() {
             return false;
         }
         
@@ -706,8 +706,6 @@ namespace GyCAP.Data {
         
         public delegate void UNIDADES_MEDIDARowChangeEventHandler(object sender, UNIDADES_MEDIDARowChangeEvent e);
         
-        public delegate void COMPUESTOS_PARTESRowChangeEventHandler(object sender, COMPUESTOS_PARTESRowChangeEvent e);
-        
         public delegate void ESTRUCTURASRowChangeEventHandler(object sender, ESTRUCTURASRowChangeEvent e);
         
         public delegate void MATERIAS_PRIMASRowChangeEventHandler(object sender, MATERIAS_PRIMASRowChangeEvent e);
@@ -717,6 +715,8 @@ namespace GyCAP.Data {
         public delegate void UBICACIONES_STOCKRowChangeEventHandler(object sender, UBICACIONES_STOCKRowChangeEvent e);
         
         public delegate void PARTESRowChangeEventHandler(object sender, PARTESRowChangeEvent e);
+        
+        public delegate void COMPUESTOS_PARTESRowChangeEventHandler(object sender, COMPUESTOS_PARTESRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -2539,338 +2539,6 @@ namespace GyCAP.Data {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class COMPUESTOS_PARTESDataTable : global::System.Data.TypedTableBase<COMPUESTOS_PARTESRow> {
-            
-            private global::System.Data.DataColumn columnCOMP_CODIGO;
-            
-            private global::System.Data.DataColumn columnPART_NUMERO_PADRE;
-            
-            private global::System.Data.DataColumn columnPART_NUMERO_HIJO;
-            
-            private global::System.Data.DataColumn columnMP_CODIGO;
-            
-            private global::System.Data.DataColumn columnCOMP_CANTIDAD;
-            
-            private global::System.Data.DataColumn columnESTR_CODIGO;
-            
-            private global::System.Data.DataColumn columnUMED_CODIGO;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COMPUESTOS_PARTESDataTable() {
-                this.TableName = "COMPUESTOS_PARTES";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal COMPUESTOS_PARTESDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected COMPUESTOS_PARTESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn COMP_CODIGOColumn {
-                get {
-                    return this.columnCOMP_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PART_NUMERO_PADREColumn {
-                get {
-                    return this.columnPART_NUMERO_PADRE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PART_NUMERO_HIJOColumn {
-                get {
-                    return this.columnPART_NUMERO_HIJO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MP_CODIGOColumn {
-                get {
-                    return this.columnMP_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn COMP_CANTIDADColumn {
-                get {
-                    return this.columnCOMP_CANTIDAD;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ESTR_CODIGOColumn {
-                get {
-                    return this.columnESTR_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn UMED_CODIGOColumn {
-                get {
-                    return this.columnUMED_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COMPUESTOS_PARTESRow this[int index] {
-                get {
-                    return ((COMPUESTOS_PARTESRow)(this.Rows[index]));
-                }
-            }
-            
-            public event COMPUESTOS_PARTESRowChangeEventHandler COMPUESTOS_PARTESRowChanging;
-            
-            public event COMPUESTOS_PARTESRowChangeEventHandler COMPUESTOS_PARTESRowChanged;
-            
-            public event COMPUESTOS_PARTESRowChangeEventHandler COMPUESTOS_PARTESRowDeleting;
-            
-            public event COMPUESTOS_PARTESRowChangeEventHandler COMPUESTOS_PARTESRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddCOMPUESTOS_PARTESRow(COMPUESTOS_PARTESRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COMPUESTOS_PARTESRow AddCOMPUESTOS_PARTESRow(PARTESRow parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES_PADRE, PARTESRow parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO, MATERIAS_PRIMASRow parentMATERIAS_PRIMASRowByMATERIAS_PRIMAS_COMPUESTOS_PARTES, decimal COMP_CANTIDAD, ESTRUCTURASRow parentESTRUCTURASRowByFK_COMPUESTOS_PARTES_ESTRUCTURAS, UNIDADES_MEDIDARow parentUNIDADES_MEDIDARowByFK_COMPUESTOS_PARTES_UNIDADES_MEDIDA) {
-                COMPUESTOS_PARTESRow rowCOMPUESTOS_PARTESRow = ((COMPUESTOS_PARTESRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        null,
-                        null,
-                        null,
-                        COMP_CANTIDAD,
-                        null,
-                        null};
-                if ((parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES_PADRE != null)) {
-                    columnValuesArray[1] = parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES_PADRE[0];
-                }
-                if ((parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO != null)) {
-                    columnValuesArray[2] = parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO[0];
-                }
-                if ((parentMATERIAS_PRIMASRowByMATERIAS_PRIMAS_COMPUESTOS_PARTES != null)) {
-                    columnValuesArray[3] = parentMATERIAS_PRIMASRowByMATERIAS_PRIMAS_COMPUESTOS_PARTES[0];
-                }
-                if ((parentESTRUCTURASRowByFK_COMPUESTOS_PARTES_ESTRUCTURAS != null)) {
-                    columnValuesArray[5] = parentESTRUCTURASRowByFK_COMPUESTOS_PARTES_ESTRUCTURAS[0];
-                }
-                if ((parentUNIDADES_MEDIDARowByFK_COMPUESTOS_PARTES_UNIDADES_MEDIDA != null)) {
-                    columnValuesArray[6] = parentUNIDADES_MEDIDARowByFK_COMPUESTOS_PARTES_UNIDADES_MEDIDA[0];
-                }
-                rowCOMPUESTOS_PARTESRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowCOMPUESTOS_PARTESRow);
-                return rowCOMPUESTOS_PARTESRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COMPUESTOS_PARTESRow FindByCOMP_CODIGO(decimal COMP_CODIGO) {
-                return ((COMPUESTOS_PARTESRow)(this.Rows.Find(new object[] {
-                            COMP_CODIGO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                COMPUESTOS_PARTESDataTable cln = ((COMPUESTOS_PARTESDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new COMPUESTOS_PARTESDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnCOMP_CODIGO = base.Columns["COMP_CODIGO"];
-                this.columnPART_NUMERO_PADRE = base.Columns["PART_NUMERO_PADRE"];
-                this.columnPART_NUMERO_HIJO = base.Columns["PART_NUMERO_HIJO"];
-                this.columnMP_CODIGO = base.Columns["MP_CODIGO"];
-                this.columnCOMP_CANTIDAD = base.Columns["COMP_CANTIDAD"];
-                this.columnESTR_CODIGO = base.Columns["ESTR_CODIGO"];
-                this.columnUMED_CODIGO = base.Columns["UMED_CODIGO"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnCOMP_CODIGO = new global::System.Data.DataColumn("COMP_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCOMP_CODIGO);
-                this.columnPART_NUMERO_PADRE = new global::System.Data.DataColumn("PART_NUMERO_PADRE", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPART_NUMERO_PADRE);
-                this.columnPART_NUMERO_HIJO = new global::System.Data.DataColumn("PART_NUMERO_HIJO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPART_NUMERO_HIJO);
-                this.columnMP_CODIGO = new global::System.Data.DataColumn("MP_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMP_CODIGO);
-                this.columnCOMP_CANTIDAD = new global::System.Data.DataColumn("COMP_CANTIDAD", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCOMP_CANTIDAD);
-                this.columnESTR_CODIGO = new global::System.Data.DataColumn("ESTR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnESTR_CODIGO);
-                this.columnUMED_CODIGO = new global::System.Data.DataColumn("UMED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUMED_CODIGO);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnCOMP_CODIGO}, true));
-                this.columnCOMP_CODIGO.AutoIncrement = true;
-                this.columnCOMP_CODIGO.AutoIncrementSeed = -1;
-                this.columnCOMP_CODIGO.AutoIncrementStep = -1;
-                this.columnCOMP_CODIGO.AllowDBNull = false;
-                this.columnCOMP_CODIGO.Unique = true;
-                this.columnCOMP_CANTIDAD.AllowDBNull = false;
-                this.columnESTR_CODIGO.AllowDBNull = false;
-                this.columnUMED_CODIGO.AllowDBNull = false;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COMPUESTOS_PARTESRow NewCOMPUESTOS_PARTESRow() {
-                return ((COMPUESTOS_PARTESRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new COMPUESTOS_PARTESRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(COMPUESTOS_PARTESRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.COMPUESTOS_PARTESRowChanged != null)) {
-                    this.COMPUESTOS_PARTESRowChanged(this, new COMPUESTOS_PARTESRowChangeEvent(((COMPUESTOS_PARTESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.COMPUESTOS_PARTESRowChanging != null)) {
-                    this.COMPUESTOS_PARTESRowChanging(this, new COMPUESTOS_PARTESRowChangeEvent(((COMPUESTOS_PARTESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.COMPUESTOS_PARTESRowDeleted != null)) {
-                    this.COMPUESTOS_PARTESRowDeleted(this, new COMPUESTOS_PARTESRowChangeEvent(((COMPUESTOS_PARTESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.COMPUESTOS_PARTESRowDeleting != null)) {
-                    this.COMPUESTOS_PARTESRowDeleting(this, new COMPUESTOS_PARTESRowChangeEvent(((COMPUESTOS_PARTESRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveCOMPUESTOS_PARTESRow(COMPUESTOS_PARTESRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsEstructuraProducto ds = new dsEstructuraProducto();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "COMPUESTOS_PARTESDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class ESTRUCTURASDataTable : global::System.Data.TypedTableBase<ESTRUCTURASRow> {
             
             private global::System.Data.DataColumn columnESTR_CODIGO;
@@ -4628,6 +4296,338 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class COMPUESTOS_PARTESDataTable : global::System.Data.TypedTableBase<COMPUESTOS_PARTESRow> {
+            
+            private global::System.Data.DataColumn columnCOMP_CODIGO;
+            
+            private global::System.Data.DataColumn columnPART_NUMERO;
+            
+            private global::System.Data.DataColumn columnMP_CODIGO;
+            
+            private global::System.Data.DataColumn columnCOMP_CANTIDAD;
+            
+            private global::System.Data.DataColumn columnESTR_CODIGO;
+            
+            private global::System.Data.DataColumn columnUMED_CODIGO;
+            
+            private global::System.Data.DataColumn columnCOMP_CODIGO_PADRE;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COMPUESTOS_PARTESDataTable() {
+                this.TableName = "COMPUESTOS_PARTES";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal COMPUESTOS_PARTESDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected COMPUESTOS_PARTESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn COMP_CODIGOColumn {
+                get {
+                    return this.columnCOMP_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PART_NUMEROColumn {
+                get {
+                    return this.columnPART_NUMERO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MP_CODIGOColumn {
+                get {
+                    return this.columnMP_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn COMP_CANTIDADColumn {
+                get {
+                    return this.columnCOMP_CANTIDAD;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ESTR_CODIGOColumn {
+                get {
+                    return this.columnESTR_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn UMED_CODIGOColumn {
+                get {
+                    return this.columnUMED_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn COMP_CODIGO_PADREColumn {
+                get {
+                    return this.columnCOMP_CODIGO_PADRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COMPUESTOS_PARTESRow this[int index] {
+                get {
+                    return ((COMPUESTOS_PARTESRow)(this.Rows[index]));
+                }
+            }
+            
+            public event COMPUESTOS_PARTESRowChangeEventHandler COMPUESTOS_PARTESRowChanging;
+            
+            public event COMPUESTOS_PARTESRowChangeEventHandler COMPUESTOS_PARTESRowChanged;
+            
+            public event COMPUESTOS_PARTESRowChangeEventHandler COMPUESTOS_PARTESRowDeleting;
+            
+            public event COMPUESTOS_PARTESRowChangeEventHandler COMPUESTOS_PARTESRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddCOMPUESTOS_PARTESRow(COMPUESTOS_PARTESRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COMPUESTOS_PARTESRow AddCOMPUESTOS_PARTESRow(PARTESRow parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES, MATERIAS_PRIMASRow parentMATERIAS_PRIMASRowByMATERIAS_PRIMAS_COMPUESTOS_PARTES, decimal COMP_CANTIDAD, ESTRUCTURASRow parentESTRUCTURASRowByFK_COMPUESTOS_PARTES_ESTRUCTURAS, UNIDADES_MEDIDARow parentUNIDADES_MEDIDARowByFK_COMPUESTOS_PARTES_UNIDADES_MEDIDA, COMPUESTOS_PARTESRow parentCOMPUESTOS_PARTESRowByFK_COMPUESTOS_PARTES_COMPUESTOS_PARTES) {
+                COMPUESTOS_PARTESRow rowCOMPUESTOS_PARTESRow = ((COMPUESTOS_PARTESRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        null,
+                        COMP_CANTIDAD,
+                        null,
+                        null,
+                        null};
+                if ((parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES != null)) {
+                    columnValuesArray[1] = parentPARTESRowByFK_COMPUESTOS_PARTES_PARTES[0];
+                }
+                if ((parentMATERIAS_PRIMASRowByMATERIAS_PRIMAS_COMPUESTOS_PARTES != null)) {
+                    columnValuesArray[2] = parentMATERIAS_PRIMASRowByMATERIAS_PRIMAS_COMPUESTOS_PARTES[0];
+                }
+                if ((parentESTRUCTURASRowByFK_COMPUESTOS_PARTES_ESTRUCTURAS != null)) {
+                    columnValuesArray[4] = parentESTRUCTURASRowByFK_COMPUESTOS_PARTES_ESTRUCTURAS[0];
+                }
+                if ((parentUNIDADES_MEDIDARowByFK_COMPUESTOS_PARTES_UNIDADES_MEDIDA != null)) {
+                    columnValuesArray[5] = parentUNIDADES_MEDIDARowByFK_COMPUESTOS_PARTES_UNIDADES_MEDIDA[0];
+                }
+                if ((parentCOMPUESTOS_PARTESRowByFK_COMPUESTOS_PARTES_COMPUESTOS_PARTES != null)) {
+                    columnValuesArray[6] = parentCOMPUESTOS_PARTESRowByFK_COMPUESTOS_PARTES_COMPUESTOS_PARTES[0];
+                }
+                rowCOMPUESTOS_PARTESRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowCOMPUESTOS_PARTESRow);
+                return rowCOMPUESTOS_PARTESRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COMPUESTOS_PARTESRow FindByCOMP_CODIGO(decimal COMP_CODIGO) {
+                return ((COMPUESTOS_PARTESRow)(this.Rows.Find(new object[] {
+                            COMP_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                COMPUESTOS_PARTESDataTable cln = ((COMPUESTOS_PARTESDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new COMPUESTOS_PARTESDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnCOMP_CODIGO = base.Columns["COMP_CODIGO"];
+                this.columnPART_NUMERO = base.Columns["PART_NUMERO"];
+                this.columnMP_CODIGO = base.Columns["MP_CODIGO"];
+                this.columnCOMP_CANTIDAD = base.Columns["COMP_CANTIDAD"];
+                this.columnESTR_CODIGO = base.Columns["ESTR_CODIGO"];
+                this.columnUMED_CODIGO = base.Columns["UMED_CODIGO"];
+                this.columnCOMP_CODIGO_PADRE = base.Columns["COMP_CODIGO_PADRE"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnCOMP_CODIGO = new global::System.Data.DataColumn("COMP_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOMP_CODIGO);
+                this.columnPART_NUMERO = new global::System.Data.DataColumn("PART_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPART_NUMERO);
+                this.columnMP_CODIGO = new global::System.Data.DataColumn("MP_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMP_CODIGO);
+                this.columnCOMP_CANTIDAD = new global::System.Data.DataColumn("COMP_CANTIDAD", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOMP_CANTIDAD);
+                this.columnESTR_CODIGO = new global::System.Data.DataColumn("ESTR_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnESTR_CODIGO);
+                this.columnUMED_CODIGO = new global::System.Data.DataColumn("UMED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUMED_CODIGO);
+                this.columnCOMP_CODIGO_PADRE = new global::System.Data.DataColumn("COMP_CODIGO_PADRE", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOMP_CODIGO_PADRE);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnCOMP_CODIGO}, true));
+                this.columnCOMP_CODIGO.AutoIncrement = true;
+                this.columnCOMP_CODIGO.AutoIncrementSeed = -1;
+                this.columnCOMP_CODIGO.AutoIncrementStep = -1;
+                this.columnCOMP_CODIGO.AllowDBNull = false;
+                this.columnCOMP_CODIGO.Unique = true;
+                this.columnCOMP_CANTIDAD.AllowDBNull = false;
+                this.columnESTR_CODIGO.AllowDBNull = false;
+                this.columnUMED_CODIGO.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COMPUESTOS_PARTESRow NewCOMPUESTOS_PARTESRow() {
+                return ((COMPUESTOS_PARTESRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new COMPUESTOS_PARTESRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(COMPUESTOS_PARTESRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.COMPUESTOS_PARTESRowChanged != null)) {
+                    this.COMPUESTOS_PARTESRowChanged(this, new COMPUESTOS_PARTESRowChangeEvent(((COMPUESTOS_PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.COMPUESTOS_PARTESRowChanging != null)) {
+                    this.COMPUESTOS_PARTESRowChanging(this, new COMPUESTOS_PARTESRowChangeEvent(((COMPUESTOS_PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.COMPUESTOS_PARTESRowDeleted != null)) {
+                    this.COMPUESTOS_PARTESRowDeleted(this, new COMPUESTOS_PARTESRowChangeEvent(((COMPUESTOS_PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.COMPUESTOS_PARTESRowDeleting != null)) {
+                    this.COMPUESTOS_PARTESRowDeleting(this, new COMPUESTOS_PARTESRowChangeEvent(((COMPUESTOS_PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveCOMPUESTOS_PARTESRow(COMPUESTOS_PARTESRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsEstructuraProducto ds = new dsEstructuraProducto();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "COMPUESTOS_PARTESDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -5527,16 +5527,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COMPUESTOS_PARTESRow[] GetCOMPUESTOS_PARTESRows() {
-                if ((this.Table.ChildRelations["FK_COMPUESTOS_PARTES_UNIDADES_MEDIDA"] == null)) {
-                    return new COMPUESTOS_PARTESRow[0];
-                }
-                else {
-                    return ((COMPUESTOS_PARTESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_COMPUESTOS_PARTES_UNIDADES_MEDIDA"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public MATERIAS_PRIMASRow[] GetMATERIAS_PRIMASRows() {
                 if ((this.Table.ChildRelations["UNIDADES_MEDIDA_MATERIAS_PRIMAS"] == null)) {
                     return new MATERIAS_PRIMASRow[0];
@@ -5555,185 +5545,15 @@ namespace GyCAP.Data {
                     return ((PARTESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_PARTES_UNIDADES_MEDIDA"])));
                 }
             }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class COMPUESTOS_PARTESRow : global::System.Data.DataRow {
-            
-            private COMPUESTOS_PARTESDataTable tableCOMPUESTOS_PARTES;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal COMPUESTOS_PARTESRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableCOMPUESTOS_PARTES = ((COMPUESTOS_PARTESDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal COMP_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableCOMPUESTOS_PARTES.COMP_CODIGOColumn]));
+            public COMPUESTOS_PARTESRow[] GetCOMPUESTOS_PARTESRows() {
+                if ((this.Table.ChildRelations["FK_COMPUESTOS_PARTES_UNIDADES_MEDIDA"] == null)) {
+                    return new COMPUESTOS_PARTESRow[0];
                 }
-                set {
-                    this[this.tableCOMPUESTOS_PARTES.COMP_CODIGOColumn] = value;
+                else {
+                    return ((COMPUESTOS_PARTESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_COMPUESTOS_PARTES_UNIDADES_MEDIDA"])));
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PART_NUMERO_PADRE {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCOMPUESTOS_PARTES.PART_NUMERO_PADREColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PART_NUMERO_PADRE\' in table \'COMPUESTOS_PARTES\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCOMPUESTOS_PARTES.PART_NUMERO_PADREColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal PART_NUMERO_HIJO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCOMPUESTOS_PARTES.PART_NUMERO_HIJOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PART_NUMERO_HIJO\' in table \'COMPUESTOS_PARTES\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCOMPUESTOS_PARTES.PART_NUMERO_HIJOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal MP_CODIGO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCOMPUESTOS_PARTES.MP_CODIGOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MP_CODIGO\' in table \'COMPUESTOS_PARTES\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCOMPUESTOS_PARTES.MP_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal COMP_CANTIDAD {
-                get {
-                    return ((decimal)(this[this.tableCOMPUESTOS_PARTES.COMP_CANTIDADColumn]));
-                }
-                set {
-                    this[this.tableCOMPUESTOS_PARTES.COMP_CANTIDADColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal ESTR_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableCOMPUESTOS_PARTES.ESTR_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableCOMPUESTOS_PARTES.ESTR_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal UMED_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableCOMPUESTOS_PARTES.UMED_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableCOMPUESTOS_PARTES.UMED_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public UNIDADES_MEDIDARow UNIDADES_MEDIDARow {
-                get {
-                    return ((UNIDADES_MEDIDARow)(this.GetParentRow(this.Table.ParentRelations["FK_COMPUESTOS_PARTES_UNIDADES_MEDIDA"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_COMPUESTOS_PARTES_UNIDADES_MEDIDA"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ESTRUCTURASRow ESTRUCTURASRow {
-                get {
-                    return ((ESTRUCTURASRow)(this.GetParentRow(this.Table.ParentRelations["FK_COMPUESTOS_PARTES_ESTRUCTURAS"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_COMPUESTOS_PARTES_ESTRUCTURAS"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MATERIAS_PRIMASRow MATERIAS_PRIMASRow {
-                get {
-                    return ((MATERIAS_PRIMASRow)(this.GetParentRow(this.Table.ParentRelations["MATERIAS_PRIMAS_COMPUESTOS_PARTES"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["MATERIAS_PRIMAS_COMPUESTOS_PARTES"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PARTESRow PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO {
-                get {
-                    return ((PARTESRow)(this.GetParentRow(this.Table.ParentRelations["FK_COMPUESTOS_PARTES_PARTES_HIJO"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_COMPUESTOS_PARTES_PARTES_HIJO"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PARTESRow PARTESRowByFK_COMPUESTOS_PARTES_PARTES_PADRE {
-                get {
-                    return ((PARTESRow)(this.GetParentRow(this.Table.ParentRelations["FK_COMPUESTOS_PARTES_PARTES_PADRE"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_COMPUESTOS_PARTES_PARTES_PADRE"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPART_NUMERO_PADRENull() {
-                return this.IsNull(this.tableCOMPUESTOS_PARTES.PART_NUMERO_PADREColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPART_NUMERO_PADRENull() {
-                this[this.tableCOMPUESTOS_PARTES.PART_NUMERO_PADREColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPART_NUMERO_HIJONull() {
-                return this.IsNull(this.tableCOMPUESTOS_PARTES.PART_NUMERO_HIJOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPART_NUMERO_HIJONull() {
-                this[this.tableCOMPUESTOS_PARTES.PART_NUMERO_HIJOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsMP_CODIGONull() {
-                return this.IsNull(this.tableCOMPUESTOS_PARTES.MP_CODIGOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetMP_CODIGONull() {
-                this[this.tableCOMPUESTOS_PARTES.MP_CODIGOColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -6758,22 +6578,202 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COMPUESTOS_PARTESRow[] GetCOMPUESTOS_PARTESRowsByFK_COMPUESTOS_PARTES_PARTES_HIJO() {
-                if ((this.Table.ChildRelations["FK_COMPUESTOS_PARTES_PARTES_HIJO"] == null)) {
+            public COMPUESTOS_PARTESRow[] GetCOMPUESTOS_PARTESRows() {
+                if ((this.Table.ChildRelations["FK_COMPUESTOS_PARTES_PARTES"] == null)) {
                     return new COMPUESTOS_PARTESRow[0];
                 }
                 else {
-                    return ((COMPUESTOS_PARTESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_COMPUESTOS_PARTES_PARTES_HIJO"])));
+                    return ((COMPUESTOS_PARTESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_COMPUESTOS_PARTES_PARTES"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class COMPUESTOS_PARTESRow : global::System.Data.DataRow {
+            
+            private COMPUESTOS_PARTESDataTable tableCOMPUESTOS_PARTES;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal COMPUESTOS_PARTESRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableCOMPUESTOS_PARTES = ((COMPUESTOS_PARTESDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal COMP_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCOMPUESTOS_PARTES.COMP_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCOMPUESTOS_PARTES.COMP_CODIGOColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COMPUESTOS_PARTESRow[] GetCOMPUESTOS_PARTESRowsByFK_COMPUESTOS_PARTES_PARTES_PADRE() {
-                if ((this.Table.ChildRelations["FK_COMPUESTOS_PARTES_PARTES_PADRE"] == null)) {
+            public decimal PART_NUMERO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCOMPUESTOS_PARTES.PART_NUMEROColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PART_NUMERO\' in table \'COMPUESTOS_PARTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCOMPUESTOS_PARTES.PART_NUMEROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal MP_CODIGO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCOMPUESTOS_PARTES.MP_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MP_CODIGO\' in table \'COMPUESTOS_PARTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCOMPUESTOS_PARTES.MP_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal COMP_CANTIDAD {
+                get {
+                    return ((decimal)(this[this.tableCOMPUESTOS_PARTES.COMP_CANTIDADColumn]));
+                }
+                set {
+                    this[this.tableCOMPUESTOS_PARTES.COMP_CANTIDADColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal ESTR_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCOMPUESTOS_PARTES.ESTR_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCOMPUESTOS_PARTES.ESTR_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal UMED_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCOMPUESTOS_PARTES.UMED_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCOMPUESTOS_PARTES.UMED_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal COMP_CODIGO_PADRE {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableCOMPUESTOS_PARTES.COMP_CODIGO_PADREColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'COMP_CODIGO_PADRE\' in table \'COMPUESTOS_PARTES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCOMPUESTOS_PARTES.COMP_CODIGO_PADREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COMPUESTOS_PARTESRow COMPUESTOS_PARTESRowParent {
+                get {
+                    return ((COMPUESTOS_PARTESRow)(this.GetParentRow(this.Table.ParentRelations["FK_COMPUESTOS_PARTES_COMPUESTOS_PARTES"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_COMPUESTOS_PARTES_COMPUESTOS_PARTES"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ESTRUCTURASRow ESTRUCTURASRow {
+                get {
+                    return ((ESTRUCTURASRow)(this.GetParentRow(this.Table.ParentRelations["FK_COMPUESTOS_PARTES_ESTRUCTURAS"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_COMPUESTOS_PARTES_ESTRUCTURAS"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public PARTESRow PARTESRow {
+                get {
+                    return ((PARTESRow)(this.GetParentRow(this.Table.ParentRelations["FK_COMPUESTOS_PARTES_PARTES"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_COMPUESTOS_PARTES_PARTES"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UNIDADES_MEDIDARow UNIDADES_MEDIDARow {
+                get {
+                    return ((UNIDADES_MEDIDARow)(this.GetParentRow(this.Table.ParentRelations["FK_COMPUESTOS_PARTES_UNIDADES_MEDIDA"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_COMPUESTOS_PARTES_UNIDADES_MEDIDA"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MATERIAS_PRIMASRow MATERIAS_PRIMASRow {
+                get {
+                    return ((MATERIAS_PRIMASRow)(this.GetParentRow(this.Table.ParentRelations["MATERIAS_PRIMAS_COMPUESTOS_PARTES"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["MATERIAS_PRIMAS_COMPUESTOS_PARTES"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPART_NUMERONull() {
+                return this.IsNull(this.tableCOMPUESTOS_PARTES.PART_NUMEROColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPART_NUMERONull() {
+                this[this.tableCOMPUESTOS_PARTES.PART_NUMEROColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMP_CODIGONull() {
+                return this.IsNull(this.tableCOMPUESTOS_PARTES.MP_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMP_CODIGONull() {
+                this[this.tableCOMPUESTOS_PARTES.MP_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCOMP_CODIGO_PADRENull() {
+                return this.IsNull(this.tableCOMPUESTOS_PARTES.COMP_CODIGO_PADREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCOMP_CODIGO_PADRENull() {
+                this[this.tableCOMPUESTOS_PARTES.COMP_CODIGO_PADREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COMPUESTOS_PARTESRow[] GetCOMPUESTOS_PARTESRows() {
+                if ((this.Table.ChildRelations["FK_COMPUESTOS_PARTES_COMPUESTOS_PARTES"] == null)) {
                     return new COMPUESTOS_PARTESRow[0];
                 }
                 else {
-                    return ((COMPUESTOS_PARTESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_COMPUESTOS_PARTES_PARTES_PADRE"])));
+                    return ((COMPUESTOS_PARTESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_COMPUESTOS_PARTES_COMPUESTOS_PARTES"])));
                 }
             }
         }
@@ -6968,37 +6968,6 @@ namespace GyCAP.Data {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class COMPUESTOS_PARTESRowChangeEvent : global::System.EventArgs {
-            
-            private COMPUESTOS_PARTESRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COMPUESTOS_PARTESRowChangeEvent(COMPUESTOS_PARTESRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public COMPUESTOS_PARTESRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public class ESTRUCTURASRowChangeEvent : global::System.EventArgs {
             
             private ESTRUCTURASRow eventRow;
@@ -7137,6 +7106,37 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public PARTESRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class COMPUESTOS_PARTESRowChangeEvent : global::System.EventArgs {
+            
+            private COMPUESTOS_PARTESRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COMPUESTOS_PARTESRowChangeEvent(COMPUESTOS_PARTESRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public COMPUESTOS_PARTESRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -9819,408 +9819,6 @@ SELECT UMED_CODIGO, TUMED_CODIGO, UMED_NOMBRE, UMED_ABREVIATURA FROM UNIDADES_ME
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class COMPUESTOS_PARTESTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public COMPUESTOS_PARTESTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "COMPUESTOS_PARTES";
-            tableMapping.ColumnMappings.Add("COMP_CODIGO", "COMP_CODIGO");
-            tableMapping.ColumnMappings.Add("PART_NUMERO_PADRE", "PART_NUMERO_PADRE");
-            tableMapping.ColumnMappings.Add("PART_NUMERO_HIJO", "PART_NUMERO_HIJO");
-            tableMapping.ColumnMappings.Add("MP_CODIGO", "MP_CODIGO");
-            tableMapping.ColumnMappings.Add("COMP_CANTIDAD", "COMP_CANTIDAD");
-            tableMapping.ColumnMappings.Add("ESTR_CODIGO", "ESTR_CODIGO");
-            tableMapping.ColumnMappings.Add("UMED_CODIGO", "UMED_CODIGO");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[COMPUESTOS_PARTES] WHERE (([COMP_CODIGO] = @Original_COMP_CODIGO) AND ((@IsNull_PART_NUMERO_PADRE = 1 AND [PART_NUMERO_PADRE] IS NULL) OR ([PART_NUMERO_PADRE] = @Original_PART_NUMERO_PADRE)) AND ((@IsNull_PART_NUMERO_HIJO = 1 AND [PART_NUMERO_HIJO] IS NULL) OR ([PART_NUMERO_HIJO] = @Original_PART_NUMERO_HIJO)) AND ((@IsNull_MP_CODIGO = 1 AND [MP_CODIGO] IS NULL) OR ([MP_CODIGO] = @Original_MP_CODIGO)) AND ([COMP_CANTIDAD] = @Original_COMP_CANTIDAD) AND ([ESTR_CODIGO] = @Original_ESTR_CODIGO) AND ([UMED_CODIGO] = @Original_UMED_CODIGO))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COMP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COMP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_NUMERO_PADRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_NUMERO_PADRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_NUMERO_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO_PADRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_NUMERO_HIJO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_NUMERO_HIJO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_NUMERO_HIJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO_HIJO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COMP_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "COMP_CANTIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[COMPUESTOS_PARTES] ([PART_NUMERO_PADRE], [PART_NUMERO_HIJO], [MP_CODIGO], [COMP_CANTIDAD], [ESTR_CODIGO], [UMED_CODIGO]) VALUES (@PART_NUMERO_PADRE, @PART_NUMERO_HIJO, @MP_CODIGO, @COMP_CANTIDAD, @ESTR_CODIGO, @UMED_CODIGO);
-SELECT COMP_CODIGO, PART_NUMERO_PADRE, PART_NUMERO_HIJO, MP_CODIGO, COMP_CANTIDAD, ESTR_CODIGO, UMED_CODIGO FROM COMPUESTOS_PARTES WHERE (COMP_CODIGO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_NUMERO_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO_PADRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_NUMERO_HIJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO_HIJO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COMP_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "COMP_CANTIDAD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[COMPUESTOS_PARTES] SET [PART_NUMERO_PADRE] = @PART_NUMERO_PADRE, [PART_NUMERO_HIJO] = @PART_NUMERO_HIJO, [MP_CODIGO] = @MP_CODIGO, [COMP_CANTIDAD] = @COMP_CANTIDAD, [ESTR_CODIGO] = @ESTR_CODIGO, [UMED_CODIGO] = @UMED_CODIGO WHERE (([COMP_CODIGO] = @Original_COMP_CODIGO) AND ((@IsNull_PART_NUMERO_PADRE = 1 AND [PART_NUMERO_PADRE] IS NULL) OR ([PART_NUMERO_PADRE] = @Original_PART_NUMERO_PADRE)) AND ((@IsNull_PART_NUMERO_HIJO = 1 AND [PART_NUMERO_HIJO] IS NULL) OR ([PART_NUMERO_HIJO] = @Original_PART_NUMERO_HIJO)) AND ((@IsNull_MP_CODIGO = 1 AND [MP_CODIGO] IS NULL) OR ([MP_CODIGO] = @Original_MP_CODIGO)) AND ([COMP_CANTIDAD] = @Original_COMP_CANTIDAD) AND ([ESTR_CODIGO] = @Original_ESTR_CODIGO) AND ([UMED_CODIGO] = @Original_UMED_CODIGO));
-SELECT COMP_CODIGO, PART_NUMERO_PADRE, PART_NUMERO_HIJO, MP_CODIGO, COMP_CANTIDAD, ESTR_CODIGO, UMED_CODIGO FROM COMPUESTOS_PARTES WHERE (COMP_CODIGO = @COMP_CODIGO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_NUMERO_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO_PADRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_NUMERO_HIJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO_HIJO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COMP_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "COMP_CANTIDAD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COMP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COMP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_NUMERO_PADRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_NUMERO_PADRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_NUMERO_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO_PADRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_NUMERO_HIJO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_NUMERO_HIJO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_NUMERO_HIJO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO_HIJO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COMP_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "COMP_CANTIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COMP_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "COMP_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT COMP_CODIGO, PART_NUMERO_PADRE, PART_NUMERO_HIJO, MP_CODIGO, COMP_CANTIDAD" +
-                ", ESTR_CODIGO, UMED_CODIGO FROM dbo.COMPUESTOS_PARTES";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsEstructuraProducto.COMPUESTOS_PARTESDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsEstructuraProducto.COMPUESTOS_PARTESDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsEstructuraProducto.COMPUESTOS_PARTESDataTable dataTable = new dsEstructuraProducto.COMPUESTOS_PARTESDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsEstructuraProducto.COMPUESTOS_PARTESDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsEstructuraProducto dataSet) {
-            return this.Adapter.Update(dataSet, "COMPUESTOS_PARTES");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_COMP_CODIGO, global::System.Nullable<decimal> Original_PART_NUMERO_PADRE, global::System.Nullable<decimal> Original_PART_NUMERO_HIJO, global::System.Nullable<decimal> Original_MP_CODIGO, decimal Original_COMP_CANTIDAD, decimal Original_ESTR_CODIGO, decimal Original_UMED_CODIGO) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_COMP_CODIGO));
-            if ((Original_PART_NUMERO_PADRE.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_PART_NUMERO_PADRE.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PART_NUMERO_HIJO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_PART_NUMERO_HIJO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((Original_MP_CODIGO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((decimal)(Original_MP_CODIGO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.DeleteCommand.Parameters[7].Value = ((decimal)(Original_COMP_CANTIDAD));
-            this.Adapter.DeleteCommand.Parameters[8].Value = ((decimal)(Original_ESTR_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[9].Value = ((decimal)(Original_UMED_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<decimal> PART_NUMERO_PADRE, global::System.Nullable<decimal> PART_NUMERO_HIJO, global::System.Nullable<decimal> MP_CODIGO, decimal COMP_CANTIDAD, decimal ESTR_CODIGO, decimal UMED_CODIGO) {
-            if ((PART_NUMERO_PADRE.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(PART_NUMERO_PADRE.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((PART_NUMERO_HIJO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(PART_NUMERO_HIJO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((MP_CODIGO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(MP_CODIGO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(COMP_CANTIDAD));
-            this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(ESTR_CODIGO));
-            this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(UMED_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<decimal> PART_NUMERO_PADRE, global::System.Nullable<decimal> PART_NUMERO_HIJO, global::System.Nullable<decimal> MP_CODIGO, decimal COMP_CANTIDAD, decimal ESTR_CODIGO, decimal UMED_CODIGO, decimal Original_COMP_CODIGO, global::System.Nullable<decimal> Original_PART_NUMERO_PADRE, global::System.Nullable<decimal> Original_PART_NUMERO_HIJO, global::System.Nullable<decimal> Original_MP_CODIGO, decimal Original_COMP_CANTIDAD, decimal Original_ESTR_CODIGO, decimal Original_UMED_CODIGO, decimal COMP_CODIGO) {
-            if ((PART_NUMERO_PADRE.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(PART_NUMERO_PADRE.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((PART_NUMERO_HIJO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(PART_NUMERO_HIJO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((MP_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(MP_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(COMP_CANTIDAD));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(ESTR_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(UMED_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_COMP_CODIGO));
-            if ((Original_PART_NUMERO_PADRE.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_PART_NUMERO_PADRE.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((Original_PART_NUMERO_HIJO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_PART_NUMERO_HIJO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((Original_MP_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_MP_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_COMP_CANTIDAD));
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(Original_ESTR_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[15].Value = ((decimal)(Original_UMED_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((decimal)(COMP_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<decimal> PART_NUMERO_PADRE, global::System.Nullable<decimal> PART_NUMERO_HIJO, global::System.Nullable<decimal> MP_CODIGO, decimal COMP_CANTIDAD, decimal ESTR_CODIGO, decimal UMED_CODIGO, decimal Original_COMP_CODIGO, global::System.Nullable<decimal> Original_PART_NUMERO_PADRE, global::System.Nullable<decimal> Original_PART_NUMERO_HIJO, global::System.Nullable<decimal> Original_MP_CODIGO, decimal Original_COMP_CANTIDAD, decimal Original_ESTR_CODIGO, decimal Original_UMED_CODIGO) {
-            return this.Update(PART_NUMERO_PADRE, PART_NUMERO_HIJO, MP_CODIGO, COMP_CANTIDAD, ESTR_CODIGO, UMED_CODIGO, Original_COMP_CODIGO, Original_PART_NUMERO_PADRE, Original_PART_NUMERO_HIJO, Original_MP_CODIGO, Original_COMP_CANTIDAD, Original_ESTR_CODIGO, Original_UMED_CODIGO, Original_COMP_CODIGO);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class ESTRUCTURASTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
@@ -12756,6 +12354,408 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class COMPUESTOS_PARTESTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public COMPUESTOS_PARTESTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "COMPUESTOS_PARTES";
+            tableMapping.ColumnMappings.Add("COMP_CODIGO", "COMP_CODIGO");
+            tableMapping.ColumnMappings.Add("PART_NUMERO", "PART_NUMERO");
+            tableMapping.ColumnMappings.Add("MP_CODIGO", "MP_CODIGO");
+            tableMapping.ColumnMappings.Add("COMP_CANTIDAD", "COMP_CANTIDAD");
+            tableMapping.ColumnMappings.Add("ESTR_CODIGO", "ESTR_CODIGO");
+            tableMapping.ColumnMappings.Add("UMED_CODIGO", "UMED_CODIGO");
+            tableMapping.ColumnMappings.Add("COMP_CODIGO_PADRE", "COMP_CODIGO_PADRE");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[COMPUESTOS_PARTES] WHERE (([COMP_CODIGO] = @Original_COMP_CODIGO) AND ((@IsNull_PART_NUMERO = 1 AND [PART_NUMERO] IS NULL) OR ([PART_NUMERO] = @Original_PART_NUMERO)) AND ((@IsNull_MP_CODIGO = 1 AND [MP_CODIGO] IS NULL) OR ([MP_CODIGO] = @Original_MP_CODIGO)) AND ([COMP_CANTIDAD] = @Original_COMP_CANTIDAD) AND ([ESTR_CODIGO] = @Original_ESTR_CODIGO) AND ([UMED_CODIGO] = @Original_UMED_CODIGO) AND ((@IsNull_COMP_CODIGO_PADRE = 1 AND [COMP_CODIGO_PADRE] IS NULL) OR ([COMP_CODIGO_PADRE] = @Original_COMP_CODIGO_PADRE)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COMP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COMP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COMP_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "COMP_CANTIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_COMP_CODIGO_PADRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COMP_CODIGO_PADRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COMP_CODIGO_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COMP_CODIGO_PADRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[COMPUESTOS_PARTES] ([PART_NUMERO], [MP_CODIGO], [COMP_CANTIDAD], [ESTR_CODIGO], [UMED_CODIGO], [COMP_CODIGO_PADRE]) VALUES (@PART_NUMERO, @MP_CODIGO, @COMP_CANTIDAD, @ESTR_CODIGO, @UMED_CODIGO, @COMP_CODIGO_PADRE);
+SELECT COMP_CODIGO, PART_NUMERO, MP_CODIGO, COMP_CANTIDAD, ESTR_CODIGO, UMED_CODIGO, COMP_CODIGO_PADRE FROM COMPUESTOS_PARTES WHERE (COMP_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COMP_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "COMP_CANTIDAD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COMP_CODIGO_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COMP_CODIGO_PADRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[COMPUESTOS_PARTES] SET [PART_NUMERO] = @PART_NUMERO, [MP_CODIGO] = @MP_CODIGO, [COMP_CANTIDAD] = @COMP_CANTIDAD, [ESTR_CODIGO] = @ESTR_CODIGO, [UMED_CODIGO] = @UMED_CODIGO, [COMP_CODIGO_PADRE] = @COMP_CODIGO_PADRE WHERE (([COMP_CODIGO] = @Original_COMP_CODIGO) AND ((@IsNull_PART_NUMERO = 1 AND [PART_NUMERO] IS NULL) OR ([PART_NUMERO] = @Original_PART_NUMERO)) AND ((@IsNull_MP_CODIGO = 1 AND [MP_CODIGO] IS NULL) OR ([MP_CODIGO] = @Original_MP_CODIGO)) AND ([COMP_CANTIDAD] = @Original_COMP_CANTIDAD) AND ([ESTR_CODIGO] = @Original_ESTR_CODIGO) AND ([UMED_CODIGO] = @Original_UMED_CODIGO) AND ((@IsNull_COMP_CODIGO_PADRE = 1 AND [COMP_CODIGO_PADRE] IS NULL) OR ([COMP_CODIGO_PADRE] = @Original_COMP_CODIGO_PADRE)));
+SELECT COMP_CODIGO, PART_NUMERO, MP_CODIGO, COMP_CANTIDAD, ESTR_CODIGO, UMED_CODIGO, COMP_CODIGO_PADRE FROM COMPUESTOS_PARTES WHERE (COMP_CODIGO = @COMP_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PART_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COMP_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "COMP_CANTIDAD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COMP_CODIGO_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COMP_CODIGO_PADRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COMP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COMP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_PART_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PART_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PART_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "PART_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MP_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MP_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MP_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COMP_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "COMP_CANTIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ESTR_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ESTR_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_COMP_CODIGO_PADRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COMP_CODIGO_PADRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_COMP_CODIGO_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "COMP_CODIGO_PADRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COMP_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "COMP_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT COMP_CODIGO, PART_NUMERO, MP_CODIGO, COMP_CANTIDAD, ESTR_CODIGO, UMED_CODI" +
+                "GO, COMP_CODIGO_PADRE FROM dbo.COMPUESTOS_PARTES";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsEstructuraProducto.COMPUESTOS_PARTESDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsEstructuraProducto.COMPUESTOS_PARTESDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsEstructuraProducto.COMPUESTOS_PARTESDataTable dataTable = new dsEstructuraProducto.COMPUESTOS_PARTESDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsEstructuraProducto.COMPUESTOS_PARTESDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsEstructuraProducto dataSet) {
+            return this.Adapter.Update(dataSet, "COMPUESTOS_PARTES");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_COMP_CODIGO, global::System.Nullable<decimal> Original_PART_NUMERO, global::System.Nullable<decimal> Original_MP_CODIGO, decimal Original_COMP_CANTIDAD, decimal Original_ESTR_CODIGO, decimal Original_UMED_CODIGO, global::System.Nullable<decimal> Original_COMP_CODIGO_PADRE) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_COMP_CODIGO));
+            if ((Original_PART_NUMERO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_PART_NUMERO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((Original_MP_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_MP_CODIGO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((decimal)(Original_COMP_CANTIDAD));
+            this.Adapter.DeleteCommand.Parameters[6].Value = ((decimal)(Original_ESTR_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[7].Value = ((decimal)(Original_UMED_CODIGO));
+            if ((Original_COMP_CODIGO_PADRE.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((decimal)(Original_COMP_CODIGO_PADRE.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(global::System.Nullable<decimal> PART_NUMERO, global::System.Nullable<decimal> MP_CODIGO, decimal COMP_CANTIDAD, decimal ESTR_CODIGO, decimal UMED_CODIGO, global::System.Nullable<decimal> COMP_CODIGO_PADRE) {
+            if ((PART_NUMERO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(PART_NUMERO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((MP_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(MP_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(COMP_CANTIDAD));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(ESTR_CODIGO));
+            this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(UMED_CODIGO));
+            if ((COMP_CODIGO_PADRE.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(COMP_CODIGO_PADRE.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(global::System.Nullable<decimal> PART_NUMERO, global::System.Nullable<decimal> MP_CODIGO, decimal COMP_CANTIDAD, decimal ESTR_CODIGO, decimal UMED_CODIGO, global::System.Nullable<decimal> COMP_CODIGO_PADRE, decimal Original_COMP_CODIGO, global::System.Nullable<decimal> Original_PART_NUMERO, global::System.Nullable<decimal> Original_MP_CODIGO, decimal Original_COMP_CANTIDAD, decimal Original_ESTR_CODIGO, decimal Original_UMED_CODIGO, global::System.Nullable<decimal> Original_COMP_CODIGO_PADRE, decimal COMP_CODIGO) {
+            if ((PART_NUMERO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(PART_NUMERO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((MP_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(MP_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(COMP_CANTIDAD));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(ESTR_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(UMED_CODIGO));
+            if ((COMP_CODIGO_PADRE.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(COMP_CODIGO_PADRE.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_COMP_CODIGO));
+            if ((Original_PART_NUMERO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_PART_NUMERO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((Original_MP_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_MP_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_COMP_CANTIDAD));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_ESTR_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_UMED_CODIGO));
+            if ((Original_COMP_CODIGO_PADRE.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((decimal)(Original_COMP_CODIGO_PADRE.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[16].Value = ((decimal)(COMP_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(global::System.Nullable<decimal> PART_NUMERO, global::System.Nullable<decimal> MP_CODIGO, decimal COMP_CANTIDAD, decimal ESTR_CODIGO, decimal UMED_CODIGO, global::System.Nullable<decimal> COMP_CODIGO_PADRE, decimal Original_COMP_CODIGO, global::System.Nullable<decimal> Original_PART_NUMERO, global::System.Nullable<decimal> Original_MP_CODIGO, decimal Original_COMP_CANTIDAD, decimal Original_ESTR_CODIGO, decimal Original_UMED_CODIGO, global::System.Nullable<decimal> Original_COMP_CODIGO_PADRE) {
+            return this.Update(PART_NUMERO, MP_CODIGO, COMP_CANTIDAD, ESTR_CODIGO, UMED_CODIGO, COMP_CODIGO_PADRE, Original_COMP_CODIGO, Original_PART_NUMERO, Original_MP_CODIGO, Original_COMP_CANTIDAD, Original_ESTR_CODIGO, Original_UMED_CODIGO, Original_COMP_CODIGO_PADRE, Original_COMP_CODIGO);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -12780,8 +12780,6 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
         
         private UNIDADES_MEDIDATableAdapter _uNIDADES_MEDIDATableAdapter;
         
-        private COMPUESTOS_PARTESTableAdapter _cOMPUESTOS_PARTESTableAdapter;
-        
         private ESTRUCTURASTableAdapter _eSTRUCTURASTableAdapter;
         
         private MATERIAS_PRIMASTableAdapter _mATERIAS_PRIMASTableAdapter;
@@ -12791,6 +12789,8 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
         private UBICACIONES_STOCKTableAdapter _uBICACIONES_STOCKTableAdapter;
         
         private PARTESTableAdapter _pARTESTableAdapter;
+        
+        private COMPUESTOS_PARTESTableAdapter _cOMPUESTOS_PARTESTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -12888,19 +12888,6 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
             "", "System.Drawing.Design.UITypeEditor")]
-        public COMPUESTOS_PARTESTableAdapter COMPUESTOS_PARTESTableAdapter {
-            get {
-                return this._cOMPUESTOS_PARTESTableAdapter;
-            }
-            set {
-                this._cOMPUESTOS_PARTESTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
         public ESTRUCTURASTableAdapter ESTRUCTURASTableAdapter {
             get {
                 return this._eSTRUCTURASTableAdapter;
@@ -12963,6 +12950,19 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public COMPUESTOS_PARTESTableAdapter COMPUESTOS_PARTESTableAdapter {
+            get {
+                return this._cOMPUESTOS_PARTESTableAdapter;
+            }
+            set {
+                this._cOMPUESTOS_PARTESTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -13003,10 +13003,6 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
                             && (this._uNIDADES_MEDIDATableAdapter.Connection != null))) {
                     return this._uNIDADES_MEDIDATableAdapter.Connection;
                 }
-                if (((this._cOMPUESTOS_PARTESTableAdapter != null) 
-                            && (this._cOMPUESTOS_PARTESTableAdapter.Connection != null))) {
-                    return this._cOMPUESTOS_PARTESTableAdapter.Connection;
-                }
                 if (((this._eSTRUCTURASTableAdapter != null) 
                             && (this._eSTRUCTURASTableAdapter.Connection != null))) {
                     return this._eSTRUCTURASTableAdapter.Connection;
@@ -13026,6 +13022,10 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
                 if (((this._pARTESTableAdapter != null) 
                             && (this._pARTESTableAdapter.Connection != null))) {
                     return this._pARTESTableAdapter.Connection;
+                }
+                if (((this._cOMPUESTOS_PARTESTableAdapter != null) 
+                            && (this._cOMPUESTOS_PARTESTableAdapter.Connection != null))) {
+                    return this._cOMPUESTOS_PARTESTableAdapter.Connection;
                 }
                 return null;
             }
@@ -13057,9 +13057,6 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
                 if ((this._uNIDADES_MEDIDATableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._cOMPUESTOS_PARTESTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._eSTRUCTURASTableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -13073,6 +13070,9 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
                     count = (count + 1);
                 }
                 if ((this._pARTESTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._cOMPUESTOS_PARTESTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -13190,6 +13190,7 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
+                    this.SortSelfReferenceRows(updatedRows, dataSet.Relations["FK_COMPUESTOS_PARTES_COMPUESTOS_PARTES"], false);
                     result = (result + this._cOMPUESTOS_PARTESTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
@@ -13296,6 +13297,7 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
                 global::System.Data.DataRow[] addedRows = dataSet.COMPUESTOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
+                    this.SortSelfReferenceRows(addedRows, dataSet.Relations["FK_COMPUESTOS_PARTES_COMPUESTOS_PARTES"], false);
                     result = (result + this._cOMPUESTOS_PARTESTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
@@ -13313,6 +13315,7 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
                 global::System.Data.DataRow[] deletedRows = dataSet.COMPUESTOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
+                    this.SortSelfReferenceRows(deletedRows, dataSet.Relations["FK_COMPUESTOS_PARTES_COMPUESTOS_PARTES"], true);
                     result = (result + this._cOMPUESTOS_PARTESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
@@ -13473,11 +13476,6 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._cOMPUESTOS_PARTESTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._cOMPUESTOS_PARTESTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._eSTRUCTURASTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._eSTRUCTURASTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -13500,6 +13498,11 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
             }
             if (((this._pARTESTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._pARTESTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._cOMPUESTOS_PARTESTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._cOMPUESTOS_PARTESTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -13589,15 +13592,6 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
                         adaptersWithAcceptChangesDuringUpdate.Add(this._uNIDADES_MEDIDATableAdapter.Adapter);
                     }
                 }
-                if ((this._cOMPUESTOS_PARTESTableAdapter != null)) {
-                    revertConnections.Add(this._cOMPUESTOS_PARTESTableAdapter, this._cOMPUESTOS_PARTESTableAdapter.Connection);
-                    this._cOMPUESTOS_PARTESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._cOMPUESTOS_PARTESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._cOMPUESTOS_PARTESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._cOMPUESTOS_PARTESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._cOMPUESTOS_PARTESTableAdapter.Adapter);
-                    }
-                }
                 if ((this._eSTRUCTURASTableAdapter != null)) {
                     revertConnections.Add(this._eSTRUCTURASTableAdapter, this._eSTRUCTURASTableAdapter.Connection);
                     this._eSTRUCTURASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -13641,6 +13635,15 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
                     if (this._pARTESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._pARTESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._pARTESTableAdapter.Adapter);
+                    }
+                }
+                if ((this._cOMPUESTOS_PARTESTableAdapter != null)) {
+                    revertConnections.Add(this._cOMPUESTOS_PARTESTableAdapter, this._cOMPUESTOS_PARTESTableAdapter.Connection);
+                    this._cOMPUESTOS_PARTESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._cOMPUESTOS_PARTESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._cOMPUESTOS_PARTESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._cOMPUESTOS_PARTESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._cOMPUESTOS_PARTESTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -13725,10 +13728,6 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
                     this._uNIDADES_MEDIDATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._uNIDADES_MEDIDATableAdapter]));
                     this._uNIDADES_MEDIDATableAdapter.Transaction = null;
                 }
-                if ((this._cOMPUESTOS_PARTESTableAdapter != null)) {
-                    this._cOMPUESTOS_PARTESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cOMPUESTOS_PARTESTableAdapter]));
-                    this._cOMPUESTOS_PARTESTableAdapter.Transaction = null;
-                }
                 if ((this._eSTRUCTURASTableAdapter != null)) {
                     this._eSTRUCTURASTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._eSTRUCTURASTableAdapter]));
                     this._eSTRUCTURASTableAdapter.Transaction = null;
@@ -13748,6 +13747,10 @@ SELECT PART_NUMERO, PART_NOMBRE, PART_DESCRIPCION, PART_CODIGO, PNO_CODIGO, PART
                 if ((this._pARTESTableAdapter != null)) {
                     this._pARTESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pARTESTableAdapter]));
                     this._pARTESTableAdapter.Transaction = null;
+                }
+                if ((this._cOMPUESTOS_PARTESTableAdapter != null)) {
+                    this._cOMPUESTOS_PARTESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cOMPUESTOS_PARTESTableAdapter]));
+                    this._cOMPUESTOS_PARTESTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

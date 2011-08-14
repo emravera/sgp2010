@@ -136,7 +136,7 @@ namespace GyCAP.BLL
             arbol.Nodes.Clear();
             lastCompID = -1;
             //Obtenemos la parte padre de nivel 0 y la agregamos al árbol
-            string filtro = "estr_codigo = " + codigoEstructura + " AND part_numero_padre IS NULL";
+            string filtro = "estr_codigo = " + codigoEstructura + " AND comp_codigo_padre IS NULL";
             Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuestoInicio = (dsEstructura.COMPUESTOS_PARTES.Select(filtro) as Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])[0];
             TreeNode nodoInicio = new TreeNode();
             if (clonar) 
@@ -149,8 +149,8 @@ namespace GyCAP.BLL
                 rowCompInicioCloned.COMP_CANTIDAD = rowCompuestoInicio.COMP_CANTIDAD;
                 rowCompInicioCloned.ESTR_CODIGO = -1;
                 rowCompInicioCloned.SetMP_CODIGONull();
-                rowCompInicioCloned.PART_NUMERO_HIJO = rowCompuestoInicio.PART_NUMERO_HIJO;
-                rowCompInicioCloned.SetPART_NUMERO_PADRENull();
+                rowCompInicioCloned.PART_NUMERO = rowCompuestoInicio.PART_NUMERO;
+                rowCompInicioCloned.SetCOMP_CODIGO_PADRENull();
                 rowCompInicioCloned.UMED_CODIGO = rowCompuestoInicio.UMED_CODIGO;
                 rowCompInicioCloned.EndEdit();
                 dsEstructura.COMPUESTOS_PARTES.AddCOMPUESTOS_PARTESRow(rowCompInicioCloned);
@@ -158,21 +158,22 @@ namespace GyCAP.BLL
             }
             else { nodoInicio.Name = rowCompuestoInicio.COMP_CODIGO.ToString(); }
             
-            nodoInicio.Text = rowCompuestoInicio.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE + " - " + rowCompuestoInicio.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_CODIGO;            
+            nodoInicio.Text = rowCompuestoInicio.PARTESRow.PART_NOMBRE + " - " + rowCompuestoInicio.PARTESRow.PART_CODIGO;            
             nodoInicio.Tag = BLL.CompuestoParteBLL.HijoEsParte;
             arbol.Nodes.Add(nodoInicio);
 
             //Ahora creamos todas las ramas con sus hojas
-            foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowComp in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codigoEstructura + " AND (part_numero_hijo <> " + rowCompuestoInicio.PART_NUMERO_HIJO.ToString() + " OR part_numero_hijo IS NULL)"))
+            filtro = "estr_codigo = " + codigoEstructura + " AND comp_codigo_padre IS NOT NULL";
+            foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowComp in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(filtro))
             {
                 TreeNode nodo = new TreeNode();
                 if (clonar) { nodo.Name = lastCompID.ToString(); }
                 else { nodo.Name = rowComp.COMP_CODIGO.ToString(); }
-                nodo.Text = ((rowComp.IsMP_CODIGONull()) ? (rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE + " - " + rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_CODIGO) : (rowComp.MATERIAS_PRIMASRow.MP_NOMBRE));
+                nodo.Text = ((rowComp.IsMP_CODIGONull()) ? (rowComp.PARTESRow.PART_NOMBRE + " - " + rowComp.PARTESRow.PART_CODIGO) : (rowComp.MATERIAS_PRIMASRow.MP_NOMBRE));
                 nodo.Text += " / #" + rowComp.COMP_CANTIDAD.ToString() + " " + rowComp.UNIDADES_MEDIDARow.UMED_ABREVIATURA;
                 nodo.Tag = ((rowComp.IsMP_CODIGONull()) ? BLL.CompuestoParteBLL.HijoEsParte : BLL.CompuestoParteBLL.HijoEsMP);
-                string key = (dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + ((clonar)? "-1" : codigoEstructura.ToString()) + " AND part_numero_hijo = " + rowComp.PART_NUMERO_PADRE.ToString()) as Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])[0].COMP_CODIGO.ToString();
-                arbol.Nodes.Find(key, true)[0].Nodes.Add(nodo);
+                string key = (dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + ((clonar)? "-1" : codigoEstructura.ToString()) + " AND comp_codigo_padre = " + rowComp.COMP_CODIGO_PADRE.ToString()) as Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])[0].COMP_CODIGO.ToString();
+                arbol.Nodes.Find(rowComp.COMP_CODIGO_PADRE.ToString(), true)[0].Nodes.Add(nodo);
                 if (clonar)
                 {
                     Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompCloned = dsEstructura.COMPUESTOS_PARTES.NewCOMPUESTOS_PARTESRow();
@@ -180,10 +181,10 @@ namespace GyCAP.BLL
                     rowCompCloned.COMP_CODIGO = lastCompID;
                     rowCompCloned.COMP_CANTIDAD = rowComp.COMP_CANTIDAD;
                     rowCompCloned.ESTR_CODIGO = -1;
-                    if (rowComp.IsMP_CODIGONull()) { rowCompCloned.SetMP_CODIGONull(); rowCompCloned.PART_NUMERO_HIJO = rowComp.PART_NUMERO_HIJO; }
-                    else { rowCompCloned.SetPART_NUMERO_HIJONull(); rowCompCloned.MP_CODIGO = rowComp.MP_CODIGO; }
-                    rowCompCloned.PART_NUMERO_PADRE = rowComp.PART_NUMERO_PADRE;
+                    if (rowComp.IsMP_CODIGONull()) { rowCompCloned.SetMP_CODIGONull(); rowCompCloned.PART_NUMERO = rowComp.PART_NUMERO; }
+                    else { rowCompCloned.SetMP_CODIGONull(); rowCompCloned.MP_CODIGO = rowComp.MP_CODIGO; }
                     rowCompCloned.UMED_CODIGO = rowComp.UMED_CODIGO;
+                    rowCompCloned.COMP_CODIGO_PADRE = rowComp.COMP_CODIGO_PADRE;
                     rowCompCloned.EndEdit();
                     dsEstructura.COMPUESTOS_PARTES.AddCOMPUESTOS_PARTESRow(rowCompCloned);
                     lastCompID--;
@@ -197,51 +198,47 @@ namespace GyCAP.BLL
         {
             ArbolEstructura arbolEstructura = new ArbolEstructura(codigoEstructura);
 
-            string filtro = "estr_codigo = " + codigoEstructura + " AND part_numero_padre IS NULL";
+            string filtro = "estr_codigo = " + codigoEstructura + " AND comp_codigo_padre IS NULL";
             Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuestoInicio = (dsEstructura.COMPUESTOS_PARTES.Select(filtro) as Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])[0];
-            
-            arbolEstructura.NodoRaiz.CodigoNodo = arbolEstructura.GetNextCodigoNodo();
-            arbolEstructura.NodoRaiz.Contenido = NodoEstructura.tipoContenido.ProductoFinal;
-            arbolEstructura.NodoRaiz.Compuesto = new CompuestoParte
-                                                (
-                                                    Convert.ToInt32(rowCompuestoInicio.COMP_CODIGO),
-                                                    null,
-                                                    new Parte() { Nombre = rowCompuestoInicio.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE },
-                                                    null,
-                                                    rowCompuestoInicio.COMP_CANTIDAD,
-                                                    new UnidadMedida(Convert.ToInt32(rowCompuestoInicio.UMED_CODIGO)),
-                                                    new Estructura()
-                                                );
 
-            arbolEstructura.NodoRaiz.Text = rowCompuestoInicio.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE;
+            NodoEstructura nodoRaiz = new NodoEstructura();
+
+            nodoRaiz.CodigoNodo = arbolEstructura.GetNextCodigoNodo();
+            nodoRaiz.Contenido = NodoEstructura.tipoContenido.ProductoFinal;
+            nodoRaiz.Compuesto = new CompuestoParte()
+                                            {
+                                                Codigo = Convert.ToInt32(rowCompuestoInicio.COMP_CODIGO),
+                                                CompuestoPadre = null,
+                                                Parte = BLL.ParteBLL.AsParteEntity(Convert.ToInt32(rowCompuestoInicio.PART_NUMERO), dsEstructura),
+                                                MateriaPrima = null,
+                                                Cantidad = rowCompuestoInicio.COMP_CANTIDAD,
+                                                UnidadMedida = BLL.UnidadMedidaBLL.AsUnidadMedidaEntity(rowCompuestoInicio.UNIDADES_MEDIDARow),
+                                                Estructura = null
+                                            };
+
+            nodoRaiz.Text = rowCompuestoInicio.PARTESRow.PART_NOMBRE;
+            nodoRaiz.NodoPadre = null;
+            arbolEstructura.AddRaiz(nodoRaiz);
             
             foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowComp in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select
-                    ("estr_codigo = " + codigoEstructura + " AND (part_numero_hijo <> " + rowCompuestoInicio.PART_NUMERO_HIJO.ToString() + " OR part_numero_hijo IS NULL)"))
+                    ("estr_codigo = " + codigoEstructura + " AND comp_codigo_padre IS NOT NULL"))
             {
                 NodoEstructura nodo = new NodoEstructura();
                 nodo.CodigoNodo = Convert.ToInt32(rowComp.COMP_CODIGO);
-                nodo.Text = ((rowComp.IsMP_CODIGONull()) ? (rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE + " - " + rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_CODIGO) : (rowComp.MATERIAS_PRIMASRow.MP_NOMBRE));
-                nodo.Text += " / #" + rowComp.COMP_CANTIDAD.ToString() + " " + rowComp.UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                nodo.Text = ((rowComp.IsMP_CODIGONull()) ? (rowComp.PARTESRow.PART_NOMBRE + " - " + rowComp.PARTESRow.PART_CODIGO) : (rowComp.MATERIAS_PRIMASRow.MP_NOMBRE));
                 nodo.Contenido = ((rowComp.IsMP_CODIGONull()) ? NodoEstructura.tipoContenido.Parte : NodoEstructura.tipoContenido.MateriaPrima);
-                int key = Convert.ToInt32((dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codigoEstructura + "AND part_numero_hijo = " + rowComp.PART_NUMERO_PADRE) as Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])[0].COMP_CODIGO);
-                nodo.Compuesto = new CompuestoParte
-                                (
-                                    key,
-                                    new Parte(),
-                                    ((rowComp.IsMP_CODIGONull()) ? new Parte()
-                                        {
-                                            Nombre = rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE,
-                                            Tipo = new TipoParte()
-                                            {
-                                                Adquirido = Convert.ToInt32(rowCompuestoInicio.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.TIPOS_PARTESRow.TPAR_ADQUIRIDO)
-                                            }
-                                        } : null),
-                                    ((rowComp.IsMP_CODIGONull()) ? null : new MateriaPrima() { Nombre = rowComp.MATERIAS_PRIMASRow.MP_NOMBRE, Costo = rowComp.MATERIAS_PRIMASRow.MP_COSTO }),
-                                    rowComp.COMP_CANTIDAD,
-                                    new UnidadMedida() { Codigo = Convert.ToInt32(rowComp.UMED_CODIGO), Abreviatura = rowComp.UNIDADES_MEDIDARow.UMED_ABREVIATURA },
-                                    new Estructura()
-                                );
-                arbolEstructura.Find(key, null).NodosHijos.Add(nodo);
+                nodo.Compuesto = new CompuestoParte()
+                                {
+                                     Codigo = Convert.ToInt32(rowComp.COMP_CODIGO),
+                                     Parte = ((rowComp.IsMP_CODIGONull()) ? BLL.ParteBLL.AsParteEntity(Convert.ToInt32(rowComp.PART_NUMERO), dsEstructura) : null),
+                                     MateriaPrima = ((rowComp.IsMP_CODIGONull()) ? null : BLL.MateriaPrimaBLL.AsMateriaPrimaEntity(rowComp.MATERIAS_PRIMASRow)),
+                                     Cantidad = rowComp.COMP_CANTIDAD,
+                                     UnidadMedida = BLL.UnidadMedidaBLL.AsUnidadMedidaEntity(rowComp.UNIDADES_MEDIDARow),
+                                     Estructura = null,
+                                     CompuestoPadre  = (rowComp.IsCOMP_CODIGO_PADRENull()) ? null : BLL.CompuestoParteBLL.AsCompuestoParteEntity(Convert.ToInt32(rowComp.COMPUESTOS_PARTESRowParent.COMP_CODIGO), dsEstructura)
+                                };
+                
+                arbolEstructura.AddNodo(nodo, Convert.ToInt32(rowComp.COMP_CODIGO_PADRE));
             }
 
             return arbolEstructura;

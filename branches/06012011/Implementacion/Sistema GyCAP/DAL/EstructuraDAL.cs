@@ -34,7 +34,8 @@ namespace GyCAP.DAL
             if (!rowEstructura.IsESTR_FECHA_MODIFICACIONNull()) { fechaModificacion = rowEstructura.ESTR_FECHA_MODIFICACION.Date; }
             if (!rowEstructura.IsE_CODIGONull()) { responsable = rowEstructura.E_CODIGO; }            
             
-            object[] valorParametros = { rowEstructura.ESTR_NOMBRE, 
+            object[] valorParametros = { 
+                                         rowEstructura.ESTR_NOMBRE, 
                                          rowEstructura.COC_CODIGO,
                                          rowEstructura.PNO_CODIGO,
                                          rowEstructura.ESTR_DESCRIPCION,
@@ -42,7 +43,8 @@ namespace GyCAP.DAL
                                          rowEstructura.ESTR_FECHA_ALTA.Date,
                                          fechaModificacion,
                                          responsable,
-                                         rowEstructura.ESTR_COSTO };
+                                         rowEstructura.ESTR_COSTO 
+                                       };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -61,7 +63,16 @@ namespace GyCAP.DAL
                     rowCompuesto.BeginEdit();
                     rowCompuesto.ESTR_CODIGO = rowEstructura.ESTR_CODIGO;
                     rowCompuesto.EndEdit();
+                    decimal oldCodigo = rowCompuesto.COMP_CODIGO;
                     CompuestoParteDAL.Insertar(rowCompuesto, transaccion);
+
+                    string filtro = "comp_codigo_padre = " + oldCodigo;
+                    foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowTemp in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(filtro, null, DataViewRowState.Added))
+                    {
+                        rowTemp.BeginEdit();
+                        rowTemp.COMP_CODIGO_PADRE = rowCompuesto.COMP_CODIGO;
+                        rowTemp.EndEdit();
+                    }
                 }
 
                 //Todo ok, commit
@@ -118,7 +129,7 @@ namespace GyCAP.DAL
            //Controlemos los valores que pueden venir nulos
            object fechaModificacion = DBNull.Value, responsable = DBNull.Value;
            if (!rowEstructura.IsESTR_FECHA_MODIFICACIONNull()) { fechaModificacion = rowEstructura.ESTR_FECHA_MODIFICACION.Date; }
-           if (!rowEstructura.IsE_CODIGONull()) { responsable = rowEstructura.E_CODIGO; }
+           if (!rowEstructura.IsE_CODIGONull()) { responsable = rowEstructura.E_CODIGO; } 
             
            object[] valorParametros = { rowEstructura.COC_CODIGO,
                                         rowEstructura.PNO_CODIGO,
@@ -145,7 +156,15 @@ namespace GyCAP.DAL
 
                 foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuesto in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(null, null, System.Data.DataViewRowState.Added))
                 {
+                    decimal oldCodigo = rowCompuesto.COMP_CODIGO;
                     CompuestoParteDAL.Insertar(rowCompuesto, transaccion);
+                    string filtro = "comp_codigo_padre = " + oldCodigo;
+                    foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowTemp in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(filtro, null, DataViewRowState.Added))
+                    {
+                        rowTemp.BeginEdit();
+                        rowTemp.COMP_CODIGO_PADRE = rowCompuesto.COMP_CODIGO;
+                        rowTemp.EndEdit();
+                    }
                 }
 
                 foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuesto in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
@@ -153,7 +172,7 @@ namespace GyCAP.DAL
                     CompuestoParteDAL.Actualizar(rowCompuesto, transaccion);
                 }
 
-                foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuesto in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(null, null, System.Data.DataViewRowState.Deleted))
+                foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuesto in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(null, "comp_codigo DESC", System.Data.DataViewRowState.Deleted))
                 {
                     int codCompuesto = Convert.ToInt32(rowCompuesto["comp_codigo", System.Data.DataRowVersion.Original]);
                     CompuestoParteDAL.Eliminar(codCompuesto, transaccion);

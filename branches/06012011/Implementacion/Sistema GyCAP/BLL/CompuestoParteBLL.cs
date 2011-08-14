@@ -25,10 +25,10 @@ namespace GyCAP.BLL
                 Cantidad = row.COMP_CANTIDAD,
                 Codigo = Convert.ToInt32(row.COMP_CODIGO),
                 Estructura = null,
-                MateriaPrima = BLL.MateriaPrimaBLL.AsMateriaPrimaEntity(row.MATERIAS_PRIMASRow),
-                ParteHijo = (row.IsMP_CODIGONull()) ? BLL.ParteBLL.AsParteEntity(Convert.ToInt32(row.PART_NUMERO_HIJO), dsEstructura) : null,
-                PartePadre = (row.IsPART_NUMERO_PADRENull()) ? null : BLL.ParteBLL.AsParteEntity(Convert.ToInt32(row.PART_NUMERO_HIJO), dsEstructura),
-                UnidadMedida = BLL.UnidadMedidaBLL.AsUnidadMedidaEntity(row.UNIDADES_MEDIDARow)
+                MateriaPrima = (row.IsMP_CODIGONull()) ? null : BLL.MateriaPrimaBLL.AsMateriaPrimaEntity(row.MATERIAS_PRIMASRow),
+                Parte = (row.IsMP_CODIGONull()) ? BLL.ParteBLL.AsParteEntity(Convert.ToInt32(row.PART_NUMERO), dsEstructura) : null,                
+                UnidadMedida = BLL.UnidadMedidaBLL.AsUnidadMedidaEntity(row.UNIDADES_MEDIDARow),
+                CompuestoPadre = (row.IsCOMP_CODIGO_PADRENull()) ? null : BLL.CompuestoParteBLL.AsCompuestoParteEntity(Convert.ToInt32(row.COMPUESTOS_PARTESRowParent.COMP_CODIGO), dsEstructura)
             };
 
             return compuesto;

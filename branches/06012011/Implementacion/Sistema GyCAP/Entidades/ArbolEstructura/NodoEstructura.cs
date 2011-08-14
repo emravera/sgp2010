@@ -78,7 +78,7 @@ namespace GyCAP.Entidades.ArbolEstructura
         public decimal GetCosto()
         {
             if (this.contenido == tipoContenido.MateriaPrima) { return this.compuesto.MateriaPrima.Costo * this.compuesto.Cantidad; }
-            if (this.contenido == tipoContenido.Parte && this.compuesto.ParteHijo.Tipo.Adquirido == 1) { return this.compuesto.ParteHijo.Costo; }
+            if (this.contenido == tipoContenido.Parte && this.compuesto.Parte.Tipo.Adquirido == 1) { return this.compuesto.Parte.Costo; }
 
             decimal costo = 0;
             
@@ -112,6 +112,7 @@ namespace GyCAP.Entidades.ArbolEstructura
                 return validaciones;
             }
 
+            nodo.NodoPadre = this;
             this.nodosHijos.Add(nodo);
 
             return new List<string>();
@@ -129,16 +130,30 @@ namespace GyCAP.Entidades.ArbolEstructura
             return nodo;
         }
 
-        public TreeNode AsTreeNode()
+        public TreeNode AsNormalTreeNode()
         {
             TreeNode nodo = new TreeNode();
-            nodo.Text = (compuesto.ParteHijo != null) ? compuesto.ParteHijo.Nombre : compuesto.MateriaPrima.Nombre;
+            nodo.Text = (compuesto.Parte != null) ? compuesto.Parte.Nombre : compuesto.MateriaPrima.Nombre;
+            nodo.Name = this.codigoNodo.ToString();
+
+            foreach (NodoEstructura item in this.nodosHijos)
+            {
+                nodo.Nodes.Add(item.AsNormalTreeNode());
+            }
+
+            return nodo;
+        }
+
+        public TreeNode AsExtendedTreeNode()
+        {
+            TreeNode nodo = new TreeNode();
+            nodo.Text = (compuesto.Parte != null) ? compuesto.Parte.Nombre : compuesto.MateriaPrima.Nombre;
             nodo.Name = this.codigoNodo.ToString();
             nodo.Tag = new string[] { compuesto.Cantidad.ToString(), compuesto.UnidadMedida.Abreviatura };
 
             foreach (NodoEstructura item in this.nodosHijos)
             {
-                nodo.Nodes.Add(item.AsTreeNode());
+                nodo.Nodes.Add(item.AsExtendedTreeNode());
             }
 
             return nodo;
@@ -169,7 +184,8 @@ namespace GyCAP.Entidades.ArbolEstructura
 
         public override bool Equals(object obj)
         {
-            if (obj != null || obj.GetType() != typeof(NodoEstructura)) { return false; }
+            if (obj == null) { return false; }
+            if (obj.GetType() != typeof(NodoEstructura)) { return false; }
             NodoEstructura nodo = (NodoEstructura)obj;
 
             if (nodo.contenido != this.contenido) { return false; }
@@ -182,5 +198,7 @@ namespace GyCAP.Entidades.ArbolEstructura
         {
             return base.GetHashCode();
         }
+
+        
     }
 }
