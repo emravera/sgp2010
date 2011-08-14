@@ -9,40 +9,19 @@ namespace GyCAP.Entidades
     public class CompuestoParte
     {
         int codigo;
-
-        public CompuestoParte()
-        {
-        }
-
-        public CompuestoParte(int cod, Parte partPadre, Parte partHijo, MateriaPrima mp, decimal cant, UnidadMedida umed, Estructura estr)
-        {
-            this.codigo = cod;
-            this.partePadre = partPadre;
-            this.parteHijo = partHijo;
-            this.materiaPrima = mp;
-            this.cantidad = cant;
-            this.unidadMedida = umed;
-            this.estructura = estr;
-        }
         
         public int Codigo
         {
             get { return codigo; }
             set { codigo = value; }
         }
-        Parte partePadre;
+        
+        Parte parte;
 
-        public Parte PartePadre
+        public Parte Parte
         {
-            get { return partePadre; }
-            set { partePadre = value; }
-        }
-        Parte parteHijo;
-
-        public Parte ParteHijo
-        {
-            get { return parteHijo; }
-            set { parteHijo = value; }
+            get { return parte; }
+            set { parte = value; }
         }
         MateriaPrima materiaPrima;
 
@@ -72,6 +51,14 @@ namespace GyCAP.Entidades
         {
             get { return estructura; }
             set { estructura = value; }
+        }
+
+        private CompuestoParte compuestoPadre;
+
+        public CompuestoParte CompuestoPadre
+        {
+            get { return compuestoPadre; }
+            set { compuestoPadre = value; }
         }
     }
 }

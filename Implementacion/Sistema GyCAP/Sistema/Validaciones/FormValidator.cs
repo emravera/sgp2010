@@ -22,6 +22,7 @@ namespace GyCAP.UI.Sistema.Validaciones
         ///     - DataGridView (.NET) con al menos una fila agregada (default)
         ///     - NumericUpDown (.NET) sin tag => con value > 0
         ///     - NumericUpDown (.NET) con tag => los límites
+        ///     - TreeView (.NET) con al menos un nodo agregado
         /// </summary>
         /// <param name="formulario">El formulario a validar</param>
         /// <returns>true si es válido, false en caso contrario</returns>
@@ -195,7 +196,17 @@ namespace GyCAP.UI.Sistema.Validaciones
                 ListView lv = (ListView)ctrl;
                 if (lv.CausesValidation && lv.CheckBoxes && lv.CheckedItems.Count == 0)
                 {
-                    provider.SetError(ctrl, "Debe sleccionar al menos un elemento de la lista.");
+                    provider.SetError(ctrl, "Debe seleccionar al menos un elemento de la lista.");
+                    provider.Tag = false;
+                }
+                else { provider.SetError(ctrl, string.Empty); }
+            }
+            else if (ctrl.GetType().Equals(typeof(TreeView)))
+            {
+                TreeView tv = (TreeView)ctrl;
+                if (tv.CausesValidation && tv.Nodes.Count == 0)
+                {
+                    provider.SetError(ctrl, "Debe agregar al menos un elemento al árbol.");
                     provider.Tag = false;
                 }
                 else { provider.SetError(ctrl, string.Empty); }

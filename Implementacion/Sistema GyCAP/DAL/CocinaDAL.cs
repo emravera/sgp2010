@@ -205,10 +205,15 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
-        public static bool TieneEstructuraActiva(int codigoCocina)
+        public static bool TieneEstructuraActiva(int codigoCocina, int? codigoEstructuraOmitir)
         {
             string sql = "SELECT count(estr_codigo) FROM ESTRUCTURAS WHERE coc_codigo = @p0 AND estr_activo = @p1";
+
+            if (codigoEstructuraOmitir != null) { sql += " AND estr_codigo <> @p2"; }
+
             object[] valorParametros = { codigoCocina, EstructuraDAL.EstructuraActiva };
+            if (codigoEstructuraOmitir != null) { valorParametros = new object[] { codigoCocina, EstructuraDAL.EstructuraActiva, codigoEstructuraOmitir }; }
+
             try
             {
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0) { return false; }

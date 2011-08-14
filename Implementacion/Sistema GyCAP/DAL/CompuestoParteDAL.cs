@@ -15,25 +15,25 @@ namespace GyCAP.DAL
         public static void Insertar(Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuesto, SqlTransaction transaccion)
         {
             string sql = @"INSERT INTO [COMPUESTOS_PARTES] 
-                       ([part_numero_padre],
-                        [part_numero_hijo],
+                       ([part_numero],
                         [mp_codigo],
                         [comp_cantidad],
                         [estr_codigo],
-                        [umed_codigo])
+                        [umed_codigo],
+                        [comp_codigo_padre])
                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
 
-            object hijo = DBNull.Value, mp = DBNull.Value, padre = DBNull.Value;
-            if (!rowCompuesto.IsPART_NUMERO_HIJONull()) { hijo = rowCompuesto.PART_NUMERO_HIJO; }
-            else if (!rowCompuesto.IsMP_CODIGONull()) { mp = rowCompuesto.MP_CODIGO; }
-            if (!rowCompuesto.IsPART_NUMERO_PADRENull()) { padre = rowCompuesto.PART_NUMERO_PADRE; }
+            object parte = DBNull.Value, mp = DBNull.Value, compPadre = DBNull.Value;
+            if (!rowCompuesto.IsPART_NUMERONull()) { parte = rowCompuesto.PART_NUMERO; }
+            else if (!rowCompuesto.IsMP_CODIGONull()) { mp = rowCompuesto.MP_CODIGO; }            
+            if (!rowCompuesto.IsCOMP_CODIGO_PADRENull()) { compPadre = rowCompuesto.COMP_CODIGO_PADRE; }
 
-            object[] parametros = { padre,
-                                    hijo,
+            object[] parametros = { parte,
                                     mp,
                                     rowCompuesto.COMP_CANTIDAD,
                                     rowCompuesto.ESTR_CODIGO,
-                                    rowCompuesto.UMED_CODIGO };
+                                    rowCompuesto.UMED_CODIGO,
+                                    compPadre };
 
             rowCompuesto.BeginEdit();
             rowCompuesto.COMP_CODIGO = Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion));
@@ -63,8 +63,10 @@ namespace GyCAP.DAL
 
         public static void ObtenerCompuestosEstructura(int codigoEstructura, DataTable dtCompuestos_Partes)
         {
-            string sql = @"SELECT comp_codigo, part_numero_padre, part_numero_hijo, mp_codigo, comp_cantidad, umed_codigo, estr_codigo  
+            string sql = @"SELECT comp_codigo, part_numero, mp_codigo, comp_cantidad, 
+                                    umed_codigo, estr_codigo, comp_codigo_padre   
                         FROM COMPUESTOS_PARTES WHERE estr_codigo = @p0";
+
             object[] parametros = { codigoEstructura };
 
             try
@@ -76,16 +78,20 @@ namespace GyCAP.DAL
         
         public static void ObtenerCompuestosParte(int codigoPartePadre, Data.dsEstructuraProducto dsEstructura)
         {
-            string sql = @"SELECT comp_codigo, part_numero_padre, part_numero_hijo, mp_codigo, comp_cantidad, umed_codigo 
+            string sql = @"SELECT comp_codigo, part_numero, mp_codigo, comp_cantidad, 
+                                    umed_codigo, estr_codigo, comp_codigo_padre  
                         FROM COMPUESTOS_PARTES WHERE part_numero_padre = @p0";
+
             object[] parametros = { codigoPartePadre };
             DB.FillDataSet(dsEstructura, "COMPUESTOS_PARTE", sql, parametros);
         }
 
         public static void ObtenerCompuestosPartesEstructura(int[] codigosEstructura, DataTable dtCompuestosPartes)
         {
-            string sql = @"SELECT comp_codigo, part_numero_padre, part_numero_hijo, mp_codigo, comp_cantidad, estr_codigo, umed_codigo 
+            string sql = @"SELECT comp_codigo, part_numero, mp_codigo, comp_cantidad, estr_codigo, 
+                                    umed_codigo, comp_codigo_padre  
                             FROM COMPUESTOS_PARTES WHERE estr_codigo IN (@p0)";
+
             object[] valorParametros = { codigosEstructura };
             DB.FillDataTable(dtCompuestosPartes, sql, valorParametros);
         }

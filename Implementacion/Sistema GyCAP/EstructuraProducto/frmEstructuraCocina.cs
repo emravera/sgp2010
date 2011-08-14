@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GyCAP.Entidades.Mensajes;
-using GyCAP.Entidades.ArbolEstructura;
 
 namespace GyCAP.UI.EstructuraProducto
 {
@@ -25,7 +24,7 @@ namespace GyCAP.UI.EstructuraProducto
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
         private int compId = -1; //Variable para el manejo de inserciones en los dataset con códigos unique
         private int columnIndex = -1; //Variable para manejar el menu contextual para bloquear columnas
-        private ArbolEstructura arbolEstructura = new GyCAP.Entidades.ArbolEstructura.ArbolEstructura();
+        private Entidades.ArbolEstructura.ArbolEstructura arbolEstructura;
 
         #region Inicio
 
@@ -160,9 +159,9 @@ namespace GyCAP.UI.EstructuraProducto
             }            
         }
 
-        private void Add(NodoEstructura nodoEstr, TreeNode nodoAdd)
+        private void Add(Entidades.ArbolEstructura.NodoEstructura nodoEstr, TreeNode nodoAdd)
         {
-            foreach (NodoEstructura nodosEstr in nodoEstr.NodosHijos)
+            foreach (Entidades.ArbolEstructura.NodoEstructura nodosEstr in nodoEstr.NodosHijos)
             {
                 TreeNode nodo = new TreeNode(nodosEstr.Text);
                 nodoAdd.Nodes.Add(nodo);
@@ -210,65 +209,57 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            //Revisemos que completó todos los datos obligatorios          
-            List<string> validacion = new List<string>();
-            if (txtNombre.Text == string.Empty) { validacion.Add("Nombre"); }
-            if (cbPlano.GetSelectedIndex() == -1) { validacion.Add("Plano"); }
-            if (cbCocina.GetSelectedIndex() == -1) { validacion.Add("Cocina"); }
-            else if (BLL.CocinaBLL.TieneEstructuraActiva(cbCocina.GetSelectedValueInt())) { validacion.Add("La cocina seleccionada ya posee una estructura activa"); }
-            //if (cbResponsable.GetSelectedIndex() == -1) { datosOK = false; datosFaltantes += "\\n* Responsable"; } Por ahora opcional
-            //if (dtpFechaAlta.IsValueNull()) { dtpFechaAlta.SetFecha(BLL.DBBLL.GetFechaServidor()); } Opcional por ahora
-            if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno || estadoInterface == estadoUI.clonar && dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = -1").Length == 0) { validacion.Add("El detalle de la estructura"); } //que al menos haya cargado 1 parte
-            else if (estadoInterface == estadoUI.modificar && dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"])).Length == 0) { validacion.Add("El detalle de la estructura"); } //que al menos haya cargado 1 parte
-            if (cbEstado.GetSelectedIndex() == -1) { validacion.Add("Estado"); }
-            if (validacion.Count == 0)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
-                //Datos OK, revisemos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno || estadoInterface == estadoUI.clonar)
                 {
                     //Creando uno nuevo
                     try
                     {
-                        Data.dsEstructuraProducto.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.NewESTRUCTURASRow();
-                        rowEstructura.BeginEdit();
-                        rowEstructura.ESTR_CODIGO = -1;
-                        rowEstructura.ESTR_NOMBRE = txtNombre.Text;
-                        rowEstructura.PNO_CODIGO = cbPlano.GetSelectedValueInt();
-                        rowEstructura.ESTR_ACTIVO = cbEstado.GetSelectedValueInt(); ;
-                        if (dtpFechaAlta.IsValueNull()) { rowEstructura.ESTR_FECHA_ALTA = BLL.DBBLL.GetFechaServidor(); }
-                        else { rowEstructura.ESTR_FECHA_ALTA = (DateTime)dtpFechaAlta.GetFecha(); }
-                        rowEstructura.COC_CODIGO = cbCocina.GetSelectedValueInt();
-                        if (cbResponsable.GetSelectedValueInt() == -1) rowEstructura.SetE_CODIGONull();
-                        else { rowEstructura.E_CODIGO = cbResponsable.GetSelectedValueInt(); }
-                        if (dtpFechaModificacion.IsValueNull()) { rowEstructura.SetESTR_FECHA_MODIFICACIONNull(); }
-                        else { rowEstructura.ESTR_FECHA_MODIFICACION = (DateTime)dtpFechaModificacion.GetFecha(); }
-                        rowEstructura.ESTR_COSTO = nudcosto.Value;
-                        rowEstructura.ESTR_DESCRIPCION = txtDescripcion.Text;
-                        rowEstructura.EndEdit();
-                        dsEstructura.ESTRUCTURAS.AddESTRUCTURASRow(rowEstructura);
-                        decimal cod = BLL.EstructuraBLL.Insertar(dsEstructura);
-                        rowEstructura.BeginEdit();
-                        rowEstructura.ESTR_CODIGO = cod;
-                        rowEstructura.EndEdit();
-                        dsEstructura.ESTRUCTURAS.AcceptChanges();
-                        dsEstructura.COMPUESTOS_PARTES.AcceptChanges();
-                        
-                        //Vemos cómo se inició el formulario para determinar la acción a seguir
-                        if (estadoInterface == estadoUI.nuevoExterno)
+                        IList<string> validacion = new List<string>();
+                        if (cbEstado.GetSelectedValueInt() == BLL.EstructuraBLL.EstructuraActiva && BLL.CocinaBLL.TieneEstructuraActiva(cbCocina.GetSelectedValueInt(), null)) validacion.Add("La cocina seleccionada ya posee una estructura activa");
+                        if (validacion.Count == 0)
                         {
-                            //Nuevo desde acceso directo, cerramos el formulario
-                            btnSalir.PerformClick();
+                            Data.dsEstructuraProducto.ESTRUCTURASRow rowEstructura = dsEstructura.ESTRUCTURAS.NewESTRUCTURASRow();
+                            rowEstructura.BeginEdit();
+                            rowEstructura.ESTR_CODIGO = -1;
+                            rowEstructura.ESTR_NOMBRE = txtNombre.Text;
+                            rowEstructura.PNO_CODIGO = cbPlano.GetSelectedValueInt();
+                            rowEstructura.ESTR_ACTIVO = cbEstado.GetSelectedValueInt(); ;
+                            if (dtpFechaAlta.IsValueNull()) { rowEstructura.ESTR_FECHA_ALTA = BLL.DBBLL.GetFechaServidor(); }
+                            else { rowEstructura.ESTR_FECHA_ALTA = (DateTime)dtpFechaAlta.GetFecha(); }
+                            rowEstructura.COC_CODIGO = cbCocina.GetSelectedValueInt();
+                            if (cbResponsable.GetSelectedValueInt() == -1) rowEstructura.SetE_CODIGONull();
+                            else { rowEstructura.E_CODIGO = cbResponsable.GetSelectedValueInt(); }
+                            if (dtpFechaModificacion.IsValueNull()) { rowEstructura.SetESTR_FECHA_MODIFICACIONNull(); }
+                            else { rowEstructura.ESTR_FECHA_MODIFICACION = (DateTime)dtpFechaModificacion.GetFecha(); }
+                            rowEstructura.ESTR_COSTO = nudcosto.Value;
+                            rowEstructura.ESTR_DESCRIPCION = txtDescripcion.Text;
+                            rowEstructura.EndEdit();
+                            dsEstructura.ESTRUCTURAS.AddESTRUCTURASRow(rowEstructura);
+                            decimal cod = BLL.EstructuraBLL.Insertar(dsEstructura);
+                            rowEstructura.BeginEdit();
+                            rowEstructura.ESTR_CODIGO = cod;
+                            rowEstructura.EndEdit();
+                            dsEstructura.ESTRUCTURAS.AcceptChanges();
+                            dsEstructura.COMPUESTOS_PARTES.AcceptChanges();
+
+                            if (estadoInterface == estadoUI.nuevoExterno)
+                            {
+                                btnSalir.PerformClick();
+                            }
+                            else
+                            {
+                                SetInterface(estadoUI.inicio);
+                            }
                         }
                         else
                         {
-                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
-                            SetInterface(estadoUI.inicio);
+                            MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.Logica, validacion), this.Text);
                         }
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        //Hubo problemas con la BD, descartamos los cambios de estructuras ya que puede intentar
-                        //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
                         dsEstructura.ESTRUCTURAS.RejectChanges();
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                     }
@@ -279,63 +270,47 @@ namespace GyCAP.UI.EstructuraProducto
                     try
                     {
                         int codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]);
-                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_NOMBRE = txtNombre.Text;
-                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).PNO_CODIGO = cbPlano.GetSelectedValueInt();
-                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_ACTIVO = cbEstado.GetSelectedValueInt();
-                        if (dtpFechaAlta.IsValueNull()) { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_FECHA_ALTA = BLL.DBBLL.GetFechaServidor(); }
-                        else { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_FECHA_ALTA = (DateTime)dtpFechaAlta.GetFecha(); }
-                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).COC_CODIGO = cbCocina.GetSelectedValueInt();
-                        if (cbResponsable.GetSelectedIndex() == -1) { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).SetE_CODIGONull(); }
-                        else { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).E_CODIGO = cbResponsable.GetSelectedValueInt(); }
-                        if (dtpFechaModificacion.IsValueNull()) { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).SetESTR_FECHA_MODIFICACIONNull(); }
-                        else { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_FECHA_MODIFICACION = (DateTime)dtpFechaModificacion.GetFecha(); }
-                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_DESCRIPCION = txtDescripcion.Text;
-                        dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_COSTO = nudcosto.Value;
-                        BLL.EstructuraBLL.Actualizar(dsEstructura);
-                        MensajesABM.MsjConfirmaGuardar("Estructura", this.Text, MensajesABM.Operaciones.Modificación);
+                        IList<string> validacion = new List<string>();
+                        if (cbEstado.GetSelectedValueInt() == BLL.EstructuraBLL.EstructuraActiva && BLL.CocinaBLL.TieneEstructuraActiva(cbCocina.GetSelectedValueInt(), codigoEstructura)) validacion.Add("La cocina seleccionada ya posee una estructura activa");
+                        if (validacion.Count == 0)
+                        {                            
+                            dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_NOMBRE = txtNombre.Text;
+                            dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).PNO_CODIGO = cbPlano.GetSelectedValueInt();
+                            dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_ACTIVO = cbEstado.GetSelectedValueInt();
+                            if (dtpFechaAlta.IsValueNull()) { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_FECHA_ALTA = BLL.DBBLL.GetFechaServidor(); }
+                            else { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_FECHA_ALTA = (DateTime)dtpFechaAlta.GetFecha(); }
+                            dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).COC_CODIGO = cbCocina.GetSelectedValueInt();
+                            if (cbResponsable.GetSelectedValueInt() == -1) { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).SetE_CODIGONull(); }
+                            else { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).E_CODIGO = cbResponsable.GetSelectedValueInt(); }
+                            if (dtpFechaModificacion.IsValueNull()) { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).SetESTR_FECHA_MODIFICACIONNull(); }
+                            else { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_FECHA_MODIFICACION = (DateTime)dtpFechaModificacion.GetFecha(); }
+                            dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_DESCRIPCION = txtDescripcion.Text;
+                            dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_COSTO = nudcosto.Value;
+                            BLL.EstructuraBLL.Actualizar(dsEstructura);
+                            MensajesABM.MsjConfirmaGuardar("Estructura", this.Text, MensajesABM.Operaciones.Modificación);
 
-                        SetInterface(estadoUI.inicio);
+                            SetInterface(estadoUI.inicio);
+                        }
+                        else
+                        {
+                            MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.Logica, validacion), this.Text);
+                        }
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        //Hubo problemas con la BD, descartamos los cambios de estructuras ya que puede intentar
-                        //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
                         dsEstructura.ESTRUCTURAS.RejectChanges();
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                     }
                 }
             }
-            else
-            {
-                //le faltan completar datos, avisemos
-                MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.CompletarDatos, validacion), this.Text);
-            }
-
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            //Descartamos los cambios realizamos hasta el momento sin guardar
             dsEstructura.COMPUESTOS_PARTES.RejectChanges();
             dsEstructura.ESTRUCTURAS.RejectChanges();
             SetInterface(estadoUI.inicio);
-        }
-
-        private decimal CalcularCosto()
-        {
-            decimal costo = 0;
-            int codigoEstructura = 0;
-            if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno || estadoInterface == estadoUI.clonar) { codigoEstructura = -1; }
-            else { codigoEstructura = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
-
-            foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow row in
-                (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select("ESTR_CODIGO = " + codigoEstructura))
-            {
-                costo += row.COMP_CANTIDAD * ((row.IsMP_CODIGONull()) ? row.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_COSTO : row.MATERIAS_PRIMASRow.MP_COSTO);
-            }
-
-            return costo;
-        }
+        }        
 
         #endregion    
 
@@ -381,84 +356,6 @@ namespace GyCAP.UI.EstructuraProducto
                     MensajesABM.MsjSinSeleccion("Materia prima", MensajesABM.Generos.Femenino, this.Text);
                 }
             }
-
-            if (tcPartesDisponibles.SelectedTab == tpPartesDisponibles)
-            {
-                if (dgvPartesDisponibles.SelectedRows.Count > 0)
-                {
-                    int numeroParte = Convert.ToInt32(dvPartesDisponibles[dgvPartesDisponibles.SelectedRows[0].Index]["part_numero"]);
-                    Data.dsEstructuraProducto.PARTESRow rowParte = dsEstructura.PARTES.FindByPART_NUMERO(numeroParte);
-
-                    IList<string> validaciones = new List<string>();
-
-                    NodoEstructura nodo = new NodoEstructura();
-                    nodo.CodigoNodo = arbolEstructura.GetNextCodigoNodo();
-
-                    if (rowParte.TIPOS_PARTESRow.TPAR_PRODUCTOTERMINADO == BLL.TipoParteBLL.ValorSI)
-                    {
-                        nodo.Contenido = NodoEstructura.tipoContenido.ProductoFinal;
-                        nodo.Text = string.Concat(rowParte.PART_NOMBRE, " - ", rowParte.PART_CODIGO);
-                        nodo.Compuesto = new GyCAP.Entidades.CompuestoParte
-                            (
-                                compId,
-                                null,
-                                BLL.ParteBLL.AsParteEntity(numeroParte, dsEstructura),
-                                null,
-                                1,
-                                BLL.UnidadMedidaBLL.AsUnidadMedidaEntity(rowParte.UNIDADES_MEDIDARow),
-                                null
-                            );
-
-                        nodo.NodoPadre = null;
-                        validaciones = arbolEstructura.AddRaiz(nodo);
-                    }
-                    else
-                    {
-                        if (nudCantidadAgregar.Value > 0) { validaciones.Add("Cantidad."); }
-                        if (tvEstructura.SelectedNode == null) { validaciones.Add("Parte padre."); }
-
-                        if (validaciones.Count == 0)
-                        {
-                            nodo.Contenido = NodoEstructura.tipoContenido.Parte;
-                            nodo.Text = string.Concat(rowParte.PART_NOMBRE, " - ", rowParte.PART_CODIGO);
-                            nodo.Compuesto = new GyCAP.Entidades.CompuestoParte
-                                (
-                                    compId,
-                                    arbolEstructura.GetSelectedNode().Compuesto.ParteHijo,
-                                    BLL.ParteBLL.AsParteEntity(numeroParte, dsEstructura),
-                                    null,
-                                    nudCantidadAgregar.Value,
-                                    BLL.UnidadMedidaBLL.AsUnidadMedidaEntity(rowParte.UNIDADES_MEDIDARow),
-                                    null
-                                );
-
-                            nodo.NodoPadre = arbolEstructura.GetSelectedNode();
-                            validaciones = arbolEstructura.AddNodo(nodo, arbolEstructura.GetSelectedNode().Compuesto.Codigo);
-                        }
-                    }
-
-                    if (validaciones.Count > 0)
-                    {
-                        MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.Logica, validaciones), this.Text);
-                    }
-                }
-                else
-                {
-                    MensajesABM.MsjSinSeleccion("Parte", MensajesABM.Generos.Femenino, this.Text);
-                }
-            }
-            else
-            {
-                if (dgvMPDisponibles.SelectedRows.Count > 0)
-                {
-                }
-                else
-                {
-                    MensajesABM.MsjSinSeleccion("Materia prima", MensajesABM.Generos.Femenino, this.Text);
-                }
-            }
-
-            tcEstructuraProducto.SelectedTab = tpTemp;
         }
 
         private void AgregarParteAArbol(Data.dsEstructuraProducto.PARTESRow rowParte, Data.dsEstructuraProducto.MATERIAS_PRIMASRow rowMP)
@@ -466,16 +363,16 @@ namespace GyCAP.UI.EstructuraProducto
             List<string> validacion = new List<string>();
             if (tvEstructura.Nodes.Count != 0 && nudCantidadAgregar.Value == 0) { validacion.Add("Cantidad"); }
             if (tvEstructura.Nodes.Count != 0 && tvEstructura.SelectedNode == null) { validacion.Add("Parte padre"); }
-            if (tvEstructura.Nodes.Count == 0 && rowParte != null && !BLL.TipoParteBLL.EsProductoTerminado(Convert.ToInt32(rowParte.TPAR_CODIGO))) { validacion.Add("Unicamente un producto terminado puede ser raíz"); } //done
-            if (tvEstructura.Nodes.Count == 0 && rowParte == null) { validacion.Add("Unicamente un producto terminado puede ser raíz"); } //done
-            if (tvEstructura.SelectedNode != null && rowParte != null && rowParte.TIPOS_PARTESRow.TPAR_PRODUCTOTERMINADO == 1) { validacion.Add("Un producto terminado no puede ser hijo."); } //done
-            if (tvEstructura.SelectedNode != null && rowParte != null && Convert.ToInt32(tvEstructura.SelectedNode.Tag) == BLL.CompuestoParteBLL.HijoEsMP) { validacion.Add("Una parte no puede ser hijo de una materia prima"); } //done
+            if (tvEstructura.Nodes.Count == 0 && rowParte != null && !BLL.TipoParteBLL.EsProductoTerminado(Convert.ToInt32(rowParte.TPAR_CODIGO))) { validacion.Add("Unicamente un producto terminado puede ser raíz"); }
+            if (tvEstructura.Nodes.Count == 0 && rowParte == null) { validacion.Add("Unicamente un producto terminado puede ser raíz"); }
+            if (tvEstructura.SelectedNode != null && rowParte != null && rowParte.TIPOS_PARTESRow.TPAR_PRODUCTOTERMINADO == 1) { validacion.Add("Un producto terminado no puede ser hijo."); }
+            if (tvEstructura.SelectedNode != null && rowParte != null && Convert.ToInt32(tvEstructura.SelectedNode.Tag) == BLL.CompuestoParteBLL.HijoEsMP) { validacion.Add("Una parte no puede ser hijo de una materia prima"); }
             if (tvEstructura.SelectedNode != null && 
                 rowParte != null && 
                 Convert.ToInt32(tvEstructura.SelectedNode.Tag) == BLL.CompuestoParteBLL.HijoEsParte && 
                 tvEstructura.SelectedNode.Parent != null && 
-                EsMismoPadreHijo(rowParte, tvEstructura.SelectedNode)) { validacion.Add("Una parte no puede ser padre e hijo al mismo tiempo"); } //done
-            if (tvEstructura.SelectedNode != null && rowMP != null && Convert.ToInt32(tvEstructura.SelectedNode.Tag) == BLL.CompuestoParteBLL.HijoEsMP) { validacion.Add("Una materia prima no puede ser hijo de una materia prima"); } //done
+                EsMismoPadreHijo(rowParte, tvEstructura.SelectedNode)) { validacion.Add("Una parte no puede ser padre e hijo al mismo tiempo"); }
+            if (tvEstructura.SelectedNode != null && rowMP != null && Convert.ToInt32(tvEstructura.SelectedNode.Tag) == BLL.CompuestoParteBLL.HijoEsMP) { validacion.Add("Una materia prima no puede ser hijo de una materia prima"); }
 
             if (validacion.Count == 0)
             {
@@ -523,7 +420,7 @@ namespace GyCAP.UI.EstructuraProducto
                     if (MensajesABM.MsjPreguntaAlUsuario(pregunta, this.Text) == DialogResult.Yes)
                     {
                         rowComp.COMP_CANTIDAD += nudCantidadAgregar.Value;
-                        string texto = ((rowComp.IsMP_CODIGONull()) ? rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE + " - " + rowComp.PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_CODIGO : rowComp.MATERIAS_PRIMASRow.MP_NOMBRE);
+                        string texto = ((rowComp.IsMP_CODIGONull()) ? rowComp.PARTESRow.PART_NOMBRE + " - " + rowComp.PARTESRow.PART_CODIGO : rowComp.MATERIAS_PRIMASRow.MP_NOMBRE);
                         texto += " / #" + rowComp.COMP_CANTIDAD.ToString();
                         texto += " " + rowComp.UNIDADES_MEDIDARow.UMED_ABREVIATURA;
                         tvEstructura.Nodes.Find(rowComp.COMP_CODIGO.ToString(), true)[0].Text = texto;
@@ -542,14 +439,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else
             {
-                bool validacionRaiz = false;
-                foreach (string mensaje in validacion)
-                {
-                    if (mensaje.Contains("terminado")) { validacionRaiz = true; }
-                }
-
-                if (validacionRaiz) { MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.Logica, validacion.FindAll(p => p.Contains("terminado"))), this.Text); }
-                else { MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.CompletarDatos, validacion), this.Text); }
+                MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(MensajesABM.Validaciones.CompletarDatos, validacion), this.Text); 
             }
         }
 
@@ -563,21 +453,22 @@ namespace GyCAP.UI.EstructuraProducto
             else { rowCompuesto.COMP_CANTIDAD = 1; }
             if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { rowCompuesto.ESTR_CODIGO = -1; }
             else { rowCompuesto.ESTR_CODIGO = Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]); }
-            if (padre == null) { rowCompuesto.SetPART_NUMERO_PADRENull(); }
-            else { rowCompuesto.PART_NUMERO_PADRE = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(padre)).PART_NUMERO_HIJO; }
+            if (padre == null) { rowCompuesto.SetCOMP_CODIGO_PADRENull(); }
+            else { rowCompuesto.COMP_CODIGO_PADRE = Convert.ToInt32(padre); }
             
             if (rowParte != null)
             {
                 rowCompuesto.SetMP_CODIGONull();
-                rowCompuesto.PART_NUMERO_HIJO = rowParte.PART_NUMERO;
+                rowCompuesto.PART_NUMERO = rowParte.PART_NUMERO;
                 rowCompuesto.UMED_CODIGO = rowParte.UMED_CODIGO;
             }
             else
             {
-                rowCompuesto.SetPART_NUMERO_HIJONull();
+                rowCompuesto.SetPART_NUMERONull();
                 rowCompuesto.MP_CODIGO = rowMP.MP_CODIGO;
                 rowCompuesto.UMED_CODIGO = rowMP.UMED_CODIGO;
             }
+
             rowCompuesto.EndEdit();
             dsEstructura.COMPUESTOS_PARTES.AddCOMPUESTOS_PARTESRow(rowCompuesto);
         }
@@ -587,12 +478,12 @@ namespace GyCAP.UI.EstructuraProducto
             string filtro = string.Empty;
             if (rowParte != null && nodoPadre != null)
             {
-                filtro = "PART_NUMERO_PADRE = " + dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(nodoPadre.Name)).PART_NUMERO_HIJO.ToString();
-                filtro += " AND PART_NUMERO_HIJO = " + rowParte.PART_NUMERO.ToString();
+                filtro = "COMP_CODIGO_PADRE = " + Convert.ToInt32(nodoPadre.Name).ToString();
+                filtro += " AND PART_NUMERO = " + rowParte.PART_NUMERO.ToString();
             }
             if (rowMP != null && nodoPadre != null)
             {
-                filtro = "PART_NUMERO_PADRE = " + dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(nodoPadre.Name)).PART_NUMERO_HIJO.ToString();
+                filtro = "COMP_CODIGO_PADRE = " + Convert.ToInt32(nodoPadre.Name).ToString();
                 filtro += " AND MP_CODIGO = " + rowMP.MP_CODIGO.ToString();
             }
             if (string.IsNullOrEmpty(filtro)) { return null; }
@@ -611,7 +502,7 @@ namespace GyCAP.UI.EstructuraProducto
             TreeNode nodo = selectedNode;
             while (nodo != null)
             {
-                if (rowParte.PART_NUMERO == dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(nodo.Name)).PART_NUMERO_HIJO) { encontrado = true; }
+                if (rowParte.PART_NUMERO == dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(nodo.Name)).PART_NUMERO) { encontrado = true; }
                 nodo = nodo.Parent;
             }
             return encontrado;
@@ -626,13 +517,33 @@ namespace GyCAP.UI.EstructuraProducto
                     EliminarNodos(nodo);
                 }
 
+                arbolEstructura.DeleteNodo(null, Convert.ToInt32(tvEstructura.SelectedNode.Name));
+
+                string filtro = "comp_codigo_padre = " + Convert.ToInt32(tvEstructura.SelectedNode.Name);
+                foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow row in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(filtro))
+                {
+                    DeleteCompuesto(row);
+                }
+                
                 dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).Delete();
-                tvEstructura.SelectedNode.Remove();
+                tvEstructura.SelectedNode.Remove();                
+                nudcosto.Value = arbolEstructura.GetCostoEstructura();
             }
             else
             {
                 MensajesABM.MsjSinSeleccion("Parte", MensajesABM.Generos.Femenino, this.Text);
             }
+        }
+
+        private void DeleteCompuesto(Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowPadre)
+        {
+            string filtro = "comp_codigo_padre = " + rowPadre.COMP_CODIGO;
+            foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow row in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(filtro))
+            {
+                DeleteCompuesto(row);
+            }
+
+            rowPadre.Delete();
         }
 
         private void EliminarNodos(TreeNode nodoSelected)
@@ -654,9 +565,9 @@ namespace GyCAP.UI.EstructuraProducto
                 if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).IsMP_CODIGONull())
                 {                    
                     dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD += 1;
-                    nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE;
+                    nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).PARTESRow.PART_NOMBRE;
                     nodeText += " - ";
-                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_CODIGO;
+                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).PARTESRow.PART_CODIGO;
                     nodeText += " / #";
                     nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
                     nodeText += " ";
@@ -696,9 +607,9 @@ namespace GyCAP.UI.EstructuraProducto
                     if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD > 1)
                     {
                         dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD -= 1;
-                        nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_NOMBRE;
+                        nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).PARTESRow.PART_NOMBRE;
                         nodeText += " - ";
-                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).PARTESRowByFK_COMPUESTOS_PARTES_PARTES_HIJO.PART_CODIGO;
+                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).PARTESRow.PART_CODIGO;
                         nodeText += " / #";
                         nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
                         nodeText += " ";
@@ -761,6 +672,7 @@ namespace GyCAP.UI.EstructuraProducto
                     btnDatos.PerformClick();
                     tcEstructuraProducto.SelectedTab = tpBuscar;
                     if (dgvEstructuras.SelectedRows.Count > 0) { dgvEstructuras.SelectedRows[0].Selected = false; }
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
                     break;
                 case estadoUI.nuevo:
                     txtNombre.ReadOnly = false;
@@ -1184,19 +1096,6 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else { tvEstructura.Nodes.Clear(); }
             tvEstructura.EndUpdate();
-
-            tvTemp.Columns.Clear();
-            tvTemp.Columns.Add("partes", "Partes", 350);
-            tvTemp.Columns.Add("cantidad", "Cantidad", 100);
-            tvTemp.Columns.Add("umed", "Unidad de Medida", 100);
-            tvTemp.TreeView.Nodes.Clear();
-            TreeView temp = arbolEstructura.AsTreeView();
-            TreeNode nodo = temp.Nodes[0];
-            temp.Nodes.Clear();
-            temp.Dispose();
-            tvTemp.TreeView.Nodes.Add(nodo);
-            tvTemp.TreeView.ExpandAll();
-            tvTemp.TreeView.CheckBoxes = false;
         }        
 
         #endregion

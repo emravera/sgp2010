@@ -7,9 +7,7 @@ using System.Windows.Forms;
 namespace GyCAP.Entidades.ArbolEstructura
 {
     public class ArbolEstructura
-    {
-        public ArbolEstructura() { codigosNodo = 0; }
-        
+    {        
         public ArbolEstructura(int codEstructura)
         {
             this.codigosNodo = 0;
@@ -20,29 +18,27 @@ namespace GyCAP.Entidades.ArbolEstructura
         }
 
         private int codigosNodo;
+        private NodoEstructura nodoRaiz;
+        private int codigoEstructura;
+        private int SelectedNodeCode;
 
         public int GetNextCodigoNodo()
         {
             this.codigosNodo++;
             return this.codigosNodo;
-        }
-        
-        private NodoEstructura nodoRaiz;
+        }        
 
         public NodoEstructura NodoRaiz
         {
             get { return nodoRaiz; }
             set { nodoRaiz = value; }
-        }
-        private int codigoEstructura;
+        }        
 
         public int CodigoEstructura
         {
             get { return codigoEstructura; }
             set { codigoEstructura = value; }
-        }
-
-        private int SelectedNodeCode;
+        }        
 
         public NodoEstructura GetSelectedNode()
         {
@@ -118,18 +114,36 @@ namespace GyCAP.Entidades.ArbolEstructura
             return nodo;
         }
 
-        public TreeView AsTreeView()
+        public TreeView AsNormalTreeView()
         {
             TreeView treeReturn = new TreeView();
             treeReturn.BeginUpdate();
             TreeNode nodoInicio = new TreeNode();
-            nodoInicio.Text = nodoRaiz.Compuesto.ParteHijo.Nombre;
+            nodoInicio.Text = nodoRaiz.Compuesto.Parte.Nombre;
+            nodoInicio.Name = nodoRaiz.CodigoNodo.ToString();
+
+            foreach (NodoEstructura item in nodoRaiz.NodosHijos)
+            {
+                nodoInicio.Nodes.Add(item.AsNormalTreeNode());
+            }
+
+            treeReturn.Nodes.Add(nodoInicio);
+            treeReturn.EndUpdate();
+            return treeReturn;
+        }
+
+        public TreeView AsExtendedTreeView()
+        {
+            TreeView treeReturn = new TreeView();
+            treeReturn.BeginUpdate();
+            TreeNode nodoInicio = new TreeNode();
+            nodoInicio.Text = nodoRaiz.Compuesto.Parte.Nombre;
             nodoInicio.Name = nodoRaiz.CodigoNodo.ToString();
             nodoInicio.Tag = new string[] { nodoRaiz.Compuesto.Cantidad.ToString(), nodoRaiz.Compuesto.UnidadMedida.Abreviatura };
 
             foreach (NodoEstructura item in nodoRaiz.NodosHijos)
             {
-                nodoInicio.Nodes.Add(item.AsTreeNode());
+                nodoInicio.Nodes.Add(item.AsExtendedTreeNode());
             }
 
             treeReturn.Nodes.Add(nodoInicio);
@@ -170,6 +184,12 @@ namespace GyCAP.Entidades.ArbolEstructura
             IList<string> validaciones = new List<string>();
             validaciones.Add("El nodo padre especificado no existe en la estructura.");
             return validaciones;
+        }
+
+        public void DeleteNodo(int? codigoNodo, int? codigoCompuesto)
+        {
+            NodoEstructura nodo = Find(codigoNodo, codigoCompuesto);
+            nodo.NodoPadre.NodosHijos.Remove(nodo);            
         }
     }
 }

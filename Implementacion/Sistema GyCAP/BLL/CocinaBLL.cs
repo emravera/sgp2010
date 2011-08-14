@@ -47,9 +47,9 @@ namespace GyCAP.BLL
             DAL.CocinaDAL.ObtenerCocinas(codigo, marca, terminacion, estado, dtCocina);
         }
 
-        public static bool TieneEstructuraActiva(int codigoCocina)
+        public static bool TieneEstructuraActiva(int codigoCocina, int? codigoEstructuraOmitir)
         {
-            return DAL.CocinaDAL.TieneEstructuraActiva(codigoCocina);
+            return DAL.CocinaDAL.TieneEstructuraActiva(codigoCocina, codigoEstructuraOmitir);
         }
 
         /// <summary>
