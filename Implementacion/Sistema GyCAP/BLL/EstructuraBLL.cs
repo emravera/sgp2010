@@ -68,66 +68,9 @@ namespace GyCAP.BLL
         /// código y la segunda ([n,1]) es la cantidad necesaria de esa materia prima para fabricar la cocina dada.</returns>
         public static decimal[,] ObtenerMateriasPrimasYCantidades(int codigoCocina)
         {
-            /*int codigoEstructura = BLL.CocinaBLL.ObtenerCodigoEstructuraActiva(codigoCocina);
-            Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
-            ObtenerEstructura(codigoEstructura, dsEstructura, true);
+            int estructura = DAL.CocinaDAL.ObtenerCodigoEstructuraActiva(codigoCocina);
 
-            decimal[,] listaMateriasPrimas = new decimal[dsEstructura.MATERIAS_PRIMAS.Count,2];
-            int indice = 0;
-            foreach (Data.dsEstructura.MATERIAS_PRIMASRow row in dsEstructura.MATERIAS_PRIMAS.Rows)
-            {
-                listaMateriasPrimas[indice, 0] = row.MP_CODIGO;
-                indice++;
-            }
-
-            foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow rowCxE in dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).GetCONJUNTOSXESTRUCTURARows())
-            {
-                foreach (Data.dsEstructura.SUBCONJUNTOSXCONJUNTORow rowSCxC in rowCxE.CONJUNTOSRow.GetSUBCONJUNTOSXCONJUNTORows())
-                {
-                    foreach (Data.dsEstructura.PIEZASXSUBCONJUNTORow rowPxSC in rowSCxC.SUBCONJUNTOSRow.GetPIEZASXSUBCONJUNTORows())
-                    {
-                        foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow rowMPxP in rowPxSC.PIEZASRow.GetMATERIASPRIMASXPIEZARows())
-                        {
-                            indice = 0;
-                            while (listaMateriasPrimas[indice, 0] != rowMPxP.MATERIAS_PRIMASRow.MP_CODIGO) { indice++; }
-                            listaMateriasPrimas[indice, 1] += rowCxE.CXE_CANTIDAD * rowSCxC.SCXCJ_CANTIDAD * rowPxSC.PXSC_CANTIDAD * rowMPxP.MPXP_CANTIDAD;
-                        }
-                    }
-                }
-
-                foreach (Data.dsEstructura.PIEZASXCONJUNTORow rowPxC in rowCxE.CONJUNTOSRow.GetPIEZASXCONJUNTORows())
-                {
-                    foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow rowMPxP in rowPxC.PIEZASRow.GetMATERIASPRIMASXPIEZARows())
-                    {
-                        indice = 0;
-                        while (listaMateriasPrimas[indice, 0] != rowMPxP.MATERIAS_PRIMASRow.MP_CODIGO) { indice++; }
-                        listaMateriasPrimas[indice, 1] += rowCxE.CXE_CANTIDAD * rowPxC.PXCJ_CANTIDAD * rowMPxP.MPXP_CANTIDAD;
-                    }
-                }
-            }
-
-            foreach (Data.dsEstructura.PIEZASXESTRUCTURARow rowPxE in dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).GetPIEZASXESTRUCTURARows())
-            {
-                foreach (Data.dsEstructura.MATERIASPRIMASXPIEZARow rowMPxP in rowPxE.PIEZASRow.GetMATERIASPRIMASXPIEZARows())
-                {
-                    indice = 0;
-                    while (listaMateriasPrimas[indice, 0] != rowMPxP.MATERIAS_PRIMASRow.MP_CODIGO) { indice++; }
-                    listaMateriasPrimas[indice, 1] += rowPxE.PXE_CANTIDAD * rowMPxP.MPXP_CANTIDAD;
-                }
-            }*/
-
-            decimal[,] listaMateriasPrimas = new decimal[5, 2];
-            listaMateriasPrimas[0, 0] = 1;
-            listaMateriasPrimas[1, 0] = 2;
-            listaMateriasPrimas[2, 0] = 3;
-            listaMateriasPrimas[3, 0] = 4;
-            listaMateriasPrimas[4, 0] = 5;
-            listaMateriasPrimas[0, 1] = 10;
-            listaMateriasPrimas[1, 1] = 10;
-            listaMateriasPrimas[2, 1] = 10;
-            listaMateriasPrimas[3, 1] = 10;
-            listaMateriasPrimas[4, 1] = 10;
-            return listaMateriasPrimas;
+            return DAL.EstructuraDAL.ObtenerMateriasPrimasYCantidades(estructura);
 
         }
 
@@ -244,35 +187,30 @@ namespace GyCAP.BLL
             return arbolEstructura;
         }
 
-        //***********************************************************************
-        //                             NUEVOS METODOS -- (GONZALO)   
-        //***********************************************************************
         public static List<Entidades.MPEstructura> MateriasPrimasCocina(int codigoCocina, decimal cantidadCocina)
         {
-            List<Entidades.MPEstructura> materiaPrimas = new List<MPEstructura>();
+            Data.dsEstructuraProducto ds = new GyCAP.Data.dsEstructuraProducto();
 
-            //Este método debe hacer lo siguiente
-            //1-A partir del codigo de la cocina debe obtener su estructura activa.
-            //2-Luego debe llenar una lista generica conteniendo las materias primas y su cantidad a partir de la estructura. 
+            DAL.EstructuraDAL.ObtenerEstructuras(null, null, null, codigoCocina, null, EstructuraActiva, ds);
 
-            //Valores puestos a mano - Cambiar Gonzalo
-            int[] mpCodigos = {1,2,3,4};
-            decimal[] cantidades = {Convert.ToDecimal("3,65"),Convert.ToDecimal("7,85"), Convert.ToDecimal("4,78"), Convert.ToDecimal("6,89") };
-            int cont = 0;
-
-            foreach (int codigo in  mpCodigos)
+            if (ds.ESTRUCTURAS.Rows.Count > 0)
             {
-                Entidades.MPEstructura mpEstructura = new MPEstructura();
-
-                //Metodo que devuleve un objeto materia prima a partir de su codigo
-                //Agrego a la lista de materias primas
-                mpEstructura.MateriaPrima = BLL.MateriaPrimaBLL.ObtenerMateriaPrima(mpCodigos[cont]);
-                mpEstructura.Cantidad = Convert.ToDecimal(cantidadCocina * cantidades[cont]);
-                materiaPrimas.Add(mpEstructura);
-                cont += 1;
+                TerminacionBLL.ObtenerTodos(string.Empty, ds.TERMINACIONES);
+                PlanoBLL.ObtenerTodos(ds.PLANOS);
+                ParteBLL.ObtenerPartes(null, null, null, null, null, null, ds.PARTES);
+                MateriaPrimaBLL.ObtenerMP(ds.MATERIAS_PRIMAS);
+                UnidadMedidaBLL.ObtenerTodos(ds.UNIDADES_MEDIDA);
+                TipoParteBLL.ObtenerTodos(ds.TIPOS_PARTES);
+                EstadoParteBLL.ObtenerTodos(ds.ESTADO_PARTES);
+                HojaRutaBLL.ObtenerHojasRuta(ds.HOJAS_RUTA);
+                TipoUnidadMedidaBLL.ObtenerTodos(ds.TIPOS_UNIDADES_MEDIDA);
+                
+                ArbolEstructura arbol = ArmarArbol(Convert.ToInt32(ds.ESTRUCTURAS.Rows[0]["estr_codigo"]), ds);
+                arbol.NodoRaiz.Compuesto.Cantidad = cantidadCocina;
+                return arbol.GetMPQuantityForStructure().ToList();
             }
 
-            return materiaPrimas;            
+            return new List<MPEstructura>();
         }
     }
 }

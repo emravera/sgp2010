@@ -376,5 +376,33 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
+
+        public static decimal[,] ObtenerMateriasPrimasYCantidades(int codigoEstructura)
+        {
+            string sql = @"SELECT mp_codigo as codigo, sum(comp_cantidad) as cantidad
+                            FROM COMPUESTOS_PARTES 
+                            WHERE estr_codigo = @p0 
+                            AND mp_codigo IS NOT NULL
+                            group by mp_codigo";
+
+            object[] parametros = { codigoEstructura };
+
+            try
+            {
+                DataTable dt = new DataTable();
+                DB.FillDataTable(dt, sql, parametros);
+
+                decimal[,] datos = new decimal[dt.Rows.Count, 2];
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    datos[i, 0] = Convert.ToDecimal(dt.Rows[i]["codigo"].ToString());
+                    datos[i, 1] = Convert.ToDecimal(dt.Rows[i]["cantidad"].ToString());
+                }
+
+                return datos;
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
     }
 }

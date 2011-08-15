@@ -845,7 +845,6 @@ namespace GyCAP.UI.EstructuraProducto
                 BLL.ParteBLL.ObtenerPartes(null, null, null, null, null, null, dsEstructura.PARTES);
                 BLL.MateriaPrimaBLL.ObtenerMP(dsEstructura.MATERIAS_PRIMAS);
                 BLL.UnidadMedidaBLL.ObtenerTodos(dsEstructura.UNIDADES_MEDIDA);
-                BLL.PlanoBLL.ObtenerTodos(dsEstructura.PLANOS);
                 BLL.TipoParteBLL.ObtenerTodos(dsEstructura.TIPOS_PARTES);
                 BLL.EstadoParteBLL.ObtenerTodos(dsEstructura.ESTADO_PARTES);
                 BLL.HojaRutaBLL.ObtenerHojasRuta(dsEstructura.HOJAS_RUTA);
