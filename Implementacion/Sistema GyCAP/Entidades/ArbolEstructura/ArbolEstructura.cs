@@ -166,6 +166,7 @@ namespace GyCAP.Entidades.ArbolEstructura
 
         public IList<NodoEstructura> AsList(bool IncluirRaiz)
         {
+            //sin finalizar - gonzalo
             IList<NodoEstructura> lista = new List<NodoEstructura>();
             if (IncluirRaiz) { lista.Add(nodoRaiz); }
             return lista;
