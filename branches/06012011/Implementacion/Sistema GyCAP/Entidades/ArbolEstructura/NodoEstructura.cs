@@ -22,16 +22,6 @@ namespace GyCAP.Entidades.ArbolEstructura
         {
             this.nodosHijos = new List<NodoEstructura>();
         }
-
-        public NodoEstructura(int codigoNode, string textoNode, NodoEstructura nodePadre, tipoContenido content, CompuestoParte comp)
-        {
-            this.codigoNodo = codigoNode;
-            this.text = textoNode;
-            this.NodosHijos = new List<NodoEstructura>();
-            this.NodoPadre = nodePadre;
-            this.contenido = content;
-            this.compuesto = comp;
-        }
         
         public int CodigoNodo
         {
@@ -187,6 +177,7 @@ namespace GyCAP.Entidades.ArbolEstructura
 
         public IList<NodoEstructura> AsList(bool IncludeSelf)
         {
+            //sin finalizar - gonzalo
             return new List<NodoEstructura>();
         }
 
