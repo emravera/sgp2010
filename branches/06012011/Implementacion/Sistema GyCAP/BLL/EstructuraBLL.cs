@@ -68,9 +68,17 @@ namespace GyCAP.BLL
         /// código y la segunda ([n,1]) es la cantidad necesaria de esa materia prima para fabricar la cocina dada.</returns>
         public static decimal[,] ObtenerMateriasPrimasYCantidades(int codigoCocina)
         {
-            int estructura = DAL.CocinaDAL.ObtenerCodigoEstructuraActiva(codigoCocina);
+            IList<MPEstructura> lista = MateriasPrimasCocina(codigoCocina, 1);
 
-            return DAL.EstructuraDAL.ObtenerMateriasPrimasYCantidades(estructura);
+            decimal[,] mps = new decimal[lista.Count, 2];
+
+            for (int i = 0; i < lista.Count; i++)
+            {
+                mps[i, 0] = lista[i].MateriaPrima.CodigoMateriaPrima;
+                mps[i, 1] = lista[i].Cantidad;
+            }
+
+            return mps;
 
         }
 
