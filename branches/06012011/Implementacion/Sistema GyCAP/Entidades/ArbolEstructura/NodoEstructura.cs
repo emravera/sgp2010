@@ -90,6 +90,32 @@ namespace GyCAP.Entidades.ArbolEstructura
             return costo;
         }
 
+        public IList<MPEstructura> GetMPQuantityForPart()
+        {
+            IList<MPEstructura> listaMP = new List<MPEstructura>();
+
+            if (this.contenido == tipoContenido.MateriaPrima)
+            {
+                listaMP.Add(new MPEstructura() { MateriaPrima = this.compuesto.MateriaPrima, Cantidad = this.compuesto.Cantidad });
+                return listaMP;
+            }
+            else
+            {
+                foreach (NodoEstructura hijo in this.nodosHijos)
+                {
+                     IList<MPEstructura> auxiliar = hijo.GetMPQuantityForPart();
+
+                     foreach (MPEstructura item in auxiliar)
+                     {
+                         item.Cantidad *= this.compuesto.Cantidad;
+                         listaMP.Add(item);
+                     }
+                }
+            }
+
+            return listaMP;
+        }
+
         public void SumarCantidad(decimal cantidad)
         {
             if (this.compuesto != null) { this.compuesto.Cantidad += cantidad; }

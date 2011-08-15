@@ -59,7 +59,20 @@ namespace GyCAP.Entidades.ArbolEstructura
         public decimal GetCostoEstructura()
         {
             return nodoRaiz.GetCosto();
-        }        
+        }
+
+        public IList<MPEstructura> GetMPQuantityForStructure()
+        {
+            IList<MPEstructura> allMP = nodoRaiz.GetMPQuantityForPart();
+            IList<MPEstructura> distinctMP = allMP.GroupBy(x => x.MateriaPrima.CodigoMateriaPrima).Select(x => x.First()).ToList();
+
+            foreach (MPEstructura item in distinctMP)
+            {
+                item.Cantidad = allMP.Where(x => x.MateriaPrima.CodigoMateriaPrima == item.MateriaPrima.CodigoMateriaPrima).Sum(x => x.Cantidad);                
+            }            
+
+            return distinctMP;
+        }
 
         public NodoEstructura Find(int? codigoNodo, int? codigoCompuesto)
         {
