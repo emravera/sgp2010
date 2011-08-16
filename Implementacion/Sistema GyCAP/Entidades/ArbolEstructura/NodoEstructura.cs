@@ -8,7 +8,7 @@ namespace GyCAP.Entidades.ArbolEstructura
 {
     public class NodoEstructura
     {
-        public enum tipoContenido { Parte, MateriaPrima, ProductoFinal };
+        public enum tipoContenido { Parte, MateriaPrima, ProductoFinal, Todos };
         
         private int codigoNodo;
         private string text;
@@ -17,6 +17,7 @@ namespace GyCAP.Entidades.ArbolEstructura
         private tipoContenido contenido;
         private object tag;
         private CompuestoParte compuesto;
+        private decimal fixedCost;
 
         public NodoEstructura() 
         {
@@ -67,17 +68,26 @@ namespace GyCAP.Entidades.ArbolEstructura
         
         public decimal GetCosto()
         {
-            if (this.contenido == tipoContenido.MateriaPrima) { return this.compuesto.MateriaPrima.Costo * this.compuesto.Cantidad; }
-            if (this.contenido == tipoContenido.Parte && this.compuesto.Parte.Tipo.Adquirido == 1) { return this.compuesto.Parte.Costo; }
+            if (this.contenido == tipoContenido.MateriaPrima) 
+            {
+                this.fixedCost = this.compuesto.MateriaPrima.Costo * this.compuesto.Cantidad;
+                return this.fixedCost;
+            }
+            if (this.contenido == tipoContenido.Parte && this.compuesto.Parte.Tipo.Adquirido == 1) 
+            {
+                this.fixedCost = this.compuesto.Parte.Costo;
+                return this.fixedCost;
+            }
 
             decimal costo = 0;
             
             foreach (NodoEstructura nodo in nodosHijos)
             {
                 costo += nodo.GetCosto() * this.compuesto.Cantidad;
-            }            
+            }
 
-            return costo;
+            this.fixedCost = costo;
+            return this.fixedCost;
         }
 
         public IList<MPEstructura> GetMPQuantityForPart()
@@ -175,10 +185,17 @@ namespace GyCAP.Entidades.ArbolEstructura
             return nodo;
         }
 
-        public IList<NodoEstructura> AsList(bool IncludeSelf)
+        public IList<NodoEstructura> AsList(NodoEstructura.tipoContenido tipoContenido)
         {
-            //sin finalizar - gonzalo
-            return new List<NodoEstructura>();
+            IList<NodoEstructura> lista = new List<NodoEstructura>();
+            if (this.contenido == tipoContenido || tipoContenido == tipoContenido.Todos) { lista.Add(this); }
+
+            foreach (NodoEstructura nodoHijo in this.nodosHijos)
+            {
+                lista = lista.Concat(nodoHijo.AsList(tipoContenido)).ToList();
+            }            
+
+            return lista;
         }
 
         private IList<string> ValidateAddChild(NodoEstructura nodo)
