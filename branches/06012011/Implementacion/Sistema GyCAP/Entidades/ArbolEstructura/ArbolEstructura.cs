@@ -21,6 +21,7 @@ namespace GyCAP.Entidades.ArbolEstructura
         private NodoEstructura nodoRaiz;
         private int codigoEstructura;
         private int SelectedNodeCode;
+        private decimal fixedCost;
 
         public int GetNextCodigoNodo()
         {
@@ -58,7 +59,8 @@ namespace GyCAP.Entidades.ArbolEstructura
 
         public decimal GetCostoEstructura()
         {
-            return nodoRaiz.GetCosto();
+            this.fixedCost = nodoRaiz.GetCosto();
+            return this.fixedCost;
         }
 
         public IList<MPEstructura> GetMPQuantityForStructure()
@@ -164,11 +166,25 @@ namespace GyCAP.Entidades.ArbolEstructura
             return treeReturn;
         }
 
-        public IList<NodoEstructura> AsList(bool IncluirRaiz)
+        public IList<NodoEstructura> AsList(NodoEstructura.tipoContenido tipoContenido)
         {
-            //sin finalizar - gonzalo
-            IList<NodoEstructura> lista = new List<NodoEstructura>();
-            if (IncluirRaiz) { lista.Add(nodoRaiz); }
+            return nodoRaiz.AsList(tipoContenido);
+        }
+
+        public IList<NodoEstructura> AsList(NodoEstructura.tipoContenido tipoContenido, bool distinct, bool sumEquals)
+        {
+            //No termiando - gonzalo
+            IList<NodoEstructura> lista = nodoRaiz.AsList(tipoContenido);
+            
+            if (distinct)
+            {
+                //Filtrar
+                if (sumEquals)
+                {
+                    //Sumar
+                }
+            }
+
             return lista;
         }
 
