@@ -127,9 +127,20 @@ namespace GyCAP.DAL
                 transaccion.Rollback();
                 throw new Entidades.Excepciones.BaseDeDatosException();
             }
-
         }
 
+        //VALIDACION
+        //Metodo que valida que no se guarde un plan que ya existe
+        public static void ValidarExistencia(int año)
+        {
+            string sql = "SELECT count(pmpa_codigo) FROM PLANES_MATERIAS_PRIMAS_ANUALES WHERE pmpa_anio = @p0";
+            object[] valoresParametros = { año };
 
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valoresParametros, null)) != 0) { throw new Entidades.Excepciones.ElementoExistenteException(); }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
     }
 }
