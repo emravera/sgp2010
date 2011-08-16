@@ -140,6 +140,10 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnNuevo.Enabled = true;
                     btnConsultar.Enabled = false;
                     btnEliminar.Enabled = false;
+
+                    //Limpio los dataTables
+                    dsPlanMP.DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL.Clear();
+                    dsPlanMP.PLANES_MATERIAS_PRIMAS_ANUALES.Clear();
                     
                     //Seteamos las columnas que no queremos que se vean
                     dgvLista.Columns["PMPA_CODIGO"].Visible = false;
@@ -154,6 +158,11 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnNuevo.Enabled = true;
                     btnConsultar.Enabled = true;
                     btnEliminar.Enabled = false;
+
+                    //Limpio los dataTables
+                    dsPlanMP.DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL.Clear();
+                    dsPlanMP.PLANES_MATERIAS_PRIMAS_ANUALES.Clear();
+
                     break;
                 case estadoUI.buscar:
                     txtAnioBuscar.Text = string.Empty;
@@ -208,8 +217,11 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             try
             {
+                //Validamos si ya existe un plan de MP para ese año. (Tira excepcion de elemento existente)
+                BLL.PlanMateriaPrimaBLL.ValidarExistencia(Convert.ToInt32(cbPlanificacion.GetSelectedText()));
+                
                 //Traigo cada uno de los meses del plan anual
-                int codigoPlanAnual =Convert.ToInt32(cbPlanificacion.GetSelectedValue());
+                int codigoPlanAnual = Convert.ToInt32(cbPlanificacion.GetSelectedValue());
 
                 //Cargo el dataset con el detalle 
                 BLL.DetallePlanAnualBLL.ObtenerFila(dsPlanMP.DETALLE_PLAN_ANUAL, codigoPlanAnual);
@@ -323,7 +335,11 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+            }
+            catch (Entidades.Excepciones.ElementoExistenteException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
         }
 
@@ -509,7 +525,6 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
 
         #endregion
-
-       
+               
     }
 }

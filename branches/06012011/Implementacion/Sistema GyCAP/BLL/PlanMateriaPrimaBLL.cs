@@ -38,6 +38,12 @@ namespace GyCAP.BLL
             DAL.PlanMateriasPrimasDAL.Eliminar(codigo);
         }
 
+        //Metodo que valida que no exista un plan ya generado
+        public static void ValidarExistencia(int año)
+        {
+            DAL.PlanMateriasPrimasDAL.ValidarExistencia(año);
+        }
+
 
     }
 }
