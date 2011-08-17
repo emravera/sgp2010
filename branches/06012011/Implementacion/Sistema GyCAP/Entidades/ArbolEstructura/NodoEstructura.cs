@@ -75,7 +75,7 @@ namespace GyCAP.Entidades.ArbolEstructura
             }
             if (this.contenido == tipoContenido.Parte && this.compuesto.Parte.Tipo.Adquirido == 1) 
             {
-                this.fixedCost = this.compuesto.Parte.Costo;
+                this.fixedCost = this.compuesto.Parte.Costo * this.compuesto.Cantidad;
                 return this.fixedCost;
             }
 
