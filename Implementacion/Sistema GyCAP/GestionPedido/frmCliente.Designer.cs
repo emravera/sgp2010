@@ -75,6 +75,9 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbDatos.Controls.Add(this.cboEstado);
             this.gbDatos.Controls.Add(this.txtMail);
             this.gbDatos.Controls.Add(this.label5);
@@ -85,7 +88,6 @@
             this.gbDatos.Controls.Add(this.label8);
             this.gbDatos.Controls.Add(this.txtRazonSocial);
             this.gbDatos.Controls.Add(this.label3);
-            this.gbDatos.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbDatos.Location = new System.Drawing.Point(3, 2);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
@@ -93,7 +95,7 @@
             this.gbDatos.Size = new System.Drawing.Size(544, 243);
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
-            this.gbDatos.Text = "Datos Empleado";
+            this.gbDatos.Text = "Datos Cliente";
             // 
             // cboEstado
             // 
@@ -124,11 +126,12 @@
             // 
             // txtMotivoBaja
             // 
+            this.txtMotivoBaja.CausesValidation = false;
             this.txtMotivoBaja.Location = new System.Drawing.Point(94, 129);
             this.txtMotivoBaja.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMotivoBaja.Multiline = true;
             this.txtMotivoBaja.Name = "txtMotivoBaja";
-            this.txtMotivoBaja.Size = new System.Drawing.Size(442, 106);
+            this.txtMotivoBaja.Size = new System.Drawing.Size(417, 78);
             this.txtMotivoBaja.TabIndex = 8;
             this.txtMotivoBaja.Enter += new System.EventHandler(this.txtMotivoBaja_Enter);
             // 
@@ -166,7 +169,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 13);
             this.label8.TabIndex = 14;
-            this.label8.Text = "Telefono:";
+            this.label8.Text = "Teléfono:";
             // 
             // txtRazonSocial
             // 
@@ -222,57 +225,63 @@
             // 
             // gpbLista
             // 
+            this.gpbLista.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gpbLista.Controls.Add(this.dgvLista);
-            this.gpbLista.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gpbLista.Location = new System.Drawing.Point(3, 79);
+            this.gpbLista.Location = new System.Drawing.Point(3, 55);
             this.gpbLista.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gpbLista.Name = "gpbLista";
             this.gpbLista.Padding = new System.Windows.Forms.Padding(9);
-            this.gpbLista.Size = new System.Drawing.Size(544, 222);
+            this.gpbLista.Size = new System.Drawing.Size(544, 253);
             this.gpbLista.TabIndex = 1;
             this.gpbLista.TabStop = false;
-            this.gpbLista.Text = "Listado";
+            this.gpbLista.Text = "Resultados Búsqueda";
             // 
             // dgvLista
             // 
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
-            this.dgvLista.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvLista.CausesValidation = false;
+            this.dgvLista.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLista.Location = new System.Drawing.Point(9, 22);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(526, 191);
+            this.dgvLista.Size = new System.Drawing.Size(526, 222);
             this.dgvLista.TabIndex = 3;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
+            this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.cboBuscarEstado);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.txtRazonSocialBuscar);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 2);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(544, 77);
+            this.groupBox1.Size = new System.Drawing.Size(544, 49);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
             // 
             // cboBuscarEstado
             // 
+            this.cboBuscarEstado.CausesValidation = false;
             this.cboBuscarEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboBuscarEstado.FormattingEnabled = true;
-            this.cboBuscarEstado.Location = new System.Drawing.Point(76, 18);
+            this.cboBuscarEstado.Location = new System.Drawing.Point(58, 17);
             this.cboBuscarEstado.Name = "cboBuscarEstado";
-            this.cboBuscarEstado.Size = new System.Drawing.Size(106, 21);
+            this.cboBuscarEstado.Size = new System.Drawing.Size(123, 21);
             this.cboBuscarEstado.TabIndex = 4;
             // 
             // label4
@@ -288,7 +297,7 @@
             // 
             this.btnBuscar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(460, 41);
+            this.btnBuscar.Location = new System.Drawing.Point(447, 14);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
@@ -300,21 +309,22 @@
             // 
             // txtRazonSocialBuscar
             // 
-            this.txtRazonSocialBuscar.Location = new System.Drawing.Point(76, 45);
+            this.txtRazonSocialBuscar.CausesValidation = false;
+            this.txtRazonSocialBuscar.Location = new System.Drawing.Point(279, 17);
             this.txtRazonSocialBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtRazonSocialBuscar.Name = "txtRazonSocialBuscar";
-            this.txtRazonSocialBuscar.Size = new System.Drawing.Size(217, 20);
+            this.txtRazonSocialBuscar.Size = new System.Drawing.Size(162, 20);
             this.txtRazonSocialBuscar.TabIndex = 1;
             this.txtRazonSocialBuscar.Enter += new System.EventHandler(this.txtRazonSocialBuscar_Enter);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 48);
+            this.label1.Location = new System.Drawing.Point(202, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 13);
+            this.label1.Size = new System.Drawing.Size(71, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Buscar por:";
+            this.label1.Text = "Razón Social:";
             // 
             // tpDatos
             // 
@@ -330,9 +340,10 @@
             // 
             // gbGuardarCancelar
             // 
+            this.gbGuardarCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbGuardarCancelar.Controls.Add(this.btnVolver);
             this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
-            this.gbGuardarCancelar.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 247);
             this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
@@ -343,6 +354,7 @@
             // 
             // btnVolver
             // 
+            this.btnVolver.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnVolver.Location = new System.Drawing.Point(472, 20);
             this.btnVolver.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnVolver.Name = "btnVolver";
@@ -354,6 +366,7 @@
             // 
             // btnGuardar
             // 
+            this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnGuardar.Location = new System.Drawing.Point(402, 20);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnGuardar.Name = "btnGuardar";
@@ -466,12 +479,10 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
             this.Name = "frmCliente";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Clientes";
-            this.Load += new System.EventHandler(this.frmCliente_Load);
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
             this.tcABM.ResumeLayout(false);

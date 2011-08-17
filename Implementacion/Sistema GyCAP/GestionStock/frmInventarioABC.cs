@@ -46,8 +46,7 @@ namespace GyCAP.UI.GestionStock
             dgvModelos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvModelos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvModelos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-
+            
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvModelos.Columns["CODIGO_MODELO_PRODUCIDO"].DataPropertyName = "CODIGO_MODELO_PRODUCIDO";
             dgvModelos.Columns["CODIGO_MODELO"].DataPropertyName = "CODIGO_MODELO";
@@ -58,6 +57,7 @@ namespace GyCAP.UI.GestionStock
 
             //Indicamos la alineacion de los campos
             dgvModelos.Columns["MODELO_PORCENTAJE"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvModelos.Columns["MODELO_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaModelos = new DataView(dsInventarioABC.MODELOS_PRODUCIDOS);
@@ -91,7 +91,13 @@ namespace GyCAP.UI.GestionStock
             dgvMP.Columns["CANTIDAD_INVERSION"].DataPropertyName = "CANTIDAD_INVERSION";
             dgvMP.Columns["PORCENTAJE_INVERSION"].DataPropertyName = "PORCENTAJE_INVERSION";
             dgvMP.Columns["CATEGORIA_ABC"].DataPropertyName = "CATEGORIA_ABC";
-                                   
+             
+            //Alineamos las columnas
+            dgvMP.Columns["CANTIDAD_ANUAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvMP.Columns["PRECIO_UNIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvMP.Columns["CANTIDAD_INVERSION"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvMP.Columns["PORCENTAJE_INVERSION"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                      
             //Creamos el dataview y lo asignamos a la grilla
             dvListaMP = new DataView(dsInventarioABC.MATERIAS_PRIMAS_ABC);
             dgvMP.DataSource = dvListaMP;

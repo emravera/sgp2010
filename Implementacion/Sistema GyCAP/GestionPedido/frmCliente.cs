@@ -20,16 +20,16 @@ namespace GyCAP.UI.GestionPedido
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
 
         public event Action<Entidades.Cliente> NuevoCliente;
+        
+        #region Inicio
 
         public frmCliente()
         {
             InitializeComponent();
 
-            //Setea el nombre de la Lista
-            gpbLista.Text = "Listado de " + this.Text;
-
             //Para que no genere las columnas automáticamente
             dgvLista.AutoGenerateColumns = false;
+            
             //Agregamos las columnas
             dgvLista.Columns.Add("CLI_CODIGO", "Código");
             dgvLista.Columns.Add("CLI_RAZONSOCIAL", "Razón Social");
@@ -43,12 +43,7 @@ namespace GyCAP.UI.GestionPedido
             dgvLista.Columns["CLI_TELEFONO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             dgvLista.Columns["CLI_MAIL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             dgvLista.Columns["CLI_ESTADO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvLista.Columns["CLI_CODIGO"].Width = 100;
-            dgvLista.Columns["CLI_RAZONSOCIAL"].Width = 192;
-            dgvLista.Columns["CLI_TELEFONO"].Width = 90;
-            dgvLista.Columns["CLI_MAIL"].Width = 160;
-            dgvLista.Columns["CLI_ESTADO"].Width = 80;
-
+            
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["CLI_CODIGO"].DataPropertyName = "CLI_CODIGO";
             dgvLista.Columns["CLI_RAZONSOCIAL"].DataPropertyName = "CLI_RAZONSOCIAL";
@@ -83,6 +78,7 @@ namespace GyCAP.UI.GestionPedido
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
         }
+        #endregion
 
         #region Servicios
 
@@ -104,6 +100,8 @@ namespace GyCAP.UI.GestionPedido
                         hayDatos = true;
                         dgvLista.Focus();
                     }
+
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
 
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
@@ -213,19 +211,36 @@ namespace GyCAP.UI.GestionPedido
             }
         }
 
-        #endregion
-
-        private void frmCliente_Load(object sender, EventArgs e)
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            if (tcABM.SelectedTab == tpBuscar)
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
+        private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value != null && e.Value.ToString() != String.Empty)
             {
-                btnBuscar.Focus();
-            }
-            else
-            {
-                txtRazonSocial.Focus();
+                string nombre;
+                switch (dgvLista.Columns[e.ColumnIndex].Name)
+                {
+                    case "CLI_ESTADO":
+                        nombre = string.Empty;
+                        if (e.Value.ToString() == "A")
+                            nombre = "Activo";
+                        else if (e.Value.ToString() == "I")
+                            nombre = "Inactivo";
+
+                        e.Value = nombre;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
+
+        #endregion
+
+        #region Pestaña Buscar
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
@@ -271,14 +286,14 @@ namespace GyCAP.UI.GestionPedido
 
                 if (dsCliente.CLIENTES.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Clientes con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Clientes", this.Text);                    
                 }
                 SetInterface(estadoUI.inicio);
                 
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Clientes - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);                
                 SetInterface(estadoUI.inicio);
             }
         }
@@ -287,7 +302,10 @@ namespace GyCAP.UI.GestionPedido
         {
             SetInterface(estadoUI.inicio);
         }
-        
+        #endregion
+
+        #region Pestaña Datos
+
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             int codigoCliente = Convert.ToInt32(dvCliente[e.RowIndex]["cli_codigo"]);
@@ -329,9 +347,8 @@ namespace GyCAP.UI.GestionPedido
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             //Revisamos que escribió algo y selecciono algo en el combo
-            if (txtRazonSocial.Text != String.Empty && cboEstado.SelectedIndex != -1)
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
-
                 Entidades.Cliente cliente = new GyCAP.Entidades.Cliente();
 
                 //Revisamos que está haciendo
@@ -394,15 +411,14 @@ namespace GyCAP.UI.GestionPedido
                             //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
                             SetInterface(estadoUI.inicio);
                         }
-
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);                        
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);                        
                     }
                 }
                 else
@@ -438,58 +454,34 @@ namespace GyCAP.UI.GestionPedido
 
                         //Termina la edición de la fila
                         rowCliente.EndEdit();
+                        
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsCliente.CLIENTES.AcceptChanges();
+                        
                         //Avisamos que estuvo todo ok
-                        MessageBox.Show("Elemento actualizado correctamente.", "Información: Actualización ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Cliente", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                                                
                         //Y por último seteamos el estado de la interfaz
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);                        
                     }
                 }
 
                 //recarga de la grilla
                 dgvLista.Refresh();
-
-            }
-            else
-            {
-                MessageBox.Show("Debe completar los datos.", "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            }           
         }
-
-        private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.Value != null && e.Value.ToString() != String.Empty)
-            {
-                string nombre;
-                switch (dgvLista.Columns[e.ColumnIndex].Name)
-                {
-                    case "CLI_ESTADO":
-                        nombre = string.Empty;
-                        if (e.Value.ToString() == "A")
-                            nombre = "Activo";
-                        else if (e.Value.ToString() == "I")
-                            nombre = "Inactivo";
-
-                        e.Value = nombre;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
+        
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             //Controlamos que esté seleccionado algo
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro
-                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar el Cliente seleccionado?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Cliente", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
                 if (respuesta == DialogResult.Yes)
                 {
                     try
@@ -505,20 +497,21 @@ namespace GyCAP.UI.GestionPedido
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        MessageBox.Show(ex.Message, "Advertencia: Elemento en transacción", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);                        
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        MessageBox.Show(ex.Message, "Error: " + this.Text + " - Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un Cliente de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Cliente", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);                
             }
         }
+        #endregion
 
-
+        
     }
 }
