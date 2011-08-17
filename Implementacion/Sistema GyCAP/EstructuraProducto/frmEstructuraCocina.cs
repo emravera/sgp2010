@@ -373,9 +373,14 @@ namespace GyCAP.UI.EstructuraProducto
                 tvEstructura.SelectedNode.Parent != null && 
                 EsMismoPadreHijo(rowParte, tvEstructura.SelectedNode)) { validacion.Add("Una parte no puede ser padre e hijo al mismo tiempo"); }
             if (tvEstructura.SelectedNode != null && rowMP != null && Convert.ToInt32(tvEstructura.SelectedNode.Tag) == BLL.CompuestoParteBLL.HijoEsMP) { validacion.Add("Una materia prima no puede ser hijo de una materia prima"); }
+            if (!dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).IsCOMP_CODIGO_PADRENull() &&
+                !dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).IsPART_NUMERONull() &&
+                dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).PARTESRow.TIPOS_PARTESRow.TPAR_ADQUIRIDO == BLL.TipoParteBLL.ValorSI)
+                { validacion.Add("Una parte adquirida no puede tener hijos."); }
 
             if (validacion.Count == 0)
             {
+                nudCantidadAgregar.Value = Math.Round(nudCantidadAgregar.Value, 3);
                 Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowComp = EstaAgregada(rowParte, rowMP, tvEstructura.SelectedNode);
                 if (rowComp == null)
                 {
