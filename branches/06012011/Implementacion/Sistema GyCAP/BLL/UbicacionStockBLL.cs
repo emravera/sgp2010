@@ -39,6 +39,11 @@ namespace GyCAP.BLL
             DAL.UbicacionStockDAL.Actualizar(ubicacionStock);
         }
 
+        public static Entidades.UbicacionStock AsUbicacionStock()
+        {
+            return new GyCAP.Entidades.UbicacionStock();
+        }
+
         public static void ActualizarCantidadesStock(int numeroUbicacion, decimal cantidadReal, decimal cantidadVirtual)
         {
             DAL.UbicacionStockDAL.ActualizarCantidadesStock(numeroUbicacion, cantidadReal, cantidadVirtual, null);

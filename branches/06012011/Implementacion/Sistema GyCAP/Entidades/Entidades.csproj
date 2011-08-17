@@ -94,12 +94,14 @@
     <Compile Include="Estructura.cs" />
     <Compile Include="ExcepcionesPlan.cs" />
     <Compile Include="Excepciones\BaseDeDatosException.cs" />
+    <Compile Include="Excepciones\CocinaSinEstructuraActivaException.cs" />
     <Compile Include="Excepciones\ElementoActivoException.cs" />
     <Compile Include="Excepciones\ElementoEnTransaccionException.cs" />
     <Compile Include="Excepciones\ElementoInexistenteException.cs" />
     <Compile Include="Excepciones\ElementoExistenteException.cs" />
     <Compile Include="Excepciones\ErrorInesperadoException.cs" />
     <Compile Include="Excepciones\ErrorValidacionException.cs" />
+    <Compile Include="Excepciones\EstructuraSinMateriaPrimaException.cs" />
     <Compile Include="Excepciones\ImageNotFoundException.cs" />
     <Compile Include="Excepciones\OrdenTrabajoException.cs" />
     <Compile Include="Excepciones\SaveImageException.cs" />

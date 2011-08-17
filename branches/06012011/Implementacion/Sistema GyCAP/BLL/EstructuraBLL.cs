@@ -203,6 +203,8 @@ namespace GyCAP.BLL
 
             if (ds.ESTRUCTURAS.Rows.Count > 0)
             {
+                if (ds.COMPUESTOS_PARTES.Select(p => !p.IsMP_CODIGONull()).Count() == 0) { throw new Entidades.Excepciones.EstructuraSinMateriaPrimaException(); }
+                
                 TerminacionBLL.ObtenerTodos(string.Empty, ds.TERMINACIONES);
                 PlanoBLL.ObtenerTodos(ds.PLANOS);
                 ParteBLL.ObtenerPartes(null, null, null, null, null, null, ds.PARTES);
@@ -212,13 +214,15 @@ namespace GyCAP.BLL
                 EstadoParteBLL.ObtenerTodos(ds.ESTADO_PARTES);
                 HojaRutaBLL.ObtenerHojasRuta(ds.HOJAS_RUTA);
                 TipoUnidadMedidaBLL.ObtenerTodos(ds.TIPOS_UNIDADES_MEDIDA);
-                
+
                 ArbolEstructura arbol = ArmarArbol(Convert.ToInt32(ds.ESTRUCTURAS.Rows[0]["estr_codigo"]), ds);
                 arbol.NodoRaiz.Compuesto.Cantidad = cantidadCocina;
                 return arbol.GetMPQuantityForStructure().ToList();
             }
-
-            return new List<MPEstructura>();
+            else
+            {
+                throw new Entidades.Excepciones.CocinaSinEstructuraActivaException();
+            }
         }
     }
 }
