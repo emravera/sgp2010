@@ -380,7 +380,8 @@ namespace GyCAP.UI.EstructuraProducto
 
             if (validacion.Count == 0)
             {
-                nudCantidadAgregar.Value = Math.Round(nudCantidadAgregar.Value, 3);
+                nudCantidadAgregar.Value = Math.Round(nudCantidadAgregar.Value, 3);                
+
                 Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowComp = EstaAgregada(rowParte, rowMP, tvEstructura.SelectedNode);
                 if (rowComp == null)
                 {
