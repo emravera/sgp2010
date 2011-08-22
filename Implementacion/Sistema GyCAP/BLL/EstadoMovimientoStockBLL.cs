@@ -8,13 +8,18 @@ namespace GyCAP.BLL
 {
     public class EstadoMovimientoStockBLL
     {
-        public static readonly int EstadoPlanificado = 1;
-        public static readonly int EstadoFinalizado = 2;
-        public static readonly int EstadoCancelado = 3;
+        public const string Planificado = DAL.EstadoMovimientoStockDAL.Planificado;
+        public const string Finalizado = DAL.EstadoMovimientoStockDAL.Finalizado;
+        public const string Cancelado = DAL.EstadoMovimientoStockDAL.Cancelado;
         
         public static void ObtenerEstadosMovimiento(DataTable dtEstadosMovimientoStock)
         {
             DAL.EstadoMovimientoStockDAL.ObtenerEstados(dtEstadosMovimientoStock);
+        }
+
+        public static Entidades.EstadoMovimientoStock GetEstadoEntity(string nombreEstado)
+        {
+            return DAL.EstadoMovimientoStockDAL.GetEstadoEntity(nombreEstado);
         }
     }
 }

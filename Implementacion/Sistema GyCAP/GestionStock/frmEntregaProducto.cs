@@ -1040,26 +1040,30 @@ namespace GyCAP.UI.GestionStock
                 foreach (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow row in (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow[])dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO.Select(null, null, System.Data.DataViewRowState.Added))
                 {
                     //Actualizo la cantidad de stock
-                    BLL.UbicacionStockBLL.ActualizarCantidadesStock(Convert.ToInt32(row.DENT_CONTENIDO), (Convert.ToDecimal(row.DENT_CANTIDAD) * -1),(Convert.ToDecimal(row.DENT_CANTIDAD) * -1));
+                    //Generar movimiento - Emanuel
+                    //BLL.UbicacionStockBLL.ActualizarCantidadesStock(Convert.ToInt32(row.DENT_CONTENIDO), (Convert.ToDecimal(row.DENT_CANTIDAD) * -1),(Convert.ToDecimal(row.DENT_CANTIDAD) * -1));
                 }
                 
                 //Si se modificaron filas entonces SUMO las cantidades anteriores y luego resto las cantidades actuales
                 foreach (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow row in (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow[])dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO.Select(null, null, System.Data.DataViewRowState.ModifiedOriginal))
                 {
                     //Actualizo la cantidad de stock
-                    BLL.UbicacionStockBLL.ActualizarCantidadesStock(Convert.ToInt32(row.DENT_CONTENIDO), Convert.ToDecimal(row.DENT_CANTIDAD), Convert.ToDecimal(row.DENT_CANTIDAD));
+                    //Generar movimiento - Emanuel
+                    //BLL.UbicacionStockBLL.ActualizarCantidadesStock(Convert.ToInt32(row.DENT_CONTENIDO), Convert.ToDecimal(row.DENT_CANTIDAD), Convert.ToDecimal(row.DENT_CANTIDAD));
                 }
                 foreach (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow row in (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow[])dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
                     //Actualizo la cantidad de stock
-                    BLL.UbicacionStockBLL.ActualizarCantidadesStock(Convert.ToInt32(row.DENT_CONTENIDO), Convert.ToDecimal(row.DENT_CANTIDAD), Convert.ToDecimal(row.DENT_CANTIDAD));
+                    //Generar movimiento - Emanuel
+                    //BLL.UbicacionStockBLL.ActualizarCantidadesStock(Convert.ToInt32(row.DENT_CONTENIDO), Convert.ToDecimal(row.DENT_CANTIDAD), Convert.ToDecimal(row.DENT_CANTIDAD));
                 }
 
                 //Sumo las cantidades de las filas que fueron eliminadas
                 foreach (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow row in (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow[])dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO.Select(null, null, System.Data.DataViewRowState.Deleted))
                 {
                     //Actualizo la cantidad de stock
-                    BLL.UbicacionStockBLL.ActualizarCantidadesStock(Convert.ToInt32(row.DENT_CONTENIDO), Convert.ToDecimal(row.DENT_CANTIDAD), Convert.ToDecimal(row.DENT_CANTIDAD));
+                    //Generar movimiento - Emanuel
+                    //BLL.UbicacionStockBLL.ActualizarCantidadesStock(Convert.ToInt32(row.DENT_CONTENIDO), Convert.ToDecimal(row.DENT_CANTIDAD), Convert.ToDecimal(row.DENT_CANTIDAD));
                 }
                 //******************************************************************** FIN ACTUALIZACIONES ****************************************************************************************************************************************
 

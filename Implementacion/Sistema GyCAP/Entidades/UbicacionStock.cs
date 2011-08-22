@@ -20,7 +20,6 @@ namespace GyCAP.Entidades
         private string descripcion;
         private string ubicacionFisica;
         private decimal cantidadReal;
-        private decimal cantidadVirtual;
         private UnidadMedida unidadMedida;
         private UbicacionStock ubicacionPadre;
         private int activo;
@@ -61,13 +60,7 @@ namespace GyCAP.Entidades
         {
             get { return cantidadReal; }
             set { cantidadReal = value; }
-        }        
-
-        public decimal CantidadVirtual
-        {
-            get { return cantidadVirtual; }
-            set { cantidadVirtual = value; }
-        }        
+        }     
 
         public UnidadMedida UnidadMedida
         {

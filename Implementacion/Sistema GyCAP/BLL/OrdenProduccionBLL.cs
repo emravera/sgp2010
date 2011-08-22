@@ -444,42 +444,42 @@ namespace GyCAP.BLL
                             Data.dsStock.MOVIMIENTOS_STOCKRow rowMovimiento = dsStock.MOVIMIENTOS_STOCK.NewMOVIMIENTOS_STOCKRow();
                             rowMovimiento.BeginEdit();
                             rowMovimiento.MVTO_NUMERO = codigoMovimiento--;
-                            rowMovimiento.EMVTO_CODIGO = EstadoMovimientoStockBLL.EstadoPlanificado;
+                            //rowMovimiento.EMVTO_CODIGO = EstadoMovimientoStockBLL.EstadoPlanificado;
                             rowMovimiento.MVTO_CODIGO = "MSA/OT- " + rowOT.ORDT_CODIGO;
                             rowMovimiento.MVTO_DESCRIPCION = "Automático. Origen: Orden de Trabajo.";
                             rowMovimiento.MVTO_FECHAALTA = DBBLL.GetFechaServidor();
                             rowMovimiento.MVTO_FECHAPREVISTA = rowOT.ORDT_FECHAFINESTIMADA;
                             rowMovimiento.SetMVTO_FECHAREALNull();
-                            rowMovimiento.USTCK_ORIGEN = rowMPxP.MATERIAS_PRIMASRow.USTCK_NUMERO;
-                            if (!rowOT.IsUSTCK_DESTINONull()) { rowMovimiento.USTCK_DESTINO = rowOT.USTCK_DESTINO; }
-                            else 
-                            {
-                                Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTTemp = rowOT;
-                                while (rowOTTemp.PAR_CODIGO == rowOTTemp.ORDENES_TRABAJORowParent.PAR_CODIGO && rowOTTemp.PAR_TIPO == rowOTTemp.ORDENES_TRABAJORowParent.PAR_TIPO && rowOTTemp.ORDENES_TRABAJORowParent.IsUSTCK_DESTINONull())
-                                {
-                                    rowOTTemp = rowOTTemp.ORDENES_TRABAJORowParent;
-                                }
-                                rowMovimiento.USTCK_DESTINO = rowOTTemp.ORDENES_TRABAJORowParent.USTCK_DESTINO;
-                            }
+                            //rowMovimiento.USTCK_ORIGEN = rowMPxP.MATERIAS_PRIMASRow.USTCK_NUMERO;
+                            //if (!rowOT.IsUSTCK_DESTINONull()) { rowMovimiento.USTCK_DESTINO = rowOT.USTCK_DESTINO; }
+                            //else 
+                            //{
+                                //Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOTTemp = rowOT;
+                                //while (rowOTTemp.PAR_CODIGO == rowOTTemp.ORDENES_TRABAJORowParent.PAR_CODIGO && rowOTTemp.PAR_TIPO == rowOTTemp.ORDENES_TRABAJORowParent.PAR_TIPO && rowOTTemp.ORDENES_TRABAJORowParent.IsUSTCK_DESTINONull())
+                                //{
+                                //    rowOTTemp = rowOTTemp.ORDENES_TRABAJORowParent;
+                                //}
+                                //rowMovimiento.USTCK_DESTINO = rowOTTemp.ORDENES_TRABAJORowParent.USTCK_DESTINO;
+                            //}
                             rowMovimiento.MVTO_CANTIDAD_ORIGEN_ESTIMADA = rowMPxP.MPXP_CANTIDAD * rowOT.ORDT_CANTIDADESTIMADA;
                             rowMovimiento.MVTO_CANTIDAD_DESTINO_ESTIMADA = rowOT.ORDT_CANTIDADESTIMADA;
                             rowMovimiento.MVTO_CANTIDAD_ORIGEN_REAL = 0;
                             rowMovimiento.MVTO_CANTIDAD_DESTINO_REAL = 0;
-                            rowMovimiento.ORDT_NUMERO = rowOT.ORDT_NUMERO;
+                            //rowMovimiento.ORDT_NUMERO = rowOT.ORDT_NUMERO;
                             rowMovimiento.EndEdit();
                             dsStock.MOVIMIENTOS_STOCK.AddMOVIMIENTOS_STOCKRow(rowMovimiento);
 
                             //Actualizamos los datos de la ubicación de stock origen
-                            dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(rowMovimiento.USTCK_ORIGEN).USTCK_CANTIDADVIRTUAL -= rowMovimiento.MVTO_CANTIDAD_ORIGEN_ESTIMADA;
-                            if (!rowMovimiento.IsUSTCK_DESTINONull())
-                            {
-                                stockDestino = rowMovimiento.USTCK_DESTINO;
-                                cantidadDestino = rowMovimiento.MVTO_CANTIDAD_DESTINO_ESTIMADA;
-                            }
+                            //dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(rowMovimiento.USTCK_ORIGEN).USTCK_CANTIDADVIRTUAL -= rowMovimiento.MVTO_CANTIDAD_ORIGEN_ESTIMADA;
+                            //if (!rowMovimiento.IsUSTCK_DESTINONull())
+                            ///{
+                            //    stockDestino = rowMovimiento.USTCK_DESTINO;
+                           //     cantidadDestino = rowMovimiento.MVTO_CANTIDAD_DESTINO_ESTIMADA;
+                            //}
                         }
                     }
                     //Actualizamos los datos de la ubicación de stock destino, que para todos los casos anteriores es el mismo
-                    dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(stockDestino).USTCK_CANTIDADVIRTUAL += cantidadDestino;
+                    //dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(stockDestino).USTCK_CANTIDADVIRTUAL += cantidadDestino;
                     ultimaParte = rowOT.PAR_CODIGO;
                 }
 	        }

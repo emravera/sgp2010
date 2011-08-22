@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GyCAP.Entidades
 {
-    public class TipoUbicacionStock
+    public class TipoEntidad
     {
         private int codigo;
 
@@ -28,6 +28,5 @@ namespace GyCAP.Entidades
             get { return descripcion; }
             set { descripcion = value; }
         }
-
     }
 }

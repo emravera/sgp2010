@@ -13,7 +13,38 @@ namespace GyCAP.DAL
         public static readonly int EstadoFinalizado = 2;
         public static readonly int EstadoCancelado = 3;
         
-        public static void Insertar(Entidades.MovimientoStock movimientoStock, SqlTransaction transaccion)
+        public static void InsertarPlanificado(Entidades.MovimientoStock movimientoStock)
+        {
+            try
+            {
+                Insertar(movimientoStock, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static void InsertarFinalizado(Entidades.MovimientoStock movimientoStock)
+        {
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                transaccion = DB.IniciarTransaccion();
+                Insertar(movimientoStock, transaccion);
+                Finalizar(movimientoStock, transaccion);
+                transaccion.Commit();
+            }
+            catch (SqlException ex)
+            {
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
+            }
+            finally
+            {
+                DB.FinalizarTransaccion();
+            }
+        }
+
+        private static void Insertar(Entidades.MovimientoStock movimientoStock, SqlTransaction transaccion)
         {
             string sql = @"INSERT INTO [MOVIMIENTOS_STOCK] 
                         ([mvto_codigo]
@@ -21,40 +52,40 @@ namespace GyCAP.DAL
                         ,[mvto_fechaalta]
                         ,[mvto_fechaprevista]
                         ,[mvto_fechareal]
-                        ,[ustck_origen]
-                        ,[ustck_destino]
                         ,[mvto_cantidad_origen_estimada]
                         ,[mvto_cantidad_destino_estimada]
                         ,[mvto_cantidad_origen_real]
                         ,[mvto_cantidad_destino_real]
                         ,[emvto_codigo]
-                        ,[ordt_numero]) 
+                        ,[entd_origen]
+                        ,[entd_destino]
+                        ,[entd_duenio]) 
                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12) SELECT @@Identity";
 
-            object fechaPrevista = DBNull.Value, fechaReal = DBNull.Value, origen = DBNull.Value, destino = DBNull.Value, ot = DBNull.Value;
-            if(movimientoStock.FechaPrevista != null) { fechaPrevista = movimientoStock.FechaPrevista; }
-            if(movimientoStock.FechaReal != null) { fechaReal = movimientoStock.FechaReal; }
-            if(movimientoStock.Origen != null) { origen = movimientoStock.Origen.Numero; }
-            if(movimientoStock.Destino != null) { destino = movimientoStock.Destino.Numero; }
-            if (movimientoStock.OrdenTrabajo != null) { ot = movimientoStock.OrdenTrabajo.Numero; }
+            object fechaPrevista = DBNull.Value, fechaReal = DBNull.Value, origen = DBNull.Value, destino = DBNull.Value, duenio = DBNull.Value;
+            if (movimientoStock.FechaPrevista.HasValue) { fechaPrevista = movimientoStock.FechaPrevista.Value.ToShortDateString(); }
+            if (movimientoStock.FechaReal.HasValue) { fechaReal = movimientoStock.FechaReal.Value.ToShortDateString(); }
+            if (movimientoStock.Origen != null) { origen = movimientoStock.Origen.Codigo; }
+            if (movimientoStock.Destino != null) { destino = movimientoStock.Destino.Codigo; }
+            if (movimientoStock.Duenio != null) { duenio = movimientoStock.Duenio.Codigo; }
 
-            object[] parametros = { movimientoStock.Codigo,
+            object[] parametros = { 
+                                      movimientoStock.Codigo,
                                       movimientoStock.Descripcion,
-                                      movimientoStock.FechaAlta,
+                                      movimientoStock.FechaAlta.ToShortDateString(),
                                       fechaPrevista,
                                       fechaReal,
-                                      origen,
-                                      destino,
                                       movimientoStock.CantidadOrigenEstimada,
                                       movimientoStock.CantidadDestinoEstimada,
                                       movimientoStock.CantidadOrigenReal,
                                       movimientoStock.CantidadDestinoReal,
                                       movimientoStock.Estado.Codigo,
-                                      ot };
+                                      origen,
+                                      destino,
+                                      duenio  
+                                  };
 
             movimientoStock.Numero = Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion));
-            //Actualizamos la ubicación de stock origen involucrada en el movimiento
-            UbicacionStockDAL.ActualizarCantidadesStock(movimientoStock.Origen.Numero, 0, (movimientoStock.CantidadOrigenEstimada * -1), transaccion);
         }
 
         public static void Eliminar(int numeroMovimiento)
@@ -92,17 +123,93 @@ namespace GyCAP.DAL
             DB.executeNonQuery(sql, parametros, transaccion);
         }
 
-        public static void FinalizarMovimiento(int numeroMovimiento, SqlTransaction transaccion)
+        public static void Finalizar(Entidades.MovimientoStock movimiento, SqlTransaction transaccion)
         {
             string sql = @"UPDATE MOVIMIENTOS_STOCK SET 
-                         mvto_cantidad_origen_real  = mvto_cantidad_origen_estimada 
-                        ,mvto_cantidad_destino_real = mvto_cantidad_destino_estimada 
-                        ,mvto_fechareal = mvto_fechaprevista 
-                        ,emvto_codigo = @p0
-                         WHERE mvto_numero = @p1";
+                         mvto_cantidad_origen_real  = @p0
+                        ,mvto_cantidad_destino_real = @p1
+                        ,mvto_fechareal = @p2
+                        ,emvto_codigo = @p3
+                         WHERE mvto_numero = @p4";
 
-            object[] parametros = { EstadoFinalizado, numeroMovimiento };
-            DB.executeNonQuery(sql, parametros, transaccion);
+            object[] parametros = {   
+                                      movimiento.CantidadOrigenReal, 
+                                      movimiento.CantidadDestinoReal, 
+                                      movimiento.FechaReal.Value.ToShortDateString(), 
+                                      movimiento.Estado.Codigo,
+                                      movimiento.Numero 
+                                  };
+
+            SqlTransaction _transaccion = null;
+
+            try
+            {
+                _transaccion = (transaccion == null) ? DB.IniciarTransaccion() : transaccion;
+
+                DB.executeNonQuery(sql, parametros, _transaccion);
+
+                if (movimiento.Origen.EntidadExterna != null && movimiento.Origen.EntidadExterna.GetType() == typeof(Entidades.UbicacionStock))
+                {
+                    UbicacionStockDAL.ActualizarCantidadesStockAndParents((movimiento.Origen.EntidadExterna as Entidades.UbicacionStock).Numero, movimiento.CantidadOrigenReal, _transaccion);
+                }
+                if (movimiento.Destino.EntidadExterna != null && movimiento.Destino.EntidadExterna.GetType() == typeof(Entidades.UbicacionStock))
+                {
+                    UbicacionStockDAL.ActualizarCantidadesStockAndParents((movimiento.Destino.EntidadExterna as Entidades.UbicacionStock).Numero, movimiento.CantidadDestinoReal, _transaccion);
+                }
+
+                if (transaccion == null) { _transaccion.Commit(); }
+            }
+            catch (SqlException ex)
+            {
+                if (transaccion != null) { throw ex; }
+                
+                _transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
+            }
+            finally
+            {
+                if (transaccion == null) { DB.FinalizarTransaccion(); }
+            }            
+        }
+
+        public static void Cancelar(int numeroMovimiento)
+        {
+            string sql = @"UPDATE MOVIMIENTOS_STOCK SET                          
+                        ,mvto_fechareal = @p0
+                        ,emvto_codigo = @p1
+                         WHERE mvto_numero = @p2";
+
+            try
+            {
+                object[] parametros = { DB.GetFechaServidor().ToShortDateString(), EstadoCancelado, numeroMovimiento };
+
+                DB.executeNonQuery(sql, parametros, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool EsFinalizado(int numeroMovimiento)
+        {
+            string sql = "SELECT emvto_codigo FROM MOVIMIENTOS_STOCK WHERE mvto_numero = @p0";
+
+            object[] parametros = { numeroMovimiento };
+
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, parametros, null)) == EstadoFinalizado) { return true; }
+                else { return false; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool PuedeEliminarse(int numeroMovimiento)
+        {
+            bool result = EsFinalizado(numeroMovimiento);
+            if (result) { return false; }
+
+            //Ver otras condiciones - gonzalo
+
+            return true;
         }
     }
 }

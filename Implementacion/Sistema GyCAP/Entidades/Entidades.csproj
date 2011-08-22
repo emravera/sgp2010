@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{BF769C01-D311-4BC9-813A-C63DC3B89319}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -79,6 +79,7 @@
     <Compile Include="Domicilio.cs" />
     <Compile Include="EjemplarMaquina.cs" />
     <Compile Include="Empleado.cs" />
+    <Compile Include="Entidad.cs" />
     <Compile Include="EntregaProducto.cs" />
     <Compile Include="EstadoCocina.cs" />
     <Compile Include="EstadoDetalleMantenimiento.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Excepciones\CocinaSinEstructuraActivaException.cs" />
     <Compile Include="Excepciones\ElementoActivoException.cs" />
     <Compile Include="Excepciones\ElementoEnTransaccionException.cs" />
+    <Compile Include="Excepciones\ElementoFinalizadoException.cs" />
     <Compile Include="Excepciones\ElementoInexistenteException.cs" />
     <Compile Include="Excepciones\ElementoExistenteException.cs" />
     <Compile Include="Excepciones\ErrorInesperadoException.cs" />
@@ -123,6 +125,8 @@
     <Compile Include="MPEstructura.cs" />
     <Compile Include="NivelCriticidad.cs" />
     <Compile Include="OperacionFabricacion.cs" />
+    <Compile Include="OrdenCompra.cs" />
+    <Compile Include="OrdenProduccion.cs" />
     <Compile Include="OrdenTrabajo.cs" />
     <Compile Include="Parte.cs" />
     <Compile Include="Pedido.cs" />
@@ -155,6 +159,7 @@
     <Compile Include="SubconjuntoEstructura.cs" />
     <Compile Include="Tarea.cs" />
     <Compile Include="Terminacion.cs" />
+    <Compile Include="TipoEntidad.cs" />
     <Compile Include="TipoMantenimiento.cs" />
     <Compile Include="TipoParte.cs" />
     <Compile Include="TipoRepuesto.cs" />

@@ -20,5 +20,25 @@ namespace GyCAP.BLL
         {
             DAL.ContenidoUbicacionStockDAL.ObtenerContenidosUbicacionStock(dtContenidoUbicacionStock);
         }
+
+        public static Entidades.ContenidoUbicacionStock AsContenidoUbicacionStockEntity(Data.dsStock.CONTENIDO_UBICACION_STOCKRow row)
+        {
+            return new GyCAP.Entidades.ContenidoUbicacionStock()
+            {
+                Codigo = Convert.ToInt32(row.CON_CODIGO),
+                Nombre = row.CON_NOMBRE,
+                Descripcion = row.CON_DESCRIPCION
+            };
+        }
+
+        public static Entidades.ContenidoUbicacionStock AsContenidoUbicacionStockEntity(Data.dsEstructuraProducto.CONTENIDO_UBICACION_STOCKRow row)
+        {
+            return new GyCAP.Entidades.ContenidoUbicacionStock()
+            {
+                Codigo = Convert.ToInt32(row.CON_CODIGO),
+                Nombre = row.CON_NOMBRE,
+                Descripcion = row.CON_DESCRIPCION
+            };
+        }
     }
 }

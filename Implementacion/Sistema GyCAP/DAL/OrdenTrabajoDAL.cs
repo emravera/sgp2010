@@ -99,22 +99,22 @@ namespace GyCAP.DAL
                 movimiento.Descripcion = rowMVTO.MVTO_DESCRIPCION;
                 movimiento.FechaAlta = rowMVTO.MVTO_FECHAALTA;
                 movimiento.FechaPrevista = rowMVTO.MVTO_FECHAPREVISTA;
-                movimiento.Origen = new GyCAP.Entidades.UbicacionStock(Convert.ToInt32(rowMVTO.USTCK_ORIGEN));
-                movimiento.Destino = new GyCAP.Entidades.UbicacionStock(Convert.ToInt32(rowMVTO.USTCK_DESTINO));
+                //movimiento.Origen = new GyCAP.Entidades.UbicacionStock(Convert.ToInt32(rowMVTO.USTCK_ORIGEN));
+                //movimiento.Destino = new GyCAP.Entidades.UbicacionStock(Convert.ToInt32(rowMVTO.USTCK_DESTINO));
                 movimiento.CantidadOrigenEstimada = rowMVTO.MVTO_CANTIDAD_ORIGEN_ESTIMADA;
                 movimiento.CantidadOrigenReal = 0;
                 movimiento.CantidadDestinoEstimada = rowMVTO.MVTO_CANTIDAD_DESTINO_ESTIMADA;
                 movimiento.CantidadDestinoReal = 0;
                 movimiento.Estado = new GyCAP.Entidades.EstadoMovimientoStock(Convert.ToInt32(rowMVTO.EMVTO_CODIGO));
-                movimiento.OrdenTrabajo = new GyCAP.Entidades.OrdenTrabajo(Convert.ToInt32(rowMVTO.ORDT_NUMERO));
-                MovimientoStockDAL.Insertar(movimiento, transaccion);
+                //movimiento.OrdenTrabajo = new GyCAP.Entidades.OrdenTrabajo(Convert.ToInt32(rowMVTO.ORDT_NUMERO));
+                //MovimientoStockDAL.Crear(movimiento, transaccion);
                 rowMVTO.MVTO_NUMERO = movimiento.Numero;
             }
             //Actualizamos la ubicación destino de la orden de trabajo
-            UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).USTCK_DESTINO),
-                                                        0,
-                                                        dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_CANTIDADESTIMADA,
-                                                        transaccion);
+            //UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).USTCK_DESTINO),
+                                               //         0,
+                                               //         dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_CANTIDADESTIMADA,
+                                               //         transaccion);
         }
 
         public static void ActualizarEstado(int numeroOrdenTrabajo, int codigoEstado, SqlTransaction transaccion)
@@ -188,15 +188,15 @@ namespace GyCAP.DAL
                 {
                     cantidadOrigen = (rowMVTO.MVTO_CANTIDAD_ORIGEN_ESTIMADA / rowMVTO.MVTO_CANTIDAD_DESTINO_ESTIMADA) * rowCierre.CORD_CANTIDAD;
                     MovimientoStockDAL.ActualizarCantidadesParciales(Convert.ToInt32(rowMVTO.MVTO_NUMERO), cantidadOrigen, rowCierre.CORD_CANTIDAD, transaccion);
-                    UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(rowMVTO.USTCK_ORIGEN), (cantidadOrigen * -1), 0, transaccion);
-                    ubicacionDestino = rowMVTO.USTCK_DESTINO;
+                    //UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(rowMVTO.USTCK_ORIGEN), (cantidadOrigen * -1), 0, transaccion);
+                    //ubicacionDestino = rowMVTO.USTCK_DESTINO;
                     rowMVTO.MVTO_CANTIDAD_ORIGEN_REAL += cantidadOrigen;
                     rowMVTO.MVTO_CANTIDAD_DESTINO_REAL = rowCierre.CORD_CANTIDAD;
-                    dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(rowMVTO.USTCK_ORIGEN).USTCK_CANTIDADREAL -= cantidadOrigen;
+                    //dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(rowMVTO.USTCK_ORIGEN).USTCK_CANTIDADREAL -= cantidadOrigen;
                 }
 
                 //Actualizamos la ubicación de stock destino
-                UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(ubicacionDestino), rowCierre.CORD_CANTIDAD, 0, transaccion);
+                //UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(ubicacionDestino), rowCierre.CORD_CANTIDAD, 0, transaccion);
                 dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(ubicacionDestino).USTCK_CANTIDADREAL += rowCierre.CORD_CANTIDAD;
 
                 transaccion.Commit();
@@ -241,21 +241,21 @@ namespace GyCAP.DAL
                 {
                     cantidadDestino = rowMVTO.MVTO_CANTIDAD_DESTINO_ESTIMADA - rowMVTO.MVTO_CANTIDAD_DESTINO_REAL;
                     cantidadOrigen = rowMVTO.MVTO_CANTIDAD_ORIGEN_ESTIMADA - rowMVTO.MVTO_CANTIDAD_ORIGEN_REAL;
-                    MovimientoStockDAL.FinalizarMovimiento(Convert.ToInt32(rowMVTO.MVTO_NUMERO), transaccion);
+                    //MovimientoStockDAL.FinalizarMovimiento(Convert.ToInt32(rowMVTO.MVTO_NUMERO), transaccion);
                     rowMVTO.MVTO_CANTIDAD_DESTINO_REAL = rowMVTO.MVTO_CANTIDAD_DESTINO_ESTIMADA;
                     rowMVTO.MVTO_CANTIDAD_ORIGEN_REAL = rowMVTO.MVTO_CANTIDAD_ORIGEN_ESTIMADA;
                     rowMVTO.MVTO_FECHAREAL = rowMVTO.MVTO_FECHAPREVISTA;
                     rowMVTO.EMVTO_CODIGO = MovimientoStockDAL.EstadoFinalizado;
-                    ubicacionDestino = rowMVTO.USTCK_DESTINO;
-                    UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(rowMVTO.USTCK_ORIGEN), (cantidadOrigen * -1), 0, transaccion);
-                    dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(rowMVTO.USTCK_ORIGEN).USTCK_CANTIDADREAL -= cantidadOrigen;
+                    //ubicacionDestino = rowMVTO.USTCK_DESTINO;
+                    //UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(rowMVTO.USTCK_ORIGEN), (cantidadOrigen * -1), 0, transaccion);
+                    //dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(rowMVTO.USTCK_ORIGEN).USTCK_CANTIDADREAL -= cantidadOrigen;
                 }
 
                 //Actualizo las ubicaciones de stock afectadas por la orden de trabajo
                 cantidadDestino = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(ubicacionDestino).USTCK_CANTIDADREAL * -1;
                 dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(ubicacionDestino).USTCK_CANTIDADREAL = 0;
-                decimal cantidadVirtual = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(ubicacionDestino).USTCK_CANTIDADVIRTUAL * -1;
-                UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(ubicacionDestino), cantidadDestino, cantidadVirtual, transaccion);
+                //decimal cantidadVirtual = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(ubicacionDestino).USTCK_CANTIDADVIRTUAL * -1;
+                //UbicacionStockDAL.ActualizarCantidadesStock(Convert.ToInt32(ubicacionDestino), cantidadDestino, cantidadVirtual, transaccion);
             }
             else
             {

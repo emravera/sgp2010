@@ -35,30 +35,30 @@ namespace GyCAP.Entidades
             get { return fechaAlta; }
             set { fechaAlta = value; }
         }
-        private DateTime fechaPrevista;
+        private DateTime? fechaPrevista;
 
-        public DateTime FechaPrevista
+        public DateTime? FechaPrevista
         {
             get { return fechaPrevista; }
             set { fechaPrevista = value; }
         }
-        private DateTime fechaReal;
+        private DateTime? fechaReal;
 
-        public DateTime FechaReal
+        public DateTime? FechaReal
         {
             get { return fechaReal; }
             set { fechaReal = value; }
         }
-        private UbicacionStock origen;
+        private Entidad origen;
 
-        public UbicacionStock Origen
+        public Entidad Origen
         {
             get { return origen; }
             set { origen = value; }
         }
-        private UbicacionStock destino;
+        private Entidad destino;
 
-        public UbicacionStock Destino
+        public Entidad Destino
         {
             get { return destino; }
             set { destino = value; }
@@ -101,12 +101,12 @@ namespace GyCAP.Entidades
             set { estado = value; }
         }
 
-        private OrdenTrabajo ordenTrabajo;
+        private Entidad duenio;
 
-        public OrdenTrabajo OrdenTrabajo
+        public Entidad Duenio
         {
-            get { return ordenTrabajo; }
-            set { ordenTrabajo = value; }
+            get { return duenio; }
+            set { duenio = value; }
         }
     }
 }

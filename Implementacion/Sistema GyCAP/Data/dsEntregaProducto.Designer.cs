@@ -1949,8 +1949,6 @@ namespace GyCAP.Data {
             
             private global::System.Data.DataColumn columnUSTCK_CANTIDADREAL;
             
-            private global::System.Data.DataColumn columnUSTCK_CANTIDADVIRTUAL;
-            
             private global::System.Data.DataColumn columnUMED_CODIGO;
             
             private global::System.Data.DataColumn columnUSTCK_PADRE;
@@ -2034,13 +2032,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn USTCK_CANTIDADVIRTUALColumn {
-                get {
-                    return this.columnUSTCK_CANTIDADVIRTUAL;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn UMED_CODIGOColumn {
                 get {
                     return this.columnUMED_CODIGO;
@@ -2104,7 +2095,7 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public UBICACIONES_STOCKRow AddUBICACIONES_STOCKRow(string USTCK_CODIGO, string USTCK_NOMBRE, string USTCK_DESCRIPCION, string USTCK_UBICACIONFISICA, decimal USTCK_CANTIDADREAL, decimal USTCK_CANTIDADVIRTUAL, UNIDADES_MEDIDARow parentUNIDADES_MEDIDARowByFK_UBICACIONES_STOCK_UBICACION_STOCK1, UBICACIONES_STOCKRow parentUBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_UBICACION_STOCK, decimal USTCK_ACTIVO, decimal TUS_CODIGO, decimal CON_CODIGO) {
+            public UBICACIONES_STOCKRow AddUBICACIONES_STOCKRow(string USTCK_CODIGO, string USTCK_NOMBRE, string USTCK_DESCRIPCION, string USTCK_UBICACIONFISICA, decimal USTCK_CANTIDADREAL, UNIDADES_MEDIDARow parentUNIDADES_MEDIDARowByFK_UBICACIONES_STOCK_UBICACION_STOCK1, UBICACIONES_STOCKRow parentUBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_UBICACION_STOCK, decimal USTCK_ACTIVO, decimal TUS_CODIGO, decimal CON_CODIGO) {
                 UBICACIONES_STOCKRow rowUBICACIONES_STOCKRow = ((UBICACIONES_STOCKRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2113,17 +2104,16 @@ namespace GyCAP.Data {
                         USTCK_DESCRIPCION,
                         USTCK_UBICACIONFISICA,
                         USTCK_CANTIDADREAL,
-                        USTCK_CANTIDADVIRTUAL,
                         null,
                         null,
                         USTCK_ACTIVO,
                         TUS_CODIGO,
                         CON_CODIGO};
                 if ((parentUNIDADES_MEDIDARowByFK_UBICACIONES_STOCK_UBICACION_STOCK1 != null)) {
-                    columnValuesArray[7] = parentUNIDADES_MEDIDARowByFK_UBICACIONES_STOCK_UBICACION_STOCK1[0];
+                    columnValuesArray[6] = parentUNIDADES_MEDIDARowByFK_UBICACIONES_STOCK_UBICACION_STOCK1[0];
                 }
                 if ((parentUBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_UBICACION_STOCK != null)) {
-                    columnValuesArray[8] = parentUBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_UBICACION_STOCK[0];
+                    columnValuesArray[7] = parentUBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_UBICACION_STOCK[0];
                 }
                 rowUBICACIONES_STOCKRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUBICACIONES_STOCKRow);
@@ -2156,7 +2146,6 @@ namespace GyCAP.Data {
                 this.columnUSTCK_DESCRIPCION = base.Columns["USTCK_DESCRIPCION"];
                 this.columnUSTCK_UBICACIONFISICA = base.Columns["USTCK_UBICACIONFISICA"];
                 this.columnUSTCK_CANTIDADREAL = base.Columns["USTCK_CANTIDADREAL"];
-                this.columnUSTCK_CANTIDADVIRTUAL = base.Columns["USTCK_CANTIDADVIRTUAL"];
                 this.columnUMED_CODIGO = base.Columns["UMED_CODIGO"];
                 this.columnUSTCK_PADRE = base.Columns["USTCK_PADRE"];
                 this.columnUSTCK_ACTIVO = base.Columns["USTCK_ACTIVO"];
@@ -2178,8 +2167,6 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnUSTCK_UBICACIONFISICA);
                 this.columnUSTCK_CANTIDADREAL = new global::System.Data.DataColumn("USTCK_CANTIDADREAL", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUSTCK_CANTIDADREAL);
-                this.columnUSTCK_CANTIDADVIRTUAL = new global::System.Data.DataColumn("USTCK_CANTIDADVIRTUAL", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUSTCK_CANTIDADVIRTUAL);
                 this.columnUMED_CODIGO = new global::System.Data.DataColumn("UMED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUMED_CODIGO);
                 this.columnUSTCK_PADRE = new global::System.Data.DataColumn("USTCK_PADRE", typeof(decimal), null, global::System.Data.MappingType.Element);
@@ -2203,7 +2190,6 @@ namespace GyCAP.Data {
                 this.columnUSTCK_DESCRIPCION.MaxLength = 200;
                 this.columnUSTCK_UBICACIONFISICA.MaxLength = 200;
                 this.columnUSTCK_CANTIDADREAL.AllowDBNull = false;
-                this.columnUSTCK_CANTIDADVIRTUAL.AllowDBNull = false;
                 this.columnUMED_CODIGO.AllowDBNull = false;
                 this.columnUSTCK_ACTIVO.AllowDBNull = false;
                 this.columnTUS_CODIGO.AllowDBNull = false;
@@ -4865,16 +4851,6 @@ namespace GyCAP.Data {
                 }
                 set {
                     this[this.tableUBICACIONES_STOCK.USTCK_CANTIDADREALColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal USTCK_CANTIDADVIRTUAL {
-                get {
-                    return ((decimal)(this[this.tableUBICACIONES_STOCK.USTCK_CANTIDADVIRTUALColumn]));
-                }
-                set {
-                    this[this.tableUBICACIONES_STOCK.USTCK_CANTIDADVIRTUALColumn] = value;
                 }
             }
             
@@ -7944,7 +7920,6 @@ SELECT DPED_CODIGO, PED_CODIGO, EDPED_CODIGO, COC_CODIGO, DPED_CANTIDAD, DPED_FE
             tableMapping.ColumnMappings.Add("USTCK_DESCRIPCION", "USTCK_DESCRIPCION");
             tableMapping.ColumnMappings.Add("USTCK_UBICACIONFISICA", "USTCK_UBICACIONFISICA");
             tableMapping.ColumnMappings.Add("USTCK_CANTIDADREAL", "USTCK_CANTIDADREAL");
-            tableMapping.ColumnMappings.Add("USTCK_CANTIDADVIRTUAL", "USTCK_CANTIDADVIRTUAL");
             tableMapping.ColumnMappings.Add("UMED_CODIGO", "UMED_CODIGO");
             tableMapping.ColumnMappings.Add("USTCK_PADRE", "USTCK_PADRE");
             tableMapping.ColumnMappings.Add("USTCK_ACTIVO", "USTCK_ACTIVO");
@@ -7953,7 +7928,7 @@ SELECT DPED_CODIGO, PED_CODIGO, EDPED_CODIGO, COC_CODIGO, DPED_CANTIDAD, DPED_FE
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[UBICACIONES_STOCK] WHERE (([USTCK_NUMERO] = @Original_USTCK_NUMERO) AND ((@IsNull_USTCK_CODIGO = 1 AND [USTCK_CODIGO] IS NULL) OR ([USTCK_CODIGO] = @Original_USTCK_CODIGO)) AND ((@IsNull_USTCK_NOMBRE = 1 AND [USTCK_NOMBRE] IS NULL) OR ([USTCK_NOMBRE] = @Original_USTCK_NOMBRE)) AND ((@IsNull_USTCK_DESCRIPCION = 1 AND [USTCK_DESCRIPCION] IS NULL) OR ([USTCK_DESCRIPCION] = @Original_USTCK_DESCRIPCION)) AND ((@IsNull_USTCK_UBICACIONFISICA = 1 AND [USTCK_UBICACIONFISICA] IS NULL) OR ([USTCK_UBICACIONFISICA] = @Original_USTCK_UBICACIONFISICA)) AND ([USTCK_CANTIDADREAL] = @Original_USTCK_CANTIDADREAL) AND ([USTCK_CANTIDADVIRTUAL] = @Original_USTCK_CANTIDADVIRTUAL) AND ([UMED_CODIGO] = @Original_UMED_CODIGO) AND ((@IsNull_USTCK_PADRE = 1 AND [USTCK_PADRE] IS NULL) OR ([USTCK_PADRE] = @Original_USTCK_PADRE)) AND ([USTCK_ACTIVO] = @Original_USTCK_ACTIVO) AND ([TUS_CODIGO] = @Original_TUS_CODIGO) AND ([CON_CODIGO] = @Original_CON_CODIGO))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [UBICACIONES_STOCK] WHERE (([USTCK_NUMERO] = @Original_USTCK_NUMERO) AND ((@IsNull_USTCK_CODIGO = 1 AND [USTCK_CODIGO] IS NULL) OR ([USTCK_CODIGO] = @Original_USTCK_CODIGO)) AND ((@IsNull_USTCK_NOMBRE = 1 AND [USTCK_NOMBRE] IS NULL) OR ([USTCK_NOMBRE] = @Original_USTCK_NOMBRE)) AND ((@IsNull_USTCK_DESCRIPCION = 1 AND [USTCK_DESCRIPCION] IS NULL) OR ([USTCK_DESCRIPCION] = @Original_USTCK_DESCRIPCION)) AND ((@IsNull_USTCK_UBICACIONFISICA = 1 AND [USTCK_UBICACIONFISICA] IS NULL) OR ([USTCK_UBICACIONFISICA] = @Original_USTCK_UBICACIONFISICA)) AND ([USTCK_CANTIDADREAL] = @Original_USTCK_CANTIDADREAL) AND ([UMED_CODIGO] = @Original_UMED_CODIGO) AND ((@IsNull_USTCK_PADRE = 1 AND [USTCK_PADRE] IS NULL) OR ([USTCK_PADRE] = @Original_USTCK_PADRE)) AND ([USTCK_ACTIVO] = @Original_USTCK_ACTIVO) AND ([TUS_CODIGO] = @Original_TUS_CODIGO) AND ([CON_CODIGO] = @Original_CON_CODIGO))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -7965,7 +7940,6 @@ SELECT DPED_CODIGO, PED_CODIGO, EDPED_CODIGO, COC_CODIGO, DPED_CANTIDAD, DPED_FE
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_UBICACIONFISICA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_UBICACIONFISICA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_UBICACIONFISICA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_UBICACIONFISICA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_CANTIDADREAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_CANTIDADVIRTUAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADVIRTUAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_PADRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_PADRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_PADRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -7974,15 +7948,14 @@ SELECT DPED_CODIGO, PED_CODIGO, EDPED_CODIGO, COC_CODIGO, DPED_CANTIDAD, DPED_FE
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CON_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CON_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[UBICACIONES_STOCK] ([USTCK_CODIGO], [USTCK_NOMBRE], [USTCK_DESCRIPCION], [USTCK_UBICACIONFISICA], [USTCK_CANTIDADREAL], [USTCK_CANTIDADVIRTUAL], [UMED_CODIGO], [USTCK_PADRE], [USTCK_ACTIVO], [TUS_CODIGO], [CON_CODIGO]) VALUES (@USTCK_CODIGO, @USTCK_NOMBRE, @USTCK_DESCRIPCION, @USTCK_UBICACIONFISICA, @USTCK_CANTIDADREAL, @USTCK_CANTIDADVIRTUAL, @UMED_CODIGO, @USTCK_PADRE, @USTCK_ACTIVO, @TUS_CODIGO, @CON_CODIGO);
-SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICACIONFISICA, USTCK_CANTIDADREAL, USTCK_CANTIDADVIRTUAL, UMED_CODIGO, USTCK_PADRE, USTCK_ACTIVO, TUS_CODIGO, CON_CODIGO FROM UBICACIONES_STOCK WHERE (USTCK_NUMERO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [UBICACIONES_STOCK] ([USTCK_CODIGO], [USTCK_NOMBRE], [USTCK_DESCRIPCION], [USTCK_UBICACIONFISICA], [USTCK_CANTIDADREAL], [UMED_CODIGO], [USTCK_PADRE], [USTCK_ACTIVO], [TUS_CODIGO], [CON_CODIGO]) VALUES (@USTCK_CODIGO, @USTCK_NOMBRE, @USTCK_DESCRIPCION, @USTCK_UBICACIONFISICA, @USTCK_CANTIDADREAL, @UMED_CODIGO, @USTCK_PADRE, @USTCK_ACTIVO, @TUS_CODIGO, @CON_CODIGO);
+SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICACIONFISICA, USTCK_CANTIDADREAL, UMED_CODIGO, USTCK_PADRE, USTCK_ACTIVO, TUS_CODIGO, CON_CODIGO FROM UBICACIONES_STOCK WHERE (USTCK_NUMERO = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_UBICACIONFISICA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_UBICACIONFISICA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_CANTIDADREAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_CANTIDADVIRTUAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADVIRTUAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_PADRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "USTCK_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -7990,34 +7963,14 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CON_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CON_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[UBICACIONES_STOCK] SET [USTCK_CODIGO] = @USTCK_CODIGO, [USTCK_NOMBR" +
-                "E] = @USTCK_NOMBRE, [USTCK_DESCRIPCION] = @USTCK_DESCRIPCION, [USTCK_UBICACIONFI" +
-                "SICA] = @USTCK_UBICACIONFISICA, [USTCK_CANTIDADREAL] = @USTCK_CANTIDADREAL, [UST" +
-                "CK_CANTIDADVIRTUAL] = @USTCK_CANTIDADVIRTUAL, [UMED_CODIGO] = @UMED_CODIGO, [UST" +
-                "CK_PADRE] = @USTCK_PADRE, [USTCK_ACTIVO] = @USTCK_ACTIVO, [TUS_CODIGO] = @TUS_CO" +
-                "DIGO, [CON_CODIGO] = @CON_CODIGO WHERE (([USTCK_NUMERO] = @Original_USTCK_NUMERO" +
-                ") AND ((@IsNull_USTCK_CODIGO = 1 AND [USTCK_CODIGO] IS NULL) OR ([USTCK_CODIGO] " +
-                "= @Original_USTCK_CODIGO)) AND ((@IsNull_USTCK_NOMBRE = 1 AND [USTCK_NOMBRE] IS " +
-                "NULL) OR ([USTCK_NOMBRE] = @Original_USTCK_NOMBRE)) AND ((@IsNull_USTCK_DESCRIPC" +
-                "ION = 1 AND [USTCK_DESCRIPCION] IS NULL) OR ([USTCK_DESCRIPCION] = @Original_UST" +
-                "CK_DESCRIPCION)) AND ((@IsNull_USTCK_UBICACIONFISICA = 1 AND [USTCK_UBICACIONFIS" +
-                "ICA] IS NULL) OR ([USTCK_UBICACIONFISICA] = @Original_USTCK_UBICACIONFISICA)) AN" +
-                "D ([USTCK_CANTIDADREAL] = @Original_USTCK_CANTIDADREAL) AND ([USTCK_CANTIDADVIRT" +
-                "UAL] = @Original_USTCK_CANTIDADVIRTUAL) AND ([UMED_CODIGO] = @Original_UMED_CODI" +
-                "GO) AND ((@IsNull_USTCK_PADRE = 1 AND [USTCK_PADRE] IS NULL) OR ([USTCK_PADRE] =" +
-                " @Original_USTCK_PADRE)) AND ([USTCK_ACTIVO] = @Original_USTCK_ACTIVO) AND ([TUS" +
-                "_CODIGO] = @Original_TUS_CODIGO) AND ([CON_CODIGO] = @Original_CON_CODIGO));\r\nSE" +
-                "LECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICACIO" +
-                "NFISICA, USTCK_CANTIDADREAL, USTCK_CANTIDADVIRTUAL, UMED_CODIGO, USTCK_PADRE, US" +
-                "TCK_ACTIVO, TUS_CODIGO, CON_CODIGO FROM UBICACIONES_STOCK WHERE (USTCK_NUMERO = " +
-                "@USTCK_NUMERO)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [UBICACIONES_STOCK] SET [USTCK_CODIGO] = @USTCK_CODIGO, [USTCK_NOMBRE] = @USTCK_NOMBRE, [USTCK_DESCRIPCION] = @USTCK_DESCRIPCION, [USTCK_UBICACIONFISICA] = @USTCK_UBICACIONFISICA, [USTCK_CANTIDADREAL] = @USTCK_CANTIDADREAL, [UMED_CODIGO] = @UMED_CODIGO, [USTCK_PADRE] = @USTCK_PADRE, [USTCK_ACTIVO] = @USTCK_ACTIVO, [TUS_CODIGO] = @TUS_CODIGO, [CON_CODIGO] = @CON_CODIGO WHERE (([USTCK_NUMERO] = @Original_USTCK_NUMERO) AND ((@IsNull_USTCK_CODIGO = 1 AND [USTCK_CODIGO] IS NULL) OR ([USTCK_CODIGO] = @Original_USTCK_CODIGO)) AND ((@IsNull_USTCK_NOMBRE = 1 AND [USTCK_NOMBRE] IS NULL) OR ([USTCK_NOMBRE] = @Original_USTCK_NOMBRE)) AND ((@IsNull_USTCK_DESCRIPCION = 1 AND [USTCK_DESCRIPCION] IS NULL) OR ([USTCK_DESCRIPCION] = @Original_USTCK_DESCRIPCION)) AND ((@IsNull_USTCK_UBICACIONFISICA = 1 AND [USTCK_UBICACIONFISICA] IS NULL) OR ([USTCK_UBICACIONFISICA] = @Original_USTCK_UBICACIONFISICA)) AND ([USTCK_CANTIDADREAL] = @Original_USTCK_CANTIDADREAL) AND ([UMED_CODIGO] = @Original_UMED_CODIGO) AND ((@IsNull_USTCK_PADRE = 1 AND [USTCK_PADRE] IS NULL) OR ([USTCK_PADRE] = @Original_USTCK_PADRE)) AND ([USTCK_ACTIVO] = @Original_USTCK_ACTIVO) AND ([TUS_CODIGO] = @Original_TUS_CODIGO) AND ([CON_CODIGO] = @Original_CON_CODIGO));
+SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICACIONFISICA, USTCK_CANTIDADREAL, UMED_CODIGO, USTCK_PADRE, USTCK_ACTIVO, TUS_CODIGO, CON_CODIGO FROM UBICACIONES_STOCK WHERE (USTCK_NUMERO = @USTCK_NUMERO)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_UBICACIONFISICA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_UBICACIONFISICA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_CANTIDADREAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_CANTIDADVIRTUAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADVIRTUAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_PADRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "USTCK_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -8033,7 +7986,6 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_UBICACIONFISICA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_UBICACIONFISICA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_UBICACIONFISICA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_UBICACIONFISICA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_CANTIDADREAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_CANTIDADVIRTUAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADVIRTUAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_PADRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_PADRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_PADRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -8055,8 +8007,8 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICACI" +
-                "ONFISICA, USTCK_CANTIDADREAL, USTCK_CANTIDADVIRTUAL, UMED_CODIGO, USTCK_PADRE, U" +
-                "STCK_ACTIVO, TUS_CODIGO, CON_CODIGO FROM dbo.UBICACIONES_STOCK";
+                "ONFISICA, USTCK_CANTIDADREAL, UMED_CODIGO, USTCK_PADRE, USTCK_ACTIVO, TUS_CODIGO" +
+                ", CON_CODIGO FROM UBICACIONES_STOCK";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -8110,7 +8062,7 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_USTCK_NUMERO, string Original_USTCK_CODIGO, string Original_USTCK_NOMBRE, string Original_USTCK_DESCRIPCION, string Original_USTCK_UBICACIONFISICA, decimal Original_USTCK_CANTIDADREAL, decimal Original_USTCK_CANTIDADVIRTUAL, decimal Original_UMED_CODIGO, global::System.Nullable<decimal> Original_USTCK_PADRE, decimal Original_USTCK_ACTIVO, decimal Original_TUS_CODIGO, decimal Original_CON_CODIGO) {
+        public virtual int Delete(decimal Original_USTCK_NUMERO, string Original_USTCK_CODIGO, string Original_USTCK_NOMBRE, string Original_USTCK_DESCRIPCION, string Original_USTCK_UBICACIONFISICA, decimal Original_USTCK_CANTIDADREAL, decimal Original_UMED_CODIGO, global::System.Nullable<decimal> Original_USTCK_PADRE, decimal Original_USTCK_ACTIVO, decimal Original_TUS_CODIGO, decimal Original_CON_CODIGO) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_USTCK_NUMERO));
             if ((Original_USTCK_CODIGO == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
@@ -8145,19 +8097,18 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                 this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_USTCK_UBICACIONFISICA));
             }
             this.Adapter.DeleteCommand.Parameters[9].Value = ((decimal)(Original_USTCK_CANTIDADREAL));
-            this.Adapter.DeleteCommand.Parameters[10].Value = ((decimal)(Original_USTCK_CANTIDADVIRTUAL));
-            this.Adapter.DeleteCommand.Parameters[11].Value = ((decimal)(Original_UMED_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[10].Value = ((decimal)(Original_UMED_CODIGO));
             if ((Original_USTCK_PADRE.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((decimal)(Original_USTCK_PADRE.Value));
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((decimal)(Original_USTCK_PADRE.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
-            this.Adapter.DeleteCommand.Parameters[14].Value = ((decimal)(Original_USTCK_ACTIVO));
-            this.Adapter.DeleteCommand.Parameters[15].Value = ((decimal)(Original_TUS_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[16].Value = ((decimal)(Original_CON_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[13].Value = ((decimal)(Original_USTCK_ACTIVO));
+            this.Adapter.DeleteCommand.Parameters[14].Value = ((decimal)(Original_TUS_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[15].Value = ((decimal)(Original_CON_CODIGO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8177,7 +8128,7 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string USTCK_CODIGO, string USTCK_NOMBRE, string USTCK_DESCRIPCION, string USTCK_UBICACIONFISICA, decimal USTCK_CANTIDADREAL, decimal USTCK_CANTIDADVIRTUAL, decimal UMED_CODIGO, global::System.Nullable<decimal> USTCK_PADRE, decimal USTCK_ACTIVO, decimal TUS_CODIGO, decimal CON_CODIGO) {
+        public virtual int Insert(string USTCK_CODIGO, string USTCK_NOMBRE, string USTCK_DESCRIPCION, string USTCK_UBICACIONFISICA, decimal USTCK_CANTIDADREAL, decimal UMED_CODIGO, global::System.Nullable<decimal> USTCK_PADRE, decimal USTCK_ACTIVO, decimal TUS_CODIGO, decimal CON_CODIGO) {
             if ((USTCK_CODIGO == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -8203,17 +8154,16 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                 this.Adapter.InsertCommand.Parameters[3].Value = ((string)(USTCK_UBICACIONFISICA));
             }
             this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(USTCK_CANTIDADREAL));
-            this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(USTCK_CANTIDADVIRTUAL));
-            this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(UMED_CODIGO));
+            this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(UMED_CODIGO));
             if ((USTCK_PADRE.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(USTCK_PADRE.Value));
+                this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(USTCK_PADRE.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(USTCK_ACTIVO));
-            this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(TUS_CODIGO));
-            this.Adapter.InsertCommand.Parameters[10].Value = ((decimal)(CON_CODIGO));
+            this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(USTCK_ACTIVO));
+            this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(TUS_CODIGO));
+            this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(CON_CODIGO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8239,7 +8189,6 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     string USTCK_DESCRIPCION, 
                     string USTCK_UBICACIONFISICA, 
                     decimal USTCK_CANTIDADREAL, 
-                    decimal USTCK_CANTIDADVIRTUAL, 
                     decimal UMED_CODIGO, 
                     global::System.Nullable<decimal> USTCK_PADRE, 
                     decimal USTCK_ACTIVO, 
@@ -8251,7 +8200,6 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     string Original_USTCK_DESCRIPCION, 
                     string Original_USTCK_UBICACIONFISICA, 
                     decimal Original_USTCK_CANTIDADREAL, 
-                    decimal Original_USTCK_CANTIDADVIRTUAL, 
                     decimal Original_UMED_CODIGO, 
                     global::System.Nullable<decimal> Original_USTCK_PADRE, 
                     decimal Original_USTCK_ACTIVO, 
@@ -8283,65 +8231,63 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(USTCK_UBICACIONFISICA));
             }
             this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(USTCK_CANTIDADREAL));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(USTCK_CANTIDADVIRTUAL));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(UMED_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(UMED_CODIGO));
             if ((USTCK_PADRE.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(USTCK_PADRE.Value));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(USTCK_PADRE.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(USTCK_ACTIVO));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(TUS_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(CON_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_USTCK_NUMERO));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(USTCK_ACTIVO));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(TUS_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(CON_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_USTCK_NUMERO));
             if ((Original_USTCK_CODIGO == null)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_USTCK_CODIGO));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_USTCK_CODIGO));
             }
             if ((Original_USTCK_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_USTCK_NOMBRE));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_USTCK_NOMBRE));
             }
             if ((Original_USTCK_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_USTCK_DESCRIPCION));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_USTCK_DESCRIPCION));
             }
             if ((Original_USTCK_UBICACIONFISICA == null)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((string)(Original_USTCK_UBICACIONFISICA));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_USTCK_UBICACIONFISICA));
             }
-            this.Adapter.UpdateCommand.Parameters[20].Value = ((decimal)(Original_USTCK_CANTIDADREAL));
-            this.Adapter.UpdateCommand.Parameters[21].Value = ((decimal)(Original_USTCK_CANTIDADVIRTUAL));
-            this.Adapter.UpdateCommand.Parameters[22].Value = ((decimal)(Original_UMED_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[19].Value = ((decimal)(Original_USTCK_CANTIDADREAL));
+            this.Adapter.UpdateCommand.Parameters[20].Value = ((decimal)(Original_UMED_CODIGO));
             if ((Original_USTCK_PADRE.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((decimal)(Original_USTCK_PADRE.Value));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((decimal)(Original_USTCK_PADRE.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[25].Value = ((decimal)(Original_USTCK_ACTIVO));
-            this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(Original_TUS_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[27].Value = ((decimal)(Original_CON_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[28].Value = ((decimal)(USTCK_NUMERO));
+            this.Adapter.UpdateCommand.Parameters[23].Value = ((decimal)(Original_USTCK_ACTIVO));
+            this.Adapter.UpdateCommand.Parameters[24].Value = ((decimal)(Original_TUS_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[25].Value = ((decimal)(Original_CON_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(USTCK_NUMERO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8367,7 +8313,6 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     string USTCK_DESCRIPCION, 
                     string USTCK_UBICACIONFISICA, 
                     decimal USTCK_CANTIDADREAL, 
-                    decimal USTCK_CANTIDADVIRTUAL, 
                     decimal UMED_CODIGO, 
                     global::System.Nullable<decimal> USTCK_PADRE, 
                     decimal USTCK_ACTIVO, 
@@ -8379,13 +8324,12 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     string Original_USTCK_DESCRIPCION, 
                     string Original_USTCK_UBICACIONFISICA, 
                     decimal Original_USTCK_CANTIDADREAL, 
-                    decimal Original_USTCK_CANTIDADVIRTUAL, 
                     decimal Original_UMED_CODIGO, 
                     global::System.Nullable<decimal> Original_USTCK_PADRE, 
                     decimal Original_USTCK_ACTIVO, 
                     decimal Original_TUS_CODIGO, 
                     decimal Original_CON_CODIGO) {
-            return this.Update(USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICACIONFISICA, USTCK_CANTIDADREAL, USTCK_CANTIDADVIRTUAL, UMED_CODIGO, USTCK_PADRE, USTCK_ACTIVO, TUS_CODIGO, CON_CODIGO, Original_USTCK_NUMERO, Original_USTCK_CODIGO, Original_USTCK_NOMBRE, Original_USTCK_DESCRIPCION, Original_USTCK_UBICACIONFISICA, Original_USTCK_CANTIDADREAL, Original_USTCK_CANTIDADVIRTUAL, Original_UMED_CODIGO, Original_USTCK_PADRE, Original_USTCK_ACTIVO, Original_TUS_CODIGO, Original_CON_CODIGO, Original_USTCK_NUMERO);
+            return this.Update(USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICACIONFISICA, USTCK_CANTIDADREAL, UMED_CODIGO, USTCK_PADRE, USTCK_ACTIVO, TUS_CODIGO, CON_CODIGO, Original_USTCK_NUMERO, Original_USTCK_CODIGO, Original_USTCK_NOMBRE, Original_USTCK_DESCRIPCION, Original_USTCK_UBICACIONFISICA, Original_USTCK_CANTIDADREAL, Original_UMED_CODIGO, Original_USTCK_PADRE, Original_USTCK_ACTIVO, Original_TUS_CODIGO, Original_CON_CODIGO, Original_USTCK_NUMERO);
         }
     }
     

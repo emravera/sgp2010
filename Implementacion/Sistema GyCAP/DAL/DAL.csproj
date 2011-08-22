@@ -63,6 +63,7 @@
     <Compile Include="DesignacionDAL.cs" />
     <Compile Include="DetalleConjuntoDAL.cs" />
     <Compile Include="DetalleDemandaAnualDAL.cs" />
+    <Compile Include="EntidadDAL.cs" />
     <Compile Include="EntregaProductoDAL.cs" />
     <Compile Include="EstadoMovimientoStockDAL.cs" />
     <Compile Include="MovimientoStockDAL.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="SubConjuntoDAL.cs" />
     <Compile Include="TareaDAL.cs" />
     <Compile Include="TerminacionDAL.cs" />
+    <Compile Include="TipoEntidadDAL.cs" />
     <Compile Include="TipoMantenimientoDAL.cs" />
     <Compile Include="TipoParteDAL.cs" />
     <Compile Include="TipoRepuestoDAL.cs" />

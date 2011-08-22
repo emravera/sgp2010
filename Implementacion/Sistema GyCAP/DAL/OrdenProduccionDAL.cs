@@ -322,7 +322,7 @@ namespace GyCAP.DAL
                 {
                     int ubicacion = Convert.ToInt32(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).USTCK_DESTINO);
                     decimal cantidadReal = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_CANTIDADREAL;
-                    UbicacionStockDAL.ActualizarCantidadesStock(ubicacion, cantidadReal, 0, transaccion);
+                    //UbicacionStockDAL.ActualizarCantidadesStock(ubicacion, cantidadReal, 0, transaccion);
                 }
 
                 //Actualizamos la planificación en que estaba basada la orden de producción

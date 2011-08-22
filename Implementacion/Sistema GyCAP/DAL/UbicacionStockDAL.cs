@@ -12,7 +12,7 @@ namespace GyCAP.DAL
         public static void ObtenerUbicacionesStock(DataTable dtUbicacionesStock)
         {
             string sql = @"SELECT ustck_numero, ustck_codigo, ustck_nombre, ustck_descripcion, ustck_ubicacionfisica, 
-                            ustck_cantidadreal, ustck_cantidadvirtual, umed_codigo, ustck_padre, ustck_activo, tus_codigo, con_codigo  
+                            ustck_cantidadreal, umed_codigo, ustck_padre, ustck_activo, tus_codigo, con_codigo  
                             FROM UBICACIONES_STOCK";
 
             try
@@ -25,7 +25,7 @@ namespace GyCAP.DAL
         public static void ObtenerUbicacionesStock(DataTable dtUbicacionesStock, int contenidoUbicacionStock)
         {
             string sql = @"SELECT ustck_numero, ustck_codigo, ustck_nombre, ustck_descripcion, ustck_ubicacionfisica, 
-                            ustck_cantidadreal, ustck_cantidadvirtual, umed_codigo, ustck_padre, ustck_activo, tus_codigo, con_codigo 
+                            ustck_cantidadreal, umed_codigo, ustck_padre, ustck_activo, tus_codigo, con_codigo 
                             FROM UBICACIONES_STOCK WHERE con_codigo = @p0";
 
             object[] parametros = { contenidoUbicacionStock };
@@ -45,13 +45,12 @@ namespace GyCAP.DAL
                          [ustck_descripcion], 
                          [ustck_ubicacionfisica], 
                          [ustck_cantidadreal], 
-                         [ustck_cantidadvirtual], 
                          [umed_codigo], 
                          [ustck_padre], 
                          [ustck_activo],
                          [tus_codigo],
                          [con_codigo])
-                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10) SELECT @@Identity";
+                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9) SELECT @@Identity";
 
             object padre = DBNull.Value;
             if (ubicacion.UbicacionPadre != null) { padre = ubicacion.UbicacionPadre.Numero; };
@@ -60,7 +59,6 @@ namespace GyCAP.DAL
                                       ubicacion.Descripcion,
                                       ubicacion.UbicacionFisica,
                                       ubicacion.CantidadReal,
-                                      ubicacion.CantidadVirtual,
                                       ubicacion.UnidadMedida.Codigo,
                                       padre,
                                       ubicacion.Activo,
@@ -82,13 +80,12 @@ namespace GyCAP.DAL
                          ustck_descripcion = @p2,
                          ustck_ubicacionfisica = @p3,
                          ustck_cantidadreal = @p4,
-                         ustck_cantidadvirtual = @p5,
-                         umed_codigo = @p6,
-                         ustck_padre = @p7,
-                         ustck_activo = @p8,
-                         tus_codigo = @p9,
-                         con_codigo = @p10 
-                         WHERE ustck_numero = @p11";
+                         umed_codigo = @p5,
+                         ustck_padre = @p6,
+                         ustck_activo = @p7,
+                         tus_codigo = @p8,
+                         con_codigo = @p9 
+                         WHERE ustck_numero = @p10";
 
             object padre = DBNull.Value;
             if (ubicacion.UbicacionPadre != null) { padre = ubicacion.UbicacionPadre.Numero; };
@@ -97,7 +94,6 @@ namespace GyCAP.DAL
                                       ubicacion.Descripcion,
                                       ubicacion.UbicacionFisica,
                                       ubicacion.CantidadReal,
-                                      ubicacion.CantidadVirtual,
                                       ubicacion.UnidadMedida.Codigo,
                                       padre,
                                       ubicacion.Activo,
@@ -178,20 +174,17 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
-        public static void ActualizarCantidadesStock(int numeroUbicacion, decimal cantidadReal, decimal cantidadVirtual, SqlTransaction transaccion)
+        public static void ActualizarCantidadesStock(int numeroUbicacion, decimal cantidadReal, SqlTransaction transaccion)
         {
-            string sql = @"UPDATE UBICACIONES_STOCK SET 
-                         ustck_cantidadreal = 
-                                            ( 
-                                              CASE 
-                                                WHEN ((ustck_cantidadreal + @p0) < 0) THEN 0 
-                                                ELSE (ustck_cantidadreal + @p0)
-                                              END
-                                            ) 
-                        ,ustck_cantidadvirtual = ustck_cantidadvirtual + @p1  
-                        WHERE ustck_numero = @p2";
-            
-            object[] parametros = { cantidadReal, cantidadVirtual, numeroUbicacion };
+            string sql = @"UPDATE UBICACIONES_STOCK SET ustck_cantidadreal = ( 
+                                                                               CASE 
+                                                                                 WHEN ((ustck_cantidadreal + @p1) < 0) THEN 0 
+                                                                                 ELSE (ustck_cantidadreal + @p1)
+                                                                               END
+                                                                             )
+                           WHERE ustck_numero = @p0";
+
+            object[] parametros = { numeroUbicacion, cantidadReal };
 
             if (transaccion != null) { DB.executeNonQuery(sql, parametros, transaccion); }
             else
@@ -203,37 +196,35 @@ namespace GyCAP.DAL
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
         }
-
-        public static void ActualizarCantidadesStock(Entidades.UbicacionStock ubicacion, Entidades.MovimientoStock movimiento)
+        
+        public static void ActualizarCantidadesStockAndParents(int numeroUbicacion, decimal cantidadReal, SqlTransaction transaccion)
         {
-            string sql = @"UPDATE UBICACIONES_STOCK SET 
-                         ustck_cantidadreal = 
-                                            ( 
-                                              CASE 
-                                                WHEN ((ustck_cantidadreal + @p0) < 0) THEN 0 
-                                                ELSE (ustck_cantidadreal + @p0)
-                                              END
-                                            ) 
-                        ,ustck_cantidadvirtual = ustck_cantidadvirtual + @p1  
-                        WHERE ustck_numero = @p2";
+            string sql = @"WHILE (@p0 IS NOT NULL) 
+                            BEGIN 
+	                            UPDATE UBICACIONES_STOCK SET ustck_cantidadreal = ( 
+                                                                                     CASE 
+                                                                                       WHEN ((ustck_cantidadreal + @p1) < 0) THEN 0 
+                                                                                       ELSE (ustck_cantidadreal + @p1)
+                                                                                     END
+                                                                                   )
+                                WHERE ustck_numero = @p0
 
-            object[] parametros = { movimiento.CantidadDestinoReal, movimiento.CantidadDestinoReal, ubicacion.Numero };
+	                            SET @p0 = (SELECT ustck_padre FROM UBICACIONES_STOCK WHERE ustck_numero = @p0)
+	                            
+                                CONTINUE 
+                            END";
+            
+            object[] parametros = { numeroUbicacion, cantidadReal };
 
-            SqlTransaction transaccion = null;
-
-            try
+            if (transaccion != null) { DB.executeNonQuery(sql, parametros, transaccion); }
+            else
             {
-                transaccion = DB.IniciarTransaccion();
-
-                DB.executeNonQuery(sql, parametros, transaccion);
-                
+                try
+                {
+                    DB.executeNonQuery(sql, parametros, null);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
-            catch (SqlException ex)
-            {
-                transaccion.Rollback();
-                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
-            }
-            finally { DB.FinalizarTransaccion(); }
         }
 
         public static decimal CantidadMateriaPrima (Entidades.MateriaPrima materiaPrima)
@@ -249,10 +240,11 @@ namespace GyCAP.DAL
             try
             {
                 cantidadMP = Convert.ToDecimal(DB.executeScalar(sql, parametros,null));
+                return cantidadMP;
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-
-            return cantidadMP;
         }
+
+        
     }
 }
