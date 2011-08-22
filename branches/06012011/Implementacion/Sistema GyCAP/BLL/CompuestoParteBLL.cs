@@ -27,7 +27,7 @@ namespace GyCAP.BLL
                 Estructura = null,
                 MateriaPrima = (row.IsMP_CODIGONull()) ? null : BLL.MateriaPrimaBLL.AsMateriaPrimaEntity(row.MATERIAS_PRIMASRow),
                 Parte = (row.IsMP_CODIGONull()) ? BLL.ParteBLL.AsParteEntity(Convert.ToInt32(row.PART_NUMERO), dsEstructura) : null,                
-                UnidadMedida = BLL.UnidadMedidaBLL.AsUnidadMedidaEntity(row.UNIDADES_MEDIDARow),
+                UnidadMedida = BLL.UnidadMedidaBLL.AsUnidadMedidaEntity(Convert.ToInt32(row.UMED_CODIGO), dsEstructura),
                 CompuestoPadre = (row.IsCOMP_CODIGO_PADRENull()) ? null : BLL.CompuestoParteBLL.AsCompuestoParteEntity(Convert.ToInt32(row.COMPUESTOS_PARTESRowParent.COMP_CODIGO), dsEstructura)
             };
 

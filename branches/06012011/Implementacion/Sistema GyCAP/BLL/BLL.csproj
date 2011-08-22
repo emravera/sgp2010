@@ -62,6 +62,7 @@
     <Compile Include="DemandaAnualBLL.cs" />
     <Compile Include="DesignacionBLL.cs" />
     <Compile Include="DetalleDemandaAnualBLL.cs" />
+    <Compile Include="EntidadBLL.cs" />
     <Compile Include="EntregaProductoBLL.cs" />
     <Compile Include="EstadoMovimientoStockBLL.cs" />
     <Compile Include="ExcepcionesPlanBLL.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="SubConjuntoBLL.cs" />
     <Compile Include="TareaBLL.cs" />
     <Compile Include="TerminacionBLL.cs" />
+    <Compile Include="TipoEntidadBLL.cs" />
     <Compile Include="TipoMantenimientoBLL.cs" />
     <Compile Include="TipoParteBLL.cs" />
     <Compile Include="TipoRepuestoBLL.cs" />

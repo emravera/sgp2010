@@ -48,6 +48,8 @@
             this.tcUbicacionStock = new System.Windows.Forms.TabControl();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dtpFecha = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label2 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.nudCantidadNueva = new System.Windows.Forms.NumericUpDown();
@@ -56,25 +58,21 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtEstado = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtContenido = new System.Windows.Forms.TextBox();
+            this.txtTipo = new System.Windows.Forms.TextBox();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.txtUnidadMedida = new System.Windows.Forms.TextBox();
             this.nudRealActual = new System.Windows.Forms.NumericUpDown();
-            this.nudVirtualActual = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.dtpFecha = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
-            this.txtTipo = new System.Windows.Forms.TextBox();
-            this.txtContenido = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txtEstado = new System.Windows.Forms.TextBox();
             this.tsMenu.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
@@ -87,7 +85,6 @@
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudRealActual)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudVirtualActual)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -331,10 +328,28 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Nuevas cantidades";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(17, 27);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(40, 13);
+            this.label7.TabIndex = 38;
+            this.label7.Text = "Fecha:";
+            // 
+            // dtpFecha
+            // 
+            this.dtpFecha.CustomFormat = " ";
+            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFecha.Location = new System.Drawing.Point(88, 23);
+            this.dtpFecha.Name = "dtpFecha";
+            this.dtpFecha.Size = new System.Drawing.Size(133, 21);
+            this.dtpFecha.TabIndex = 37;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 84);
+            this.label2.Location = new System.Drawing.Point(17, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 36;
@@ -365,10 +380,12 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(88, 84);
+            this.txtDescripcion.CausesValidation = false;
+            this.txtDescripcion.Location = new System.Drawing.Point(88, 77);
+            this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(462, 73);
+            this.txtDescripcion.Size = new System.Drawing.Size(462, 80);
             this.txtDescripcion.TabIndex = 23;
             // 
             // groupBox4
@@ -413,10 +430,8 @@
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.txtUnidadMedida);
             this.groupBox3.Controls.Add(this.nudRealActual);
-            this.groupBox3.Controls.Add(this.nudVirtualActual);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.txtNombre);
             this.groupBox3.Controls.Add(this.label22);
             this.groupBox3.Location = new System.Drawing.Point(6, 3);
@@ -426,20 +441,94 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Datos de la ubicación de stock";
             // 
+            // txtEstado
+            // 
+            this.txtEstado.CausesValidation = false;
+            this.txtEstado.Location = new System.Drawing.Point(71, 93);
+            this.txtEstado.Name = "txtEstado";
+            this.txtEstado.ReadOnly = true;
+            this.txtEstado.Size = new System.Drawing.Size(204, 21);
+            this.txtEstado.TabIndex = 45;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(17, 96);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(44, 13);
+            this.label12.TabIndex = 44;
+            this.label12.Text = "Estado:";
+            // 
+            // txtContenido
+            // 
+            this.txtContenido.CausesValidation = false;
+            this.txtContenido.Location = new System.Drawing.Point(370, 25);
+            this.txtContenido.Name = "txtContenido";
+            this.txtContenido.ReadOnly = true;
+            this.txtContenido.Size = new System.Drawing.Size(180, 21);
+            this.txtContenido.TabIndex = 43;
+            // 
+            // txtTipo
+            // 
+            this.txtTipo.CausesValidation = false;
+            this.txtTipo.Location = new System.Drawing.Point(370, 60);
+            this.txtTipo.Name = "txtTipo";
+            this.txtTipo.ReadOnly = true;
+            this.txtTipo.Size = new System.Drawing.Size(180, 21);
+            this.txtTipo.TabIndex = 42;
+            // 
+            // txtCodigo
+            // 
+            this.txtCodigo.CausesValidation = false;
+            this.txtCodigo.Location = new System.Drawing.Point(71, 60);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.ReadOnly = true;
+            this.txtCodigo.Size = new System.Drawing.Size(204, 21);
+            this.txtCodigo.TabIndex = 41;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(17, 63);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(44, 13);
+            this.label11.TabIndex = 40;
+            this.label11.Text = "Código:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(304, 28);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(60, 13);
+            this.label10.TabIndex = 39;
+            this.label10.Text = "Contenido:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(304, 63);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(31, 13);
+            this.label8.TabIndex = 38;
+            this.label8.Text = "Tipo:";
+            // 
             // txtUnidadMedida
             // 
-            this.txtUnidadMedida.Location = new System.Drawing.Point(142, 139);
+            this.txtUnidadMedida.CausesValidation = false;
+            this.txtUnidadMedida.Location = new System.Drawing.Point(406, 139);
             this.txtUnidadMedida.Name = "txtUnidadMedida";
             this.txtUnidadMedida.ReadOnly = true;
-            this.txtUnidadMedida.Size = new System.Drawing.Size(133, 21);
+            this.txtUnidadMedida.Size = new System.Drawing.Size(144, 21);
             this.txtUnidadMedida.TabIndex = 37;
             this.txtUnidadMedida.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // nudRealActual
             // 
+            this.nudRealActual.CausesValidation = false;
             this.nudRealActual.DecimalPlaces = 3;
             this.nudRealActual.Enabled = false;
-            this.nudRealActual.Location = new System.Drawing.Point(142, 102);
+            this.nudRealActual.Location = new System.Drawing.Point(130, 140);
             this.nudRealActual.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -451,26 +540,10 @@
             this.nudRealActual.TabIndex = 34;
             this.nudRealActual.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // nudVirtualActual
-            // 
-            this.nudVirtualActual.DecimalPlaces = 3;
-            this.nudVirtualActual.Enabled = false;
-            this.nudVirtualActual.Location = new System.Drawing.Point(142, 64);
-            this.nudVirtualActual.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.nudVirtualActual.Name = "nudVirtualActual";
-            this.nudVirtualActual.ReadOnly = true;
-            this.nudVirtualActual.Size = new System.Drawing.Size(133, 21);
-            this.nudVirtualActual.TabIndex = 33;
-            this.nudVirtualActual.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 142);
+            this.label6.Location = new System.Drawing.Point(304, 142);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(96, 13);
             this.label6.TabIndex = 27;
@@ -479,20 +552,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 104);
+            this.label5.Location = new System.Drawing.Point(17, 142);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(107, 13);
             this.label5.TabIndex = 26;
             this.label5.Text = "Cantidad real actual:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 66);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(119, 13);
-            this.label3.TabIndex = 25;
-            this.label3.Text = "Cantidad virtual actual:";
             // 
             // txtNombre
             // 
@@ -528,92 +592,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(594, 498);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
-            // dtpFecha
-            // 
-            this.dtpFecha.CustomFormat = " ";
-            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFecha.Location = new System.Drawing.Point(88, 23);
-            this.dtpFecha.Name = "dtpFecha";
-            this.dtpFecha.Size = new System.Drawing.Size(133, 21);
-            this.dtpFecha.TabIndex = 37;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(17, 27);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(40, 13);
-            this.label7.TabIndex = 38;
-            this.label7.Text = "Fecha:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(320, 104);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(31, 13);
-            this.label8.TabIndex = 38;
-            this.label8.Text = "Tipo:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(320, 66);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(60, 13);
-            this.label10.TabIndex = 39;
-            this.label10.Text = "Contenido:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(320, 28);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(44, 13);
-            this.label11.TabIndex = 40;
-            this.label11.Text = "Código:";
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Location = new System.Drawing.Point(386, 25);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.ReadOnly = true;
-            this.txtCodigo.Size = new System.Drawing.Size(164, 21);
-            this.txtCodigo.TabIndex = 41;
-            // 
-            // txtTipo
-            // 
-            this.txtTipo.Location = new System.Drawing.Point(386, 101);
-            this.txtTipo.Name = "txtTipo";
-            this.txtTipo.ReadOnly = true;
-            this.txtTipo.Size = new System.Drawing.Size(164, 21);
-            this.txtTipo.TabIndex = 42;
-            // 
-            // txtContenido
-            // 
-            this.txtContenido.Location = new System.Drawing.Point(386, 63);
-            this.txtContenido.Name = "txtContenido";
-            this.txtContenido.ReadOnly = true;
-            this.txtContenido.Size = new System.Drawing.Size(164, 21);
-            this.txtContenido.TabIndex = 43;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(320, 142);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(44, 13);
-            this.label12.TabIndex = 44;
-            this.label12.Text = "Estado:";
-            // 
-            // txtEstado
-            // 
-            this.txtEstado.Location = new System.Drawing.Point(386, 139);
-            this.txtEstado.Name = "txtEstado";
-            this.txtEstado.ReadOnly = true;
-            this.txtEstado.Size = new System.Drawing.Size(164, 21);
-            this.txtEstado.TabIndex = 45;
-            // 
             // frmActualizacionStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -643,7 +621,6 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudRealActual)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudVirtualActual)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -682,11 +659,9 @@
         private System.Windows.Forms.TextBox txtUnidadMedida;
         private System.Windows.Forms.NumericUpDown nudCantidadNueva;
         private System.Windows.Forms.NumericUpDown nudRealActual;
-        private System.Windows.Forms.NumericUpDown nudVirtualActual;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;

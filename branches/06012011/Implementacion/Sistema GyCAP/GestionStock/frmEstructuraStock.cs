@@ -74,10 +74,10 @@ namespace GyCAP.UI.GestionStock
             }            
             
             tvcEstructura.Columns.Add("ustck", "Ubicación de Stock");
+            tvcEstructura.Columns.Add("codigo", "Código");
             tvcEstructura.Columns.Add("cantidad_real", "Cantidad Real");
-            tvcEstructura.Columns.Add("cantidad_virtual", "Cantidad Virtual");
             tvcEstructura.Columns[0].Width = 400;
-            tvcEstructura.Columns[1].Width = 180;
+            tvcEstructura.Columns[1].Width = 200;
             tvcEstructura.Columns[2].Width = 180;
             
             foreach (Data.dsStock.UBICACIONES_STOCKRow row in (Data.dsStock.UBICACIONES_STOCKRow[])dsStock.UBICACIONES_STOCK.Select("ustck_padre IS NULL"))
@@ -85,7 +85,7 @@ namespace GyCAP.UI.GestionStock
                 TreeNode nodo = new TreeNode();
                 nodo.Text = row.USTCK_NOMBRE;
                 nodo.Name = row.USTCK_NUMERO.ToString();
-                nodo.Tag = new string[] { row.USTCK_CANTIDADREAL.ToString(), row.USTCK_CANTIDADVIRTUAL.ToString() };
+                nodo.Tag = new string[] { row.USTCK_CODIGO, row.USTCK_CANTIDADREAL.ToString() };
                 tvcEstructura.TreeView.Nodes.Add(nodo);
 
                 CrearHijos(nodo);
@@ -99,7 +99,7 @@ namespace GyCAP.UI.GestionStock
                 TreeNode nodo = new TreeNode();
                 nodo.Text = row.USTCK_NOMBRE;
                 nodo.Name = row.USTCK_NUMERO.ToString();
-                nodo.Tag = new string[] { row.USTCK_CANTIDADREAL.ToString(), row.USTCK_CANTIDADVIRTUAL.ToString() };
+                nodo.Tag = new string[] { row.USTCK_CODIGO, row.USTCK_CANTIDADREAL.ToString() };
                 nodoPadre.Nodes.Add(nodo);
 
                 CrearHijos(nodo);

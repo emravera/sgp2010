@@ -51,14 +51,12 @@
             this.cboUnidadMedida = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.txtUbicacionFisica = new System.Windows.Forms.RichTextBox();
             this.txtDescripcion = new System.Windows.Forms.RichTextBox();
-            this.nudCantidadVirtual = new System.Windows.Forms.NumericUpDown();
             this.nudCantidadReal = new System.Windows.Forms.NumericUpDown();
             this.cboPadre = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -83,7 +81,6 @@
             this.gbGuardarCancelar.SuspendLayout();
             this.tpDatos.SuspendLayout();
             this.gbDatos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadVirtual)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidadReal)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
@@ -114,7 +111,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(313, 81);
+            this.label5.Location = new System.Drawing.Point(313, 53);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(81, 13);
             this.label5.TabIndex = 4;
@@ -265,14 +262,12 @@
             this.gbDatos.Controls.Add(this.cboUnidadMedida);
             this.gbDatos.Controls.Add(this.txtUbicacionFisica);
             this.gbDatos.Controls.Add(this.txtDescripcion);
-            this.gbDatos.Controls.Add(this.nudCantidadVirtual);
             this.gbDatos.Controls.Add(this.nudCantidadReal);
             this.gbDatos.Controls.Add(this.cboPadre);
             this.gbDatos.Controls.Add(this.cboEstado);
             this.gbDatos.Controls.Add(this.label12);
             this.gbDatos.Controls.Add(this.label11);
             this.gbDatos.Controls.Add(this.label10);
-            this.gbDatos.Controls.Add(this.label9);
             this.gbDatos.Controls.Add(this.label8);
             this.gbDatos.Controls.Add(this.label7);
             this.gbDatos.Controls.Add(this.txtCodigo);
@@ -292,7 +287,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(12, 141);
+            this.label15.Location = new System.Drawing.Point(313, 110);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(60, 13);
             this.label15.TabIndex = 20;
@@ -303,7 +298,7 @@
             this.cboContenidoStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboContenidoStock.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboContenidoStock.FormattingEnabled = true;
-            this.cboContenidoStock.Location = new System.Drawing.Point(105, 138);
+            this.cboContenidoStock.Location = new System.Drawing.Point(406, 107);
             this.cboContenidoStock.Name = "cboContenidoStock";
             this.cboContenidoStock.Size = new System.Drawing.Size(185, 21);
             this.cboContenidoStock.TabIndex = 11;
@@ -311,7 +306,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(313, 110);
+            this.label2.Location = new System.Drawing.Point(313, 81);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 18;
@@ -322,9 +317,9 @@
             this.cboTipoUbicacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTipoUbicacion.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboTipoUbicacion.FormattingEnabled = true;
-            this.cboTipoUbicacion.Location = new System.Drawing.Point(417, 107);
+            this.cboTipoUbicacion.Location = new System.Drawing.Point(406, 78);
             this.cboTipoUbicacion.Name = "cboTipoUbicacion";
-            this.cboTipoUbicacion.Size = new System.Drawing.Size(174, 21);
+            this.cboTipoUbicacion.Size = new System.Drawing.Size(185, 21);
             this.cboTipoUbicacion.TabIndex = 15;
             this.cboTipoUbicacion.SelectedIndexChanged += new System.EventHandler(this.cboTipoUbicacion_SelectedIndexChanged);
             // 
@@ -333,18 +328,18 @@
             this.cboUnidadMedida.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboUnidadMedida.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboUnidadMedida.FormattingEnabled = true;
-            this.cboUnidadMedida.Location = new System.Drawing.Point(417, 78);
+            this.cboUnidadMedida.Location = new System.Drawing.Point(406, 50);
             this.cboUnidadMedida.Name = "cboUnidadMedida";
-            this.cboUnidadMedida.Size = new System.Drawing.Size(174, 21);
+            this.cboUnidadMedida.Size = new System.Drawing.Size(185, 21);
             this.cboUnidadMedida.TabIndex = 14;
             // 
             // txtUbicacionFisica
             // 
             this.txtUbicacionFisica.CausesValidation = false;
-            this.txtUbicacionFisica.Location = new System.Drawing.Point(316, 188);
+            this.txtUbicacionFisica.Location = new System.Drawing.Point(316, 165);
             this.txtUbicacionFisica.MaxLength = 200;
             this.txtUbicacionFisica.Name = "txtUbicacionFisica";
-            this.txtUbicacionFisica.Size = new System.Drawing.Size(275, 112);
+            this.txtUbicacionFisica.Size = new System.Drawing.Size(275, 135);
             this.txtUbicacionFisica.TabIndex = 17;
             this.txtUbicacionFisica.Text = "";
             this.txtUbicacionFisica.Enter += new System.EventHandler(this.control_Enter);
@@ -352,34 +347,13 @@
             // txtDescripcion
             // 
             this.txtDescripcion.CausesValidation = false;
-            this.txtDescripcion.Location = new System.Drawing.Point(15, 188);
+            this.txtDescripcion.Location = new System.Drawing.Point(15, 165);
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(275, 112);
+            this.txtDescripcion.Size = new System.Drawing.Size(275, 135);
             this.txtDescripcion.TabIndex = 16;
             this.txtDescripcion.Text = "";
             this.txtDescripcion.Enter += new System.EventHandler(this.control_Enter);
-            // 
-            // nudCantidadVirtual
-            // 
-            this.nudCantidadVirtual.CausesValidation = false;
-            this.nudCantidadVirtual.DecimalPlaces = 3;
-            this.nudCantidadVirtual.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudCantidadVirtual.Location = new System.Drawing.Point(417, 51);
-            this.nudCantidadVirtual.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.nudCantidadVirtual.Name = "nudCantidadVirtual";
-            this.nudCantidadVirtual.Size = new System.Drawing.Size(174, 21);
-            this.nudCantidadVirtual.TabIndex = 13;
-            this.nudCantidadVirtual.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudCantidadVirtual.Enter += new System.EventHandler(this.control_Enter);
             // 
             // nudCantidadReal
             // 
@@ -390,14 +364,14 @@
             0,
             0,
             65536});
-            this.nudCantidadReal.Location = new System.Drawing.Point(417, 24);
+            this.nudCantidadReal.Location = new System.Drawing.Point(406, 24);
             this.nudCantidadReal.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
             this.nudCantidadReal.Name = "nudCantidadReal";
-            this.nudCantidadReal.Size = new System.Drawing.Size(174, 21);
+            this.nudCantidadReal.Size = new System.Drawing.Size(185, 21);
             this.nudCantidadReal.TabIndex = 12;
             this.nudCantidadReal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCantidadReal.Enter += new System.EventHandler(this.control_Enter);
@@ -426,7 +400,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(12, 172);
+            this.label12.Location = new System.Drawing.Point(12, 149);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(65, 13);
             this.label12.TabIndex = 16;
@@ -435,7 +409,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(313, 172);
+            this.label11.Location = new System.Drawing.Point(313, 149);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(83, 13);
             this.label11.TabIndex = 15;
@@ -449,15 +423,6 @@
             this.label10.Size = new System.Drawing.Size(75, 13);
             this.label10.TabIndex = 14;
             this.label10.Text = "Cantidad real:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(313, 53);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(87, 13);
-            this.label9.TabIndex = 13;
-            this.label9.Text = "Cantidad virtual:";
             // 
             // label8
             // 
@@ -710,7 +675,6 @@
             this.tpDatos.ResumeLayout(false);
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadVirtual)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidadReal)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
@@ -754,14 +718,12 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.RichTextBox txtUbicacionFisica;
         private System.Windows.Forms.RichTextBox txtDescripcion;
-        private System.Windows.Forms.NumericUpDown nudCantidadVirtual;
         private System.Windows.Forms.NumericUpDown nudCantidadReal;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboPadre;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboEstado;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboEstadoBuscar;

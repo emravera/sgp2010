@@ -33,27 +33,35 @@ namespace GyCAP.Data {
         
         private TIPOS_UBICACIONES_STOCKDataTable tableTIPOS_UBICACIONES_STOCK;
         
-        private MOVIMIENTOS_STOCKDataTable tableMOVIMIENTOS_STOCK;
-        
         private CONTENIDO_UBICACION_STOCKDataTable tableCONTENIDO_UBICACION_STOCK;
         
         private UBICACIONES_STOCKDataTable tableUBICACIONES_STOCK;
         
+        private MOVIMIENTOS_STOCKDataTable tableMOVIMIENTOS_STOCK;
+        
+        private TIPOS_ENTIDADDataTable tableTIPOS_ENTIDAD;
+        
+        private ENTIDADESDataTable tableENTIDADES;
+        
         private global::System.Data.DataRelation relationunidadMedida_tipoUnidadMedida_fk;
         
-        private global::System.Data.DataRelation relationFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK;
-        
         private global::System.Data.DataRelation relationFK_UBICACIONES_STOCK_UBICACION_STOCK;
-        
-        private global::System.Data.DataRelation relationFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK;
-        
-        private global::System.Data.DataRelation relationFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1;
         
         private global::System.Data.DataRelation relationFK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK;
         
         private global::System.Data.DataRelation relationFK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK;
         
         private global::System.Data.DataRelation relationFK_UBICACIONES_STOCK_UBICACION_STOCK1;
+        
+        private global::System.Data.DataRelation relationFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK;
+        
+        private global::System.Data.DataRelation relationFK_MOVIMIENTOS_STOCK_ENTIDADES_DESTINO;
+        
+        private global::System.Data.DataRelation relationFK_MOVIMIENTOS_STOCK_ENTIDADES_DUENIO;
+        
+        private global::System.Data.DataRelation relationFK_MOVIMIENTOS_STOCK_ENTIDADES_ORIGEN;
+        
+        private global::System.Data.DataRelation relationFK_ENTIDADES_TIPOS_ENTIDAD;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -93,14 +101,20 @@ namespace GyCAP.Data {
                 if ((ds.Tables["TIPOS_UBICACIONES_STOCK"] != null)) {
                     base.Tables.Add(new TIPOS_UBICACIONES_STOCKDataTable(ds.Tables["TIPOS_UBICACIONES_STOCK"]));
                 }
-                if ((ds.Tables["MOVIMIENTOS_STOCK"] != null)) {
-                    base.Tables.Add(new MOVIMIENTOS_STOCKDataTable(ds.Tables["MOVIMIENTOS_STOCK"]));
-                }
                 if ((ds.Tables["CONTENIDO_UBICACION_STOCK"] != null)) {
                     base.Tables.Add(new CONTENIDO_UBICACION_STOCKDataTable(ds.Tables["CONTENIDO_UBICACION_STOCK"]));
                 }
                 if ((ds.Tables["UBICACIONES_STOCK"] != null)) {
                     base.Tables.Add(new UBICACIONES_STOCKDataTable(ds.Tables["UBICACIONES_STOCK"]));
+                }
+                if ((ds.Tables["MOVIMIENTOS_STOCK"] != null)) {
+                    base.Tables.Add(new MOVIMIENTOS_STOCKDataTable(ds.Tables["MOVIMIENTOS_STOCK"]));
+                }
+                if ((ds.Tables["TIPOS_ENTIDAD"] != null)) {
+                    base.Tables.Add(new TIPOS_ENTIDADDataTable(ds.Tables["TIPOS_ENTIDAD"]));
+                }
+                if ((ds.Tables["ENTIDADES"] != null)) {
+                    base.Tables.Add(new ENTIDADESDataTable(ds.Tables["ENTIDADES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -159,15 +173,6 @@ namespace GyCAP.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public MOVIMIENTOS_STOCKDataTable MOVIMIENTOS_STOCK {
-            get {
-                return this.tableMOVIMIENTOS_STOCK;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public CONTENIDO_UBICACION_STOCKDataTable CONTENIDO_UBICACION_STOCK {
             get {
                 return this.tableCONTENIDO_UBICACION_STOCK;
@@ -180,6 +185,33 @@ namespace GyCAP.Data {
         public UBICACIONES_STOCKDataTable UBICACIONES_STOCK {
             get {
                 return this.tableUBICACIONES_STOCK;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public MOVIMIENTOS_STOCKDataTable MOVIMIENTOS_STOCK {
+            get {
+                return this.tableMOVIMIENTOS_STOCK;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public TIPOS_ENTIDADDataTable TIPOS_ENTIDAD {
+            get {
+                return this.tableTIPOS_ENTIDAD;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ENTIDADESDataTable ENTIDADES {
+            get {
+                return this.tableENTIDADES;
             }
         }
         
@@ -254,14 +286,20 @@ namespace GyCAP.Data {
                 if ((ds.Tables["TIPOS_UBICACIONES_STOCK"] != null)) {
                     base.Tables.Add(new TIPOS_UBICACIONES_STOCKDataTable(ds.Tables["TIPOS_UBICACIONES_STOCK"]));
                 }
-                if ((ds.Tables["MOVIMIENTOS_STOCK"] != null)) {
-                    base.Tables.Add(new MOVIMIENTOS_STOCKDataTable(ds.Tables["MOVIMIENTOS_STOCK"]));
-                }
                 if ((ds.Tables["CONTENIDO_UBICACION_STOCK"] != null)) {
                     base.Tables.Add(new CONTENIDO_UBICACION_STOCKDataTable(ds.Tables["CONTENIDO_UBICACION_STOCK"]));
                 }
                 if ((ds.Tables["UBICACIONES_STOCK"] != null)) {
                     base.Tables.Add(new UBICACIONES_STOCKDataTable(ds.Tables["UBICACIONES_STOCK"]));
+                }
+                if ((ds.Tables["MOVIMIENTOS_STOCK"] != null)) {
+                    base.Tables.Add(new MOVIMIENTOS_STOCKDataTable(ds.Tables["MOVIMIENTOS_STOCK"]));
+                }
+                if ((ds.Tables["TIPOS_ENTIDAD"] != null)) {
+                    base.Tables.Add(new TIPOS_ENTIDADDataTable(ds.Tables["TIPOS_ENTIDAD"]));
+                }
+                if ((ds.Tables["ENTIDADES"] != null)) {
+                    base.Tables.Add(new ENTIDADESDataTable(ds.Tables["ENTIDADES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -317,12 +355,6 @@ namespace GyCAP.Data {
                     this.tableTIPOS_UBICACIONES_STOCK.InitVars();
                 }
             }
-            this.tableMOVIMIENTOS_STOCK = ((MOVIMIENTOS_STOCKDataTable)(base.Tables["MOVIMIENTOS_STOCK"]));
-            if ((initTable == true)) {
-                if ((this.tableMOVIMIENTOS_STOCK != null)) {
-                    this.tableMOVIMIENTOS_STOCK.InitVars();
-                }
-            }
             this.tableCONTENIDO_UBICACION_STOCK = ((CONTENIDO_UBICACION_STOCKDataTable)(base.Tables["CONTENIDO_UBICACION_STOCK"]));
             if ((initTable == true)) {
                 if ((this.tableCONTENIDO_UBICACION_STOCK != null)) {
@@ -335,14 +367,34 @@ namespace GyCAP.Data {
                     this.tableUBICACIONES_STOCK.InitVars();
                 }
             }
+            this.tableMOVIMIENTOS_STOCK = ((MOVIMIENTOS_STOCKDataTable)(base.Tables["MOVIMIENTOS_STOCK"]));
+            if ((initTable == true)) {
+                if ((this.tableMOVIMIENTOS_STOCK != null)) {
+                    this.tableMOVIMIENTOS_STOCK.InitVars();
+                }
+            }
+            this.tableTIPOS_ENTIDAD = ((TIPOS_ENTIDADDataTable)(base.Tables["TIPOS_ENTIDAD"]));
+            if ((initTable == true)) {
+                if ((this.tableTIPOS_ENTIDAD != null)) {
+                    this.tableTIPOS_ENTIDAD.InitVars();
+                }
+            }
+            this.tableENTIDADES = ((ENTIDADESDataTable)(base.Tables["ENTIDADES"]));
+            if ((initTable == true)) {
+                if ((this.tableENTIDADES != null)) {
+                    this.tableENTIDADES.InitVars();
+                }
+            }
             this.relationunidadMedida_tipoUnidadMedida_fk = this.Relations["unidadMedida_tipoUnidadMedida_fk"];
-            this.relationFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK = this.Relations["FK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK"];
             this.relationFK_UBICACIONES_STOCK_UBICACION_STOCK = this.Relations["FK_UBICACIONES_STOCK_UBICACION_STOCK"];
-            this.relationFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK = this.Relations["FK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK"];
-            this.relationFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1 = this.Relations["FK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1"];
             this.relationFK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK = this.Relations["FK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK"];
             this.relationFK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK = this.Relations["FK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK"];
             this.relationFK_UBICACIONES_STOCK_UBICACION_STOCK1 = this.Relations["FK_UBICACIONES_STOCK_UBICACION_STOCK1"];
+            this.relationFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK = this.Relations["FK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK"];
+            this.relationFK_MOVIMIENTOS_STOCK_ENTIDADES_DESTINO = this.Relations["FK_MOVIMIENTOS_STOCK_ENTIDADES_DESTINO"];
+            this.relationFK_MOVIMIENTOS_STOCK_ENTIDADES_DUENIO = this.Relations["FK_MOVIMIENTOS_STOCK_ENTIDADES_DUENIO"];
+            this.relationFK_MOVIMIENTOS_STOCK_ENTIDADES_ORIGEN = this.Relations["FK_MOVIMIENTOS_STOCK_ENTIDADES_ORIGEN"];
+            this.relationFK_ENTIDADES_TIPOS_ENTIDAD = this.Relations["FK_ENTIDADES_TIPOS_ENTIDAD"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -360,32 +412,24 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tableTIPOS_UNIDADES_MEDIDA);
             this.tableTIPOS_UBICACIONES_STOCK = new TIPOS_UBICACIONES_STOCKDataTable();
             base.Tables.Add(this.tableTIPOS_UBICACIONES_STOCK);
-            this.tableMOVIMIENTOS_STOCK = new MOVIMIENTOS_STOCKDataTable();
-            base.Tables.Add(this.tableMOVIMIENTOS_STOCK);
             this.tableCONTENIDO_UBICACION_STOCK = new CONTENIDO_UBICACION_STOCKDataTable();
             base.Tables.Add(this.tableCONTENIDO_UBICACION_STOCK);
             this.tableUBICACIONES_STOCK = new UBICACIONES_STOCKDataTable();
             base.Tables.Add(this.tableUBICACIONES_STOCK);
+            this.tableMOVIMIENTOS_STOCK = new MOVIMIENTOS_STOCKDataTable();
+            base.Tables.Add(this.tableMOVIMIENTOS_STOCK);
+            this.tableTIPOS_ENTIDAD = new TIPOS_ENTIDADDataTable();
+            base.Tables.Add(this.tableTIPOS_ENTIDAD);
+            this.tableENTIDADES = new ENTIDADESDataTable();
+            base.Tables.Add(this.tableENTIDADES);
             this.relationunidadMedida_tipoUnidadMedida_fk = new global::System.Data.DataRelation("unidadMedida_tipoUnidadMedida_fk", new global::System.Data.DataColumn[] {
                         this.tableTIPOS_UNIDADES_MEDIDA.TUMED_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableUNIDADES_MEDIDA.TUMED_CODIGOColumn}, false);
             this.Relations.Add(this.relationunidadMedida_tipoUnidadMedida_fk);
-            this.relationFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK = new global::System.Data.DataRelation("FK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK", new global::System.Data.DataColumn[] {
-                        this.tableESTADO_MOVIMIENTOS_STOCK.EMVTO_CODIGOColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMOVIMIENTOS_STOCK.EMVTO_CODIGOColumn}, false);
-            this.Relations.Add(this.relationFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK);
             this.relationFK_UBICACIONES_STOCK_UBICACION_STOCK = new global::System.Data.DataRelation("FK_UBICACIONES_STOCK_UBICACION_STOCK", new global::System.Data.DataColumn[] {
                         this.tableUBICACIONES_STOCK.USTCK_NUMEROColumn}, new global::System.Data.DataColumn[] {
                         this.tableUBICACIONES_STOCK.USTCK_PADREColumn}, false);
             this.Relations.Add(this.relationFK_UBICACIONES_STOCK_UBICACION_STOCK);
-            this.relationFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK = new global::System.Data.DataRelation("FK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK", new global::System.Data.DataColumn[] {
-                        this.tableUBICACIONES_STOCK.USTCK_NUMEROColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMOVIMIENTOS_STOCK.USTCK_ORIGENColumn}, false);
-            this.Relations.Add(this.relationFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK);
-            this.relationFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1 = new global::System.Data.DataRelation("FK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1", new global::System.Data.DataColumn[] {
-                        this.tableUBICACIONES_STOCK.USTCK_NUMEROColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMOVIMIENTOS_STOCK.USTCK_DESTINOColumn}, false);
-            this.Relations.Add(this.relationFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1);
             this.relationFK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK = new global::System.Data.DataRelation("FK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK", new global::System.Data.DataColumn[] {
                         this.tableCONTENIDO_UBICACION_STOCK.CON_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableUBICACIONES_STOCK.CON_CODIGOColumn}, false);
@@ -398,6 +442,26 @@ namespace GyCAP.Data {
                         this.tableUNIDADES_MEDIDA.UMED_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableUBICACIONES_STOCK.UMED_CODIGOColumn}, false);
             this.Relations.Add(this.relationFK_UBICACIONES_STOCK_UBICACION_STOCK1);
+            this.relationFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK = new global::System.Data.DataRelation("FK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK", new global::System.Data.DataColumn[] {
+                        this.tableESTADO_MOVIMIENTOS_STOCK.EMVTO_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMOVIMIENTOS_STOCK.EMVTO_CODIGOColumn}, false);
+            this.Relations.Add(this.relationFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK);
+            this.relationFK_MOVIMIENTOS_STOCK_ENTIDADES_DESTINO = new global::System.Data.DataRelation("FK_MOVIMIENTOS_STOCK_ENTIDADES_DESTINO", new global::System.Data.DataColumn[] {
+                        this.tableENTIDADES.ENTD_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMOVIMIENTOS_STOCK.ENTD_DESTINOColumn}, false);
+            this.Relations.Add(this.relationFK_MOVIMIENTOS_STOCK_ENTIDADES_DESTINO);
+            this.relationFK_MOVIMIENTOS_STOCK_ENTIDADES_DUENIO = new global::System.Data.DataRelation("FK_MOVIMIENTOS_STOCK_ENTIDADES_DUENIO", new global::System.Data.DataColumn[] {
+                        this.tableENTIDADES.ENTD_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMOVIMIENTOS_STOCK.ENTD_DUENIOColumn}, false);
+            this.Relations.Add(this.relationFK_MOVIMIENTOS_STOCK_ENTIDADES_DUENIO);
+            this.relationFK_MOVIMIENTOS_STOCK_ENTIDADES_ORIGEN = new global::System.Data.DataRelation("FK_MOVIMIENTOS_STOCK_ENTIDADES_ORIGEN", new global::System.Data.DataColumn[] {
+                        this.tableENTIDADES.ENTD_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMOVIMIENTOS_STOCK.ENTD_ORIGENColumn}, false);
+            this.Relations.Add(this.relationFK_MOVIMIENTOS_STOCK_ENTIDADES_ORIGEN);
+            this.relationFK_ENTIDADES_TIPOS_ENTIDAD = new global::System.Data.DataRelation("FK_ENTIDADES_TIPOS_ENTIDAD", new global::System.Data.DataColumn[] {
+                        this.tableTIPOS_ENTIDAD.TENTD_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableENTIDADES.TENTD_CODIGOColumn}, false);
+            this.Relations.Add(this.relationFK_ENTIDADES_TIPOS_ENTIDAD);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -421,17 +485,27 @@ namespace GyCAP.Data {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeMOVIMIENTOS_STOCK() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeCONTENIDO_UBICACION_STOCK() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeUBICACIONES_STOCK() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeMOVIMIENTOS_STOCK() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeTIPOS_ENTIDAD() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeENTIDADES() {
             return false;
         }
         
@@ -496,11 +570,15 @@ namespace GyCAP.Data {
         
         public delegate void TIPOS_UBICACIONES_STOCKRowChangeEventHandler(object sender, TIPOS_UBICACIONES_STOCKRowChangeEvent e);
         
-        public delegate void MOVIMIENTOS_STOCKRowChangeEventHandler(object sender, MOVIMIENTOS_STOCKRowChangeEvent e);
-        
         public delegate void CONTENIDO_UBICACION_STOCKRowChangeEventHandler(object sender, CONTENIDO_UBICACION_STOCKRowChangeEvent e);
         
         public delegate void UBICACIONES_STOCKRowChangeEventHandler(object sender, UBICACIONES_STOCKRowChangeEvent e);
+        
+        public delegate void MOVIMIENTOS_STOCKRowChangeEventHandler(object sender, MOVIMIENTOS_STOCKRowChangeEvent e);
+        
+        public delegate void TIPOS_ENTIDADRowChangeEventHandler(object sender, TIPOS_ENTIDADRowChangeEvent e);
+        
+        public delegate void ENTIDADESRowChangeEventHandler(object sender, ENTIDADESRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1566,428 +1644,6 @@ namespace GyCAP.Data {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class MOVIMIENTOS_STOCKDataTable : global::System.Data.TypedTableBase<MOVIMIENTOS_STOCKRow> {
-            
-            private global::System.Data.DataColumn columnMVTO_NUMERO;
-            
-            private global::System.Data.DataColumn columnMVTO_CODIGO;
-            
-            private global::System.Data.DataColumn columnMVTO_DESCRIPCION;
-            
-            private global::System.Data.DataColumn columnMVTO_FECHAALTA;
-            
-            private global::System.Data.DataColumn columnMVTO_FECHAPREVISTA;
-            
-            private global::System.Data.DataColumn columnMVTO_FECHAREAL;
-            
-            private global::System.Data.DataColumn columnUSTCK_ORIGEN;
-            
-            private global::System.Data.DataColumn columnUSTCK_DESTINO;
-            
-            private global::System.Data.DataColumn columnMVTO_CANTIDAD_ORIGEN_ESTIMADA;
-            
-            private global::System.Data.DataColumn columnMVTO_CANTIDAD_DESTINO_ESTIMADA;
-            
-            private global::System.Data.DataColumn columnMVTO_CANTIDAD_ORIGEN_REAL;
-            
-            private global::System.Data.DataColumn columnMVTO_CANTIDAD_DESTINO_REAL;
-            
-            private global::System.Data.DataColumn columnEMVTO_CODIGO;
-            
-            private global::System.Data.DataColumn columnORDT_NUMERO;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MOVIMIENTOS_STOCKDataTable() {
-                this.TableName = "MOVIMIENTOS_STOCK";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal MOVIMIENTOS_STOCKDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected MOVIMIENTOS_STOCKDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MVTO_NUMEROColumn {
-                get {
-                    return this.columnMVTO_NUMERO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MVTO_CODIGOColumn {
-                get {
-                    return this.columnMVTO_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MVTO_DESCRIPCIONColumn {
-                get {
-                    return this.columnMVTO_DESCRIPCION;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MVTO_FECHAALTAColumn {
-                get {
-                    return this.columnMVTO_FECHAALTA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MVTO_FECHAPREVISTAColumn {
-                get {
-                    return this.columnMVTO_FECHAPREVISTA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MVTO_FECHAREALColumn {
-                get {
-                    return this.columnMVTO_FECHAREAL;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn USTCK_ORIGENColumn {
-                get {
-                    return this.columnUSTCK_ORIGEN;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn USTCK_DESTINOColumn {
-                get {
-                    return this.columnUSTCK_DESTINO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MVTO_CANTIDAD_ORIGEN_ESTIMADAColumn {
-                get {
-                    return this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MVTO_CANTIDAD_DESTINO_ESTIMADAColumn {
-                get {
-                    return this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MVTO_CANTIDAD_ORIGEN_REALColumn {
-                get {
-                    return this.columnMVTO_CANTIDAD_ORIGEN_REAL;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MVTO_CANTIDAD_DESTINO_REALColumn {
-                get {
-                    return this.columnMVTO_CANTIDAD_DESTINO_REAL;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn EMVTO_CODIGOColumn {
-                get {
-                    return this.columnEMVTO_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ORDT_NUMEROColumn {
-                get {
-                    return this.columnORDT_NUMERO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MOVIMIENTOS_STOCKRow this[int index] {
-                get {
-                    return ((MOVIMIENTOS_STOCKRow)(this.Rows[index]));
-                }
-            }
-            
-            public event MOVIMIENTOS_STOCKRowChangeEventHandler MOVIMIENTOS_STOCKRowChanging;
-            
-            public event MOVIMIENTOS_STOCKRowChangeEventHandler MOVIMIENTOS_STOCKRowChanged;
-            
-            public event MOVIMIENTOS_STOCKRowChangeEventHandler MOVIMIENTOS_STOCKRowDeleting;
-            
-            public event MOVIMIENTOS_STOCKRowChangeEventHandler MOVIMIENTOS_STOCKRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddMOVIMIENTOS_STOCKRow(MOVIMIENTOS_STOCKRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MOVIMIENTOS_STOCKRow AddMOVIMIENTOS_STOCKRow(string MVTO_CODIGO, string MVTO_DESCRIPCION, System.DateTime MVTO_FECHAALTA, System.DateTime MVTO_FECHAPREVISTA, System.DateTime MVTO_FECHAREAL, UBICACIONES_STOCKRow parentUBICACIONES_STOCKRowByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK, UBICACIONES_STOCKRow parentUBICACIONES_STOCKRowByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1, decimal MVTO_CANTIDAD_ORIGEN_ESTIMADA, decimal MVTO_CANTIDAD_DESTINO_ESTIMADA, decimal MVTO_CANTIDAD_ORIGEN_REAL, decimal MVTO_CANTIDAD_DESTINO_REAL, ESTADO_MOVIMIENTOS_STOCKRow parentESTADO_MOVIMIENTOS_STOCKRowByFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK, decimal ORDT_NUMERO) {
-                MOVIMIENTOS_STOCKRow rowMOVIMIENTOS_STOCKRow = ((MOVIMIENTOS_STOCKRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        MVTO_CODIGO,
-                        MVTO_DESCRIPCION,
-                        MVTO_FECHAALTA,
-                        MVTO_FECHAPREVISTA,
-                        MVTO_FECHAREAL,
-                        null,
-                        null,
-                        MVTO_CANTIDAD_ORIGEN_ESTIMADA,
-                        MVTO_CANTIDAD_DESTINO_ESTIMADA,
-                        MVTO_CANTIDAD_ORIGEN_REAL,
-                        MVTO_CANTIDAD_DESTINO_REAL,
-                        null,
-                        ORDT_NUMERO};
-                if ((parentUBICACIONES_STOCKRowByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK != null)) {
-                    columnValuesArray[6] = parentUBICACIONES_STOCKRowByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK[0];
-                }
-                if ((parentUBICACIONES_STOCKRowByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1 != null)) {
-                    columnValuesArray[7] = parentUBICACIONES_STOCKRowByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1[0];
-                }
-                if ((parentESTADO_MOVIMIENTOS_STOCKRowByFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK != null)) {
-                    columnValuesArray[12] = parentESTADO_MOVIMIENTOS_STOCKRowByFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK[0];
-                }
-                rowMOVIMIENTOS_STOCKRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowMOVIMIENTOS_STOCKRow);
-                return rowMOVIMIENTOS_STOCKRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MOVIMIENTOS_STOCKRow FindByMVTO_NUMERO(decimal MVTO_NUMERO) {
-                return ((MOVIMIENTOS_STOCKRow)(this.Rows.Find(new object[] {
-                            MVTO_NUMERO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                MOVIMIENTOS_STOCKDataTable cln = ((MOVIMIENTOS_STOCKDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new MOVIMIENTOS_STOCKDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnMVTO_NUMERO = base.Columns["MVTO_NUMERO"];
-                this.columnMVTO_CODIGO = base.Columns["MVTO_CODIGO"];
-                this.columnMVTO_DESCRIPCION = base.Columns["MVTO_DESCRIPCION"];
-                this.columnMVTO_FECHAALTA = base.Columns["MVTO_FECHAALTA"];
-                this.columnMVTO_FECHAPREVISTA = base.Columns["MVTO_FECHAPREVISTA"];
-                this.columnMVTO_FECHAREAL = base.Columns["MVTO_FECHAREAL"];
-                this.columnUSTCK_ORIGEN = base.Columns["USTCK_ORIGEN"];
-                this.columnUSTCK_DESTINO = base.Columns["USTCK_DESTINO"];
-                this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA = base.Columns["MVTO_CANTIDAD_ORIGEN_ESTIMADA"];
-                this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA = base.Columns["MVTO_CANTIDAD_DESTINO_ESTIMADA"];
-                this.columnMVTO_CANTIDAD_ORIGEN_REAL = base.Columns["MVTO_CANTIDAD_ORIGEN_REAL"];
-                this.columnMVTO_CANTIDAD_DESTINO_REAL = base.Columns["MVTO_CANTIDAD_DESTINO_REAL"];
-                this.columnEMVTO_CODIGO = base.Columns["EMVTO_CODIGO"];
-                this.columnORDT_NUMERO = base.Columns["ORDT_NUMERO"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnMVTO_NUMERO = new global::System.Data.DataColumn("MVTO_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMVTO_NUMERO);
-                this.columnMVTO_CODIGO = new global::System.Data.DataColumn("MVTO_CODIGO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMVTO_CODIGO);
-                this.columnMVTO_DESCRIPCION = new global::System.Data.DataColumn("MVTO_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMVTO_DESCRIPCION);
-                this.columnMVTO_FECHAALTA = new global::System.Data.DataColumn("MVTO_FECHAALTA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMVTO_FECHAALTA);
-                this.columnMVTO_FECHAPREVISTA = new global::System.Data.DataColumn("MVTO_FECHAPREVISTA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMVTO_FECHAPREVISTA);
-                this.columnMVTO_FECHAREAL = new global::System.Data.DataColumn("MVTO_FECHAREAL", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMVTO_FECHAREAL);
-                this.columnUSTCK_ORIGEN = new global::System.Data.DataColumn("USTCK_ORIGEN", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUSTCK_ORIGEN);
-                this.columnUSTCK_DESTINO = new global::System.Data.DataColumn("USTCK_DESTINO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUSTCK_DESTINO);
-                this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA = new global::System.Data.DataColumn("MVTO_CANTIDAD_ORIGEN_ESTIMADA", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA);
-                this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA = new global::System.Data.DataColumn("MVTO_CANTIDAD_DESTINO_ESTIMADA", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA);
-                this.columnMVTO_CANTIDAD_ORIGEN_REAL = new global::System.Data.DataColumn("MVTO_CANTIDAD_ORIGEN_REAL", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMVTO_CANTIDAD_ORIGEN_REAL);
-                this.columnMVTO_CANTIDAD_DESTINO_REAL = new global::System.Data.DataColumn("MVTO_CANTIDAD_DESTINO_REAL", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMVTO_CANTIDAD_DESTINO_REAL);
-                this.columnEMVTO_CODIGO = new global::System.Data.DataColumn("EMVTO_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEMVTO_CODIGO);
-                this.columnORDT_NUMERO = new global::System.Data.DataColumn("ORDT_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnORDT_NUMERO);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnMVTO_NUMERO}, true));
-                this.columnMVTO_NUMERO.AutoIncrement = true;
-                this.columnMVTO_NUMERO.AutoIncrementSeed = -1;
-                this.columnMVTO_NUMERO.AutoIncrementStep = -1;
-                this.columnMVTO_NUMERO.AllowDBNull = false;
-                this.columnMVTO_NUMERO.Unique = true;
-                this.columnMVTO_CODIGO.MaxLength = 80;
-                this.columnMVTO_DESCRIPCION.MaxLength = 300;
-                this.columnMVTO_FECHAALTA.AllowDBNull = false;
-                this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA.AllowDBNull = false;
-                this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA.AllowDBNull = false;
-                this.columnMVTO_CANTIDAD_ORIGEN_REAL.AllowDBNull = false;
-                this.columnMVTO_CANTIDAD_DESTINO_REAL.AllowDBNull = false;
-                this.columnEMVTO_CODIGO.AllowDBNull = false;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MOVIMIENTOS_STOCKRow NewMOVIMIENTOS_STOCKRow() {
-                return ((MOVIMIENTOS_STOCKRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new MOVIMIENTOS_STOCKRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(MOVIMIENTOS_STOCKRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.MOVIMIENTOS_STOCKRowChanged != null)) {
-                    this.MOVIMIENTOS_STOCKRowChanged(this, new MOVIMIENTOS_STOCKRowChangeEvent(((MOVIMIENTOS_STOCKRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.MOVIMIENTOS_STOCKRowChanging != null)) {
-                    this.MOVIMIENTOS_STOCKRowChanging(this, new MOVIMIENTOS_STOCKRowChangeEvent(((MOVIMIENTOS_STOCKRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.MOVIMIENTOS_STOCKRowDeleted != null)) {
-                    this.MOVIMIENTOS_STOCKRowDeleted(this, new MOVIMIENTOS_STOCKRowChangeEvent(((MOVIMIENTOS_STOCKRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.MOVIMIENTOS_STOCKRowDeleting != null)) {
-                    this.MOVIMIENTOS_STOCKRowDeleting(this, new MOVIMIENTOS_STOCKRowChangeEvent(((MOVIMIENTOS_STOCKRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveMOVIMIENTOS_STOCKRow(MOVIMIENTOS_STOCKRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsStock ds = new dsStock();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "MOVIMIENTOS_STOCKDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class CONTENIDO_UBICACION_STOCKDataTable : global::System.Data.TypedTableBase<CONTENIDO_UBICACION_STOCKRow> {
             
             private global::System.Data.DataColumn columnCON_CODIGO;
@@ -2266,8 +1922,6 @@ namespace GyCAP.Data {
             
             private global::System.Data.DataColumn columnUSTCK_CANTIDADREAL;
             
-            private global::System.Data.DataColumn columnUSTCK_CANTIDADVIRTUAL;
-            
             private global::System.Data.DataColumn columnUMED_CODIGO;
             
             private global::System.Data.DataColumn columnUSTCK_PADRE;
@@ -2351,13 +2005,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn USTCK_CANTIDADVIRTUALColumn {
-                get {
-                    return this.columnUSTCK_CANTIDADVIRTUAL;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn UMED_CODIGOColumn {
                 get {
                     return this.columnUMED_CODIGO;
@@ -2421,7 +2068,7 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public UBICACIONES_STOCKRow AddUBICACIONES_STOCKRow(string USTCK_CODIGO, string USTCK_NOMBRE, string USTCK_DESCRIPCION, string USTCK_UBICACIONFISICA, decimal USTCK_CANTIDADREAL, decimal USTCK_CANTIDADVIRTUAL, UNIDADES_MEDIDARow parentUNIDADES_MEDIDARowByFK_UBICACIONES_STOCK_UBICACION_STOCK1, UBICACIONES_STOCKRow parentUBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_UBICACION_STOCK, decimal USTCK_ACTIVO, TIPOS_UBICACIONES_STOCKRow parentTIPOS_UBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK, CONTENIDO_UBICACION_STOCKRow parentCONTENIDO_UBICACION_STOCKRowByFK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK) {
+            public UBICACIONES_STOCKRow AddUBICACIONES_STOCKRow(string USTCK_CODIGO, string USTCK_NOMBRE, string USTCK_DESCRIPCION, string USTCK_UBICACIONFISICA, decimal USTCK_CANTIDADREAL, UNIDADES_MEDIDARow parentUNIDADES_MEDIDARowByFK_UBICACIONES_STOCK_UBICACION_STOCK1, UBICACIONES_STOCKRow parentUBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_UBICACION_STOCK, decimal USTCK_ACTIVO, TIPOS_UBICACIONES_STOCKRow parentTIPOS_UBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK, CONTENIDO_UBICACION_STOCKRow parentCONTENIDO_UBICACION_STOCKRowByFK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK) {
                 UBICACIONES_STOCKRow rowUBICACIONES_STOCKRow = ((UBICACIONES_STOCKRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2430,23 +2077,22 @@ namespace GyCAP.Data {
                         USTCK_DESCRIPCION,
                         USTCK_UBICACIONFISICA,
                         USTCK_CANTIDADREAL,
-                        USTCK_CANTIDADVIRTUAL,
                         null,
                         null,
                         USTCK_ACTIVO,
                         null,
                         null};
                 if ((parentUNIDADES_MEDIDARowByFK_UBICACIONES_STOCK_UBICACION_STOCK1 != null)) {
-                    columnValuesArray[7] = parentUNIDADES_MEDIDARowByFK_UBICACIONES_STOCK_UBICACION_STOCK1[0];
+                    columnValuesArray[6] = parentUNIDADES_MEDIDARowByFK_UBICACIONES_STOCK_UBICACION_STOCK1[0];
                 }
                 if ((parentUBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_UBICACION_STOCK != null)) {
-                    columnValuesArray[8] = parentUBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_UBICACION_STOCK[0];
+                    columnValuesArray[7] = parentUBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_UBICACION_STOCK[0];
                 }
                 if ((parentTIPOS_UBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK != null)) {
-                    columnValuesArray[10] = parentTIPOS_UBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK[0];
+                    columnValuesArray[9] = parentTIPOS_UBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK[0];
                 }
                 if ((parentCONTENIDO_UBICACION_STOCKRowByFK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK != null)) {
-                    columnValuesArray[11] = parentCONTENIDO_UBICACION_STOCKRowByFK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK[0];
+                    columnValuesArray[10] = parentCONTENIDO_UBICACION_STOCKRowByFK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK[0];
                 }
                 rowUBICACIONES_STOCKRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUBICACIONES_STOCKRow);
@@ -2479,7 +2125,6 @@ namespace GyCAP.Data {
                 this.columnUSTCK_DESCRIPCION = base.Columns["USTCK_DESCRIPCION"];
                 this.columnUSTCK_UBICACIONFISICA = base.Columns["USTCK_UBICACIONFISICA"];
                 this.columnUSTCK_CANTIDADREAL = base.Columns["USTCK_CANTIDADREAL"];
-                this.columnUSTCK_CANTIDADVIRTUAL = base.Columns["USTCK_CANTIDADVIRTUAL"];
                 this.columnUMED_CODIGO = base.Columns["UMED_CODIGO"];
                 this.columnUSTCK_PADRE = base.Columns["USTCK_PADRE"];
                 this.columnUSTCK_ACTIVO = base.Columns["USTCK_ACTIVO"];
@@ -2501,8 +2146,6 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnUSTCK_UBICACIONFISICA);
                 this.columnUSTCK_CANTIDADREAL = new global::System.Data.DataColumn("USTCK_CANTIDADREAL", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUSTCK_CANTIDADREAL);
-                this.columnUSTCK_CANTIDADVIRTUAL = new global::System.Data.DataColumn("USTCK_CANTIDADVIRTUAL", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUSTCK_CANTIDADVIRTUAL);
                 this.columnUMED_CODIGO = new global::System.Data.DataColumn("UMED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUMED_CODIGO);
                 this.columnUSTCK_PADRE = new global::System.Data.DataColumn("USTCK_PADRE", typeof(decimal), null, global::System.Data.MappingType.Element);
@@ -2525,7 +2168,6 @@ namespace GyCAP.Data {
                 this.columnUSTCK_DESCRIPCION.MaxLength = 200;
                 this.columnUSTCK_UBICACIONFISICA.MaxLength = 200;
                 this.columnUSTCK_CANTIDADREAL.AllowDBNull = false;
-                this.columnUSTCK_CANTIDADVIRTUAL.AllowDBNull = false;
                 this.columnUMED_CODIGO.AllowDBNull = false;
                 this.columnUSTCK_ACTIVO.AllowDBNull = false;
                 this.columnTUS_CODIGO.AllowDBNull = false;
@@ -2607,6 +2249,977 @@ namespace GyCAP.Data {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "UBICACIONES_STOCKDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class MOVIMIENTOS_STOCKDataTable : global::System.Data.TypedTableBase<MOVIMIENTOS_STOCKRow> {
+            
+            private global::System.Data.DataColumn columnMVTO_NUMERO;
+            
+            private global::System.Data.DataColumn columnMVTO_CODIGO;
+            
+            private global::System.Data.DataColumn columnMVTO_DESCRIPCION;
+            
+            private global::System.Data.DataColumn columnMVTO_FECHAALTA;
+            
+            private global::System.Data.DataColumn columnMVTO_FECHAPREVISTA;
+            
+            private global::System.Data.DataColumn columnMVTO_FECHAREAL;
+            
+            private global::System.Data.DataColumn columnMVTO_CANTIDAD_ORIGEN_ESTIMADA;
+            
+            private global::System.Data.DataColumn columnMVTO_CANTIDAD_DESTINO_ESTIMADA;
+            
+            private global::System.Data.DataColumn columnMVTO_CANTIDAD_ORIGEN_REAL;
+            
+            private global::System.Data.DataColumn columnMVTO_CANTIDAD_DESTINO_REAL;
+            
+            private global::System.Data.DataColumn columnEMVTO_CODIGO;
+            
+            private global::System.Data.DataColumn columnENTD_ORIGEN;
+            
+            private global::System.Data.DataColumn columnENTD_DESTINO;
+            
+            private global::System.Data.DataColumn columnENTD_DUENIO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MOVIMIENTOS_STOCKDataTable() {
+                this.TableName = "MOVIMIENTOS_STOCK";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal MOVIMIENTOS_STOCKDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected MOVIMIENTOS_STOCKDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MVTO_NUMEROColumn {
+                get {
+                    return this.columnMVTO_NUMERO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MVTO_CODIGOColumn {
+                get {
+                    return this.columnMVTO_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MVTO_DESCRIPCIONColumn {
+                get {
+                    return this.columnMVTO_DESCRIPCION;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MVTO_FECHAALTAColumn {
+                get {
+                    return this.columnMVTO_FECHAALTA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MVTO_FECHAPREVISTAColumn {
+                get {
+                    return this.columnMVTO_FECHAPREVISTA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MVTO_FECHAREALColumn {
+                get {
+                    return this.columnMVTO_FECHAREAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MVTO_CANTIDAD_ORIGEN_ESTIMADAColumn {
+                get {
+                    return this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MVTO_CANTIDAD_DESTINO_ESTIMADAColumn {
+                get {
+                    return this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MVTO_CANTIDAD_ORIGEN_REALColumn {
+                get {
+                    return this.columnMVTO_CANTIDAD_ORIGEN_REAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MVTO_CANTIDAD_DESTINO_REALColumn {
+                get {
+                    return this.columnMVTO_CANTIDAD_DESTINO_REAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EMVTO_CODIGOColumn {
+                get {
+                    return this.columnEMVTO_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ENTD_ORIGENColumn {
+                get {
+                    return this.columnENTD_ORIGEN;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ENTD_DESTINOColumn {
+                get {
+                    return this.columnENTD_DESTINO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ENTD_DUENIOColumn {
+                get {
+                    return this.columnENTD_DUENIO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MOVIMIENTOS_STOCKRow this[int index] {
+                get {
+                    return ((MOVIMIENTOS_STOCKRow)(this.Rows[index]));
+                }
+            }
+            
+            public event MOVIMIENTOS_STOCKRowChangeEventHandler MOVIMIENTOS_STOCKRowChanging;
+            
+            public event MOVIMIENTOS_STOCKRowChangeEventHandler MOVIMIENTOS_STOCKRowChanged;
+            
+            public event MOVIMIENTOS_STOCKRowChangeEventHandler MOVIMIENTOS_STOCKRowDeleting;
+            
+            public event MOVIMIENTOS_STOCKRowChangeEventHandler MOVIMIENTOS_STOCKRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddMOVIMIENTOS_STOCKRow(MOVIMIENTOS_STOCKRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MOVIMIENTOS_STOCKRow AddMOVIMIENTOS_STOCKRow(string MVTO_CODIGO, string MVTO_DESCRIPCION, System.DateTime MVTO_FECHAALTA, System.DateTime MVTO_FECHAPREVISTA, System.DateTime MVTO_FECHAREAL, decimal MVTO_CANTIDAD_ORIGEN_ESTIMADA, decimal MVTO_CANTIDAD_DESTINO_ESTIMADA, decimal MVTO_CANTIDAD_ORIGEN_REAL, decimal MVTO_CANTIDAD_DESTINO_REAL, ESTADO_MOVIMIENTOS_STOCKRow parentESTADO_MOVIMIENTOS_STOCKRowByFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK, ENTIDADESRow parentENTIDADESRowByFK_MOVIMIENTOS_STOCK_ENTIDADES_ORIGEN, ENTIDADESRow parentENTIDADESRowByFK_MOVIMIENTOS_STOCK_ENTIDADES_DESTINO, ENTIDADESRow parentENTIDADESRowByFK_MOVIMIENTOS_STOCK_ENTIDADES_DUENIO) {
+                MOVIMIENTOS_STOCKRow rowMOVIMIENTOS_STOCKRow = ((MOVIMIENTOS_STOCKRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        MVTO_CODIGO,
+                        MVTO_DESCRIPCION,
+                        MVTO_FECHAALTA,
+                        MVTO_FECHAPREVISTA,
+                        MVTO_FECHAREAL,
+                        MVTO_CANTIDAD_ORIGEN_ESTIMADA,
+                        MVTO_CANTIDAD_DESTINO_ESTIMADA,
+                        MVTO_CANTIDAD_ORIGEN_REAL,
+                        MVTO_CANTIDAD_DESTINO_REAL,
+                        null,
+                        null,
+                        null,
+                        null};
+                if ((parentESTADO_MOVIMIENTOS_STOCKRowByFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK != null)) {
+                    columnValuesArray[10] = parentESTADO_MOVIMIENTOS_STOCKRowByFK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK[0];
+                }
+                if ((parentENTIDADESRowByFK_MOVIMIENTOS_STOCK_ENTIDADES_ORIGEN != null)) {
+                    columnValuesArray[11] = parentENTIDADESRowByFK_MOVIMIENTOS_STOCK_ENTIDADES_ORIGEN[0];
+                }
+                if ((parentENTIDADESRowByFK_MOVIMIENTOS_STOCK_ENTIDADES_DESTINO != null)) {
+                    columnValuesArray[12] = parentENTIDADESRowByFK_MOVIMIENTOS_STOCK_ENTIDADES_DESTINO[0];
+                }
+                if ((parentENTIDADESRowByFK_MOVIMIENTOS_STOCK_ENTIDADES_DUENIO != null)) {
+                    columnValuesArray[13] = parentENTIDADESRowByFK_MOVIMIENTOS_STOCK_ENTIDADES_DUENIO[0];
+                }
+                rowMOVIMIENTOS_STOCKRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowMOVIMIENTOS_STOCKRow);
+                return rowMOVIMIENTOS_STOCKRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MOVIMIENTOS_STOCKRow FindByMVTO_NUMERO(decimal MVTO_NUMERO) {
+                return ((MOVIMIENTOS_STOCKRow)(this.Rows.Find(new object[] {
+                            MVTO_NUMERO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                MOVIMIENTOS_STOCKDataTable cln = ((MOVIMIENTOS_STOCKDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new MOVIMIENTOS_STOCKDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnMVTO_NUMERO = base.Columns["MVTO_NUMERO"];
+                this.columnMVTO_CODIGO = base.Columns["MVTO_CODIGO"];
+                this.columnMVTO_DESCRIPCION = base.Columns["MVTO_DESCRIPCION"];
+                this.columnMVTO_FECHAALTA = base.Columns["MVTO_FECHAALTA"];
+                this.columnMVTO_FECHAPREVISTA = base.Columns["MVTO_FECHAPREVISTA"];
+                this.columnMVTO_FECHAREAL = base.Columns["MVTO_FECHAREAL"];
+                this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA = base.Columns["MVTO_CANTIDAD_ORIGEN_ESTIMADA"];
+                this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA = base.Columns["MVTO_CANTIDAD_DESTINO_ESTIMADA"];
+                this.columnMVTO_CANTIDAD_ORIGEN_REAL = base.Columns["MVTO_CANTIDAD_ORIGEN_REAL"];
+                this.columnMVTO_CANTIDAD_DESTINO_REAL = base.Columns["MVTO_CANTIDAD_DESTINO_REAL"];
+                this.columnEMVTO_CODIGO = base.Columns["EMVTO_CODIGO"];
+                this.columnENTD_ORIGEN = base.Columns["ENTD_ORIGEN"];
+                this.columnENTD_DESTINO = base.Columns["ENTD_DESTINO"];
+                this.columnENTD_DUENIO = base.Columns["ENTD_DUENIO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnMVTO_NUMERO = new global::System.Data.DataColumn("MVTO_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMVTO_NUMERO);
+                this.columnMVTO_CODIGO = new global::System.Data.DataColumn("MVTO_CODIGO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMVTO_CODIGO);
+                this.columnMVTO_DESCRIPCION = new global::System.Data.DataColumn("MVTO_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMVTO_DESCRIPCION);
+                this.columnMVTO_FECHAALTA = new global::System.Data.DataColumn("MVTO_FECHAALTA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMVTO_FECHAALTA);
+                this.columnMVTO_FECHAPREVISTA = new global::System.Data.DataColumn("MVTO_FECHAPREVISTA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMVTO_FECHAPREVISTA);
+                this.columnMVTO_FECHAREAL = new global::System.Data.DataColumn("MVTO_FECHAREAL", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMVTO_FECHAREAL);
+                this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA = new global::System.Data.DataColumn("MVTO_CANTIDAD_ORIGEN_ESTIMADA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA);
+                this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA = new global::System.Data.DataColumn("MVTO_CANTIDAD_DESTINO_ESTIMADA", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA);
+                this.columnMVTO_CANTIDAD_ORIGEN_REAL = new global::System.Data.DataColumn("MVTO_CANTIDAD_ORIGEN_REAL", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMVTO_CANTIDAD_ORIGEN_REAL);
+                this.columnMVTO_CANTIDAD_DESTINO_REAL = new global::System.Data.DataColumn("MVTO_CANTIDAD_DESTINO_REAL", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMVTO_CANTIDAD_DESTINO_REAL);
+                this.columnEMVTO_CODIGO = new global::System.Data.DataColumn("EMVTO_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEMVTO_CODIGO);
+                this.columnENTD_ORIGEN = new global::System.Data.DataColumn("ENTD_ORIGEN", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnENTD_ORIGEN);
+                this.columnENTD_DESTINO = new global::System.Data.DataColumn("ENTD_DESTINO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnENTD_DESTINO);
+                this.columnENTD_DUENIO = new global::System.Data.DataColumn("ENTD_DUENIO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnENTD_DUENIO);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnMVTO_NUMERO}, true));
+                this.columnMVTO_NUMERO.AutoIncrement = true;
+                this.columnMVTO_NUMERO.AutoIncrementSeed = -1;
+                this.columnMVTO_NUMERO.AutoIncrementStep = -1;
+                this.columnMVTO_NUMERO.AllowDBNull = false;
+                this.columnMVTO_NUMERO.Unique = true;
+                this.columnMVTO_CODIGO.MaxLength = 80;
+                this.columnMVTO_DESCRIPCION.MaxLength = 300;
+                this.columnMVTO_FECHAALTA.AllowDBNull = false;
+                this.columnMVTO_CANTIDAD_ORIGEN_ESTIMADA.AllowDBNull = false;
+                this.columnMVTO_CANTIDAD_DESTINO_ESTIMADA.AllowDBNull = false;
+                this.columnMVTO_CANTIDAD_ORIGEN_REAL.AllowDBNull = false;
+                this.columnMVTO_CANTIDAD_DESTINO_REAL.AllowDBNull = false;
+                this.columnEMVTO_CODIGO.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MOVIMIENTOS_STOCKRow NewMOVIMIENTOS_STOCKRow() {
+                return ((MOVIMIENTOS_STOCKRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new MOVIMIENTOS_STOCKRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(MOVIMIENTOS_STOCKRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.MOVIMIENTOS_STOCKRowChanged != null)) {
+                    this.MOVIMIENTOS_STOCKRowChanged(this, new MOVIMIENTOS_STOCKRowChangeEvent(((MOVIMIENTOS_STOCKRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.MOVIMIENTOS_STOCKRowChanging != null)) {
+                    this.MOVIMIENTOS_STOCKRowChanging(this, new MOVIMIENTOS_STOCKRowChangeEvent(((MOVIMIENTOS_STOCKRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.MOVIMIENTOS_STOCKRowDeleted != null)) {
+                    this.MOVIMIENTOS_STOCKRowDeleted(this, new MOVIMIENTOS_STOCKRowChangeEvent(((MOVIMIENTOS_STOCKRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.MOVIMIENTOS_STOCKRowDeleting != null)) {
+                    this.MOVIMIENTOS_STOCKRowDeleting(this, new MOVIMIENTOS_STOCKRowChangeEvent(((MOVIMIENTOS_STOCKRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveMOVIMIENTOS_STOCKRow(MOVIMIENTOS_STOCKRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsStock ds = new dsStock();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "MOVIMIENTOS_STOCKDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class TIPOS_ENTIDADDataTable : global::System.Data.TypedTableBase<TIPOS_ENTIDADRow> {
+            
+            private global::System.Data.DataColumn columnTENTD_CODIGO;
+            
+            private global::System.Data.DataColumn columnTENTD_NOMBRE;
+            
+            private global::System.Data.DataColumn columnTENTD_DESCRIPCION;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_ENTIDADDataTable() {
+                this.TableName = "TIPOS_ENTIDAD";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TIPOS_ENTIDADDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected TIPOS_ENTIDADDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TENTD_CODIGOColumn {
+                get {
+                    return this.columnTENTD_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TENTD_NOMBREColumn {
+                get {
+                    return this.columnTENTD_NOMBRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TENTD_DESCRIPCIONColumn {
+                get {
+                    return this.columnTENTD_DESCRIPCION;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_ENTIDADRow this[int index] {
+                get {
+                    return ((TIPOS_ENTIDADRow)(this.Rows[index]));
+                }
+            }
+            
+            public event TIPOS_ENTIDADRowChangeEventHandler TIPOS_ENTIDADRowChanging;
+            
+            public event TIPOS_ENTIDADRowChangeEventHandler TIPOS_ENTIDADRowChanged;
+            
+            public event TIPOS_ENTIDADRowChangeEventHandler TIPOS_ENTIDADRowDeleting;
+            
+            public event TIPOS_ENTIDADRowChangeEventHandler TIPOS_ENTIDADRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddTIPOS_ENTIDADRow(TIPOS_ENTIDADRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_ENTIDADRow AddTIPOS_ENTIDADRow(string TENTD_NOMBRE, string TENTD_DESCRIPCION) {
+                TIPOS_ENTIDADRow rowTIPOS_ENTIDADRow = ((TIPOS_ENTIDADRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        TENTD_NOMBRE,
+                        TENTD_DESCRIPCION};
+                rowTIPOS_ENTIDADRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowTIPOS_ENTIDADRow);
+                return rowTIPOS_ENTIDADRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_ENTIDADRow FindByTENTD_CODIGO(decimal TENTD_CODIGO) {
+                return ((TIPOS_ENTIDADRow)(this.Rows.Find(new object[] {
+                            TENTD_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                TIPOS_ENTIDADDataTable cln = ((TIPOS_ENTIDADDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new TIPOS_ENTIDADDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnTENTD_CODIGO = base.Columns["TENTD_CODIGO"];
+                this.columnTENTD_NOMBRE = base.Columns["TENTD_NOMBRE"];
+                this.columnTENTD_DESCRIPCION = base.Columns["TENTD_DESCRIPCION"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnTENTD_CODIGO = new global::System.Data.DataColumn("TENTD_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTENTD_CODIGO);
+                this.columnTENTD_NOMBRE = new global::System.Data.DataColumn("TENTD_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTENTD_NOMBRE);
+                this.columnTENTD_DESCRIPCION = new global::System.Data.DataColumn("TENTD_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTENTD_DESCRIPCION);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnTENTD_CODIGO}, true));
+                this.columnTENTD_CODIGO.AutoIncrement = true;
+                this.columnTENTD_CODIGO.AutoIncrementSeed = -1;
+                this.columnTENTD_CODIGO.AutoIncrementStep = -1;
+                this.columnTENTD_CODIGO.AllowDBNull = false;
+                this.columnTENTD_CODIGO.Unique = true;
+                this.columnTENTD_NOMBRE.AllowDBNull = false;
+                this.columnTENTD_NOMBRE.MaxLength = 80;
+                this.columnTENTD_DESCRIPCION.MaxLength = 200;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_ENTIDADRow NewTIPOS_ENTIDADRow() {
+                return ((TIPOS_ENTIDADRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new TIPOS_ENTIDADRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(TIPOS_ENTIDADRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.TIPOS_ENTIDADRowChanged != null)) {
+                    this.TIPOS_ENTIDADRowChanged(this, new TIPOS_ENTIDADRowChangeEvent(((TIPOS_ENTIDADRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.TIPOS_ENTIDADRowChanging != null)) {
+                    this.TIPOS_ENTIDADRowChanging(this, new TIPOS_ENTIDADRowChangeEvent(((TIPOS_ENTIDADRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.TIPOS_ENTIDADRowDeleted != null)) {
+                    this.TIPOS_ENTIDADRowDeleted(this, new TIPOS_ENTIDADRowChangeEvent(((TIPOS_ENTIDADRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.TIPOS_ENTIDADRowDeleting != null)) {
+                    this.TIPOS_ENTIDADRowDeleting(this, new TIPOS_ENTIDADRowChangeEvent(((TIPOS_ENTIDADRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveTIPOS_ENTIDADRow(TIPOS_ENTIDADRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsStock ds = new dsStock();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "TIPOS_ENTIDADDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ENTIDADESDataTable : global::System.Data.TypedTableBase<ENTIDADESRow> {
+            
+            private global::System.Data.DataColumn columnENTD_CODIGO;
+            
+            private global::System.Data.DataColumn columnENTD_NOMBRE;
+            
+            private global::System.Data.DataColumn columnTENTD_CODIGO;
+            
+            private global::System.Data.DataColumn columnENTD_ID;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ENTIDADESDataTable() {
+                this.TableName = "ENTIDADES";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal ENTIDADESDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected ENTIDADESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ENTD_CODIGOColumn {
+                get {
+                    return this.columnENTD_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ENTD_NOMBREColumn {
+                get {
+                    return this.columnENTD_NOMBRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TENTD_CODIGOColumn {
+                get {
+                    return this.columnTENTD_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ENTD_IDColumn {
+                get {
+                    return this.columnENTD_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ENTIDADESRow this[int index] {
+                get {
+                    return ((ENTIDADESRow)(this.Rows[index]));
+                }
+            }
+            
+            public event ENTIDADESRowChangeEventHandler ENTIDADESRowChanging;
+            
+            public event ENTIDADESRowChangeEventHandler ENTIDADESRowChanged;
+            
+            public event ENTIDADESRowChangeEventHandler ENTIDADESRowDeleting;
+            
+            public event ENTIDADESRowChangeEventHandler ENTIDADESRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddENTIDADESRow(ENTIDADESRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ENTIDADESRow AddENTIDADESRow(string ENTD_NOMBRE, TIPOS_ENTIDADRow parentTIPOS_ENTIDADRowByFK_ENTIDADES_TIPOS_ENTIDAD, decimal ENTD_ID) {
+                ENTIDADESRow rowENTIDADESRow = ((ENTIDADESRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        ENTD_NOMBRE,
+                        null,
+                        ENTD_ID};
+                if ((parentTIPOS_ENTIDADRowByFK_ENTIDADES_TIPOS_ENTIDAD != null)) {
+                    columnValuesArray[2] = parentTIPOS_ENTIDADRowByFK_ENTIDADES_TIPOS_ENTIDAD[0];
+                }
+                rowENTIDADESRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowENTIDADESRow);
+                return rowENTIDADESRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ENTIDADESRow FindByENTD_CODIGO(decimal ENTD_CODIGO) {
+                return ((ENTIDADESRow)(this.Rows.Find(new object[] {
+                            ENTD_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                ENTIDADESDataTable cln = ((ENTIDADESDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ENTIDADESDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnENTD_CODIGO = base.Columns["ENTD_CODIGO"];
+                this.columnENTD_NOMBRE = base.Columns["ENTD_NOMBRE"];
+                this.columnTENTD_CODIGO = base.Columns["TENTD_CODIGO"];
+                this.columnENTD_ID = base.Columns["ENTD_ID"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnENTD_CODIGO = new global::System.Data.DataColumn("ENTD_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnENTD_CODIGO);
+                this.columnENTD_NOMBRE = new global::System.Data.DataColumn("ENTD_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnENTD_NOMBRE);
+                this.columnTENTD_CODIGO = new global::System.Data.DataColumn("TENTD_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTENTD_CODIGO);
+                this.columnENTD_ID = new global::System.Data.DataColumn("ENTD_ID", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnENTD_ID);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnENTD_CODIGO}, true));
+                this.columnENTD_CODIGO.AutoIncrement = true;
+                this.columnENTD_CODIGO.AutoIncrementSeed = -1;
+                this.columnENTD_CODIGO.AutoIncrementStep = -1;
+                this.columnENTD_CODIGO.AllowDBNull = false;
+                this.columnENTD_CODIGO.Unique = true;
+                this.columnENTD_NOMBRE.AllowDBNull = false;
+                this.columnENTD_NOMBRE.MaxLength = 80;
+                this.columnTENTD_CODIGO.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ENTIDADESRow NewENTIDADESRow() {
+                return ((ENTIDADESRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ENTIDADESRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(ENTIDADESRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ENTIDADESRowChanged != null)) {
+                    this.ENTIDADESRowChanged(this, new ENTIDADESRowChangeEvent(((ENTIDADESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ENTIDADESRowChanging != null)) {
+                    this.ENTIDADESRowChanging(this, new ENTIDADESRowChangeEvent(((ENTIDADESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ENTIDADESRowDeleted != null)) {
+                    this.ENTIDADESRowDeleted(this, new ENTIDADESRowChangeEvent(((ENTIDADESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ENTIDADESRowDeleting != null)) {
+                    this.ENTIDADESRowDeleting(this, new ENTIDADESRowChangeEvent(((ENTIDADESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveENTIDADESRow(ENTIDADESRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsStock ds = new dsStock();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ENTIDADESDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -3002,297 +3615,6 @@ namespace GyCAP.Data {
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class MOVIMIENTOS_STOCKRow : global::System.Data.DataRow {
-            
-            private MOVIMIENTOS_STOCKDataTable tableMOVIMIENTOS_STOCK;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal MOVIMIENTOS_STOCKRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableMOVIMIENTOS_STOCK = ((MOVIMIENTOS_STOCKDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal MVTO_NUMERO {
-                get {
-                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_NUMEROColumn]));
-                }
-                set {
-                    this[this.tableMOVIMIENTOS_STOCK.MVTO_NUMEROColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string MVTO_CODIGO {
-                get {
-                    if (this.IsMVTO_CODIGONull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CODIGOColumn]));
-                    }
-                }
-                set {
-                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string MVTO_DESCRIPCION {
-                get {
-                    if (this.IsMVTO_DESCRIPCIONNull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tableMOVIMIENTOS_STOCK.MVTO_DESCRIPCIONColumn]));
-                    }
-                }
-                set {
-                    this[this.tableMOVIMIENTOS_STOCK.MVTO_DESCRIPCIONColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime MVTO_FECHAALTA {
-                get {
-                    return ((global::System.DateTime)(this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAALTAColumn]));
-                }
-                set {
-                    this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAALTAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime MVTO_FECHAPREVISTA {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAPREVISTAColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MVTO_FECHAPREVISTA\' in table \'MOVIMIENTOS_STOCK\' is DBNull." +
-                                "", e);
-                    }
-                }
-                set {
-                    this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAPREVISTAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime MVTO_FECHAREAL {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAREALColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MVTO_FECHAREAL\' in table \'MOVIMIENTOS_STOCK\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAREALColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal USTCK_ORIGEN {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.USTCK_ORIGENColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'USTCK_ORIGEN\' in table \'MOVIMIENTOS_STOCK\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMOVIMIENTOS_STOCK.USTCK_ORIGENColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal USTCK_DESTINO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.USTCK_DESTINOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'USTCK_DESTINO\' in table \'MOVIMIENTOS_STOCK\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMOVIMIENTOS_STOCK.USTCK_DESTINOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal MVTO_CANTIDAD_ORIGEN_ESTIMADA {
-                get {
-                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_ORIGEN_ESTIMADAColumn]));
-                }
-                set {
-                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_ORIGEN_ESTIMADAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal MVTO_CANTIDAD_DESTINO_ESTIMADA {
-                get {
-                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_DESTINO_ESTIMADAColumn]));
-                }
-                set {
-                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_DESTINO_ESTIMADAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal MVTO_CANTIDAD_ORIGEN_REAL {
-                get {
-                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_ORIGEN_REALColumn]));
-                }
-                set {
-                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_ORIGEN_REALColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal MVTO_CANTIDAD_DESTINO_REAL {
-                get {
-                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_DESTINO_REALColumn]));
-                }
-                set {
-                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_DESTINO_REALColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal EMVTO_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.EMVTO_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableMOVIMIENTOS_STOCK.EMVTO_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal ORDT_NUMERO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.ORDT_NUMEROColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ORDT_NUMERO\' in table \'MOVIMIENTOS_STOCK\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMOVIMIENTOS_STOCK.ORDT_NUMEROColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ESTADO_MOVIMIENTOS_STOCKRow ESTADO_MOVIMIENTOS_STOCKRow {
-                get {
-                    return ((ESTADO_MOVIMIENTOS_STOCKRow)(this.GetParentRow(this.Table.ParentRelations["FK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public UBICACIONES_STOCKRow UBICACIONES_STOCKRowByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK {
-                get {
-                    return ((UBICACIONES_STOCKRow)(this.GetParentRow(this.Table.ParentRelations["FK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public UBICACIONES_STOCKRow UBICACIONES_STOCKRowByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1 {
-                get {
-                    return ((UBICACIONES_STOCKRow)(this.GetParentRow(this.Table.ParentRelations["FK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsMVTO_CODIGONull() {
-                return this.IsNull(this.tableMOVIMIENTOS_STOCK.MVTO_CODIGOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetMVTO_CODIGONull() {
-                this[this.tableMOVIMIENTOS_STOCK.MVTO_CODIGOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsMVTO_DESCRIPCIONNull() {
-                return this.IsNull(this.tableMOVIMIENTOS_STOCK.MVTO_DESCRIPCIONColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetMVTO_DESCRIPCIONNull() {
-                this[this.tableMOVIMIENTOS_STOCK.MVTO_DESCRIPCIONColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsMVTO_FECHAPREVISTANull() {
-                return this.IsNull(this.tableMOVIMIENTOS_STOCK.MVTO_FECHAPREVISTAColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetMVTO_FECHAPREVISTANull() {
-                this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAPREVISTAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsMVTO_FECHAREALNull() {
-                return this.IsNull(this.tableMOVIMIENTOS_STOCK.MVTO_FECHAREALColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetMVTO_FECHAREALNull() {
-                this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAREALColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsUSTCK_ORIGENNull() {
-                return this.IsNull(this.tableMOVIMIENTOS_STOCK.USTCK_ORIGENColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetUSTCK_ORIGENNull() {
-                this[this.tableMOVIMIENTOS_STOCK.USTCK_ORIGENColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsUSTCK_DESTINONull() {
-                return this.IsNull(this.tableMOVIMIENTOS_STOCK.USTCK_DESTINOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetUSTCK_DESTINONull() {
-                this[this.tableMOVIMIENTOS_STOCK.USTCK_DESTINOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsORDT_NUMERONull() {
-                return this.IsNull(this.tableMOVIMIENTOS_STOCK.ORDT_NUMEROColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetORDT_NUMERONull() {
-                this[this.tableMOVIMIENTOS_STOCK.ORDT_NUMEROColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public partial class CONTENIDO_UBICACION_STOCKRow : global::System.Data.DataRow {
             
             private CONTENIDO_UBICACION_STOCKDataTable tableCONTENIDO_UBICACION_STOCK;
@@ -3470,16 +3792,6 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal USTCK_CANTIDADVIRTUAL {
-                get {
-                    return ((decimal)(this[this.tableUBICACIONES_STOCK.USTCK_CANTIDADVIRTUALColumn]));
-                }
-                set {
-                    this[this.tableUBICACIONES_STOCK.USTCK_CANTIDADVIRTUALColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public decimal UMED_CODIGO {
                 get {
                     return ((decimal)(this[this.tableUBICACIONES_STOCK.UMED_CODIGOColumn]));
@@ -3633,24 +3945,485 @@ namespace GyCAP.Data {
                     return ((UBICACIONES_STOCKRow[])(base.GetChildRows(this.Table.ChildRelations["FK_UBICACIONES_STOCK_UBICACION_STOCK"])));
                 }
             }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class MOVIMIENTOS_STOCKRow : global::System.Data.DataRow {
+            
+            private MOVIMIENTOS_STOCKDataTable tableMOVIMIENTOS_STOCK;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MOVIMIENTOS_STOCKRow[] GetMOVIMIENTOS_STOCKRowsByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK() {
-                if ((this.Table.ChildRelations["FK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK"] == null)) {
-                    return new MOVIMIENTOS_STOCKRow[0];
+            internal MOVIMIENTOS_STOCKRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableMOVIMIENTOS_STOCK = ((MOVIMIENTOS_STOCKDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal MVTO_NUMERO {
+                get {
+                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_NUMEROColumn]));
                 }
-                else {
-                    return ((MOVIMIENTOS_STOCKRow[])(base.GetChildRows(this.Table.ChildRelations["FK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK"])));
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.MVTO_NUMEROColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MOVIMIENTOS_STOCKRow[] GetMOVIMIENTOS_STOCKRowsByFK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1() {
-                if ((this.Table.ChildRelations["FK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1"] == null)) {
+            public string MVTO_CODIGO {
+                get {
+                    if (this.IsMVTO_CODIGONull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CODIGOColumn]));
+                    }
+                }
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string MVTO_DESCRIPCION {
+                get {
+                    if (this.IsMVTO_DESCRIPCIONNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableMOVIMIENTOS_STOCK.MVTO_DESCRIPCIONColumn]));
+                    }
+                }
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.MVTO_DESCRIPCIONColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime MVTO_FECHAALTA {
+                get {
+                    return ((global::System.DateTime)(this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAALTAColumn]));
+                }
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAALTAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime MVTO_FECHAPREVISTA {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAPREVISTAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MVTO_FECHAPREVISTA\' in table \'MOVIMIENTOS_STOCK\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAPREVISTAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime MVTO_FECHAREAL {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAREALColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MVTO_FECHAREAL\' in table \'MOVIMIENTOS_STOCK\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAREALColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal MVTO_CANTIDAD_ORIGEN_ESTIMADA {
+                get {
+                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_ORIGEN_ESTIMADAColumn]));
+                }
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_ORIGEN_ESTIMADAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal MVTO_CANTIDAD_DESTINO_ESTIMADA {
+                get {
+                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_DESTINO_ESTIMADAColumn]));
+                }
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_DESTINO_ESTIMADAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal MVTO_CANTIDAD_ORIGEN_REAL {
+                get {
+                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_ORIGEN_REALColumn]));
+                }
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_ORIGEN_REALColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal MVTO_CANTIDAD_DESTINO_REAL {
+                get {
+                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_DESTINO_REALColumn]));
+                }
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.MVTO_CANTIDAD_DESTINO_REALColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal EMVTO_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.EMVTO_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.EMVTO_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal ENTD_ORIGEN {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.ENTD_ORIGENColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ENTD_ORIGEN\' in table \'MOVIMIENTOS_STOCK\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.ENTD_ORIGENColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal ENTD_DESTINO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.ENTD_DESTINOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ENTD_DESTINO\' in table \'MOVIMIENTOS_STOCK\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.ENTD_DESTINOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal ENTD_DUENIO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableMOVIMIENTOS_STOCK.ENTD_DUENIOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ENTD_DUENIO\' in table \'MOVIMIENTOS_STOCK\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMOVIMIENTOS_STOCK.ENTD_DUENIOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ESTADO_MOVIMIENTOS_STOCKRow ESTADO_MOVIMIENTOS_STOCKRow {
+                get {
+                    return ((ESTADO_MOVIMIENTOS_STOCKRow)(this.GetParentRow(this.Table.ParentRelations["FK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_MOVIMIENTOS_STOCK_ESTADO_MOVIMIENTOS_STOCK"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ENTIDADESRow ENTIDADESRowByFK_MOVIMIENTOS_STOCK_ENTIDADES_DESTINO {
+                get {
+                    return ((ENTIDADESRow)(this.GetParentRow(this.Table.ParentRelations["FK_MOVIMIENTOS_STOCK_ENTIDADES_DESTINO"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_MOVIMIENTOS_STOCK_ENTIDADES_DESTINO"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ENTIDADESRow ENTIDADESRowByFK_MOVIMIENTOS_STOCK_ENTIDADES_DUENIO {
+                get {
+                    return ((ENTIDADESRow)(this.GetParentRow(this.Table.ParentRelations["FK_MOVIMIENTOS_STOCK_ENTIDADES_DUENIO"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_MOVIMIENTOS_STOCK_ENTIDADES_DUENIO"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ENTIDADESRow ENTIDADESRowByFK_MOVIMIENTOS_STOCK_ENTIDADES_ORIGEN {
+                get {
+                    return ((ENTIDADESRow)(this.GetParentRow(this.Table.ParentRelations["FK_MOVIMIENTOS_STOCK_ENTIDADES_ORIGEN"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_MOVIMIENTOS_STOCK_ENTIDADES_ORIGEN"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMVTO_CODIGONull() {
+                return this.IsNull(this.tableMOVIMIENTOS_STOCK.MVTO_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMVTO_CODIGONull() {
+                this[this.tableMOVIMIENTOS_STOCK.MVTO_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMVTO_DESCRIPCIONNull() {
+                return this.IsNull(this.tableMOVIMIENTOS_STOCK.MVTO_DESCRIPCIONColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMVTO_DESCRIPCIONNull() {
+                this[this.tableMOVIMIENTOS_STOCK.MVTO_DESCRIPCIONColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMVTO_FECHAPREVISTANull() {
+                return this.IsNull(this.tableMOVIMIENTOS_STOCK.MVTO_FECHAPREVISTAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMVTO_FECHAPREVISTANull() {
+                this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAPREVISTAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMVTO_FECHAREALNull() {
+                return this.IsNull(this.tableMOVIMIENTOS_STOCK.MVTO_FECHAREALColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMVTO_FECHAREALNull() {
+                this[this.tableMOVIMIENTOS_STOCK.MVTO_FECHAREALColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsENTD_ORIGENNull() {
+                return this.IsNull(this.tableMOVIMIENTOS_STOCK.ENTD_ORIGENColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetENTD_ORIGENNull() {
+                this[this.tableMOVIMIENTOS_STOCK.ENTD_ORIGENColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsENTD_DESTINONull() {
+                return this.IsNull(this.tableMOVIMIENTOS_STOCK.ENTD_DESTINOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetENTD_DESTINONull() {
+                this[this.tableMOVIMIENTOS_STOCK.ENTD_DESTINOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsENTD_DUENIONull() {
+                return this.IsNull(this.tableMOVIMIENTOS_STOCK.ENTD_DUENIOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetENTD_DUENIONull() {
+                this[this.tableMOVIMIENTOS_STOCK.ENTD_DUENIOColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class TIPOS_ENTIDADRow : global::System.Data.DataRow {
+            
+            private TIPOS_ENTIDADDataTable tableTIPOS_ENTIDAD;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TIPOS_ENTIDADRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableTIPOS_ENTIDAD = ((TIPOS_ENTIDADDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal TENTD_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableTIPOS_ENTIDAD.TENTD_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableTIPOS_ENTIDAD.TENTD_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string TENTD_NOMBRE {
+                get {
+                    return ((string)(this[this.tableTIPOS_ENTIDAD.TENTD_NOMBREColumn]));
+                }
+                set {
+                    this[this.tableTIPOS_ENTIDAD.TENTD_NOMBREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string TENTD_DESCRIPCION {
+                get {
+                    if (this.IsTENTD_DESCRIPCIONNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableTIPOS_ENTIDAD.TENTD_DESCRIPCIONColumn]));
+                    }
+                }
+                set {
+                    this[this.tableTIPOS_ENTIDAD.TENTD_DESCRIPCIONColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTENTD_DESCRIPCIONNull() {
+                return this.IsNull(this.tableTIPOS_ENTIDAD.TENTD_DESCRIPCIONColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTENTD_DESCRIPCIONNull() {
+                this[this.tableTIPOS_ENTIDAD.TENTD_DESCRIPCIONColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ENTIDADESRow[] GetENTIDADESRows() {
+                if ((this.Table.ChildRelations["FK_ENTIDADES_TIPOS_ENTIDAD"] == null)) {
+                    return new ENTIDADESRow[0];
+                }
+                else {
+                    return ((ENTIDADESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_ENTIDADES_TIPOS_ENTIDAD"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class ENTIDADESRow : global::System.Data.DataRow {
+            
+            private ENTIDADESDataTable tableENTIDADES;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal ENTIDADESRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableENTIDADES = ((ENTIDADESDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal ENTD_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableENTIDADES.ENTD_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableENTIDADES.ENTD_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string ENTD_NOMBRE {
+                get {
+                    return ((string)(this[this.tableENTIDADES.ENTD_NOMBREColumn]));
+                }
+                set {
+                    this[this.tableENTIDADES.ENTD_NOMBREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal TENTD_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableENTIDADES.TENTD_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableENTIDADES.TENTD_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal ENTD_ID {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableENTIDADES.ENTD_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ENTD_ID\' in table \'ENTIDADES\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableENTIDADES.ENTD_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_ENTIDADRow TIPOS_ENTIDADRow {
+                get {
+                    return ((TIPOS_ENTIDADRow)(this.GetParentRow(this.Table.ParentRelations["FK_ENTIDADES_TIPOS_ENTIDAD"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_ENTIDADES_TIPOS_ENTIDAD"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsENTD_IDNull() {
+                return this.IsNull(this.tableENTIDADES.ENTD_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetENTD_IDNull() {
+                this[this.tableENTIDADES.ENTD_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MOVIMIENTOS_STOCKRow[] GetMOVIMIENTOS_STOCKRowsByFK_MOVIMIENTOS_STOCK_ENTIDADES_DESTINO() {
+                if ((this.Table.ChildRelations["FK_MOVIMIENTOS_STOCK_ENTIDADES_DESTINO"] == null)) {
                     return new MOVIMIENTOS_STOCKRow[0];
                 }
                 else {
-                    return ((MOVIMIENTOS_STOCKRow[])(base.GetChildRows(this.Table.ChildRelations["FK_MOVIMIENTOS_STOCK_UBICACIONES_STOCK1"])));
+                    return ((MOVIMIENTOS_STOCKRow[])(base.GetChildRows(this.Table.ChildRelations["FK_MOVIMIENTOS_STOCK_ENTIDADES_DESTINO"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MOVIMIENTOS_STOCKRow[] GetMOVIMIENTOS_STOCKRowsByFK_MOVIMIENTOS_STOCK_ENTIDADES_DUENIO() {
+                if ((this.Table.ChildRelations["FK_MOVIMIENTOS_STOCK_ENTIDADES_DUENIO"] == null)) {
+                    return new MOVIMIENTOS_STOCKRow[0];
+                }
+                else {
+                    return ((MOVIMIENTOS_STOCKRow[])(base.GetChildRows(this.Table.ChildRelations["FK_MOVIMIENTOS_STOCK_ENTIDADES_DUENIO"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MOVIMIENTOS_STOCKRow[] GetMOVIMIENTOS_STOCKRowsByFK_MOVIMIENTOS_STOCK_ENTIDADES_ORIGEN() {
+                if ((this.Table.ChildRelations["FK_MOVIMIENTOS_STOCK_ENTIDADES_ORIGEN"] == null)) {
+                    return new MOVIMIENTOS_STOCKRow[0];
+                }
+                else {
+                    return ((MOVIMIENTOS_STOCKRow[])(base.GetChildRows(this.Table.ChildRelations["FK_MOVIMIENTOS_STOCK_ENTIDADES_ORIGEN"])));
                 }
             }
         }
@@ -3783,37 +4556,6 @@ namespace GyCAP.Data {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class MOVIMIENTOS_STOCKRowChangeEvent : global::System.EventArgs {
-            
-            private MOVIMIENTOS_STOCKRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MOVIMIENTOS_STOCKRowChangeEvent(MOVIMIENTOS_STOCKRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MOVIMIENTOS_STOCKRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public class CONTENIDO_UBICACION_STOCKRowChangeEvent : global::System.EventArgs {
             
             private CONTENIDO_UBICACION_STOCKRow eventRow;
@@ -3859,6 +4601,99 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public UBICACIONES_STOCKRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class MOVIMIENTOS_STOCKRowChangeEvent : global::System.EventArgs {
+            
+            private MOVIMIENTOS_STOCKRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MOVIMIENTOS_STOCKRowChangeEvent(MOVIMIENTOS_STOCKRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public MOVIMIENTOS_STOCKRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class TIPOS_ENTIDADRowChangeEvent : global::System.EventArgs {
+            
+            private TIPOS_ENTIDADRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_ENTIDADRowChangeEvent(TIPOS_ENTIDADRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_ENTIDADRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class ENTIDADESRowChangeEvent : global::System.EventArgs {
+            
+            private ENTIDADESRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ENTIDADESRowChangeEvent(ENTIDADESRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ENTIDADESRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -5250,655 +6085,6 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class MOVIMIENTOS_STOCKTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public MOVIMIENTOS_STOCKTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "MOVIMIENTOS_STOCK";
-            tableMapping.ColumnMappings.Add("MVTO_NUMERO", "MVTO_NUMERO");
-            tableMapping.ColumnMappings.Add("MVTO_CODIGO", "MVTO_CODIGO");
-            tableMapping.ColumnMappings.Add("MVTO_DESCRIPCION", "MVTO_DESCRIPCION");
-            tableMapping.ColumnMappings.Add("MVTO_FECHAALTA", "MVTO_FECHAALTA");
-            tableMapping.ColumnMappings.Add("MVTO_FECHAPREVISTA", "MVTO_FECHAPREVISTA");
-            tableMapping.ColumnMappings.Add("MVTO_FECHAREAL", "MVTO_FECHAREAL");
-            tableMapping.ColumnMappings.Add("USTCK_ORIGEN", "USTCK_ORIGEN");
-            tableMapping.ColumnMappings.Add("USTCK_DESTINO", "USTCK_DESTINO");
-            tableMapping.ColumnMappings.Add("MVTO_CANTIDAD_ORIGEN_ESTIMADA", "MVTO_CANTIDAD_ORIGEN_ESTIMADA");
-            tableMapping.ColumnMappings.Add("MVTO_CANTIDAD_DESTINO_ESTIMADA", "MVTO_CANTIDAD_DESTINO_ESTIMADA");
-            tableMapping.ColumnMappings.Add("MVTO_CANTIDAD_ORIGEN_REAL", "MVTO_CANTIDAD_ORIGEN_REAL");
-            tableMapping.ColumnMappings.Add("MVTO_CANTIDAD_DESTINO_REAL", "MVTO_CANTIDAD_DESTINO_REAL");
-            tableMapping.ColumnMappings.Add("EMVTO_CODIGO", "EMVTO_CODIGO");
-            tableMapping.ColumnMappings.Add("ORDT_NUMERO", "ORDT_NUMERO");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[MOVIMIENTOS_STOCK] WHERE (([MVTO_NUMERO] = @Original_MVTO_NUMERO) AND ((@IsNull_MVTO_CODIGO = 1 AND [MVTO_CODIGO] IS NULL) OR ([MVTO_CODIGO] = @Original_MVTO_CODIGO)) AND ((@IsNull_MVTO_DESCRIPCION = 1 AND [MVTO_DESCRIPCION] IS NULL) OR ([MVTO_DESCRIPCION] = @Original_MVTO_DESCRIPCION)) AND ([MVTO_FECHAALTA] = @Original_MVTO_FECHAALTA) AND ((@IsNull_MVTO_FECHAPREVISTA = 1 AND [MVTO_FECHAPREVISTA] IS NULL) OR ([MVTO_FECHAPREVISTA] = @Original_MVTO_FECHAPREVISTA)) AND ((@IsNull_MVTO_FECHAREAL = 1 AND [MVTO_FECHAREAL] IS NULL) OR ([MVTO_FECHAREAL] = @Original_MVTO_FECHAREAL)) AND ((@IsNull_USTCK_ORIGEN = 1 AND [USTCK_ORIGEN] IS NULL) OR ([USTCK_ORIGEN] = @Original_USTCK_ORIGEN)) AND ((@IsNull_USTCK_DESTINO = 1 AND [USTCK_DESTINO] IS NULL) OR ([USTCK_DESTINO] = @Original_USTCK_DESTINO)) AND ([MVTO_CANTIDAD_ORIGEN_ESTIMADA] = @Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA) AND ([MVTO_CANTIDAD_DESTINO_ESTIMADA] = @Original_MVTO_CANTIDAD_DESTINO_ESTIMADA) AND ([MVTO_CANTIDAD_ORIGEN_REAL] = @Original_MVTO_CANTIDAD_ORIGEN_REAL) AND ([MVTO_CANTIDAD_DESTINO_REAL] = @Original_MVTO_CANTIDAD_DESTINO_REAL) AND ([EMVTO_CODIGO] = @Original_EMVTO_CODIGO) AND ((@IsNull_ORDT_NUMERO = 1 AND [ORDT_NUMERO] IS NULL) OR ([ORDT_NUMERO] = @Original_ORDT_NUMERO)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MVTO_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAALTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_FECHAPREVISTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAPREVISTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_FECHAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAPREVISTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_FECHAREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_FECHAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_ORIGEN", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_ORIGEN", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_ORIGEN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_DESTINO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_DESTINO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_DESTINO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EMVTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EMVTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDT_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[MOVIMIENTOS_STOCK] ([MVTO_CODIGO], [MVTO_DESCRIPCION], [MVTO_FECHAALTA], [MVTO_FECHAPREVISTA], [MVTO_FECHAREAL], [USTCK_ORIGEN], [USTCK_DESTINO], [MVTO_CANTIDAD_ORIGEN_ESTIMADA], [MVTO_CANTIDAD_DESTINO_ESTIMADA], [MVTO_CANTIDAD_ORIGEN_REAL], [MVTO_CANTIDAD_DESTINO_REAL], [EMVTO_CODIGO], [ORDT_NUMERO]) VALUES (@MVTO_CODIGO, @MVTO_DESCRIPCION, @MVTO_FECHAALTA, @MVTO_FECHAPREVISTA, @MVTO_FECHAREAL, @USTCK_ORIGEN, @USTCK_DESTINO, @MVTO_CANTIDAD_ORIGEN_ESTIMADA, @MVTO_CANTIDAD_DESTINO_ESTIMADA, @MVTO_CANTIDAD_ORIGEN_REAL, @MVTO_CANTIDAD_DESTINO_REAL, @EMVTO_CODIGO, @ORDT_NUMERO);
-SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREVISTA, MVTO_FECHAREAL, USTCK_ORIGEN, USTCK_DESTINO, MVTO_CANTIDAD_ORIGEN_ESTIMADA, MVTO_CANTIDAD_DESTINO_ESTIMADA, MVTO_CANTIDAD_ORIGEN_REAL, MVTO_CANTIDAD_DESTINO_REAL, EMVTO_CODIGO, ORDT_NUMERO FROM MOVIMIENTOS_STOCK WHERE (MVTO_NUMERO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAALTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_FECHAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAPREVISTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_FECHAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_ORIGEN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_DESTINO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EMVTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EMVTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[MOVIMIENTOS_STOCK] SET [MVTO_CODIGO] = @MVTO_CODIGO, [MVTO_DESCRIPC" +
-                "ION] = @MVTO_DESCRIPCION, [MVTO_FECHAALTA] = @MVTO_FECHAALTA, [MVTO_FECHAPREVIST" +
-                "A] = @MVTO_FECHAPREVISTA, [MVTO_FECHAREAL] = @MVTO_FECHAREAL, [USTCK_ORIGEN] = @" +
-                "USTCK_ORIGEN, [USTCK_DESTINO] = @USTCK_DESTINO, [MVTO_CANTIDAD_ORIGEN_ESTIMADA] " +
-                "= @MVTO_CANTIDAD_ORIGEN_ESTIMADA, [MVTO_CANTIDAD_DESTINO_ESTIMADA] = @MVTO_CANTI" +
-                "DAD_DESTINO_ESTIMADA, [MVTO_CANTIDAD_ORIGEN_REAL] = @MVTO_CANTIDAD_ORIGEN_REAL, " +
-                "[MVTO_CANTIDAD_DESTINO_REAL] = @MVTO_CANTIDAD_DESTINO_REAL, [EMVTO_CODIGO] = @EM" +
-                "VTO_CODIGO, [ORDT_NUMERO] = @ORDT_NUMERO WHERE (([MVTO_NUMERO] = @Original_MVTO_" +
-                "NUMERO) AND ((@IsNull_MVTO_CODIGO = 1 AND [MVTO_CODIGO] IS NULL) OR ([MVTO_CODIG" +
-                "O] = @Original_MVTO_CODIGO)) AND ((@IsNull_MVTO_DESCRIPCION = 1 AND [MVTO_DESCRI" +
-                "PCION] IS NULL) OR ([MVTO_DESCRIPCION] = @Original_MVTO_DESCRIPCION)) AND ([MVTO" +
-                "_FECHAALTA] = @Original_MVTO_FECHAALTA) AND ((@IsNull_MVTO_FECHAPREVISTA = 1 AND" +
-                " [MVTO_FECHAPREVISTA] IS NULL) OR ([MVTO_FECHAPREVISTA] = @Original_MVTO_FECHAPR" +
-                "EVISTA)) AND ((@IsNull_MVTO_FECHAREAL = 1 AND [MVTO_FECHAREAL] IS NULL) OR ([MVT" +
-                "O_FECHAREAL] = @Original_MVTO_FECHAREAL)) AND ((@IsNull_USTCK_ORIGEN = 1 AND [US" +
-                "TCK_ORIGEN] IS NULL) OR ([USTCK_ORIGEN] = @Original_USTCK_ORIGEN)) AND ((@IsNull" +
-                "_USTCK_DESTINO = 1 AND [USTCK_DESTINO] IS NULL) OR ([USTCK_DESTINO] = @Original_" +
-                "USTCK_DESTINO)) AND ([MVTO_CANTIDAD_ORIGEN_ESTIMADA] = @Original_MVTO_CANTIDAD_O" +
-                "RIGEN_ESTIMADA) AND ([MVTO_CANTIDAD_DESTINO_ESTIMADA] = @Original_MVTO_CANTIDAD_" +
-                "DESTINO_ESTIMADA) AND ([MVTO_CANTIDAD_ORIGEN_REAL] = @Original_MVTO_CANTIDAD_ORI" +
-                "GEN_REAL) AND ([MVTO_CANTIDAD_DESTINO_REAL] = @Original_MVTO_CANTIDAD_DESTINO_RE" +
-                "AL) AND ([EMVTO_CODIGO] = @Original_EMVTO_CODIGO) AND ((@IsNull_ORDT_NUMERO = 1 " +
-                "AND [ORDT_NUMERO] IS NULL) OR ([ORDT_NUMERO] = @Original_ORDT_NUMERO)));\r\nSELECT" +
-                " MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREVISTA," +
-                " MVTO_FECHAREAL, USTCK_ORIGEN, USTCK_DESTINO, MVTO_CANTIDAD_ORIGEN_ESTIMADA, MVT" +
-                "O_CANTIDAD_DESTINO_ESTIMADA, MVTO_CANTIDAD_ORIGEN_REAL, MVTO_CANTIDAD_DESTINO_RE" +
-                "AL, EMVTO_CODIGO, ORDT_NUMERO FROM MOVIMIENTOS_STOCK WHERE (MVTO_NUMERO = @MVTO_" +
-                "NUMERO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAALTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_FECHAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAPREVISTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_FECHAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_ORIGEN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_DESTINO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EMVTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EMVTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MVTO_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAALTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_FECHAPREVISTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAPREVISTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_FECHAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAPREVISTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_FECHAREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_FECHAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_ORIGEN", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_ORIGEN", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_ORIGEN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_DESTINO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_DESTINO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_DESTINO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EMVTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EMVTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ORDT_NUMERO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_NUMERO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "MVTO_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREVISTA, MVTO_FECHAREAL, USTCK_ORIGEN, USTCK_DESTINO, MVTO_CANTIDAD_ORIGEN_ESTIMADA, MVTO_CANTIDAD_DESTINO_ESTIMADA, MVTO_CANTIDAD_ORIGEN_REAL, MVTO_CANTIDAD_DESTINO_REAL, EMVTO_CODIGO, ORDT_NUMERO FROM dbo.MOVIMIENTOS_STOCK";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsStock.MOVIMIENTOS_STOCKDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsStock.MOVIMIENTOS_STOCKDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsStock.MOVIMIENTOS_STOCKDataTable dataTable = new dsStock.MOVIMIENTOS_STOCKDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsStock.MOVIMIENTOS_STOCKDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsStock dataSet) {
-            return this.Adapter.Update(dataSet, "MOVIMIENTOS_STOCK");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_MVTO_NUMERO, string Original_MVTO_CODIGO, string Original_MVTO_DESCRIPCION, System.DateTime Original_MVTO_FECHAALTA, global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAPREVISTA, global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAREAL, global::System.Nullable<decimal> Original_USTCK_ORIGEN, global::System.Nullable<decimal> Original_USTCK_DESTINO, decimal Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA, decimal Original_MVTO_CANTIDAD_DESTINO_ESTIMADA, decimal Original_MVTO_CANTIDAD_ORIGEN_REAL, decimal Original_MVTO_CANTIDAD_DESTINO_REAL, decimal Original_EMVTO_CODIGO, global::System.Nullable<decimal> Original_ORDT_NUMERO) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_MVTO_NUMERO));
-            if ((Original_MVTO_CODIGO == null)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_MVTO_CODIGO));
-            }
-            if ((Original_MVTO_DESCRIPCION == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_MVTO_DESCRIPCION));
-            }
-            this.Adapter.DeleteCommand.Parameters[5].Value = ((System.DateTime)(Original_MVTO_FECHAALTA));
-            if ((Original_MVTO_FECHAPREVISTA.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((System.DateTime)(Original_MVTO_FECHAPREVISTA.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((Original_MVTO_FECHAREAL.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((System.DateTime)(Original_MVTO_FECHAREAL.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((Original_USTCK_ORIGEN.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((decimal)(Original_USTCK_ORIGEN.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((Original_USTCK_DESTINO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((decimal)(Original_USTCK_DESTINO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.DeleteCommand.Parameters[14].Value = ((decimal)(Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA));
-            this.Adapter.DeleteCommand.Parameters[15].Value = ((decimal)(Original_MVTO_CANTIDAD_DESTINO_ESTIMADA));
-            this.Adapter.DeleteCommand.Parameters[16].Value = ((decimal)(Original_MVTO_CANTIDAD_ORIGEN_REAL));
-            this.Adapter.DeleteCommand.Parameters[17].Value = ((decimal)(Original_MVTO_CANTIDAD_DESTINO_REAL));
-            this.Adapter.DeleteCommand.Parameters[18].Value = ((decimal)(Original_EMVTO_CODIGO));
-            if ((Original_ORDT_NUMERO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[20].Value = ((decimal)(Original_ORDT_NUMERO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string MVTO_CODIGO, string MVTO_DESCRIPCION, System.DateTime MVTO_FECHAALTA, global::System.Nullable<global::System.DateTime> MVTO_FECHAPREVISTA, global::System.Nullable<global::System.DateTime> MVTO_FECHAREAL, global::System.Nullable<decimal> USTCK_ORIGEN, global::System.Nullable<decimal> USTCK_DESTINO, decimal MVTO_CANTIDAD_ORIGEN_ESTIMADA, decimal MVTO_CANTIDAD_DESTINO_ESTIMADA, decimal MVTO_CANTIDAD_ORIGEN_REAL, decimal MVTO_CANTIDAD_DESTINO_REAL, decimal EMVTO_CODIGO, global::System.Nullable<decimal> ORDT_NUMERO) {
-            if ((MVTO_CODIGO == null)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(MVTO_CODIGO));
-            }
-            if ((MVTO_DESCRIPCION == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(MVTO_DESCRIPCION));
-            }
-            this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(MVTO_FECHAALTA));
-            if ((MVTO_FECHAPREVISTA.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((System.DateTime)(MVTO_FECHAPREVISTA.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((MVTO_FECHAREAL.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(MVTO_FECHAREAL.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((USTCK_ORIGEN.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(USTCK_ORIGEN.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((USTCK_DESTINO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(USTCK_DESTINO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(MVTO_CANTIDAD_ORIGEN_ESTIMADA));
-            this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(MVTO_CANTIDAD_DESTINO_ESTIMADA));
-            this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(MVTO_CANTIDAD_ORIGEN_REAL));
-            this.Adapter.InsertCommand.Parameters[10].Value = ((decimal)(MVTO_CANTIDAD_DESTINO_REAL));
-            this.Adapter.InsertCommand.Parameters[11].Value = ((decimal)(EMVTO_CODIGO));
-            if ((ORDT_NUMERO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[12].Value = ((decimal)(ORDT_NUMERO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string MVTO_CODIGO, 
-                    string MVTO_DESCRIPCION, 
-                    System.DateTime MVTO_FECHAALTA, 
-                    global::System.Nullable<global::System.DateTime> MVTO_FECHAPREVISTA, 
-                    global::System.Nullable<global::System.DateTime> MVTO_FECHAREAL, 
-                    global::System.Nullable<decimal> USTCK_ORIGEN, 
-                    global::System.Nullable<decimal> USTCK_DESTINO, 
-                    decimal MVTO_CANTIDAD_ORIGEN_ESTIMADA, 
-                    decimal MVTO_CANTIDAD_DESTINO_ESTIMADA, 
-                    decimal MVTO_CANTIDAD_ORIGEN_REAL, 
-                    decimal MVTO_CANTIDAD_DESTINO_REAL, 
-                    decimal EMVTO_CODIGO, 
-                    global::System.Nullable<decimal> ORDT_NUMERO, 
-                    decimal Original_MVTO_NUMERO, 
-                    string Original_MVTO_CODIGO, 
-                    string Original_MVTO_DESCRIPCION, 
-                    System.DateTime Original_MVTO_FECHAALTA, 
-                    global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAPREVISTA, 
-                    global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAREAL, 
-                    global::System.Nullable<decimal> Original_USTCK_ORIGEN, 
-                    global::System.Nullable<decimal> Original_USTCK_DESTINO, 
-                    decimal Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA, 
-                    decimal Original_MVTO_CANTIDAD_DESTINO_ESTIMADA, 
-                    decimal Original_MVTO_CANTIDAD_ORIGEN_REAL, 
-                    decimal Original_MVTO_CANTIDAD_DESTINO_REAL, 
-                    decimal Original_EMVTO_CODIGO, 
-                    global::System.Nullable<decimal> Original_ORDT_NUMERO, 
-                    decimal MVTO_NUMERO) {
-            if ((MVTO_CODIGO == null)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(MVTO_CODIGO));
-            }
-            if ((MVTO_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(MVTO_DESCRIPCION));
-            }
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(MVTO_FECHAALTA));
-            if ((MVTO_FECHAPREVISTA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((System.DateTime)(MVTO_FECHAPREVISTA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((MVTO_FECHAREAL.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(MVTO_FECHAREAL.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((USTCK_ORIGEN.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(USTCK_ORIGEN.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((USTCK_DESTINO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(USTCK_DESTINO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(MVTO_CANTIDAD_ORIGEN_ESTIMADA));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(MVTO_CANTIDAD_DESTINO_ESTIMADA));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(MVTO_CANTIDAD_ORIGEN_REAL));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(MVTO_CANTIDAD_DESTINO_REAL));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(EMVTO_CODIGO));
-            if ((ORDT_NUMERO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(ORDT_NUMERO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_MVTO_NUMERO));
-            if ((Original_MVTO_CODIGO == null)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_MVTO_CODIGO));
-            }
-            if ((Original_MVTO_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_MVTO_DESCRIPCION));
-            }
-            this.Adapter.UpdateCommand.Parameters[18].Value = ((System.DateTime)(Original_MVTO_FECHAALTA));
-            if ((Original_MVTO_FECHAPREVISTA.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((System.DateTime)(Original_MVTO_FECHAPREVISTA.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
-            }
-            if ((Original_MVTO_FECHAREAL.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((System.DateTime)(Original_MVTO_FECHAREAL.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
-            }
-            if ((Original_USTCK_ORIGEN.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((decimal)(Original_USTCK_ORIGEN.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
-            }
-            if ((Original_USTCK_DESTINO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(Original_USTCK_DESTINO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[27].Value = ((decimal)(Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA));
-            this.Adapter.UpdateCommand.Parameters[28].Value = ((decimal)(Original_MVTO_CANTIDAD_DESTINO_ESTIMADA));
-            this.Adapter.UpdateCommand.Parameters[29].Value = ((decimal)(Original_MVTO_CANTIDAD_ORIGEN_REAL));
-            this.Adapter.UpdateCommand.Parameters[30].Value = ((decimal)(Original_MVTO_CANTIDAD_DESTINO_REAL));
-            this.Adapter.UpdateCommand.Parameters[31].Value = ((decimal)(Original_EMVTO_CODIGO));
-            if ((Original_ORDT_NUMERO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((decimal)(Original_ORDT_NUMERO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[34].Value = ((decimal)(MVTO_NUMERO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string MVTO_CODIGO, 
-                    string MVTO_DESCRIPCION, 
-                    System.DateTime MVTO_FECHAALTA, 
-                    global::System.Nullable<global::System.DateTime> MVTO_FECHAPREVISTA, 
-                    global::System.Nullable<global::System.DateTime> MVTO_FECHAREAL, 
-                    global::System.Nullable<decimal> USTCK_ORIGEN, 
-                    global::System.Nullable<decimal> USTCK_DESTINO, 
-                    decimal MVTO_CANTIDAD_ORIGEN_ESTIMADA, 
-                    decimal MVTO_CANTIDAD_DESTINO_ESTIMADA, 
-                    decimal MVTO_CANTIDAD_ORIGEN_REAL, 
-                    decimal MVTO_CANTIDAD_DESTINO_REAL, 
-                    decimal EMVTO_CODIGO, 
-                    global::System.Nullable<decimal> ORDT_NUMERO, 
-                    decimal Original_MVTO_NUMERO, 
-                    string Original_MVTO_CODIGO, 
-                    string Original_MVTO_DESCRIPCION, 
-                    System.DateTime Original_MVTO_FECHAALTA, 
-                    global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAPREVISTA, 
-                    global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAREAL, 
-                    global::System.Nullable<decimal> Original_USTCK_ORIGEN, 
-                    global::System.Nullable<decimal> Original_USTCK_DESTINO, 
-                    decimal Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA, 
-                    decimal Original_MVTO_CANTIDAD_DESTINO_ESTIMADA, 
-                    decimal Original_MVTO_CANTIDAD_ORIGEN_REAL, 
-                    decimal Original_MVTO_CANTIDAD_DESTINO_REAL, 
-                    decimal Original_EMVTO_CODIGO, 
-                    global::System.Nullable<decimal> Original_ORDT_NUMERO) {
-            return this.Update(MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREVISTA, MVTO_FECHAREAL, USTCK_ORIGEN, USTCK_DESTINO, MVTO_CANTIDAD_ORIGEN_ESTIMADA, MVTO_CANTIDAD_DESTINO_ESTIMADA, MVTO_CANTIDAD_ORIGEN_REAL, MVTO_CANTIDAD_DESTINO_REAL, EMVTO_CODIGO, ORDT_NUMERO, Original_MVTO_NUMERO, Original_MVTO_CODIGO, Original_MVTO_DESCRIPCION, Original_MVTO_FECHAALTA, Original_MVTO_FECHAPREVISTA, Original_MVTO_FECHAREAL, Original_USTCK_ORIGEN, Original_USTCK_DESTINO, Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA, Original_MVTO_CANTIDAD_DESTINO_ESTIMADA, Original_MVTO_CANTIDAD_ORIGEN_REAL, Original_MVTO_CANTIDAD_DESTINO_REAL, Original_EMVTO_CODIGO, Original_ORDT_NUMERO, Original_MVTO_NUMERO);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class CONTENIDO_UBICACION_STOCKTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
@@ -6351,7 +6537,6 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
             tableMapping.ColumnMappings.Add("USTCK_DESCRIPCION", "USTCK_DESCRIPCION");
             tableMapping.ColumnMappings.Add("USTCK_UBICACIONFISICA", "USTCK_UBICACIONFISICA");
             tableMapping.ColumnMappings.Add("USTCK_CANTIDADREAL", "USTCK_CANTIDADREAL");
-            tableMapping.ColumnMappings.Add("USTCK_CANTIDADVIRTUAL", "USTCK_CANTIDADVIRTUAL");
             tableMapping.ColumnMappings.Add("UMED_CODIGO", "UMED_CODIGO");
             tableMapping.ColumnMappings.Add("USTCK_PADRE", "USTCK_PADRE");
             tableMapping.ColumnMappings.Add("USTCK_ACTIVO", "USTCK_ACTIVO");
@@ -6360,7 +6545,7 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[UBICACIONES_STOCK] WHERE (([USTCK_NUMERO] = @Original_USTCK_NUMERO) AND ((@IsNull_USTCK_CODIGO = 1 AND [USTCK_CODIGO] IS NULL) OR ([USTCK_CODIGO] = @Original_USTCK_CODIGO)) AND ((@IsNull_USTCK_NOMBRE = 1 AND [USTCK_NOMBRE] IS NULL) OR ([USTCK_NOMBRE] = @Original_USTCK_NOMBRE)) AND ((@IsNull_USTCK_DESCRIPCION = 1 AND [USTCK_DESCRIPCION] IS NULL) OR ([USTCK_DESCRIPCION] = @Original_USTCK_DESCRIPCION)) AND ((@IsNull_USTCK_UBICACIONFISICA = 1 AND [USTCK_UBICACIONFISICA] IS NULL) OR ([USTCK_UBICACIONFISICA] = @Original_USTCK_UBICACIONFISICA)) AND ([USTCK_CANTIDADREAL] = @Original_USTCK_CANTIDADREAL) AND ([USTCK_CANTIDADVIRTUAL] = @Original_USTCK_CANTIDADVIRTUAL) AND ([UMED_CODIGO] = @Original_UMED_CODIGO) AND ((@IsNull_USTCK_PADRE = 1 AND [USTCK_PADRE] IS NULL) OR ([USTCK_PADRE] = @Original_USTCK_PADRE)) AND ([USTCK_ACTIVO] = @Original_USTCK_ACTIVO) AND ([TUS_CODIGO] = @Original_TUS_CODIGO) AND ([CON_CODIGO] = @Original_CON_CODIGO))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [UBICACIONES_STOCK] WHERE (([USTCK_NUMERO] = @Original_USTCK_NUMERO) AND ((@IsNull_USTCK_CODIGO = 1 AND [USTCK_CODIGO] IS NULL) OR ([USTCK_CODIGO] = @Original_USTCK_CODIGO)) AND ((@IsNull_USTCK_NOMBRE = 1 AND [USTCK_NOMBRE] IS NULL) OR ([USTCK_NOMBRE] = @Original_USTCK_NOMBRE)) AND ((@IsNull_USTCK_DESCRIPCION = 1 AND [USTCK_DESCRIPCION] IS NULL) OR ([USTCK_DESCRIPCION] = @Original_USTCK_DESCRIPCION)) AND ((@IsNull_USTCK_UBICACIONFISICA = 1 AND [USTCK_UBICACIONFISICA] IS NULL) OR ([USTCK_UBICACIONFISICA] = @Original_USTCK_UBICACIONFISICA)) AND ([USTCK_CANTIDADREAL] = @Original_USTCK_CANTIDADREAL) AND ([UMED_CODIGO] = @Original_UMED_CODIGO) AND ((@IsNull_USTCK_PADRE = 1 AND [USTCK_PADRE] IS NULL) OR ([USTCK_PADRE] = @Original_USTCK_PADRE)) AND ([USTCK_ACTIVO] = @Original_USTCK_ACTIVO) AND ([TUS_CODIGO] = @Original_TUS_CODIGO) AND ([CON_CODIGO] = @Original_CON_CODIGO))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -6372,7 +6557,6 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_UBICACIONFISICA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_UBICACIONFISICA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_UBICACIONFISICA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_UBICACIONFISICA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_CANTIDADREAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_CANTIDADVIRTUAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADVIRTUAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_PADRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_PADRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_PADRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -6381,15 +6565,14 @@ SELECT CON_CODIGO, CON_NOMBRE, CON_DESCRIPCION FROM CONTENIDO_UBICACION_STOCK WH
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CON_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CON_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[UBICACIONES_STOCK] ([USTCK_CODIGO], [USTCK_NOMBRE], [USTCK_DESCRIPCION], [USTCK_UBICACIONFISICA], [USTCK_CANTIDADREAL], [USTCK_CANTIDADVIRTUAL], [UMED_CODIGO], [USTCK_PADRE], [USTCK_ACTIVO], [TUS_CODIGO], [CON_CODIGO]) VALUES (@USTCK_CODIGO, @USTCK_NOMBRE, @USTCK_DESCRIPCION, @USTCK_UBICACIONFISICA, @USTCK_CANTIDADREAL, @USTCK_CANTIDADVIRTUAL, @UMED_CODIGO, @USTCK_PADRE, @USTCK_ACTIVO, @TUS_CODIGO, @CON_CODIGO);
-SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICACIONFISICA, USTCK_CANTIDADREAL, USTCK_CANTIDADVIRTUAL, UMED_CODIGO, USTCK_PADRE, USTCK_ACTIVO, TUS_CODIGO, CON_CODIGO FROM UBICACIONES_STOCK WHERE (USTCK_NUMERO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [UBICACIONES_STOCK] ([USTCK_CODIGO], [USTCK_NOMBRE], [USTCK_DESCRIPCION], [USTCK_UBICACIONFISICA], [USTCK_CANTIDADREAL], [UMED_CODIGO], [USTCK_PADRE], [USTCK_ACTIVO], [TUS_CODIGO], [CON_CODIGO]) VALUES (@USTCK_CODIGO, @USTCK_NOMBRE, @USTCK_DESCRIPCION, @USTCK_UBICACIONFISICA, @USTCK_CANTIDADREAL, @UMED_CODIGO, @USTCK_PADRE, @USTCK_ACTIVO, @TUS_CODIGO, @CON_CODIGO);
+SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICACIONFISICA, USTCK_CANTIDADREAL, UMED_CODIGO, USTCK_PADRE, USTCK_ACTIVO, TUS_CODIGO, CON_CODIGO FROM UBICACIONES_STOCK WHERE (USTCK_NUMERO = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_UBICACIONFISICA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_UBICACIONFISICA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_CANTIDADREAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_CANTIDADVIRTUAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADVIRTUAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_PADRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "USTCK_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -6397,34 +6580,14 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CON_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CON_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[UBICACIONES_STOCK] SET [USTCK_CODIGO] = @USTCK_CODIGO, [USTCK_NOMBR" +
-                "E] = @USTCK_NOMBRE, [USTCK_DESCRIPCION] = @USTCK_DESCRIPCION, [USTCK_UBICACIONFI" +
-                "SICA] = @USTCK_UBICACIONFISICA, [USTCK_CANTIDADREAL] = @USTCK_CANTIDADREAL, [UST" +
-                "CK_CANTIDADVIRTUAL] = @USTCK_CANTIDADVIRTUAL, [UMED_CODIGO] = @UMED_CODIGO, [UST" +
-                "CK_PADRE] = @USTCK_PADRE, [USTCK_ACTIVO] = @USTCK_ACTIVO, [TUS_CODIGO] = @TUS_CO" +
-                "DIGO, [CON_CODIGO] = @CON_CODIGO WHERE (([USTCK_NUMERO] = @Original_USTCK_NUMERO" +
-                ") AND ((@IsNull_USTCK_CODIGO = 1 AND [USTCK_CODIGO] IS NULL) OR ([USTCK_CODIGO] " +
-                "= @Original_USTCK_CODIGO)) AND ((@IsNull_USTCK_NOMBRE = 1 AND [USTCK_NOMBRE] IS " +
-                "NULL) OR ([USTCK_NOMBRE] = @Original_USTCK_NOMBRE)) AND ((@IsNull_USTCK_DESCRIPC" +
-                "ION = 1 AND [USTCK_DESCRIPCION] IS NULL) OR ([USTCK_DESCRIPCION] = @Original_UST" +
-                "CK_DESCRIPCION)) AND ((@IsNull_USTCK_UBICACIONFISICA = 1 AND [USTCK_UBICACIONFIS" +
-                "ICA] IS NULL) OR ([USTCK_UBICACIONFISICA] = @Original_USTCK_UBICACIONFISICA)) AN" +
-                "D ([USTCK_CANTIDADREAL] = @Original_USTCK_CANTIDADREAL) AND ([USTCK_CANTIDADVIRT" +
-                "UAL] = @Original_USTCK_CANTIDADVIRTUAL) AND ([UMED_CODIGO] = @Original_UMED_CODI" +
-                "GO) AND ((@IsNull_USTCK_PADRE = 1 AND [USTCK_PADRE] IS NULL) OR ([USTCK_PADRE] =" +
-                " @Original_USTCK_PADRE)) AND ([USTCK_ACTIVO] = @Original_USTCK_ACTIVO) AND ([TUS" +
-                "_CODIGO] = @Original_TUS_CODIGO) AND ([CON_CODIGO] = @Original_CON_CODIGO));\r\nSE" +
-                "LECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICACIO" +
-                "NFISICA, USTCK_CANTIDADREAL, USTCK_CANTIDADVIRTUAL, UMED_CODIGO, USTCK_PADRE, US" +
-                "TCK_ACTIVO, TUS_CODIGO, CON_CODIGO FROM UBICACIONES_STOCK WHERE (USTCK_NUMERO = " +
-                "@USTCK_NUMERO)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [UBICACIONES_STOCK] SET [USTCK_CODIGO] = @USTCK_CODIGO, [USTCK_NOMBRE] = @USTCK_NOMBRE, [USTCK_DESCRIPCION] = @USTCK_DESCRIPCION, [USTCK_UBICACIONFISICA] = @USTCK_UBICACIONFISICA, [USTCK_CANTIDADREAL] = @USTCK_CANTIDADREAL, [UMED_CODIGO] = @UMED_CODIGO, [USTCK_PADRE] = @USTCK_PADRE, [USTCK_ACTIVO] = @USTCK_ACTIVO, [TUS_CODIGO] = @TUS_CODIGO, [CON_CODIGO] = @CON_CODIGO WHERE (([USTCK_NUMERO] = @Original_USTCK_NUMERO) AND ((@IsNull_USTCK_CODIGO = 1 AND [USTCK_CODIGO] IS NULL) OR ([USTCK_CODIGO] = @Original_USTCK_CODIGO)) AND ((@IsNull_USTCK_NOMBRE = 1 AND [USTCK_NOMBRE] IS NULL) OR ([USTCK_NOMBRE] = @Original_USTCK_NOMBRE)) AND ((@IsNull_USTCK_DESCRIPCION = 1 AND [USTCK_DESCRIPCION] IS NULL) OR ([USTCK_DESCRIPCION] = @Original_USTCK_DESCRIPCION)) AND ((@IsNull_USTCK_UBICACIONFISICA = 1 AND [USTCK_UBICACIONFISICA] IS NULL) OR ([USTCK_UBICACIONFISICA] = @Original_USTCK_UBICACIONFISICA)) AND ([USTCK_CANTIDADREAL] = @Original_USTCK_CANTIDADREAL) AND ([UMED_CODIGO] = @Original_UMED_CODIGO) AND ((@IsNull_USTCK_PADRE = 1 AND [USTCK_PADRE] IS NULL) OR ([USTCK_PADRE] = @Original_USTCK_PADRE)) AND ([USTCK_ACTIVO] = @Original_USTCK_ACTIVO) AND ([TUS_CODIGO] = @Original_TUS_CODIGO) AND ([CON_CODIGO] = @Original_CON_CODIGO));
+SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICACIONFISICA, USTCK_CANTIDADREAL, UMED_CODIGO, USTCK_PADRE, USTCK_ACTIVO, TUS_CODIGO, CON_CODIGO FROM UBICACIONES_STOCK WHERE (USTCK_NUMERO = @USTCK_NUMERO)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_UBICACIONFISICA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_UBICACIONFISICA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_CANTIDADREAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_CANTIDADVIRTUAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADVIRTUAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_PADRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@USTCK_ACTIVO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 1, 0, "USTCK_ACTIVO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -6440,7 +6603,6 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_UBICACIONFISICA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_UBICACIONFISICA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_UBICACIONFISICA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_UBICACIONFISICA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_CANTIDADREAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_CANTIDADVIRTUAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "USTCK_CANTIDADVIRTUAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_USTCK_PADRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "USTCK_PADRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_USTCK_PADRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "USTCK_PADRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -6462,8 +6624,8 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICACI" +
-                "ONFISICA, USTCK_CANTIDADREAL, USTCK_CANTIDADVIRTUAL, UMED_CODIGO, USTCK_PADRE, U" +
-                "STCK_ACTIVO, TUS_CODIGO, CON_CODIGO FROM dbo.UBICACIONES_STOCK";
+                "ONFISICA, USTCK_CANTIDADREAL, UMED_CODIGO, USTCK_PADRE, USTCK_ACTIVO, TUS_CODIGO" +
+                ", CON_CODIGO FROM UBICACIONES_STOCK";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -6517,7 +6679,7 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_USTCK_NUMERO, string Original_USTCK_CODIGO, string Original_USTCK_NOMBRE, string Original_USTCK_DESCRIPCION, string Original_USTCK_UBICACIONFISICA, decimal Original_USTCK_CANTIDADREAL, decimal Original_USTCK_CANTIDADVIRTUAL, decimal Original_UMED_CODIGO, global::System.Nullable<decimal> Original_USTCK_PADRE, decimal Original_USTCK_ACTIVO, decimal Original_TUS_CODIGO, decimal Original_CON_CODIGO) {
+        public virtual int Delete(decimal Original_USTCK_NUMERO, string Original_USTCK_CODIGO, string Original_USTCK_NOMBRE, string Original_USTCK_DESCRIPCION, string Original_USTCK_UBICACIONFISICA, decimal Original_USTCK_CANTIDADREAL, decimal Original_UMED_CODIGO, global::System.Nullable<decimal> Original_USTCK_PADRE, decimal Original_USTCK_ACTIVO, decimal Original_TUS_CODIGO, decimal Original_CON_CODIGO) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_USTCK_NUMERO));
             if ((Original_USTCK_CODIGO == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
@@ -6552,19 +6714,18 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                 this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_USTCK_UBICACIONFISICA));
             }
             this.Adapter.DeleteCommand.Parameters[9].Value = ((decimal)(Original_USTCK_CANTIDADREAL));
-            this.Adapter.DeleteCommand.Parameters[10].Value = ((decimal)(Original_USTCK_CANTIDADVIRTUAL));
-            this.Adapter.DeleteCommand.Parameters[11].Value = ((decimal)(Original_UMED_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[10].Value = ((decimal)(Original_UMED_CODIGO));
             if ((Original_USTCK_PADRE.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((decimal)(Original_USTCK_PADRE.Value));
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((decimal)(Original_USTCK_PADRE.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
-            this.Adapter.DeleteCommand.Parameters[14].Value = ((decimal)(Original_USTCK_ACTIVO));
-            this.Adapter.DeleteCommand.Parameters[15].Value = ((decimal)(Original_TUS_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[16].Value = ((decimal)(Original_CON_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[13].Value = ((decimal)(Original_USTCK_ACTIVO));
+            this.Adapter.DeleteCommand.Parameters[14].Value = ((decimal)(Original_TUS_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[15].Value = ((decimal)(Original_CON_CODIGO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6584,7 +6745,7 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string USTCK_CODIGO, string USTCK_NOMBRE, string USTCK_DESCRIPCION, string USTCK_UBICACIONFISICA, decimal USTCK_CANTIDADREAL, decimal USTCK_CANTIDADVIRTUAL, decimal UMED_CODIGO, global::System.Nullable<decimal> USTCK_PADRE, decimal USTCK_ACTIVO, decimal TUS_CODIGO, decimal CON_CODIGO) {
+        public virtual int Insert(string USTCK_CODIGO, string USTCK_NOMBRE, string USTCK_DESCRIPCION, string USTCK_UBICACIONFISICA, decimal USTCK_CANTIDADREAL, decimal UMED_CODIGO, global::System.Nullable<decimal> USTCK_PADRE, decimal USTCK_ACTIVO, decimal TUS_CODIGO, decimal CON_CODIGO) {
             if ((USTCK_CODIGO == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -6610,17 +6771,16 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                 this.Adapter.InsertCommand.Parameters[3].Value = ((string)(USTCK_UBICACIONFISICA));
             }
             this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(USTCK_CANTIDADREAL));
-            this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(USTCK_CANTIDADVIRTUAL));
-            this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(UMED_CODIGO));
+            this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(UMED_CODIGO));
             if ((USTCK_PADRE.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(USTCK_PADRE.Value));
+                this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(USTCK_PADRE.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(USTCK_ACTIVO));
-            this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(TUS_CODIGO));
-            this.Adapter.InsertCommand.Parameters[10].Value = ((decimal)(CON_CODIGO));
+            this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(USTCK_ACTIVO));
+            this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(TUS_CODIGO));
+            this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(CON_CODIGO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6646,7 +6806,6 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     string USTCK_DESCRIPCION, 
                     string USTCK_UBICACIONFISICA, 
                     decimal USTCK_CANTIDADREAL, 
-                    decimal USTCK_CANTIDADVIRTUAL, 
                     decimal UMED_CODIGO, 
                     global::System.Nullable<decimal> USTCK_PADRE, 
                     decimal USTCK_ACTIVO, 
@@ -6658,7 +6817,6 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     string Original_USTCK_DESCRIPCION, 
                     string Original_USTCK_UBICACIONFISICA, 
                     decimal Original_USTCK_CANTIDADREAL, 
-                    decimal Original_USTCK_CANTIDADVIRTUAL, 
                     decimal Original_UMED_CODIGO, 
                     global::System.Nullable<decimal> Original_USTCK_PADRE, 
                     decimal Original_USTCK_ACTIVO, 
@@ -6690,65 +6848,63 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(USTCK_UBICACIONFISICA));
             }
             this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(USTCK_CANTIDADREAL));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(USTCK_CANTIDADVIRTUAL));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(UMED_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(UMED_CODIGO));
             if ((USTCK_PADRE.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(USTCK_PADRE.Value));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(USTCK_PADRE.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(USTCK_ACTIVO));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(TUS_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(CON_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_USTCK_NUMERO));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(USTCK_ACTIVO));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(TUS_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(CON_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_USTCK_NUMERO));
             if ((Original_USTCK_CODIGO == null)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_USTCK_CODIGO));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_USTCK_CODIGO));
             }
             if ((Original_USTCK_NOMBRE == null)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_USTCK_NOMBRE));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_USTCK_NOMBRE));
             }
             if ((Original_USTCK_DESCRIPCION == null)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_USTCK_DESCRIPCION));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_USTCK_DESCRIPCION));
             }
             if ((Original_USTCK_UBICACIONFISICA == null)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((string)(Original_USTCK_UBICACIONFISICA));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_USTCK_UBICACIONFISICA));
             }
-            this.Adapter.UpdateCommand.Parameters[20].Value = ((decimal)(Original_USTCK_CANTIDADREAL));
-            this.Adapter.UpdateCommand.Parameters[21].Value = ((decimal)(Original_USTCK_CANTIDADVIRTUAL));
-            this.Adapter.UpdateCommand.Parameters[22].Value = ((decimal)(Original_UMED_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[19].Value = ((decimal)(Original_USTCK_CANTIDADREAL));
+            this.Adapter.UpdateCommand.Parameters[20].Value = ((decimal)(Original_UMED_CODIGO));
             if ((Original_USTCK_PADRE.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((decimal)(Original_USTCK_PADRE.Value));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((decimal)(Original_USTCK_PADRE.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[25].Value = ((decimal)(Original_USTCK_ACTIVO));
-            this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(Original_TUS_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[27].Value = ((decimal)(Original_CON_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[28].Value = ((decimal)(USTCK_NUMERO));
+            this.Adapter.UpdateCommand.Parameters[23].Value = ((decimal)(Original_USTCK_ACTIVO));
+            this.Adapter.UpdateCommand.Parameters[24].Value = ((decimal)(Original_TUS_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[25].Value = ((decimal)(Original_CON_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(USTCK_NUMERO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6774,7 +6930,6 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     string USTCK_DESCRIPCION, 
                     string USTCK_UBICACIONFISICA, 
                     decimal USTCK_CANTIDADREAL, 
-                    decimal USTCK_CANTIDADVIRTUAL, 
                     decimal UMED_CODIGO, 
                     global::System.Nullable<decimal> USTCK_PADRE, 
                     decimal USTCK_ACTIVO, 
@@ -6786,13 +6941,1343 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     string Original_USTCK_DESCRIPCION, 
                     string Original_USTCK_UBICACIONFISICA, 
                     decimal Original_USTCK_CANTIDADREAL, 
-                    decimal Original_USTCK_CANTIDADVIRTUAL, 
                     decimal Original_UMED_CODIGO, 
                     global::System.Nullable<decimal> Original_USTCK_PADRE, 
                     decimal Original_USTCK_ACTIVO, 
                     decimal Original_TUS_CODIGO, 
                     decimal Original_CON_CODIGO) {
-            return this.Update(USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICACIONFISICA, USTCK_CANTIDADREAL, USTCK_CANTIDADVIRTUAL, UMED_CODIGO, USTCK_PADRE, USTCK_ACTIVO, TUS_CODIGO, CON_CODIGO, Original_USTCK_NUMERO, Original_USTCK_CODIGO, Original_USTCK_NOMBRE, Original_USTCK_DESCRIPCION, Original_USTCK_UBICACIONFISICA, Original_USTCK_CANTIDADREAL, Original_USTCK_CANTIDADVIRTUAL, Original_UMED_CODIGO, Original_USTCK_PADRE, Original_USTCK_ACTIVO, Original_TUS_CODIGO, Original_CON_CODIGO, Original_USTCK_NUMERO);
+            return this.Update(USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICACIONFISICA, USTCK_CANTIDADREAL, UMED_CODIGO, USTCK_PADRE, USTCK_ACTIVO, TUS_CODIGO, CON_CODIGO, Original_USTCK_NUMERO, Original_USTCK_CODIGO, Original_USTCK_NOMBRE, Original_USTCK_DESCRIPCION, Original_USTCK_UBICACIONFISICA, Original_USTCK_CANTIDADREAL, Original_UMED_CODIGO, Original_USTCK_PADRE, Original_USTCK_ACTIVO, Original_TUS_CODIGO, Original_CON_CODIGO, Original_USTCK_NUMERO);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class MOVIMIENTOS_STOCKTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public MOVIMIENTOS_STOCKTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "MOVIMIENTOS_STOCK";
+            tableMapping.ColumnMappings.Add("MVTO_NUMERO", "MVTO_NUMERO");
+            tableMapping.ColumnMappings.Add("MVTO_CODIGO", "MVTO_CODIGO");
+            tableMapping.ColumnMappings.Add("MVTO_DESCRIPCION", "MVTO_DESCRIPCION");
+            tableMapping.ColumnMappings.Add("MVTO_FECHAALTA", "MVTO_FECHAALTA");
+            tableMapping.ColumnMappings.Add("MVTO_FECHAPREVISTA", "MVTO_FECHAPREVISTA");
+            tableMapping.ColumnMappings.Add("MVTO_FECHAREAL", "MVTO_FECHAREAL");
+            tableMapping.ColumnMappings.Add("MVTO_CANTIDAD_ORIGEN_ESTIMADA", "MVTO_CANTIDAD_ORIGEN_ESTIMADA");
+            tableMapping.ColumnMappings.Add("MVTO_CANTIDAD_DESTINO_ESTIMADA", "MVTO_CANTIDAD_DESTINO_ESTIMADA");
+            tableMapping.ColumnMappings.Add("MVTO_CANTIDAD_ORIGEN_REAL", "MVTO_CANTIDAD_ORIGEN_REAL");
+            tableMapping.ColumnMappings.Add("MVTO_CANTIDAD_DESTINO_REAL", "MVTO_CANTIDAD_DESTINO_REAL");
+            tableMapping.ColumnMappings.Add("EMVTO_CODIGO", "EMVTO_CODIGO");
+            tableMapping.ColumnMappings.Add("ENTD_ORIGEN", "ENTD_ORIGEN");
+            tableMapping.ColumnMappings.Add("ENTD_DESTINO", "ENTD_DESTINO");
+            tableMapping.ColumnMappings.Add("ENTD_DUENIO", "ENTD_DUENIO");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[MOVIMIENTOS_STOCK] WHERE (([MVTO_NUMERO] = @Original_MVTO_NUMERO) AND ((@IsNull_MVTO_CODIGO = 1 AND [MVTO_CODIGO] IS NULL) OR ([MVTO_CODIGO] = @Original_MVTO_CODIGO)) AND ((@IsNull_MVTO_DESCRIPCION = 1 AND [MVTO_DESCRIPCION] IS NULL) OR ([MVTO_DESCRIPCION] = @Original_MVTO_DESCRIPCION)) AND ([MVTO_FECHAALTA] = @Original_MVTO_FECHAALTA) AND ((@IsNull_MVTO_FECHAPREVISTA = 1 AND [MVTO_FECHAPREVISTA] IS NULL) OR ([MVTO_FECHAPREVISTA] = @Original_MVTO_FECHAPREVISTA)) AND ((@IsNull_MVTO_FECHAREAL = 1 AND [MVTO_FECHAREAL] IS NULL) OR ([MVTO_FECHAREAL] = @Original_MVTO_FECHAREAL)) AND ([MVTO_CANTIDAD_ORIGEN_ESTIMADA] = @Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA) AND ([MVTO_CANTIDAD_DESTINO_ESTIMADA] = @Original_MVTO_CANTIDAD_DESTINO_ESTIMADA) AND ([MVTO_CANTIDAD_ORIGEN_REAL] = @Original_MVTO_CANTIDAD_ORIGEN_REAL) AND ([MVTO_CANTIDAD_DESTINO_REAL] = @Original_MVTO_CANTIDAD_DESTINO_REAL) AND ([EMVTO_CODIGO] = @Original_EMVTO_CODIGO) AND ((@IsNull_ENTD_ORIGEN = 1 AND [ENTD_ORIGEN] IS NULL) OR ([ENTD_ORIGEN] = @Original_ENTD_ORIGEN)) AND ((@IsNull_ENTD_DESTINO = 1 AND [ENTD_DESTINO] IS NULL) OR ([ENTD_DESTINO] = @Original_ENTD_DESTINO)) AND ((@IsNull_ENTD_DUENIO = 1 AND [ENTD_DUENIO] IS NULL) OR ([ENTD_DUENIO] = @Original_ENTD_DUENIO)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MVTO_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAALTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_FECHAPREVISTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAPREVISTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_FECHAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAPREVISTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_FECHAREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_FECHAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EMVTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EMVTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ENTD_ORIGEN", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ENTD_ORIGEN", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTD_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_ORIGEN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ENTD_DESTINO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ENTD_DESTINO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTD_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_DESTINO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ENTD_DUENIO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ENTD_DUENIO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTD_DUENIO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_DUENIO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[MOVIMIENTOS_STOCK] ([MVTO_CODIGO], [MVTO_DESCRIPCION], [MVTO_FECHAALTA], [MVTO_FECHAPREVISTA], [MVTO_FECHAREAL], [MVTO_CANTIDAD_ORIGEN_ESTIMADA], [MVTO_CANTIDAD_DESTINO_ESTIMADA], [MVTO_CANTIDAD_ORIGEN_REAL], [MVTO_CANTIDAD_DESTINO_REAL], [EMVTO_CODIGO], [ENTD_ORIGEN], [ENTD_DESTINO], [ENTD_DUENIO]) VALUES (@MVTO_CODIGO, @MVTO_DESCRIPCION, @MVTO_FECHAALTA, @MVTO_FECHAPREVISTA, @MVTO_FECHAREAL, @MVTO_CANTIDAD_ORIGEN_ESTIMADA, @MVTO_CANTIDAD_DESTINO_ESTIMADA, @MVTO_CANTIDAD_ORIGEN_REAL, @MVTO_CANTIDAD_DESTINO_REAL, @EMVTO_CODIGO, @ENTD_ORIGEN, @ENTD_DESTINO, @ENTD_DUENIO);
+SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREVISTA, MVTO_FECHAREAL, MVTO_CANTIDAD_ORIGEN_ESTIMADA, MVTO_CANTIDAD_DESTINO_ESTIMADA, MVTO_CANTIDAD_ORIGEN_REAL, MVTO_CANTIDAD_DESTINO_REAL, EMVTO_CODIGO, ENTD_ORIGEN, ENTD_DESTINO, ENTD_DUENIO FROM MOVIMIENTOS_STOCK WHERE (MVTO_NUMERO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAALTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_FECHAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAPREVISTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_FECHAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EMVTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EMVTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ENTD_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_ORIGEN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ENTD_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_DESTINO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ENTD_DUENIO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_DUENIO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[MOVIMIENTOS_STOCK] SET [MVTO_CODIGO] = @MVTO_CODIGO, [MVTO_DESCRIPC" +
+                "ION] = @MVTO_DESCRIPCION, [MVTO_FECHAALTA] = @MVTO_FECHAALTA, [MVTO_FECHAPREVIST" +
+                "A] = @MVTO_FECHAPREVISTA, [MVTO_FECHAREAL] = @MVTO_FECHAREAL, [MVTO_CANTIDAD_ORI" +
+                "GEN_ESTIMADA] = @MVTO_CANTIDAD_ORIGEN_ESTIMADA, [MVTO_CANTIDAD_DESTINO_ESTIMADA]" +
+                " = @MVTO_CANTIDAD_DESTINO_ESTIMADA, [MVTO_CANTIDAD_ORIGEN_REAL] = @MVTO_CANTIDAD" +
+                "_ORIGEN_REAL, [MVTO_CANTIDAD_DESTINO_REAL] = @MVTO_CANTIDAD_DESTINO_REAL, [EMVTO" +
+                "_CODIGO] = @EMVTO_CODIGO, [ENTD_ORIGEN] = @ENTD_ORIGEN, [ENTD_DESTINO] = @ENTD_D" +
+                "ESTINO, [ENTD_DUENIO] = @ENTD_DUENIO WHERE (([MVTO_NUMERO] = @Original_MVTO_NUME" +
+                "RO) AND ((@IsNull_MVTO_CODIGO = 1 AND [MVTO_CODIGO] IS NULL) OR ([MVTO_CODIGO] =" +
+                " @Original_MVTO_CODIGO)) AND ((@IsNull_MVTO_DESCRIPCION = 1 AND [MVTO_DESCRIPCIO" +
+                "N] IS NULL) OR ([MVTO_DESCRIPCION] = @Original_MVTO_DESCRIPCION)) AND ([MVTO_FEC" +
+                "HAALTA] = @Original_MVTO_FECHAALTA) AND ((@IsNull_MVTO_FECHAPREVISTA = 1 AND [MV" +
+                "TO_FECHAPREVISTA] IS NULL) OR ([MVTO_FECHAPREVISTA] = @Original_MVTO_FECHAPREVIS" +
+                "TA)) AND ((@IsNull_MVTO_FECHAREAL = 1 AND [MVTO_FECHAREAL] IS NULL) OR ([MVTO_FE" +
+                "CHAREAL] = @Original_MVTO_FECHAREAL)) AND ([MVTO_CANTIDAD_ORIGEN_ESTIMADA] = @Or" +
+                "iginal_MVTO_CANTIDAD_ORIGEN_ESTIMADA) AND ([MVTO_CANTIDAD_DESTINO_ESTIMADA] = @O" +
+                "riginal_MVTO_CANTIDAD_DESTINO_ESTIMADA) AND ([MVTO_CANTIDAD_ORIGEN_REAL] = @Orig" +
+                "inal_MVTO_CANTIDAD_ORIGEN_REAL) AND ([MVTO_CANTIDAD_DESTINO_REAL] = @Original_MV" +
+                "TO_CANTIDAD_DESTINO_REAL) AND ([EMVTO_CODIGO] = @Original_EMVTO_CODIGO) AND ((@I" +
+                "sNull_ENTD_ORIGEN = 1 AND [ENTD_ORIGEN] IS NULL) OR ([ENTD_ORIGEN] = @Original_E" +
+                "NTD_ORIGEN)) AND ((@IsNull_ENTD_DESTINO = 1 AND [ENTD_DESTINO] IS NULL) OR ([ENT" +
+                "D_DESTINO] = @Original_ENTD_DESTINO)) AND ((@IsNull_ENTD_DUENIO = 1 AND [ENTD_DU" +
+                "ENIO] IS NULL) OR ([ENTD_DUENIO] = @Original_ENTD_DUENIO)));\r\nSELECT MVTO_NUMERO" +
+                ", MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREVISTA, MVTO_FECHAR" +
+                "EAL, MVTO_CANTIDAD_ORIGEN_ESTIMADA, MVTO_CANTIDAD_DESTINO_ESTIMADA, MVTO_CANTIDA" +
+                "D_ORIGEN_REAL, MVTO_CANTIDAD_DESTINO_REAL, EMVTO_CODIGO, ENTD_ORIGEN, ENTD_DESTI" +
+                "NO, ENTD_DUENIO FROM MOVIMIENTOS_STOCK WHERE (MVTO_NUMERO = @MVTO_NUMERO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAALTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_FECHAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAPREVISTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_FECHAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EMVTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EMVTO_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ENTD_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_ORIGEN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ENTD_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_DESTINO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ENTD_DUENIO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_DUENIO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MVTO_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CODIGO", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_FECHAALTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAALTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_FECHAPREVISTA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAPREVISTA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_FECHAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAPREVISTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MVTO_FECHAREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_FECHAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MVTO_FECHAREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_ESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_ESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_ORIGEN_REAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 3, "MVTO_CANTIDAD_DESTINO_REAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EMVTO_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "EMVTO_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ENTD_ORIGEN", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ENTD_ORIGEN", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTD_ORIGEN", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_ORIGEN", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ENTD_DESTINO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ENTD_DESTINO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTD_DESTINO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_DESTINO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ENTD_DUENIO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ENTD_DUENIO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTD_DUENIO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_DUENIO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_NUMERO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "MVTO_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREVISTA, MVTO_FECHAREAL, MVTO_CANTIDAD_ORIGEN_ESTIMADA, MVTO_CANTIDAD_DESTINO_ESTIMADA, MVTO_CANTIDAD_ORIGEN_REAL, MVTO_CANTIDAD_DESTINO_REAL, EMVTO_CODIGO, ENTD_ORIGEN, ENTD_DESTINO, ENTD_DUENIO FROM dbo.MOVIMIENTOS_STOCK";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsStock.MOVIMIENTOS_STOCKDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsStock.MOVIMIENTOS_STOCKDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsStock.MOVIMIENTOS_STOCKDataTable dataTable = new dsStock.MOVIMIENTOS_STOCKDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsStock.MOVIMIENTOS_STOCKDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsStock dataSet) {
+            return this.Adapter.Update(dataSet, "MOVIMIENTOS_STOCK");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_MVTO_NUMERO, string Original_MVTO_CODIGO, string Original_MVTO_DESCRIPCION, System.DateTime Original_MVTO_FECHAALTA, global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAPREVISTA, global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAREAL, decimal Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA, decimal Original_MVTO_CANTIDAD_DESTINO_ESTIMADA, decimal Original_MVTO_CANTIDAD_ORIGEN_REAL, decimal Original_MVTO_CANTIDAD_DESTINO_REAL, decimal Original_EMVTO_CODIGO, global::System.Nullable<decimal> Original_ENTD_ORIGEN, global::System.Nullable<decimal> Original_ENTD_DESTINO, global::System.Nullable<decimal> Original_ENTD_DUENIO) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_MVTO_NUMERO));
+            if ((Original_MVTO_CODIGO == null)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_MVTO_CODIGO));
+            }
+            if ((Original_MVTO_DESCRIPCION == null)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_MVTO_DESCRIPCION));
+            }
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((System.DateTime)(Original_MVTO_FECHAALTA));
+            if ((Original_MVTO_FECHAPREVISTA.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((System.DateTime)(Original_MVTO_FECHAPREVISTA.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((Original_MVTO_FECHAREAL.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((System.DateTime)(Original_MVTO_FECHAREAL.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.DeleteCommand.Parameters[10].Value = ((decimal)(Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA));
+            this.Adapter.DeleteCommand.Parameters[11].Value = ((decimal)(Original_MVTO_CANTIDAD_DESTINO_ESTIMADA));
+            this.Adapter.DeleteCommand.Parameters[12].Value = ((decimal)(Original_MVTO_CANTIDAD_ORIGEN_REAL));
+            this.Adapter.DeleteCommand.Parameters[13].Value = ((decimal)(Original_MVTO_CANTIDAD_DESTINO_REAL));
+            this.Adapter.DeleteCommand.Parameters[14].Value = ((decimal)(Original_EMVTO_CODIGO));
+            if ((Original_ENTD_ORIGEN.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((decimal)(Original_ENTD_ORIGEN.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ENTD_DESTINO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((decimal)(Original_ENTD_DESTINO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ENTD_DUENIO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((decimal)(Original_ENTD_DUENIO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string MVTO_CODIGO, string MVTO_DESCRIPCION, System.DateTime MVTO_FECHAALTA, global::System.Nullable<global::System.DateTime> MVTO_FECHAPREVISTA, global::System.Nullable<global::System.DateTime> MVTO_FECHAREAL, decimal MVTO_CANTIDAD_ORIGEN_ESTIMADA, decimal MVTO_CANTIDAD_DESTINO_ESTIMADA, decimal MVTO_CANTIDAD_ORIGEN_REAL, decimal MVTO_CANTIDAD_DESTINO_REAL, decimal EMVTO_CODIGO, global::System.Nullable<decimal> ENTD_ORIGEN, global::System.Nullable<decimal> ENTD_DESTINO, global::System.Nullable<decimal> ENTD_DUENIO) {
+            if ((MVTO_CODIGO == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(MVTO_CODIGO));
+            }
+            if ((MVTO_DESCRIPCION == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(MVTO_DESCRIPCION));
+            }
+            this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(MVTO_FECHAALTA));
+            if ((MVTO_FECHAPREVISTA.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((System.DateTime)(MVTO_FECHAPREVISTA.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((MVTO_FECHAREAL.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(MVTO_FECHAREAL.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(MVTO_CANTIDAD_ORIGEN_ESTIMADA));
+            this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(MVTO_CANTIDAD_DESTINO_ESTIMADA));
+            this.Adapter.InsertCommand.Parameters[7].Value = ((decimal)(MVTO_CANTIDAD_ORIGEN_REAL));
+            this.Adapter.InsertCommand.Parameters[8].Value = ((decimal)(MVTO_CANTIDAD_DESTINO_REAL));
+            this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(EMVTO_CODIGO));
+            if ((ENTD_ORIGEN.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((decimal)(ENTD_ORIGEN.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((ENTD_DESTINO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[11].Value = ((decimal)(ENTD_DESTINO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((ENTD_DUENIO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[12].Value = ((decimal)(ENTD_DUENIO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string MVTO_CODIGO, 
+                    string MVTO_DESCRIPCION, 
+                    System.DateTime MVTO_FECHAALTA, 
+                    global::System.Nullable<global::System.DateTime> MVTO_FECHAPREVISTA, 
+                    global::System.Nullable<global::System.DateTime> MVTO_FECHAREAL, 
+                    decimal MVTO_CANTIDAD_ORIGEN_ESTIMADA, 
+                    decimal MVTO_CANTIDAD_DESTINO_ESTIMADA, 
+                    decimal MVTO_CANTIDAD_ORIGEN_REAL, 
+                    decimal MVTO_CANTIDAD_DESTINO_REAL, 
+                    decimal EMVTO_CODIGO, 
+                    global::System.Nullable<decimal> ENTD_ORIGEN, 
+                    global::System.Nullable<decimal> ENTD_DESTINO, 
+                    global::System.Nullable<decimal> ENTD_DUENIO, 
+                    decimal Original_MVTO_NUMERO, 
+                    string Original_MVTO_CODIGO, 
+                    string Original_MVTO_DESCRIPCION, 
+                    System.DateTime Original_MVTO_FECHAALTA, 
+                    global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAPREVISTA, 
+                    global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAREAL, 
+                    decimal Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA, 
+                    decimal Original_MVTO_CANTIDAD_DESTINO_ESTIMADA, 
+                    decimal Original_MVTO_CANTIDAD_ORIGEN_REAL, 
+                    decimal Original_MVTO_CANTIDAD_DESTINO_REAL, 
+                    decimal Original_EMVTO_CODIGO, 
+                    global::System.Nullable<decimal> Original_ENTD_ORIGEN, 
+                    global::System.Nullable<decimal> Original_ENTD_DESTINO, 
+                    global::System.Nullable<decimal> Original_ENTD_DUENIO, 
+                    decimal MVTO_NUMERO) {
+            if ((MVTO_CODIGO == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(MVTO_CODIGO));
+            }
+            if ((MVTO_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(MVTO_DESCRIPCION));
+            }
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(MVTO_FECHAALTA));
+            if ((MVTO_FECHAPREVISTA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((System.DateTime)(MVTO_FECHAPREVISTA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((MVTO_FECHAREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(MVTO_FECHAREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(MVTO_CANTIDAD_ORIGEN_ESTIMADA));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(MVTO_CANTIDAD_DESTINO_ESTIMADA));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(MVTO_CANTIDAD_ORIGEN_REAL));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(MVTO_CANTIDAD_DESTINO_REAL));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(EMVTO_CODIGO));
+            if ((ENTD_ORIGEN.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(ENTD_ORIGEN.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((ENTD_DESTINO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(ENTD_DESTINO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((ENTD_DUENIO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(ENTD_DUENIO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_MVTO_NUMERO));
+            if ((Original_MVTO_CODIGO == null)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_MVTO_CODIGO));
+            }
+            if ((Original_MVTO_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_MVTO_DESCRIPCION));
+            }
+            this.Adapter.UpdateCommand.Parameters[18].Value = ((System.DateTime)(Original_MVTO_FECHAALTA));
+            if ((Original_MVTO_FECHAPREVISTA.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((System.DateTime)(Original_MVTO_FECHAPREVISTA.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            if ((Original_MVTO_FECHAREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((System.DateTime)(Original_MVTO_FECHAREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[23].Value = ((decimal)(Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA));
+            this.Adapter.UpdateCommand.Parameters[24].Value = ((decimal)(Original_MVTO_CANTIDAD_DESTINO_ESTIMADA));
+            this.Adapter.UpdateCommand.Parameters[25].Value = ((decimal)(Original_MVTO_CANTIDAD_ORIGEN_REAL));
+            this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(Original_MVTO_CANTIDAD_DESTINO_REAL));
+            this.Adapter.UpdateCommand.Parameters[27].Value = ((decimal)(Original_EMVTO_CODIGO));
+            if ((Original_ENTD_ORIGEN.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((decimal)(Original_ENTD_ORIGEN.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ENTD_DESTINO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((decimal)(Original_ENTD_DESTINO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[31].Value = global::System.DBNull.Value;
+            }
+            if ((Original_ENTD_DUENIO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((decimal)(Original_ENTD_DUENIO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[33].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[34].Value = ((decimal)(MVTO_NUMERO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string MVTO_CODIGO, 
+                    string MVTO_DESCRIPCION, 
+                    System.DateTime MVTO_FECHAALTA, 
+                    global::System.Nullable<global::System.DateTime> MVTO_FECHAPREVISTA, 
+                    global::System.Nullable<global::System.DateTime> MVTO_FECHAREAL, 
+                    decimal MVTO_CANTIDAD_ORIGEN_ESTIMADA, 
+                    decimal MVTO_CANTIDAD_DESTINO_ESTIMADA, 
+                    decimal MVTO_CANTIDAD_ORIGEN_REAL, 
+                    decimal MVTO_CANTIDAD_DESTINO_REAL, 
+                    decimal EMVTO_CODIGO, 
+                    global::System.Nullable<decimal> ENTD_ORIGEN, 
+                    global::System.Nullable<decimal> ENTD_DESTINO, 
+                    global::System.Nullable<decimal> ENTD_DUENIO, 
+                    decimal Original_MVTO_NUMERO, 
+                    string Original_MVTO_CODIGO, 
+                    string Original_MVTO_DESCRIPCION, 
+                    System.DateTime Original_MVTO_FECHAALTA, 
+                    global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAPREVISTA, 
+                    global::System.Nullable<global::System.DateTime> Original_MVTO_FECHAREAL, 
+                    decimal Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA, 
+                    decimal Original_MVTO_CANTIDAD_DESTINO_ESTIMADA, 
+                    decimal Original_MVTO_CANTIDAD_ORIGEN_REAL, 
+                    decimal Original_MVTO_CANTIDAD_DESTINO_REAL, 
+                    decimal Original_EMVTO_CODIGO, 
+                    global::System.Nullable<decimal> Original_ENTD_ORIGEN, 
+                    global::System.Nullable<decimal> Original_ENTD_DESTINO, 
+                    global::System.Nullable<decimal> Original_ENTD_DUENIO) {
+            return this.Update(MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPREVISTA, MVTO_FECHAREAL, MVTO_CANTIDAD_ORIGEN_ESTIMADA, MVTO_CANTIDAD_DESTINO_ESTIMADA, MVTO_CANTIDAD_ORIGEN_REAL, MVTO_CANTIDAD_DESTINO_REAL, EMVTO_CODIGO, ENTD_ORIGEN, ENTD_DESTINO, ENTD_DUENIO, Original_MVTO_NUMERO, Original_MVTO_CODIGO, Original_MVTO_DESCRIPCION, Original_MVTO_FECHAALTA, Original_MVTO_FECHAPREVISTA, Original_MVTO_FECHAREAL, Original_MVTO_CANTIDAD_ORIGEN_ESTIMADA, Original_MVTO_CANTIDAD_DESTINO_ESTIMADA, Original_MVTO_CANTIDAD_ORIGEN_REAL, Original_MVTO_CANTIDAD_DESTINO_REAL, Original_EMVTO_CODIGO, Original_ENTD_ORIGEN, Original_ENTD_DESTINO, Original_ENTD_DUENIO, Original_MVTO_NUMERO);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class TIPOS_ENTIDADTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public TIPOS_ENTIDADTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "TIPOS_ENTIDAD";
+            tableMapping.ColumnMappings.Add("TENTD_CODIGO", "TENTD_CODIGO");
+            tableMapping.ColumnMappings.Add("TENTD_NOMBRE", "TENTD_NOMBRE");
+            tableMapping.ColumnMappings.Add("TENTD_DESCRIPCION", "TENTD_DESCRIPCION");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[TIPOS_ENTIDAD] WHERE (([TENTD_CODIGO] = @Original_TENTD_CODIGO" +
+                ") AND ([TENTD_NOMBRE] = @Original_TENTD_NOMBRE) AND ((@IsNull_TENTD_DESCRIPCION " +
+                "= 1 AND [TENTD_DESCRIPCION] IS NULL) OR ([TENTD_DESCRIPCION] = @Original_TENTD_D" +
+                "ESCRIPCION)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TENTD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TENTD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TENTD_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TENTD_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TENTD_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TENTD_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TENTD_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TENTD_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[TIPOS_ENTIDAD] ([TENTD_NOMBRE], [TENTD_DESCRIPCION]) VALUES (@" +
+                "TENTD_NOMBRE, @TENTD_DESCRIPCION);\r\nSELECT TENTD_CODIGO, TENTD_NOMBRE, TENTD_DES" +
+                "CRIPCION FROM TIPOS_ENTIDAD WHERE (TENTD_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TENTD_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TENTD_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TENTD_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TENTD_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[TIPOS_ENTIDAD] SET [TENTD_NOMBRE] = @TENTD_NOMBRE, [TENTD_DESCRIPCION] = @TENTD_DESCRIPCION WHERE (([TENTD_CODIGO] = @Original_TENTD_CODIGO) AND ([TENTD_NOMBRE] = @Original_TENTD_NOMBRE) AND ((@IsNull_TENTD_DESCRIPCION = 1 AND [TENTD_DESCRIPCION] IS NULL) OR ([TENTD_DESCRIPCION] = @Original_TENTD_DESCRIPCION)));
+SELECT TENTD_CODIGO, TENTD_NOMBRE, TENTD_DESCRIPCION FROM TIPOS_ENTIDAD WHERE (TENTD_CODIGO = @TENTD_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TENTD_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TENTD_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TENTD_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TENTD_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TENTD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TENTD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TENTD_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TENTD_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TENTD_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TENTD_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TENTD_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TENTD_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TENTD_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "TENTD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT TENTD_CODIGO, TENTD_NOMBRE, TENTD_DESCRIPCION FROM dbo.TIPOS_ENTIDAD";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsStock.TIPOS_ENTIDADDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsStock.TIPOS_ENTIDADDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsStock.TIPOS_ENTIDADDataTable dataTable = new dsStock.TIPOS_ENTIDADDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsStock.TIPOS_ENTIDADDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsStock dataSet) {
+            return this.Adapter.Update(dataSet, "TIPOS_ENTIDAD");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_TENTD_CODIGO, string Original_TENTD_NOMBRE, string Original_TENTD_DESCRIPCION) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_TENTD_CODIGO));
+            if ((Original_TENTD_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("Original_TENTD_NOMBRE");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_TENTD_NOMBRE));
+            }
+            if ((Original_TENTD_DESCRIPCION == null)) {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_TENTD_DESCRIPCION));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string TENTD_NOMBRE, string TENTD_DESCRIPCION) {
+            if ((TENTD_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("TENTD_NOMBRE");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(TENTD_NOMBRE));
+            }
+            if ((TENTD_DESCRIPCION == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(TENTD_DESCRIPCION));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string TENTD_NOMBRE, string TENTD_DESCRIPCION, decimal Original_TENTD_CODIGO, string Original_TENTD_NOMBRE, string Original_TENTD_DESCRIPCION, decimal TENTD_CODIGO) {
+            if ((TENTD_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("TENTD_NOMBRE");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(TENTD_NOMBRE));
+            }
+            if ((TENTD_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(TENTD_DESCRIPCION));
+            }
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(Original_TENTD_CODIGO));
+            if ((Original_TENTD_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("Original_TENTD_NOMBRE");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Original_TENTD_NOMBRE));
+            }
+            if ((Original_TENTD_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_TENTD_DESCRIPCION));
+            }
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(TENTD_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string TENTD_NOMBRE, string TENTD_DESCRIPCION, decimal Original_TENTD_CODIGO, string Original_TENTD_NOMBRE, string Original_TENTD_DESCRIPCION) {
+            return this.Update(TENTD_NOMBRE, TENTD_DESCRIPCION, Original_TENTD_CODIGO, Original_TENTD_NOMBRE, Original_TENTD_DESCRIPCION, Original_TENTD_CODIGO);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class ENTIDADESTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public ENTIDADESTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "ENTIDADES";
+            tableMapping.ColumnMappings.Add("ENTD_CODIGO", "ENTD_CODIGO");
+            tableMapping.ColumnMappings.Add("ENTD_NOMBRE", "ENTD_NOMBRE");
+            tableMapping.ColumnMappings.Add("TENTD_CODIGO", "TENTD_CODIGO");
+            tableMapping.ColumnMappings.Add("ENTD_ID", "ENTD_ID");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[ENTIDADES] WHERE (([ENTD_CODIGO] = @Original_ENTD_CODIGO) AND " +
+                "([ENTD_NOMBRE] = @Original_ENTD_NOMBRE) AND ([TENTD_CODIGO] = @Original_TENTD_CO" +
+                "DIGO) AND ((@IsNull_ENTD_ID = 1 AND [ENTD_ID] IS NULL) OR ([ENTD_ID] = @Original" +
+                "_ENTD_ID)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTD_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ENTD_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TENTD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TENTD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ENTD_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ENTD_ID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTD_ID", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[ENTIDADES] ([ENTD_NOMBRE], [TENTD_CODIGO], [ENTD_ID]) VALUES (" +
+                "@ENTD_NOMBRE, @TENTD_CODIGO, @ENTD_ID);\r\nSELECT ENTD_CODIGO, ENTD_NOMBRE, TENTD_" +
+                "CODIGO, ENTD_ID FROM ENTIDADES WHERE (ENTD_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ENTD_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ENTD_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TENTD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TENTD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ENTD_ID", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[ENTIDADES] SET [ENTD_NOMBRE] = @ENTD_NOMBRE, [TENTD_CODIGO] = @TENTD_CODIGO, [ENTD_ID] = @ENTD_ID WHERE (([ENTD_CODIGO] = @Original_ENTD_CODIGO) AND ([ENTD_NOMBRE] = @Original_ENTD_NOMBRE) AND ([TENTD_CODIGO] = @Original_TENTD_CODIGO) AND ((@IsNull_ENTD_ID = 1 AND [ENTD_ID] IS NULL) OR ([ENTD_ID] = @Original_ENTD_ID)));
+SELECT ENTD_CODIGO, ENTD_NOMBRE, TENTD_CODIGO, ENTD_ID FROM ENTIDADES WHERE (ENTD_CODIGO = @ENTD_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ENTD_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ENTD_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TENTD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TENTD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ENTD_ID", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTD_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ENTD_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TENTD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TENTD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ENTD_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ENTD_ID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTD_ID", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ENTD_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT ENTD_CODIGO, ENTD_NOMBRE, TENTD_CODIGO, ENTD_ID FROM dbo.ENTIDADES";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsStock.ENTIDADESDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsStock.ENTIDADESDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsStock.ENTIDADESDataTable dataTable = new dsStock.ENTIDADESDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsStock.ENTIDADESDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsStock dataSet) {
+            return this.Adapter.Update(dataSet, "ENTIDADES");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_ENTD_CODIGO, string Original_ENTD_NOMBRE, decimal Original_TENTD_CODIGO, global::System.Nullable<decimal> Original_ENTD_ID) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_ENTD_CODIGO));
+            if ((Original_ENTD_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("Original_ENTD_NOMBRE");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_ENTD_NOMBRE));
+            }
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_TENTD_CODIGO));
+            if ((Original_ENTD_ID.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_ENTD_ID.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string ENTD_NOMBRE, decimal TENTD_CODIGO, global::System.Nullable<decimal> ENTD_ID) {
+            if ((ENTD_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("ENTD_NOMBRE");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(ENTD_NOMBRE));
+            }
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(TENTD_CODIGO));
+            if ((ENTD_ID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(ENTD_ID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string ENTD_NOMBRE, decimal TENTD_CODIGO, global::System.Nullable<decimal> ENTD_ID, decimal Original_ENTD_CODIGO, string Original_ENTD_NOMBRE, decimal Original_TENTD_CODIGO, global::System.Nullable<decimal> Original_ENTD_ID, decimal ENTD_CODIGO) {
+            if ((ENTD_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("ENTD_NOMBRE");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(ENTD_NOMBRE));
+            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(TENTD_CODIGO));
+            if ((ENTD_ID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(ENTD_ID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(Original_ENTD_CODIGO));
+            if ((Original_ENTD_NOMBRE == null)) {
+                throw new global::System.ArgumentNullException("Original_ENTD_NOMBRE");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_ENTD_NOMBRE));
+            }
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(Original_TENTD_CODIGO));
+            if ((Original_ENTD_ID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_ENTD_ID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(ENTD_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string ENTD_NOMBRE, decimal TENTD_CODIGO, global::System.Nullable<decimal> ENTD_ID, decimal Original_ENTD_CODIGO, string Original_ENTD_NOMBRE, decimal Original_TENTD_CODIGO, global::System.Nullable<decimal> Original_ENTD_ID) {
+            return this.Update(ENTD_NOMBRE, TENTD_CODIGO, ENTD_ID, Original_ENTD_CODIGO, Original_ENTD_NOMBRE, Original_TENTD_CODIGO, Original_ENTD_ID, Original_ENTD_CODIGO);
         }
     }
     
@@ -6817,11 +8302,15 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
         
         private TIPOS_UBICACIONES_STOCKTableAdapter _tIPOS_UBICACIONES_STOCKTableAdapter;
         
-        private MOVIMIENTOS_STOCKTableAdapter _mOVIMIENTOS_STOCKTableAdapter;
-        
         private CONTENIDO_UBICACION_STOCKTableAdapter _cONTENIDO_UBICACION_STOCKTableAdapter;
         
         private UBICACIONES_STOCKTableAdapter _uBICACIONES_STOCKTableAdapter;
+        
+        private MOVIMIENTOS_STOCKTableAdapter _mOVIMIENTOS_STOCKTableAdapter;
+        
+        private TIPOS_ENTIDADTableAdapter _tIPOS_ENTIDADTableAdapter;
+        
+        private ENTIDADESTableAdapter _eNTIDADESTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -6893,19 +8382,6 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
             "", "System.Drawing.Design.UITypeEditor")]
-        public MOVIMIENTOS_STOCKTableAdapter MOVIMIENTOS_STOCKTableAdapter {
-            get {
-                return this._mOVIMIENTOS_STOCKTableAdapter;
-            }
-            set {
-                this._mOVIMIENTOS_STOCKTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
         public CONTENIDO_UBICACION_STOCKTableAdapter CONTENIDO_UBICACION_STOCKTableAdapter {
             get {
                 return this._cONTENIDO_UBICACION_STOCKTableAdapter;
@@ -6925,6 +8401,45 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
             }
             set {
                 this._uBICACIONES_STOCKTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public MOVIMIENTOS_STOCKTableAdapter MOVIMIENTOS_STOCKTableAdapter {
+            get {
+                return this._mOVIMIENTOS_STOCKTableAdapter;
+            }
+            set {
+                this._mOVIMIENTOS_STOCKTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public TIPOS_ENTIDADTableAdapter TIPOS_ENTIDADTableAdapter {
+            get {
+                return this._tIPOS_ENTIDADTableAdapter;
+            }
+            set {
+                this._tIPOS_ENTIDADTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public ENTIDADESTableAdapter ENTIDADESTableAdapter {
+            get {
+                return this._eNTIDADESTableAdapter;
+            }
+            set {
+                this._eNTIDADESTableAdapter = value;
             }
         }
         
@@ -6961,10 +8476,6 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                             && (this._tIPOS_UBICACIONES_STOCKTableAdapter.Connection != null))) {
                     return this._tIPOS_UBICACIONES_STOCKTableAdapter.Connection;
                 }
-                if (((this._mOVIMIENTOS_STOCKTableAdapter != null) 
-                            && (this._mOVIMIENTOS_STOCKTableAdapter.Connection != null))) {
-                    return this._mOVIMIENTOS_STOCKTableAdapter.Connection;
-                }
                 if (((this._cONTENIDO_UBICACION_STOCKTableAdapter != null) 
                             && (this._cONTENIDO_UBICACION_STOCKTableAdapter.Connection != null))) {
                     return this._cONTENIDO_UBICACION_STOCKTableAdapter.Connection;
@@ -6972,6 +8483,18 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                 if (((this._uBICACIONES_STOCKTableAdapter != null) 
                             && (this._uBICACIONES_STOCKTableAdapter.Connection != null))) {
                     return this._uBICACIONES_STOCKTableAdapter.Connection;
+                }
+                if (((this._mOVIMIENTOS_STOCKTableAdapter != null) 
+                            && (this._mOVIMIENTOS_STOCKTableAdapter.Connection != null))) {
+                    return this._mOVIMIENTOS_STOCKTableAdapter.Connection;
+                }
+                if (((this._tIPOS_ENTIDADTableAdapter != null) 
+                            && (this._tIPOS_ENTIDADTableAdapter.Connection != null))) {
+                    return this._tIPOS_ENTIDADTableAdapter.Connection;
+                }
+                if (((this._eNTIDADESTableAdapter != null) 
+                            && (this._eNTIDADESTableAdapter.Connection != null))) {
+                    return this._eNTIDADESTableAdapter.Connection;
                 }
                 return null;
             }
@@ -6997,13 +8520,19 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                 if ((this._tIPOS_UBICACIONES_STOCKTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._mOVIMIENTOS_STOCKTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._cONTENIDO_UBICACION_STOCKTableAdapter != null)) {
                     count = (count + 1);
                 }
                 if ((this._uBICACIONES_STOCKTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._mOVIMIENTOS_STOCKTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._tIPOS_ENTIDADTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._eNTIDADESTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -7025,6 +8554,15 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._tIPOS_ENTIDADTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.TIPOS_ENTIDAD.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._tIPOS_ENTIDADTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._cONTENIDO_UBICACION_STOCKTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.CONTENIDO_UBICACION_STOCK.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -7034,31 +8572,12 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._tIPOS_UBICACIONES_STOCKTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.TIPOS_UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._eNTIDADESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.ENTIDADES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._tIPOS_UBICACIONES_STOCKTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._uNIDADES_MEDIDATableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.UNIDADES_MEDIDA.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._uNIDADES_MEDIDATableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._uBICACIONES_STOCKTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    this.SortSelfReferenceRows(updatedRows, dataSet.Relations["FK_UBICACIONES_STOCK_UBICACION_STOCK"], false);
-                    result = (result + this._uBICACIONES_STOCKTableAdapter.Update(updatedRows));
+                    result = (result + this._eNTIDADESTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -7071,12 +8590,40 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._uNIDADES_MEDIDATableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.UNIDADES_MEDIDA.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._uNIDADES_MEDIDATableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._tIPOS_UBICACIONES_STOCKTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.TIPOS_UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._tIPOS_UBICACIONES_STOCKTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._mOVIMIENTOS_STOCKTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.MOVIMIENTOS_STOCK.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._mOVIMIENTOS_STOCKTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._uBICACIONES_STOCKTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    this.SortSelfReferenceRows(updatedRows, dataSet.Relations["FK_UBICACIONES_STOCK_UBICACION_STOCK"], false);
+                    result = (result + this._uBICACIONES_STOCKTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -7097,11 +8644,43 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._tIPOS_ENTIDADTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.TIPOS_ENTIDAD.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._tIPOS_ENTIDADTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._cONTENIDO_UBICACION_STOCKTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.CONTENIDO_UBICACION_STOCK.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._cONTENIDO_UBICACION_STOCKTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._eNTIDADESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.ENTIDADES.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._eNTIDADESTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._eSTADO_MOVIMIENTOS_STOCKTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.ESTADO_MOVIMIENTOS_STOCK.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._eSTADO_MOVIMIENTOS_STOCKTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._uNIDADES_MEDIDATableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.UNIDADES_MEDIDA.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._uNIDADES_MEDIDATableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -7113,11 +8692,11 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._uNIDADES_MEDIDATableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.UNIDADES_MEDIDA.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._mOVIMIENTOS_STOCKTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.MOVIMIENTOS_STOCK.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._uNIDADES_MEDIDATableAdapter.Update(addedRows));
+                    result = (result + this._mOVIMIENTOS_STOCKTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -7130,22 +8709,6 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._eSTADO_MOVIMIENTOS_STOCKTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.ESTADO_MOVIMIENTOS_STOCK.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._eSTADO_MOVIMIENTOS_STOCKTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._mOVIMIENTOS_STOCKTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.MOVIMIENTOS_STOCK.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._mOVIMIENTOS_STOCKTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             return result;
         }
         
@@ -7155,22 +8718,6 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateDeletedRows(dsStock dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._mOVIMIENTOS_STOCKTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.MOVIMIENTOS_STOCK.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._mOVIMIENTOS_STOCKTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._eSTADO_MOVIMIENTOS_STOCKTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.ESTADO_MOVIMIENTOS_STOCK.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._eSTADO_MOVIMIENTOS_STOCKTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._uBICACIONES_STOCKTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -7180,11 +8727,11 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._uNIDADES_MEDIDATableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.UNIDADES_MEDIDA.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._mOVIMIENTOS_STOCKTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.MOVIMIENTOS_STOCK.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._uNIDADES_MEDIDATableAdapter.Update(deletedRows));
+                    result = (result + this._mOVIMIENTOS_STOCKTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -7196,11 +8743,43 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._uNIDADES_MEDIDATableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.UNIDADES_MEDIDA.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._uNIDADES_MEDIDATableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._eSTADO_MOVIMIENTOS_STOCKTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.ESTADO_MOVIMIENTOS_STOCK.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._eSTADO_MOVIMIENTOS_STOCKTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._eNTIDADESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.ENTIDADES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._eNTIDADESTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._cONTENIDO_UBICACION_STOCKTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.CONTENIDO_UBICACION_STOCK.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._cONTENIDO_UBICACION_STOCKTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._tIPOS_ENTIDADTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.TIPOS_ENTIDAD.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tIPOS_ENTIDADTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -7269,11 +8848,6 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._mOVIMIENTOS_STOCKTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._mOVIMIENTOS_STOCKTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._cONTENIDO_UBICACION_STOCKTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._cONTENIDO_UBICACION_STOCKTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -7281,6 +8855,21 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
             }
             if (((this._uBICACIONES_STOCKTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._uBICACIONES_STOCKTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._mOVIMIENTOS_STOCKTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._mOVIMIENTOS_STOCKTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._tIPOS_ENTIDADTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._tIPOS_ENTIDADTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._eNTIDADESTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._eNTIDADESTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -7352,15 +8941,6 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                         adaptersWithAcceptChangesDuringUpdate.Add(this._tIPOS_UBICACIONES_STOCKTableAdapter.Adapter);
                     }
                 }
-                if ((this._mOVIMIENTOS_STOCKTableAdapter != null)) {
-                    revertConnections.Add(this._mOVIMIENTOS_STOCKTableAdapter, this._mOVIMIENTOS_STOCKTableAdapter.Connection);
-                    this._mOVIMIENTOS_STOCKTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._mOVIMIENTOS_STOCKTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._mOVIMIENTOS_STOCKTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._mOVIMIENTOS_STOCKTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._mOVIMIENTOS_STOCKTableAdapter.Adapter);
-                    }
-                }
                 if ((this._cONTENIDO_UBICACION_STOCKTableAdapter != null)) {
                     revertConnections.Add(this._cONTENIDO_UBICACION_STOCKTableAdapter, this._cONTENIDO_UBICACION_STOCKTableAdapter.Connection);
                     this._cONTENIDO_UBICACION_STOCKTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -7377,6 +8957,33 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     if (this._uBICACIONES_STOCKTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._uBICACIONES_STOCKTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._uBICACIONES_STOCKTableAdapter.Adapter);
+                    }
+                }
+                if ((this._mOVIMIENTOS_STOCKTableAdapter != null)) {
+                    revertConnections.Add(this._mOVIMIENTOS_STOCKTableAdapter, this._mOVIMIENTOS_STOCKTableAdapter.Connection);
+                    this._mOVIMIENTOS_STOCKTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._mOVIMIENTOS_STOCKTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._mOVIMIENTOS_STOCKTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._mOVIMIENTOS_STOCKTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._mOVIMIENTOS_STOCKTableAdapter.Adapter);
+                    }
+                }
+                if ((this._tIPOS_ENTIDADTableAdapter != null)) {
+                    revertConnections.Add(this._tIPOS_ENTIDADTableAdapter, this._tIPOS_ENTIDADTableAdapter.Connection);
+                    this._tIPOS_ENTIDADTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._tIPOS_ENTIDADTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._tIPOS_ENTIDADTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._tIPOS_ENTIDADTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._tIPOS_ENTIDADTableAdapter.Adapter);
+                    }
+                }
+                if ((this._eNTIDADESTableAdapter != null)) {
+                    revertConnections.Add(this._eNTIDADESTableAdapter, this._eNTIDADESTableAdapter.Connection);
+                    this._eNTIDADESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._eNTIDADESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._eNTIDADESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._eNTIDADESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._eNTIDADESTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -7453,10 +9060,6 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                     this._tIPOS_UBICACIONES_STOCKTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._tIPOS_UBICACIONES_STOCKTableAdapter]));
                     this._tIPOS_UBICACIONES_STOCKTableAdapter.Transaction = null;
                 }
-                if ((this._mOVIMIENTOS_STOCKTableAdapter != null)) {
-                    this._mOVIMIENTOS_STOCKTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._mOVIMIENTOS_STOCKTableAdapter]));
-                    this._mOVIMIENTOS_STOCKTableAdapter.Transaction = null;
-                }
                 if ((this._cONTENIDO_UBICACION_STOCKTableAdapter != null)) {
                     this._cONTENIDO_UBICACION_STOCKTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cONTENIDO_UBICACION_STOCKTableAdapter]));
                     this._cONTENIDO_UBICACION_STOCKTableAdapter.Transaction = null;
@@ -7464,6 +9067,18 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                 if ((this._uBICACIONES_STOCKTableAdapter != null)) {
                     this._uBICACIONES_STOCKTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._uBICACIONES_STOCKTableAdapter]));
                     this._uBICACIONES_STOCKTableAdapter.Transaction = null;
+                }
+                if ((this._mOVIMIENTOS_STOCKTableAdapter != null)) {
+                    this._mOVIMIENTOS_STOCKTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._mOVIMIENTOS_STOCKTableAdapter]));
+                    this._mOVIMIENTOS_STOCKTableAdapter.Transaction = null;
+                }
+                if ((this._tIPOS_ENTIDADTableAdapter != null)) {
+                    this._tIPOS_ENTIDADTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._tIPOS_ENTIDADTableAdapter]));
+                    this._tIPOS_ENTIDADTableAdapter.Transaction = null;
+                }
+                if ((this._eNTIDADESTableAdapter != null)) {
+                    this._eNTIDADESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._eNTIDADESTableAdapter]));
+                    this._eNTIDADESTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

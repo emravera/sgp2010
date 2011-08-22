@@ -39,20 +39,54 @@ namespace GyCAP.BLL
             DAL.UbicacionStockDAL.Actualizar(ubicacionStock);
         }
 
-        public static Entidades.UbicacionStock AsUbicacionStock()
+        public static Entidades.UbicacionStock AsUbicacionStock(int numeroUbicacionStock, Data.dsEstructuraProducto ds)
         {
-            return new GyCAP.Entidades.UbicacionStock();
+            Entidades.UbicacionStock ubicacion = new GyCAP.Entidades.UbicacionStock();
+            ubicacion.Activo = Convert.ToInt32(ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_ACTIVO);
+            ubicacion.CantidadReal = ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_CANTIDADREAL;
+            ubicacion.Codigo = ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_CODIGO;
+            ubicacion.Descripcion = ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_DESCRIPCION;
+            ubicacion.Contenido = BLL.ContenidoUbicacionStockBLL.AsContenidoUbicacionStockEntity(ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).CONTENIDO_UBICACION_STOCKRow);
+            ubicacion.Nombre = ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_NOMBRE;
+            ubicacion.Numero = numeroUbicacionStock;
+            ubicacion.TipoUbicacion = BLL.TipoUbicacionStockBLL.AsTipoUbicacionStockEntity(ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).TIPOS_UBICACIONES_STOCKRow);
+            ubicacion.UbicacionFisica = ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_UBICACIONFISICA;
+            ubicacion.UnidadMedida = BLL.UnidadMedidaBLL.AsUnidadMedidaEntity(Convert.ToInt32(ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).UMED_CODIGO), ds);
+            if (!ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).IsUSTCK_PADRENull())
+            {
+                ubicacion.UbicacionPadre = BLL.UbicacionStockBLL.AsUbicacionStock(Convert.ToInt32(ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_PADRE), ds);
+            }
+
+            return ubicacion;
+        }
+        
+        public static Entidades.UbicacionStock AsUbicacionStock(int numeroUbicacionStock, Data.dsStock dsStock)
+        {
+            Entidades.UbicacionStock ubicacion = new GyCAP.Entidades.UbicacionStock();
+            ubicacion.Activo = Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_ACTIVO);
+            ubicacion.CantidadReal = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_CANTIDADREAL;
+            ubicacion.Codigo = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_CODIGO;
+            ubicacion.Descripcion = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_DESCRIPCION;
+            ubicacion.Contenido = BLL.ContenidoUbicacionStockBLL.AsContenidoUbicacionStockEntity(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).CONTENIDO_UBICACION_STOCKRow);
+            ubicacion.Nombre = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_NOMBRE;
+            ubicacion.Numero = numeroUbicacionStock;
+            ubicacion.TipoUbicacion = BLL.TipoUbicacionStockBLL.AsTipoUbicacionStockEntity(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).TIPOS_UBICACIONES_STOCKRow);
+            ubicacion.UbicacionFisica = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_UBICACIONFISICA;
+            ubicacion.UnidadMedida = BLL.UnidadMedidaBLL.AsUnidadMedidaEntity(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).UMED_CODIGO), dsStock);
+            if (!dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).IsUSTCK_PADRENull())
+            {
+                ubicacion.UbicacionPadre = BLL.UbicacionStockBLL.AsUbicacionStock(Convert.ToInt32(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_PADRE), dsStock);
+            }
+
+            return ubicacion;
         }
 
-        public static void ActualizarCantidadesStock(int numeroUbicacion, decimal cantidadReal, decimal cantidadVirtual)
+        public static void ActualizarCantidadesStock(int numeroUbicacion, decimal cantidadReal)
         {
-            DAL.UbicacionStockDAL.ActualizarCantidadesStock(numeroUbicacion, cantidadReal, cantidadVirtual, null);
+            DAL.UbicacionStockDAL.ActualizarCantidadesStock(numeroUbicacion, cantidadReal, null);
+            // que eventos deberia disparar ?? - gonzalo
         }
-
-        public static void ActualizarCantidadesStock(Entidades.UbicacionStock ubicacion, Entidades.MovimientoStock movimiento)
-        {
-            DAL.UbicacionStockDAL.ActualizarCantidadesStock(ubicacion, movimiento);
-        }
+        
         public static decimal CantidadMateriaPrima(Entidades.MateriaPrima materiaPrima)
         {
             return DAL.UbicacionStockDAL.CantidadMateriaPrima(materiaPrima);
