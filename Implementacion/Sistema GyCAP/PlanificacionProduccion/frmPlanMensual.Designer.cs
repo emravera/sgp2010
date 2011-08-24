@@ -31,9 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPlanMensual));
             this.gbDatosPrincipales = new System.Windows.Forms.GroupBox();
             this.btnCargaDetalle = new System.Windows.Forms.Button();
-            this.cbPlanAnual = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label3 = new System.Windows.Forms.Label();
-            this.cbMesDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
@@ -45,7 +43,6 @@
             this.gbGrillaDemanda = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbMes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label2 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtAnioBuscar = new System.Windows.Forms.TextBox();
@@ -60,7 +57,6 @@
             this.numPorcentaje = new System.Windows.Forms.NumericUpDown();
             this.rbPorcentaje = new System.Windows.Forms.RadioButton();
             this.rbUnidades = new System.Windows.Forms.RadioButton();
-            this.cbCocinas = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label5 = new System.Windows.Forms.Label();
             this.tpPedidos = new System.Windows.Forms.TabPage();
             this.btnVerDetalle = new System.Windows.Forms.Button();
@@ -96,6 +92,10 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcPlanAnual = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
+            this.cbMes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbCocinas = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbPlanAnual = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbMesDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.gbDatosPrincipales.SuspendLayout();
             this.tsMenu.SuspendLayout();
             this.gbGrillaDemanda.SuspendLayout();
@@ -153,16 +153,6 @@
             this.btnCargaDetalle.UseVisualStyleBackColor = true;
             this.btnCargaDetalle.Click += new System.EventHandler(this.btnCargaDetalle_Click);
             // 
-            // cbPlanAnual
-            // 
-            this.cbPlanAnual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbPlanAnual.FormattingEnabled = true;
-            this.cbPlanAnual.Location = new System.Drawing.Point(166, 20);
-            this.cbPlanAnual.Name = "cbPlanAnual";
-            this.cbPlanAnual.Size = new System.Drawing.Size(94, 21);
-            this.cbPlanAnual.TabIndex = 23;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -171,16 +161,6 @@
             this.label3.Size = new System.Drawing.Size(122, 13);
             this.label3.TabIndex = 24;
             this.label3.Text = "Plan Anual Planificación:";
-            // 
-            // cbMesDatos
-            // 
-            this.cbMesDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMesDatos.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbMesDatos.FormattingEnabled = true;
-            this.cbMesDatos.Location = new System.Drawing.Point(424, 20);
-            this.cbMesDatos.Name = "cbMesDatos";
-            this.cbMesDatos.Size = new System.Drawing.Size(135, 21);
-            this.cbMesDatos.TabIndex = 2;
             // 
             // label4
             // 
@@ -318,16 +298,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
-            // 
-            // cbMes
-            // 
-            this.cbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMes.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbMes.FormattingEnabled = true;
-            this.cbMes.Location = new System.Drawing.Point(245, 27);
-            this.cbMes.Name = "cbMes";
-            this.cbMes.Size = new System.Drawing.Size(128, 21);
-            this.cbMes.TabIndex = 3;
             // 
             // label2
             // 
@@ -493,16 +463,6 @@
             this.rbUnidades.UseVisualStyleBackColor = true;
             this.rbUnidades.CheckedChanged += new System.EventHandler(this.rbUnidades_CheckedChanged);
             // 
-            // cbCocinas
-            // 
-            this.cbCocinas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCocinas.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbCocinas.FormattingEnabled = true;
-            this.cbCocinas.Location = new System.Drawing.Point(103, 47);
-            this.cbCocinas.Name = "cbCocinas";
-            this.cbCocinas.Size = new System.Drawing.Size(219, 21);
-            this.cbCocinas.TabIndex = 1;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -552,11 +512,14 @@
             // 
             this.dgvPedidos.AllowUserToAddRows = false;
             this.dgvPedidos.AllowUserToDeleteRows = false;
+            this.dgvPedidos.AllowUserToResizeColumns = false;
             this.dgvPedidos.AllowUserToResizeRows = false;
             this.dgvPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPedidos.Location = new System.Drawing.Point(6, 19);
             this.dgvPedidos.Name = "dgvPedidos";
+            this.dgvPedidos.ReadOnly = true;
             this.dgvPedidos.RowHeadersVisible = false;
+            this.dgvPedidos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvPedidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPedidos.Size = new System.Drawing.Size(319, 172);
             this.dgvPedidos.TabIndex = 7;
@@ -580,7 +543,7 @@
             this.tpDetallePedido.Name = "tpDetallePedido";
             this.tpDetallePedido.Size = new System.Drawing.Size(348, 252);
             this.tpDetallePedido.TabIndex = 2;
-            this.tpDetallePedido.Text = "DetallePedido";
+            this.tpDetallePedido.Text = "Detalle de Pedido";
             // 
             // btnPlanificar
             // 
@@ -611,12 +574,14 @@
             // 
             this.dgvDetallePedido.AllowUserToAddRows = false;
             this.dgvDetallePedido.AllowUserToDeleteRows = false;
+            this.dgvDetallePedido.AllowUserToResizeColumns = false;
             this.dgvDetallePedido.AllowUserToResizeRows = false;
             this.dgvDetallePedido.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetallePedido.Location = new System.Drawing.Point(6, 19);
             this.dgvDetallePedido.Name = "dgvDetallePedido";
             this.dgvDetallePedido.ReadOnly = true;
             this.dgvDetallePedido.RowHeadersVisible = false;
+            this.dgvDetallePedido.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvDetallePedido.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDetallePedido.Size = new System.Drawing.Size(321, 177);
             this.dgvDetallePedido.TabIndex = 7;
@@ -938,6 +903,46 @@
             this.tpBuscar.Size = new System.Drawing.Size(762, 463);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
+            // 
+            // cbMes
+            // 
+            this.cbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMes.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbMes.FormattingEnabled = true;
+            this.cbMes.Location = new System.Drawing.Point(245, 27);
+            this.cbMes.Name = "cbMes";
+            this.cbMes.Size = new System.Drawing.Size(128, 21);
+            this.cbMes.TabIndex = 3;
+            // 
+            // cbCocinas
+            // 
+            this.cbCocinas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCocinas.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbCocinas.FormattingEnabled = true;
+            this.cbCocinas.Location = new System.Drawing.Point(103, 47);
+            this.cbCocinas.Name = "cbCocinas";
+            this.cbCocinas.Size = new System.Drawing.Size(219, 21);
+            this.cbCocinas.TabIndex = 1;
+            // 
+            // cbPlanAnual
+            // 
+            this.cbPlanAnual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlanAnual.FormattingEnabled = true;
+            this.cbPlanAnual.Location = new System.Drawing.Point(166, 20);
+            this.cbPlanAnual.Name = "cbPlanAnual";
+            this.cbPlanAnual.Size = new System.Drawing.Size(94, 21);
+            this.cbPlanAnual.TabIndex = 23;
+            // 
+            // cbMesDatos
+            // 
+            this.cbMesDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMesDatos.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbMesDatos.FormattingEnabled = true;
+            this.cbMesDatos.Location = new System.Drawing.Point(424, 20);
+            this.cbMesDatos.Name = "cbMesDatos";
+            this.cbMesDatos.Size = new System.Drawing.Size(135, 21);
+            this.cbMesDatos.TabIndex = 2;
             // 
             // frmPlanMensual
             // 
