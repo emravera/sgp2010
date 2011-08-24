@@ -1308,6 +1308,14 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
+            catch (Entidades.Excepciones.CocinaSinEstructuraActivaException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+            }
+            catch (Entidades.Excepciones.EstructuraSinMateriaPrimaException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+            }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)

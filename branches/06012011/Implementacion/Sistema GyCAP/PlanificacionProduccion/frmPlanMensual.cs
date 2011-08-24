@@ -39,7 +39,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Agregamos la columnas
             dgvLista.Columns.Add("PMES_CODIGO", "Código");
             dgvLista.Columns.Add("PAN_CODIGO", "Plan Anual");
-            dgvLista.Columns.Add("PAN_ANIO", "Anio Plan Anual");
+            dgvLista.Columns.Add("PAN_ANIO", "Año Plan Anual");
             dgvLista.Columns.Add("PMES_MES", "Mes del Plan Mensual");
             dgvLista.Columns.Add("PMES_FECHACREACION", "Fecha Creación Plan Mensual");
 
@@ -68,10 +68,10 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Agregamos la columnas
             dgvDetalle.Columns.Add("DPMES_CODIGO", "Código");
             dgvDetalle.Columns.Add("PMES_CODIGO", "Mes");
-            dgvDetalle.Columns.Add("COC_CODIGO", "Cocina Codigo");
+            dgvDetalle.Columns.Add("COC_CODIGO", "Cocina Código");
             dgvDetalle.Columns.Add("DPMES_CANTIDADESTIMADA", "Cantidad Estimada");
             dgvDetalle.Columns.Add("DPMES_CANTIDADREAL", "Cantidad Real");
-            dgvDetalle.Columns.Add("DPED_CODIGO", "Detalle Pedido");
+            dgvDetalle.Columns.Add("DPED_CODIGO", "Pedido");
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvDetalle.Columns["DPMES_CODIGO"].DataPropertyName = "DPMES_CODIGO";
@@ -103,7 +103,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Agregamos la columnas
             dgvDatos.Columns.Add("DPMES_CODIGO", "Código");
             dgvDatos.Columns.Add("PMES_CODIGO", "Mes");
-            dgvDatos.Columns.Add("COC_CODIGO", "Cocina Codigo");
+            dgvDatos.Columns.Add("COC_CODIGO", "Cocina Código");
             dgvDatos.Columns.Add("DPMES_CANTIDADESTIMADA", "Cantidad Estimada");
             dgvDatos.Columns.Add("DPMES_CANTIDADREAL", "Cantidad Real");
             dgvDatos.Columns.Add("DPED_CODIGO", "Pedido");
@@ -131,7 +131,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //*********************************** Lista de Pedidos *****************************************
             //Agregamos la columnas
             dgvPedidos.Columns.Add("PED_CODIGO", "Código");
-            dgvPedidos.Columns.Add("PED_NUMERO", "Numero");
+            dgvPedidos.Columns.Add("PED_NUMERO", "Número");
             dgvPedidos.Columns.Add("CLI_CODIGO", "Cliente");
             dgvPedidos.Columns.Add("EPED_CODIGO", "Estado");
             dgvPedidos.Columns.Add("PED_FECHA_ALTA", "Fecha Alta");
@@ -675,7 +675,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             else txtRestaPlanificar.Text = Convert.ToString(0);
         }
 
-        private void ValidarDetalle()
+        private string ValidarDetalle()
         {
             string msjerror = string.Empty;
 
@@ -702,7 +702,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
 
             //Validamos que no se quiera agregar un modelo que ya está en el dataset
-            foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])dsPlanMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
+            foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])dsPlanMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.CurrentRows))
             {
                 if (row["COC_CODIGO"].ToString() == Convert.ToString(cbCocinas.GetSelectedValue()))
                 {
@@ -712,9 +712,31 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             if (msjerror.Length > 0)
             {
-                msjerror = "Los errores encontrados son:\n" + msjerror;
-                throw new Exception(msjerror);
+                msjerror = "Los errores encontrados son:\n" + msjerror;                
             }
+
+            return msjerror;
+        }
+
+        private string ValidarAgregarPedido(int codigoDetallePedido)
+        {
+            string msjerror = string.Empty;
+            
+            //Validamos que no se quiera agregar un detalle de pedido que ya fue planificado
+            foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])dsPlanMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.CurrentRows))
+            {
+                if (Convert.ToInt32(row["DPED_CODIGO"]) == codigoDetallePedido )
+                {
+                    msjerror = msjerror + "-El detalle de pedido que intenta agregar ya se encuentra en la planificación\n";
+                }
+            }
+
+           if (msjerror.Length > 0)
+            {
+                msjerror = "Los errores encontrados son:\n" + msjerror;
+            }
+
+            return msjerror;
         }
         #endregion
 
@@ -900,6 +922,14 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
+            catch (Entidades.Excepciones.CocinaSinEstructuraActivaException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+            }
+            catch (Entidades.Excepciones.EstructuraSinMateriaPrimaException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+            }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -1041,26 +1071,35 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             try
             {
-                int codigoPlan = -1; int cantidad;
+                //Validamos lo que quiere planificar
+                string msjValidacion = ValidarAgregarPedido(Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_codigo"]));
 
-                //Comenzamos con la edición de la fila en si misma
-                Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row = dsPlanMensual.DETALLE_PLANES_MENSUALES.NewDETALLE_PLANES_MENSUALESRow();
-                row.BeginEdit();
-                row.DPMES_CODIGO = codigoDetalle--;
-                row.PMES_CODIGO = codigoPlan;
-                row.COC_CODIGO = Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["coc_codigo"]);
-                cantidad = Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_cantidad"]);
-                row.DPMES_CANTIDADESTIMADA = cantidad;
-                row.DPED_CODIGO = Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_codigo"]);
-                row.EndEdit();
-                dsPlanMensual.DETALLE_PLANES_MENSUALES.AddDETALLE_PLANES_MENSUALESRow(row);
+                if( msjValidacion == string.Empty)
+                {
+                    int codigoPlan = -1; int cantidad;
 
-                //Metodo que recalcula los valores Ingresados
-                CalcularCantidades(cantidad);
+                    //Comenzamos con la edición de la fila en si misma
+                    Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row = dsPlanMensual.DETALLE_PLANES_MENSUALES.NewDETALLE_PLANES_MENSUALESRow();
+                    row.BeginEdit();
+                    row.DPMES_CODIGO = codigoDetalle--;
+                    row.PMES_CODIGO = codigoPlan;
+                    row.COC_CODIGO = Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["coc_codigo"]);
+                    cantidad = Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_cantidad"]);
+                    row.DPMES_CANTIDADESTIMADA = cantidad;
+                    row.DPED_CODIGO = Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_codigo"]);
+                    row.EndEdit();
+                    dsPlanMensual.DETALLE_PLANES_MENSUALES.AddDETALLE_PLANES_MENSUALESRow(row);
 
-                //Seteamos la interface
-                tcDatos.SelectedTab = tpPlanificacion;
+                    //Metodo que recalcula los valores Ingresados
+                    CalcularCantidades(cantidad);
 
+                    //Seteamos la interface
+                    tcDatos.SelectedTab = tpPlanificacion;
+                }
+                else
+                {
+                    Entidades.Mensajes.MensajesABM.MsjValidacion(msjValidacion, this.Text);
+                }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -1085,6 +1124,9 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnPlanificar.Enabled = true;
                     seleccionPestaña = true;
                     tcDatos.SelectedTab = tpDetallePedido;
+
+                    //Oculto la columna de código de detalle
+                    dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
                 }
                 else
                 {
@@ -1206,37 +1248,43 @@ namespace GyCAP.UI.PlanificacionProduccion
             try
             {
                 //Ejecutamos la validacion para verificar que este todo OK
-                ValidarDetalle();
+                string msjerror = ValidarDetalle();
 
-                //Comenzamos con la edición de la fila en si misma
-                Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row = dsPlanMensual.DETALLE_PLANES_MENSUALES.NewDETALLE_PLANES_MENSUALESRow();
-                row.BeginEdit();
-                row.DPMES_CODIGO = codigoDetalle--;
-                row.PMES_CODIGO = codigoPlan;
-                row.COC_CODIGO = Convert.ToInt32(cbCocinas.GetSelectedValue());
-                if (rbUnidades.Checked == true)
+                if (msjerror.Length == 0)
                 {
-                    cantidad = Convert.ToInt32(numUnidades.Value);
-                    row.DPMES_CANTIDADESTIMADA = cantidad;
+                    //Comenzamos con la edición de la fila en si misma
+                    Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row = dsPlanMensual.DETALLE_PLANES_MENSUALES.NewDETALLE_PLANES_MENSUALESRow();
+                    row.BeginEdit();
+                    row.DPMES_CODIGO = codigoDetalle--;
+                    row.PMES_CODIGO = codigoPlan;
+                    row.COC_CODIGO = Convert.ToInt32(cbCocinas.GetSelectedValue());
+                    if (rbUnidades.Checked == true)
+                    {
+                        cantidad = Convert.ToInt32(numUnidades.Value);
+                        row.DPMES_CANTIDADESTIMADA = cantidad;
+                    }
+                    else
+                    {
+                        cantidad = Convert.ToInt32(Convert.ToInt32(txtCantAPlanificar.Text) * (numPorcentaje.Value / 100));
+                        row.DPMES_CANTIDADESTIMADA = cantidad;
+
+                    }
+                    row.DPED_CODIGO = 0;
+                    row.EndEdit();
+                    dsPlanMensual.DETALLE_PLANES_MENSUALES.AddDETALLE_PLANES_MENSUALESRow(row);
+
+                    //Metodo que recalcula los valores Ingresados
+                    CalcularCantidades(cantidad);
+
+                    //Seteamos la interface al estado de carga de detalle
+                    cbCocinas.SetSelectedIndex(-1);
+                    numPorcentaje.Value = 0;
+                    numUnidades.Value = 0;
                 }
                 else
                 {
-                    cantidad = Convert.ToInt32(Convert.ToInt32(txtCantAPlanificar.Text) * (numPorcentaje.Value / 100));
-                    row.DPMES_CANTIDADESTIMADA = cantidad;
-
+                    Entidades.Mensajes.MensajesABM.MsjValidacion(msjerror, this.Text);
                 }
-                row.DPED_CODIGO = 0;
-                row.EndEdit();
-                dsPlanMensual.DETALLE_PLANES_MENSUALES.AddDETALLE_PLANES_MENSUALESRow(row);
-
-                //Metodo que recalcula los valores Ingresados
-                CalcularCantidades(cantidad);
-
-                //Seteamos la interface al estado de carga de detalle
-                cbCocinas.SetSelectedIndex(-1);
-                numPorcentaje.Value = 0;
-                numUnidades.Value = 0;
-
             }
             catch (Exception ex)
             {
@@ -1245,6 +1293,5 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
 
         #endregion       
-
     }
 }
