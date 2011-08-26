@@ -89,7 +89,7 @@ namespace GyCAP.BLL
                 Descripcion = row.MP_DESCRIPCION,
                 EsPrincipal = Convert.ToInt32(row.MP_ESPRINCIPAL),
                 Nombre = row.MP_NOMBRE,
-                UbicacionStock = null
+                UbicacionStock =new GyCAP.Entidades.UbicacionStock(Convert.ToInt32(row.USTCK_NUMERO))
             };
 
             return mp;
