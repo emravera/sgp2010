@@ -103,7 +103,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Agregamos la columnas
             dgvPlanMensual.Columns.Add("DPMES_CODIGO", "Código");
             dgvPlanMensual.Columns.Add("PMES_CODIGO", "Mes");
-            dgvPlanMensual.Columns.Add("COC_CODIGO", "Cocina Codigo");
+            dgvPlanMensual.Columns.Add("COC_CODIGO", "Cocina Código");
             dgvPlanMensual.Columns.Add("DPMES_CANTIDADESTIMADA", "C.Estimada");
             dgvPlanMensual.Columns.Add("DPMES_CANTPLANIFICADA", "C.Planificada");
             dgvPlanMensual.Columns.Add("DPED_CODIGO", "Detalle Pedido");
@@ -241,8 +241,9 @@ namespace GyCAP.UI.PlanificacionProduccion
                     dsPlanSemanal.PLANES_SEMANALES.Clear();
                     cbSemana.Items.Clear();                    
             
-                    //Limpio el dataset de detalle de plan semanal 
-                    //dsPlanSemanal.DETALLE_PLANES_SEMANALES.Clear();
+                    //Limpiamos los valores ya buscados
+                    dsPlanSemanal.DIAS_PLAN_SEMANAL.Clear();
+                    dsPlanSemanal.DETALLE_PLANES_SEMANALES.Clear();
 
                     tcPlanAnual.SelectedTab = tpBuscar;
                     estadoActual = estadoUI.inicio;
@@ -885,7 +886,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            SetInterface(estadoUI.inicio);
+            SetInterface(estadoUI.inicio);           
         }
         
         private void btnCargaDetalle_Click(object sender, EventArgs e)
@@ -1116,7 +1117,13 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                         if (codigoCocina == codigoCocinaAgregada)
                         {
-                            if (pedido == rows["DPED_CODIGO"].ToString())
+                            if (pedido != "0" && pedido == rows["DPED_CODIGO"].ToString())
+                            {
+                                rows.BeginEdit();
+                                rows.DPMES_CANTPLANIFICADA += 1;
+                                rows.EndEdit();
+                            }
+                            else
                             {
                                 rows.BeginEdit();
                                 rows.DPMES_CANTPLANIFICADA += 1;
@@ -1166,7 +1173,13 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                         if (codigoCocina == codigoCocinaAgregada)
                         {
-                            if (pedido == rows["DPED_CODIGO"].ToString())
+                            if (pedido != "0" && pedido == rows["DPED_CODIGO"].ToString())
+                            {
+                                rows.BeginEdit();
+                                rows.DPMES_CANTPLANIFICADA -= 1;
+                                rows.EndEdit();
+                            }
+                            else
                             {
                                 rows.BeginEdit();
                                 rows.DPMES_CANTPLANIFICADA -= 1;
@@ -1221,87 +1234,98 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             try
             {
-                //Checkeo las excepciones relacionadas con el Plan Semanal
-                List<Entidades.ExcepcionesPlan> excepciones = new List<GyCAP.Entidades.ExcepcionesPlan>();
-                excepciones = BLL.PlanSemanalBLL.CheckeoExcepciones(dsPlanSemanal.DETALLE_PLANES_SEMANALES);
-
-                if (excepciones.Count == 0 || checkeoExcepciones == true)
+                //Valido que el detalle del plan no sea nulo
+                if (dsPlanSemanal.DETALLE_PLANES_SEMANALES.Count > 0)
                 {
-                    //Creamos el objeto del plan mensual para insertar en el plan mensual
-                    Entidades.PlanMensual planMensual = new GyCAP.Entidades.PlanMensual();
-                    planMensual.Codigo = Convert.ToInt32(cbMesDatos.GetSelectedValue());
 
-                    //Creamos el objeto del Plan semanal
-                    Entidades.PlanSemanal planSemanal = new GyCAP.Entidades.PlanSemanal();
-                    planSemanal.FechaCreacion = BLL.DBBLL.GetFechaServidor();
-                    planSemanal.PlanMensual = planMensual;
-                    planSemanal.Semana = Convert.ToInt32(cbSemanaDatos.GetSelectedText());
-                    planSemanal.Codigo = codigoPlanSemanal;
+                    //Checkeo las excepciones relacionadas con el Plan Semanal
+                    List<Entidades.ExcepcionesPlan> excepciones = new List<GyCAP.Entidades.ExcepcionesPlan>();
+                    excepciones = BLL.PlanSemanalBLL.CheckeoExcepciones(dsPlanSemanal.DETALLE_PLANES_SEMANALES);
 
-                    //Creamos el objeto del dia del Plan Semanal
-                    Entidades.DiasPlanSemanal diaPlan = new GyCAP.Entidades.DiasPlanSemanal();
-                    diaPlan.Dia = getDia(dtpFechaDia.Value);
-                    diaPlan.Fecha = dtpFechaDia.Value;
-                    diaPlan.PlanSemanal = planSemanal;
-
-                    if (estadoActual == estadoUI.cargaDetalle)
+                    if (excepciones.Count == 0 || checkeoExcepciones == true)
                     {
-                        if (esPrimero == true)
+                        //Creamos el objeto del plan mensual para insertar en el plan mensual
+                        Entidades.PlanMensual planMensual = new GyCAP.Entidades.PlanMensual();
+                        planMensual.Codigo = Convert.ToInt32(cbMesDatos.GetSelectedValue());
+
+                        //Creamos el objeto del Plan semanal
+                        Entidades.PlanSemanal planSemanal = new GyCAP.Entidades.PlanSemanal();
+                        planSemanal.FechaCreacion = BLL.DBBLL.GetFechaServidor();
+                        planSemanal.PlanMensual = planMensual;
+                        planSemanal.Semana = Convert.ToInt32(cbSemanaDatos.GetSelectedText());
+                        planSemanal.Codigo = codigoPlanSemanal;
+
+                        //Creamos el objeto del dia del Plan Semanal
+                        Entidades.DiasPlanSemanal diaPlan = new GyCAP.Entidades.DiasPlanSemanal();
+                        diaPlan.Dia = getDia(dtpFechaDia.Value);
+                        diaPlan.Fecha = dtpFechaDia.Value;
+                        diaPlan.PlanSemanal = planSemanal;
+
+                        if (estadoActual == estadoUI.cargaDetalle)
+                        {
+                            if (esPrimero == true)
+                            {
+                                //Llamamos al método que realiza el guardado de los datos en la clase Plan Semanal
+                                codigoPlanSemanal = BLL.PlanSemanalBLL.InsertarPlanSemanal(planSemanal, diaPlan, dsPlanSemanal, esPrimero);
+                            }
+                            else
+                            {
+                                int guardaCodigo = codigoPlanSemanal;
+                                codigoPlanSemanal = BLL.PlanSemanalBLL.InsertarPlanSemanal(planSemanal, diaPlan, dsPlanSemanal, esPrimero);
+                                codigoPlanSemanal = guardaCodigo;
+                            }
+                        }
+                        else if (estadoActual == estadoUI.modificar)
                         {
                             //Llamamos al método que realiza el guardado de los datos en la clase Plan Semanal
-                            codigoPlanSemanal = BLL.PlanSemanalBLL.InsertarPlanSemanal(planSemanal, diaPlan, dsPlanSemanal, esPrimero);
+                            BLL.PlanSemanalBLL.ModificarPlanSemanal(planSemanal, diaPlan, dsPlanSemanal);
                         }
-                        else
-                        {
-                            int guardaCodigo = codigoPlanSemanal;
-                            codigoPlanSemanal = BLL.PlanSemanalBLL.InsertarPlanSemanal(planSemanal, diaPlan, dsPlanSemanal, esPrimero);
-                            codigoPlanSemanal = guardaCodigo;
-                        }
-                    }
-                    else if (estadoActual == estadoUI.modificar)
-                    {
-                        //Llamamos al método que realiza el guardado de los datos en la clase Plan Semanal
-                        BLL.PlanSemanalBLL.ModificarPlanSemanal(planSemanal, diaPlan, dsPlanSemanal);
-                    }
 
-                    //Si esta todo bien aceptamos los cambios que se le hacen al dataset
-                    dsPlanSemanal.AcceptChanges();
+                        //Si esta todo bien aceptamos los cambios que se le hacen al dataset
+                        dsPlanSemanal.AcceptChanges();
 
-                    //Verificamos si esta modificando
-                    if (estadoActual == estadoUI.modificar)
-                    {
-                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Día de Plan Semanal", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
-                        SetInterface(estadoUI.inicio);
-                    }
-                    else if (estadoActual == estadoUI.cargaDetalle)
-                    {
-                        //Verifico si quiere continuar cargando
-                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Día de Plan Semanal", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
-                        DialogResult respuesta = MessageBox.Show("¿Desea continuar cargando otro día de la semana?", "Pregunta: Guardado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                        if (respuesta == DialogResult.Yes)
+                        //Verificamos si esta modificando
+                        if (estadoActual == estadoUI.modificar)
                         {
-                            esPrimero = false;
-                            SetInterface(estadoUI.cargaDetalle);
-                        }
-                        else
-                        {
+                            Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Día de Plan Semanal", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                             SetInterface(estadoUI.inicio);
                         }
+                        else if (estadoActual == estadoUI.cargaDetalle)
+                        {
+                            //Verifico si quiere continuar cargando
+                            Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Día de Plan Semanal", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                            DialogResult respuesta = MessageBox.Show("¿Desea continuar cargando el siguiente día de la semana?", "Pregunta: Guardado", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                            if (respuesta == DialogResult.Yes)
+                            {
+                                esPrimero = false;
+                                dtpFechaDia.Value = dtpFechaDia.Value.AddDays(1);
+                                dtpFechaDia.Focus();
+                                SetInterface(estadoUI.cargaDetalle);
+                            }
+                            else
+                            {
+                                SetInterface(estadoUI.inicio);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //Si existen excepciones relacionadas con el Plan Semanal
+                        PlanificacionProduccion.frmExcepcionesPlan frmExcepciones = new frmExcepcionesPlan();
+                        frmExcepciones.TopLevel = false;
+                        frmExcepciones.Parent = this.Parent;
+                        frmExcepciones.CargarGrilla(excepciones);
+                        frmExcepciones.Show();
+                        frmExcepciones.BringToFront();
+
+                        //Cambio el valor de checkeo excepciones a TRUE para que pase una vez
+                        checkeoExcepciones = true;
                     }
                 }
                 else
                 {
-                    //Si existen excepciones relacionadas con el Plan Semanal
-                    PlanificacionProduccion.frmExcepcionesPlan frmExcepciones = new frmExcepcionesPlan();
-                    frmExcepciones.TopLevel = false;
-                    frmExcepciones.Parent = this.Parent;
-                    frmExcepciones.CargarGrilla(excepciones);
-                    frmExcepciones.Show();
-                    frmExcepciones.BringToFront();
-
-                    //Cambio el valor de checkeo excepciones a TRUE para que pase una vez
-                    checkeoExcepciones = true;
+                    Entidades.Mensajes.MensajesABM.MsjValidacion("No se puede guardar un plan semanal sin que tenga detalle", this.Text);
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -1438,7 +1462,6 @@ namespace GyCAP.UI.PlanificacionProduccion
         }       
 
         #endregion
-
 
     }
 }

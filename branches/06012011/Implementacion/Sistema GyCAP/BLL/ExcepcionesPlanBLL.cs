@@ -19,6 +19,7 @@ namespace GyCAP.BLL
             //Creo el objeto excepcion 
             Entidades.ExcepcionesPlan excepcion = new GyCAP.Entidades.ExcepcionesPlan();
             cantidad = cantidad * -1;
+            cantidad = decimal.Round(cantidad, 3);
 
             excepcion.Nombre = "FALTA: " + materiaPrima.Nombre.ToString();
             excepcion.Tipo = Entidades.ExcepcionesPlan.TipoExcepcion.MateriaPrima;
