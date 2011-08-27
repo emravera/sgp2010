@@ -21,5 +21,10 @@ namespace GyCAP.BLL
         {
             return DAL.EstadoMovimientoStockDAL.GetEstadoEntity(nombreEstado);
         }
+
+        public static Entidades.EstadoMovimientoStock GetEstadoEntity(int codigoEstado)
+        {
+            return DAL.EstadoMovimientoStockDAL.GetEstadoEntity(codigoEstado);
+        }
     }
 }

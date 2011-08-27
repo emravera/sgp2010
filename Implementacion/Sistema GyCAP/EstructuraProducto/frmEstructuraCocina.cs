@@ -855,6 +855,9 @@ namespace GyCAP.UI.EstructuraProducto
                 BLL.EstadoParteBLL.ObtenerTodos(dsEstructura.ESTADO_PARTES);
                 BLL.HojaRutaBLL.ObtenerHojasRuta(dsEstructura.HOJAS_RUTA);
                 BLL.TipoUnidadMedidaBLL.ObtenerTodos(dsEstructura.TIPOS_UNIDADES_MEDIDA);
+                BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsEstructura.UBICACIONES_STOCK);
+                BLL.ContenidoUbicacionStockBLL.ObtenerContenidosUbicacionStock(dsEstructura.CONTENIDO_UBICACION_STOCK);
+                BLL.TipoUbicacionStockBLL.ObtenerTiposUbicacionStock(dsEstructura.TIPOS_UBICACIONES_STOCK);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {

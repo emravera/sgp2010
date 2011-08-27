@@ -34,5 +34,20 @@ namespace GyCAP.BLL
                 Descripcion = row.TUS_DESCRIPCION
             };
         }
+
+        public static Entidades.TipoUbicacionStock GetTipoUbicacion(int codigo)
+        {
+            Data.dsStock.TIPOS_UBICACIONES_STOCKDataTable dt = DAL.TipoUbicacionStockDAL.GetTipoUbicacion(codigo);
+            Entidades.TipoUbicacionStock tipo = new GyCAP.Entidades.TipoUbicacionStock();
+
+            if (dt.Rows.Count > 0)
+            {
+                tipo.Codigo = Convert.ToInt32(dt.Rows[0]["tus_codigo"].ToString());
+                tipo.Descripcion = dt.Rows[0]["tus_descripcion"].ToString();
+                tipo.Nombre = dt.Rows[0]["tus_nombre"].ToString();
+            }
+
+            return tipo;
+        }
     }
 }

@@ -81,6 +81,30 @@ namespace GyCAP.BLL
             return ubicacion;
         }
 
+        public static Entidades.UbicacionStock GetUbicacionStock(int numeroUbicacion)
+        {
+            Data.dsStock.UBICACIONES_STOCKDataTable dt = DAL.UbicacionStockDAL.GetUbicacionStock(numeroUbicacion);
+            Entidades.UbicacionStock ubicacion = new GyCAP.Entidades.UbicacionStock();
+                
+            if (dt.Rows.Count > 0)
+            {
+                ubicacion.Numero = numeroUbicacion;
+                ubicacion.Codigo = dt.Rows[0]["ustck_codigo"].ToString();
+                ubicacion.Activo = Convert.ToInt32(dt.Rows[0]["ustck_activo"].ToString());
+                ubicacion.Descripcion = dt.Rows[0]["ustck_descripcion"].ToString();
+                ubicacion.CantidadReal = Convert.ToDecimal(dt.Rows[0]["ustck_cantidadreal"].ToString());
+                ubicacion.Contenido = BLL.ContenidoUbicacionStockBLL.GetContenidoUbicacionStock(Convert.ToInt32(dt.Rows[0]["con_codigo"].ToString()));
+                ubicacion.Nombre = dt.Rows[0]["ustck_nombre"].ToString();
+                ubicacion.TipoUbicacion = BLL.TipoUbicacionStockBLL.GetTipoUbicacion(Convert.ToInt32(dt.Rows[0]["tus_codigo"].ToString()));
+                ubicacion.UbicacionFisica = dt.Rows[0]["ustck_ubicacionfisica"].ToString();
+                string numeroPadre = dt.Rows[0]["ustck_padre"].ToString();
+                ubicacion.UbicacionPadre = (!string.IsNullOrEmpty(numeroPadre)) ? GetUbicacionStock(Convert.ToInt32(dt.Rows[0]["ustck_padre"].ToString())) : null;
+                ubicacion.UnidadMedida = UnidadMedidaBLL.GetUnidadMedida(Convert.ToInt32(dt.Rows[0]["umed_codigo"].ToString()));
+            }
+
+            return ubicacion;
+        }
+
         public static void ActualizarCantidadesStock(int numeroUbicacion, decimal cantidadReal)
         {
             DAL.UbicacionStockDAL.ActualizarCantidadesStock(numeroUbicacion, cantidadReal, null);

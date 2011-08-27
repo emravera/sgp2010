@@ -96,5 +96,21 @@ namespace GyCAP.BLL
 
             return umed;
         }
+
+        public static Entidades.UnidadMedida GetUnidadMedida(int codigo)
+        {
+            Data.dsEntregaProducto.UNIDADES_MEDIDADataTable dt = DAL.UnidadMedidaDAL.GetUnidadMedida(codigo);
+            Entidades.UnidadMedida unidad = new GyCAP.Entidades.UnidadMedida();
+
+            if (dt.Rows.Count > 0)
+            {
+                unidad.Codigo = codigo;
+                unidad.Abreviatura = dt.Rows[0]["umed_abreviatura"].ToString();
+                unidad.Nombre = dt.Rows[0]["umed_nombre"].ToString();
+                unidad.Tipo = BLL.TipoUnidadMedidaBLL.GetTipoUnidadMedida(Convert.ToInt32(dt.Rows[0]["tumed_codigo"].ToString()));
+            }
+
+            return unidad;
+        }
     }
 }

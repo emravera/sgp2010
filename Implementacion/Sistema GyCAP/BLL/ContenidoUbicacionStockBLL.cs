@@ -40,5 +40,20 @@ namespace GyCAP.BLL
                 Descripcion = row.CON_DESCRIPCION
             };
         }
+
+        public static Entidades.ContenidoUbicacionStock GetContenidoUbicacionStock(int codigo)
+        {
+            Data.dsStock.CONTENIDO_UBICACION_STOCKDataTable dt = DAL.ContenidoUbicacionStockDAL.GetContenidoUbicacionStock(codigo);
+            Entidades.ContenidoUbicacionStock contenido = new GyCAP.Entidades.ContenidoUbicacionStock();
+
+            if (dt.Rows.Count > 0)
+            {
+                contenido.Codigo = codigo;
+                contenido.Nombre = dt.Rows[0]["con_nombre"].ToString();
+                contenido.Descripcion = dt.Rows[0]["con_descripcion"].ToString();
+            }
+
+            return contenido;
+        }
     }
 }
