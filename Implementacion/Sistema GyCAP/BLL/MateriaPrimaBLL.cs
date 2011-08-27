@@ -78,28 +78,6 @@ namespace GyCAP.BLL
         /// </summary>
         /// <param name="row">El data row de materia prima.</param>
         /// <returns>La entidad Materia Prima.</returns>
-        public static Entidades.MateriaPrima AsMateriaPrimaEntity(Data.dsEstructuraProducto.MATERIAS_PRIMASRow row)
-        {
-            Entidades.MateriaPrima mp = new GyCAP.Entidades.MateriaPrima()
-            {
-                CodigoMateriaPrima = Convert.ToInt32(row.MP_CODIGO),
-                Cantidad = row.MP_CANTIDAD,
-                CodigoUnidadMedida = Convert.ToInt32(row.UMED_CODIGO),
-                Costo = row.MP_COSTO,
-                Descripcion = row.MP_DESCRIPCION,
-                EsPrincipal = Convert.ToInt32(row.MP_ESPRINCIPAL),
-                Nombre = row.MP_NOMBRE,
-                UbicacionStock =new GyCAP.Entidades.UbicacionStock(Convert.ToInt32(row.USTCK_NUMERO))
-            };
-
-            return mp;
-        }
-
-        /// <summary>
-        /// Transforma una data row de materia prima en una entidad de materia prima.
-        /// </summary>
-        /// <param name="row">El data row de materia prima.</param>
-        /// <returns>La entidad Materia Prima.</returns>
         public static Entidades.MateriaPrima AsMateriaPrimaEntity(int codigoMP, Data.dsEstructuraProducto ds)
         {
             Data.dsEstructuraProducto.MATERIAS_PRIMASRow row = ds.MATERIAS_PRIMAS.FindByMP_CODIGO(codigoMP);

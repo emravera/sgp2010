@@ -162,12 +162,12 @@ namespace GyCAP.UI.Soporte
 
         private void txtNombreBuscar_Enter(object sender, EventArgs e)
         {
-            txtNombreBuscar.SelectAll();
+            //txtNombreBuscar.SelectAll();
         }
 
         private void txtNombre_Enter(object sender, EventArgs e)
         {
-            txtNombre.SelectAll();
+            //txtNombre.SelectAll();
         }
                
         public static frmLocalidad Instancia

@@ -50,6 +50,24 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
+        public static string GetNombreTipoEntidad(int codigoTipo)
+        {
+            string sql = "SELECT tentd_nombre FROM TIPOS_ENTIDAD WHERE tentd_codigo = @p0";
+
+            try
+            {
+                object result = DB.executeScalar(sql, new object[] { codigoTipo }, null);
+
+                if (result != null)
+                {
+                    return result.ToString();
+                }
+
+                throw new Entidades.Excepciones.ElementoInexistenteException();
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
         public static TipoEntidadEnum GetTipoEntidad(string nombreTipoEntidad)
         {
             switch (nombreTipoEntidad)

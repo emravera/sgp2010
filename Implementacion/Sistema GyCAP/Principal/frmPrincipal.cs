@@ -202,8 +202,8 @@ namespace Principal
 
         private void tipoParte_Click(object sender, EventArgs e)
         {
-            GyCAP.UI.GestionStock.frmActualizacionStock.Instancia.MdiParent = this;
-            GyCAP.UI.GestionStock.frmActualizacionStock.Instancia.Show();
+            GyCAP.UI.GestionStock.frmMovimientoStock.Instancia.MdiParent = this;
+            GyCAP.UI.GestionStock.frmMovimientoStock.Instancia.Show();
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
