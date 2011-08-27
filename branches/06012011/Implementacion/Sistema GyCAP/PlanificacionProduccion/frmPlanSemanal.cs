@@ -1299,8 +1299,14 @@ namespace GyCAP.UI.PlanificacionProduccion
                             if (respuesta == DialogResult.Yes)
                             {
                                 esPrimero = false;
+                                
+                                //Agrego un dia al control que maneja el dia planificado
                                 dtpFechaDia.Value = dtpFechaDia.Value.AddDays(1);
                                 dtpFechaDia.Focus();
+
+                                //Pongo el valor en False para que vuelva a calcular las excepciones
+                                checkeoExcepciones = false;
+
                                 SetInterface(estadoUI.cargaDetalle);
                             }
                             else

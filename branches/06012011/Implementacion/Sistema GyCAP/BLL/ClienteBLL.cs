@@ -49,7 +49,10 @@ namespace GyCAP.BLL
 
         public static void Actualizar(Entidades.Cliente cliente)
         {
-            DAL.ClienteDAL.Actualizar(cliente);
+            //Si existe lanzamos la excepción correspondiente
+            if (EsCliente(cliente)) throw new Entidades.Excepciones.ElementoExistenteException();
+            //Como no existe lo creamos
+            else DAL.ClienteDAL.Actualizar(cliente);
         }
 
         public static bool EsCliente(Entidades.Cliente cliente)

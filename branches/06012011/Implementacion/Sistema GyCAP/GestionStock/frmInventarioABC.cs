@@ -45,7 +45,7 @@ namespace GyCAP.UI.GestionStock
             dgvModelos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvModelos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvModelos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvModelos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvModelos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvModelos.Columns["CODIGO_MODELO_PRODUCIDO"].DataPropertyName = "CODIGO_MODELO_PRODUCIDO";
@@ -59,6 +59,9 @@ namespace GyCAP.UI.GestionStock
             dgvModelos.Columns["MODELO_PORCENTAJE"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvModelos.Columns["MODELO_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
+            //Ocultamos las columnas que no queremos que se vean
+            dgvModelos.Columns["CODIGO_MODELO"].Visible = false;
+            
             //Creamos el dataview y lo asignamos a la grilla
             dvListaModelos = new DataView(dsInventarioABC.MODELOS_PRODUCIDOS);
             dgvModelos.DataSource = dvListaModelos;
@@ -66,12 +69,12 @@ namespace GyCAP.UI.GestionStock
             //Grilla de Materias Primas ABC
             //Agregamos la columnas
             dgvMP.Columns.Add("CODIGO_MATERIA_PRIMA_ABC", "Código");
-            dgvMP.Columns.Add("CODIGO_MATERIA_PRIMA", "MP");
+            dgvMP.Columns.Add("CODIGO_MATERIA_PRIMA", "Materia Prima");
             dgvMP.Columns.Add("CANTIDAD_ANUAL", "Cant.Anual");
             dgvMP.Columns.Add("PRECIO_UNIDAD", "Precio");
-            dgvMP.Columns.Add("CANTIDAD_INVERSION", "$ Inversion");
+            dgvMP.Columns.Add("CANTIDAD_INVERSION", "$ Inversión");
             dgvMP.Columns.Add("PORCENTAJE_INVERSION", "% Inv.");
-            dgvMP.Columns.Add("CATEGORIA_ABC", "Categoría");
+            dgvMP.Columns.Add("CATEGORIA_ABC", "CAT");
 
             //Seteamos el modo de tamaño de las columnas
             dgvMP.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -80,9 +83,8 @@ namespace GyCAP.UI.GestionStock
             dgvMP.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvMP.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvMP.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvMP.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-
+            dgvMP.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvMP.Columns["CODIGO_MATERIA_PRIMA_ABC"].DataPropertyName = "CODIGO_MATERIA_PRIMA_ABC";
             dgvMP.Columns["CODIGO_MATERIA_PRIMA"].DataPropertyName = "CODIGO_MATERIA_PRIMA";
@@ -98,6 +100,9 @@ namespace GyCAP.UI.GestionStock
             dgvMP.Columns["CANTIDAD_INVERSION"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvMP.Columns["PORCENTAJE_INVERSION"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                       
+            //Ocultamos las columnas que no queremos que se vean
+            dgvMP.Columns["CODIGO_MATERIA_PRIMA_ABC"].Visible = false;
+
             //Creamos el dataview y lo asignamos a la grilla
             dvListaMP = new DataView(dsInventarioABC.MATERIAS_PRIMAS_ABC);
             dgvMP.DataSource = dvListaMP;
@@ -170,8 +175,9 @@ namespace GyCAP.UI.GestionStock
                     cbAñoHistorico.Visible = false;
                     txtCantAnual.ReadOnly = true;
 
-                    //Escondo las columnas que no quiero que se vean
+                    //Ocultamos las columnas que no queremos que se vean
                     dgvModelos.Columns["CODIGO_MODELO"].Visible = false;
+
                     break;
 
                 case estadoUI.CargaDetalle:
@@ -183,26 +189,22 @@ namespace GyCAP.UI.GestionStock
                     //Limpiamos los controles
                     cbCocinas.SetSelectedIndex(-1);
                     numPorcentaje.Value = Convert.ToDecimal(0.00);
-
-                    //Escondo las columnas que no quiero que se vean
-                    dgvModelos.Columns["CODIGO_MODELO"].Visible = false;
                     break;
+
                 case estadoUI.generaHistorico:
                     gbDatosPrincipales.Enabled = false;
                     gbDatosCocinas.Visible = true;
                     gbMateriasPrimas.Visible = true;
                     gbMateriasPrimas.Enabled = true;
-                                       
-                    //Escondo las columnas que no quiero que se vean
-                    dgvModelos.Columns["CODIGO_MODELO"].Visible = false;
                     break;
+                
                 case estadoUI.generadoABC:
                     gbDatosPrincipales.Enabled = false;
                     gbDatosCocinas.Visible = true;
                     gbDatosCocinas.Enabled = true;
+                    break;
 
-                    //Escondo las columnas que no quiero que se vean
-                    dgvMP.Columns["CODIGO_MATERIA_PRIMA_ABC"].Visible = false;
+                default:
                     break;
             }
         }
@@ -402,7 +404,7 @@ namespace GyCAP.UI.GestionStock
                             //Sumo uno mas al contador
                             cont += 1;
                         }
-                        if (sum == 0)
+                        if (sum != 0)
                         {
                             //Le calculo los porcentajes a cada elemento de la matriz
                             for (int i = 0; i < cantidadModelos; i++)
@@ -437,7 +439,7 @@ namespace GyCAP.UI.GestionStock
                         }
                         else
                         {
-                            Entidades.Mensajes.MensajesABM.MsjValidacion("No existen datos para calcular el histórico", this.Text);
+                            Entidades.Mensajes.MensajesABM.MsjValidacion("El plan anual seleccionado no tiene Planes Mensuales ni semnales Generados para calcular el histórico", this.Text);
                         }
                     }
                 }
@@ -502,90 +504,105 @@ namespace GyCAP.UI.GestionStock
 
         private void btnCalcularABC_Click(object sender, EventArgs e)
         {
-            string validacion = ValidarABC();
-
-            if (validacion == string.Empty)
+            try
             {
-                //Limpiamos el Dataset de Materias Primas
-                dsInventarioABC.MATERIAS_PRIMAS_ABC.Clear();
+                string validacion = ValidarABC();
 
-                //Contamos la cantidad de modelos
-                int cantidadModelos =Convert.ToInt32(dsInventarioABC.MODELOS_PRODUCIDOS.Rows.Count);
-
-                //Defino las materias primas
-                decimal[,] mpModelo = new decimal[1,1];
-                decimal[,] mpCostos ;
-                              
-                //Buscamos las materias primas para cada modelo de cocina
-                foreach (Data.dsInventarioABC.MODELOS_PRODUCIDOSRow row in dsInventarioABC.MODELOS_PRODUCIDOS.Rows)
+                if (validacion == string.Empty)
                 {
-                    //Busco el modelo de cocina
-                    int modeloCocina = Convert.ToInt32(row["CODIGO_MODELO_PRODUCIDO"]);
+                    //Limpiamos el Dataset de Materias Primas
+                    dsInventarioABC.MATERIAS_PRIMAS_ABC.Clear();
 
-                    //Busco la cantidad de ese modelo a producir
-                    decimal cantidadPrducir = Convert.ToDecimal(row["MODELO_CANTIDAD"]);
+                    //Contamos la cantidad de modelos
+                    int cantidadModelos = Convert.ToInt32(dsInventarioABC.MODELOS_PRODUCIDOS.Rows.Count);
 
-                    
-                    //Obtengo las materias primas de ese modelo
-                    mpModelo = BLL.EstructuraBLL.ObtenerMateriasPrimasYCantidades(modeloCocina);
-                    
-                    //Calculo las cantidades para todo el año
-                    for (int j = 0; j < (mpModelo.Length/2); j++)
+                    //Defino las materias primas
+                    decimal[,] mpModelo = new decimal[1, 1];
+                    decimal[,] mpCostos;
+
+                    //Buscamos las materias primas para cada modelo de cocina
+                    foreach (Data.dsInventarioABC.MODELOS_PRODUCIDOSRow row in dsInventarioABC.MODELOS_PRODUCIDOS.Rows)
                     {
-                        mpModelo[j,1] = (mpModelo[j,1] * cantidadPrducir);
+                        //Busco el modelo de cocina
+                        int modeloCocina = Convert.ToInt32(row["CODIGO_MODELO_PRODUCIDO"]);
+
+                        //Busco la cantidad de ese modelo a producir
+                        decimal cantidadPrducir = Convert.ToDecimal(row["MODELO_CANTIDAD"]);
+
+
+                        //Obtengo las materias primas de ese modelo
+                        mpModelo = BLL.EstructuraBLL.ObtenerMateriasPrimasYCantidades(modeloCocina);
+
+                        //Calculo las cantidades para todo el año
+                        for (int j = 0; j < (mpModelo.Length / 2); j++)
+                        {
+                            mpModelo[j, 1] = (mpModelo[j, 1] * cantidadPrducir);
+                        }
+
+                        //Paso las cantidades a Precios
+                        mpCostos = new decimal[(mpModelo.Length / mpModelo.Rank), 2];
+
+                        for (int i = 0; i < (mpModelo.Length / 2); i++)
+                        {
+                            //Ontengo el Codigo de la MP
+                            decimal codigoMP = mpModelo[i, 0];
+
+                            //Obtengo el precio de esa materia prima
+                            decimal precioMP = BLL.MateriaPrimaBLL.ObtenerPrecioMP(codigoMP);
+
+                            //Asigno el codigo de MP y el costo total anual
+                            mpCostos[i, 0] = codigoMP;
+                            mpCostos[i, 1] = (mpModelo[i, 1] * precioMP);
+                        }
+
+                        //Me crea una matriz unica con el costo y la cantidad
+                        decimal[,] mpUnica = new decimal[(mpModelo.Length / mpModelo.Rank), 3];
+
+                        //Se Definen las Columnas: 0-codigoMP, 1-CantidadMPAnio, 2-CostoMPAnio
+                        for (int j = 0; j < (mpModelo.Length / mpModelo.Rank); j++)
+                        {
+                            mpUnica[j, 0] = mpModelo[j, 0];
+                            mpUnica[j, 1] = mpModelo[j, 1];
+                            mpUnica[j, 2] = mpCostos[j, 1];
+                        }
+
+                        //Se añade la matriz unificada a la Lista
+                        ActualizarLista(mpUnica);
                     }
 
-                    //Paso las cantidades a Precios
-                    mpCostos = new decimal[(mpModelo.Length / mpModelo.Rank), 2];
-                    
-                    for (int i = 0; i < (mpModelo.Length/2); i++)
-                    {
-                        //Ontengo el Codigo de la MP
-                        decimal codigoMP = mpModelo[i,0];  
+                    //Operaciones para calcular los porcentajes, ordenarlos y asignarle las clases
+                    calcularPorcentajes();
 
-                        //Obtengo el precio de esa materia prima
-                        decimal precioMP = BLL.MateriaPrimaBLL.ObtenerPrecioMP(codigoMP);
+                    //Se ordena la lista por los porcentajes
+                    materiasPrimas = materiasPrimas.OrderBy(x => x.PorcentajeMP).ToList();
+                    materiasPrimas.Reverse();
 
-                        //Asigno el codigo de MP y el costo total anual
-                        mpCostos[i,0] = codigoMP;
-                        mpCostos[i,1] = (mpModelo[i,1] * precioMP);                        
-                    }
+                    //Se caculan las clases a partir de los valores obtenidos
+                    determinarABC();
 
-                    //Me crea una matriz unica con el costo y la cantidad
-                    decimal[,] mpUnica = new decimal[(mpModelo.Length / mpModelo.Rank), 3];
+                    //Se pasa la lista generica al DataTable  de materias primas ABC
+                    generarDataTable();
 
-                    //Se Definen las Columnas: 0-codigoMP, 1-CantidadMPAnio, 2-CostoMPAnio
-                    for (int j = 0; j < (mpModelo.Length / mpModelo.Rank); j++)
-                    {
-                        mpUnica[j, 0] = mpModelo[j, 0];
-                        mpUnica[j, 1] = mpModelo[j, 1];
-                        mpUnica[j, 2] = mpCostos[j, 1];
-                    }
-
-                    //Se añade la matriz unificada a la Lista
-                    ActualizarLista(mpUnica);
+                    //Se muestra el groupbox donde esta la lista de clasificacion
+                    SetInterface(estadoUI.generadoABC);
                 }
-
-                //Operaciones para calcular los porcentajes, ordenarlos y asignarle las clases
-                calcularPorcentajes();
-
-                //Se ordena la lista por los porcentajes
-                materiasPrimas = materiasPrimas.OrderBy(x => x.PorcentajeMP).ToList();
-                materiasPrimas.Reverse();
-
-                //Se caculan las clases a partir de los valores obtenidos
-                determinarABC();
-
-                //Se pasa la lista generica al DataTable  de materias primas ABC
-                generarDataTable();
-
-                //Se muestra el groupbox donde esta la lista de clasificacion
-                SetInterface(estadoUI.generadoABC);
+                else
+                {
+                    Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
+                }
             }
-            else
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
-            }            
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+            }
+            catch (Entidades.Excepciones.CocinaSinEstructuraActivaException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+            }
+            catch (Entidades.Excepciones.EstructuraSinMateriaPrimaException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+            }
         }
 
         //Funcion que maneja la lista de MP
@@ -736,11 +753,7 @@ namespace GyCAP.UI.GestionStock
             }
         }
 
-        #endregion
-
-       
-
-       
+        #endregion  
 
     }
 }

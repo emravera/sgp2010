@@ -118,7 +118,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 81);
+            this.label5.Location = new System.Drawing.Point(60, 81);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 13);
             this.label5.TabIndex = 22;
@@ -131,14 +131,14 @@
             this.txtMotivoBaja.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMotivoBaja.Multiline = true;
             this.txtMotivoBaja.Name = "txtMotivoBaja";
-            this.txtMotivoBaja.Size = new System.Drawing.Size(417, 78);
+            this.txtMotivoBaja.Size = new System.Drawing.Size(426, 78);
             this.txtMotivoBaja.TabIndex = 8;
             this.txtMotivoBaja.Enter += new System.EventHandler(this.txtMotivoBaja_Enter);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 136);
+            this.label2.Location = new System.Drawing.Point(7, 132);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 13);
             this.label2.TabIndex = 20;
@@ -147,7 +147,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 106);
+            this.label6.Location = new System.Drawing.Point(45, 106);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 13);
             this.label6.TabIndex = 18;
@@ -158,14 +158,14 @@
             this.txtTelefono.Location = new System.Drawing.Point(94, 54);
             this.txtTelefono.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(121, 20);
+            this.txtTelefono.Size = new System.Drawing.Size(152, 20);
             this.txtTelefono.TabIndex = 5;
             this.txtTelefono.Enter += new System.EventHandler(this.txtTelefono_Enter);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 57);
+            this.label8.Location = new System.Drawing.Point(36, 57);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 13);
             this.label8.TabIndex = 14;
@@ -183,7 +183,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 33);
+            this.label3.Location = new System.Drawing.Point(18, 33);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 1;

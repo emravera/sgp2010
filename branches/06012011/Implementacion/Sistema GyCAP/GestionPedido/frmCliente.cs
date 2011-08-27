@@ -33,7 +33,7 @@ namespace GyCAP.UI.GestionPedido
             //Agregamos las columnas
             dgvLista.Columns.Add("CLI_CODIGO", "Código");
             dgvLista.Columns.Add("CLI_RAZONSOCIAL", "Razón Social");
-            dgvLista.Columns.Add("CLI_TELEFONO", "Telefono");
+            dgvLista.Columns.Add("CLI_TELEFONO", "Teléfono");
             dgvLista.Columns.Add("CLI_MAIL", "Mail");
             dgvLista.Columns.Add("CLI_ESTADO", "Estado");
 
@@ -73,7 +73,8 @@ namespace GyCAP.UI.GestionPedido
             //Seteo el maxlenght de los textbox para que no de error en la bd
             txtRazonSocial.MaxLength = 80;
             txtTelefono.MaxLength = 15;
-            txtMotivoBaja.MaxLength = 254; 
+            txtMotivoBaja.MaxLength = 254;
+            txtMail.MaxLength = 50;
             
             //Seteamos el estado de la interfaz
             SetInterface(estadoUI.inicio);
@@ -354,7 +355,7 @@ namespace GyCAP.UI.GestionPedido
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
-                    //Está cargando un nuevo Empleado
+                    //Está cargando un nuevo Cliente
                     cliente.RazonSocial = txtRazonSocial.Text.Trim();
                     cliente.Mail = txtMail.Text.Trim();
                     cliente.Telefono = txtTelefono.Text.Trim();
@@ -411,10 +412,11 @@ namespace GyCAP.UI.GestionPedido
                             //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
                             SetInterface(estadoUI.inicio);
                         }
+                        
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);                        
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);                        
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
@@ -422,8 +424,8 @@ namespace GyCAP.UI.GestionPedido
                     }
                 }
                 else
-                {
-                    //Está modificando una designacion
+                {                    
+                    //Está modificando un Cliente
                     //Primero obtenemos su código del dataview que está realacionado a la fila seleccionada                
                     cliente.Codigo = Convert.ToInt32(dvCliente[dgvLista.SelectedRows[0].Index]["cli_codigo"]);
 
@@ -431,21 +433,30 @@ namespace GyCAP.UI.GestionPedido
                     cliente.RazonSocial = txtRazonSocial.Text.Trim();
                     cliente.Mail = txtMail.Text.Trim();
                     cliente.Telefono = txtTelefono.Text.Trim();
-                    cliente.MotivoBaja = txtMotivoBaja.Text.Trim();
+
+                    //Si se le esta dando de baja se guarda el motivo sino se pone en blanco
                     if (cboEstado.SelectedItem.ToString().Substring(0, 1) == "A")
+                    {
                         cliente.Estado = "A";
+                        cliente.MotivoBaja = string.Empty;
+                    }
                     else
+                    {
                         cliente.Estado = "I";
+                        cliente.MotivoBaja = txtMotivoBaja.Text.Trim();
+                    }
 
                     try
                     {
                         //Lo actualizamos en la DB
                         BLL.ClienteBLL.Actualizar(cliente);
+
                         //Lo actualizamos en el dataset y aceptamos los cambios
                         Data.dsCliente.CLIENTESRow rowCliente = dsCliente.CLIENTES.FindByCLI_CODIGO(cliente.Codigo);
+
                         //Indicamos que comienza la edición de la fila
                         rowCliente.BeginEdit();
-                        //rowEmpleado.E_CODIGO = empleado.Codigo;
+
                         rowCliente.CLI_RAZONSOCIAL = cliente.RazonSocial;
                         rowCliente.CLI_TELEFONO = cliente.Telefono;
                         rowCliente.CLI_MAIL = cliente.Mail;
@@ -454,19 +465,23 @@ namespace GyCAP.UI.GestionPedido
 
                         //Termina la edición de la fila
                         rowCliente.EndEdit();
-                        
+
                         //Agregamos la fila al dataset y aceptamos los cambios
                         dsCliente.CLIENTES.AcceptChanges();
-                        
+
                         //Avisamos que estuvo todo ok
                         Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Cliente", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
-                                                
+
                         //Y por último seteamos el estado de la interfaz
-                        SetInterface(estadoUI.inicio);
-                    }
+                        SetInterface(estadoUI.inicio);                       
+                    }                    
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);                        
+                    }
+                    catch (Entidades.Excepciones.ElementoExistenteException ex)
+                    {
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);
                     }
                 }
 
@@ -497,7 +512,7 @@ namespace GyCAP.UI.GestionPedido
                     }
                     catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                     {
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);                        
+                        Entidades.Mensajes.MensajesABM.MsjElementoTransaccion(ex.Message, this.Text);                        
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
@@ -510,8 +525,7 @@ namespace GyCAP.UI.GestionPedido
                 Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Cliente", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);                
             }
         }
-        #endregion
+        #endregion        
 
-        
     }
 }

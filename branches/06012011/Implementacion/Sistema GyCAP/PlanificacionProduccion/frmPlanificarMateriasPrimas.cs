@@ -46,7 +46,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvLista.Columns["PMPA_MES"].DataPropertyName = "PMPA_MES";
             dgvLista.Columns["PMPA_FECHACREACION"].DataPropertyName = "PMPA_FECHACREACION";
 
-            //Oculto las columnas que no se pueden
+            //Oculto las columnas
             dgvLista.Columns["PMPA_CODIGO"].Visible = false;
             
             //Creamos el dataview y lo asignamos a la grilla
@@ -75,6 +75,9 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             //Oculto las columnas que no se pueden
             dgvDetalle.Columns["DPMPA_CODIGO"].Visible = false;
+
+            //Seteo la alineación de las columnas con números
+            dgvDetalle.Columns["DPMPA_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetalle = new DataView(dsPlanMP.DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL);
@@ -144,11 +147,9 @@ namespace GyCAP.UI.PlanificacionProduccion
                     //Limpio los dataTables
                     dsPlanMP.DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL.Clear();
                     dsPlanMP.PLANES_MATERIAS_PRIMAS_ANUALES.Clear();
-                    
-                    //Seteamos las columnas que no queremos que se vean
-                    dgvLista.Columns["PMPA_CODIGO"].Visible = false;
-                    dgvDetalle.Columns["DPMPA_CODIGO"].Visible = false;
+                                     
                     break;
+
                 case estadoUI.nuevo:
                     txtAnioBuscar.Text = string.Empty;
                     gbGrillaDemanda.Visible = true;
@@ -162,8 +163,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                     //Limpio los dataTables
                     dsPlanMP.DETALLE_PLAN_MATERIAS_PRIMAS_ANUAL.Clear();
                     dsPlanMP.PLANES_MATERIAS_PRIMAS_ANUALES.Clear();
-
                     break;
+
                 case estadoUI.buscar:
                     txtAnioBuscar.Text = string.Empty;
                     gbGrillaDemanda.Visible = true;
@@ -178,16 +179,13 @@ namespace GyCAP.UI.PlanificacionProduccion
                     }
                     else hayDatos = false;
                     btnConsultar.Enabled = hayDatos;
-                    btnEliminar.Enabled = hayDatos;
-
-                    //Seteamos las columnas que no queremos que se vean
-                    dgvLista.Columns["PMPA_CODIGO"].Visible = false;
-                    dgvDetalle.Columns["DPMPA_CODIGO"].Visible = false;
+                    btnEliminar.Enabled = hayDatos;                   
                     break;
+
                 case estadoUI.calcular:
                     txtAnioBuscar.Text = string.Empty;
                     gbGrillaDemanda.Visible = true;
-                    gbGrillaDetalle.Visible = true;
+                    gbGrillaDetalle.Visible = false;
                     gbBuscar.Visible = false;
                     gbDatosPrincipales.Visible = true;
                     btnNuevo.Enabled = true;
@@ -265,8 +263,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 //creo el plan y el detalle de las materias primas
                 IList<Entidades.PlanMateriaPrima> planesMP = new List<Entidades.PlanMateriaPrima>();
                 IList<Entidades.DetallePlanMateriasPrimas> detalleplanMP = new List<Entidades.DetallePlanMateriasPrimas>();
-
-                            
+                                            
                 for(int i=0; i<12;i++)
                 {
                     //Creo el plan de las materias primas 
@@ -479,23 +476,25 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void dgvDetalle_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value.ToString() != String.Empty)
+            if (e.Value != null)
             {
-                switch (dgvDetalle.Columns[e.ColumnIndex].Name)
+                if (e.Value.ToString() != String.Empty)
                 {
-                    case "MP_CODIGO":
-                        string nombreMP = dsPlanMP.MATERIAS_PRIMAS.FindByMP_CODIGO(Convert.ToInt32(e.Value)).MP_NOMBRE;
-                        e.Value = nombreMP;
-                        break;
-                    case "UMED_CODIGO":
-                        string nombreUMed = dsPlanMP.UNIDADES_MEDIDA.FindByUMED_CODIGO(Convert.ToInt32(e.Value)).UMED_NOMBRE;
-                        e.Value = nombreUMed;
-                        break;
+                    switch (dgvDetalle.Columns[e.ColumnIndex].Name)
+                    {
+                        case "MP_CODIGO":
+                            string nombreMP = dsPlanMP.MATERIAS_PRIMAS.FindByMP_CODIGO(Convert.ToInt32(e.Value)).MP_NOMBRE;
+                            e.Value = nombreMP;
+                            break;
+                        case "UMED_CODIGO":
+                            string nombreUMed = dsPlanMP.UNIDADES_MEDIDA.FindByUMED_CODIGO(Convert.ToInt32(e.Value)).UMED_NOMBRE;
+                            e.Value = nombreUMed;
+                            break;
 
-                    default:
-                        break;
+                        default:
+                            break;
+                    }
                 }
-
             }
         }
 

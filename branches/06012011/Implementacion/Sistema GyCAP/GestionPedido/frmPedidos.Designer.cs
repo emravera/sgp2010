@@ -388,11 +388,10 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dgvLista);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(3, 139);
+            this.groupBox2.Location = new System.Drawing.Point(3, 115);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(9);
-            this.groupBox2.Size = new System.Drawing.Size(564, 306);
+            this.groupBox2.Size = new System.Drawing.Size(756, 342);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Listado de Pedidos";
@@ -411,7 +410,7 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(546, 275);
+            this.dgvLista.Size = new System.Drawing.Size(738, 311);
             this.dgvLista.TabIndex = 6;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
@@ -421,11 +420,11 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(232, 24);
+            this.label11.Location = new System.Drawing.Point(35, 48);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(44, 13);
             this.label11.TabIndex = 7;
-            this.label11.Text = "Estado:";
+            this.label11.Text = "Estado:";            
             // 
             // label10
             // 
@@ -455,7 +454,7 @@
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(578, 50);
+            this.tsMenu.Size = new System.Drawing.Size(770, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
@@ -535,7 +534,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(564, 106);
+            this.groupBox1.Size = new System.Drawing.Size(756, 106);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
@@ -545,7 +544,7 @@
             this.sfFechaHasta.CausesValidation = false;
             this.sfFechaHasta.CustomFormat = " ";
             this.sfFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.sfFechaHasta.Location = new System.Drawing.Point(85, 46);
+            this.sfFechaHasta.Location = new System.Drawing.Point(282, 20);
             this.sfFechaHasta.Name = "sfFechaHasta";
             this.sfFechaHasta.Size = new System.Drawing.Size(102, 20);
             this.sfFechaHasta.TabIndex = 1;
@@ -553,7 +552,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 50);
+            this.label13.Location = new System.Drawing.Point(203, 24);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(71, 13);
             this.label13.TabIndex = 13;
@@ -581,7 +580,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 75);
+            this.label5.Location = new System.Drawing.Point(31, 72);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 13);
             this.label5.TabIndex = 10;
@@ -602,10 +601,10 @@
             this.cboEstadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboEstadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboEstadoBuscar.FormattingEnabled = true;
-            this.cboEstadoBuscar.Location = new System.Drawing.Point(282, 21);
+            this.cboEstadoBuscar.Location = new System.Drawing.Point(85, 45);
             this.cboEstadoBuscar.Name = "cboEstadoBuscar";
             this.cboEstadoBuscar.Size = new System.Drawing.Size(115, 21);
-            this.cboEstadoBuscar.TabIndex = 3;
+            this.cboEstadoBuscar.TabIndex = 3;            
             // 
             // btnBuscar
             // 
@@ -806,7 +805,7 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(570, 448);
+            this.tpBuscar.Size = new System.Drawing.Size(762, 463);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -823,7 +822,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(582, 513);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 528);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
             // tcPedido
@@ -840,7 +839,7 @@
             this.tcPedido.Name = "tcPedido";
             this.tcPedido.Padding = new System.Drawing.Point(0, 0);
             this.tcPedido.SelectedIndex = 0;
-            this.tcPedido.Size = new System.Drawing.Size(578, 457);
+            this.tcPedido.Size = new System.Drawing.Size(770, 472);
             this.tcPedido.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcPedido.TabIndex = 8;
             // 
@@ -848,7 +847,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 513);
+            this.ClientSize = new System.Drawing.Size(774, 528);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

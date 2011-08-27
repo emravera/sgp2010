@@ -130,7 +130,7 @@ namespace GyCAP.DAL
         //Metodo que valida que no se intente guardar algo que ya esta en la BD
         public static bool esCliente(Entidades.Cliente cliente)
         {
-            string sql = "SELECT count(cli_codigo) FROM CLIENTES WHERE cli_codigo = @p0";
+            string sql = "SELECT count(cli_codigo) FROM CLIENTES WHERE cli_razonsocial = @p0";
             object[] valorParametros = { cliente.Codigo };
             try
             {
