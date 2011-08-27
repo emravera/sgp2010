@@ -141,29 +141,29 @@ namespace GyCAP.BLL
             switch (entidad.TipoEntidad.Nombre)
             {
                 case TipoEntidadBLL.PedidoNombre:
-                    entidad.EntidadExterna = new Pedido() { Codigo = idEntidad };
+                    entidad.EntidadExterna = new Pedido() { Codigo = Convert.ToInt32(dt.Rows[0]["entd_id"].ToString()) };
                     break;
                 case TipoEntidadBLL.DetallePedidoNombre:
-                    entidad.EntidadExterna = new DetallePedido() { Codigo = idEntidad };
+                    entidad.EntidadExterna = new DetallePedido() { Codigo = Convert.ToInt32(dt.Rows[0]["entd_id"].ToString()) };
                     break;
                 case TipoEntidadBLL.ManualNombre:
                     entidad.EntidadExterna = null;
                     entidad.Nombre = TipoEntidadBLL.ManualNombre;
                     break;
                 case TipoEntidadBLL.OrdenProduccionNombre:
-                    entidad.EntidadExterna = new OrdenProduccion() { Numero = idEntidad };
+                    entidad.EntidadExterna = new OrdenProduccion() { Numero = Convert.ToInt32(dt.Rows[0]["entd_id"].ToString()) };
                     break;
                 case TipoEntidadBLL.OrdenTrabajoNombre:
-                    entidad.EntidadExterna = new OrdenTrabajo() { Numero = idEntidad };
+                    entidad.EntidadExterna = new OrdenTrabajo() { Numero = Convert.ToInt32(dt.Rows[0]["entd_id"].ToString()) };
                     break;
                 case TipoEntidadBLL.MantenimientoNombre:
-                    entidad.EntidadExterna = new Mantenimiento() { Codigo = idEntidad };
+                    entidad.EntidadExterna = new Mantenimiento() { Codigo = Convert.ToInt32(dt.Rows[0]["entd_id"].ToString()) };
                     break;
                 case TipoEntidadBLL.UbicacionStockNombre:
-                    entidad.EntidadExterna = UbicacionStockBLL.GetUbicacionStock(idEntidad);
+                    entidad.EntidadExterna = UbicacionStockBLL.GetUbicacionStock(Convert.ToInt32(dt.Rows[0]["entd_id"].ToString()));
                     break;
                 case TipoEntidadBLL.OrdenCompraNombre:
-                    entidad.EntidadExterna = new OrdenCompra() { Numero = idEntidad };
+                    entidad.EntidadExterna = new OrdenCompra() { Numero = Convert.ToInt32(dt.Rows[0]["entd_id"].ToString()) };
                     break;
                 default:
                     break;

@@ -108,7 +108,7 @@ namespace GyCAP.DAL
 
         public static Data.dsStock.ENTIDADESDataTable GetEntidad(int codigoEntidad)
         {
-            string sql = @"SELECT entd_nombre, tentd_codigo, entd_id FROM ENTIDADES WHERE entd_codigo = @p0";
+            string sql = @"SELECT entd_codigo, entd_nombre, tentd_codigo, entd_id FROM ENTIDADES WHERE entd_codigo = @p0";
             
             object[] parametros = { codigoEntidad };
 
