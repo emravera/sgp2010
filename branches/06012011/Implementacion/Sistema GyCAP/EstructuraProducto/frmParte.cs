@@ -530,7 +530,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (!string.IsNullOrEmpty(e.Value.ToString()))
+            if (e.Value != null && !string.IsNullOrEmpty(e.Value.ToString()))
             {
                 string nombre = string.Empty;
 

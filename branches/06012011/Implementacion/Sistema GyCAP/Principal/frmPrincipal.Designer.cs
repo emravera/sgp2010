@@ -519,8 +519,8 @@
             this.tipoParte.Image = ((System.Drawing.Image)(resources.GetObject("tipoParte.Image")));
             this.tipoParte.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tipoParte.Name = "tipoParte";
-            this.tipoParte.Size = new System.Drawing.Size(55, 33);
-            this.tipoParte.Text = "tipoParte";
+            this.tipoParte.Size = new System.Drawing.Size(98, 33);
+            this.tipoParte.Text = "Movimientos stock";
             this.tipoParte.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tipoParte.Click += new System.EventHandler(this.tipoParte_Click);
             // 

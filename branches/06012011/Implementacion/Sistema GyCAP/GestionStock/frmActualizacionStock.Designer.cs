@@ -204,7 +204,7 @@
             this.cboContenidoBuscar.Location = new System.Drawing.Point(295, 56);
             this.cboContenidoBuscar.Name = "cboContenidoBuscar";
             this.cboContenidoBuscar.Size = new System.Drawing.Size(151, 21);
-            this.cboContenidoBuscar.TabIndex = 7;
+            this.cboContenidoBuscar.TabIndex = 4;
             // 
             // label16
             // 
@@ -222,7 +222,7 @@
             this.txtCodigoBuscar.MaxLength = 80;
             this.txtCodigoBuscar.Name = "txtCodigoBuscar";
             this.txtCodigoBuscar.Size = new System.Drawing.Size(161, 21);
-            this.txtCodigoBuscar.TabIndex = 3;
+            this.txtCodigoBuscar.TabIndex = 2;
             // 
             // label13
             // 
@@ -242,7 +242,7 @@
             this.cboEstadoBuscar.Location = new System.Drawing.Point(295, 22);
             this.cboEstadoBuscar.Name = "cboEstadoBuscar";
             this.cboEstadoBuscar.Size = new System.Drawing.Size(151, 21);
-            this.cboEstadoBuscar.TabIndex = 2;
+            this.cboEstadoBuscar.TabIndex = 3;
             // 
             // label4
             // 
@@ -326,7 +326,7 @@
             this.groupBox5.Size = new System.Drawing.Size(570, 168);
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Nuevas cantidades";
+            this.groupBox5.Text = "Ingrese la nueva cantidad";
             // 
             // label7
             // 
@@ -344,7 +344,7 @@
             this.dtpFecha.Location = new System.Drawing.Point(88, 23);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(133, 21);
-            this.dtpFecha.TabIndex = 37;
+            this.dtpFecha.TabIndex = 7;
             // 
             // label2
             // 
@@ -375,7 +375,7 @@
             0});
             this.nudCantidadNueva.Name = "nudCantidadNueva";
             this.nudCantidadNueva.Size = new System.Drawing.Size(133, 21);
-            this.nudCantidadNueva.TabIndex = 35;
+            this.nudCantidadNueva.TabIndex = 8;
             this.nudCantidadNueva.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtDescripcion
@@ -386,7 +386,7 @@
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(462, 80);
-            this.txtDescripcion.TabIndex = 23;
+            this.txtDescripcion.TabIndex = 9;
             // 
             // groupBox4
             // 
@@ -403,7 +403,7 @@
             this.btnVolver.Location = new System.Drawing.Point(500, 20);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 26);
-            this.btnVolver.TabIndex = 21;
+            this.btnVolver.TabIndex = 11;
             this.btnVolver.Text = "&Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -413,7 +413,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(430, 20);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 26);
-            this.btnGuardar.TabIndex = 20;
+            this.btnGuardar.TabIndex = 10;
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -449,6 +449,7 @@
             this.txtEstado.ReadOnly = true;
             this.txtEstado.Size = new System.Drawing.Size(204, 21);
             this.txtEstado.TabIndex = 45;
+            this.txtEstado.TabStop = false;
             // 
             // label12
             // 
@@ -467,6 +468,7 @@
             this.txtContenido.ReadOnly = true;
             this.txtContenido.Size = new System.Drawing.Size(180, 21);
             this.txtContenido.TabIndex = 43;
+            this.txtContenido.TabStop = false;
             // 
             // txtTipo
             // 
@@ -476,6 +478,7 @@
             this.txtTipo.ReadOnly = true;
             this.txtTipo.Size = new System.Drawing.Size(180, 21);
             this.txtTipo.TabIndex = 42;
+            this.txtTipo.TabStop = false;
             // 
             // txtCodigo
             // 
@@ -485,6 +488,7 @@
             this.txtCodigo.ReadOnly = true;
             this.txtCodigo.Size = new System.Drawing.Size(204, 21);
             this.txtCodigo.TabIndex = 41;
+            this.txtCodigo.TabStop = false;
             // 
             // label11
             // 
@@ -521,6 +525,7 @@
             this.txtUnidadMedida.ReadOnly = true;
             this.txtUnidadMedida.Size = new System.Drawing.Size(144, 21);
             this.txtUnidadMedida.TabIndex = 37;
+            this.txtUnidadMedida.TabStop = false;
             this.txtUnidadMedida.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // nudRealActual
@@ -538,6 +543,7 @@
             this.nudRealActual.ReadOnly = true;
             this.nudRealActual.Size = new System.Drawing.Size(133, 21);
             this.nudRealActual.TabIndex = 34;
+            this.nudRealActual.TabStop = false;
             this.nudRealActual.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label6
@@ -566,6 +572,7 @@
             this.txtNombre.ReadOnly = true;
             this.txtNombre.Size = new System.Drawing.Size(204, 21);
             this.txtNombre.TabIndex = 14;
+            this.txtNombre.TabStop = false;
             // 
             // label22
             // 

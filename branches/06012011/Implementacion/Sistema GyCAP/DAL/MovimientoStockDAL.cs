@@ -211,5 +211,74 @@ namespace GyCAP.DAL
 
             return true;
         }
+
+        public static void ObtenerTodos(object fechaDesde, object fechaHasta, object origen, object destino, object estado, Data.dsStock.MOVIMIENTOS_STOCKDataTable dt)
+        {
+            string sql = @"SELECT mvto_numero, mvto_codigo, mvto_descripcion, mvto_fechaalta, mvto_fechaprevista, 
+                            mvto_fechareal, mvto_cantidad_origen_estimada, mvto_cantidad_origen_real, 
+                            mvto_cantidad_destino_estimada, mvto_cantidad_destino_real, emvto_codigo, 
+                            entd_origen, entd_destino, entd_duenio 
+                            FROM MOVIMIENTOS_STOCK WHERE 1=1";
+
+            int cantidadParametros = 0;
+            object[] valoresFiltros = new object[5];
+
+            if (origen != null)
+            {
+                sql += " AND entd_origen = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(origen);
+                cantidadParametros++;
+            }
+
+            if (destino != null)
+            {
+                sql += " AND entd_destino = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(destino);
+                cantidadParametros++;
+            }
+            
+            if (estado != null && estado.GetType() == cantidadParametros.GetType())
+            {
+                sql += " AND emvto_codigo = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(estado);
+                cantidadParametros++;
+            }
+
+            if (fechaDesde != null && !string.IsNullOrEmpty(fechaDesde.ToString()))
+            {
+                sql += " AND mvto_fechareal >= @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = fechaDesde;
+                cantidadParametros++;
+            }
+
+            if (fechaHasta != null && !string.IsNullOrEmpty(fechaHasta.ToString()))
+            {
+                sql += " AND mvto_fechareal <= @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = fechaHasta;
+                cantidadParametros++;
+            }
+
+            if (cantidadParametros > 0)
+            {
+                object[] valorParametros = new object[cantidadParametros];
+                for (int i = 0; i < cantidadParametros; i++)
+                {
+                    valorParametros[i] = valoresFiltros[i];
+                }
+                try
+                {
+                    DB.FillDataTable(dt, sql, valorParametros);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            }
+            else
+            {
+                try
+                {
+                    DB.FillDataTable(dt, sql, null);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            }
+        }
     }
 }

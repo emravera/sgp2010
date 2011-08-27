@@ -53,5 +53,15 @@ namespace GyCAP.BLL
 
             return movimiento;
         }
+
+        public static void ObtenerTodos(object fechaDesde, object fechaHasta, object origen, object destino, object estado, Data.dsStock.MOVIMIENTOS_STOCKDataTable dt)
+        {
+            if (origen != null && Convert.ToInt32(origen) <= 0) { origen = null; }
+            if (destino != null && Convert.ToInt32(destino) <= 0) { destino = null; }
+            if (estado != null && Convert.ToInt32(estado) <= 0) { estado = null; }
+            if (fechaDesde != null) { fechaDesde = DateTime.Parse(fechaDesde.ToString()).ToString("yyyyMMdd"); }
+            if (fechaHasta != null) { fechaHasta = DateTime.Parse(fechaHasta.ToString()).ToString("yyyyMMdd"); }
+            DAL.MovimientoStockDAL.ObtenerTodos(fechaDesde, fechaHasta, origen, destino, estado, dt);
+        }
     }
 }
