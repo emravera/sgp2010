@@ -78,7 +78,7 @@
             this.gbDatosPrincipales.Controls.Add(this.label3);
             this.gbDatosPrincipales.Location = new System.Drawing.Point(3, 9);
             this.gbDatosPrincipales.Name = "gbDatosPrincipales";
-            this.gbDatosPrincipales.Size = new System.Drawing.Size(787, 53);
+            this.gbDatosPrincipales.Size = new System.Drawing.Size(807, 53);
             this.gbDatosPrincipales.TabIndex = 16;
             this.gbDatosPrincipales.TabStop = false;
             this.gbDatosPrincipales.Text = "Datos Principales";
@@ -130,7 +130,7 @@
             // btnGenerarInventario
             // 
             this.btnGenerarInventario.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnGenerarInventario.Location = new System.Drawing.Point(685, 19);
+            this.btnGenerarInventario.Location = new System.Drawing.Point(705, 19);
             this.btnGenerarInventario.Name = "btnGenerarInventario";
             this.btnGenerarInventario.Size = new System.Drawing.Size(82, 23);
             this.btnGenerarInventario.TabIndex = 4;
@@ -368,7 +368,7 @@
             this.gbMateriasPrimas.Controls.Add(this.dgvMP);
             this.gbMateriasPrimas.Location = new System.Drawing.Point(351, 68);
             this.gbMateriasPrimas.Name = "gbMateriasPrimas";
-            this.gbMateriasPrimas.Size = new System.Drawing.Size(439, 384);
+            this.gbMateriasPrimas.Size = new System.Drawing.Size(459, 384);
             this.gbMateriasPrimas.TabIndex = 18;
             this.gbMateriasPrimas.TabStop = false;
             this.gbMateriasPrimas.Text = "Clasificación Inventario ABC";
@@ -384,7 +384,7 @@
             this.dgvMP.Name = "dgvMP";
             this.dgvMP.RowHeadersVisible = false;
             this.dgvMP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMP.Size = new System.Drawing.Size(433, 365);
+            this.dgvMP.Size = new System.Drawing.Size(453, 365);
             this.dgvMP.TabIndex = 29;
             this.dgvMP.DataMemberChanged += new System.EventHandler(this.dgvMP_DataBindingComplete);
             this.dgvMP.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvMP_CellFormatting);
@@ -393,7 +393,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(794, 464);
+            this.ClientSize = new System.Drawing.Size(814, 464);
             this.Controls.Add(this.gbMateriasPrimas);
             this.Controls.Add(this.gbDatosCocinas);
             this.Controls.Add(this.gbDatosPrincipales);

@@ -147,9 +147,14 @@ namespace GyCAP.UI.PlanificacionProduccion
                     dgvLista.Columns["PAN_CODIGO"].Visible = false;
                     dgvDetalle.Columns["DPAN_CODIGO"].Visible = false;
 
+                    //Limpiamos los datatables de la busqueda
+                    dsPlanAnual.PLANES_ANUALES.Clear();
+                    dsPlanAnual.DETALLE_PLAN_ANUAL.Clear();
+
                     tcPlanAnual.SelectedTab = tpBuscar;
                     estadoActual = estadoUI.inicio;
                     break;
+
                 //Cuando termina de Buscar
                 case estadoUI.buscar:
                     btnNuevo.Enabled = true;
@@ -162,7 +167,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnConsultar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
                     btnModificar.Enabled = hayDatos;
-                    tcPlanAnual.SelectedTab = tpBuscar;
+                    tcPlanAnual.SelectedTab = tpBuscar;                
+
                     estadoActual = estadoUI.buscar;
                     break;
 
@@ -1191,8 +1197,8 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                         Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Plan Anual", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
 
-                        //Pongo la interface en el estado de busqueda
-                        SetInterface(estadoUI.buscar);
+                        //Pongo la interface al inicio
+                        SetInterface(estadoUI.inicio);
                     }
                 }
                 else

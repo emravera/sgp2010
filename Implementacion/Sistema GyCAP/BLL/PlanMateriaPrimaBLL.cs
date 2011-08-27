@@ -12,6 +12,7 @@ namespace GyCAP.BLL
         {
             DAL.PlanMateriasPrimasDAL.ObtenerDetalle(codigo,ds);
         }
+
         //Metodos para la busqueda
         public static void ObtenerTodos(int anio, Data.dsPlanMP ds)
         {
@@ -43,7 +44,5 @@ namespace GyCAP.BLL
         {
             DAL.PlanMateriasPrimasDAL.ValidarExistencia(año);
         }
-
-
     }
 }
