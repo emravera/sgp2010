@@ -161,6 +161,10 @@ namespace GyCAP.UI.GestionStock
                         movimiento.Destino = BLL.EntidadBLL.GetEntidad(BLL.TipoEntidadBLL.ManualNombre, -1);
                         //el dueño es la entidad manual, es el evento que generó el movimiento
                         movimiento.Duenio = movimiento.Destino;
+                        movimiento.CantidadOrigenReal = cantidadMovimiento;
+                        movimiento.CantidadOrigenEstimada = cantidadMovimiento;
+                        movimiento.CantidadDestinoReal = cantidadMovimiento * -1;
+                        movimiento.CantidadDestinoEstimada = cantidadMovimiento * -1;
                     }
                     else
                     {
@@ -168,15 +172,17 @@ namespace GyCAP.UI.GestionStock
                         movimiento.Origen = BLL.EntidadBLL.GetEntidad(BLL.TipoEntidadBLL.ManualNombre, -1);
                         movimiento.Destino = BLL.EntidadBLL.GetEntidad(BLL.TipoEntidadBLL.UbicacionStockNombre, numero);
                         movimiento.Destino.EntidadExterna = BLL.UbicacionStockBLL.AsUbicacionStock(numero, dsStock);
-                        movimiento.Duenio = movimiento.Destino;
+                        movimiento.Duenio = movimiento.Origen;
+                        movimiento.CantidadOrigenReal = cantidadMovimiento * -1;
+                        movimiento.CantidadOrigenEstimada = cantidadMovimiento * -1;
+                        movimiento.CantidadDestinoReal = cantidadMovimiento;
+                        movimiento.CantidadDestinoEstimada = cantidadMovimiento;
                     }
 
-                    movimiento.CantidadOrigenReal = cantidadMovimiento;
-                    movimiento.CantidadOrigenEstimada = cantidadMovimiento;
-                    movimiento.CantidadDestinoReal = cantidadMovimiento;
-                    movimiento.CantidadDestinoEstimada = cantidadMovimiento;
-
                     BLL.MovimientoStockBLL.InsertarFinalizado(movimiento);
+
+                    MensajesABM.MsjConfirmaGuardar("Stock", this.Text, MensajesABM.Operaciones.Guardado);
+
                     if (movimiento.Origen.TipoEntidad.Nombre == BLL.TipoEntidadBLL.UbicacionStockNombre)
                     {
                         ActualizarDataset((movimiento.Origen.EntidadExterna as Entidades.UbicacionStock).Numero, movimiento.CantidadOrigenReal);
@@ -185,8 +191,7 @@ namespace GyCAP.UI.GestionStock
                     {
                         ActualizarDataset((movimiento.Destino.EntidadExterna as Entidades.UbicacionStock).Numero, movimiento.CantidadDestinoReal);
                     }
-
-                    MensajesABM.MsjConfirmaGuardar("Stock", this.Text, MensajesABM.Operaciones.Guardado);
+                    
                     SetInterface(estadoUI.inicio);
 
                 }

@@ -83,7 +83,7 @@ namespace GyCAP.UI.GestionStock
 
         #endregion
 
-        #region Servicios        
+        #region Servicios
 
         private void InicializarDatos()
         {
