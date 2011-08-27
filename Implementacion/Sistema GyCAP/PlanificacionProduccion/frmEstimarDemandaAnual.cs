@@ -68,11 +68,13 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+            dgvDetalle.Columns["DDEMAN_CANTIDADMES"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvDetalle.Columns["DDEMAN_CODIGO"].DataPropertyName = "DDEMAN_CODIGO";
             dgvDetalle.Columns["DDEMAN_MES"].DataPropertyName = "DDEMAN_MES";
             dgvDetalle.Columns["DDEMAN_CANTIDADMES"].DataPropertyName = "DDEMAN_CANTIDADMES";
-                        
+
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetalle = new DataView(dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES);
             dgvDetalle.DataSource = dvListaDetalle;
@@ -765,6 +767,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             //Creo el dataview y lo asigno al control de cheklist
             dvChAnios = new DataView(dsEstimarDemanda.DEMANDAS_ANUALES);
+            dvChAnios.Sort = "deman_anio";
             chListAnios.Items.Clear();
             string anio, nombre, union;
 
@@ -797,7 +800,10 @@ namespace GyCAP.UI.PlanificacionProduccion
                 if (txtIdentificacion.Text == string.Empty) strError = strError + "-El nombre de identificación no puede estar vacío\n";
                 
                //Verifico que haya seleccionado alguna estimacion anterior
-               if (chListAnios.CheckedItems.Count == 0) strError = strError + "-En modo calcular estimación por sistema se deben seleccionar datos anteriores para utilizar\n";
+                if (estado != estadoUI.modificar)
+                {
+                    if (chListAnios.CheckedItems.Count == 0) strError = strError + "-En modo calcular estimación por sistema se deben seleccionar datos anteriores para utilizar\n";
+                }
             }
             if (estado == estadoUI.cargaHistorico)
             {
@@ -1035,6 +1041,8 @@ namespace GyCAP.UI.PlanificacionProduccion
             numCrecimiento.Select(0, 10);
         }
         #endregion         
+
+      
 
     }
 }
