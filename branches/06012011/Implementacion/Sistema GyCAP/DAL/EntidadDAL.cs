@@ -105,5 +105,21 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
+
+        public static Data.dsStock.ENTIDADESDataTable GetEntidad(int codigoEntidad)
+        {
+            string sql = @"SELECT entd_nombre, tentd_codigo, entd_id FROM ENTIDADES WHERE entd_codigo = @p0";
+            
+            object[] parametros = { codigoEntidad };
+
+            Data.dsStock.ENTIDADESDataTable dt = new GyCAP.Data.dsStock.ENTIDADESDataTable();
+
+            try
+            {
+                DB.FillDataTable(dt, sql, parametros);
+                return dt;
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }            
+        }
     }
 }

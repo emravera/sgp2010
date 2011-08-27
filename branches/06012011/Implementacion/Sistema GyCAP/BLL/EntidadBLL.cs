@@ -125,5 +125,51 @@ namespace GyCAP.BLL
 
             return entidad;
         }
+
+        public static Entidad GetEntidad(int idEntidad)
+        {
+            Data.dsStock.ENTIDADESDataTable dt = DAL.EntidadDAL.GetEntidad(idEntidad);
+            Entidad entidad = new Entidad();
+
+            if (dt.Rows.Count > 0)
+            {
+                entidad.Codigo = Convert.ToInt32(dt.Rows[0]["entd_codigo"].ToString());
+                entidad.Nombre = dt.Rows[0]["entd_nombre"].ToString();
+                entidad.TipoEntidad = BLL.TipoEntidadBLL.GetTipoEntidadEntity(Convert.ToInt32(dt.Rows[0]["tentd_codigo"].ToString()));
+            }
+            
+            switch (entidad.TipoEntidad.Nombre)
+            {
+                case TipoEntidadBLL.PedidoNombre:
+                    entidad.EntidadExterna = new Pedido() { Codigo = idEntidad };
+                    break;
+                case TipoEntidadBLL.DetallePedidoNombre:
+                    entidad.EntidadExterna = new DetallePedido() { Codigo = idEntidad };
+                    break;
+                case TipoEntidadBLL.ManualNombre:
+                    entidad.EntidadExterna = null;
+                    entidad.Nombre = TipoEntidadBLL.ManualNombre;
+                    break;
+                case TipoEntidadBLL.OrdenProduccionNombre:
+                    entidad.EntidadExterna = new OrdenProduccion() { Numero = idEntidad };
+                    break;
+                case TipoEntidadBLL.OrdenTrabajoNombre:
+                    entidad.EntidadExterna = new OrdenTrabajo() { Numero = idEntidad };
+                    break;
+                case TipoEntidadBLL.MantenimientoNombre:
+                    entidad.EntidadExterna = new Mantenimiento() { Codigo = idEntidad };
+                    break;
+                case TipoEntidadBLL.UbicacionStockNombre:
+                    entidad.EntidadExterna = UbicacionStockBLL.GetUbicacionStock(idEntidad);
+                    break;
+                case TipoEntidadBLL.OrdenCompraNombre:
+                    entidad.EntidadExterna = new OrdenCompra() { Numero = idEntidad };
+                    break;
+                default:
+                    break;
+            }
+
+            return entidad;
+        }
     }
 }

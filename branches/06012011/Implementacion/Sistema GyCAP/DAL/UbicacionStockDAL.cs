@@ -245,6 +245,22 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
-        
+        public static Data.dsStock.UBICACIONES_STOCKDataTable GetUbicacionStock(int numeroUbicacion)
+        {
+            string sql = @"SELECT ustck_numero, ustck_codigo, ustck_nombre, ustck_descripcion, ustck_ubicacionfisica, 
+                            ustck_cantidadreal, umed_codigo, ustck_padre, ustck_activo, tus_codigo, con_codigo  
+                            FROM UBICACIONES_STOCK WHERE ustck_numero = @p0";
+
+            object[] parametros = { numeroUbicacion };
+
+            try
+            {
+                Data.dsStock.UBICACIONES_STOCKDataTable dt = new GyCAP.Data.dsStock.UBICACIONES_STOCKDataTable();
+                DB.FillDataTable(dt, sql, parametros);
+
+                return dt;
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
     }
 }

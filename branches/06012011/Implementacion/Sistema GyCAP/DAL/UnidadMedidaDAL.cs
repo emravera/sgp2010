@@ -188,5 +188,18 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
+        public static Data.dsEntregaProducto.UNIDADES_MEDIDADataTable GetUnidadMedida(int codigo)
+        {
+            string sql = "SELECT umed_codigo,tumed_codigo, umed_nombre, umed_abreviatura FROM UNIDADES_MEDIDA WHERE umed_codigo = @p0";
+            object[] parametros = { codigo };
+
+            try
+            {
+                Data.dsEntregaProducto.UNIDADES_MEDIDADataTable dt = new GyCAP.Data.dsEntregaProducto.UNIDADES_MEDIDADataTable();
+                DB.FillDataTable(dt, sql, parametros);
+                return dt;
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
    }
 }

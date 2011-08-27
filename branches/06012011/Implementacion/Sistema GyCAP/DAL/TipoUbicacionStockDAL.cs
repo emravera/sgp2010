@@ -19,5 +19,19 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
+
+        public static Data.dsStock.TIPOS_UBICACIONES_STOCKDataTable GetTipoUbicacion(int codigo)
+        {
+            string sql = "SELECT tus_codigo, tus_nombre, tus_descripcion FROM TIPOS_UBICACIONES_STOCK WHERE tus_codigo = @p0";
+            object[] parametros = { codigo };
+
+            try
+            {
+                Data.dsStock.TIPOS_UBICACIONES_STOCKDataTable dt = new GyCAP.Data.dsStock.TIPOS_UBICACIONES_STOCKDataTable();
+                DB.FillDataTable(dt, sql, parametros);
+                return dt;
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
     }
 }

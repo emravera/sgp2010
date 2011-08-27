@@ -13,6 +13,13 @@ namespace GyCAP.Entidades
         private Cocina cocina;
         private int cantidad;
         private DateTime fechaCancelacion;
+        private string codigoNemonico;
+
+        public string CodigoNemonico
+        {
+            get { return CodigoNemonico; }
+            set { CodigoNemonico = value; }
+        }
 
         public long Codigo
         {

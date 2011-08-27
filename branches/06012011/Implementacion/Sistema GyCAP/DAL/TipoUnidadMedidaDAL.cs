@@ -143,5 +143,21 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+
+        public static Data.dsStock.TIPOS_UNIDADES_MEDIDADataTable GetTipoUnidadMedida(int codigo)
+        {
+            string sql = "SELECT tumed_codigo, tumed_nombre FROM TIPOS_UNIDADES_MEDIDA WHERE tumed_codigo = @p0";
+            object[] parametros = { codigo };
+
+            try
+            {
+                Data.dsStock.TIPOS_UNIDADES_MEDIDADataTable dt = new GyCAP.Data.dsStock.TIPOS_UNIDADES_MEDIDADataTable();
+                DB.FillDataTable(dt, sql, parametros);
+                return dt;
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+            
+        }
     }
 }

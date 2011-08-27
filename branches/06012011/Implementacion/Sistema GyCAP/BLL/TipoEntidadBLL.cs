@@ -67,5 +67,10 @@ namespace GyCAP.BLL
         {
             return DAL.TipoEntidadDAL.GetTipoEntidadEntity(nombreTipo);
         }
+
+        public static TipoEntidad GetTipoEntidadEntity(int codigoTipoEntidad)
+        {
+            return DAL.TipoEntidadDAL.GetTipoEntidadEntity(codigoTipoEntidad);
+        }
     }
 }

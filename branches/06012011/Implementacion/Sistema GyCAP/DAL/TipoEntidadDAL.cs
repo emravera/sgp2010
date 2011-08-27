@@ -175,5 +175,28 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
+
+        public static TipoEntidad GetTipoEntidadEntity(int codigoTipoEntidad)
+        {
+            string sql = "SELECT tentd_codigo, tentd_nombre, tentd_descripcion FROM TIPOS_ENTIDAD WHERE tentd_codigo = @p0";
+            object[] parametros = { codigoTipoEntidad };
+            TipoEntidad tipo = new TipoEntidad();
+
+            try
+            {
+                Data.dsStock.TIPOS_ENTIDADDataTable dt = new GyCAP.Data.dsStock.TIPOS_ENTIDADDataTable();
+                DB.FillDataTable(dt, sql, parametros);
+
+                if (dt.Rows.Count == 1)
+                {
+                    tipo.Codigo = Convert.ToInt32(dt.Rows[0]["tentd_codigo"].ToString());
+                    tipo.Nombre = dt.Rows[0]["tentd_nombre"].ToString();
+                    tipo.Descripcion = dt.Rows[0]["tentd_descripcion"].ToString();
+                }
+
+                return tipo;
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
     }
 }
