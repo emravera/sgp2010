@@ -289,6 +289,9 @@ namespace GyCAP.UI.EstructuraProducto
                             BLL.EstructuraBLL.Actualizar(dsEstructura);
                             MensajesABM.MsjConfirmaGuardar("Estructura", this.Text, MensajesABM.Operaciones.Modificación);
 
+                            dsEstructura.ESTRUCTURAS.AcceptChanges();
+                            dsEstructura.COMPUESTOS_PARTES.AcceptChanges();
+
                             SetInterface(estadoUI.inicio);
                         }
                         else
@@ -373,14 +376,16 @@ namespace GyCAP.UI.EstructuraProducto
                 tvEstructura.SelectedNode.Parent != null && 
                 EsMismoPadreHijo(rowParte, tvEstructura.SelectedNode)) { validacion.Add("Una parte no puede ser padre e hijo al mismo tiempo"); }
             if (tvEstructura.SelectedNode != null && rowMP != null && Convert.ToInt32(tvEstructura.SelectedNode.Tag) == BLL.CompuestoParteBLL.HijoEsMP) { validacion.Add("Una materia prima no puede ser hijo de una materia prima"); }
-            if (!dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).IsCOMP_CODIGO_PADRENull() &&
+            if (tvEstructura.SelectedNode != null && tvEstructura.Nodes.Count > 0 &&
+                !dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).IsCOMP_CODIGO_PADRENull() &&
                 !dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).IsPART_NUMERONull() &&
                 dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).PARTESRow.TIPOS_PARTESRow.TPAR_ADQUIRIDO == BLL.TipoParteBLL.ValorSI)
                 { validacion.Add("Una parte adquirida no puede tener hijos."); }
 
             if (validacion.Count == 0)
             {
-                nudCantidadAgregar.Value = Math.Round(nudCantidadAgregar.Value, 3);                
+                nudCantidadAgregar.Value = Math.Round(nudCantidadAgregar.Value, 3);
+                string cantidad = (nudCantidadAgregar.Value.ToString().Split(',').Count() == 1) ? nudCantidadAgregar.Value + ",000" : nudCantidadAgregar.Value.ToString();
 
                 Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowComp = EstaAgregada(rowParte, rowMP, tvEstructura.SelectedNode);
                 if (rowComp == null)
@@ -393,7 +398,7 @@ namespace GyCAP.UI.EstructuraProducto
                         nodoHijo = new TreeNode();
                         nodoHijo.Name = compId.ToString();
                         nodoHijo.Text = rowParte.PART_NOMBRE + " - " + rowParte.PART_CODIGO;
-                        if (tvEstructura.Nodes.Count != 0) { nodoHijo.Text += " / #" + nudCantidadAgregar.Value.ToString() + " " + rowParte.UNIDADES_MEDIDARow.UMED_ABREVIATURA; }
+                        if (tvEstructura.Nodes.Count != 0) { nodoHijo.Text += " / #" + cantidad + " " + rowParte.UNIDADES_MEDIDARow.UMED_ABREVIATURA; }
                         nodoHijo.Tag = BLL.CompuestoParteBLL.HijoEsParte;
                         AgregarParteADataset(rowParte, null, (tvEstructura.SelectedNode != null) ? tvEstructura.SelectedNode.Name : null);
                     }
@@ -402,7 +407,7 @@ namespace GyCAP.UI.EstructuraProducto
                         //Estoy agregando una mp
                         nodoHijo = new TreeNode();
                         nodoHijo.Name = compId.ToString();
-                        nodoHijo.Text = rowMP.MP_NOMBRE + " / #" + nudCantidadAgregar.Value.ToString() + " " + rowMP.UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                        nodoHijo.Text = rowMP.MP_NOMBRE + " / #" + cantidad + " " + rowMP.UNIDADES_MEDIDARow.UMED_ABREVIATURA;
                         nodoHijo.Tag = BLL.CompuestoParteBLL.HijoEsMP;
                         AgregarParteADataset(null, rowMP, (tvEstructura.SelectedNode != null) ? tvEstructura.SelectedNode.Name : null);
                     }
@@ -559,7 +564,6 @@ namespace GyCAP.UI.EstructuraProducto
                 EliminarNodos(nodo);
             }
             dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(nodoSelected.Name)).Delete();
-            nodoSelected.Remove();
         }
 
         private void btnSumarParte_Click(object sender, EventArgs e)

@@ -59,8 +59,13 @@ namespace GyCAP.Entidades.ArbolEstructura
 
         public decimal GetCostoEstructura()
         {
-            this.fixedCost = nodoRaiz.GetCosto();
-            return this.fixedCost;
+            if (this.nodoRaiz != null)
+            {
+                this.fixedCost = nodoRaiz.GetCosto();
+                return this.fixedCost;
+            }
+
+            return 0;
         }
 
         public IList<MPEstructura> GetMPQuantityForStructure()
@@ -219,7 +224,14 @@ namespace GyCAP.Entidades.ArbolEstructura
         public void DeleteNodo(int? codigoNodo, int? codigoCompuesto)
         {
             NodoEstructura nodo = Find(codigoNodo, codigoCompuesto);
-            nodo.NodoPadre.NodosHijos.Remove(nodo);            
+            if (nodo.Contenido == NodoEstructura.tipoContenido.ProductoFinal)
+            {
+                this.nodoRaiz = null;
+            }
+            else
+            {
+                nodo.NodoPadre.NodosHijos.Remove(nodo);
+            }
         }
     }
 }
