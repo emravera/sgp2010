@@ -16,7 +16,7 @@ namespace GyCAP.UI.GestionStock
     {
         private static frmMovimientoStock _frmMovimientoStock = null;
         private dsStock dsStock = new dsStock();
-        private DataView dvMovimientos, dvEstadoBuscar, dvOrigen, dvDestino;
+        private DataView dvEstadoBuscar, dvOrigen, dvDestino;
         private IList<MovimientoStock> listaMovimientos = new List<MovimientoStock>();
 
         #region Inicio
@@ -135,7 +135,6 @@ namespace GyCAP.UI.GestionStock
                 MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
             }
 
-            dvMovimientos = new DataView(dsStock.MOVIMIENTOS_STOCK);
             dvEstadoBuscar = new DataView(dsStock.ESTADO_MOVIMIENTOS_STOCK);
             dvOrigen = new DataView(dsStock.UBICACIONES_STOCK);
             dvOrigen.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;

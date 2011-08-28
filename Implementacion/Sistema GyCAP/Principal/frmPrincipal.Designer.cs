@@ -76,7 +76,7 @@
             this.tipoParte = new System.Windows.Forms.ToolStripButton();
             this.tipoRepuesto = new System.Windows.Forms.ToolStripButton();
             this.btnProveedores = new System.Windows.Forms.ToolStripButton();
-            this.toolAveria = new System.Windows.Forms.ToolStripButton();
+            this.toolGrafico = new System.Windows.Forms.ToolStripButton();
             this.toolStripRepuestos = new System.Windows.Forms.ToolStripButton();
             this.toolStripTipoMantenimiento = new System.Windows.Forms.ToolStripButton();
             this.toolStripCausaFallo = new System.Windows.Forms.ToolStripButton();
@@ -455,7 +455,7 @@
             this.tipoParte,
             this.tipoRepuesto,
             this.btnProveedores,
-            this.toolAveria,
+            this.toolGrafico,
             this.toolStripRepuestos,
             this.toolStripTipoMantenimiento,
             this.toolStripCausaFallo});
@@ -544,15 +544,15 @@
             this.btnProveedores.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnProveedores.Click += new System.EventHandler(this.btnProveedores_Click);
             // 
-            // toolAveria
+            // toolGrafico
             // 
-            this.toolAveria.Image = ((System.Drawing.Image)(resources.GetObject("toolAveria.Image")));
-            this.toolAveria.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolAveria.Name = "toolAveria";
-            this.toolAveria.Size = new System.Drawing.Size(47, 33);
-            this.toolAveria.Text = "Averias";
-            this.toolAveria.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolAveria.Click += new System.EventHandler(this.toolAveria_Click);
+            this.toolGrafico.Image = ((System.Drawing.Image)(resources.GetObject("toolGrafico.Image")));
+            this.toolGrafico.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolGrafico.Name = "toolGrafico";
+            this.toolGrafico.Size = new System.Drawing.Size(73, 33);
+            this.toolGrafico.Text = "Grafico stock";
+            this.toolGrafico.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolGrafico.Click += new System.EventHandler(this.toolAveria_Click);
             // 
             // toolStripRepuestos
             // 
@@ -678,7 +678,7 @@
         private System.Windows.Forms.ToolStripButton tipoParte;
         private System.Windows.Forms.ToolStripButton tipoRepuesto;
         private System.Windows.Forms.ToolStripButton btnProveedores;
-        private System.Windows.Forms.ToolStripButton toolAveria;
+        private System.Windows.Forms.ToolStripButton toolGrafico;
         private System.Windows.Forms.ToolStripButton toolStripRepuestos;
         private System.Windows.Forms.ToolStripButton toolStripTipoMantenimiento;
         private System.Windows.Forms.ToolStripButton toolStripCausaFallo;

@@ -90,9 +90,49 @@ namespace GyCAP.BLL
                     movimiento.Origen = (!row.IsENTD_ORIGENNull()) ? BLL.EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_ORIGEN)) : null;
                     movimiento.Destino = (!row.IsENTD_DESTINONull()) ? BLL.EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_DESTINO)) : null;
                     movimiento.Duenio = (!row.IsENTD_DUENIONull()) ? BLL.EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_DUENIO)) : null;
+                    movimiento.OldQuantity = row.MVTO_OLDQUANTITY;
 
                     lista.Add(movimiento);
             	}
+            }
+
+            return lista;
+        }
+
+        public static IList<Entidades.MovimientoStock> ObtenerMovimientosUbicacionStock(object fechaDesde, object fechaHasta, object numeroStock, object estado)
+        {
+            IList<Entidades.MovimientoStock> lista = new List<Entidades.MovimientoStock>();
+
+            if (numeroStock == null) { return lista; }
+
+            int codigoEntidad = EntidadBLL.GetEntidad(BLL.TipoEntidadBLL.UbicacionStockNombre, Convert.ToInt32(numeroStock)).Codigo;
+            
+            Data.dsStock.MOVIMIENTOS_STOCKDataTable dt = DAL.MovimientoStockDAL.ObtenerMovimientosUbicacionStock(fechaDesde, fechaHasta, codigoEntidad, estado);
+
+            if (dt.Rows.Count > 0)
+            {
+                foreach (Data.dsStock.MOVIMIENTOS_STOCKRow row in dt.Rows)
+                {
+                    MovimientoStock movimiento = new MovimientoStock();
+
+                    movimiento.Numero = Convert.ToInt32(row.MVTO_NUMERO);
+                    movimiento.Codigo = row.MVTO_CODIGO;
+                    movimiento.Descripcion = row.MVTO_DESCRIPCION;
+                    movimiento.FechaAlta = row.MVTO_FECHAALTA;
+                    if (!row.IsMVTO_FECHAPREVISTANull()) { movimiento.FechaPrevista = row.MVTO_FECHAPREVISTA; }
+                    if (!row.IsMVTO_FECHAREALNull()) { movimiento.FechaReal = row.MVTO_FECHAREAL; }
+                    movimiento.Estado = BLL.EstadoMovimientoStockBLL.GetEstadoEntity(Convert.ToInt32(row.EMVTO_CODIGO));
+                    movimiento.CantidadOrigenEstimada = row.MVTO_CANTIDAD_ORIGEN_ESTIMADA;
+                    movimiento.CantidadDestinoEstimada = row.MVTO_CANTIDAD_DESTINO_ESTIMADA;
+                    movimiento.CantidadOrigenReal = row.MVTO_CANTIDAD_ORIGEN_REAL;
+                    movimiento.CantidadDestinoReal = row.MVTO_CANTIDAD_DESTINO_REAL;
+                    movimiento.Origen = (!row.IsENTD_ORIGENNull()) ? BLL.EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_ORIGEN)) : null;
+                    movimiento.Destino = (!row.IsENTD_DESTINONull()) ? BLL.EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_DESTINO)) : null;
+                    movimiento.Duenio = (!row.IsENTD_DUENIONull()) ? BLL.EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_DUENIO)) : null;
+                    movimiento.OldQuantity = row.MVTO_OLDQUANTITY;
+
+                    lista.Add(movimiento);
+                }
             }
 
             return lista;

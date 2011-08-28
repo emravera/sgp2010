@@ -14,7 +14,7 @@ namespace GyCAP.UI.GestionStock
     public partial class frmActualizacionStock : Form
     {
         private static frmActualizacionStock _frmActualizacionStock = null;
-        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, eliminar };
+        private enum estadoUI { inicio, actualizar };
         private Data.dsStock dsStock = new GyCAP.Data.dsStock();
         DataView dvUbicaciones, dvContenidoBuscar;
         private estadoUI estadoInterface;
@@ -86,46 +86,41 @@ namespace GyCAP.UI.GestionStock
             
             dvUbicaciones.RowFilter = filtro;
 
-            if (dvUbicaciones.Count == 0) { MensajesABM.MsjBuscarNoEncontrado("Actualización de Stock", this.Text); }           
+            if (dvUbicaciones.Count == 0) { MensajesABM.MsjBuscarNoEncontrado("Actualización de Stock", this.Text); }
+
+            CompletarDatos();
 
             SetInterface(estadoUI.inicio);
         }                
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.nuevo); }
+            if (dgvLista.SelectedRows.Count > 0) { SetInterface(estadoUI.actualizar); }
             else { MensajesABM.MsjSinSeleccion("Actualización de Stock", MensajesABM.Generos.Femenino, this.Text); }
         }       
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            if (dgvLista.SelectedRows.Count > 0) { dgvLista.SelectedRows[0].Selected = false; }
             SetInterface(estadoUI.inicio);
         }
 
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvLista.SelectedRows.Count > 0)
-            {
-                CompletarDatos();
-            }
+            CompletarDatos();
         }
 
         private void CompletarDatos()
         {
             if (dvUbicaciones.Count > 0 && dgvLista.SelectedRows.Count > 0)
             {
-                if (estadoInterface != estadoUI.eliminar)
-                {
-                    int numero = Convert.ToInt32(dvUbicaciones[dgvLista.SelectedRows[0].Index]["ustck_numero"]);
-                    txtCodigo.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_CODIGO;
-                    txtNombre.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_NOMBRE;
-                    nudRealActual.Value = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_CANTIDADREAL;
-                    txtUnidadMedida.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).UNIDADES_MEDIDARow.UMED_NOMBRE;
-                    txtTipo.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).TIPOS_UBICACIONES_STOCKRow.TUS_NOMBRE;
-                    txtEstado.Text = (dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_ACTIVO == BLL.UbicacionStockBLL.Activo) ? "Activo" : "Inactivo";
-                    txtContenido.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).CONTENIDO_UBICACION_STOCKRow.CON_NOMBRE;
-                }
+                int numero = Convert.ToInt32(dvUbicaciones[dgvLista.SelectedRows[0].Index]["ustck_numero"]);
+                txtCodigo.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_CODIGO;
+                txtNombre.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_NOMBRE;
+                nudRealActual.Value = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_CANTIDADREAL;
+                txtUnidadMedida.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).UNIDADES_MEDIDARow.UMED_NOMBRE;
+                txtTipo.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).TIPOS_UBICACIONES_STOCKRow.TUS_NOMBRE;
+                txtEstado.Text = (dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_ACTIVO == BLL.UbicacionStockBLL.Activo) ? "Activo" : "Inactivo";
+                txtContenido.Text = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).CONTENIDO_UBICACION_STOCKRow.CON_NOMBRE;            
             }
         }
 
@@ -156,7 +151,7 @@ namespace GyCAP.UI.GestionStock
                     {
                         //origen es la ubicacion stock, se le está restando cantidad
                         movimiento.Origen = BLL.EntidadBLL.GetEntidad(BLL.TipoEntidadBLL.UbicacionStockNombre, numero);
-                        movimiento.Origen.EntidadExterna = BLL.UbicacionStockBLL.AsUbicacionStock(numero, dsStock);
+                        movimiento.Origen.EntidadExterna = BLL.UbicacionStockBLL.GetUbicacionStock(numero);
                         //destino es la entidad manual
                         movimiento.Destino = BLL.EntidadBLL.GetEntidad(BLL.TipoEntidadBLL.ManualNombre, -1);
                         //el dueño es la entidad manual, es el evento que generó el movimiento
@@ -171,7 +166,7 @@ namespace GyCAP.UI.GestionStock
                         //es el caso contrario, se le está sumando cantidad a la ubicación de stock
                         movimiento.Origen = BLL.EntidadBLL.GetEntidad(BLL.TipoEntidadBLL.ManualNombre, -1);
                         movimiento.Destino = BLL.EntidadBLL.GetEntidad(BLL.TipoEntidadBLL.UbicacionStockNombre, numero);
-                        movimiento.Destino.EntidadExterna = BLL.UbicacionStockBLL.AsUbicacionStock(numero, dsStock);
+                        movimiento.Destino.EntidadExterna = BLL.UbicacionStockBLL.GetUbicacionStock(numero);
                         movimiento.Duenio = movimiento.Origen;
                         movimiento.CantidadOrigenReal = cantidadMovimiento * -1;
                         movimiento.CantidadOrigenEstimada = cantidadMovimiento * -1;
@@ -179,7 +174,7 @@ namespace GyCAP.UI.GestionStock
                         movimiento.CantidadDestinoEstimada = cantidadMovimiento;
                     }
 
-                    BLL.MovimientoStockBLL.InsertarFinalizado(movimiento);
+                    BLL.MovimientoStockBLL.InsertarFinalizado(movimiento);                    
 
                     MensajesABM.MsjConfirmaGuardar("Stock", this.Text, MensajesABM.Operaciones.Guardado);
 
@@ -191,7 +186,9 @@ namespace GyCAP.UI.GestionStock
                     {
                         ActualizarDataset((movimiento.Destino.EntidadExterna as Entidades.UbicacionStock).Numero, movimiento.CantidadDestinoReal);
                     }
-                    
+
+                    CompletarDatos();
+
                     SetInterface(estadoUI.inicio);
 
                 }
@@ -243,27 +240,15 @@ namespace GyCAP.UI.GestionStock
                     tcUbicacionStock.SelectedTab = tpBuscar;
                     estadoInterface = estadoUI.inicio;
                     if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
+                    if (dgvLista.SelectedRows.Count > 0) { dgvLista.SelectedRows[0].Selected = false; }
                     txtNombreBuscar.Focus();
-                    break;                
-                case estadoUI.nuevo:
-                    txtDescripcion.Clear();
-                    dtpFecha.SetFechaNull();
-                    nudCantidadNueva.Value = 0;
-                    btnGuardar.Enabled = true;
-                    btnVolver.Enabled = true;
-                    btnActualizar.Enabled = false;
-                    estadoInterface = estadoUI.nuevo;
-                    tcUbicacionStock.SelectedTab = tpDatos;
                     break;
-                case estadoUI.nuevoExterno:
-                    txtDescripcion.Clear();
+                case estadoUI.actualizar:
                     dtpFecha.SetFechaNull();
                     nudCantidadNueva.Value = 0;
-                    btnGuardar.Enabled = true;
-                    btnVolver.Enabled = true;
-                    btnActualizar.Enabled = false;
-                    estadoInterface = estadoUI.nuevoExterno;
+                    txtDescripcion.Clear();
                     tcUbicacionStock.SelectedTab = tpDatos;
+                    estadoInterface = estadoUI.actualizar;
                     break;
                 default:
                     break;

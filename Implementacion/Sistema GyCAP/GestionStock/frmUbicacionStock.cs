@@ -584,10 +584,7 @@ namespace GyCAP.UI.GestionStock
 
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvLista.SelectedRows.Count > 0)
-            {
-                CompletarDatos();
-            }
+            CompletarDatos();            
         }
 
         private void CompletarDatos()
