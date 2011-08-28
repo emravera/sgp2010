@@ -108,5 +108,13 @@ namespace GyCAP.Entidades
             get { return duenio; }
             set { duenio = value; }
         }
+
+        private decimal oldQuantity;
+
+        public decimal OldQuantity
+        {
+            get { return oldQuantity; }
+            set { oldQuantity = value; }
+        }
     }
 }

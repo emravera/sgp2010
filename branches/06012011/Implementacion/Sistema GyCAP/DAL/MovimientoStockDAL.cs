@@ -59,8 +59,9 @@ namespace GyCAP.DAL
                         ,[emvto_codigo]
                         ,[entd_origen]
                         ,[entd_destino]
-                        ,[entd_duenio]) 
-                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12) SELECT @@Identity";
+                        ,[entd_duenio]
+                        ,[mvto_oldquantity]) 
+                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13) SELECT @@Identity";
 
             object fechaPrevista = DBNull.Value, fechaReal = DBNull.Value, origen = DBNull.Value, destino = DBNull.Value, duenio = DBNull.Value;
             if (movimientoStock.FechaPrevista.HasValue) { fechaPrevista = movimientoStock.FechaPrevista.Value.ToShortDateString(); }
@@ -82,7 +83,8 @@ namespace GyCAP.DAL
                                       movimientoStock.Estado.Codigo,
                                       origen,
                                       destino,
-                                      duenio  
+                                      duenio,
+                                      movimientoStock.OldQuantity
                                   };
 
             movimientoStock.Numero = Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion));
@@ -104,7 +106,7 @@ namespace GyCAP.DAL
         {
             string sql = @"SELECT mvto_numero, mvto_codigo, mvto_descripcion, mvto_fechaalta, mvto_fechaprevista, mvto_fechareal
                         ,ustck_origen, ustck_destino, mvto_cantidad_origen_estimada, mvto_cantidad_destino_estimada
-                        ,mvto_cantidad_origen_real, mvto_cantidad_destino_real, emvto_codigo, ordt_numero 
+                        ,mvto_cantidad_origen_real, mvto_cantidad_destino_real, emvto_codigo  
                         FROM MOVIMIENTOS_STOCK WHERE ordt_numero = @p0";
 
             object[] parametros = { numeroOrdenTrabajo };
@@ -130,13 +132,24 @@ namespace GyCAP.DAL
                         ,mvto_cantidad_destino_real = @p1
                         ,mvto_fechareal = @p2
                         ,emvto_codigo = @p3
-                         WHERE mvto_numero = @p4";
+                        ,mvto_oldquantity = @p4 
+                         WHERE mvto_numero = @p5";
 
+            if (movimiento.Origen.EntidadExterna != null && movimiento.Origen.EntidadExterna.GetType() == typeof(Entidades.UbicacionStock))
+            {
+                movimiento.OldQuantity = (movimiento.Origen.EntidadExterna as Entidades.UbicacionStock).CantidadReal;
+            }
+            else if (movimiento.Destino.EntidadExterna != null && movimiento.Destino.EntidadExterna.GetType() == typeof(Entidades.UbicacionStock))
+            {
+                movimiento.OldQuantity = (movimiento.Destino.EntidadExterna as Entidades.UbicacionStock).CantidadReal;
+            }
+            
             object[] parametros = {   
                                       movimiento.CantidadOrigenReal, 
                                       movimiento.CantidadDestinoReal, 
                                       movimiento.FechaReal.Value.ToShortDateString(), 
                                       movimiento.Estado.Codigo,
+                                      movimiento.OldQuantity,
                                       movimiento.Numero 
                                   };
 
@@ -217,7 +230,7 @@ namespace GyCAP.DAL
             string sql = @"SELECT mvto_numero, mvto_codigo, mvto_descripcion, mvto_fechaalta, mvto_fechaprevista, 
                             mvto_fechareal, mvto_cantidad_origen_estimada, mvto_cantidad_origen_real, 
                             mvto_cantidad_destino_estimada, mvto_cantidad_destino_real, emvto_codigo, 
-                            entd_origen, entd_destino, entd_duenio 
+                            entd_origen, entd_destino, entd_duenio, mvto_oldquantity  
                             FROM MOVIMIENTOS_STOCK WHERE 1=1";
 
             int cantidadParametros = 0;
@@ -279,6 +292,71 @@ namespace GyCAP.DAL
                 }
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }
+        }
+
+        public static Data.dsStock.MOVIMIENTOS_STOCKDataTable ObtenerMovimientosUbicacionStock(object fechaDesde, object fechaHasta, object codigoEntidad, object estado)
+        {
+            string sql = @"SELECT mvto_numero, mvto_codigo, mvto_descripcion, mvto_fechaalta, mvto_fechaprevista, 
+                            mvto_fechareal, mvto_cantidad_origen_estimada, mvto_cantidad_origen_real, 
+                            mvto_cantidad_destino_estimada, mvto_cantidad_destino_real, emvto_codigo, 
+                            entd_origen, entd_destino, entd_duenio, mvto_oldquantity 
+                            FROM MOVIMIENTOS_STOCK WHERE 1=1 ";
+
+            int cantidadParametros = 0;
+            object[] valoresFiltros = new object[5];
+
+            Data.dsStock.MOVIMIENTOS_STOCKDataTable dt = new GyCAP.Data.dsStock.MOVIMIENTOS_STOCKDataTable();
+
+            if (fechaDesde != null && !string.IsNullOrEmpty(fechaDesde.ToString()))
+            {
+                sql += " AND mvto_fechareal >= @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = fechaDesde;
+                cantidadParametros++;
+            }
+
+            if (fechaHasta != null && !string.IsNullOrEmpty(fechaHasta.ToString()))
+            {
+                sql += " AND mvto_fechareal <= @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = fechaHasta;
+                cantidadParametros++;
+            }
+
+            if (codigoEntidad != null)
+            {
+                sql += " AND (entd_origen = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(codigoEntidad);
+                cantidadParametros++;
+                sql += " OR entd_destino = @p" + cantidadParametros + ")";
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(codigoEntidad);
+                cantidadParametros++;
+            }
+
+            if (estado != null)
+            {
+                sql += " AND emvto_codigo = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(estado);
+                cantidadParametros++;
+            }
+
+            Entidades.EstadoMovimientoStock estadoEntity = EstadoMovimientoStockDAL.GetEstadoEntity(Convert.ToInt32(estado));
+            if (estadoEntity.Nombre == EstadoMovimientoStockDAL.Finalizado) { sql += " ORDER BY mvto_fechareal ASC"; }
+            else if (estadoEntity.Nombre == EstadoMovimientoStockDAL.Planificado) { sql += " ORDER BY mvto_fechaprevista ASC"; }
+
+            if (cantidadParametros > 0)
+            {
+                object[] valorParametros = new object[cantidadParametros];
+                for (int i = 0; i < cantidadParametros; i++)
+                {
+                    valorParametros[i] = valoresFiltros[i];
+                }
+                try
+                {
+                    DB.FillDataTable(dt, sql, valorParametros);
+                }
+                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            }
+
+            return dt;
         }
     }
 }

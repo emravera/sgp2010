@@ -226,8 +226,8 @@ namespace Principal
 
         private void toolAveria_Click(object sender, EventArgs e)
         {
-            GyCAP.UI.Mantenimiento.frmAverias.Instancia.MdiParent = this;
-            GyCAP.UI.Mantenimiento.frmAverias.Instancia.Show();
+            GyCAP.UI.GestionStock.frmGraficoVariacionStock.Instancia.MdiParent = this;
+            GyCAP.UI.GestionStock.frmGraficoVariacionStock.Instancia.Show();
         }
 
         private void toolStripRepuestos_Click(object sender, EventArgs e)
