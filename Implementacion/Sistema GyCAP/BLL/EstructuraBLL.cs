@@ -84,19 +84,17 @@ namespace GyCAP.BLL
 
         public static void CrearArbolEstructura(int codigoEstructura, Data.dsEstructuraProducto dsEstructura, TreeView arbol, bool clonar, out int lastCompID)
         {
-            arbol.Nodes.Clear();
-            lastCompID = -1;
+            arbol.Nodes.Clear();            
             //Obtenemos la parte padre de nivel 0 y la agregamos al árbol
             string filtro = "estr_codigo = " + codigoEstructura + " AND comp_codigo_padre IS NULL";
             Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompuestoInicio = (dsEstructura.COMPUESTOS_PARTES.Select(filtro) as Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])[0];
             TreeNode nodoInicio = new TreeNode();
             if (clonar) 
-            { 
-                nodoInicio.Name = lastCompID.ToString(); 
-                
+            {
+                nodoInicio.Name = (rowCompuestoInicio.COMP_CODIGO * -1).ToString();
                 Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompInicioCloned = dsEstructura.COMPUESTOS_PARTES.NewCOMPUESTOS_PARTESRow();
                 rowCompInicioCloned.BeginEdit();
-                rowCompInicioCloned.COMP_CODIGO = lastCompID;
+                rowCompInicioCloned.COMP_CODIGO = rowCompuestoInicio.COMP_CODIGO * -1;
                 rowCompInicioCloned.COMP_CANTIDAD = rowCompuestoInicio.COMP_CANTIDAD;
                 rowCompInicioCloned.ESTR_CODIGO = -1;
                 rowCompInicioCloned.SetMP_CODIGONull();
@@ -105,7 +103,6 @@ namespace GyCAP.BLL
                 rowCompInicioCloned.UMED_CODIGO = rowCompuestoInicio.UMED_CODIGO;
                 rowCompInicioCloned.EndEdit();
                 dsEstructura.COMPUESTOS_PARTES.AddCOMPUESTOS_PARTESRow(rowCompInicioCloned);
-                lastCompID--;
             }
             else { nodoInicio.Name = rowCompuestoInicio.COMP_CODIGO.ToString(); }
             
@@ -118,31 +115,33 @@ namespace GyCAP.BLL
             foreach (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowComp in (Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])dsEstructura.COMPUESTOS_PARTES.Select(filtro))
             {
                 TreeNode nodo = new TreeNode();
-                if (clonar) { nodo.Name = lastCompID.ToString(); }
+                
+                if (clonar) { nodo.Name = (rowComp.COMP_CODIGO * -1).ToString(); }
                 else { nodo.Name = rowComp.COMP_CODIGO.ToString(); }
+
                 nodo.Text = ((rowComp.IsMP_CODIGONull()) ? (rowComp.PARTESRow.PART_NOMBRE + " - " + rowComp.PARTESRow.PART_CODIGO) : (rowComp.MATERIAS_PRIMASRow.MP_NOMBRE));
                 nodo.Text += " / #" + rowComp.COMP_CANTIDAD.ToString() + " " + rowComp.UNIDADES_MEDIDARow.UMED_ABREVIATURA;
                 nodo.Tag = ((rowComp.IsMP_CODIGONull()) ? BLL.CompuestoParteBLL.HijoEsParte : BLL.CompuestoParteBLL.HijoEsMP);
-                string key = (dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + ((clonar)? "-1" : codigoEstructura.ToString()) + " AND comp_codigo_padre = " + rowComp.COMP_CODIGO_PADRE.ToString()) as Data.dsEstructuraProducto.COMPUESTOS_PARTESRow[])[0].COMP_CODIGO.ToString();
-                arbol.Nodes.Find(rowComp.COMP_CODIGO_PADRE.ToString(), true)[0].Nodes.Add(nodo);
+                arbol.Nodes.Find((clonar) ? (rowComp.COMP_CODIGO_PADRE * -1).ToString() : rowComp.COMP_CODIGO_PADRE.ToString(), true)[0].Nodes.Add(nodo);
                 if (clonar)
                 {
                     Data.dsEstructuraProducto.COMPUESTOS_PARTESRow rowCompCloned = dsEstructura.COMPUESTOS_PARTES.NewCOMPUESTOS_PARTESRow();
                     rowCompCloned.BeginEdit();
-                    rowCompCloned.COMP_CODIGO = lastCompID;
+                    rowCompCloned.COMP_CODIGO = rowComp.COMP_CODIGO * -1;
                     rowCompCloned.COMP_CANTIDAD = rowComp.COMP_CANTIDAD;
                     rowCompCloned.ESTR_CODIGO = -1;
                     if (rowComp.IsMP_CODIGONull()) { rowCompCloned.SetMP_CODIGONull(); rowCompCloned.PART_NUMERO = rowComp.PART_NUMERO; }
                     else { rowCompCloned.SetMP_CODIGONull(); rowCompCloned.MP_CODIGO = rowComp.MP_CODIGO; }
                     rowCompCloned.UMED_CODIGO = rowComp.UMED_CODIGO;
-                    rowCompCloned.COMP_CODIGO_PADRE = rowComp.COMP_CODIGO_PADRE;
+                    rowCompCloned.COMP_CODIGO_PADRE = rowComp.COMP_CODIGO_PADRE * -1;
                     rowCompCloned.EndEdit();
                     dsEstructura.COMPUESTOS_PARTES.AddCOMPUESTOS_PARTESRow(rowCompCloned);
-                    lastCompID--;
                 }
             }
             
-            arbol.ExpandAll();            
+            arbol.ExpandAll();
+
+            lastCompID = (clonar) ? Convert.ToInt32(dsEstructura.COMPUESTOS_PARTES.Min(p => p.COMP_CODIGO) - 1) : -1;
         }
 
         public static ArbolEstructura ArmarArbol(int codigoEstructura, Data.dsEstructuraProducto dsEstructura)
