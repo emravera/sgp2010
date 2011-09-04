@@ -74,7 +74,6 @@
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
             this.btnNewCliente = new System.Windows.Forms.Button();
-            this.sfFechaPrevista = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
@@ -83,12 +82,17 @@
             this.txtObservacion = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.slideDatos = new SlickInterface.Slide();
             this.slideControl = new SlickInterface.SlideControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcPedido = new System.Windows.Forms.TabControl();
+            this.sfFechaPrevista = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePedido)).BeginInit();
             this.panelAcciones.SuspendLayout();
@@ -107,15 +111,20 @@
             this.tpBuscar.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcPedido.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.dgvDetallePedido);
             this.groupBox3.Controls.Add(this.panelAcciones);
             this.groupBox3.Location = new System.Drawing.Point(6, 199);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(560, 201);
+            this.groupBox3.Size = new System.Drawing.Size(668, 210);
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Detalle del pedido";
@@ -131,7 +140,7 @@
             this.dgvDetallePedido.ReadOnly = true;
             this.dgvDetallePedido.RowHeadersVisible = false;
             this.dgvDetallePedido.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetallePedido.Size = new System.Drawing.Size(462, 180);
+            this.dgvDetallePedido.Size = new System.Drawing.Size(575, 188);
             this.dgvDetallePedido.TabIndex = 12;
             this.dgvDetallePedido.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetallePedido_CellFormatting);
             this.dgvDetallePedido.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDetallePedido_DataBindingComplete);
@@ -145,16 +154,16 @@
             this.panelAcciones.Controls.Add(this.btnSumar);
             this.panelAcciones.Controls.Add(this.btnDelete);
             this.panelAcciones.Controls.Add(this.btnNew);
-            this.panelAcciones.Location = new System.Drawing.Point(471, 16);
+            this.panelAcciones.Location = new System.Drawing.Point(584, 16);
             this.panelAcciones.Name = "panelAcciones";
-            this.panelAcciones.Size = new System.Drawing.Size(78, 148);
+            this.panelAcciones.Size = new System.Drawing.Size(78, 188);
             this.panelAcciones.TabIndex = 11;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(12, 86);
+            this.label7.Location = new System.Drawing.Point(12, 118);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 13);
             this.label7.TabIndex = 14;
@@ -165,11 +174,11 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(12, 14);
+            this.label6.Location = new System.Drawing.Point(23, 8);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(39, 13);
+            this.label6.Size = new System.Drawing.Size(40, 13);
             this.label6.TabIndex = 13;
-            this.label6.Text = "Cocina";
+            this.label6.Text = "Detalle";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnRestar
@@ -180,7 +189,7 @@
             this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Restar_Gris_25;
             this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestar.Location = new System.Drawing.Point(37, 103);
+            this.btnRestar.Location = new System.Drawing.Point(37, 135);
             this.btnRestar.Name = "btnRestar";
             this.btnRestar.Size = new System.Drawing.Size(30, 30);
             this.btnRestar.TabIndex = 16;
@@ -198,7 +207,7 @@
             this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSumar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Sumar_Gris_25;
             this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSumar.Location = new System.Drawing.Point(3, 103);
+            this.btnSumar.Location = new System.Drawing.Point(3, 135);
             this.btnSumar.Name = "btnSumar";
             this.btnSumar.Size = new System.Drawing.Size(30, 30);
             this.btnSumar.TabIndex = 15;
@@ -216,7 +225,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Delete_25;
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(37, 30);
+            this.btnDelete.Location = new System.Drawing.Point(37, 24);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(30, 30);
             this.btnDelete.TabIndex = 14;
@@ -234,7 +243,7 @@
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.New_25;
             this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNew.Location = new System.Drawing.Point(3, 30);
+            this.btnNew.Location = new System.Drawing.Point(3, 24);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(30, 30);
             this.btnNew.TabIndex = 13;
@@ -246,18 +255,20 @@
             // 
             // gbGuardarCancelar
             // 
+            this.gbGuardarCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbGuardarCancelar.Controls.Add(this.btnVolver);
             this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
-            this.gbGuardarCancelar.Location = new System.Drawing.Point(6, 401);
+            this.gbGuardarCancelar.Location = new System.Drawing.Point(3, 413);
             this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
             this.gbGuardarCancelar.Name = "gbGuardarCancelar";
-            this.gbGuardarCancelar.Size = new System.Drawing.Size(560, 46);
+            this.gbGuardarCancelar.Size = new System.Drawing.Size(670, 46);
             this.gbGuardarCancelar.TabIndex = 1;
             this.gbGuardarCancelar.TabStop = false;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(488, 15);
+            this.btnVolver.Location = new System.Drawing.Point(601, 14);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(64, 26);
             this.btnVolver.TabIndex = 18;
@@ -267,7 +278,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(418, 15);
+            this.btnGuardar.Location = new System.Drawing.Point(531, 14);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(64, 26);
             this.btnGuardar.TabIndex = 17;
@@ -285,7 +296,7 @@
             this.tpCocinas.Controls.Add(this.slideAgregar);
             this.tpCocinas.Location = new System.Drawing.Point(4, 5);
             this.tpCocinas.Name = "tpCocinas";
-            this.tpCocinas.Size = new System.Drawing.Size(570, 448);
+            this.tpCocinas.Size = new System.Drawing.Size(680, 463);
             this.tpCocinas.TabIndex = 2;
             this.tpCocinas.UseVisualStyleBackColor = true;
             // 
@@ -295,29 +306,35 @@
             this.gbCocinas.Controls.Add(this.dgvCocinas);
             this.gbCocinas.Location = new System.Drawing.Point(0, 0);
             this.gbCocinas.Name = "gbCocinas";
-            this.gbCocinas.Size = new System.Drawing.Size(564, 190);
+            this.gbCocinas.Size = new System.Drawing.Size(674, 190);
             this.gbCocinas.TabIndex = 13;
             this.gbCocinas.TabStop = false;
-            this.gbCocinas.Text = "Cocinas";
+            this.gbCocinas.Text = "Carga de Detalle";
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.label15);
+            this.panel1.Controls.Add(this.numericUpDown2);
+            this.panel1.Controls.Add(this.label14);
+            this.panel1.Controls.Add(this.numericUpDown1);
+            this.panel1.Controls.Add(this.sfFechaPrevista);
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnAgregar);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.btnHecho);
             this.panel1.Controls.Add(this.nudCantidad);
-            this.panel1.Location = new System.Drawing.Point(470, 37);
+            this.panel1.Location = new System.Drawing.Point(453, 17);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(73, 127);
+            this.panel1.Size = new System.Drawing.Size(205, 162);
             this.panel1.TabIndex = 6;
             // 
             // btnAgregar
             // 
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAgregar.Location = new System.Drawing.Point(3, 63);
+            this.btnAgregar.Location = new System.Drawing.Point(7, 133);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(64, 22);
+            this.btnAgregar.Size = new System.Drawing.Size(89, 22);
             this.btnAgregar.TabIndex = 31;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -327,20 +344,20 @@
             // 
             this.label8.AutoSize = true;
             this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.label8.Location = new System.Drawing.Point(0, 13);
+            this.label8.Location = new System.Drawing.Point(20, 14);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(50, 13);
+            this.label8.Size = new System.Drawing.Size(70, 13);
             this.label8.TabIndex = 1;
-            this.label8.Text = "Cantidad";
+            this.label8.Text = "Total Cocina:";
             // 
             // btnHecho
             // 
             this.btnHecho.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnHecho.Location = new System.Drawing.Point(3, 90);
+            this.btnHecho.Location = new System.Drawing.Point(102, 133);
             this.btnHecho.Name = "btnHecho";
-            this.btnHecho.Size = new System.Drawing.Size(64, 22);
+            this.btnHecho.Size = new System.Drawing.Size(96, 22);
             this.btnHecho.TabIndex = 32;
-            this.btnHecho.Text = "Hecho";
+            this.btnHecho.Text = "Volver";
             this.btnHecho.UseVisualStyleBackColor = true;
             this.btnHecho.Click += new System.EventHandler(this.btnHecho_Click);
             // 
@@ -348,16 +365,16 @@
             // 
             this.nudCantidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.nudCantidad.CausesValidation = false;
-            this.nudCantidad.Location = new System.Drawing.Point(3, 30);
+            this.nudCantidad.Location = new System.Drawing.Point(92, 12);
             this.nudCantidad.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.nudCantidad.Name = "nudCantidad";
-            this.nudCantidad.Size = new System.Drawing.Size(64, 20);
+            this.nudCantidad.Size = new System.Drawing.Size(106, 20);
             this.nudCantidad.TabIndex = 30;
-            this.nudCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nudCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudCantidad.Enter += new System.EventHandler(this.nudCantidad_Enter);
             // 
             // dgvCocinas
@@ -387,11 +404,14 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.dgvLista);
-            this.groupBox2.Location = new System.Drawing.Point(3, 115);
+            this.groupBox2.Location = new System.Drawing.Point(3, 97);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(9);
-            this.groupBox2.Size = new System.Drawing.Size(756, 342);
+            this.groupBox2.Size = new System.Drawing.Size(671, 360);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Listado de Pedidos";
@@ -410,26 +430,25 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(738, 311);
+            this.dgvLista.Size = new System.Drawing.Size(653, 329);
             this.dgvLista.TabIndex = 6;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
-            this.dgvLista.DoubleClick += new System.EventHandler(this.dgvLista_DoubleClick);
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
             this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(35, 48);
+            this.label11.Location = new System.Drawing.Point(441, 24);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(44, 13);
             this.label11.TabIndex = 7;
-            this.label11.Text = "Estado:";            
+            this.label11.Text = "Estado:";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(232, 75);
+            this.label10.Location = new System.Drawing.Point(246, 59);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(44, 13);
             this.label10.TabIndex = 6;
@@ -454,7 +473,7 @@
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(770, 50);
+            this.tsMenu.Size = new System.Drawing.Size(688, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
@@ -520,6 +539,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.sfFechaHasta);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.sfFechaDesde);
@@ -531,10 +552,9 @@
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.txtNombreBuscar);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(756, 106);
+            this.groupBox1.Size = new System.Drawing.Size(671, 88);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
@@ -544,15 +564,15 @@
             this.sfFechaHasta.CausesValidation = false;
             this.sfFechaHasta.CustomFormat = " ";
             this.sfFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.sfFechaHasta.Location = new System.Drawing.Point(282, 20);
+            this.sfFechaHasta.Location = new System.Drawing.Point(296, 20);
             this.sfFechaHasta.Name = "sfFechaHasta";
-            this.sfFechaHasta.Size = new System.Drawing.Size(102, 20);
+            this.sfFechaHasta.Size = new System.Drawing.Size(139, 20);
             this.sfFechaHasta.TabIndex = 1;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(203, 24);
+            this.label13.Location = new System.Drawing.Point(219, 24);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(71, 13);
             this.label13.TabIndex = 13;
@@ -565,7 +585,7 @@
             this.sfFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.sfFechaDesde.Location = new System.Drawing.Point(85, 20);
             this.sfFechaDesde.Name = "sfFechaDesde";
-            this.sfFechaDesde.Size = new System.Drawing.Size(102, 20);
+            this.sfFechaDesde.Size = new System.Drawing.Size(131, 20);
             this.sfFechaDesde.TabIndex = 0;
             // 
             // label12
@@ -580,7 +600,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(31, 72);
+            this.label5.Location = new System.Drawing.Point(31, 59);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 13);
             this.label5.TabIndex = 10;
@@ -589,7 +609,7 @@
             // txtNroPedidoBuscar
             // 
             this.txtNroPedidoBuscar.CausesValidation = false;
-            this.txtNroPedidoBuscar.Location = new System.Drawing.Point(85, 72);
+            this.txtNroPedidoBuscar.Location = new System.Drawing.Point(85, 56);
             this.txtNroPedidoBuscar.MaxLength = 80;
             this.txtNroPedidoBuscar.Name = "txtNroPedidoBuscar";
             this.txtNroPedidoBuscar.Size = new System.Drawing.Size(131, 20);
@@ -601,17 +621,17 @@
             this.cboEstadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboEstadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboEstadoBuscar.FormattingEnabled = true;
-            this.cboEstadoBuscar.Location = new System.Drawing.Point(85, 45);
+            this.cboEstadoBuscar.Location = new System.Drawing.Point(491, 20);
             this.cboEstadoBuscar.Name = "cboEstadoBuscar";
-            this.cboEstadoBuscar.Size = new System.Drawing.Size(115, 21);
-            this.cboEstadoBuscar.TabIndex = 3;            
+            this.cboEstadoBuscar.Size = new System.Drawing.Size(133, 21);
+            this.cboEstadoBuscar.TabIndex = 3;
             // 
             // btnBuscar
             // 
             this.btnBuscar.CausesValidation = false;
             this.btnBuscar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(480, 68);
+            this.btnBuscar.Location = new System.Drawing.Point(592, 50);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
             this.btnBuscar.TabIndex = 5;
@@ -623,10 +643,10 @@
             // txtNombreBuscar
             // 
             this.txtNombreBuscar.CausesValidation = false;
-            this.txtNombreBuscar.Location = new System.Drawing.Point(282, 72);
+            this.txtNombreBuscar.Location = new System.Drawing.Point(296, 56);
             this.txtNombreBuscar.MaxLength = 80;
             this.txtNombreBuscar.Name = "txtNombreBuscar";
-            this.txtNombreBuscar.Size = new System.Drawing.Size(170, 20);
+            this.txtNombreBuscar.Size = new System.Drawing.Size(189, 20);
             this.txtNombreBuscar.TabIndex = 4;
             // 
             // tpDatos
@@ -640,14 +660,15 @@
             this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
             this.tpDatos.Name = "tpDatos";
             this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(570, 448);
+            this.tpDatos.Size = new System.Drawing.Size(680, 463);
             this.tpDatos.TabIndex = 1;
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
             // gbDatos
             // 
+            this.gbDatos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbDatos.Controls.Add(this.btnNewCliente);
-            this.gbDatos.Controls.Add(this.sfFechaPrevista);
             this.gbDatos.Controls.Add(this.txtNumero);
             this.gbDatos.Controls.Add(this.label9);
             this.gbDatos.Controls.Add(this.cboEstado);
@@ -656,11 +677,10 @@
             this.gbDatos.Controls.Add(this.txtObservacion);
             this.gbDatos.Controls.Add(this.label2);
             this.gbDatos.Controls.Add(this.label3);
-            this.gbDatos.Controls.Add(this.label1);
             this.gbDatos.Location = new System.Drawing.Point(3, 1);
             this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
             this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(558, 185);
+            this.gbDatos.Size = new System.Drawing.Size(673, 194);
             this.gbDatos.TabIndex = 16;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del pedido";
@@ -676,31 +696,22 @@
             this.btnNewCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNewCliente.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNewCliente.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.New_25;
-            this.btnNewCliente.Location = new System.Drawing.Point(467, 38);
+            this.btnNewCliente.Location = new System.Drawing.Point(329, 38);
             this.btnNewCliente.Name = "btnNewCliente";
-            this.btnNewCliente.Size = new System.Drawing.Size(85, 31);
+            this.btnNewCliente.Size = new System.Drawing.Size(109, 31);
             this.btnNewCliente.TabIndex = 20;
             this.btnNewCliente.TabStop = false;
-            this.btnNewCliente.Text = "Nuevo...";
+            this.btnNewCliente.Text = "Nuevo Cliente";
             this.btnNewCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNewCliente.UseVisualStyleBackColor = true;
             this.btnNewCliente.Click += new System.EventHandler(this.btnNewCliente_Click);
             this.btnNewCliente.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNewCliente.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
-            // sfFechaPrevista
-            // 
-            this.sfFechaPrevista.CustomFormat = " ";
-            this.sfFechaPrevista.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.sfFechaPrevista.Location = new System.Drawing.Point(96, 69);
-            this.sfFechaPrevista.Name = "sfFechaPrevista";
-            this.sfFechaPrevista.Size = new System.Drawing.Size(153, 20);
-            this.sfFechaPrevista.TabIndex = 9;
-            // 
             // txtNumero
             // 
             this.txtNumero.CausesValidation = false;
-            this.txtNumero.Location = new System.Drawing.Point(96, 19);
+            this.txtNumero.Location = new System.Drawing.Point(82, 19);
             this.txtNumero.MaxLength = 20;
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(153, 20);
@@ -709,7 +720,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(8, 22);
+            this.label9.Location = new System.Drawing.Point(28, 22);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(48, 13);
             this.label9.TabIndex = 7;
@@ -720,7 +731,7 @@
             this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboEstado.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboEstado.FormattingEnabled = true;
-            this.cboEstado.Location = new System.Drawing.Point(96, 94);
+            this.cboEstado.Location = new System.Drawing.Point(82, 71);
             this.cboEstado.Name = "cboEstado";
             this.cboEstado.Size = new System.Drawing.Size(153, 21);
             this.cboEstado.TabIndex = 10;
@@ -730,15 +741,15 @@
             this.cboClientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboClientes.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboClientes.FormattingEnabled = true;
-            this.cboClientes.Location = new System.Drawing.Point(96, 44);
+            this.cboClientes.Location = new System.Drawing.Point(82, 44);
             this.cboClientes.Name = "cboClientes";
-            this.cboClientes.Size = new System.Drawing.Size(342, 21);
+            this.cboClientes.Size = new System.Drawing.Size(228, 21);
             this.cboClientes.TabIndex = 8;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 97);
+            this.label4.Location = new System.Drawing.Point(32, 74);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 19;
@@ -747,17 +758,17 @@
             // txtObservacion
             // 
             this.txtObservacion.CausesValidation = false;
-            this.txtObservacion.Location = new System.Drawing.Point(96, 123);
+            this.txtObservacion.Location = new System.Drawing.Point(82, 98);
             this.txtObservacion.MaxLength = 200;
             this.txtObservacion.Name = "txtObservacion";
-            this.txtObservacion.Size = new System.Drawing.Size(342, 50);
+            this.txtObservacion.Size = new System.Drawing.Size(424, 79);
             this.txtObservacion.TabIndex = 11;
             this.txtObservacion.Text = "";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 126);
+            this.label2.Location = new System.Drawing.Point(5, 101);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 13);
             this.label2.TabIndex = 13;
@@ -766,20 +777,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 47);
+            this.label3.Location = new System.Drawing.Point(32, 47);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 14;
             this.label3.Text = "Cliente:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 73);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 13);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Fecha Prevista:";
             // 
             // slideDatos
             // 
@@ -805,7 +807,7 @@
             this.tpBuscar.Location = new System.Drawing.Point(4, 5);
             this.tpBuscar.Name = "tpBuscar";
             this.tpBuscar.Padding = new System.Windows.Forms.Padding(3);
-            this.tpBuscar.Size = new System.Drawing.Size(762, 463);
+            this.tpBuscar.Size = new System.Drawing.Size(680, 463);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
@@ -822,7 +824,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 528);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(692, 528);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
             // tcPedido
@@ -839,15 +841,83 @@
             this.tcPedido.Name = "tcPedido";
             this.tcPedido.Padding = new System.Drawing.Point(0, 0);
             this.tcPedido.SelectedIndex = 0;
-            this.tcPedido.Size = new System.Drawing.Size(770, 472);
+            this.tcPedido.Size = new System.Drawing.Size(688, 472);
             this.tcPedido.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcPedido.TabIndex = 8;
+            // 
+            // sfFechaPrevista
+            // 
+            this.sfFechaPrevista.CustomFormat = " ";
+            this.sfFechaPrevista.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.sfFechaPrevista.Location = new System.Drawing.Point(92, 38);
+            this.sfFechaPrevista.Name = "sfFechaPrevista";
+            this.sfFechaPrevista.Size = new System.Drawing.Size(106, 20);
+            this.sfFechaPrevista.TabIndex = 33;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(-2, 42);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 13);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "Fecha Necesidad:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label14.Location = new System.Drawing.Point(8, 71);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(82, 13);
+            this.label14.TabIndex = 35;
+            this.label14.Text = "Cant. En Stock:";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numericUpDown1.CausesValidation = false;
+            this.numericUpDown1.Location = new System.Drawing.Point(92, 69);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(106, 20);
+            this.numericUpDown1.TabIndex = 36;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label15.Location = new System.Drawing.Point(1, 97);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(89, 13);
+            this.label15.TabIndex = 37;
+            this.label15.Text = "Cant. a Producir:";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.numericUpDown2.CausesValidation = false;
+            this.numericUpDown2.Location = new System.Drawing.Point(92, 95);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(106, 20);
+            this.numericUpDown2.TabIndex = 38;
+            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // frmPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 528);
+            this.ClientSize = new System.Drawing.Size(692, 528);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -856,7 +926,6 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Pedidos";
-            this.Load += new System.EventHandler(this.frmPedidos_Load);
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePedido)).EndInit();
             this.panelAcciones.ResumeLayout(false);
@@ -881,6 +950,8 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tcPedido.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -935,7 +1006,6 @@
         private System.Windows.Forms.DataGridView dgvCocinas;
         private SlickInterface.Slide slideAgregar;
         private System.Windows.Forms.GroupBox gbDatos;
-        private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha sfFechaPrevista;
         private System.Windows.Forms.TextBox txtNumero;
         private System.Windows.Forms.Label label9;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboEstado;
@@ -944,9 +1014,14 @@
         private System.Windows.Forms.RichTextBox txtObservacion;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
         private SlickInterface.Slide slideDatos;
         private SlickInterface.SlideControl slideControl;
         private System.Windows.Forms.Button btnNewCliente;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha sfFechaPrevista;
+        private System.Windows.Forms.Label label1;
     }
 }
