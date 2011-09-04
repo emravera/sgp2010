@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.numDiciembre = new System.Windows.Forms.NumericUpDown();
             this.tcPlanAnual = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
@@ -84,7 +84,6 @@
             this.btnPuntoEquilibrio = new System.Windows.Forms.Button();
             this.label30 = new System.Windows.Forms.Label();
             this.numPuntoEquilibrio = new System.Windows.Forms.NumericUpDown();
-            this.label28 = new System.Windows.Forms.Label();
             this.numPrecioVenta = new System.Windows.Forms.NumericUpDown();
             this.label29 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
@@ -119,6 +118,7 @@
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnPlanificar = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numDiciembre)).BeginInit();
             this.tcPlanAnual.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -336,14 +336,14 @@
             // 
             // chartDemanda
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartDemanda.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.chartDemanda.ChartAreas.Add(chartArea1);
             this.chartDemanda.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartDemanda.Location = new System.Drawing.Point(3, 17);
             this.chartDemanda.Name = "chartDemanda";
-            series2.ChartArea = "ChartArea1";
-            series2.Name = "Series1";
-            this.chartDemanda.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Name = "Series1";
+            this.chartDemanda.Series.Add(series1);
             this.chartDemanda.Size = new System.Drawing.Size(438, 210);
             this.chartDemanda.TabIndex = 0;
             this.chartDemanda.Text = "chart1";
@@ -784,11 +784,11 @@
             // gbPuntoEquilibrio
             // 
             this.gbPuntoEquilibrio.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.gbPuntoEquilibrio.Controls.Add(this.label2);
             this.gbPuntoEquilibrio.Controls.Add(this.chPuntoEquilibrio);
             this.gbPuntoEquilibrio.Controls.Add(this.btnPuntoEquilibrio);
             this.gbPuntoEquilibrio.Controls.Add(this.label30);
             this.gbPuntoEquilibrio.Controls.Add(this.numPuntoEquilibrio);
-            this.gbPuntoEquilibrio.Controls.Add(this.label28);
             this.gbPuntoEquilibrio.Controls.Add(this.numPrecioVenta);
             this.gbPuntoEquilibrio.Controls.Add(this.label29);
             this.gbPuntoEquilibrio.Controls.Add(this.label26);
@@ -846,16 +846,6 @@
             this.numPuntoEquilibrio.TabIndex = 13;
             this.numPuntoEquilibrio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numPuntoEquilibrio.Enter += new System.EventHandler(this.numPuntoEquilibrio_Enter);
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(180, 71);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(16, 13);
-            this.label28.TabIndex = 16;
-            this.label28.Text = "$ ";
             // 
             // numPrecioVenta
             // 
@@ -1236,6 +1226,16 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 532);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(180, 71);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "$/Unidad";
+            // 
             // frmPlanAnual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1374,7 +1374,6 @@
         private System.Windows.Forms.Button btnPuntoEquilibrio;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.NumericUpDown numPuntoEquilibrio;
-        private System.Windows.Forms.Label label28;
         private System.Windows.Forms.NumericUpDown numPrecioVenta;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label26;
@@ -1388,6 +1387,7 @@
         private System.Windows.Forms.Label label31;
         public System.Windows.Forms.ToolStripButton btnNuevo;
         private System.Windows.Forms.CheckBox chPuntoEquilibrio;
+        private System.Windows.Forms.Label label2;
 
 
 
