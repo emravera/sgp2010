@@ -12,7 +12,7 @@ namespace GyCAP.UI.EstructuraProducto
     public partial class frmListadoEstructura : Form
     {
         private static frmListadoEstructura _frmListadoEstructura = null;
-        private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
+        //private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
         private Data.dsCocina dsCocina = new GyCAP.Data.dsCocina();
         private Data.dsEmpleado dsEmpleado = new GyCAP.Data.dsEmpleado();
         private Data.dsPlanMP dsUnidadMedida = new GyCAP.Data.dsPlanMP();
@@ -50,15 +50,15 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 try
                 {
-                    dsEstructura.PIEZASXESTRUCTURA.Clear();
-                    dsEstructura.CONJUNTOSXESTRUCTURA.Clear();
-                    dsEstructura.ESTRUCTURAS.Clear();
-                    BLL.EstructuraBLL.ObtenerEstructura(cbCocinaBuscar.GetSelectedValueInt(), dsEstructura, true);
-                    dvEstructuras.Table = dsEstructura.ESTRUCTURAS;
-                    if (dsEstructura.ESTRUCTURAS.Rows.Count == 0)
-                    {
-                        MessageBox.Show("No se encontraron Estructuras para la cocina seleccionada.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    //dsEstructura.PIEZASXESTRUCTURA.Clear();
+                    //dsEstructura.CONJUNTOSXESTRUCTURA.Clear();
+                    //dsEstructura.ESTRUCTURAS.Clear();
+                    //BLL.EstructuraBLL.ObtenerEstructura(cbCocinaBuscar.GetSelectedValueInt(), dsEstructura, true);
+                    //dvEstructuras.Table = dsEstructura.ESTRUCTURAS;
+                    //if (dsEstructura.ESTRUCTURAS.Rows.Count == 0)
+                    //{
+                    //    MessageBox.Show("No se encontraron Estructuras para la cocina seleccionada.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //}
                                         
                 }
                 catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -76,14 +76,14 @@ namespace GyCAP.UI.EstructuraProducto
         {
             try
             {
-                BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsEstructura.TERMINACIONES);
-                BLL.PlanoBLL.ObtenerTodos(dsEstructura.PLANOS);
+                //BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsEstructura.TERMINACIONES);
+                //BLL.PlanoBLL.ObtenerTodos(dsEstructura.PLANOS);
                 BLL.CocinaBLL.ObtenerCocinas(dsCocina.COCINAS);
                 BLL.EmpleadoBLL.ObtenerEmpleados(dsEmpleado.EMPLEADOS);
-                BLL.ConjuntoBLL.ObtenerConjuntos(dsEstructura.CONJUNTOS);
-                BLL.SubConjuntoBLL.ObtenerSubconjuntos(dsEstructura.SUBCONJUNTOS);
-                BLL.PiezaBLL.ObtenerPiezas(dsEstructura.PIEZAS);
-                BLL.MateriaPrimaBLL.ObtenerMP(dsEstructura.MATERIAS_PRIMAS);
+                //BLL.ConjuntoBLL.ObtenerConjuntos(dsEstructura.CONJUNTOS);
+                //BLL.SubConjuntoBLL.ObtenerSubconjuntos(dsEstructura.SUBCONJUNTOS);
+                //BLL.PiezaBLL.ObtenerPiezas(dsEstructura.PIEZAS);
+                //BLL.MateriaPrimaBLL.ObtenerMP(dsEstructura.MATERIAS_PRIMAS);
                 BLL.UnidadMedidaBLL.ObtenerTodos(dsUnidadMedida.UNIDADES_MEDIDA);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -110,8 +110,8 @@ namespace GyCAP.UI.EstructuraProducto
             
             //Dataviews
             dvCocinaBuscar = new DataView(dsCocina.COCINAS);
-            dvPartes = new DataView(dsEstructura.LISTA_PARTES);
-            dvEstructuras = new DataView(dsEstructura.ESTRUCTURAS);
+            //dvPartes = new DataView(dsEstructura.LISTA_PARTES);
+            //dvEstructuras = new DataView(dsEstructura.ESTRUCTURAS);
             dvEstructuras.Sort = "ESTR_NOMBRE ASC";
             dgvEstructuras.DataSource = dvEstructuras;
 
@@ -138,7 +138,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void CargarListaPartes()
         {
-            dsEstructura.LISTA_PARTES.Clear();
+            /*dsEstructura.LISTA_PARTES.Clear();
             foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow row in dsEstructura.CONJUNTOSXESTRUCTURA)
             {
                 Data.dsEstructura.LISTA_PARTESRow rowParte = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
@@ -149,7 +149,7 @@ namespace GyCAP.UI.EstructuraProducto
                 rowParte.PAR_TERMINACION = string.Empty;
                 rowParte.PAR_CANTIDAD = row.CXE_CANTIDAD.ToString();
                 rowParte.PAR_UMED = "Unidad";
-                rowParte.EndEdit();
+               rowParte.EndEdit();
                 dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
             }
 
@@ -167,7 +167,7 @@ namespace GyCAP.UI.EstructuraProducto
                 dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
             }
 
-            dvPartes.Table = dsEstructura.LISTA_PARTES;
+            dvPartes.Table = dsEstructura.LISTA_PARTES;*/
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -179,7 +179,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             if (e.Value.ToString() != string.Empty)
             {
-                string nombre;
+                string nombre = string.Empty;
                 switch (dgvEstructuras.Columns[e.ColumnIndex].Name)
                 {
                     case "COC_CODIGO":
@@ -187,7 +187,7 @@ namespace GyCAP.UI.EstructuraProducto
                         e.Value = nombre;
                         break;
                     case "PNO_CODIGO":
-                        nombre = dsEstructura.PLANOS.FindByPNO_CODIGO(Convert.ToInt32(e.Value)).PNO_NOMBRE;
+                        //nombre = dsEstructura.PLANOS.FindByPNO_CODIGO(Convert.ToInt32(e.Value)).PNO_NOMBRE;
                         e.Value = nombre;
                         break;
                     case "E_CODIGO":

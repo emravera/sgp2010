@@ -17,6 +17,13 @@ namespace GyCAP.Entidades
         private Terminacion terminacionHorno;
         private int activo;        
         private int hasImage;
+        private bool esBase;
+
+        public bool EsBase
+        {
+            get { return esBase; }
+            set { esBase = value; }
+        }
 
         public int Activo
         {

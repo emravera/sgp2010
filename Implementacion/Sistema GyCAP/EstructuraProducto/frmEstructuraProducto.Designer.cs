@@ -611,7 +611,6 @@
             this.btnListadoParte.Text = "Listados";
             this.btnListadoParte.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnListadoParte.UseVisualStyleBackColor = true;
-            this.btnListadoParte.Click += new System.EventHandler(this.btnListadoPieza_Click);
             this.btnListadoParte.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnListadoParte.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -631,7 +630,6 @@
             this.btnConsultarParte.Text = "Consultar";
             this.btnConsultarParte.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarParte.UseVisualStyleBackColor = true;
-            this.btnConsultarParte.Click += new System.EventHandler(this.btnConsultarPieza_Click);
             this.btnConsultarParte.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnConsultarParte.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 

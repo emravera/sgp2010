@@ -13,7 +13,6 @@ namespace GyCAP.UI.EstructuraProducto
     public partial class frmColor : Form
     {
         private static frmColor _frmColor = null;
-        //private Data.dsColor dsColor = new GyCAP.Data.dsColor();
         private Data.dsCocina dsColor = new GyCAP.Data.dsCocina();
         private DataView dvColor;
         private enum estadoUI {inicio, modificar, };

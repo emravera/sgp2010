@@ -23,9 +23,10 @@ namespace GyCAP.DAL
                         ,[desig_codigo]
                         ,[coc_codigo_producto]
                         ,[coc_activo]
-                        ,[coc_has_image])
-                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7) SELECT @@Identity";
-
+                        ,[coc_has_image]
+                        ,[coc_is_base])
+                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8) SELECT @@Identity";
+                        
             object[] valorParametros = { cocina.Color.Codigo,
                                          cocina.Modelo.Codigo,
                                          cocina.Marca.Codigo,
@@ -33,7 +34,8 @@ namespace GyCAP.DAL
                                          cocina.Designacion.Codigo,
                                          cocina.CodigoProducto,
                                          cocina.Activo,
-                                         cocina.HasImage 
+                                         cocina.HasImage,
+                                         (cocina.EsBase) ? 1 : 0
                                        };
 
             try
@@ -54,7 +56,8 @@ namespace GyCAP.DAL
                         ,coc_codigo_producto = @p5
                         ,coc_activo = @p6
                         ,coc_has_image = @p7
-                        WHERE coc_codigo = @p8";
+                        ,coc_is_base = @p8
+                        WHERE coc_codigo = @p9";
 
             object[] valorParametros = { cocina.Color.Codigo,
                                          cocina.Modelo.Codigo,
@@ -64,7 +67,8 @@ namespace GyCAP.DAL
                                          cocina.CodigoProducto,
                                          cocina.Activo,
                                          cocina.HasImage,
-                                         cocina.CodigoCocina 
+                                         (cocina.EsBase) ? 1 : 0,
+                                         cocina.CodigoCocina                                         
                                        };
 
             try
@@ -90,7 +94,7 @@ namespace GyCAP.DAL
         public static void ObtenerCocinas(DataTable dtCocina)
         {
             string sql = @"SELECT coc_codigo, col_codigo, mod_codigo, mca_codigo, te_codigo, desig_codigo, 
-                         coc_codigo_producto, coc_activo, coc_has_image FROM COCINAS";
+                         coc_codigo_producto, coc_activo, coc_has_image, coc_is_base FROM COCINAS";
 
             try
             {
@@ -103,7 +107,7 @@ namespace GyCAP.DAL
         public static void ObtenerCocinas(object codigo, object codMarca, object codTerminacion, object codEstado, DataTable dtCocina)
         {
             string sql = @"SELECT coc_codigo, col_codigo, mod_codigo, mca_codigo, te_codigo, desig_codigo, 
-                        coc_codigo_producto, coc_activo, coc_has_image FROM COCINAS WHERE 1=1 ";
+                        coc_codigo_producto, coc_activo, coc_has_image, coc_is_base FROM COCINAS WHERE 1=1 ";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -222,6 +226,48 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
+        public static int GetCodigoCocinaBase()
+        {
+            string sql = "SELECT coc_codigo FROM COCINAS WHERE coc_is_base = 1";
+            
+            try
+            {
+                object result = DB.executeScalar(sql, null, null);
+                if (result == null) { throw new Entidades.Excepciones.CocinaBaseException("No existe una cocina base definida."); }
+                if (Convert.ToInt32(result) <= 0) { throw new Entidades.Excepciones.CocinaBaseException("No existe una cocina base definida."); }
+
+                return Convert.ToInt32(result);                
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool EsCocinaBase(int codigoCocina)
+        {
+            string sql = "SELECT coc_is_base FROM COCINAS WHERE coc_codigo = @p0";
+            object[] parametros = { codigoCocina };
+            
+            try
+            {
+                object result = DB.executeScalar(sql, parametros, null);
+                if (Convert.ToInt32(result) == 0) { return false; }
+                return true;
+            }
+            catch (Exception ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static bool HayCocinaBase()
+        {
+            string sql = "SELECT count(coc_codigo) FROM COCINAS WHERE coc_is_base = 1";
+
+            try
+            {
+                int result = Convert.ToInt32(DB.executeScalar(sql, null, null));
+                if (result == 1) { return true; }
+                else { return false; }
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+        
         public static void SetImageStatus(int codigoCocina, ImagenStatus status)
         {
             string sql = "UPDATE COCINA SET coc_has_image = @p0 WHERE coc_codigo = @p1";

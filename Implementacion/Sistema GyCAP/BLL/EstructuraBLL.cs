@@ -12,7 +12,7 @@ namespace GyCAP.BLL
     {
         public static readonly int EstructuraActiva = 1;
         public static readonly int EstructuraInactiva = 0;
-        
+
         public static decimal Insertar(Data.dsEstructuraProducto ds)
         {
             return DAL.EstructuraDAL.Insertar(ds);
@@ -48,16 +48,11 @@ namespace GyCAP.BLL
         
         public static void ObtenerEstructuras(object nombre, object codPlano, object fechaCreacion, object codCocina, object codResponsable, object activoSiNo, Data.dsEstructuraProducto ds)
         {
-            if (Convert.ToInt32(codPlano.ToString()) <= 0) { codPlano = null; }
-            if (Convert.ToInt32(codCocina.ToString()) <= 0) { codCocina = null; }
-            if (Convert.ToInt32(codResponsable.ToString()) <= 0) { codResponsable = null; }
-            if (Convert.ToInt32(activoSiNo) < 0) { activoSiNo = null; }
+            if (codPlano != null && Convert.ToInt32(codPlano.ToString()) <= 0) { codPlano = null; }
+            if (codCocina != null && Convert.ToInt32(codCocina.ToString()) <= 0) { codCocina = null; }
+            if (codResponsable != null && Convert.ToInt32(codResponsable.ToString()) <= 0) { codResponsable = null; }
+            if (activoSiNo != null && Convert.ToInt32(activoSiNo) < 0) { activoSiNo = null; }
             DAL.EstructuraDAL.ObtenerEstructuras(nombre, codPlano, fechaCreacion, codCocina, codResponsable, activoSiNo, ds);
-        }
-
-        public static void ObtenerEstructura(int codigoEstructura, Data.dsEstructura ds, bool detalle)
-        {
-            DAL.EstructuraDAL.ObtenerEstructura(codigoEstructura, ds, detalle);
         }
 
         /// <summary>
@@ -222,6 +217,35 @@ namespace GyCAP.BLL
             {
                 throw new Entidades.Excepciones.CocinaSinEstructuraActivaException();
             }
+        }
+
+        public static ArbolEstructura GetArbolEstructura(int codigoCocina)
+        {
+            ArbolEstructura arbol = new ArbolEstructura(-1);
+
+            Data.dsEstructuraProducto ds = new GyCAP.Data.dsEstructuraProducto();
+            ObtenerEstructuras(null, null, null, codigoCocina, null, EstructuraActiva, ds);
+
+            if (ds.ESTRUCTURAS.Rows.Count > 0)
+            {
+                UnidadMedidaBLL.ObtenerTodos(ds.UNIDADES_MEDIDA);
+                TipoUnidadMedidaBLL.ObtenerTodos(ds.TIPOS_UNIDADES_MEDIDA);
+                MateriaPrimaBLL.ObtenerMP(ds.MATERIAS_PRIMAS);
+                ParteBLL.ObtenerPartes(null, null, null, null, null, null, ds.PARTES);
+                EstadoParteBLL.ObtenerTodos(ds.ESTADO_PARTES);
+                TipoParteBLL.ObtenerTodos(ds.TIPOS_PARTES);
+                UbicacionStockBLL.ObtenerUbicacionesStock(ds.UBICACIONES_STOCK);
+                TipoUbicacionStockBLL.ObtenerTiposUbicacionStock(ds.TIPOS_UBICACIONES_STOCK);
+                ContenidoUbicacionStockBLL.ObtenerContenidosUbicacionStock(ds.CONTENIDO_UBICACION_STOCK);
+                arbol = ArmarArbol(Convert.ToInt32(ds.ESTRUCTURAS.Rows[0]["estr_codigo"].ToString()), ds);
+            }
+
+            return arbol;
+        }
+
+        public static IList<CapacidadNecesidadCombinada> AsListForCapacity(int codigoCocina)
+        {
+            return GetArbolEstructura(codigoCocina).AsListForCapacity();
         }
     }
 }

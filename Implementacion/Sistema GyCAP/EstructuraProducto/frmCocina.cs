@@ -106,6 +106,10 @@ namespace GyCAP.UI.EstructuraProducto
                     {
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
+                    catch (Entidades.Excepciones.CocinaBaseException ex)
+                    {
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
+                    }
                 }
             }
             else
@@ -122,14 +126,10 @@ namespace GyCAP.UI.EstructuraProducto
         {
             try
             {
-                //Limpiamos el Dataset
                 dsCocina.COCINAS.Clear();
 
-                //Metodo para la busqueda con todos los parámetros
                 BLL.CocinaBLL.ObtenerCocinas(txtCodigoBuscar.Text, cbMarcaBuscar.GetSelectedValueInt(), cbTerminacionBuscar.GetSelectedValueInt(), cbEstadoBuscar.GetSelectedValueInt(), dsCocina.COCINAS);
 
-                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
-                //por una consulta a la BD
                 dvCocinas.Table = dsCocina.COCINAS;
 
                 if (dsCocina.COCINAS.Rows.Count == 0)
@@ -167,6 +167,10 @@ namespace GyCAP.UI.EstructuraProducto
                         if (Convert.ToInt32(e.Value) == 1) { e.Value = "Activa"; }
                         else if (Convert.ToInt32(e.Value) == 0) { e.Value = "Inactiva"; }
                         break;
+                    case "COC_IS_BASE":
+                        if (Convert.ToInt32(e.Value) == 1) { e.Value = "Si"; }
+                        else if (Convert.ToInt32(e.Value) == 0) { e.Value = "No"; }
+                        break;                        
                     default:
                         break;
                 }
@@ -183,6 +187,7 @@ namespace GyCAP.UI.EstructuraProducto
             cbColor.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COL_CODIGO));
             cbTerminacion.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).TE_CODIGO));
             cbEstado.SetSelectedValue(Convert.ToInt32(dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COC_ACTIVO));
+            chkBase.Checked = (dsCocina.COCINAS.FindByCOC_CODIGO(codigoCocina).COC_IS_BASE == 1) ? true : false;
             //cargar imagen solo al consultar con WCF - gonzalo
             pbImagen.Image = BLL.CocinaBLL.ObtenerImagen(codigoCocina);
         }
@@ -197,17 +202,13 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 Entidades.Cocina cocina = new GyCAP.Entidades.Cocina();
                 cocina.CodigoProducto = txtCodigo.Text;
-                cocina.Modelo = new GyCAP.Entidades.ModeloCocina();
-                cocina.Modelo.Codigo = cbModelo.GetSelectedValueInt();
-                cocina.Marca = new GyCAP.Entidades.Marca();
-                cocina.Marca.Codigo = cbMarca.GetSelectedValueInt();
-                cocina.Designacion = new GyCAP.Entidades.Designacion();
-                cocina.Designacion.Codigo = cbDesignacion.GetSelectedValueInt();
-                cocina.Color = new GyCAP.Entidades.Color();
-                cocina.Color.Codigo = cbColor.GetSelectedValueInt();
-                cocina.TerminacionHorno = new GyCAP.Entidades.Terminacion();
-                cocina.TerminacionHorno.Codigo = cbTerminacion.GetSelectedValueInt();
+                cocina.Modelo = new GyCAP.Entidades.ModeloCocina() { Codigo = cbModelo.GetSelectedValueInt()};
+                cocina.Marca = new GyCAP.Entidades.Marca() { Codigo = cbMarca.GetSelectedValueInt() } ;
+                cocina.Designacion = new GyCAP.Entidades.Designacion() { Codigo = cbDesignacion.GetSelectedValueInt() };
+                cocina.Color = new GyCAP.Entidades.Color() { Codigo = cbColor.GetSelectedValueInt() };
+                cocina.TerminacionHorno = new GyCAP.Entidades.Terminacion() { Codigo = cbTerminacion.GetSelectedValueInt() };
                 cocina.Activo = cbEstado.GetSelectedValueInt();
+                cocina.EsBase = chkBase.Checked;
                 cocina.HasImage = BLL.ImageRepository.WithImage;
                 //determinar si tiene imagen que no sea la sinimagen - gonzalo
 
@@ -228,6 +229,7 @@ namespace GyCAP.UI.EstructuraProducto
                         rowCocina.TE_CODIGO = cocina.TerminacionHorno.Codigo;
                         rowCocina.DESIG_CODIGO = cocina.Designacion.Codigo;
                         rowCocina.COC_ACTIVO = cocina.Activo;
+                        rowCocina.COC_IS_BASE = (cocina.EsBase) ? 1 : 0;
                         rowCocina.COC_HAS_IMAGE = cocina.HasImage;
                         rowCocina.EndEdit();
                         Image imagen = pbImagen.Image;
@@ -255,10 +257,14 @@ namespace GyCAP.UI.EstructuraProducto
                     {
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
                     }
+                    catch (Entidades.Excepciones.CocinaBaseException ex)
+                    {
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
+                    }
                 }
                 else
                 {
-                    cocina.CodigoCocina = Convert.ToInt32(dvCocinas[dgvListaCocina.SelectedRows[0].Index]["coc_codigo"]);                    
+                    cocina.CodigoCocina = Convert.ToInt32(dvCocinas[dgvListaCocina.SelectedRows[0].Index]["coc_codigo"]);
 
                     try
                     {
@@ -275,6 +281,7 @@ namespace GyCAP.UI.EstructuraProducto
                         rowCocina.TE_CODIGO = cocina.TerminacionHorno.Codigo;
                         rowCocina.DESIG_CODIGO = cocina.Designacion.Codigo;
                         rowCocina.COC_ACTIVO = cocina.Activo;
+                        rowCocina.COC_IS_BASE = (cocina.EsBase) ? 1 : 0;
                         rowCocina.COC_HAS_IMAGE = cocina.HasImage;
                         rowCocina.EndEdit();
                         dsCocina.COCINAS.AcceptChanges();
@@ -284,6 +291,10 @@ namespace GyCAP.UI.EstructuraProducto
                         SetInterface(estadoUI.inicio);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
+                    }
+                    catch (Entidades.Excepciones.CocinaBaseException ex)
                     {
                         MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
                     }
@@ -360,6 +371,8 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.SetTexto("Seleccione...");
                     cbTerminacion.SetTexto("Seleccione...");
                     cbEstado.SetTexto("Seleccione...");
+                    chkBase.Checked = false;
+                    chkBase.Enabled = true;
                     pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
@@ -389,6 +402,8 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.SetTexto("Seleccione");
                     cbTerminacion.SetTexto("Seleccione");
                     cbEstado.SetTexto("Seleccione");
+                    chkBase.Checked = false;
+                    chkBase.Enabled = true;
                     pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = false;
@@ -409,6 +424,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.Enabled = false;
                     cbTerminacion.Enabled = false;
                     cbEstado.Enabled = false;
+                    chkBase.Enabled = false;
                     btnAbrirImagen.Enabled = false;
                     btnQuitarImagen.Enabled = false;
                     btnGuardar.Enabled = false;
@@ -428,6 +444,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbColor.Enabled = true;
                     cbTerminacion.Enabled = true;
                     cbEstado.Enabled = true;
+                    chkBase.Enabled = true;
                     btnAbrirImagen.Enabled = true;
                     btnQuitarImagen.Enabled = true;
                     btnGuardar.Enabled = true;
@@ -469,14 +486,12 @@ namespace GyCAP.UI.EstructuraProducto
             dgvListaCocina.Columns.Add("MOD_CODIGO", "Modelo");
             dgvListaCocina.Columns.Add("MCA_CODIGO", "Marca");
             dgvListaCocina.Columns.Add("COC_ESTADO", "Estado");
+            dgvListaCocina.Columns.Add("COC_IS_BASE", "Es base");
             dgvListaCocina.Columns["COC_CODIGO_PRODUCTO"].DataPropertyName = "COC_CODIGO_PRODUCTO";
             dgvListaCocina.Columns["MOD_CODIGO"].DataPropertyName = "MOD_CODIGO";
             dgvListaCocina.Columns["MCA_CODIGO"].DataPropertyName = "MCA_CODIGO";
             dgvListaCocina.Columns["COC_ESTADO"].DataPropertyName = "COC_ACTIVO";
-            dgvListaCocina.Columns["COC_CODIGO_PRODUCTO"].MinimumWidth = 100;
-            dgvListaCocina.Columns["MOD_CODIGO"].MinimumWidth = 100;
-            dgvListaCocina.Columns["MCA_CODIGO"].MinimumWidth = 90;
-            dgvListaCocina.Columns["COC_ESTADO"].MinimumWidth = 90;
+            dgvListaCocina.Columns["COC_IS_BASE"].DataPropertyName = "COC_IS_BASE";
                         
             //Dataviews
             dvMarcaBuscar = new DataView(dsCocina.MARCAS);
@@ -510,7 +525,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void control_Enter(object sender, EventArgs e)
         {
-            if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
+            //if (sender.GetType().Equals(typeof(TextBox))) { (sender as TextBox).SelectAll(); }
         }
 
         private void btnZoomIn_Click(object sender, EventArgs e)

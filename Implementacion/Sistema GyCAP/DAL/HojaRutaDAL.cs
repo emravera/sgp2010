@@ -275,5 +275,24 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
+
+        public static DataTable GetHojaRutaAndDetalle(int codigoHojaRuta)
+        {
+            string sql = @"SELECT H.hr_codigo, H.hr_nombre, H.hr_descripcion, H.hr_activo, H.hr_fechaalta, H.ustck_numero, 
+                                    D.dhr_codigo, D.cto_codigo, D.hr_codigo, D.dhr_secuencia, D.opr_numero, D.ustck_origen, D.ustck_destino  
+                           FROM HOJAS_RUTA H, DETALLE_HOJARUTA D
+                           WHERE D.hr_codigo = H.hr_codigo
+                           AND H.hr_codigo = @p0";
+
+            object[] parametros = { codigoHojaRuta };
+            DataTable dt = new DataTable();
+
+            try
+            {
+                DB.FillDataTable(dt, sql, parametros);
+                return dt;
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
     }
 }

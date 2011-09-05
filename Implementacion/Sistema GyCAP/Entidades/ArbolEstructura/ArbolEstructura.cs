@@ -171,9 +171,16 @@ namespace GyCAP.Entidades.ArbolEstructura
             return treeReturn;
         }
 
-        public IList<NodoEstructura> AsList(NodoEstructura.tipoContenido tipoContenido)
+        public IList<CapacidadNecesidadCombinada> AsListForCapacity()
         {
-            return nodoRaiz.AsList(tipoContenido);
+            IList<CapacidadNecesidadCombinada> lista = new List<CapacidadNecesidadCombinada>();
+
+            foreach (NodoEstructura nodo in nodoRaiz.NodosHijos)
+            {
+                nodo.AsListForCapacity(lista, 1);
+            }
+            
+            return lista;
         }
 
         public IList<NodoEstructura> AsList(NodoEstructura.tipoContenido tipoContenido, bool distinct, bool sumEquals)

@@ -185,17 +185,28 @@ namespace GyCAP.Entidades.ArbolEstructura
             return nodo;
         }
 
-        public IList<NodoEstructura> AsList(NodoEstructura.tipoContenido tipoContenido)
+        public void AsListForCapacity(IList<CapacidadNecesidadCombinada> lista, int multiplicador)
         {
-            IList<NodoEstructura> lista = new List<NodoEstructura>();
-            if (this.contenido == tipoContenido || tipoContenido == tipoContenido.Todos) { lista.Add(this); }
-
-            foreach (NodoEstructura nodoHijo in this.nodosHijos)
+            if (this.contenido == tipoContenido.Parte)
             {
-                lista = lista.Concat(nodoHijo.AsList(tipoContenido)).ToList();
-            }            
+                multiplicador *= Convert.ToInt32(this.compuesto.Cantidad);
+                lista.Add(new CapacidadNecesidadCombinada() { 
+                    Parte = this.compuesto.Parte, 
+                    Necesidad = multiplicador, 
+                    ListaOperacionesCentros = new List<CapacidadNecesidadCombinadaItem>() 
+                });
 
-            return lista;
+                foreach (NodoEstructura nodoHijo in this.nodosHijos)
+                {
+                    nodoHijo.AsListForCapacity(lista, multiplicador);
+                }
+            }
+        }
+
+        public IList<NodoEstructura> AsList(tipoContenido tipoContenido)
+        {
+            //sin terminar - gonzalo
+            return new List<NodoEstructura>();
         }
 
         private IList<string> ValidateAddChild(NodoEstructura nodo)

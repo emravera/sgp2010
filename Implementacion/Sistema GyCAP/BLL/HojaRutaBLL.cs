@@ -37,10 +37,25 @@ namespace GyCAP.BLL
             DAL.HojaRutaDAL.Actualizar(dsHojaRuta);
         }
 
-        public static void Eliminar(int codigoHoja)
+        public static void Eliminar(int codigoHojaRuta)
         {
-            if (!DAL.HojaRutaDAL.PuedeEliminarse(codigoHoja)) throw new Entidades.Excepciones.ElementoEnTransaccionException();
-            DAL.HojaRutaDAL.Eliminar(codigoHoja);
+            if (!DAL.HojaRutaDAL.PuedeEliminarse(codigoHojaRuta)) throw new Entidades.Excepciones.ElementoEnTransaccionException();
+            DAL.HojaRutaDAL.Eliminar(codigoHojaRuta);
+        }
+
+        public static Entidades.HojaRuta GetHojaRuta(int codigoHojaRuta)
+        {
+            //sin terminar - gonzalo
+            //DataTable dt = HojaRutaBLL.GetHojaRuta(codigoHojaRuta);
+
+            Entidades.HojaRuta hoja = new GyCAP.Entidades.HojaRuta();
+
+            //if (dt.Rows.Count > 0)
+            //{
+
+            //}
+            
+            return hoja;
         }
     }
 }

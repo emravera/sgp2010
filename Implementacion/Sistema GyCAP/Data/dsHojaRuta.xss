@@ -12,9 +12,9 @@
     <Shape ID="DesignTable:OPERACIONES" ZOrder="16" X="342" Y="217" Height="137" Width="225" AdapterExpanded="false" DataTableExpanded="true" OldAdapterHeight="41" OldDataTableHeight="0" SplitterPosition="109" />
     <Shape ID="DesignTable:DETALLE_HOJARUTA" ZOrder="15" X="269" Y="-10" Height="171" Width="261" AdapterExpanded="false" DataTableExpanded="true" OldAdapterHeight="41" OldDataTableHeight="0" SplitterPosition="143" />
     <Shape ID="DesignTable:HOJAS_RUTA" ZOrder="13" X="-7" Y="-14" Height="154" Width="218" AdapterExpanded="false" DataTableExpanded="true" OldAdapterHeight="41" OldDataTableHeight="0" SplitterPosition="126" />
-    <Shape ID="DesignTable:UBICACIONES_STOCK" ZOrder="7" X="7" Y="230" Height="256" Width="268" AdapterExpanded="false" DataTableExpanded="true" OldAdapterHeight="41" OldDataTableHeight="0" SplitterPosition="228" />
-    <Shape ID="DesignTable:CONTENIDO_UBICACION_STOCK" ZOrder="6" X="372" Y="377" Height="122" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="75" />
-    <Shape ID="DesignTable:CENTROS_TRABAJOS" ZOrder="4" X="587" Y="-32" Height="358" Width="263" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="41" OldDataTableHeight="0" SplitterPosition="296" />
+    <Shape ID="DesignTable:UBICACIONES_STOCK" ZOrder="7" X="7" Y="230" Height="239" Width="268" AdapterExpanded="false" DataTableExpanded="true" OldAdapterHeight="41" OldDataTableHeight="0" SplitterPosition="211" />
+    <Shape ID="DesignTable:CONTENIDO_UBICACION_STOCK" ZOrder="6" X="372" Y="377" Height="103" Width="300" AdapterExpanded="false" DataTableExpanded="true" OldAdapterHeight="41" OldDataTableHeight="0" SplitterPosition="75" />
+    <Shape ID="DesignTable:CENTROS_TRABAJOS" ZOrder="4" X="587" Y="-32" Height="324" Width="263" AdapterExpanded="false" DataTableExpanded="true" OldAdapterHeight="56" OldDataTableHeight="0" SplitterPosition="296" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:TURNOS_TRABAJO_TURNOSXCENTROTRABAJO" ZOrder="17" LineWidth="11">
@@ -141,7 +141,7 @@
       <RoutePoints>
         <Point>
           <X>811</X>
-          <Y>326</Y>
+          <Y>292</Y>
         </Point>
         <Point>
           <X>811</X>

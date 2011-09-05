@@ -307,7 +307,7 @@ namespace GyCAP.BLL
             tvOrdenesYEstructura.ExpandAll();
         }        
 
-        public static void PlanearFechaHaciaAtras(int codigoOrdenProduccion, DateTime fechaFinalizacion, TreeView tvDependenciaCompleta, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
+        /*public static void PlanearFechaHaciaAtras(int codigoOrdenProduccion, DateTime fechaFinalizacion, TreeView tvDependenciaCompleta, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
             TreeNode nodoOrden = tvDependenciaCompleta.Nodes[codigoOrdenProduccion.ToString()];
             dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigoOrdenProduccion).ORDP_FECHAFINESTIMADA = fechaFinalizacion;
@@ -492,7 +492,7 @@ namespace GyCAP.BLL
             
             //Ahora mandamos todo a la BD
             DAL.OrdenProduccionDAL.IniciarOrdenProduccion(numeroOrdenProduccion, dsOrdenTrabajo, dsStock);
-        }
+        }*/
 
         public static void FinalizarOrdenProduccion(int numeroOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsStock dsStock)
         {
