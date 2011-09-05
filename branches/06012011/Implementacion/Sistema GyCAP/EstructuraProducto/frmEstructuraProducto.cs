@@ -356,21 +356,6 @@ namespace GyCAP.UI.EstructuraProducto
             frmParte.Instancia.Focus();
         }
 
-        private void btnConsultarPieza_Click(object sender, EventArgs e)
-        {
-            frmParte.Instancia.TopLevel = false;
-            frmParte.Instancia.Parent = areaTrabajo;
-            frmParte.Instancia.Location = PosicionarFormulario();
-            frmParte.Instancia.SetEstadoInicial(frmPieza.estadoInicialConsultar);
-            frmParte.Instancia.Show();
-            frmParte.Instancia.Focus();
-        }
-
-        private void btnListadoPieza_Click(object sender, EventArgs e)
-        {
-            //frmPieza.Instancia.Location = PosicionarFormulario();
-        }
-
         #endregion
         
         #region Terminación

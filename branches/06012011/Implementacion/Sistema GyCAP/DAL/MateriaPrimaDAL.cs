@@ -60,19 +60,6 @@ namespace GyCAP.DAL
 
         }
 
-        public static void ObtenerMateriaPrima(int codigoMP, Data.dsEstructura ds)
-        {
-            string sql = @"SELECT mp_codigo, mp_nombre, umed_codigo, mp_descripcion, mp_costo, ustck_numero, mp_cantidad, mp_esprincipal   
-                        FROM MATERIAS_PRIMAS WHERE mp_codigo = @p0";
-            object[] valoresParametros = { codigoMP };
-            
-            try
-            {
-                DB.FillDataTable(ds.MATERIAS_PRIMAS, sql, valoresParametros);
-            }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-        }
-
         //Metodo que obtiene el precio de una materia prima
         public static decimal ObtenerPrecioMP(decimal codigoMP)
         {

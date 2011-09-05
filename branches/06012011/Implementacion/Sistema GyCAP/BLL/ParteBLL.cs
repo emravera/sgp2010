@@ -14,10 +14,10 @@ namespace GyCAP.BLL
         
         public static void ObtenerPartes(object nombre, object codigo, object terminacion, object tipo, object estado, object plano, DataTable dtPartes)
         {
-            if (Convert.ToInt32(terminacion) <= 0) { terminacion = null; }
-            if (Convert.ToInt32(tipo) <= 0) { tipo = null; }
-            if (Convert.ToInt32(estado) <= 0) { estado = null; }
-            if (Convert.ToInt32(plano) <= 0) { plano = null; }
+            if (terminacion != null && Convert.ToInt32(terminacion) <= 0) { terminacion = null; }
+            if (tipo != null && Convert.ToInt32(tipo) <= 0) { tipo = null; }
+            if (estado != null && Convert.ToInt32(estado) <= 0) { estado = null; }
+            if (plano != null && Convert.ToInt32(plano) <= 0) { plano = null; }
             DAL.ParteDAL.ObtenerPartes(nombre, codigo, terminacion, tipo, estado, plano, dtPartes);
         }
 

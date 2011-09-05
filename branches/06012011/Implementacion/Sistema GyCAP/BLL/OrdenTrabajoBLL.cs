@@ -39,7 +39,7 @@ namespace GyCAP.BLL
         /// <param name="dsOrdenTrabajo"></param>
         /// <param name="dsEstructura"></param>
         /// <param name="dsHojaRuta"></param>
-        public static void GenerarOrdenesTrabajo(int codigoOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
+        /*public static void GenerarOrdenesTrabajo(int codigoOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsEstructura dsEstructura, Data.dsHojaRuta dsHojaRuta)
         {
             //Si la orden de producción tiene órdenes de trabajo generadas las eliminamos
             //Y si ya estan en la DB ??? - gonzalo
@@ -280,7 +280,7 @@ namespace GyCAP.BLL
                     }
                 }
             }            
-        }
+        }*/
 
         public static void ObtenerOrdenesTrabajo(int numeroOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo, bool obtenerCierresParciales)
         {

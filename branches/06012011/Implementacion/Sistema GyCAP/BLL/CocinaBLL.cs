@@ -14,18 +14,31 @@ namespace GyCAP.BLL
 
         public static int Insertar(Entidades.Cocina cocina)
         {
-            return DAL.CocinaDAL.Insertar(cocina);
+            if (DAL.CocinaDAL.HayCocinaBase()) { throw new Entidades.Excepciones.CocinaBaseException("Ya existe una cocina base definida."); }
+            
+            return DAL.CocinaDAL.Insertar(cocina);         
         }
 
         public static void Actualizar(Entidades.Cocina cocina)
         {
+            int codigo = 0;
+            
+            try
+            {
+                if (cocina.EsBase) { codigo = DAL.CocinaDAL.GetCodigoCocinaBase(); }
+            }
+            catch (Entidades.Excepciones.CocinaBaseException) { }
+
+            if (codigo != 0 && codigo != cocina.CodigoCocina) { throw new Entidades.Excepciones.CocinaBaseException("Ya existe una cocina base definida."); }
             DAL.CocinaDAL.Actualizar(cocina);
+            
         }
 
         public static void Eliminar(int codigoCocina)
         {
-            if(DAL.CocinaDAL.PuedeEliminarse(codigoCocina)) { DAL.CocinaDAL.Eliminar(codigoCocina); }
-            else { throw new Entidades.Excepciones.ElementoEnTransaccionException(); }
+            if(!DAL.CocinaDAL.PuedeEliminarse(codigoCocina)) { throw new Entidades.Excepciones.ElementoEnTransaccionException(); }
+            if (DAL.CocinaDAL.EsCocinaBase(codigoCocina)) { throw new Entidades.Excepciones.CocinaBaseException("No se puede eliminar una cocina base."); }
+            DAL.CocinaDAL.Eliminar(codigoCocina); 
             //eliminar la imagen - gonzalo
         }
         
@@ -87,6 +100,11 @@ namespace GyCAP.BLL
         public static int ObtenerCodigoEstructuraActiva(int codigoCocina)
         {
             return DAL.CocinaDAL.ObtenerCodigoEstructuraActiva(codigoCocina);
+        }
+
+        public static int GetCodigoCocinaBase()
+        {
+            return DAL.CocinaDAL.GetCodigoCocinaBase();
         }
         
     }

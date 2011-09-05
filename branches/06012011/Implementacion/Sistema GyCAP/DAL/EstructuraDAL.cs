@@ -334,49 +334,6 @@ namespace GyCAP.DAL
             
         }
 
-        private static void ObtenerDetalleEstructura(int codigoEstructura, Data.dsEstructura dsEstructura)
-        { 
-            int[] codigosEstructuras = { codigoEstructura };
-
-            try
-            {
-                ConjuntoEstructuraDAL.ObtenerConjuntosEstructura(codigosEstructuras, dsEstructura);
-
-                foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow rowCxE in (Data.dsEstructura.CONJUNTOSXESTRUCTURARow[])dsEstructura.CONJUNTOSXESTRUCTURA.Select("estr_codigo = " + codigoEstructura))
-                {
-                    ConjuntoDAL.ObtenerConjunto(Convert.ToInt32(rowCxE.CONJ_CODIGO), true, dsEstructura);
-                }
-
-                PiezaEstructuraDAL.ObtenerPiezasEstructura(codigosEstructuras, dsEstructura);
-
-                foreach (Data.dsEstructura.PIEZASXESTRUCTURARow rowPxE in (Data.dsEstructura.PIEZASXESTRUCTURARow[])dsEstructura.PIEZASXESTRUCTURA.Select("estr_codigo = " + codigoEstructura))
-                {
-                    PiezaDAL.ObtenerPieza(Convert.ToInt32(rowPxE.PZA_CODIGO), true, dsEstructura);
-                }
-            }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-
-        }
-
-        public static void ObtenerEstructura(int codigoEstructura, Data.dsEstructura ds, bool detalle)
-        {
-            string sql = @"SELECT estr_codigo, estr_nombre, coc_codigo, pno_codigo, estr_descripcion, estr_activo, 
-                          estr_fecha_alta, estr_fecha_modificacion, e_codigo, estr_costo   
-                          FROM ESTRUCTURAS WHERE estr_codigo = @p0";
-
-            object[] valorParametros = { codigoEstructura };
-            
-            try
-            {
-                DB.FillDataSet(ds, "ESTRUCTURAS", sql, valorParametros);
-                if (detalle)
-                {                    
-                    ObtenerDetalleEstructura(codigoEstructura, ds);
-                }
-            }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-        }
-
         public static decimal[,] ObtenerMateriasPrimasYCantidades(int codigoEstructura)
         {
             string sql = @"SELECT mp_codigo as codigo, sum(comp_cantidad) as cantidad

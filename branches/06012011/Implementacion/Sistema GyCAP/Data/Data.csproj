@@ -103,15 +103,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsEstimarDemanda.xsd</DependentUpon>
     </Compile>
-    <Compile Include="dsEstructura.cs">
-      <DependentUpon>dsEstructura.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="dsEstructura.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsEstructura.xsd</DependentUpon>
-    </Compile>
     <Compile Include="dsEstructuraProducto.cs">
       <DependentUpon>dsEstructuraProducto.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -354,17 +345,6 @@
     </None>
     <None Include="dsEstimarDemanda.xss">
       <DependentUpon>dsEstimarDemanda.xsd</DependentUpon>
-    </None>
-    <None Include="dsEstructura.xsc">
-      <DependentUpon>dsEstructura.xsd</DependentUpon>
-    </None>
-    <None Include="dsEstructura.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsEstructura.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="dsEstructura.xss">
-      <DependentUpon>dsEstructura.xsd</DependentUpon>
     </None>
     <None Include="dsEstructuraProducto.xsc">
       <DependentUpon>dsEstructuraProducto.xsd</DependentUpon>

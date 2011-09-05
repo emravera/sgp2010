@@ -15,7 +15,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
         private enum estadoUI { pestañaProduccion, pestañaTrabajo, pestañaCierreParcial };
         private estadoUI estadoInterface;
         private Data.dsOrdenTrabajo dsOrdenTrabajo = new GyCAP.Data.dsOrdenTrabajo();
-        private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
+        //private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
         private Data.dsHojaRuta dsHojaRuta = new GyCAP.Data.dsHojaRuta();
         private Data.dsStock dsStock = new GyCAP.Data.dsStock();
         private DataView dvOrdenProduccion, dvOrdenTrabajo, dvCierreParcial, dvEmpleado, dvMaquina;
@@ -67,7 +67,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                     {
                         try
                         {
-                            BLL.OrdenProduccionBLL.IniciarOrdenProduccion(numeroOrdenOP, BLL.DBBLL.GetFechaServidor(), dsOrdenTrabajo, dsStock, dsHojaRuta, dsEstructura);
+                            //BLL.OrdenProduccionBLL.IniciarOrdenProduccion(numeroOrdenOP, BLL.DBBLL.GetFechaServidor(), dsOrdenTrabajo, dsStock, dsHojaRuta, dsEstructura);
                             dsOrdenTrabajo.AcceptChanges();
                             dsStock.AcceptChanges();
                         }
@@ -201,9 +201,9 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                     rowReporte.Fecha = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenT).ORDT_FECHAINICIOESTIMADA.ToShortDateString();
                     int tipoParte = Convert.ToInt32(dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenT).PAR_TIPO);
                     int codigoParte = Convert.ToInt32(dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenT).PAR_CODIGO);
-                    if (tipoParte == BLL.OrdenTrabajoBLL.parteTipoConjunto) { rowReporte.ParteFabricada = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigoParte).CONJ_CODIGOPARTE; }
-                    else if (tipoParte == BLL.OrdenTrabajoBLL.parteTipoSubconjunto) { rowReporte.ParteFabricada = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoParte).SCONJ_CODIGOPARTE; }
-                    else if (tipoParte == BLL.OrdenTrabajoBLL.parteTipoPieza) { rowReporte.ParteFabricada = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoParte).PZA_CODIGOPARTE; }
+                    //if (tipoParte == BLL.OrdenTrabajoBLL.parteTipoConjunto) { rowReporte.ParteFabricada = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codigoParte).CONJ_CODIGOPARTE; }
+                    //else if (tipoParte == BLL.OrdenTrabajoBLL.parteTipoSubconjunto) { rowReporte.ParteFabricada = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codigoParte).SCONJ_CODIGOPARTE; }
+                    //else if (tipoParte == BLL.OrdenTrabajoBLL.parteTipoPieza) { rowReporte.ParteFabricada = dsEstructura.PIEZAS.FindByPZA_CODIGO(codigoParte).PZA_CODIGOPARTE; }
                     rowReporte.CentroTrabajo = dsHojaRuta.CENTROS_TRABAJOS.FindByCTO_CODIGO(dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenT).CTO_CODIGO).CTO_NOMBRE;
                     rowReporte.Operacion = dsHojaRuta.OPERACIONES.FindByOPR_NUMERO(dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenT).OPR_NUMERO).OPR_NOMBRE;
                     rowReporte.Cantidad = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenT).ORDT_CANTIDADESTIMADA.ToString();
@@ -507,9 +507,9 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                 BLL.EstadoOrdenTrabajoBLL.ObtenerEstadosOrden(dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO);
                 BLL.CentroTrabajoBLL.ObetenerCentrosTrabajo(null, null, null, null, dsHojaRuta.CENTROS_TRABAJOS);
                 BLL.OperacionBLL.ObetenerOperaciones(dsHojaRuta.OPERACIONES);
-                BLL.ConjuntoBLL.ObtenerConjuntos(dsEstructura.CONJUNTOS);
-                BLL.SubConjuntoBLL.ObtenerSubconjuntos(dsEstructura.SUBCONJUNTOS);
-                BLL.PiezaBLL.ObtenerPiezas(dsEstructura.PIEZAS);
+                //BLL.ConjuntoBLL.ObtenerConjuntos(dsEstructura.CONJUNTOS);
+                //BLL.SubConjuntoBLL.ObtenerSubconjuntos(dsEstructura.SUBCONJUNTOS);
+                //BLL.PiezaBLL.ObtenerPiezas(dsEstructura.PIEZAS);
                 BLL.EstadoMovimientoStockBLL.ObtenerEstadosMovimiento(dsStock.ESTADO_MOVIMIENTOS_STOCK);
                 BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsStock.UBICACIONES_STOCK);
             }
@@ -621,9 +621,9 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                         int codOrden = Convert.ToInt32(e.Value);
                         decimal codParte = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(codOrden).PAR_CODIGO;
                         decimal tipoParte = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(codOrden).PAR_TIPO;
-                        if (tipoParte == BLL.OrdenTrabajoBLL.parteTipoConjunto) { nombre = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codParte).CONJ_CODIGOPARTE; }
-                        else if(tipoParte == BLL.OrdenTrabajoBLL.parteTipoSubconjunto) { nombre = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codParte).SCONJ_CODIGOPARTE; }
-                        else if(tipoParte == BLL.OrdenTrabajoBLL.parteTipoPieza) { nombre = dsEstructura.PIEZAS.FindByPZA_CODIGO(codParte).PZA_CODIGOPARTE; }
+                        //if (tipoParte == BLL.OrdenTrabajoBLL.parteTipoConjunto) { nombre = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(codParte).CONJ_CODIGOPARTE; }
+                        //else if(tipoParte == BLL.OrdenTrabajoBLL.parteTipoSubconjunto) { nombre = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(codParte).SCONJ_CODIGOPARTE; }
+                        //else if(tipoParte == BLL.OrdenTrabajoBLL.parteTipoPieza) { nombre = dsEstructura.PIEZAS.FindByPZA_CODIGO(codParte).PZA_CODIGOPARTE; }
                         e.Value = nombre;
                         break;
                     case "ORDT_FECHAINICIOESTIMADA":

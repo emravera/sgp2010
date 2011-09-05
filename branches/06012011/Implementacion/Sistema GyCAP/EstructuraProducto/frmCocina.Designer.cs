@@ -76,6 +76,8 @@
             this.tcCocina = new System.Windows.Forms.TabControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
+            this.label6 = new System.Windows.Forms.Label();
+            this.chkBase = new System.Windows.Forms.CheckBox();
             this.tsMenu.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tpDatos.SuspendLayout();
@@ -237,6 +239,8 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.chkBase);
+            this.gbDatos.Controls.Add(this.label6);
             this.gbDatos.Controls.Add(this.cbEstado);
             this.gbDatos.Controls.Add(this.cbTerminacion);
             this.gbDatos.Controls.Add(this.cbColor);
@@ -664,6 +668,24 @@
             this.ofdImagen.Title = "Seleccione una imagen";
             this.ofdImagen.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdImagen_FileOk);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(18, 279);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(81, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Es cocina base:";
+            // 
+            // chkBase
+            // 
+            this.chkBase.AutoSize = true;
+            this.chkBase.Location = new System.Drawing.Point(123, 278);
+            this.chkBase.Name = "chkBase";
+            this.chkBase.Size = new System.Drawing.Size(15, 14);
+            this.chkBase.TabIndex = 23;
+            this.chkBase.UseVisualStyleBackColor = true;
+            // 
             // frmCocina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -748,5 +770,7 @@
         private System.Windows.Forms.OpenFileDialog ofdImagen;
         private System.Windows.Forms.Button btnZoomOut;
         private System.Windows.Forms.Button btnZoomIn;
+        private System.Windows.Forms.CheckBox chkBase;
+        private System.Windows.Forms.Label label6;
     }
 }

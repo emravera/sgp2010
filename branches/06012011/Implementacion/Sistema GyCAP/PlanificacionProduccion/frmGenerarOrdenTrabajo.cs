@@ -20,7 +20,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         public static readonly int estadoInicialNuevoAutomatico = 1; //Para generar las OT de forma automática
         public static readonly int estadoInicialNuevoManual = 2; //Para generar OT de forma manual
         Data.dsPlanSemanal dsPlanSemanal = new GyCAP.Data.dsPlanSemanal();
-        Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
+        //Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
         Data.dsOrdenTrabajo dsOrdenTrabajo = new GyCAP.Data.dsOrdenTrabajo();
         Data.dsHojaRuta dsHojaRuta = new GyCAP.Data.dsHojaRuta();
         DataView dvPlanAnual, dvMensual, dvPlanSemanal, dvOrdenProduccion, dvOrdenTrabajo, dvStockDestino;
@@ -287,7 +287,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 if (Convert.ToBoolean(cellSelecion.FormattedValue))
                 {
                     int codigoOrdenP = Convert.ToInt32(dvOrdenProduccion[fila.Index]["ordp_numero"].ToString());
-                    BLL.OrdenTrabajoBLL.GenerarOrdenesTrabajo(codigoOrdenP, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                    //BLL.OrdenTrabajoBLL.GenerarOrdenesTrabajo(codigoOrdenP, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
                     cantidad++;
                 }
             }
@@ -321,7 +321,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     {
                         //Planeamos hacia adelante
                         DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
-                        BLL.OrdenProduccionBLL.PlanearFechaHaciaDelante(codigoP, fecha, tvDependenciaCompleta, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                        //BLL.OrdenProduccionBLL.PlanearFechaHaciaDelante(codigoP, fecha, tvDependenciaCompleta, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
                         dvOrdenTrabajo.Table = dsOrdenTrabajo.ORDENES_TRABAJO;
                         sourceOrdenTrabajo.DataSource = dvOrdenTrabajo;
                         CompletarDatosOrdenTrabajo();
@@ -330,7 +330,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     {
                         //Planeamos hacia atrás
                         DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
-                        BLL.OrdenProduccionBLL.PlanearFechaHaciaAtras(codigoP, fecha, tvDependenciaCompleta, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                        //BLL.OrdenProduccionBLL.PlanearFechaHaciaAtras(codigoP, fecha, tvDependenciaCompleta, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
                         dvOrdenTrabajo.Table = dsOrdenTrabajo.ORDENES_TRABAJO;
                         sourceOrdenTrabajo.DataSource = dvOrdenTrabajo;
                         CompletarDatosOrdenTrabajo();
@@ -728,22 +728,22 @@ namespace GyCAP.UI.PlanificacionProduccion
                 if (row.PAR_TIPO == BLL.OrdenProduccionBLL.parteTipoConjunto) 
                 { 
                     txtTipoParteOrdenT.Text = "Conjunto";
-                    txtParteOrdenT.Text = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).CONJ_CODIGOPARTE;
-                    int hoja = Convert.ToInt32(dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).HR_CODIGO);
+                    //txtParteOrdenT.Text = dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).CONJ_CODIGOPARTE;
+                    int hoja = 0;//Convert.ToInt32(dsEstructura.CONJUNTOS.FindByCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).HR_CODIGO);
                     txtHojaRuta.Text = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(hoja).HR_NOMBRE;
                 }
                 else if (row.PAR_TIPO == BLL.OrdenProduccionBLL.parteTipoSubconjunto) 
                 { 
                     txtTipoParteOrdenT.Text = "Subconjunto";
-                    txtParteOrdenT.Text = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).SCONJ_CODIGOPARTE;
-                    int hoja = Convert.ToInt32(dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).HR_CODIGO);
+                    //txtParteOrdenT.Text = dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).SCONJ_CODIGOPARTE;
+                    int hoja = 0;// Convert.ToInt32(dsEstructura.SUBCONJUNTOS.FindBySCONJ_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).HR_CODIGO);
                     txtHojaRuta.Text = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(hoja).HR_NOMBRE;
                 }
                 else if (row.PAR_TIPO == BLL.OrdenProduccionBLL.parteTipoPieza)
                 { 
                     txtTipoParteOrdenT.Text = "Pieza";
-                    txtParteOrdenT.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).PZA_CODIGOPARTE;
-                    int hoja = Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).HR_CODIGO);
+                    //txtParteOrdenT.Text = dsEstructura.PIEZAS.FindByPZA_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).PZA_CODIGOPARTE;
+                    int hoja = 0;// Convert.ToInt32(dsEstructura.PIEZAS.FindByPZA_CODIGO(Convert.ToInt32(row.PAR_CODIGO)).HR_CODIGO);
                     txtHojaRuta.Text = dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(hoja).HR_NOMBRE;
                 }
                 txtCantidadOrdenT.Text = row.ORDT_CANTIDADESTIMADA.ToString();

@@ -7,7 +7,7 @@ namespace GyCAP.Entidades
 {
     public class ExcepcionesPlan
     {
-        public enum TipoExcepcion { MateriaPrima, Capacidad, Fecha };
+        public enum TipoExcepcion { MateriaPrima, Capacidad, Fecha, SinCocinaBase, ParteSinHojaRuta };
 
         string nombre;
         TipoExcepcion tipo;
