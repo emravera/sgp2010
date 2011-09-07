@@ -20,7 +20,7 @@ namespace GyCAP.BLL
         /// <param name="codigoCocina">La cocina base, si es null se determina una.</param>
         /// <param name="tipoHorario">El tipo de horario: normal o extendido.</param>
         /// <returns>El código de la cocina base.</returns>
-        /// <exception cref="Entidades.CocinaBseException">Cuando no exite una cocina base definida.</exception>
+        /// <exception cref="Entidades.CocinaBaseException">Cuando no exite una cocina base definida.</exception>
         public static int GetCapacidadSemanalBruta(int? codigoCocina, TipoHorario tipoHorario)
         {
             int capacidad = 0;
