@@ -5,11 +5,12 @@ using System.Text;
 
 namespace GyCAP.Entidades
 {
-    public class EstadoUsuario
+    public class Rol
     {
         private int codigo;
         private String nombre;
         private String descripcion;
+        private String permiso;
 
         public int Codigo
         {
@@ -22,11 +23,17 @@ namespace GyCAP.Entidades
             get { return nombre; }
             set { nombre = value; }
         }
-
+        
         public String Descripcion
         {
             get { return descripcion; }
             set { descripcion = value; }
+        }
+
+        public String Permiso
+        {
+            get { return permiso; }
+            set { permiso = value; }
         }
 
 

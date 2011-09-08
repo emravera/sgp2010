@@ -5,11 +5,11 @@ using System.Text;
 
 namespace GyCAP.Entidades
 {
-    public class EstadoUsuario
+    public class MenuUsuario
     {
         private int codigo;
-        private String nombre;
-        private String descripcion;
+        private Menu menu;
+        private Usuario usuario;
 
         public int Codigo
         {
@@ -17,16 +17,16 @@ namespace GyCAP.Entidades
             set { codigo = value; }
         }
 
-        public String Nombre
+        public Menu Menu
         {
-            get { return nombre; }
-            set { nombre = value; }
+            get { return menu; }
+            set { menu = value; }
         }
 
-        public String Descripcion
+        public Usuario Usuario
         {
-            get { return descripcion; }
-            set { descripcion = value; }
+            get { return usuario; }
+            set { usuario = value; }
         }
 
 
