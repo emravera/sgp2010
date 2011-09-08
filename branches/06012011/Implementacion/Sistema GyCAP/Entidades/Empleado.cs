@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GyCAP.Entidades
 {
-    public class Empleado : Usuario
+    public class Empleado //: Usuario
     {
         private long codigo;
         private string legajo;

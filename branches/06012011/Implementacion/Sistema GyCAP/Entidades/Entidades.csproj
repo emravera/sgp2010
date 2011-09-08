@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{BF769C01-D311-4BC9-813A-C63DC3B89319}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -115,6 +115,8 @@
     <Compile Include="MateriaPrimaABC.cs" />
     <Compile Include="MateriaPrimaEstructura.cs" />
     <Compile Include="Mensajes\MensajesABM.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="MenuUsuario.cs" />
     <Compile Include="ModeloCocina.cs" />
     <Compile Include="ModeloMaquina.cs" />
     <Compile Include="MovimientoStock.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="RegistrosMantenimientos.cs" />
     <Compile Include="Repuesto.cs" />
     <Compile Include="RepuestosRegistroMantenimiento.cs" />
+    <Compile Include="Rol.cs" />
     <Compile Include="SectorTrabajo.cs" />
     <Compile Include="Sistema.cs" />
     <Compile Include="Tarea.cs" />
