@@ -28,25 +28,15 @@ namespace GyCAP.UI.ProcesoFabricacion
             dgvLista.Columns.Add("OPR_CODIGO", "Código");
             dgvLista.Columns.Add("OPR_NOMBRE", "Nombre");
             dgvLista.Columns.Add("OPR_HORASREQUERIDA", "Tiempo (hs)");
-            dgvLista.Columns.Add("OPR_DESCRIPCION", "Descripción");            
-
-            //Se setean los valores de las columnas 
-            dgvLista.Columns["OPR_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["OPR_NOMBRE"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["OPR_DESCRIPCION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvLista.Columns.Add("OPR_DESCRIPCION", "Descripción");
             dgvLista.Columns["OPR_HORASREQUERIDA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvLista.Columns["OPR_HORASREQUERIDA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["OPR_CODIGO"].MinimumWidth = 100;
-            dgvLista.Columns["OPR_NOMBRE"].MinimumWidth = 120;
-            dgvLista.Columns["OPR_DESCRIPCION"].MinimumWidth = 160;
-            dgvLista.Columns["OPR_HORASREQUERIDA"].MinimumWidth = 100;
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["OPR_CODIGO"].DataPropertyName = "OPR_CODIGO";
             dgvLista.Columns["OPR_NOMBRE"].DataPropertyName = "OPR_NOMBRE";
             dgvLista.Columns["OPR_DESCRIPCION"].DataPropertyName = "OPR_DESCRIPCION";
             dgvLista.Columns["OPR_HORASREQUERIDA"].DataPropertyName = "OPR_HORASREQUERIDA";
-
+            dgvLista.Columns["OPR_HORASREQUERIDA"].Visible = false;
             //Creamos el dataview y lo asignamos a la grilla
             dvListaOperaciones = new DataView(dsOperacionesFabricacion.OPERACIONES);
             dvListaOperaciones.Sort = "OPR_NUMERO ASC";
@@ -392,7 +382,12 @@ namespace GyCAP.UI.ProcesoFabricacion
             {
                 MensajesABM.MsjSinSeleccion("Operación de fabricación", MensajesABM.Generos.Femenino, this.Text);
             }
-        }   
+        }
+
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        } 
         
     }
 }

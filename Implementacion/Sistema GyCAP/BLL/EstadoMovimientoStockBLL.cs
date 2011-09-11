@@ -26,5 +26,6 @@ namespace GyCAP.BLL
         {
             return DAL.EstadoMovimientoStockDAL.GetEstadoEntity(codigoEstado);
         }
+
     }
 }

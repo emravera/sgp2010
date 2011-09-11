@@ -66,7 +66,7 @@ namespace GyCAP.UI.GestionStock
                 {
                     listaMovimientos.Clear();
 
-                    listaMovimientos = BLL.MovimientoStockBLL.ObtenerMovimientosUbicacionStock(dtpFechaDesde.GetFecha(), dtpFechaHasta.GetFecha(), cboStock.GetSelectedValueInt(), cboEstado.GetSelectedValueInt());
+                    listaMovimientos = BLL.MovimientoStockBLL.ObtenerMovimientosUbicacionStock(dtpFechaDesde.GetFecha(), dtpFechaHasta.GetFecha(), cboStock.GetSelectedValueInt(), cboEstado.GetSelectedValueInt(), Entidades.Enumeraciones.StockEnum.TipoFecha.FechaReal);
 
                     if (listaMovimientos.Count > 0)
                     {
@@ -75,27 +75,28 @@ namespace GyCAP.UI.GestionStock
 
                         if (listaMovimientos.Count > 0)
                         {
-                            valores[0] = listaMovimientos[0].OldQuantity;
+                            //Buscar el ultimo valor real y usarlo como inicio - gonzalo
+                            valores[0] = 500;
                             fechas[0] = string.Empty;
                         }
 
                         for (int i = 0; i < listaMovimientos.Count; i++)
                         {
-                            
+                            //Sin terminar - gonzalo
                             switch (listaMovimientos[i].Estado.Nombre)
                             {
                                 case BLL.EstadoMovimientoStockBLL.Planificado:
-                                    valores[i+1] = listaMovimientos[i].OldQuantity + listaMovimientos[i].CantidadOrigenEstimada;
+                                    valores[i+1] = 50 + listaMovimientos[i].CantidadOrigenEstimada;
                                     fechas[i+1] = listaMovimientos[i].FechaPrevista.Value.ToShortDateString();
                                     break;
                                 case BLL.EstadoMovimientoStockBLL.Finalizado:
                                     if (listaMovimientos[i].Origen.TipoEntidad.Nombre == BLL.TipoEntidadBLL.UbicacionStockNombre)
                                     {
-                                        valores[i+1] = listaMovimientos[i].OldQuantity + listaMovimientos[i].CantidadOrigenReal;
+                                        valores[i+1] = 50 + listaMovimientos[i].CantidadOrigenReal;
                                     }
                                     else if (listaMovimientos[i].Destino.TipoEntidad.Nombre == BLL.TipoEntidadBLL.UbicacionStockNombre)
                                     {
-                                        valores[i+1] = listaMovimientos[i].OldQuantity + listaMovimientos[i].CantidadDestinoReal;
+                                        valores[i+1] = 50 + listaMovimientos[i].CantidadDestinoReal;
                                     }
                                     fechas[i+1] = listaMovimientos[i].FechaReal.Value.ToShortDateString();
                                     break;

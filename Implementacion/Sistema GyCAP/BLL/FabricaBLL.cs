@@ -5,6 +5,7 @@ using System.Text;
 using GyCAP.Entidades;
 using GyCAP.Entidades.ArbolEstructura;
 using GyCAP.Entidades.Excepciones;
+using GyCAP.Entidades.Enumeraciones;
 using System.Data;
 
 namespace GyCAP.BLL
@@ -38,26 +39,50 @@ namespace GyCAP.BLL
             foreach (DataRow row in dt.Rows)
             {
                 int parte = Convert.ToInt32(row["part_numero"].ToString());
-                decimal operacion = row.Field<decimal>("opr_horasrequerida");
                 decimal horasTrabajo = 0;
-                if (tipoHorario == TipoHorario.Normal)
+                decimal tiempoAntes = row.Field<decimal>("cto_tiempoantes");
+                decimal tiempoDespues = row.Field<decimal>("cto_tiempodespues");
+                decimal eficiencia = row.Field<decimal>("cto_eficiencia");
+                decimal capacidadCiclo = 0, horasCiclo = 0, capacidadUnidadHora = 0, capacidadCentro = 0;
+                
+                if (row.Field<decimal>("cto_activo") == BLL.CentroTrabajoBLL.CentroActivo)
                 {
-                    horasTrabajo = row.Field<decimal>("cto_horastrabajonormal");
-                }
-                else
-                {
-                    horasTrabajo = row.Field<decimal>("cto_horastrabajoextendido");
+                    if (tipoHorario == TipoHorario.Normal)
+                    {
+                        horasTrabajo = row.Field<decimal>("cto_horastrabajonormal");
+                    }
+                    else
+                    {
+                        horasTrabajo = row.Field<decimal>("cto_horastrabajoextendido");
+                    }
+                    
+                    horasTrabajo -= (tiempoAntes + tiempoDespues) * BLL.ConfiguracionSistemaBLL.GetConfiguracion<int>("DiasLaborales");
+
+                    if (row.Field<decimal>("cto_tipo") == BLL.CentroTrabajoBLL.TipoHombre)
+                    {
+                        capacidadUnidadHora = row.Field<decimal>("cto_capacidadunidadhora");
+                        capacidadCentro = horasTrabajo * capacidadUnidadHora;
+                    }
+                    else
+                    {
+                        capacidadCiclo = row.Field<decimal>("cto_capacidadciclo");
+                        horasCiclo = row.Field<decimal>("cto_horasciclo");
+                        capacidadCentro = (horasTrabajo / horasCiclo) * capacidadCiclo;
+                    }
+
+                    capacidadCentro *= eficiencia;
+                    if (capacidadCentro < 0) { capacidadCentro = 0; }
                 }
 
                 CapacidadNecesidadCombinada cnc = (from x in listaCombinada
                                                    where x.Parte.Numero == parte
                                                    select x).FirstOrDefault();
-
+                
                 cnc.ListaOperacionesCentros.Add(new CapacidadNecesidadCombinadaItem()
                 {
-                    CapacidadCentroTrabajo = horasTrabajo,                    
-                    TiempoOperacion = operacion * cnc.Necesidad,
-                    Resultado = Convert.ToInt32(horasTrabajo / (operacion * cnc.Necesidad))
+                    CapacidadCentroTrabajo = capacidadCentro,
+                    CantidadNecesaria = cnc.Necesidad,
+                    Resultado = Convert.ToInt32(capacidadCentro / cnc.Necesidad)
                 });
             }
 
@@ -77,6 +102,36 @@ namespace GyCAP.BLL
             int capacidad = GetCapacidadSemanalBruta(codigoCocina, tipoHorario);
 
             return capacidad * 53;
+        }
+
+        /// <summary>
+        /// Obtiene la cantidad de stock estimada para una fecha dada.
+        /// </summary>
+        /// <param name="stock">El código de la ubicación de stock.</param>
+        /// <param name="fecha">La fecha objetivo.</param>
+        /// <returns>La cantidad de stock para la fecha especificada.</returns>
+        public static decimal GetStockForDay(int stock, DateTime fecha)
+        {
+            UbicacionStock ubicacion = UbicacionStockBLL.GetUbicacionStock(stock);
+            if (ubicacion == null) { throw new Entidades.Excepciones.ElementoInexistenteException(); }
+            
+            IList<MovimientoStock> lista = MovimientoStockBLL.ObtenerMovimientosUbicacionStock(DateTime.Today, fecha, stock, EstadoMovimientoStockBLL.Planificado, StockEnum.TipoFecha.FechaPrevista);
+            
+            for (int i = 0; i < lista.Count; i++)
+            {
+                if (lista[i].Origen.TipoEntidad.Nombre == TipoEntidadBLL.UbicacionStockNombre
+                    &&
+                   (lista[i].Origen.EntidadExterna as UbicacionStock).Codigo == ubicacion.Codigo)
+                {
+                    ubicacion.CantidadReal += lista[i].CantidadOrigenEstimada;
+                }
+                else
+                {
+                    ubicacion.CantidadReal += lista[i].CantidadDestinoEstimada;
+                }
+            }
+
+            return ubicacion.CantidadReal;
         }
     }
 }

@@ -35,5 +35,13 @@ namespace GyCAP.Entidades
             get { return entidadExterna; }
             set { entidadExterna = value; }
         }
+
+        public bool Equals(Entidad obj)
+        {
+            if (obj == null) { return false; }
+            if (obj.TipoEntidad.Codigo != this.TipoEntidad.Codigo) { return false; }
+            if (obj.Codigo != this.Codigo) { return false; }
+            return true;
+        }
     }
 }
