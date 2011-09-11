@@ -13,7 +13,9 @@ namespace GyCAP.DAL
     {
         public static DataTable GetOperacionesCentrosByPartes(int[] numerosPartes)
         {
-            string sql = @"SELECT P.part_numero, O.opr_horasrequerida, C.cto_horastrabajonormal, C.cto_horastrabajoextendido 
+            string sql = @"SELECT P.part_numero, C.cto_horastrabajonormal, C.cto_horastrabajoextendido, 
+                                  C.cto_tipo, C.cto_activo, C.cto_capacidadciclo, C.cto_horasciclo, 
+                                  C.cto_tiempoantes, C.cto_tiempodespues, C.cto_eficiencia, C.cto_capacidadunidadhora 
                             FROM HOJAS_RUTA H, DETALLE_HOJARUTA D, OPERACIONES O, CENTROS_TRABAJOS C, PARTES P 
                             WHERE O.opr_numero = D.opr_numero 
                             AND C.cto_codigo = D.cto_codigo 

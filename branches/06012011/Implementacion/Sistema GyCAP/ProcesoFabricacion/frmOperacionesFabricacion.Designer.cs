@@ -98,6 +98,7 @@
             this.dgvLista.TabIndex = 0;
             this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
+            this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // gbGrillaBuscar
             // 
@@ -258,39 +259,42 @@
             // 
             // numHoras
             // 
+            this.numHoras.CausesValidation = false;
             this.numHoras.DecimalPlaces = 2;
             this.numHoras.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numHoras.Location = new System.Drawing.Point(164, 88);
+            this.numHoras.Location = new System.Drawing.Point(25, 155);
             this.numHoras.Maximum = new decimal(new int[] {
             99999,
             0,
             0,
             131072});
             this.numHoras.Name = "numHoras";
-            this.numHoras.Size = new System.Drawing.Size(193, 21);
+            this.numHoras.Size = new System.Drawing.Size(57, 21);
             this.numHoras.TabIndex = 3;
             this.numHoras.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numHoras.Visible = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 90);
+            this.label4.Location = new System.Drawing.Point(17, 139);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "Horas requeridas:";
+            this.label4.Visible = false;
             // 
             // txtDescripcion
             // 
             this.txtDescripcion.CausesValidation = false;
-            this.txtDescripcion.Location = new System.Drawing.Point(164, 121);
+            this.txtDescripcion.Location = new System.Drawing.Point(164, 96);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(314, 68);
+            this.txtDescripcion.Size = new System.Drawing.Size(314, 93);
             this.txtDescripcion.TabIndex = 4;
             // 
             // label2
@@ -312,7 +316,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 121);
+            this.label5.Location = new System.Drawing.Point(17, 96);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 13);
             this.label5.TabIndex = 4;

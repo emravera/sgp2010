@@ -7,12 +7,12 @@ namespace GyCAP.Entidades
 {
     public class CapacidadNecesidadCombinadaItem
     {
-        private decimal tiempoOperacion;
+        private decimal cantidadNecesaria;
 
-        public decimal TiempoOperacion
+        public decimal CantidadNecesaria
         {
-            get { return tiempoOperacion; }
-            set { tiempoOperacion = value; }
+            get { return cantidadNecesaria; }
+            set { cantidadNecesaria = value; }
         }
         private decimal capacidadCentroTrabajo;
 

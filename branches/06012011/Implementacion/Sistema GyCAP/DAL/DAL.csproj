@@ -55,6 +55,7 @@
     <Compile Include="CocinaDAL.cs" />
     <Compile Include="ColorDAL.cs" />
     <Compile Include="CompuestoParteDAL.cs" />
+    <Compile Include="ConfiguracionSistemaDAL.cs" />
     <Compile Include="ContenidoUbicacionStockDAL.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="DemandaAnualDAL.cs" />

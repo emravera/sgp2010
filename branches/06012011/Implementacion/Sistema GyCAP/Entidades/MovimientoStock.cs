@@ -92,7 +92,7 @@ namespace GyCAP.Entidades
             get { return cantidadDestinoReal; }
             set { cantidadDestinoReal = value; }
         }
-        
+
         private EstadoMovimientoStock estado;
 
         public EstadoMovimientoStock Estado
@@ -107,14 +107,6 @@ namespace GyCAP.Entidades
         {
             get { return duenio; }
             set { duenio = value; }
-        }
-
-        private decimal oldQuantity;
-
-        public decimal OldQuantity
-        {
-            get { return oldQuantity; }
-            set { oldQuantity = value; }
         }
     }
 }

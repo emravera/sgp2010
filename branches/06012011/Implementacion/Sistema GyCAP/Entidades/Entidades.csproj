@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{BF769C01-D311-4BC9-813A-C63DC3B89319}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -77,6 +77,7 @@
     <Compile Include="Empleado.cs" />
     <Compile Include="Entidad.cs" />
     <Compile Include="EntregaProducto.cs" />
+    <Compile Include="Enumeraciones\StockEnum.cs" />
     <Compile Include="EstadoCocina.cs" />
     <Compile Include="EstadoDetalleMantenimiento.cs" />
     <Compile Include="EstadoDetallePedido.cs" />
@@ -92,6 +93,8 @@
     <Compile Include="ExcepcionesPlan.cs" />
     <Compile Include="Excepciones\BaseDeDatosException.cs" />
     <Compile Include="Excepciones\CocinaSinEstructuraActivaException.cs" />
+    <Compile Include="Excepciones\ConfiguracionInexistenteException.cs" />
+    <Compile Include="Excepciones\ConfiguracionMovimientoException.cs" />
     <Compile Include="Excepciones\ElementoActivoException.cs" />
     <Compile Include="Excepciones\ElementoEnTransaccionException.cs" />
     <Compile Include="Excepciones\ElementoFinalizadoException.cs" />
