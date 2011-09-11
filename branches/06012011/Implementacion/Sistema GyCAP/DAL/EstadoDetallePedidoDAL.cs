@@ -61,7 +61,7 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void ObtenerEstadosDetallePedido(string nombre, Data.dsEstadoDetallePedido ds)
+        public static void ObtenerEstadosDetallePedido(string nombre, DataTable dtEstadoDetalle)
         {
             if (nombre != String.Empty)
             {
@@ -73,7 +73,7 @@ namespace GyCAP.DAL
                 object[] valorParametros = { nombre };
                 try
                 {
-                    DB.FillDataSet(ds, "ESTADO_DETALLE_PEDIDOS", sql, valorParametros);
+                    DB.FillDataTable(dtEstadoDetalle, sql, valorParametros);
                 }
                 catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
@@ -83,36 +83,11 @@ namespace GyCAP.DAL
                 string sql = "SELECT EDPED_CODIGO, EDPED_NOMBRE, EDPED_DESCRIPCION FROM ESTADO_DETALLE_PEDIDOS ";
                 try
                 {
-                    DB.FillDataSet(ds, "ESTADO_DETALLE_PEDIDOS", sql, null);
+                    DB.FillDataTable(dtEstadoDetalle, sql, null);
                 }
                 catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-
             }
-        }
-
-        public static void ObtenerEstadosDetallePedido(Data.dsEstadoDetallePedido ds)
-        {
-            string sql = @"SELECT EDPED_CODIGO, EDPED_NOMBRE, EDPED_DESCRIPCION
-                           FROM ESTADO_DETALLE_PEDIDOS";
-            try
-            {
-                //Se llena el Dataset
-                DB.FillDataSet(ds, "ESTADO_DETALLE_PEDIDOS", sql, null);
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
-
-        public static void ObtenerEstadosDetallePedido(Data.dsCliente ds)
-        {
-            string sql = @"SELECT EDPED_CODIGO, EDPED_NOMBRE, EDPED_DESCRIPCION
-                           FROM ESTADO_DETALLE_PEDIDOS";
-            try
-            {
-                //Se llena el Dataset
-                DB.FillDataSet(ds, "ESTADO_DETALLE_PEDIDOS", sql, null);
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
+        }             
 
         public static void ObtenerEstadosDetallePedido(DataTable dtEstadoDetallePedido)
         {
@@ -120,7 +95,7 @@ namespace GyCAP.DAL
                            FROM ESTADO_DETALLE_PEDIDOS";
             try
             {
-                //Se llena el Dataset
+                //Se llena el Datatable
                 DB.FillDataTable(dtEstadoDetallePedido, sql, null);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }

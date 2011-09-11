@@ -43,27 +43,16 @@ namespace GyCAP.BLL
         public static bool EsEstadoDetallePedido(Entidades.EstadoDetallePedido estadoDetallePedido)
         {
             return DAL.EstadoDetallePedidoDAL.EsEstadoDetallePedido(estadoDetallePedido);
-        }
+        }       
 
-        public static void ObtenerTodos(Data.dsEstadoDetallePedido ds)
+        public static void ObtenerTodos(string nombre, DataTable dtEstadoDetallePedido)
         {
-            DAL.EstadoDetallePedidoDAL.ObtenerEstadosDetallePedido(ds);
-        }
-
-        public static void ObtenerTodos(string nombre, Data.dsEstadoDetallePedido ds)
-        {
-            DAL.EstadoDetallePedidoDAL.ObtenerEstadosDetallePedido(nombre, ds);
+            DAL.EstadoDetallePedidoDAL.ObtenerEstadosDetallePedido(nombre, dtEstadoDetallePedido);
         }
 
         public static void ObtenerTodos(DataTable dtEstadoDetallePedido)
         {
             DAL.EstadoDetallePedidoDAL.ObtenerEstadosDetallePedido(dtEstadoDetallePedido);
         }
-
-        public static void ObtenerTodos(Data.dsCliente ds)
-        {
-            DAL.EstadoDetallePedidoDAL.ObtenerEstadosDetallePedido(ds);
-        }
-
     }
 }

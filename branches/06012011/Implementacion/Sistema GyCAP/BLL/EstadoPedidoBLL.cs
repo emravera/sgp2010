@@ -33,7 +33,6 @@ namespace GyCAP.BLL
                 //No puede eliminarse, lanzamos nuestra excepción
                 throw new Entidades.Excepciones.ElementoEnTransaccionException();
             }
-
         }
 
         public static void Actualizar(Entidades.EstadoPedido estadoPedido)
@@ -46,14 +45,9 @@ namespace GyCAP.BLL
             return DAL.EstadoPedidoDAL.EsEstadoPedido(estadoPedido);
         }
 
-        public static void ObtenerTodos(Data.dsEstadoPedidos ds)
+        public static void ObtenerTodos(string nombre, DataTable dtEstadoPedido)
         {
-            DAL.EstadoPedidoDAL.ObtenerEstadosPedido(ds);
-        }
-
-        public static void ObtenerTodos(string nombre, Data.dsEstadoPedidos ds)
-        {
-            DAL.EstadoPedidoDAL.ObtenerEstadosPedido(nombre, ds);
+            DAL.EstadoPedidoDAL.ObtenerEstadosPedido(nombre, dtEstadoPedido);
         }
 
         public static void ObtenerTodos(DataTable dtEstadoPedido)
@@ -61,9 +55,9 @@ namespace GyCAP.BLL
             DAL.EstadoPedidoDAL.ObtenerEstadosPedido(dtEstadoPedido);
         }
 
-        public static void ObtenerTodos(Data.dsCliente ds)
+        public static int ObtenerIDDeatalle(string estadoPedido)
         {
-            DAL.EstadoPedidoDAL.ObtenerEstadosPedido(ds);
-        }
+            return DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido(estadoPedido);
+        }  
     }
 }

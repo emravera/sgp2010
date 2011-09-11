@@ -54,7 +54,6 @@ namespace GyCAP.BLL
                 //No puede eliminarse, lanzamos nuestra excepción
                 throw new Entidades.Excepciones.ElementoEnTransaccionException();
             }
-
         }
 
         //Metodo que obtiene los pedidos a partir de una fecha
@@ -73,6 +72,6 @@ namespace GyCAP.BLL
         public static void ObtenerPedidoCliente(int codigoCliente, int estadoPedido, DataTable dtPedido)
         {
             DAL.PedidoDAL.ObtenerPedidosCliente(codigoCliente,estadoPedido,dtPedido);
-        }
+        }        
     }
 }
