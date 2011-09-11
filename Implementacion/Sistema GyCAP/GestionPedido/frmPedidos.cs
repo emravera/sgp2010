@@ -15,10 +15,9 @@ namespace GyCAP.UI.GestionPedido
         private Sistema.ControlesUsuarios.AnimadorFormulario animador = new GyCAP.UI.Sistema.ControlesUsuarios.AnimadorFormulario();
         private static frmPedidos _frmPedido = null;
         private Data.dsCliente dsCliente = new GyCAP.Data.dsCliente();
-        private Data.dsEstadoPedidos dsEstadoPedido = new GyCAP.Data.dsEstadoPedidos();
         private DataView dvPedido, dvDetallePedido, dvCocinas, dvEstadoPedido;
         private DataView dvEstadoDetallePedido, dvClientes, dvEstadoPedidoBuscar;
-        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
+        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, cargarDetalle };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
@@ -62,38 +61,35 @@ namespace GyCAP.UI.GestionPedido
             dgvLista.Columns.Add("PED_CODIGO", "Código");
             dgvLista.Columns.Add("PED_NUMERO", "Número");
             dgvLista.Columns.Add("CLI_CODIGO", "Cliente");
-            dgvLista.Columns.Add("PED_FECHAENTREGAPREVISTA", "Fecha Prevista");
             dgvLista.Columns.Add("EPED_CODIGO", "Estado");
             dgvLista.Columns.Add("PED_OBSERVACIONES", "Observaciones");
+
             dgvLista.Columns["PED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["PED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["PED_NUMERO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["PED_NUMERO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["CLI_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["PED_FECHAENTREGAPREVISTA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["PED_FECHAENTREGAPREVISTA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvLista.Columns["PED_FECHAENTREGAPREVISTA"].MinimumWidth = 110;
             dgvLista.Columns["EPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["PED_OBSERVACIONES"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLista.Columns["PED_OBSERVACIONES"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             //Alineacion de los numeros y las fechas en la grilla
             dgvLista.Columns["PED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["PED_CODIGO"].Visible = false;
 
-            //dgvDetallePedido.Columns.Add("DPED_CODIGO", "Codigo");
+            dgvDetallePedido.Columns.Add("DPED_CODIGO", "Codigo");
             dgvDetallePedido.Columns.Add("COC_CODIGO", "Cocina");
             dgvDetallePedido.Columns.Add("DPED_CANTIDAD", "Cantidad");
             dgvDetallePedido.Columns.Add("EDPED_CODIGO", "Estado");
 
-            //dgvDetallePedido.Columns["DPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetallePedido.Columns["DPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetallePedido.Columns["COC_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetallePedido.Columns["DPED_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetallePedido.Columns["DPED_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDetallePedido.Columns["EDPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             //Alineacion de los numeros y las fechas en la grilla
-            //dgvDetallePedido.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            //dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
+            dgvDetallePedido.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
 
             dgvCocinas.Columns.Add("COC_CODIGO_PRODUCTO", "Código");
             dgvCocinas.Columns.Add("MOD_CODIGO", "Modelo");
@@ -106,11 +102,10 @@ namespace GyCAP.UI.GestionPedido
             dgvLista.Columns["PED_CODIGO"].DataPropertyName = "PED_CODIGO";
             dgvLista.Columns["PED_NUMERO"].DataPropertyName = "PED_NUMERO";
             dgvLista.Columns["CLI_CODIGO"].DataPropertyName = "CLI_CODIGO";
-            dgvLista.Columns["PED_FECHAENTREGAPREVISTA"].DataPropertyName = "PED_FECHAENTREGAPREVISTA";
             dgvLista.Columns["EPED_CODIGO"].DataPropertyName = "EPED_CODIGO";
             dgvLista.Columns["PED_OBSERVACIONES"].DataPropertyName = "PED_OBSERVACIONES";
 
-            //dgvDetallePedido.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
+            dgvDetallePedido.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
             dgvDetallePedido.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
             dgvDetallePedido.Columns["DPED_CANTIDAD"].DataPropertyName = "DPED_CANTIDAD";
             dgvDetallePedido.Columns["EDPED_CODIGO"].DataPropertyName = "EDPED_CODIGO";
@@ -162,7 +157,7 @@ namespace GyCAP.UI.GestionPedido
             cboClientes.SetDatos(dvClientes, "CLI_CODIGO", "CLI_RAZONSOCIAL", "", false);
         }
 
-#endregion
+        #endregion
 
         #region Servicios
 
@@ -202,14 +197,15 @@ namespace GyCAP.UI.GestionPedido
 
                     if (dsCliente.PEDIDOS.Rows.Count == 0)
                     {
-                        hayDatos = false;
-                        btnBuscar.Focus();
+                        hayDatos = false;                        
                     }
                     else
                     {
-                        hayDatos = true;
-                        dgvLista.Focus();
+                        hayDatos = true;                        
                     }
+
+                    //Linea para validacion
+                    if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
 
                     limpiarControles(false);
                     btnModificar.Enabled = hayDatos;
@@ -219,7 +215,6 @@ namespace GyCAP.UI.GestionPedido
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.inicio;
                     tcPedido.SelectedTab = tpBuscar;
-                    //txtNombreBuscar.Focus();
                     break;
                 case estadoUI.nuevo:
                     setControles(false);
@@ -236,7 +231,6 @@ namespace GyCAP.UI.GestionPedido
                     estadoInterface = estadoUI.nuevo;
                     dvDetallePedido.RowFilter = "DPED_CODIGO < 0";
                     tcPedido.SelectedTab = tpDatos;
-                    cboClientes.Focus();
                     break;
                 case estadoUI.nuevoExterno:
                     setControles(false);
@@ -253,7 +247,6 @@ namespace GyCAP.UI.GestionPedido
                     estadoInterface = estadoUI.nuevoExterno;
                     dvDetallePedido.RowFilter = "DPED_CODIGO < 0";
                     tcPedido.SelectedTab = tpDatos;
-                    cboClientes.Focus();
                     break;
                 case estadoUI.consultar:
                     setControles(true);
@@ -264,7 +257,6 @@ namespace GyCAP.UI.GestionPedido
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.consultar;
                     tcPedido.SelectedTab = tpDatos;
-                    btnVolver.Focus();
                     break;
                 case estadoUI.modificar:
                     setControles(false);
@@ -278,7 +270,19 @@ namespace GyCAP.UI.GestionPedido
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.modificar;
                     tcPedido.SelectedTab = tpDatos;
-                    cboClientes.Focus();
+                    break;
+                case estadoUI.cargarDetalle:
+                    btnAgregar.Enabled = false;
+                    lblCantProducir.Visible = false;
+                    lblCantStock.Visible = false;
+                    numCantProducir.Visible = false;
+                    numCantStock.Visible = false;
+                    
+                    //Escondemos los numeros y reseteamos los controles
+                    numCantProducir.Value=0;
+                    numCantStock.Value=0;
+                    estadoInterface = estadoUI.cargarDetalle;
+                    tcPedido.SelectedTab = tpDatos;
                     break;
                 default:
                     break;
@@ -287,27 +291,26 @@ namespace GyCAP.UI.GestionPedido
 
         private void setControles(bool pValue)
         {
-            txtNumero.ReadOnly = true;
+            txtNumero.Enabled = false;
             txtObservacion.ReadOnly = pValue;
             cboClientes.Enabled = !pValue;
-            cboEstado.Enabled = !pValue;
-            sfFechaPrevista.Enabled = !pValue;
-
+            cboEstado.Enabled = !pValue;            
         }
 
         private void limpiarControles(bool pValue)
         {
+            //Limpia los valores cuando se quiere cargar un nuevo pedido
             txtNumero.Text = string.Empty ;
             txtObservacion.Text = string.Empty;
             cboClientes.SelectedIndex = -1 ;
             cboEstado.SelectedIndex = -1;
-            sfFechaPrevista.SetFechaNull();
-            
+                        
             if (pValue == true)
-            {
-                
+            {               
                 dgvDetallePedido.Refresh();
-                cboEstado.SetSelectedValue(1 )  ; //Esto tiene que ser un parametro no puede quedar hardcodiado
+                //Pongo al combo el valor del pedido Pendiente
+                int estadoPedido = BLL.EstadoPedidoBLL.ObtenerIDDeatalle("Pendiente");
+                cboEstado.SetSelectedValue(estadoPedido); 
                 cboEstado.Enabled = false;
 
                 cboClientes.SetTexto("Seleccione un Cliente...");
@@ -317,14 +320,12 @@ namespace GyCAP.UI.GestionPedido
         //***************************************************************************
         //                          METODO DE LOS CONTROLES
         //***************************************************************************
-
-
+        
         private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             long codigo = Convert.ToInt64(dvPedido[e.RowIndex]["ped_codigo"]);
             txtNumero.Text = dsCliente.PEDIDOS.FindByPED_CODIGO(codigo).PED_NUMERO;
             cboClientes.SetSelectedValue(Convert.ToInt32(dsCliente.PEDIDOS.FindByPED_CODIGO(codigo).CLI_CODIGO));
-            sfFechaPrevista.SetFecha(dsCliente.PEDIDOS.FindByPED_CODIGO(codigo).PED_FECHAENTREGAPREVISTA);
             cboEstado.SetSelectedValue(Convert.ToInt32(dsCliente.PEDIDOS.FindByPED_CODIGO(codigo).EPED_CODIGO));
             txtObservacion.Text = dsCliente.PEDIDOS.FindByPED_CODIGO(codigo).PED_OBSERVACIONES;
 
@@ -378,7 +379,6 @@ namespace GyCAP.UI.GestionPedido
                 }
             }
         }
-
 
         private void dgvCocinas_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -475,16 +475,27 @@ namespace GyCAP.UI.GestionPedido
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            //Descartamos los cambios realizamos hasta el momento sin guardar
-            dsCliente.PEDIDOS.RejectChanges();
-            dsCliente.DETALLE_PEDIDOS.RejectChanges();
-            SetInterface(estadoUI.inicio);
+            if (estadoInterface == estadoUI.cargarDetalle)
+            {
+                slideControl.BackwardTo("slideDatos");
+                nudCantidad.Value = 0;
+                panelAcciones.Enabled = true;              
+
+            }
+            else
+            {
+                //Descartamos los cambios realizamos hasta el momento sin guardar
+                dsCliente.PEDIDOS.RejectChanges();
+                dsCliente.DETALLE_PEDIDOS.RejectChanges();
+                SetInterface(estadoUI.inicio);
+            }
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
             slideControl.ForwardTo("slideAgregar");
             panelAcciones.Enabled = false;
+            SetInterface(estadoUI.cargarDetalle);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -498,7 +509,6 @@ namespace GyCAP.UI.GestionPedido
             }
             else
             {
-                //MessageBox.Show("Debe seleccionar una Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Entidades.Mensajes.MensajesABM.MsjExcepcion("Debe seleccionar una Cocina de la lista.", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación );
             }
         }
@@ -515,7 +525,6 @@ namespace GyCAP.UI.GestionPedido
             }
             else
             {
-                //MessageBox.Show("Debe seleccionar una Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Entidades.Mensajes.MensajesABM.MsjExcepcion("Debe seleccionar una Cocina de la lista.", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
         }
@@ -535,28 +544,14 @@ namespace GyCAP.UI.GestionPedido
             }
             else
             {
-                //MessageBox.Show("Debe seleccionar una Cocina de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Entidades.Mensajes.MensajesABM.MsjExcepcion("Debe seleccionar una Cocina de la lista.", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
             }
         }
 
-        private void nudCantidad_Enter(object sender, EventArgs e)
-        {
-            //if (sender.GetType().Equals(txtNombre.GetType())) { (sender as TextBox).SelectAll(); }
-            //if (sender.GetType().Equals(txtDescripcion.GetType())) { (sender as RichTextBox).SelectAll(); }
-            if (sender.GetType().Equals(nudCantidad.GetType())) { (sender as NumericUpDown).Select(0, 20); }
-        }    
-
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            //Datos opcionales = descripcion
-            //Revisamos que completó los datos obligatorios
-            string datosFaltantes = string.Empty;
-            //if (txtNumero.Text == string.Empty) { datosFaltantes += "* Numero\n"; }
-            if (cboClientes.GetSelectedIndex() == -1) { datosFaltantes += "* Cliente\n"; }
-            if (cboEstado.GetSelectedIndex() == -1) { datosFaltantes += "* Estado\n"; }
-            if (dgvDetallePedido.Rows.Count == 0) { datosFaltantes += "* El detalle del Pedido\n"; }
-            if (datosFaltantes == string.Empty)
+            //Validamos el formulario            
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
@@ -571,7 +566,6 @@ namespace GyCAP.UI.GestionPedido
                         rowPedido.BeginEdit();
                         rowPedido.PED_CODIGO = -1;
                         rowPedido.PED_NUMERO = string.Empty;
-                        rowPedido.PED_FECHAENTREGAPREVISTA = DateTime.Parse(sfFechaPrevista.GetFecha().ToString());
                         rowPedido.PED_OBSERVACIONES = txtObservacion.Text.Trim();
                         rowPedido.EPED_CODIGO = cboEstado.GetSelectedValueInt();
                         rowPedido.CLI_CODIGO = long.Parse( cboClientes.GetSelectedValueInt().ToString()); 
@@ -586,8 +580,8 @@ namespace GyCAP.UI.GestionPedido
                         //Ahora si aceptamos los cambios
                         dsCliente.PEDIDOS.AcceptChanges();
                         dsCliente.DETALLE_PEDIDOS.AcceptChanges();
+                        
                         //Y por último seteamos el estado de la interfaz
-
                         //Vemos cómo se inició el formulario para determinar la acción a seguir
                         if (estadoInterface == estadoUI.nuevoExterno)
                         {
@@ -629,8 +623,7 @@ namespace GyCAP.UI.GestionPedido
                     dsCliente.PEDIDOS.FindByPED_CODIGO(codigoPedido).CLI_CODIGO = long.Parse(cboClientes.GetSelectedValueInt().ToString());
                     dsCliente.PEDIDOS.FindByPED_CODIGO(codigoPedido).EPED_CODIGO = cboEstado.GetSelectedValueInt();
                     dsCliente.PEDIDOS.FindByPED_CODIGO(codigoPedido).PED_OBSERVACIONES = txtObservacion.Text;
-                    dsCliente.PEDIDOS.FindByPED_CODIGO(codigoPedido).PED_FECHAENTREGAPREVISTA = DateTime.Parse(sfFechaPrevista.GetFecha().ToString());
-                    
+                                        
                     try
                     {
                         //Lo actualizamos en la DB
@@ -662,11 +655,7 @@ namespace GyCAP.UI.GestionPedido
                     }
                 }
                 dgvLista.Refresh();
-            }
-            else
-            {
-                Entidades.Mensajes.MensajesABM.MsjValidacion("Debe completar los datos:\n\n" + datosFaltantes, this.Text);
-            }
+            }            
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -834,16 +823,26 @@ namespace GyCAP.UI.GestionPedido
             {
                 Entidades.Mensajes.MensajesABM.MsjExcepcion("Debe seleccionar una Cocina de la lista y asignarle una cantidad mayor a 0.", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
-        }
+        }       
 
-        private void btnHecho_Click(object sender, EventArgs e)
+        #endregion      
+
+        private void btnValidar_Click(object sender, EventArgs e)
         {
-            slideControl.BackwardTo("slideDatos");
-            nudCantidad.Value = 0;
-            panelAcciones.Enabled = true;
-        }
+            //Hay que validar que se ingrese una fecha y una cantidad total de cocinas
+            if (nudCantidad.Value != 0 && sfFechaPrevista.Value != null)
+            {
+                //Verificamos si hay stock para una cocina determinada para esa fecha
 
-        #endregion
+
+
+
+            }
+            else
+            {
+                Entidades.Mensajes.MensajesABM.MsjValidacion("Debe completar los datos obligatorios", this.Text);
+            }
+        }
 
     }
 }

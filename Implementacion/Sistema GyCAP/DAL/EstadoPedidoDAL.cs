@@ -61,7 +61,7 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
-        public static void ObtenerEstadosPedido(string nombre, Data.dsEstadoPedidos ds)
+        public static void ObtenerEstadosPedido(string nombre, DataTable dtEstadoPedido)
         {
             if (nombre != String.Empty)
             {
@@ -73,7 +73,7 @@ namespace GyCAP.DAL
                 object[] valorParametros = { nombre };
                 try
                 {
-                    DB.FillDataSet(ds, "ESTADO_PEDIDOS", sql, valorParametros);
+                    DB.FillDataTable(dtEstadoPedido, sql, valorParametros);
                 }
                 catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
@@ -83,45 +83,36 @@ namespace GyCAP.DAL
                 string sql = "SELECT EPED_CODIGO, EPED_NOMBRE, EPED_DESCRIPCION FROM ESTADO_PEDIDOS ";
                 try
                 {
-                    DB.FillDataSet(ds, "ESTADO_PEDIDOS", sql, null);
+                    DB.FillDataTable(dtEstadoPedido, sql, null);
                 }
                 catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
             }
         }
-
-        public static void ObtenerEstadosPedido(Data.dsEstadoPedidos ds)
-        {
-            string sql = @"SELECT EPED_CODIGO, EPED_NOMBRE, EPED_DESCRIPCION
-                           FROM ESTADO_PEDIDOS";
-            try
-            {
-                //Se llena el Dataset
-                DB.FillDataSet(ds, "ESTADO_PEDIDOS", sql, null);
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
-
-        public static void ObtenerEstadosPedido(Data.dsCliente ds)
-        {
-            string sql = @"SELECT EPED_CODIGO, EPED_NOMBRE, EPED_DESCRIPCION
-                           FROM ESTADO_PEDIDOS";
-            try
-            {
-                //Se llena el Dataset
-                DB.FillDataSet(ds, "ESTADO_PEDIDOS", sql, null);
-            }
-            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-        }
-
+       
         public static void ObtenerEstadosPedido(DataTable dtEstadoPedido)
         {
             string sql = @"SELECT EPED_CODIGO, EPED_NOMBRE, EPED_DESCRIPCION
                            FROM ESTADO_PEDIDOS";
             try
             {
-                //Se llena el Dataset
+                //Se llena el Datatable
                 DB.FillDataTable(dtEstadoPedido, sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+        public static int ObtenerIDEstadosPedido(string estadoPedido)
+        {
+            string sql = @"SELECT EPED_CODIGO
+                           FROM ESTADO_PEDIDOS
+                           WHERE EPED_NOMBRE = @p0";
+            object[] valorParametros = { estadoPedido };
+
+            try
+            {
+                //Se llena el Datatable
+                return Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
