@@ -33,13 +33,13 @@
             this.tpLista = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.cboCocina = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tvcCostos = new TreeViewColumnsProject.TreeViewColumns();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
+            this.cboCocina = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.tvcCostos = new TreeViewColumnsProject.TreeViewColumns();
             this.tcEstructuraStock.SuspendLayout();
             this.tpLista.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -107,20 +107,10 @@
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 37);
             this.btnBuscar.TabIndex = 6;
-            this.btnBuscar.Text = "&Calcular";
+            this.btnBuscar.Text = "&Mostrar";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // cboCocina
-            // 
-            this.cboCocina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboCocina.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboCocina.FormattingEnabled = true;
-            this.cboCocina.Location = new System.Drawing.Point(138, 26);
-            this.cboCocina.Name = "cboCocina";
-            this.cboCocina.Size = new System.Drawing.Size(297, 21);
-            this.cboCocina.TabIndex = 1;
             // 
             // label1
             // 
@@ -140,15 +130,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Costo del Producto";
-            // 
-            // tvcCostos
-            // 
-            this.tvcCostos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(166)))), ((int)(((byte)(170)))));
-            this.tvcCostos.Location = new System.Drawing.Point(6, 19);
-            this.tvcCostos.Name = "tvcCostos";
-            this.tvcCostos.Padding = new System.Windows.Forms.Padding(1);
-            this.tvcCostos.Size = new System.Drawing.Size(762, 400);
-            this.tvcCostos.TabIndex = 0;
             // 
             // toolStripSeparator1
             // 
@@ -189,6 +170,25 @@
             this.tsMenu.Size = new System.Drawing.Size(788, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
+            // 
+            // cboCocina
+            // 
+            this.cboCocina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCocina.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboCocina.FormattingEnabled = true;
+            this.cboCocina.Location = new System.Drawing.Point(138, 26);
+            this.cboCocina.Name = "cboCocina";
+            this.cboCocina.Size = new System.Drawing.Size(297, 21);
+            this.cboCocina.TabIndex = 1;
+            // 
+            // tvcCostos
+            // 
+            this.tvcCostos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(166)))), ((int)(((byte)(170)))));
+            this.tvcCostos.Location = new System.Drawing.Point(6, 19);
+            this.tvcCostos.Name = "tvcCostos";
+            this.tvcCostos.Padding = new System.Windows.Forms.Padding(1);
+            this.tvcCostos.Size = new System.Drawing.Size(762, 400);
+            this.tvcCostos.TabIndex = 0;
             // 
             // frmCostoProducto
             // 
