@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AE7890FB-1E14-4037-BF00-F0406BA4364A}</ProjectGuid>
+    <ProjectGuid>{D471ACB8-BD2D-4CBF-9D29-42466FEDC4D0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GyCAP.UI.Principal</RootNamespace>
-    <AssemblyName>Principal</AssemblyName>
+    <RootNamespace>GyCAP.UI.Costos</RootNamespace>
+    <AssemblyName>Costos</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -48,36 +48,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmFondoPrincipal.cs">
+    <Compile Include="frmCostoProducto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmFondoPrincipal.Designer.cs">
-      <DependentUpon>frmFondoPrincipal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmOpciones.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmOpciones.Designer.cs">
-      <DependentUpon>frmOpciones.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmPrincipal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmPrincipal.Designer.cs">
-      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    <Compile Include="frmCostoProducto.Designer.cs">
+      <DependentUpon>frmCostoProducto.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmFondoPrincipal.resx">
-      <DependentUpon>frmFondoPrincipal.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmOpciones.resx">
-      <DependentUpon>frmOpciones.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmPrincipal.resx">
-      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    <EmbeddedResource Include="frmCostoProducto.resx">
+      <DependentUpon>frmCostoProducto.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -105,109 +85,126 @@
       <Project>{A0EA0794-16BA-4988-BCFF-00204902B7AA}</Project>
       <Name>BLL %28BLL\BLL%29</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Calidad\Calidad.csproj">
-      <Project>{A1DDD582-FAE2-46D8-A915-42013AA1DCB7}</Project>
-      <Name>Calidad</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ControlTrabajoEnProceso\ControlTrabajoEnProceso.csproj">
-      <Project>{BD64ACB7-2A4A-44E9-8183-11EFAFF4B518}</Project>
-      <Name>ControlTrabajoEnProceso</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Costos\Costos.csproj">
-      <Project>{D471ACB8-BD2D-4CBF-9D29-42466FEDC4D0}</Project>
-      <Name>Costos</Name>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{B288FFDF-AF2E-41DA-AB2F-C17A4944E272}</Project>
+      <Name>Data %28Data\Data%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
       <Project>{BF769C01-D311-4BC9-813A-C63DC3B89319}</Project>
       <Name>Entidades %28Entidades\Entidades%29</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EstructuraProducto\EstructuraProducto.csproj">
-      <Project>{9102F252-4267-45D1-B148-DD3BE4D709E4}</Project>
-      <Name>EstructuraProducto</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GestionPedido\GestionPedido.csproj">
-      <Project>{9260777F-2789-458E-924E-163DC946C9E1}</Project>
-      <Name>GestionPedido</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GestionStock\GestionStock.csproj">
-      <Project>{35A24B8F-C745-41C5-A681-39C1F9AAD906}</Project>
-      <Name>GestionStock</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mantenimiento\Mantenimiento.csproj">
-      <Project>{6A2EB4DA-E737-466E-A7A6-9FD238F0AF4E}</Project>
-      <Name>Mantenimiento</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PlanificacionProduccion\PlanificacionProduccion.csproj">
-      <Project>{959ABFBF-7696-414D-B0CA-8807851367E8}</Project>
-      <Name>PlanificacionProduccion</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ProcesoFabricacion\ProcesoFabricacion.csproj">
-      <Project>{6255860F-61F4-46AC-B845-FE988BD6F723}</Project>
-      <Name>ProcesoFabricacion</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RecursosFabricacion\RecursosFabricacion.csproj">
-      <Project>{3D17BB74-E9A2-435E-BED2-9C222B5F1DDD}</Project>
-      <Name>RecursosFabricacion</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Sistema\Sistema.csproj">
       <Project>{9A02F786-F362-4FC0-A53D-83C51951D9DF}</Project>
       <Name>Sistema</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Soporte\Soporte.csproj">
-      <Project>{E62237F2-4821-4526-BE7C-45263EE307C5}</Project>
-      <Name>Soporte</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\macoser.jpg" />
+    <None Include="Resources\Zoom-Out-25.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Logo Florencia.JPG" />
+    <None Include="Resources\Abrir-25.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\estructura-producto.jpg" />
+    <None Include="Resources\Apply-25.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\stock-25.png" />
+    <None Include="Resources\Arbol-25.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\pedido.png" />
+    <None Include="Resources\Calculadora-25.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\soporte.jpg" />
+    <None Include="Resources\Cancel-25.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\mantenimiento.png" />
+    <None Include="Resources\Cancelar-25.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\trabajoEnProceso.jpg" />
+    <None Include="Resources\Cierre-Parcial-25.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\planificacion.jpg" />
+    <None Include="Resources\Copy-25.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\trabajoEnProceso2.jpg" />
+    <None Include="Resources\Delete-25.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\calidad.jpg" />
+    <None Include="Resources\Finalizar-25.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\pedido2.jpg" />
+    <None Include="Resources\Find-25.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\planificacion2.jpg" />
+    <None Include="Resources\Floppy-25.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\recursoFabricacion2.jpg" />
+    <None Include="Resources\Information-25.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\recursoFabricacion.gif" />
+    <None Include="Resources\Iniciar-25.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\reporte.jpg" />
+    <None Include="Resources\lupa-20.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\modulo.procesoFabricacion.jpg" />
+    <None Include="Resources\lupa-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mas-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Menos-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Open-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Page-Setup-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Password-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pausa-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Printer-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Refresh-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Salir-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\System-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\System.Set-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Text-Editor-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Volver-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Volver-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Warning-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zoom-In-25.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

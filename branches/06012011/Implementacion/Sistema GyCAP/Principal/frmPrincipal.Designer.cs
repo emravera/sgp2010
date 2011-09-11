@@ -579,8 +579,8 @@
             this.toolStripCausaFallo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripCausaFallo.Image")));
             this.toolStripCausaFallo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripCausaFallo.Name = "toolStripCausaFallo";
-            this.toolStripCausaFallo.Size = new System.Drawing.Size(86, 33);
-            this.toolStripCausaFallo.Text = "Causas de Fallo";
+            this.toolStripCausaFallo.Size = new System.Drawing.Size(44, 33);
+            this.toolStripCausaFallo.Text = "Costos";
             this.toolStripCausaFallo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripCausaFallo.Click += new System.EventHandler(this.toolStripCausaFallo_Click);
             // 
