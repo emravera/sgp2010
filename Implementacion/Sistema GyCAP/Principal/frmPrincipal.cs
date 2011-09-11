@@ -244,8 +244,8 @@ namespace Principal
 
         private void toolStripCausaFallo_Click(object sender, EventArgs e)
         {
-            GyCAP.UI.Mantenimiento.frmCausasFallos.Instancia.MdiParent = this;
-            GyCAP.UI.Mantenimiento.frmCausasFallos.Instancia.Show();
+            GyCAP.UI.Costos.frmCostoProducto.Instancia.MdiParent = this;
+            GyCAP.UI.Costos.frmCostoProducto.Instancia.Show();
         }
 
 

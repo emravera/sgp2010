@@ -21,7 +21,6 @@ namespace GyCAP.Entidades.ArbolEstructura
         private NodoEstructura nodoRaiz;
         private int codigoEstructura;
         private int SelectedNodeCode;
-        private decimal fixedCost;
 
         public int GetNextCodigoNodo()
         {
@@ -61,8 +60,7 @@ namespace GyCAP.Entidades.ArbolEstructura
         {
             if (this.nodoRaiz != null)
             {
-                this.fixedCost = nodoRaiz.GetCosto();
-                return this.fixedCost;
+                return Math.Round(nodoRaiz.GetCosto(), 3);
             }
 
             return 0;
@@ -159,7 +157,13 @@ namespace GyCAP.Entidades.ArbolEstructura
             TreeNode nodoInicio = new TreeNode();
             nodoInicio.Text = nodoRaiz.Compuesto.Parte.Nombre;
             nodoInicio.Name = nodoRaiz.CodigoNodo.ToString();
-            nodoInicio.Tag = new string[] { nodoRaiz.Compuesto.Cantidad.ToString(), nodoRaiz.Compuesto.UnidadMedida.Abreviatura };
+            decimal costo = this.GetCostoEstructura();
+            nodoInicio.Tag = new string[] { 
+                                            nodoRaiz.Compuesto.Cantidad.ToString(), 
+                                            nodoRaiz.Compuesto.UnidadMedida.Abreviatura, 
+                                            string.Format("{0:0.000}", Convert.ToDouble(costo / nodoRaiz.Compuesto.Cantidad)),
+                                            costo.ToString() 
+                                          };
 
             foreach (NodoEstructura item in nodoRaiz.NodosHijos)
             {

@@ -17,7 +17,6 @@ namespace GyCAP.Entidades.ArbolEstructura
         private tipoContenido contenido;
         private object tag;
         private CompuestoParte compuesto;
-        private decimal fixedCost;
 
         public NodoEstructura() 
         {
@@ -70,13 +69,11 @@ namespace GyCAP.Entidades.ArbolEstructura
         {
             if (this.contenido == tipoContenido.MateriaPrima) 
             {
-                this.fixedCost = this.compuesto.MateriaPrima.Costo * this.compuesto.Cantidad;
-                return this.fixedCost;
+                return Math.Round(this.compuesto.MateriaPrima.Costo * this.compuesto.Cantidad, 3);
             }
             if (this.contenido == tipoContenido.Parte && this.compuesto.Parte.Tipo.Adquirido == 1) 
             {
-                this.fixedCost = this.compuesto.Parte.Costo * this.compuesto.Cantidad;
-                return this.fixedCost;
+                return Math.Round(this.compuesto.Parte.Costo * this.compuesto.Cantidad, 3);
             }
 
             decimal costo = 0;
@@ -86,8 +83,7 @@ namespace GyCAP.Entidades.ArbolEstructura
                 costo += nodo.GetCosto() * this.compuesto.Cantidad;
             }
 
-            this.fixedCost = costo;
-            return this.fixedCost;
+            return Math.Round(costo, 3);
         }
 
         public IList<MPEstructura> GetMPQuantityForPart()
@@ -175,7 +171,13 @@ namespace GyCAP.Entidades.ArbolEstructura
             TreeNode nodo = new TreeNode();
             nodo.Text = (compuesto.Parte != null) ? compuesto.Parte.Nombre : compuesto.MateriaPrima.Nombre;
             nodo.Name = this.codigoNodo.ToString();
-            nodo.Tag = new string[] { compuesto.Cantidad.ToString(), compuesto.UnidadMedida.Abreviatura };
+            decimal costo = this.GetCosto();
+            nodo.Tag = new string[] { 
+                                      compuesto.Cantidad.ToString(), 
+                                      compuesto.UnidadMedida.Abreviatura, 
+                                      string.Format("{0:0.000}", Convert.ToDouble(costo / compuesto.Cantidad)),
+                                      costo.ToString() 
+                                    };
 
             foreach (NodoEstructura item in this.nodosHijos)
             {
