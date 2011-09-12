@@ -219,7 +219,7 @@ namespace GyCAP.BLL
             }
         }
 
-        public static ArbolEstructura GetArbolEstructura(int codigoCocina)
+        public static ArbolEstructura GetArbolEstructura(int codigoCocina, bool fillHojaRuta)
         {
             ArbolEstructura arbol = new ArbolEstructura(-1);
 
@@ -238,14 +238,41 @@ namespace GyCAP.BLL
                 TipoUbicacionStockBLL.ObtenerTiposUbicacionStock(ds.TIPOS_UBICACIONES_STOCK);
                 ContenidoUbicacionStockBLL.ObtenerContenidosUbicacionStock(ds.CONTENIDO_UBICACION_STOCK);
                 arbol = ArmarArbol(Convert.ToInt32(ds.ESTRUCTURAS.Rows[0]["estr_codigo"].ToString()), ds);
+
+                ds.Dispose();
+
+                if (fillHojaRuta) { FillHojasRutas(arbol); }
             }
 
             return arbol;
         }
 
+        private static void FillHojasRutas(ArbolEstructura arbol)
+        {
+            Data.dsHojaRuta dsHoja = new GyCAP.Data.dsHojaRuta();
+
+            UbicacionStockBLL.ObtenerUbicacionesStock(dsHoja.UBICACIONES_STOCK);
+            TipoUbicacionStockBLL.ObtenerTiposUbicacionStock(dsHoja.TIPOS_UBICACIONES_STOCK);
+            ContenidoUbicacionStockBLL.ObtenerContenidosUbicacionStock(dsHoja.CONTENIDO_UBICACION_STOCK);
+            CentroTrabajoBLL.ObetenerCentrosTrabajo(null, null, null, null, dsHoja.CENTROS_TRABAJOS);
+            OperacionBLL.ObetenerOperaciones(dsHoja.OPERACIONES);
+            HojaRutaBLL.ObtenerHojasRuta(null, null, dsHoja, true);
+            UnidadMedidaBLL.ObtenerTodos(dsHoja.UNIDADES_MEDIDA);
+            TipoUnidadMedidaBLL.ObtenerTodos(dsHoja.TIPOS_UNIDADES_MEDIDA);
+
+            IList<ParteNecesidadCombinada> listaPartes = arbol.AsListOfParts();
+
+            foreach (ParteNecesidadCombinada parte in listaPartes)
+            {
+                if (parte.Parte.HojaRuta != null) { parte.Parte.HojaRuta = HojaRutaBLL.AsHojaRutaEntity(parte.Parte.HojaRuta.Codigo, dsHoja); }
+            }
+            
+            dsHoja.Dispose();
+        }
+        
         public static IList<CapacidadNecesidadCombinada> AsListForCapacity(int codigoCocina)
         {
-            return GetArbolEstructura(codigoCocina).AsListForCapacity();
+            return GetArbolEstructura(codigoCocina, false).AsListForCapacity();
         }
     }
 }

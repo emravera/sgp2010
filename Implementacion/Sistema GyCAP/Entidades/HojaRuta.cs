@@ -51,5 +51,13 @@ namespace GyCAP.Entidades
             set { ubicacionStock = value; }
         }
 
+        private IList<DetalleHojaRuta> detalle = new List<DetalleHojaRuta>();
+
+        public IList<DetalleHojaRuta> Detalle
+        {
+            get { return detalle; }
+            set { detalle = value; }
+        }
+
     }
 }

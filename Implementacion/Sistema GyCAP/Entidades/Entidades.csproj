@@ -64,6 +64,7 @@
     <Compile Include="DemandaAnual.cs" />
     <Compile Include="Designacion.cs" />
     <Compile Include="DetalleDemandaAnual.cs" />
+    <Compile Include="DetalleHojaRuta.cs" />
     <Compile Include="DetalleOrdenTrabajo.cs" />
     <Compile Include="DetallePedido.cs" />
     <Compile Include="DetallePlanAnual.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Empleado.cs" />
     <Compile Include="Entidad.cs" />
     <Compile Include="EntregaProducto.cs" />
+    <Compile Include="Enumeraciones\RecursosFabricacionEnum.cs" />
     <Compile Include="Enumeraciones\StockEnum.cs" />
     <Compile Include="EstadoCocina.cs" />
     <Compile Include="EstadoDetalleMantenimiento.cs" />
@@ -130,6 +132,7 @@
     <Compile Include="OrdenProduccion.cs" />
     <Compile Include="OrdenTrabajo.cs" />
     <Compile Include="Parte.cs" />
+    <Compile Include="ParteNecesidadCombinada.cs" />
     <Compile Include="Pedido.cs" />
     <Compile Include="PlanAnual.cs" />
     <Compile Include="PlanMantenimiento.cs" />

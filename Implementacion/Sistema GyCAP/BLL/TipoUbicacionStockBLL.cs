@@ -35,6 +35,16 @@ namespace GyCAP.BLL
             };
         }
 
+        public static Entidades.TipoUbicacionStock AsTipoUbicacionStockEntity(Data.dsHojaRuta.TIPOS_UBICACIONES_STOCKRow row)
+        {
+            return new GyCAP.Entidades.TipoUbicacionStock()
+            {
+                Codigo = Convert.ToInt32(row.TUS_CODIGO),
+                Nombre = row.TUS_NOMBRE,
+                Descripcion = row.TUS_DESCRIPCION
+            };
+        }
+
         public static Entidades.TipoUbicacionStock GetTipoUbicacion(int codigo)
         {
             Data.dsStock.TIPOS_UBICACIONES_STOCKDataTable dt = DAL.TipoUbicacionStockDAL.GetTipoUbicacion(codigo);

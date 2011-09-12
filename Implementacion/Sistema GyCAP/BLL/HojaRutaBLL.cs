@@ -14,7 +14,10 @@ namespace GyCAP.BLL
         public static void ObtenerHojasRuta(object nombre, object activa, Data.dsHojaRuta dsHojaRuta, bool obtenerDetalle)
         {
             object estado = null;
-            if (activa != null && Convert.ToInt32(activa.ToString()) == hojaRutaActiva || Convert.ToInt32(activa.ToString()) == hojaRutaInactiva) { estado = activa; };
+            if (activa != null)
+            {
+                if(Convert.ToInt32(activa.ToString()) == hojaRutaActiva || Convert.ToInt32(activa.ToString()) == hojaRutaInactiva) { estado = activa; };
+            }
             DAL.HojaRutaDAL.ObtenerHojasRuta(nombre, estado, dsHojaRuta, obtenerDetalle);
         }
 
@@ -43,19 +46,42 @@ namespace GyCAP.BLL
             DAL.HojaRutaDAL.Eliminar(codigoHojaRuta);
         }
 
-        public static Entidades.HojaRuta GetHojaRuta(int codigoHojaRuta)
+        public static Entidades.HojaRuta AsHojaRutaEntity(int codigo, Data.dsHojaRuta ds)
         {
-            //sin terminar - gonzalo
-            //DataTable dt = HojaRutaBLL.GetHojaRuta(codigoHojaRuta);
+            Data.dsHojaRuta.HOJAS_RUTARow row = ds.HOJAS_RUTA.FindByHR_CODIGO(codigo);
 
-            Entidades.HojaRuta hoja = new GyCAP.Entidades.HojaRuta();
+            Entidades.HojaRuta hoja = new GyCAP.Entidades.HojaRuta()
+            {
+                Codigo = codigo,
+                Nombre = row.HR_NOMBRE,
+                Descripcion = row.HR_DESCRIPCION,
+                FechaAlta = row.HR_FECHAALTA,
+                Estado = Convert.ToInt32(row.HR_ACTIVO),
+                UbicacionStock = (row.IsUSTCK_NUMERONull()) ? null : UbicacionStockBLL.AsUbicacionStock(Convert.ToInt32(row.USTCK_NUMERO), ds),
+                Detalle = AsDetalleHojaRuta(Convert.ToInt32(row.HR_CODIGO), ds)
+            };
 
-            //if (dt.Rows.Count > 0)
-            //{
-
-            //}
-            
             return hoja;
+        }
+
+        private static IList<Entidades.DetalleHojaRuta> AsDetalleHojaRuta(int codigoHojaRuta, Data.dsHojaRuta ds)
+        {
+            IList<Entidades.DetalleHojaRuta> detalle = new List<Entidades.DetalleHojaRuta>();
+            
+            foreach (Data.dsHojaRuta.DETALLE_HOJARUTARow row in (Data.dsHojaRuta.DETALLE_HOJARUTARow[])ds.DETALLE_HOJARUTA.Select("hr_codigo = " + codigoHojaRuta))
+            {
+                detalle.Add(new GyCAP.Entidades.DetalleHojaRuta()
+                {
+                    Codigo = Convert.ToInt32(row.DHR_CODIGO),
+                    Secuencia = Convert.ToInt32(row.DHR_SECUENCIA),
+                    StockDestino = (row.IsUSTCK_DESTINONull()) ? null : UbicacionStockBLL.AsUbicacionStock(Convert.ToInt32(row.USTCK_DESTINO), ds),
+                    StockOrigen = (row.IsUSTCK_ORIGENNull()) ? null : UbicacionStockBLL.AsUbicacionStock(Convert.ToInt32(row.USTCK_ORIGEN), ds),
+                    Operacion = OperacionBLL.AsOperacionFabricacionEntity(row.OPERACIONESRow),
+                    CentroTrabajo = CentroTrabajoBLL.AsCentroTrabajoEntity(row.CENTROS_TRABAJOSRow)
+                });
+            }
+
+            return detalle;
         }
     }
 }

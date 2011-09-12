@@ -60,16 +60,28 @@ namespace GyCAP.UI.Costos
         {            
             if (cboCocina.GetSelectedIndex() != -1)
             {
-                tvcCostos.TreeView.Nodes.Clear();
-                arbol = BLL.EstructuraBLL.GetArbolEstructura(cboCocina.GetSelectedValueInt());
+                tvcCostosMateriales.TreeView.Nodes.Clear();
+                tvcCostosCentros.TreeView.Nodes.Clear();
+                txtCostoTotal.Text = string.Empty;
+                arbol = BLL.EstructuraBLL.GetArbolEstructura(cboCocina.GetSelectedValueInt(), true);
 
                 if (arbol != null && arbol.CodigoEstructura > 0)
                 {                    
-                    TreeView tv = arbol.AsExtendedTreeView();
+                    TreeView tv = arbol.AsExtendedTreeViewWithMaterials();
                     TreeNode nodo = (TreeNode)tv.Nodes[0].Clone();
+                    tvcCostosMateriales.TreeView.Nodes.Add(nodo);
+                    tvcCostosMateriales.TreeView.ExpandAll();
+
+                    decimal costoProceso = 0;
+                    tv = arbol.AsExtendedTreeViewWithCentros(out costoProceso);
+                    foreach (TreeNode node in tv.Nodes)
+                    {
+                        tvcCostosCentros.TreeView.Nodes.Add((TreeNode)node.Clone());
+                    }
+                    tvcCostosCentros.TreeView.ExpandAll();
                     tv.Dispose();
-                    tvcCostos.TreeView.Nodes.Add(nodo);
-                    tvcCostos.TreeView.ExpandAll();
+
+                    txtCostoTotal.Text = string.Format("{0:0.00}",Convert.ToDouble(arbol.GetCostoEstructura() + costoProceso));
                 }
                 else
                 {
@@ -100,14 +112,23 @@ namespace GyCAP.UI.Costos
             dvCocina = new DataView(dsCocina.COCINAS);
             cboCocina.SetDatos(dvCocina, "coc_codigo", "coc_codigo_producto", "Seleccione...", false);
 
-            tvcCostos.TreeView.Nodes.Clear();
-            tvcCostos.Columns.Clear();
-            tvcCostos.TreeView.CheckBoxes = false;
-            tvcCostos.Columns.Add("Partes", 355, HorizontalAlignment.Center);
-            tvcCostos.Columns.Add("Cantidad", 80, HorizontalAlignment.Right);
-            tvcCostos.Columns.Add("Unidad Medida", 100, HorizontalAlignment.Center);
-            tvcCostos.Columns.Add("Costo unitario $", 110, HorizontalAlignment.Right);
-            tvcCostos.Columns.Add("Costo total $", 110, HorizontalAlignment.Right);
+            tvcCostosMateriales.TreeView.Nodes.Clear();
+            tvcCostosMateriales.Columns.Clear();
+            tvcCostosMateriales.TreeView.CheckBoxes = false;
+            tvcCostosMateriales.Columns.Add("Partes", 355, HorizontalAlignment.Left);
+            tvcCostosMateriales.Columns.Add("Cantidad", 80, HorizontalAlignment.Right);
+            tvcCostosMateriales.Columns.Add("Unidad Medida", 100, HorizontalAlignment.Center);
+            tvcCostosMateriales.Columns.Add("Costo unitario $", 110, HorizontalAlignment.Right);
+            tvcCostosMateriales.Columns.Add("Costo total $", 110, HorizontalAlignment.Right);
+
+            tvcCostosCentros.TreeView.Nodes.Clear();
+            tvcCostosCentros.Columns.Clear();
+            tvcCostosCentros.TreeView.CheckBoxes = false;
+            tvcCostosCentros.Columns.Add("Partes", 250, HorizontalAlignment.Left);
+            tvcCostosCentros.Columns.Add("Centro", 150, HorizontalAlignment.Left);
+            tvcCostosCentros.Columns.Add("Operación", 150, HorizontalAlignment.Left);
+            tvcCostosCentros.Columns.Add("Costo $", 100, HorizontalAlignment.Right);
+            tvcCostosCentros.Columns.Add("Costo total $", 100, HorizontalAlignment.Right);
         }
 
         #endregion        

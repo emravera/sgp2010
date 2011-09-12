@@ -46,6 +46,16 @@ namespace GyCAP.BLL
             };
         }
 
+        public static Entidades.ContenidoUbicacionStock AsContenidoUbicacionStockEntity(Data.dsHojaRuta.CONTENIDO_UBICACION_STOCKRow row)
+        {
+            return new GyCAP.Entidades.ContenidoUbicacionStock()
+            {
+                Codigo = Convert.ToInt32(row.CON_CODIGO),
+                Nombre = row.CON_NOMBRE,
+                Descripcion = row.CON_DESCRIPCION
+            };
+        }
+
         public static Entidades.ContenidoUbicacionStock GetContenidoUbicacionStock(int codigo)
         {
             Data.dsStock.CONTENIDO_UBICACION_STOCKDataTable dt = DAL.ContenidoUbicacionStockDAL.GetContenidoUbicacionStock(codigo);
