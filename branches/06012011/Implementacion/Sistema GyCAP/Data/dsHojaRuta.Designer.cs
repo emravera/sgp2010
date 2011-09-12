@@ -43,6 +43,12 @@ namespace GyCAP.Data {
         
         private CENTROS_TRABAJOSDataTable tableCENTROS_TRABAJOS;
         
+        private TIPOS_UBICACIONES_STOCKDataTable tableTIPOS_UBICACIONES_STOCK;
+        
+        private UNIDADES_MEDIDADataTable tableUNIDADES_MEDIDA;
+        
+        private TIPOS_UNIDADES_MEDIDADataTable tableTIPOS_UNIDADES_MEDIDA;
+        
         private global::System.Data.DataRelation relationTURNOS_TRABAJO_TURNOSXCENTROTRABAJO;
         
         private global::System.Data.DataRelation relationFK_DETALLE_HOJARUTA_OPERACIONES;
@@ -64,6 +70,12 @@ namespace GyCAP.Data {
         private global::System.Data.DataRelation relationFK_DETALLE_HOJARUTA_CENTROS_TRABAJOS;
         
         private global::System.Data.DataRelation relationFK_CENTROS_TRABAJOS_SECTORES;
+        
+        private global::System.Data.DataRelation relationFK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK;
+        
+        private global::System.Data.DataRelation relationFK_UBICACIONES_STOCK_UBICACION_STOCK1;
+        
+        private global::System.Data.DataRelation relationunidadMedida_tipoUnidadMedida_fk;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -117,6 +129,15 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["CENTROS_TRABAJOS"] != null)) {
                     base.Tables.Add(new CENTROS_TRABAJOSDataTable(ds.Tables["CENTROS_TRABAJOS"]));
+                }
+                if ((ds.Tables["TIPOS_UBICACIONES_STOCK"] != null)) {
+                    base.Tables.Add(new TIPOS_UBICACIONES_STOCKDataTable(ds.Tables["TIPOS_UBICACIONES_STOCK"]));
+                }
+                if ((ds.Tables["UNIDADES_MEDIDA"] != null)) {
+                    base.Tables.Add(new UNIDADES_MEDIDADataTable(ds.Tables["UNIDADES_MEDIDA"]));
+                }
+                if ((ds.Tables["TIPOS_UNIDADES_MEDIDA"] != null)) {
+                    base.Tables.Add(new TIPOS_UNIDADES_MEDIDADataTable(ds.Tables["TIPOS_UNIDADES_MEDIDA"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -218,6 +239,33 @@ namespace GyCAP.Data {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public TIPOS_UBICACIONES_STOCKDataTable TIPOS_UBICACIONES_STOCK {
+            get {
+                return this.tableTIPOS_UBICACIONES_STOCK;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public UNIDADES_MEDIDADataTable UNIDADES_MEDIDA {
+            get {
+                return this.tableUNIDADES_MEDIDA;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public TIPOS_UNIDADES_MEDIDADataTable TIPOS_UNIDADES_MEDIDA {
+            get {
+                return this.tableTIPOS_UNIDADES_MEDIDA;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -303,6 +351,15 @@ namespace GyCAP.Data {
                 if ((ds.Tables["CENTROS_TRABAJOS"] != null)) {
                     base.Tables.Add(new CENTROS_TRABAJOSDataTable(ds.Tables["CENTROS_TRABAJOS"]));
                 }
+                if ((ds.Tables["TIPOS_UBICACIONES_STOCK"] != null)) {
+                    base.Tables.Add(new TIPOS_UBICACIONES_STOCKDataTable(ds.Tables["TIPOS_UBICACIONES_STOCK"]));
+                }
+                if ((ds.Tables["UNIDADES_MEDIDA"] != null)) {
+                    base.Tables.Add(new UNIDADES_MEDIDADataTable(ds.Tables["UNIDADES_MEDIDA"]));
+                }
+                if ((ds.Tables["TIPOS_UNIDADES_MEDIDA"] != null)) {
+                    base.Tables.Add(new TIPOS_UNIDADES_MEDIDADataTable(ds.Tables["TIPOS_UNIDADES_MEDIDA"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -387,6 +444,24 @@ namespace GyCAP.Data {
                     this.tableCENTROS_TRABAJOS.InitVars();
                 }
             }
+            this.tableTIPOS_UBICACIONES_STOCK = ((TIPOS_UBICACIONES_STOCKDataTable)(base.Tables["TIPOS_UBICACIONES_STOCK"]));
+            if ((initTable == true)) {
+                if ((this.tableTIPOS_UBICACIONES_STOCK != null)) {
+                    this.tableTIPOS_UBICACIONES_STOCK.InitVars();
+                }
+            }
+            this.tableUNIDADES_MEDIDA = ((UNIDADES_MEDIDADataTable)(base.Tables["UNIDADES_MEDIDA"]));
+            if ((initTable == true)) {
+                if ((this.tableUNIDADES_MEDIDA != null)) {
+                    this.tableUNIDADES_MEDIDA.InitVars();
+                }
+            }
+            this.tableTIPOS_UNIDADES_MEDIDA = ((TIPOS_UNIDADES_MEDIDADataTable)(base.Tables["TIPOS_UNIDADES_MEDIDA"]));
+            if ((initTable == true)) {
+                if ((this.tableTIPOS_UNIDADES_MEDIDA != null)) {
+                    this.tableTIPOS_UNIDADES_MEDIDA.InitVars();
+                }
+            }
             this.relationTURNOS_TRABAJO_TURNOSXCENTROTRABAJO = this.Relations["TURNOS_TRABAJO_TURNOSXCENTROTRABAJO"];
             this.relationFK_DETALLE_HOJARUTA_OPERACIONES = this.Relations["FK_DETALLE_HOJARUTA_OPERACIONES"];
             this.relationFK_DETALLE_HOJARUTA_HOJAS_RUTA = this.Relations["FK_DETALLE_HOJARUTA_HOJAS_RUTA"];
@@ -398,6 +473,9 @@ namespace GyCAP.Data {
             this.relationFK_TURNOSXCENTROTRABAJO_CENTROS_TRABAJOS = this.Relations["FK_TURNOSXCENTROTRABAJO_CENTROS_TRABAJOS"];
             this.relationFK_DETALLE_HOJARUTA_CENTROS_TRABAJOS = this.Relations["FK_DETALLE_HOJARUTA_CENTROS_TRABAJOS"];
             this.relationFK_CENTROS_TRABAJOS_SECTORES = this.Relations["FK_CENTROS_TRABAJOS_SECTORES"];
+            this.relationFK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK = this.Relations["FK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK"];
+            this.relationFK_UBICACIONES_STOCK_UBICACION_STOCK1 = this.Relations["FK_UBICACIONES_STOCK_UBICACION_STOCK1"];
+            this.relationunidadMedida_tipoUnidadMedida_fk = this.Relations["unidadMedida_tipoUnidadMedida_fk"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -425,6 +503,12 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tableCONTENIDO_UBICACION_STOCK);
             this.tableCENTROS_TRABAJOS = new CENTROS_TRABAJOSDataTable();
             base.Tables.Add(this.tableCENTROS_TRABAJOS);
+            this.tableTIPOS_UBICACIONES_STOCK = new TIPOS_UBICACIONES_STOCKDataTable();
+            base.Tables.Add(this.tableTIPOS_UBICACIONES_STOCK);
+            this.tableUNIDADES_MEDIDA = new UNIDADES_MEDIDADataTable();
+            base.Tables.Add(this.tableUNIDADES_MEDIDA);
+            this.tableTIPOS_UNIDADES_MEDIDA = new TIPOS_UNIDADES_MEDIDADataTable();
+            base.Tables.Add(this.tableTIPOS_UNIDADES_MEDIDA);
             this.relationTURNOS_TRABAJO_TURNOSXCENTROTRABAJO = new global::System.Data.DataRelation("TURNOS_TRABAJO_TURNOSXCENTROTRABAJO", new global::System.Data.DataColumn[] {
                         this.tableTURNOS_TRABAJO.TUR_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableTURNOSXCENTROTRABAJO.TUR_CODIGOColumn}, false);
@@ -469,6 +553,18 @@ namespace GyCAP.Data {
                         this.tableSECTORES.SEC_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableCENTROS_TRABAJOS.SEC_CODIGOColumn}, false);
             this.Relations.Add(this.relationFK_CENTROS_TRABAJOS_SECTORES);
+            this.relationFK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK = new global::System.Data.DataRelation("FK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK", new global::System.Data.DataColumn[] {
+                        this.tableTIPOS_UBICACIONES_STOCK.TUS_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableUBICACIONES_STOCK.TUS_CODIGOColumn}, false);
+            this.Relations.Add(this.relationFK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK);
+            this.relationFK_UBICACIONES_STOCK_UBICACION_STOCK1 = new global::System.Data.DataRelation("FK_UBICACIONES_STOCK_UBICACION_STOCK1", new global::System.Data.DataColumn[] {
+                        this.tableUNIDADES_MEDIDA.UMED_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableUBICACIONES_STOCK.UMED_CODIGOColumn}, false);
+            this.Relations.Add(this.relationFK_UBICACIONES_STOCK_UBICACION_STOCK1);
+            this.relationunidadMedida_tipoUnidadMedida_fk = new global::System.Data.DataRelation("unidadMedida_tipoUnidadMedida_fk", new global::System.Data.DataColumn[] {
+                        this.tableTIPOS_UNIDADES_MEDIDA.TUMED_CODIGOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableUNIDADES_MEDIDA.TUMED_CODIGOColumn}, false);
+            this.Relations.Add(this.relationunidadMedida_tipoUnidadMedida_fk);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -513,6 +609,21 @@ namespace GyCAP.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeCENTROS_TRABAJOS() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeTIPOS_UBICACIONES_STOCK() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeUNIDADES_MEDIDA() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeTIPOS_UNIDADES_MEDIDA() {
             return false;
         }
         
@@ -586,6 +697,12 @@ namespace GyCAP.Data {
         public delegate void CONTENIDO_UBICACION_STOCKRowChangeEventHandler(object sender, CONTENIDO_UBICACION_STOCKRowChangeEvent e);
         
         public delegate void CENTROS_TRABAJOSRowChangeEventHandler(object sender, CENTROS_TRABAJOSRowChangeEvent e);
+        
+        public delegate void TIPOS_UBICACIONES_STOCKRowChangeEventHandler(object sender, TIPOS_UBICACIONES_STOCKRowChangeEvent e);
+        
+        public delegate void UNIDADES_MEDIDARowChangeEventHandler(object sender, UNIDADES_MEDIDARowChangeEvent e);
+        
+        public delegate void TIPOS_UNIDADES_MEDIDARowChangeEventHandler(object sender, TIPOS_UNIDADES_MEDIDARowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -2511,7 +2628,7 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public UBICACIONES_STOCKRow AddUBICACIONES_STOCKRow(string USTCK_CODIGO, string USTCK_NOMBRE, string USTCK_DESCRIPCION, string USTCK_UBICACIONFISICA, decimal USTCK_CANTIDADREAL, decimal UMED_CODIGO, UBICACIONES_STOCKRow parentUBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_UBICACION_STOCK, decimal USTCK_ACTIVO, decimal TUS_CODIGO, CONTENIDO_UBICACION_STOCKRow parentCONTENIDO_UBICACION_STOCKRowByFK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK) {
+            public UBICACIONES_STOCKRow AddUBICACIONES_STOCKRow(string USTCK_CODIGO, string USTCK_NOMBRE, string USTCK_DESCRIPCION, string USTCK_UBICACIONFISICA, decimal USTCK_CANTIDADREAL, UNIDADES_MEDIDARow parentUNIDADES_MEDIDARowByFK_UBICACIONES_STOCK_UBICACION_STOCK1, UBICACIONES_STOCKRow parentUBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_UBICACION_STOCK, decimal USTCK_ACTIVO, TIPOS_UBICACIONES_STOCKRow parentTIPOS_UBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK, CONTENIDO_UBICACION_STOCKRow parentCONTENIDO_UBICACION_STOCKRowByFK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK) {
                 UBICACIONES_STOCKRow rowUBICACIONES_STOCKRow = ((UBICACIONES_STOCKRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2520,13 +2637,19 @@ namespace GyCAP.Data {
                         USTCK_DESCRIPCION,
                         USTCK_UBICACIONFISICA,
                         USTCK_CANTIDADREAL,
-                        UMED_CODIGO,
+                        null,
                         null,
                         USTCK_ACTIVO,
-                        TUS_CODIGO,
+                        null,
                         null};
+                if ((parentUNIDADES_MEDIDARowByFK_UBICACIONES_STOCK_UBICACION_STOCK1 != null)) {
+                    columnValuesArray[6] = parentUNIDADES_MEDIDARowByFK_UBICACIONES_STOCK_UBICACION_STOCK1[0];
+                }
                 if ((parentUBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_UBICACION_STOCK != null)) {
                     columnValuesArray[7] = parentUBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_UBICACION_STOCK[0];
+                }
+                if ((parentTIPOS_UBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK != null)) {
+                    columnValuesArray[9] = parentTIPOS_UBICACIONES_STOCKRowByFK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK[0];
                 }
                 if ((parentCONTENIDO_UBICACION_STOCKRowByFK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK != null)) {
                     columnValuesArray[10] = parentCONTENIDO_UBICACION_STOCKRowByFK_UBICACIONES_STOCK_CONTENIDO_UBICACION_STOCK[0];
@@ -3386,6 +3509,800 @@ namespace GyCAP.Data {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "CENTROS_TRABAJOSDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class TIPOS_UBICACIONES_STOCKDataTable : global::System.Data.TypedTableBase<TIPOS_UBICACIONES_STOCKRow> {
+            
+            private global::System.Data.DataColumn columnTUS_CODIGO;
+            
+            private global::System.Data.DataColumn columnTUS_NOMBRE;
+            
+            private global::System.Data.DataColumn columnTUS_DESCRIPCION;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UBICACIONES_STOCKDataTable() {
+                this.TableName = "TIPOS_UBICACIONES_STOCK";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TIPOS_UBICACIONES_STOCKDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected TIPOS_UBICACIONES_STOCKDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TUS_CODIGOColumn {
+                get {
+                    return this.columnTUS_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TUS_NOMBREColumn {
+                get {
+                    return this.columnTUS_NOMBRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TUS_DESCRIPCIONColumn {
+                get {
+                    return this.columnTUS_DESCRIPCION;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UBICACIONES_STOCKRow this[int index] {
+                get {
+                    return ((TIPOS_UBICACIONES_STOCKRow)(this.Rows[index]));
+                }
+            }
+            
+            public event TIPOS_UBICACIONES_STOCKRowChangeEventHandler TIPOS_UBICACIONES_STOCKRowChanging;
+            
+            public event TIPOS_UBICACIONES_STOCKRowChangeEventHandler TIPOS_UBICACIONES_STOCKRowChanged;
+            
+            public event TIPOS_UBICACIONES_STOCKRowChangeEventHandler TIPOS_UBICACIONES_STOCKRowDeleting;
+            
+            public event TIPOS_UBICACIONES_STOCKRowChangeEventHandler TIPOS_UBICACIONES_STOCKRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddTIPOS_UBICACIONES_STOCKRow(TIPOS_UBICACIONES_STOCKRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UBICACIONES_STOCKRow AddTIPOS_UBICACIONES_STOCKRow(string TUS_NOMBRE, string TUS_DESCRIPCION) {
+                TIPOS_UBICACIONES_STOCKRow rowTIPOS_UBICACIONES_STOCKRow = ((TIPOS_UBICACIONES_STOCKRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        TUS_NOMBRE,
+                        TUS_DESCRIPCION};
+                rowTIPOS_UBICACIONES_STOCKRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowTIPOS_UBICACIONES_STOCKRow);
+                return rowTIPOS_UBICACIONES_STOCKRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UBICACIONES_STOCKRow FindByTUS_CODIGO(decimal TUS_CODIGO) {
+                return ((TIPOS_UBICACIONES_STOCKRow)(this.Rows.Find(new object[] {
+                            TUS_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                TIPOS_UBICACIONES_STOCKDataTable cln = ((TIPOS_UBICACIONES_STOCKDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new TIPOS_UBICACIONES_STOCKDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnTUS_CODIGO = base.Columns["TUS_CODIGO"];
+                this.columnTUS_NOMBRE = base.Columns["TUS_NOMBRE"];
+                this.columnTUS_DESCRIPCION = base.Columns["TUS_DESCRIPCION"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnTUS_CODIGO = new global::System.Data.DataColumn("TUS_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTUS_CODIGO);
+                this.columnTUS_NOMBRE = new global::System.Data.DataColumn("TUS_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTUS_NOMBRE);
+                this.columnTUS_DESCRIPCION = new global::System.Data.DataColumn("TUS_DESCRIPCION", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTUS_DESCRIPCION);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnTUS_CODIGO}, true));
+                this.columnTUS_CODIGO.AutoIncrement = true;
+                this.columnTUS_CODIGO.AutoIncrementSeed = -1;
+                this.columnTUS_CODIGO.AutoIncrementStep = -1;
+                this.columnTUS_CODIGO.AllowDBNull = false;
+                this.columnTUS_CODIGO.Unique = true;
+                this.columnTUS_NOMBRE.MaxLength = 80;
+                this.columnTUS_DESCRIPCION.MaxLength = 200;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UBICACIONES_STOCKRow NewTIPOS_UBICACIONES_STOCKRow() {
+                return ((TIPOS_UBICACIONES_STOCKRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new TIPOS_UBICACIONES_STOCKRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(TIPOS_UBICACIONES_STOCKRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.TIPOS_UBICACIONES_STOCKRowChanged != null)) {
+                    this.TIPOS_UBICACIONES_STOCKRowChanged(this, new TIPOS_UBICACIONES_STOCKRowChangeEvent(((TIPOS_UBICACIONES_STOCKRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.TIPOS_UBICACIONES_STOCKRowChanging != null)) {
+                    this.TIPOS_UBICACIONES_STOCKRowChanging(this, new TIPOS_UBICACIONES_STOCKRowChangeEvent(((TIPOS_UBICACIONES_STOCKRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.TIPOS_UBICACIONES_STOCKRowDeleted != null)) {
+                    this.TIPOS_UBICACIONES_STOCKRowDeleted(this, new TIPOS_UBICACIONES_STOCKRowChangeEvent(((TIPOS_UBICACIONES_STOCKRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.TIPOS_UBICACIONES_STOCKRowDeleting != null)) {
+                    this.TIPOS_UBICACIONES_STOCKRowDeleting(this, new TIPOS_UBICACIONES_STOCKRowChangeEvent(((TIPOS_UBICACIONES_STOCKRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveTIPOS_UBICACIONES_STOCKRow(TIPOS_UBICACIONES_STOCKRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsHojaRuta ds = new dsHojaRuta();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "TIPOS_UBICACIONES_STOCKDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class UNIDADES_MEDIDADataTable : global::System.Data.TypedTableBase<UNIDADES_MEDIDARow> {
+            
+            private global::System.Data.DataColumn columnUMED_CODIGO;
+            
+            private global::System.Data.DataColumn columnTUMED_CODIGO;
+            
+            private global::System.Data.DataColumn columnUMED_NOMBRE;
+            
+            private global::System.Data.DataColumn columnUMED_ABREVIATURA;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UNIDADES_MEDIDADataTable() {
+                this.TableName = "UNIDADES_MEDIDA";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal UNIDADES_MEDIDADataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected UNIDADES_MEDIDADataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn UMED_CODIGOColumn {
+                get {
+                    return this.columnUMED_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TUMED_CODIGOColumn {
+                get {
+                    return this.columnTUMED_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn UMED_NOMBREColumn {
+                get {
+                    return this.columnUMED_NOMBRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn UMED_ABREVIATURAColumn {
+                get {
+                    return this.columnUMED_ABREVIATURA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UNIDADES_MEDIDARow this[int index] {
+                get {
+                    return ((UNIDADES_MEDIDARow)(this.Rows[index]));
+                }
+            }
+            
+            public event UNIDADES_MEDIDARowChangeEventHandler UNIDADES_MEDIDARowChanging;
+            
+            public event UNIDADES_MEDIDARowChangeEventHandler UNIDADES_MEDIDARowChanged;
+            
+            public event UNIDADES_MEDIDARowChangeEventHandler UNIDADES_MEDIDARowDeleting;
+            
+            public event UNIDADES_MEDIDARowChangeEventHandler UNIDADES_MEDIDARowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddUNIDADES_MEDIDARow(UNIDADES_MEDIDARow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UNIDADES_MEDIDARow AddUNIDADES_MEDIDARow(TIPOS_UNIDADES_MEDIDARow parentTIPOS_UNIDADES_MEDIDARowByunidadMedida_tipoUnidadMedida_fk, string UMED_NOMBRE, string UMED_ABREVIATURA) {
+                UNIDADES_MEDIDARow rowUNIDADES_MEDIDARow = ((UNIDADES_MEDIDARow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        UMED_NOMBRE,
+                        UMED_ABREVIATURA};
+                if ((parentTIPOS_UNIDADES_MEDIDARowByunidadMedida_tipoUnidadMedida_fk != null)) {
+                    columnValuesArray[1] = parentTIPOS_UNIDADES_MEDIDARowByunidadMedida_tipoUnidadMedida_fk[0];
+                }
+                rowUNIDADES_MEDIDARow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowUNIDADES_MEDIDARow);
+                return rowUNIDADES_MEDIDARow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UNIDADES_MEDIDARow FindByUMED_CODIGO(decimal UMED_CODIGO) {
+                return ((UNIDADES_MEDIDARow)(this.Rows.Find(new object[] {
+                            UMED_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                UNIDADES_MEDIDADataTable cln = ((UNIDADES_MEDIDADataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new UNIDADES_MEDIDADataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnUMED_CODIGO = base.Columns["UMED_CODIGO"];
+                this.columnTUMED_CODIGO = base.Columns["TUMED_CODIGO"];
+                this.columnUMED_NOMBRE = base.Columns["UMED_NOMBRE"];
+                this.columnUMED_ABREVIATURA = base.Columns["UMED_ABREVIATURA"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnUMED_CODIGO = new global::System.Data.DataColumn("UMED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUMED_CODIGO);
+                this.columnTUMED_CODIGO = new global::System.Data.DataColumn("TUMED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTUMED_CODIGO);
+                this.columnUMED_NOMBRE = new global::System.Data.DataColumn("UMED_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUMED_NOMBRE);
+                this.columnUMED_ABREVIATURA = new global::System.Data.DataColumn("UMED_ABREVIATURA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUMED_ABREVIATURA);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnUMED_CODIGO}, true));
+                this.columnUMED_CODIGO.AutoIncrement = true;
+                this.columnUMED_CODIGO.AutoIncrementSeed = -1;
+                this.columnUMED_CODIGO.AutoIncrementStep = -1;
+                this.columnUMED_CODIGO.AllowDBNull = false;
+                this.columnUMED_CODIGO.Unique = true;
+                this.columnUMED_NOMBRE.MaxLength = 80;
+                this.columnUMED_ABREVIATURA.MaxLength = 10;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UNIDADES_MEDIDARow NewUNIDADES_MEDIDARow() {
+                return ((UNIDADES_MEDIDARow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new UNIDADES_MEDIDARow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(UNIDADES_MEDIDARow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.UNIDADES_MEDIDARowChanged != null)) {
+                    this.UNIDADES_MEDIDARowChanged(this, new UNIDADES_MEDIDARowChangeEvent(((UNIDADES_MEDIDARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.UNIDADES_MEDIDARowChanging != null)) {
+                    this.UNIDADES_MEDIDARowChanging(this, new UNIDADES_MEDIDARowChangeEvent(((UNIDADES_MEDIDARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.UNIDADES_MEDIDARowDeleted != null)) {
+                    this.UNIDADES_MEDIDARowDeleted(this, new UNIDADES_MEDIDARowChangeEvent(((UNIDADES_MEDIDARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.UNIDADES_MEDIDARowDeleting != null)) {
+                    this.UNIDADES_MEDIDARowDeleting(this, new UNIDADES_MEDIDARowChangeEvent(((UNIDADES_MEDIDARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveUNIDADES_MEDIDARow(UNIDADES_MEDIDARow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsHojaRuta ds = new dsHojaRuta();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "UNIDADES_MEDIDADataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class TIPOS_UNIDADES_MEDIDADataTable : global::System.Data.TypedTableBase<TIPOS_UNIDADES_MEDIDARow> {
+            
+            private global::System.Data.DataColumn columnTUMED_CODIGO;
+            
+            private global::System.Data.DataColumn columnTUMED_NOMBRE;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UNIDADES_MEDIDADataTable() {
+                this.TableName = "TIPOS_UNIDADES_MEDIDA";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TIPOS_UNIDADES_MEDIDADataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected TIPOS_UNIDADES_MEDIDADataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TUMED_CODIGOColumn {
+                get {
+                    return this.columnTUMED_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TUMED_NOMBREColumn {
+                get {
+                    return this.columnTUMED_NOMBRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UNIDADES_MEDIDARow this[int index] {
+                get {
+                    return ((TIPOS_UNIDADES_MEDIDARow)(this.Rows[index]));
+                }
+            }
+            
+            public event TIPOS_UNIDADES_MEDIDARowChangeEventHandler TIPOS_UNIDADES_MEDIDARowChanging;
+            
+            public event TIPOS_UNIDADES_MEDIDARowChangeEventHandler TIPOS_UNIDADES_MEDIDARowChanged;
+            
+            public event TIPOS_UNIDADES_MEDIDARowChangeEventHandler TIPOS_UNIDADES_MEDIDARowDeleting;
+            
+            public event TIPOS_UNIDADES_MEDIDARowChangeEventHandler TIPOS_UNIDADES_MEDIDARowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddTIPOS_UNIDADES_MEDIDARow(TIPOS_UNIDADES_MEDIDARow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UNIDADES_MEDIDARow AddTIPOS_UNIDADES_MEDIDARow(string TUMED_NOMBRE) {
+                TIPOS_UNIDADES_MEDIDARow rowTIPOS_UNIDADES_MEDIDARow = ((TIPOS_UNIDADES_MEDIDARow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        TUMED_NOMBRE};
+                rowTIPOS_UNIDADES_MEDIDARow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowTIPOS_UNIDADES_MEDIDARow);
+                return rowTIPOS_UNIDADES_MEDIDARow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UNIDADES_MEDIDARow FindByTUMED_CODIGO(decimal TUMED_CODIGO) {
+                return ((TIPOS_UNIDADES_MEDIDARow)(this.Rows.Find(new object[] {
+                            TUMED_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                TIPOS_UNIDADES_MEDIDADataTable cln = ((TIPOS_UNIDADES_MEDIDADataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new TIPOS_UNIDADES_MEDIDADataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnTUMED_CODIGO = base.Columns["TUMED_CODIGO"];
+                this.columnTUMED_NOMBRE = base.Columns["TUMED_NOMBRE"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnTUMED_CODIGO = new global::System.Data.DataColumn("TUMED_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTUMED_CODIGO);
+                this.columnTUMED_NOMBRE = new global::System.Data.DataColumn("TUMED_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTUMED_NOMBRE);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnTUMED_CODIGO}, true));
+                this.columnTUMED_CODIGO.AutoIncrement = true;
+                this.columnTUMED_CODIGO.AutoIncrementSeed = -1;
+                this.columnTUMED_CODIGO.AutoIncrementStep = -1;
+                this.columnTUMED_CODIGO.AllowDBNull = false;
+                this.columnTUMED_CODIGO.Unique = true;
+                this.columnTUMED_NOMBRE.MaxLength = 80;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UNIDADES_MEDIDARow NewTIPOS_UNIDADES_MEDIDARow() {
+                return ((TIPOS_UNIDADES_MEDIDARow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new TIPOS_UNIDADES_MEDIDARow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(TIPOS_UNIDADES_MEDIDARow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.TIPOS_UNIDADES_MEDIDARowChanged != null)) {
+                    this.TIPOS_UNIDADES_MEDIDARowChanged(this, new TIPOS_UNIDADES_MEDIDARowChangeEvent(((TIPOS_UNIDADES_MEDIDARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.TIPOS_UNIDADES_MEDIDARowChanging != null)) {
+                    this.TIPOS_UNIDADES_MEDIDARowChanging(this, new TIPOS_UNIDADES_MEDIDARowChangeEvent(((TIPOS_UNIDADES_MEDIDARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.TIPOS_UNIDADES_MEDIDARowDeleted != null)) {
+                    this.TIPOS_UNIDADES_MEDIDARowDeleted(this, new TIPOS_UNIDADES_MEDIDARowChangeEvent(((TIPOS_UNIDADES_MEDIDARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.TIPOS_UNIDADES_MEDIDARowDeleting != null)) {
+                    this.TIPOS_UNIDADES_MEDIDARowDeleting(this, new TIPOS_UNIDADES_MEDIDARowChangeEvent(((TIPOS_UNIDADES_MEDIDARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveTIPOS_UNIDADES_MEDIDARow(TIPOS_UNIDADES_MEDIDARow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsHojaRuta ds = new dsHojaRuta();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "TIPOS_UNIDADES_MEDIDADataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -4307,6 +5224,26 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UBICACIONES_STOCKRow TIPOS_UBICACIONES_STOCKRow {
+                get {
+                    return ((TIPOS_UBICACIONES_STOCKRow)(this.GetParentRow(this.Table.ParentRelations["FK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UNIDADES_MEDIDARow UNIDADES_MEDIDARow {
+                get {
+                    return ((UNIDADES_MEDIDARow)(this.GetParentRow(this.Table.ParentRelations["FK_UBICACIONES_STOCK_UBICACION_STOCK1"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_UBICACIONES_STOCK_UBICACION_STOCK1"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsUSTCK_CODIGONull() {
                 return this.IsNull(this.tableUBICACIONES_STOCK.USTCK_CODIGOColumn);
             }
@@ -4916,6 +5853,271 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class TIPOS_UBICACIONES_STOCKRow : global::System.Data.DataRow {
+            
+            private TIPOS_UBICACIONES_STOCKDataTable tableTIPOS_UBICACIONES_STOCK;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TIPOS_UBICACIONES_STOCKRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableTIPOS_UBICACIONES_STOCK = ((TIPOS_UBICACIONES_STOCKDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal TUS_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableTIPOS_UBICACIONES_STOCK.TUS_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableTIPOS_UBICACIONES_STOCK.TUS_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string TUS_NOMBRE {
+                get {
+                    if (this.IsTUS_NOMBRENull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableTIPOS_UBICACIONES_STOCK.TUS_NOMBREColumn]));
+                    }
+                }
+                set {
+                    this[this.tableTIPOS_UBICACIONES_STOCK.TUS_NOMBREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string TUS_DESCRIPCION {
+                get {
+                    if (this.IsTUS_DESCRIPCIONNull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableTIPOS_UBICACIONES_STOCK.TUS_DESCRIPCIONColumn]));
+                    }
+                }
+                set {
+                    this[this.tableTIPOS_UBICACIONES_STOCK.TUS_DESCRIPCIONColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTUS_NOMBRENull() {
+                return this.IsNull(this.tableTIPOS_UBICACIONES_STOCK.TUS_NOMBREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTUS_NOMBRENull() {
+                this[this.tableTIPOS_UBICACIONES_STOCK.TUS_NOMBREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTUS_DESCRIPCIONNull() {
+                return this.IsNull(this.tableTIPOS_UBICACIONES_STOCK.TUS_DESCRIPCIONColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTUS_DESCRIPCIONNull() {
+                this[this.tableTIPOS_UBICACIONES_STOCK.TUS_DESCRIPCIONColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UBICACIONES_STOCKRow[] GetUBICACIONES_STOCKRows() {
+                if ((this.Table.ChildRelations["FK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK"] == null)) {
+                    return new UBICACIONES_STOCKRow[0];
+                }
+                else {
+                    return ((UBICACIONES_STOCKRow[])(base.GetChildRows(this.Table.ChildRelations["FK_UBICACIONES_STOCK_TIPOS_UBICACIONES_STOCK"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class UNIDADES_MEDIDARow : global::System.Data.DataRow {
+            
+            private UNIDADES_MEDIDADataTable tableUNIDADES_MEDIDA;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal UNIDADES_MEDIDARow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableUNIDADES_MEDIDA = ((UNIDADES_MEDIDADataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal UMED_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableUNIDADES_MEDIDA.UMED_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableUNIDADES_MEDIDA.UMED_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal TUMED_CODIGO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableUNIDADES_MEDIDA.TUMED_CODIGOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TUMED_CODIGO\' in table \'UNIDADES_MEDIDA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUNIDADES_MEDIDA.TUMED_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string UMED_NOMBRE {
+                get {
+                    if (this.IsUMED_NOMBRENull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableUNIDADES_MEDIDA.UMED_NOMBREColumn]));
+                    }
+                }
+                set {
+                    this[this.tableUNIDADES_MEDIDA.UMED_NOMBREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string UMED_ABREVIATURA {
+                get {
+                    if (this.IsUMED_ABREVIATURANull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableUNIDADES_MEDIDA.UMED_ABREVIATURAColumn]));
+                    }
+                }
+                set {
+                    this[this.tableUNIDADES_MEDIDA.UMED_ABREVIATURAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UNIDADES_MEDIDARow TIPOS_UNIDADES_MEDIDARow {
+                get {
+                    return ((TIPOS_UNIDADES_MEDIDARow)(this.GetParentRow(this.Table.ParentRelations["unidadMedida_tipoUnidadMedida_fk"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["unidadMedida_tipoUnidadMedida_fk"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTUMED_CODIGONull() {
+                return this.IsNull(this.tableUNIDADES_MEDIDA.TUMED_CODIGOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTUMED_CODIGONull() {
+                this[this.tableUNIDADES_MEDIDA.TUMED_CODIGOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsUMED_NOMBRENull() {
+                return this.IsNull(this.tableUNIDADES_MEDIDA.UMED_NOMBREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetUMED_NOMBRENull() {
+                this[this.tableUNIDADES_MEDIDA.UMED_NOMBREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsUMED_ABREVIATURANull() {
+                return this.IsNull(this.tableUNIDADES_MEDIDA.UMED_ABREVIATURAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetUMED_ABREVIATURANull() {
+                this[this.tableUNIDADES_MEDIDA.UMED_ABREVIATURAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UBICACIONES_STOCKRow[] GetUBICACIONES_STOCKRows() {
+                if ((this.Table.ChildRelations["FK_UBICACIONES_STOCK_UBICACION_STOCK1"] == null)) {
+                    return new UBICACIONES_STOCKRow[0];
+                }
+                else {
+                    return ((UBICACIONES_STOCKRow[])(base.GetChildRows(this.Table.ChildRelations["FK_UBICACIONES_STOCK_UBICACION_STOCK1"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class TIPOS_UNIDADES_MEDIDARow : global::System.Data.DataRow {
+            
+            private TIPOS_UNIDADES_MEDIDADataTable tableTIPOS_UNIDADES_MEDIDA;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TIPOS_UNIDADES_MEDIDARow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableTIPOS_UNIDADES_MEDIDA = ((TIPOS_UNIDADES_MEDIDADataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal TUMED_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableTIPOS_UNIDADES_MEDIDA.TUMED_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableTIPOS_UNIDADES_MEDIDA.TUMED_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string TUMED_NOMBRE {
+                get {
+                    if (this.IsTUMED_NOMBRENull()) {
+                        return string.Empty;
+                    }
+                    else {
+                        return ((string)(this[this.tableTIPOS_UNIDADES_MEDIDA.TUMED_NOMBREColumn]));
+                    }
+                }
+                set {
+                    this[this.tableTIPOS_UNIDADES_MEDIDA.TUMED_NOMBREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTUMED_NOMBRENull() {
+                return this.IsNull(this.tableTIPOS_UNIDADES_MEDIDA.TUMED_NOMBREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTUMED_NOMBRENull() {
+                this[this.tableTIPOS_UNIDADES_MEDIDA.TUMED_NOMBREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UNIDADES_MEDIDARow[] GetUNIDADES_MEDIDARows() {
+                if ((this.Table.ChildRelations["unidadMedida_tipoUnidadMedida_fk"] == null)) {
+                    return new UNIDADES_MEDIDARow[0];
+                }
+                else {
+                    return ((UNIDADES_MEDIDARow[])(base.GetChildRows(this.Table.ChildRelations["unidadMedida_tipoUnidadMedida_fk"])));
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -5181,6 +6383,99 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public CENTROS_TRABAJOSRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class TIPOS_UBICACIONES_STOCKRowChangeEvent : global::System.EventArgs {
+            
+            private TIPOS_UBICACIONES_STOCKRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UBICACIONES_STOCKRowChangeEvent(TIPOS_UBICACIONES_STOCKRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UBICACIONES_STOCKRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class UNIDADES_MEDIDARowChangeEvent : global::System.EventArgs {
+            
+            private UNIDADES_MEDIDARow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UNIDADES_MEDIDARowChangeEvent(UNIDADES_MEDIDARow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public UNIDADES_MEDIDARow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class TIPOS_UNIDADES_MEDIDARowChangeEvent : global::System.EventArgs {
+            
+            private TIPOS_UNIDADES_MEDIDARow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UNIDADES_MEDIDARowChangeEvent(TIPOS_UNIDADES_MEDIDARow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TIPOS_UNIDADES_MEDIDARow Row {
                 get {
                     return this.eventRow;
                 }
@@ -9220,6 +10515,1028 @@ SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class TIPOS_UBICACIONES_STOCKTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public TIPOS_UBICACIONES_STOCKTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "TIPOS_UBICACIONES_STOCK";
+            tableMapping.ColumnMappings.Add("TUS_CODIGO", "TUS_CODIGO");
+            tableMapping.ColumnMappings.Add("TUS_NOMBRE", "TUS_NOMBRE");
+            tableMapping.ColumnMappings.Add("TUS_DESCRIPCION", "TUS_DESCRIPCION");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[TIPOS_UBICACIONES_STOCK] WHERE (([TUS_CODIGO] = @Original_TUS_CODIGO) AND ((@IsNull_TUS_NOMBRE = 1 AND [TUS_NOMBRE] IS NULL) OR ([TUS_NOMBRE] = @Original_TUS_NOMBRE)) AND ((@IsNull_TUS_DESCRIPCION = 1 AND [TUS_DESCRIPCION] IS NULL) OR ([TUS_DESCRIPCION] = @Original_TUS_DESCRIPCION)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TUS_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TUS_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TUS_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUS_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TUS_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUS_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TUS_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUS_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TUS_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUS_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[TIPOS_UBICACIONES_STOCK] ([TUS_NOMBRE], [TUS_DESCRIPCION]) VAL" +
+                "UES (@TUS_NOMBRE, @TUS_DESCRIPCION);\r\nSELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIP" +
+                "CION FROM TIPOS_UBICACIONES_STOCK WHERE (TUS_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TUS_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUS_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TUS_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUS_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[TIPOS_UBICACIONES_STOCK] SET [TUS_NOMBRE] = @TUS_NOMBRE, [TUS_DESCRIPCION] = @TUS_DESCRIPCION WHERE (([TUS_CODIGO] = @Original_TUS_CODIGO) AND ((@IsNull_TUS_NOMBRE = 1 AND [TUS_NOMBRE] IS NULL) OR ([TUS_NOMBRE] = @Original_TUS_NOMBRE)) AND ((@IsNull_TUS_DESCRIPCION = 1 AND [TUS_DESCRIPCION] IS NULL) OR ([TUS_DESCRIPCION] = @Original_TUS_DESCRIPCION)));
+SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHERE (TUS_CODIGO = @TUS_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TUS_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUS_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TUS_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUS_DESCRIPCION", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TUS_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TUS_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TUS_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUS_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TUS_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUS_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TUS_DESCRIPCION", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUS_DESCRIPCION", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TUS_DESCRIPCION", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUS_DESCRIPCION", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TUS_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "TUS_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM dbo.TIPOS_UBICACIONES_STOCK";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsHojaRuta.TIPOS_UBICACIONES_STOCKDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsHojaRuta.TIPOS_UBICACIONES_STOCKDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsHojaRuta.TIPOS_UBICACIONES_STOCKDataTable dataTable = new dsHojaRuta.TIPOS_UBICACIONES_STOCKDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsHojaRuta.TIPOS_UBICACIONES_STOCKDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsHojaRuta dataSet) {
+            return this.Adapter.Update(dataSet, "TIPOS_UBICACIONES_STOCK");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_TUS_CODIGO, string Original_TUS_NOMBRE, string Original_TUS_DESCRIPCION) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_TUS_CODIGO));
+            if ((Original_TUS_NOMBRE == null)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_TUS_NOMBRE));
+            }
+            if ((Original_TUS_DESCRIPCION == null)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_TUS_DESCRIPCION));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string TUS_NOMBRE, string TUS_DESCRIPCION) {
+            if ((TUS_NOMBRE == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(TUS_NOMBRE));
+            }
+            if ((TUS_DESCRIPCION == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(TUS_DESCRIPCION));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string TUS_NOMBRE, string TUS_DESCRIPCION, decimal Original_TUS_CODIGO, string Original_TUS_NOMBRE, string Original_TUS_DESCRIPCION, decimal TUS_CODIGO) {
+            if ((TUS_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(TUS_NOMBRE));
+            }
+            if ((TUS_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(TUS_DESCRIPCION));
+            }
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(Original_TUS_CODIGO));
+            if ((Original_TUS_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_TUS_NOMBRE));
+            }
+            if ((Original_TUS_DESCRIPCION == null)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_TUS_DESCRIPCION));
+            }
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(TUS_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string TUS_NOMBRE, string TUS_DESCRIPCION, decimal Original_TUS_CODIGO, string Original_TUS_NOMBRE, string Original_TUS_DESCRIPCION) {
+            return this.Update(TUS_NOMBRE, TUS_DESCRIPCION, Original_TUS_CODIGO, Original_TUS_NOMBRE, Original_TUS_DESCRIPCION, Original_TUS_CODIGO);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class UNIDADES_MEDIDATableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public UNIDADES_MEDIDATableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "UNIDADES_MEDIDA";
+            tableMapping.ColumnMappings.Add("UMED_CODIGO", "UMED_CODIGO");
+            tableMapping.ColumnMappings.Add("TUMED_CODIGO", "TUMED_CODIGO");
+            tableMapping.ColumnMappings.Add("UMED_NOMBRE", "UMED_NOMBRE");
+            tableMapping.ColumnMappings.Add("UMED_ABREVIATURA", "UMED_ABREVIATURA");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[UNIDADES_MEDIDA] WHERE (([UMED_CODIGO] = @Original_UMED_CODIGO) AND ((@IsNull_TUMED_CODIGO = 1 AND [TUMED_CODIGO] IS NULL) OR ([TUMED_CODIGO] = @Original_TUMED_CODIGO)) AND ((@IsNull_UMED_NOMBRE = 1 AND [UMED_NOMBRE] IS NULL) OR ([UMED_NOMBRE] = @Original_UMED_NOMBRE)) AND ((@IsNull_UMED_ABREVIATURA = 1 AND [UMED_ABREVIATURA] IS NULL) OR ([UMED_ABREVIATURA] = @Original_UMED_ABREVIATURA)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TUMED_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUMED_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TUMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TUMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UMED_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UMED_ABREVIATURA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_ABREVIATURA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_ABREVIATURA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[UNIDADES_MEDIDA] ([TUMED_CODIGO], [UMED_NOMBRE], [UMED_ABREVIATURA]) VALUES (@TUMED_CODIGO, @UMED_NOMBRE, @UMED_ABREVIATURA);
+SELECT UMED_CODIGO, TUMED_CODIGO, UMED_NOMBRE, UMED_ABREVIATURA FROM UNIDADES_MEDIDA WHERE (UMED_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TUMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TUMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_ABREVIATURA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[UNIDADES_MEDIDA] SET [TUMED_CODIGO] = @TUMED_CODIGO, [UMED_NOMBRE] = @UMED_NOMBRE, [UMED_ABREVIATURA] = @UMED_ABREVIATURA WHERE (([UMED_CODIGO] = @Original_UMED_CODIGO) AND ((@IsNull_TUMED_CODIGO = 1 AND [TUMED_CODIGO] IS NULL) OR ([TUMED_CODIGO] = @Original_TUMED_CODIGO)) AND ((@IsNull_UMED_NOMBRE = 1 AND [UMED_NOMBRE] IS NULL) OR ([UMED_NOMBRE] = @Original_UMED_NOMBRE)) AND ((@IsNull_UMED_ABREVIATURA = 1 AND [UMED_ABREVIATURA] IS NULL) OR ([UMED_ABREVIATURA] = @Original_UMED_ABREVIATURA)));
+SELECT UMED_CODIGO, TUMED_CODIGO, UMED_NOMBRE, UMED_ABREVIATURA FROM UNIDADES_MEDIDA WHERE (UMED_CODIGO = @UMED_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TUMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TUMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_ABREVIATURA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TUMED_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUMED_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TUMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TUMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UMED_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_UMED_ABREVIATURA", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_ABREVIATURA", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_UMED_ABREVIATURA", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UMED_ABREVIATURA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UMED_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "UMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT UMED_CODIGO, TUMED_CODIGO, UMED_NOMBRE, UMED_ABREVIATURA FROM dbo.UNIDADES" +
+                "_MEDIDA";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsHojaRuta.UNIDADES_MEDIDADataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsHojaRuta.UNIDADES_MEDIDADataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsHojaRuta.UNIDADES_MEDIDADataTable dataTable = new dsHojaRuta.UNIDADES_MEDIDADataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsHojaRuta.UNIDADES_MEDIDADataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsHojaRuta dataSet) {
+            return this.Adapter.Update(dataSet, "UNIDADES_MEDIDA");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_UMED_CODIGO, global::System.Nullable<decimal> Original_TUMED_CODIGO, string Original_UMED_NOMBRE, string Original_UMED_ABREVIATURA) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_UMED_CODIGO));
+            if ((Original_TUMED_CODIGO.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_TUMED_CODIGO.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((Original_UMED_NOMBRE == null)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_UMED_NOMBRE));
+            }
+            if ((Original_UMED_ABREVIATURA == null)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_UMED_ABREVIATURA));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(global::System.Nullable<decimal> TUMED_CODIGO, string UMED_NOMBRE, string UMED_ABREVIATURA) {
+            if ((TUMED_CODIGO.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(TUMED_CODIGO.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((UMED_NOMBRE == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(UMED_NOMBRE));
+            }
+            if ((UMED_ABREVIATURA == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(UMED_ABREVIATURA));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(global::System.Nullable<decimal> TUMED_CODIGO, string UMED_NOMBRE, string UMED_ABREVIATURA, decimal Original_UMED_CODIGO, global::System.Nullable<decimal> Original_TUMED_CODIGO, string Original_UMED_NOMBRE, string Original_UMED_ABREVIATURA, decimal UMED_CODIGO) {
+            if ((TUMED_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(TUMED_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((UMED_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(UMED_NOMBRE));
+            }
+            if ((UMED_ABREVIATURA == null)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(UMED_ABREVIATURA));
+            }
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(Original_UMED_CODIGO));
+            if ((Original_TUMED_CODIGO.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(Original_TUMED_CODIGO.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((Original_UMED_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_UMED_NOMBRE));
+            }
+            if ((Original_UMED_ABREVIATURA == null)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_UMED_ABREVIATURA));
+            }
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(UMED_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(global::System.Nullable<decimal> TUMED_CODIGO, string UMED_NOMBRE, string UMED_ABREVIATURA, decimal Original_UMED_CODIGO, global::System.Nullable<decimal> Original_TUMED_CODIGO, string Original_UMED_NOMBRE, string Original_UMED_ABREVIATURA) {
+            return this.Update(TUMED_CODIGO, UMED_NOMBRE, UMED_ABREVIATURA, Original_UMED_CODIGO, Original_TUMED_CODIGO, Original_UMED_NOMBRE, Original_UMED_ABREVIATURA, Original_UMED_CODIGO);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class TIPOS_UNIDADES_MEDIDATableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public TIPOS_UNIDADES_MEDIDATableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "TIPOS_UNIDADES_MEDIDA";
+            tableMapping.ColumnMappings.Add("TUMED_CODIGO", "TUMED_CODIGO");
+            tableMapping.ColumnMappings.Add("TUMED_NOMBRE", "TUMED_NOMBRE");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[TIPOS_UNIDADES_MEDIDA] WHERE (([TUMED_CODIGO] = @Original_TUME" +
+                "D_CODIGO) AND ((@IsNull_TUMED_NOMBRE = 1 AND [TUMED_NOMBRE] IS NULL) OR ([TUMED_" +
+                "NOMBRE] = @Original_TUMED_NOMBRE)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TUMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TUMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TUMED_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUMED_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TUMED_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUMED_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[TIPOS_UNIDADES_MEDIDA] ([TUMED_NOMBRE]) VALUES (@TUMED_NOMBRE)" +
+                ";\r\nSELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_COD" +
+                "IGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TUMED_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUMED_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[TIPOS_UNIDADES_MEDIDA] SET [TUMED_NOMBRE] = @TUMED_NOMBRE WHERE (([TUMED_CODIGO] = @Original_TUMED_CODIGO) AND ((@IsNull_TUMED_NOMBRE = 1 AND [TUMED_NOMBRE] IS NULL) OR ([TUMED_NOMBRE] = @Original_TUMED_NOMBRE)));
+SELECT TUMED_CODIGO, TUMED_NOMBRE FROM TIPOS_UNIDADES_MEDIDA WHERE (TUMED_CODIGO = @TUMED_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TUMED_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUMED_NOMBRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TUMED_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "TUMED_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TUMED_NOMBRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUMED_NOMBRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TUMED_NOMBRE", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TUMED_NOMBRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TUMED_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "TUMED_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT TUMED_CODIGO, TUMED_NOMBRE FROM dbo.TIPOS_UNIDADES_MEDIDA";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsHojaRuta.TIPOS_UNIDADES_MEDIDADataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsHojaRuta.TIPOS_UNIDADES_MEDIDADataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsHojaRuta.TIPOS_UNIDADES_MEDIDADataTable dataTable = new dsHojaRuta.TIPOS_UNIDADES_MEDIDADataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsHojaRuta.TIPOS_UNIDADES_MEDIDADataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsHojaRuta dataSet) {
+            return this.Adapter.Update(dataSet, "TIPOS_UNIDADES_MEDIDA");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_TUMED_CODIGO, string Original_TUMED_NOMBRE) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_TUMED_CODIGO));
+            if ((Original_TUMED_NOMBRE == null)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_TUMED_NOMBRE));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string TUMED_NOMBRE) {
+            if ((TUMED_NOMBRE == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(TUMED_NOMBRE));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string TUMED_NOMBRE, decimal Original_TUMED_CODIGO, string Original_TUMED_NOMBRE, decimal TUMED_CODIGO) {
+            if ((TUMED_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(TUMED_NOMBRE));
+            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(Original_TUMED_CODIGO));
+            if ((Original_TUMED_NOMBRE == null)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Original_TUMED_NOMBRE));
+            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(TUMED_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string TUMED_NOMBRE, decimal Original_TUMED_CODIGO, string Original_TUMED_NOMBRE) {
+            return this.Update(TUMED_NOMBRE, Original_TUMED_CODIGO, Original_TUMED_NOMBRE, Original_TUMED_CODIGO);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -9249,6 +11566,12 @@ SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO
         private CONTENIDO_UBICACION_STOCKTableAdapter _cONTENIDO_UBICACION_STOCKTableAdapter;
         
         private CENTROS_TRABAJOSTableAdapter _cENTROS_TRABAJOSTableAdapter;
+        
+        private TIPOS_UBICACIONES_STOCKTableAdapter _tIPOS_UBICACIONES_STOCKTableAdapter;
+        
+        private UNIDADES_MEDIDATableAdapter _uNIDADES_MEDIDATableAdapter;
+        
+        private TIPOS_UNIDADES_MEDIDATableAdapter _tIPOS_UNIDADES_MEDIDATableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -9382,6 +11705,45 @@ SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public TIPOS_UBICACIONES_STOCKTableAdapter TIPOS_UBICACIONES_STOCKTableAdapter {
+            get {
+                return this._tIPOS_UBICACIONES_STOCKTableAdapter;
+            }
+            set {
+                this._tIPOS_UBICACIONES_STOCKTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public UNIDADES_MEDIDATableAdapter UNIDADES_MEDIDATableAdapter {
+            get {
+                return this._uNIDADES_MEDIDATableAdapter;
+            }
+            set {
+                this._uNIDADES_MEDIDATableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public TIPOS_UNIDADES_MEDIDATableAdapter TIPOS_UNIDADES_MEDIDATableAdapter {
+            get {
+                return this._tIPOS_UNIDADES_MEDIDATableAdapter;
+            }
+            set {
+                this._tIPOS_UNIDADES_MEDIDATableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -9434,6 +11796,18 @@ SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO
                             && (this._cENTROS_TRABAJOSTableAdapter.Connection != null))) {
                     return this._cENTROS_TRABAJOSTableAdapter.Connection;
                 }
+                if (((this._tIPOS_UBICACIONES_STOCKTableAdapter != null) 
+                            && (this._tIPOS_UBICACIONES_STOCKTableAdapter.Connection != null))) {
+                    return this._tIPOS_UBICACIONES_STOCKTableAdapter.Connection;
+                }
+                if (((this._uNIDADES_MEDIDATableAdapter != null) 
+                            && (this._uNIDADES_MEDIDATableAdapter.Connection != null))) {
+                    return this._uNIDADES_MEDIDATableAdapter.Connection;
+                }
+                if (((this._tIPOS_UNIDADES_MEDIDATableAdapter != null) 
+                            && (this._tIPOS_UNIDADES_MEDIDATableAdapter.Connection != null))) {
+                    return this._tIPOS_UNIDADES_MEDIDATableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -9473,6 +11847,15 @@ SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO
                 if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
                     count = (count + 1);
                 }
+                if ((this._tIPOS_UBICACIONES_STOCKTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._uNIDADES_MEDIDATableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._tIPOS_UNIDADES_MEDIDATableAdapter != null)) {
+                    count = (count + 1);
+                }
                 return count;
             }
         }
@@ -9483,12 +11866,39 @@ SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateUpdatedRows(dsHojaRuta dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._tIPOS_UNIDADES_MEDIDATableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.TIPOS_UNIDADES_MEDIDA.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._tIPOS_UNIDADES_MEDIDATableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._cONTENIDO_UBICACION_STOCKTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.CONTENIDO_UBICACION_STOCK.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._cONTENIDO_UBICACION_STOCKTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._tIPOS_UBICACIONES_STOCKTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.TIPOS_UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._tIPOS_UBICACIONES_STOCKTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._uNIDADES_MEDIDATableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.UNIDADES_MEDIDA.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._uNIDADES_MEDIDATableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -9520,21 +11930,21 @@ SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.CENTROS_TRABAJOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._cENTROS_TRABAJOSTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._tURNOS_TRABAJOTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.TURNOS_TRABAJO.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._tURNOS_TRABAJOTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.CENTROS_TRABAJOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._cENTROS_TRABAJOSTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -9574,11 +11984,35 @@ SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateInsertedRows(dsHojaRuta dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._tIPOS_UNIDADES_MEDIDATableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.TIPOS_UNIDADES_MEDIDA.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._tIPOS_UNIDADES_MEDIDATableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._cONTENIDO_UBICACION_STOCKTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.CONTENIDO_UBICACION_STOCK.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._cONTENIDO_UBICACION_STOCKTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._tIPOS_UBICACIONES_STOCKTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.TIPOS_UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._tIPOS_UBICACIONES_STOCKTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._uNIDADES_MEDIDATableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.UNIDADES_MEDIDA.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._uNIDADES_MEDIDATableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -9607,19 +12041,19 @@ SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.CENTROS_TRABAJOS.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._cENTROS_TRABAJOSTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._tURNOS_TRABAJOTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.TURNOS_TRABAJO.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._tURNOS_TRABAJOTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.CENTROS_TRABAJOS.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._cENTROS_TRABAJOSTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -9680,19 +12114,19 @@ SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._tURNOS_TRABAJOTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.TURNOS_TRABAJO.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._tURNOS_TRABAJOTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.CENTROS_TRABAJOS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._cENTROS_TRABAJOSTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._tURNOS_TRABAJOTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.TURNOS_TRABAJO.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tURNOS_TRABAJOTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -9721,11 +12155,35 @@ SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._uNIDADES_MEDIDATableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.UNIDADES_MEDIDA.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._uNIDADES_MEDIDATableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._tIPOS_UBICACIONES_STOCKTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.TIPOS_UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tIPOS_UBICACIONES_STOCKTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._cONTENIDO_UBICACION_STOCKTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.CONTENIDO_UBICACION_STOCK.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._cONTENIDO_UBICACION_STOCKTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._tIPOS_UNIDADES_MEDIDATableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.TIPOS_UNIDADES_MEDIDA.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tIPOS_UNIDADES_MEDIDATableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -9808,6 +12266,21 @@ SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO
             }
             if (((this._cENTROS_TRABAJOSTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._cENTROS_TRABAJOSTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._tIPOS_UBICACIONES_STOCKTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._tIPOS_UBICACIONES_STOCKTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._uNIDADES_MEDIDATableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._uNIDADES_MEDIDATableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._tIPOS_UNIDADES_MEDIDATableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._tIPOS_UNIDADES_MEDIDATableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -9924,6 +12397,33 @@ SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO
                         adaptersWithAcceptChangesDuringUpdate.Add(this._cENTROS_TRABAJOSTableAdapter.Adapter);
                     }
                 }
+                if ((this._tIPOS_UBICACIONES_STOCKTableAdapter != null)) {
+                    revertConnections.Add(this._tIPOS_UBICACIONES_STOCKTableAdapter, this._tIPOS_UBICACIONES_STOCKTableAdapter.Connection);
+                    this._tIPOS_UBICACIONES_STOCKTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._tIPOS_UBICACIONES_STOCKTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._tIPOS_UBICACIONES_STOCKTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._tIPOS_UBICACIONES_STOCKTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._tIPOS_UBICACIONES_STOCKTableAdapter.Adapter);
+                    }
+                }
+                if ((this._uNIDADES_MEDIDATableAdapter != null)) {
+                    revertConnections.Add(this._uNIDADES_MEDIDATableAdapter, this._uNIDADES_MEDIDATableAdapter.Connection);
+                    this._uNIDADES_MEDIDATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._uNIDADES_MEDIDATableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._uNIDADES_MEDIDATableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._uNIDADES_MEDIDATableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._uNIDADES_MEDIDATableAdapter.Adapter);
+                    }
+                }
+                if ((this._tIPOS_UNIDADES_MEDIDATableAdapter != null)) {
+                    revertConnections.Add(this._tIPOS_UNIDADES_MEDIDATableAdapter, this._tIPOS_UNIDADES_MEDIDATableAdapter.Connection);
+                    this._tIPOS_UNIDADES_MEDIDATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._tIPOS_UNIDADES_MEDIDATableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._tIPOS_UNIDADES_MEDIDATableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._tIPOS_UNIDADES_MEDIDATableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._tIPOS_UNIDADES_MEDIDATableAdapter.Adapter);
+                    }
+                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -10017,6 +12517,18 @@ SELECT CTO_CODIGO, CTO_NOMBRE, SEC_CODIGO, CTO_TIPO, CTO_HORASTRABAJONORMAL, CTO
                 if ((this._cENTROS_TRABAJOSTableAdapter != null)) {
                     this._cENTROS_TRABAJOSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cENTROS_TRABAJOSTableAdapter]));
                     this._cENTROS_TRABAJOSTableAdapter.Transaction = null;
+                }
+                if ((this._tIPOS_UBICACIONES_STOCKTableAdapter != null)) {
+                    this._tIPOS_UBICACIONES_STOCKTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._tIPOS_UBICACIONES_STOCKTableAdapter]));
+                    this._tIPOS_UBICACIONES_STOCKTableAdapter.Transaction = null;
+                }
+                if ((this._uNIDADES_MEDIDATableAdapter != null)) {
+                    this._uNIDADES_MEDIDATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._uNIDADES_MEDIDATableAdapter]));
+                    this._uNIDADES_MEDIDATableAdapter.Transaction = null;
+                }
+                if ((this._tIPOS_UNIDADES_MEDIDATableAdapter != null)) {
+                    this._tIPOS_UNIDADES_MEDIDATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._tIPOS_UNIDADES_MEDIDATableAdapter]));
+                    this._tIPOS_UNIDADES_MEDIDATableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

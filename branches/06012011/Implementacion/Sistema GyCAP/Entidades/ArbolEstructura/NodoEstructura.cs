@@ -166,7 +166,7 @@ namespace GyCAP.Entidades.ArbolEstructura
             return nodo;
         }
 
-        public TreeNode AsExtendedTreeNode()
+        public TreeNode AsExtendedTreeNodeWithMaterials()
         {
             TreeNode nodo = new TreeNode();
             nodo.Text = (compuesto.Parte != null) ? compuesto.Parte.Nombre : compuesto.MateriaPrima.Nombre;
@@ -181,7 +181,7 @@ namespace GyCAP.Entidades.ArbolEstructura
 
             foreach (NodoEstructura item in this.nodosHijos)
             {
-                nodo.Nodes.Add(item.AsExtendedTreeNode());
+                nodo.Nodes.Add(item.AsExtendedTreeNodeWithMaterials());
             }
 
             return nodo;
@@ -205,10 +205,17 @@ namespace GyCAP.Entidades.ArbolEstructura
             }
         }
 
-        public IList<NodoEstructura> AsList(tipoContenido tipoContenido)
+        public void AsListOfParts(IList<ParteNecesidadCombinada> lista)
         {
-            //sin terminar - gonzalo
-            return new List<NodoEstructura>();
+            if (this.Contenido == tipoContenido.Parte)
+            {
+                lista.Add(new ParteNecesidadCombinada() { Parte = this.compuesto.Parte, Cantidad = this.compuesto.Cantidad });
+
+                foreach (NodoEstructura nodo in this.NodosHijos)
+                {
+                    nodo.AsListOfParts(lista);
+                }
+            }
         }
 
         private IList<string> ValidateAddChild(NodoEstructura nodo)

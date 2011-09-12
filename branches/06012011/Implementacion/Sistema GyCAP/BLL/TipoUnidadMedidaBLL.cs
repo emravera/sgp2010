@@ -74,6 +74,17 @@ namespace GyCAP.BLL
             return tumed;
         }
 
+        public static Entidades.TipoUnidadMedida AsTipoUnidadMedidaEntity(Data.dsHojaRuta.TIPOS_UNIDADES_MEDIDARow row)
+        {
+            Entidades.TipoUnidadMedida tumed = new GyCAP.Entidades.TipoUnidadMedida()
+            {
+                Codigo = Convert.ToInt32(row.TUMED_CODIGO),
+                Nombre = row.TUMED_NOMBRE
+            };
+
+            return tumed;
+        }
+
         public static Entidades.TipoUnidadMedida GetTipoUnidadMedida(int codigo)
         {
             Data.dsStock.TIPOS_UNIDADES_MEDIDADataTable dt = DAL.TipoUnidadMedidaDAL.GetTipoUnidadMedida(codigo);

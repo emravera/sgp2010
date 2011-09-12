@@ -37,5 +37,19 @@ namespace GyCAP.BLL
             if (!DAL.OperacionDAL.PuedeEliminarse(codigoOperacion)) { throw new Entidades.Excepciones.ElementoEnTransaccionException(); }
             DAL.OperacionDAL.EliminarOperacion(codigoOperacion);
         }
+
+        public static Entidades.OperacionFabricacion AsOperacionFabricacionEntity(Data.dsHojaRuta.OPERACIONESRow row)
+        {
+            Entidades.OperacionFabricacion operacion = new GyCAP.Entidades.OperacionFabricacion()
+            {
+                Codigo = Convert.ToInt32(row.OPR_NUMERO),
+                Codificacion = row.OPR_CODIGO,
+                Descripcion = row.OPR_DESCRIPCION,
+                HorasRequeridas = row.OPR_HORASREQUERIDA,
+                Nombre = row.OPR_NOMBRE
+            };
+
+            return operacion;
+        }
     }
 }

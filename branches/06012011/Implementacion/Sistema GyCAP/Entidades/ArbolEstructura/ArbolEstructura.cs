@@ -150,7 +150,7 @@ namespace GyCAP.Entidades.ArbolEstructura
             return treeReturn;
         }
 
-        public TreeView AsExtendedTreeView()
+        public TreeView AsExtendedTreeViewWithMaterials()
         {
             TreeView treeReturn = new TreeView();
             treeReturn.BeginUpdate();
@@ -167,10 +167,70 @@ namespace GyCAP.Entidades.ArbolEstructura
 
             foreach (NodoEstructura item in nodoRaiz.NodosHijos)
             {
-                nodoInicio.Nodes.Add(item.AsExtendedTreeNode());
+                nodoInicio.Nodes.Add(item.AsExtendedTreeNodeWithMaterials());
             }
 
             treeReturn.Nodes.Add(nodoInicio);
+            treeReturn.EndUpdate();
+            return treeReturn;
+        }
+
+        public TreeView AsExtendedTreeViewWithCentros(out decimal CostoTotal)
+        {
+            IList<ParteNecesidadCombinada> listaPartes = AsListOfParts();
+            CostoTotal = 0;
+            TreeView treeReturn = new TreeView();
+            treeReturn.BeginUpdate();
+            
+            foreach (ParteNecesidadCombinada parte in listaPartes)
+            {
+                TreeNode nodoParte = new TreeNode();
+                nodoParte.Text = parte.Parte.Nombre;
+                nodoParte.Name = parte.Parte.Numero.ToString();
+                decimal costoParte = 0;
+
+                if (parte.Parte.HojaRuta != null)
+                {
+                    foreach (DetalleHojaRuta detalle in parte.Parte.HojaRuta.Detalle)
+                    {
+                        TreeNode nodoDetalle = new TreeNode();
+                        nodoDetalle.Text = string.Empty;
+                        nodoDetalle.Name = detalle.Codigo.ToString();
+
+                        decimal costo = 0;
+                        if (detalle.CentroTrabajo.Tipo == (int)Enumeraciones.RecursosFabricacionEnum.TipoCentroTrabajo.TipoHombre)
+                        {
+                            costo = (detalle.CentroTrabajo.CostoHora / detalle.CentroTrabajo.CapacidadUnidadHora) * parte.Cantidad;
+
+                        }
+                        else
+                        {
+                            costo = (detalle.CentroTrabajo.CostoCiclo / detalle.CentroTrabajo.CapacidadCiclo) * parte.Cantidad;
+                        }
+
+                        costoParte += costo;
+
+                        nodoDetalle.Tag = new string[] {
+                                                            detalle.CentroTrabajo.Nombre,
+                                                            detalle.Operacion.Nombre,
+                                                            string.Format("{0:0.000}", Convert.ToDouble(costo)),
+                                                            string.Empty
+                                                       };
+                        nodoParte.Nodes.Add(nodoDetalle);
+                    }
+
+                    nodoParte.Tag = new string[] { 
+                                                string.Empty, 
+                                                string.Empty,
+                                                string.Empty,
+                                                string.Format("{0:0.000}", Convert.ToDouble(costoParte))
+                                              };
+                    treeReturn.Nodes.Add(nodoParte);
+                }
+
+                CostoTotal += costoParte;
+            }            
+            
             treeReturn.EndUpdate();
             return treeReturn;
         }
@@ -187,18 +247,29 @@ namespace GyCAP.Entidades.ArbolEstructura
             return lista;
         }
 
-        public IList<NodoEstructura> AsList(NodoEstructura.tipoContenido tipoContenido, bool distinct, bool sumEquals)
+        public IList<NodoEstructura> AsList(NodoEstructura.tipoContenido tipoContenido, bool includeRaiz)
         {
-            //No termiando - gonzalo
-            IList<NodoEstructura> lista = nodoRaiz.AsList(tipoContenido);
-            
-            if (distinct)
+            //No terminado - gonzalo
+            IList<NodoEstructura> lista = new List<NodoEstructura>();
+
+            if (includeRaiz) { lista.Add(this.nodoRaiz); }
+
+            foreach (NodoEstructura nodo in this.nodoRaiz.NodosHijos)
             {
-                //Filtrar
-                if (sumEquals)
-                {
-                    //Sumar
-                }
+                
+            }
+
+            return lista;
+        }
+
+        public IList<ParteNecesidadCombinada> AsListOfParts()
+        {
+            IList<ParteNecesidadCombinada> lista = new List<ParteNecesidadCombinada>();
+            lista.Add(new ParteNecesidadCombinada() { Parte = this.nodoRaiz.Compuesto.Parte, Cantidad = this.nodoRaiz.Compuesto.Cantidad });
+
+            foreach (NodoEstructura nodo in this.nodoRaiz.NodosHijos)
+            {
+                nodo.AsListOfParts(lista);
             }
 
             return lista;

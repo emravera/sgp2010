@@ -63,6 +63,14 @@ namespace GyCAP.Entidades
             get { return capacidadCiclo; }
             set { capacidadCiclo = value; }
         }
+        private decimal capacidadUnidadHora;
+
+        public decimal CapacidadUnidadHora
+        {
+            get { return capacidadUnidadHora; }
+            set { capacidadUnidadHora = value; }
+        }
+        
         private decimal horasCiclo;
 
         public decimal HorasCiclo

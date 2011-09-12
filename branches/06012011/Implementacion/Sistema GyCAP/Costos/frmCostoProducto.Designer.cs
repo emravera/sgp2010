@@ -31,6 +31,9 @@
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tcEstructuraStock = new System.Windows.Forms.TabControl();
             this.tpLista = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -38,10 +41,14 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
+            this.tvcCostosCentros = new TreeViewColumnsProject.TreeViewColumns();
             this.cboCocina = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.tvcCostos = new TreeViewColumnsProject.TreeViewColumns();
+            this.tvcCostosMateriales = new TreeViewColumnsProject.TreeViewColumns();
+            this.txtCostoTotal = new System.Windows.Forms.Label();
             this.tcEstructuraStock.SuspendLayout();
             this.tpLista.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -71,20 +78,51 @@
             this.tcEstructuraStock.Name = "tcEstructuraStock";
             this.tcEstructuraStock.Padding = new System.Drawing.Point(0, 0);
             this.tcEstructuraStock.SelectedIndex = 0;
-            this.tcEstructuraStock.Size = new System.Drawing.Size(788, 514);
+            this.tcEstructuraStock.Size = new System.Drawing.Size(790, 516);
             this.tcEstructuraStock.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcEstructuraStock.TabIndex = 8;
             // 
             // tpLista
             // 
+            this.tpLista.Controls.Add(this.groupBox4);
+            this.tpLista.Controls.Add(this.groupBox3);
             this.tpLista.Controls.Add(this.groupBox2);
             this.tpLista.Controls.Add(this.groupBox1);
             this.tpLista.Location = new System.Drawing.Point(4, 5);
             this.tpLista.Name = "tpLista";
             this.tpLista.Padding = new System.Windows.Forms.Padding(3);
-            this.tpLista.Size = new System.Drawing.Size(780, 505);
+            this.tpLista.Size = new System.Drawing.Size(782, 507);
             this.tpLista.TabIndex = 0;
             this.tpLista.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.txtCostoTotal);
+            this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Location = new System.Drawing.Point(494, 6);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(283, 54);
+            this.groupBox4.TabIndex = 3;
+            this.groupBox4.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(21, 23);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(73, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Costo total $:";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.tvcCostosCentros);
+            this.groupBox3.Location = new System.Drawing.Point(6, 289);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(771, 210);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Costos de Proceso";
             // 
             // groupBox2
             // 
@@ -93,21 +131,20 @@
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Location = new System.Drawing.Point(3, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(774, 65);
+            this.groupBox2.Size = new System.Drawing.Size(485, 54);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Seleccione la cocina";
             // 
             // btnBuscar
             // 
-            this.btnBuscar.AutoSize = true;
             this.btnBuscar.Image = global::GyCAP.UI.Costos.Properties.Resources.System_25;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(529, 17);
+            this.btnBuscar.Location = new System.Drawing.Point(379, 15);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 37);
+            this.btnBuscar.Size = new System.Drawing.Size(75, 30);
             this.btnBuscar.TabIndex = 6;
-            this.btnBuscar.Text = "&Mostrar";
+            this.btnBuscar.Text = "&Calcular";
             this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
@@ -115,7 +152,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(89, 29);
+            this.label1.Location = new System.Drawing.Point(6, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 0;
@@ -123,13 +160,13 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.tvcCostos);
-            this.groupBox1.Location = new System.Drawing.Point(3, 77);
+            this.groupBox1.Controls.Add(this.tvcCostosMateriales);
+            this.groupBox1.Location = new System.Drawing.Point(3, 66);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(774, 425);
+            this.groupBox1.Size = new System.Drawing.Size(774, 217);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Costo del Producto";
+            this.groupBox1.Text = "Costos de Materiales";
             // 
             // toolStripSeparator1
             // 
@@ -149,7 +186,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(792, 570);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(794, 572);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
             // tsMenu
@@ -167,35 +204,56 @@
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(788, 50);
+            this.tsMenu.Size = new System.Drawing.Size(790, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
+            // 
+            // tvcCostosCentros
+            // 
+            this.tvcCostosCentros.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(166)))), ((int)(((byte)(170)))));
+            this.tvcCostosCentros.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvcCostosCentros.Location = new System.Drawing.Point(3, 17);
+            this.tvcCostosCentros.Name = "tvcCostosCentros";
+            this.tvcCostosCentros.Padding = new System.Windows.Forms.Padding(1);
+            this.tvcCostosCentros.Size = new System.Drawing.Size(765, 190);
+            this.tvcCostosCentros.TabIndex = 0;
             // 
             // cboCocina
             // 
             this.cboCocina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCocina.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboCocina.FormattingEnabled = true;
-            this.cboCocina.Location = new System.Drawing.Point(138, 26);
+            this.cboCocina.Location = new System.Drawing.Point(55, 20);
             this.cboCocina.Name = "cboCocina";
-            this.cboCocina.Size = new System.Drawing.Size(297, 21);
+            this.cboCocina.Size = new System.Drawing.Size(318, 21);
             this.cboCocina.TabIndex = 1;
             // 
-            // tvcCostos
+            // tvcCostosMateriales
             // 
-            this.tvcCostos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(166)))), ((int)(((byte)(170)))));
-            this.tvcCostos.Location = new System.Drawing.Point(6, 19);
-            this.tvcCostos.Name = "tvcCostos";
-            this.tvcCostos.Padding = new System.Windows.Forms.Padding(1);
-            this.tvcCostos.Size = new System.Drawing.Size(762, 400);
-            this.tvcCostos.TabIndex = 0;
+            this.tvcCostosMateriales.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(166)))), ((int)(((byte)(170)))));
+            this.tvcCostosMateriales.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvcCostosMateriales.Location = new System.Drawing.Point(3, 17);
+            this.tvcCostosMateriales.Name = "tvcCostosMateriales";
+            this.tvcCostosMateriales.Padding = new System.Windows.Forms.Padding(1);
+            this.tvcCostosMateriales.Size = new System.Drawing.Size(768, 197);
+            this.tvcCostosMateriales.TabIndex = 0;
+            // 
+            // txtCostoTotal
+            // 
+            this.txtCostoTotal.AutoSize = true;
+            this.txtCostoTotal.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCostoTotal.Location = new System.Drawing.Point(100, 20);
+            this.txtCostoTotal.Name = "txtCostoTotal";
+            this.txtCostoTotal.Size = new System.Drawing.Size(0, 19);
+            this.txtCostoTotal.TabIndex = 1;
             // 
             // frmCostoProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 570);
+            this.ClientSize = new System.Drawing.Size(794, 572);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmCostoProducto";
             this.ShowIcon = false;
@@ -203,6 +261,9 @@
             this.Text = "Costo del Producto";
             this.tcEstructuraStock.ResumeLayout(false);
             this.tpLista.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -224,9 +285,14 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStrip tsMenu;
         private System.Windows.Forms.GroupBox groupBox2;
-        private TreeViewColumnsProject.TreeViewColumns tvcCostos;
+        private TreeViewColumnsProject.TreeViewColumns tvcCostosMateriales;
         private System.Windows.Forms.Label label1;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboCocina;
         private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private TreeViewColumnsProject.TreeViewColumns tvcCostosCentros;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label txtCostoTotal;
     }
 }

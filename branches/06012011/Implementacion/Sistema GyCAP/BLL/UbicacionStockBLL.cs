@@ -81,6 +81,27 @@ namespace GyCAP.BLL
             return ubicacion;
         }
 
+        public static Entidades.UbicacionStock AsUbicacionStock(int numeroUbicacionStock, Data.dsHojaRuta ds)
+        {
+            Entidades.UbicacionStock ubicacion = new GyCAP.Entidades.UbicacionStock();
+            ubicacion.Activo = Convert.ToInt32(ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_ACTIVO);
+            ubicacion.CantidadReal = ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_CANTIDADREAL;
+            ubicacion.Codigo = ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_CODIGO;
+            ubicacion.Descripcion = ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_DESCRIPCION;
+            ubicacion.Contenido = BLL.ContenidoUbicacionStockBLL.AsContenidoUbicacionStockEntity(ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).CONTENIDO_UBICACION_STOCKRow);
+            ubicacion.Nombre = ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_NOMBRE;
+            ubicacion.Numero = numeroUbicacionStock;
+            ubicacion.TipoUbicacion = BLL.TipoUbicacionStockBLL.AsTipoUbicacionStockEntity(ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).TIPOS_UBICACIONES_STOCKRow);
+            ubicacion.UbicacionFisica = ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_UBICACIONFISICA;
+            ubicacion.UnidadMedida = BLL.UnidadMedidaBLL.AsUnidadMedidaEntity(Convert.ToInt32(ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).UMED_CODIGO), ds);
+            if (!ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).IsUSTCK_PADRENull())
+            {
+                ubicacion.UbicacionPadre = BLL.UbicacionStockBLL.AsUbicacionStock(Convert.ToInt32(ds.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numeroUbicacionStock).USTCK_PADRE), ds);
+            }
+
+            return ubicacion;
+        }
+
         public static Entidades.UbicacionStock GetUbicacionStock(int numeroUbicacion)
         {
             Data.dsStock.UBICACIONES_STOCKDataTable dt = DAL.UbicacionStockDAL.GetUbicacionStock(numeroUbicacion);

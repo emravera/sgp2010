@@ -90,7 +90,7 @@ namespace GyCAP.BLL
                 Tipo = BLL.TipoParteBLL.AsTipoParteEntity(row.TIPOS_PARTESRow),
                 Costo = row.PART_COSTO,
                 Estado = BLL.EstadoParteBLL.AsEstadoParteEntity(row.ESTADO_PARTESRow),
-                HojaRuta = null,
+                HojaRuta = (row.IsHR_CODIGONull()) ? null : new GyCAP.Entidades.HojaRuta() { Codigo = Convert.ToInt32(row.HR_CODIGO) },
                 Nombre = row.PART_NOMBRE,
                 Plano = null,
                 Proveedor = null,

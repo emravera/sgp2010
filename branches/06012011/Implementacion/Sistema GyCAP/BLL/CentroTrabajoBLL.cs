@@ -57,5 +57,31 @@ namespace GyCAP.BLL
             if (estado != null && Convert.ToInt32(estado.ToString()) < 0) { estado = null; }
             DAL.CentroTrabajoDAL.ObetenerCentrosTrabajo(nombre, tipo, sector, estado, ds);
         }
+
+        public static Entidades.CentroTrabajo AsCentroTrabajoEntity(Data.dsHojaRuta.CENTROS_TRABAJOSRow row)
+        {
+            Entidades.CentroTrabajo centro = new GyCAP.Entidades.CentroTrabajo()
+            {
+                Activo = Convert.ToInt32(row.CTO_ACTIVO),
+                CapacidadCiclo = row.CTO_CAPACIDADCICLO,
+                CapacidadUnidadHora = row.CTO_CAPACIDADUNIDADHORA,
+                Codigo = Convert.ToInt32(row.CTO_CODIGO),
+                CostoCiclo = row.CTO_COSTOCICLO,
+                CostoHora = row.CTO_COSTOHORA,
+                Descripcion = row.CTO_DESCRIPCION,
+                Eficiencia = row.CTO_EFICIENCIA,
+                HorasCiclo = row.CTO_HORASCICLO,
+                HorasTrabajoExtendido = row.CTO_HORASTRABAJOEXTENDIDO,
+                HorasTrabajoNormal = row.CTO_HORASTRABAJONORMAL,
+                Nombre = row.CTO_NOMBRE,
+                Sector = null,
+                TiempoAntes = row.CTO_TIEMPOANTES,
+                TiempoDespues = row.CTO_TIEMPODESPUES,
+                Tipo = Convert.ToInt32(row.CTO_TIPO),
+                TurnosTrabajo = null
+            };
+
+            return centro;
+        }
     }
 }
