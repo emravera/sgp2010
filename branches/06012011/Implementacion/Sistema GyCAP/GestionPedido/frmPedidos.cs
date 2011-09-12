@@ -16,7 +16,7 @@ namespace GyCAP.UI.GestionPedido
         private static frmPedidos _frmPedido = null;
         private Data.dsCliente dsCliente = new GyCAP.Data.dsCliente();
         private DataView dvPedido, dvDetallePedido, dvCocinas, dvEstadoPedido;
-        private DataView dvEstadoDetallePedido, dvClientes, dvEstadoPedidoBuscar;
+        private DataView dvEstadoDetallePedido, dvClientes, dvEstadoPedidoBuscar, dvCbUbicacionStock;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, cargarDetalle };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
@@ -134,7 +134,7 @@ namespace GyCAP.UI.GestionPedido
 
             dvEstadoDetallePedido = new DataView(dsCliente.ESTADO_DETALLE_PEDIDOS);
             dvEstadoDetallePedido.Sort = "EDPED_NOMBRE";
-
+            
             //Obtenemos las terminaciones, los planos, los estados de las piezas, las MP, unidades medidas, hojas ruta
             try
             {
@@ -152,9 +152,18 @@ namespace GyCAP.UI.GestionPedido
             }
             dvEstadoPedidoBuscar = new DataView(dsCliente.ESTADO_PEDIDOS);
 
+            //Lleno el Datatable de las Ubicaciones de Stock 
+            int codigoUbicacionMP = BLL.ContenidoUbicacionStockBLL.ObtenerCodigoContenido("Cocina");
+            BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsCliente.UBICACIONES_STOCK, codigoUbicacionMP);
+
             cboEstadoBuscar.SetDatos(dvEstadoPedidoBuscar, "EPED_CODIGO", "EPED_NOMBRE", "--TODOS--", true);
             cboEstado.SetDatos(dvEstadoPedidoBuscar, "EPED_CODIGO", "EPED_NOMBRE", "", false);
             cboClientes.SetDatos(dvClientes, "CLI_CODIGO", "CLI_RAZONSOCIAL", "", false);
+
+            //Creamos el Dataview y se lo asignamos al combo de ubicaciones de stock
+            dvCbUbicacionStock = new DataView(dsCliente.UBICACIONES_STOCK);
+            cbUbicacionStock.DataSource = dvCbUbicacionStock;
+            cbUbicacionStock.SetDatos(dvCbUbicacionStock, "ustck_numero", "ustck_nombre", "-Seleccionar-", false);
         }
 
         #endregion
@@ -832,17 +841,20 @@ namespace GyCAP.UI.GestionPedido
             //Hay que validar que se ingrese una fecha y una cantidad total de cocinas
             if (nudCantidad.Value != 0 && sfFechaPrevista.Value != null)
             {
+                //Obtenemos la ubicacion de stock desde el combo
+                int ubicacionStock = Convert.ToInt32(cbUbicacionStock.GetSelectedValue());
+                DateTime fechaNecesidad =Convert.ToDateTime(sfFechaPrevista.Value);
+                
                 //Verificamos si hay stock para una cocina determinada para esa fecha
-
-
-
-
+                decimal cantidadStock = BLL.FabricaBLL.GetStockForDay(ubicacionStock, fechaNecesidad);
+                
+                
             }
             else
             {
                 Entidades.Mensajes.MensajesABM.MsjValidacion("Debe completar los datos obligatorios", this.Text);
             }
-        }
+        }  
 
     }
 }

@@ -28,6 +28,21 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
+        public static int ObtenerCodigoUbicacion(string nombreUbicacionStock)
+        {
+            string sql = "SELECT con_codigo FROM CONTENIDO_UBICACION_STOCK where con_nombre = @p0";
+            object[] parametros = { nombreUbicacionStock };
+            int codigo = 0;
+
+            try
+            {
+                codigo =Convert.ToInt32(DB.executeScalar(sql, parametros, null));
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+
+            return codigo;
+        }
+
         public static Data.dsStock.CONTENIDO_UBICACION_STOCKDataTable GetContenidoUbicacionStock(int codigo)
         {
             string sql = "SELECT con_codigo, con_nombre, con_descripcion FROM CONTENIDO_UBICACION_STOCK WHERE con_codigo = @p0";

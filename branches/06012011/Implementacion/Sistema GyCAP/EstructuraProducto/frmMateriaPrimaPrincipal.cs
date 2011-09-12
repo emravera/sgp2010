@@ -88,7 +88,9 @@ namespace GyCAP.UI.EstructuraProducto
             BLL.TipoUnidadMedidaBLL.ObtenerTodos(dsMateriaPrima.TIPOS_UNIDADES_MEDIDA);
 
             //Lleno el Datatable de las Ubicaciones de Stock (El valor 5 esta en la tabla de ubicaciones que tienen MP)
-            BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsMateriaPrima.UBICACIONES_STOCK);
+            //Obtenemos el código de ubicación de stock de las MAterias Primas
+            int codigoUbicacionMP = BLL.ContenidoUbicacionStockBLL.ObtenerCodigoContenido("Materia Prima");
+            BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsMateriaPrima.UBICACIONES_STOCK, codigoUbicacionMP);
 
             //CARGA DE COMBOS
             //Combo de Datos

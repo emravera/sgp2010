@@ -21,6 +21,11 @@ namespace GyCAP.BLL
             DAL.ContenidoUbicacionStockDAL.ObtenerContenidosUbicacionStock(dtContenidoUbicacionStock);
         }
 
+        public static int ObtenerCodigoContenido(string nombreUbicacion)
+        {
+            return DAL.ContenidoUbicacionStockDAL.ObtenerCodigoUbicacion(nombreUbicacion);
+        }
+
         public static Entidades.ContenidoUbicacionStock AsContenidoUbicacionStockEntity(Data.dsStock.CONTENIDO_UBICACION_STOCKRow row)
         {
             return new GyCAP.Entidades.ContenidoUbicacionStock()
