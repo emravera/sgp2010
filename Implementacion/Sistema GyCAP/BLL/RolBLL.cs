@@ -8,7 +8,7 @@ namespace GyCAP.BLL
 {
     public class RolBLL
     {
-        public static readonly int EstadoDeBaja = 2;
+        public static readonly int RolAdministrador = 1;
 
         public static long Insertar(Entidades.Rol rol)
         {

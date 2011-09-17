@@ -8,7 +8,8 @@ namespace GyCAP.BLL
 {
     public class EstadoUsuarioBLL
     {
-        public static readonly int EstadoDeBaja = 2;
+        public static readonly int EstadoActivo = 1;
+        public static readonly int EstadoInactivo = 2;
 
         public static long Insertar(Entidades.EstadoUsuario estadoUsuario)
         {
