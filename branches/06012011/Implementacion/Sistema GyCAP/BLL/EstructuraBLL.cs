@@ -208,6 +208,9 @@ namespace GyCAP.BLL
                 EstadoParteBLL.ObtenerTodos(ds.ESTADO_PARTES);
                 HojaRutaBLL.ObtenerHojasRuta(ds.HOJAS_RUTA);
                 TipoUnidadMedidaBLL.ObtenerTodos(ds.TIPOS_UNIDADES_MEDIDA);
+                UbicacionStockBLL.ObtenerUbicacionesStock(ds.UBICACIONES_STOCK);
+                TipoUbicacionStockBLL.ObtenerTiposUbicacionStock(ds.TIPOS_UBICACIONES_STOCK);
+                ContenidoUbicacionStockBLL.ObtenerContenidosUbicacionStock(ds.CONTENIDO_UBICACION_STOCK);
 
                 ArbolEstructura arbol = ArmarArbol(Convert.ToInt32(ds.ESTRUCTURAS.Rows[0]["estr_codigo"]), ds);
                 arbol.NodoRaiz.Compuesto.Cantidad = cantidadCocina;
