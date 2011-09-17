@@ -248,6 +248,12 @@ namespace Principal
             GyCAP.UI.Costos.frmCostoProducto.Instancia.Show();
         }
 
+        private void toolStripUsuarios_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Seguridad.frmUsuario.Instancia.MdiParent = this;
+            GyCAP.UI.Seguridad.frmUsuario.Instancia.Show();
+        }
+
 
     }
 }

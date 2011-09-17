@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GyCAP.Entidades
 {
-    public abstract class Usuario
+    public class Usuario
     {
         private int codigo;
         private String login;

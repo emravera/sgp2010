@@ -24,7 +24,7 @@ namespace GyCAP.BLL
             DAL.UsuarioDAL.ObtenerTodos(nombre, estado, ds);
         }
 
-        public static long Insertar(Entidades.Usuario usuario)
+        public static int Insertar(Entidades.Usuario usuario)
         {
             //Si existe lanzamos la excepción correspondiente
             if (EsUsuario(usuario)) throw new Entidades.Excepciones.ElementoExistenteException();
