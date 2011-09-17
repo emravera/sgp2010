@@ -68,6 +68,8 @@ namespace GyCAP.Entidades.ArbolEstructura
 
         public decimal GetCostoProceso()
         {
+            if (this.nodoRaiz == null) { return 0; }
+
             IList<ParteNecesidadCombinada> listaPartes = AsListOfParts();
             decimal CostoTotal = 0;            
 
