@@ -66,6 +66,39 @@ namespace GyCAP.Entidades.ArbolEstructura
             return 0;
         }
 
+        public decimal GetCostoProceso()
+        {
+            IList<ParteNecesidadCombinada> listaPartes = AsListOfParts();
+            decimal CostoTotal = 0;            
+
+            foreach (ParteNecesidadCombinada parte in listaPartes)
+            {                
+                decimal costoParte = 0;
+
+                if (parte.Parte.HojaRuta != null)
+                {
+                    foreach (DetalleHojaRuta detalle in parte.Parte.HojaRuta.Detalle)
+                    {                        
+                        decimal costo = 0;
+                        if (detalle.CentroTrabajo.Tipo == (int)Enumeraciones.RecursosFabricacionEnum.TipoCentroTrabajo.TipoHombre)
+                        {
+                            costo = (detalle.CentroTrabajo.CostoHora / detalle.CentroTrabajo.CapacidadUnidadHora) * parte.Cantidad;
+                        }
+                        else
+                        {
+                            costo = (detalle.CentroTrabajo.CostoCiclo / detalle.CentroTrabajo.CapacidadCiclo) * parte.Cantidad;
+                        }
+
+                        costoParte += costo;                        
+                    }                    
+                }
+
+                CostoTotal += costoParte;
+            }
+                        
+            return CostoTotal;
+        }
+
         public IList<MPEstructura> GetMPQuantityForStructure()
         {
             IList<MPEstructura> allMP = nodoRaiz.GetMPQuantityForPart();
@@ -201,7 +234,6 @@ namespace GyCAP.Entidades.ArbolEstructura
                         if (detalle.CentroTrabajo.Tipo == (int)Enumeraciones.RecursosFabricacionEnum.TipoCentroTrabajo.TipoHombre)
                         {
                             costo = (detalle.CentroTrabajo.CostoHora / detalle.CentroTrabajo.CapacidadUnidadHora) * parte.Cantidad;
-
                         }
                         else
                         {

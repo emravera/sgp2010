@@ -133,5 +133,22 @@ namespace GyCAP.BLL
 
             return ubicacion.CantidadReal;
         }
+
+        /// <summary>
+        /// Obtiene el costo total de una cocina dada o en su defecto de la cocina base.
+        /// Está formado por el costo de la estructura y el costo de proceso.
+        /// </summary>
+        /// <param name="codigoCocina">El código de la cocina, en caso de ser null se tma la cocina base.</param>
+        /// <returns>El costo de la cocina.</returns>
+        public static decimal GetCostoTotalProducto(int? codigoCocina)
+        {
+            if (!codigoCocina.HasValue) { codigoCocina = CocinaBLL.GetCodigoCocinaBase(); }
+
+            ArbolEstructura arbol = EstructuraBLL.GetArbolEstructura(codigoCocina.Value, true);
+
+            decimal costo = (arbol == null) ? 0 : arbol.GetCostoEstructura() + arbol.GetCostoProceso();
+
+            return costo;
+        }
     }
 }
