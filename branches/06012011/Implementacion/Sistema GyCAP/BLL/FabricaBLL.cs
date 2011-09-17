@@ -142,11 +142,17 @@ namespace GyCAP.BLL
         /// <returns>El costo de la cocina.</returns>
         public static decimal GetCostoTotalProducto(int? codigoCocina)
         {
-            if (!codigoCocina.HasValue) { codigoCocina = CocinaBLL.GetCodigoCocinaBase(); }
+            decimal costo = 0;
+            try
+            {
+                if (!codigoCocina.HasValue) { codigoCocina = CocinaBLL.GetCodigoCocinaBase(); }
 
-            ArbolEstructura arbol = EstructuraBLL.GetArbolEstructura(codigoCocina.Value, true);
+                ArbolEstructura arbol = EstructuraBLL.GetArbolEstructura(codigoCocina.Value, true);
 
-            decimal costo = (arbol == null) ? 0 : arbol.GetCostoEstructura() + arbol.GetCostoProceso();
+                costo = (arbol == null) ? 0 : arbol.GetCostoEstructura() + arbol.GetCostoProceso();
+            }
+            catch (BaseDeDatosException) { }
+            catch (CocinaBaseException) { }
 
             return costo;
         }
