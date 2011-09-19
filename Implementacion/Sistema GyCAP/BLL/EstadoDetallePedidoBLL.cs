@@ -50,6 +50,11 @@ namespace GyCAP.BLL
             DAL.EstadoDetallePedidoDAL.ObtenerEstadosDetallePedido(nombre, dtEstadoDetallePedido);
         }
 
+        public static int ObtenerCodigoEstado(string nombre)
+        {
+            return DAL.EstadoDetallePedidoDAL.ObtenerCodigoEstado(nombre);
+        }
+
         public static void ObtenerTodos(DataTable dtEstadoDetallePedido)
         {
             DAL.EstadoDetallePedidoDAL.ObtenerEstadosDetallePedido(dtEstadoDetallePedido);

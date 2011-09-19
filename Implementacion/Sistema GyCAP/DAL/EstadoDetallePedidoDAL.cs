@@ -87,7 +87,26 @@ namespace GyCAP.DAL
                 }
                 catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
             }
-        }             
+        }
+
+        public static int ObtenerCodigoEstado(string nombre)
+        {
+            string sql = @"SELECT EDPED_CODIGO
+                          FROM ESTADO_DETALLE_PEDIDOS
+                          WHERE EDPED_NOMBRE LIKE @p0";
+            int codigo = 0;
+
+            //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+            nombre = "%" + nombre + "%";
+            object[] valorParametros = { nombre };
+            try
+            {
+                codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+            return codigo;
+        }
 
         public static void ObtenerEstadosDetallePedido(DataTable dtEstadoDetallePedido)
         {

@@ -57,6 +57,10 @@ namespace GyCAP.UI.GestionPedido
             dgvDetallePedido.AutoGenerateColumns = false;
             dgvCocinas.AutoGenerateColumns = false;
 
+            //*******************************************************************************************
+            //                                  GRILLA DE BUSQUEDA
+            //*******************************************************************************************
+
             //Agregamos las columnas y sus propiedades
             dgvLista.Columns.Add("PED_CODIGO", "Código");
             dgvLista.Columns.Add("PED_NUMERO", "Número");
@@ -76,28 +80,6 @@ namespace GyCAP.UI.GestionPedido
             dgvLista.Columns["PED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["PED_CODIGO"].Visible = false;
 
-            dgvDetallePedido.Columns.Add("DPED_CODIGO", "Codigo");
-            dgvDetallePedido.Columns.Add("COC_CODIGO", "Cocina");
-            dgvDetallePedido.Columns.Add("DPED_CANTIDAD", "Cantidad");
-            dgvDetallePedido.Columns.Add("EDPED_CODIGO", "Estado");
-
-            dgvDetallePedido.Columns["DPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePedido.Columns["COC_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePedido.Columns["DPED_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePedido.Columns["DPED_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvDetallePedido.Columns["EDPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
-            //Alineacion de los numeros y las fechas en la grilla
-            dgvDetallePedido.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
-
-            dgvCocinas.Columns.Add("COC_CODIGO_PRODUCTO", "Código");
-            dgvCocinas.Columns.Add("MOD_CODIGO", "Modelo");
-            dgvCocinas.Columns.Add("MCA_CODIGO", "Marca");
-            dgvCocinas.Columns["COC_CODIGO_PRODUCTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCocinas.Columns["MOD_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCocinas.Columns["MCA_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
             //Indicamos de dónde van a sacar los datos cada columna
             dgvLista.Columns["PED_CODIGO"].DataPropertyName = "PED_CODIGO";
             dgvLista.Columns["PED_NUMERO"].DataPropertyName = "PED_NUMERO";
@@ -105,10 +87,51 @@ namespace GyCAP.UI.GestionPedido
             dgvLista.Columns["EPED_CODIGO"].DataPropertyName = "EPED_CODIGO";
             dgvLista.Columns["PED_OBSERVACIONES"].DataPropertyName = "PED_OBSERVACIONES";
 
+            //*******************************************************************************************
+            //                              GRILLA DE DETALLE DE PEDIDO
+            //*******************************************************************************************
+
+            dgvDetallePedido.Columns.Add("DPED_CODIGO", "Codigo");
+            dgvDetallePedido.Columns.Add("COC_CODIGO", "Cocina");
+            dgvDetallePedido.Columns.Add("DPED_CANTIDAD", "Cantidad");
+            dgvDetallePedido.Columns.Add("EDPED_CODIGO", "Estado");
+            dgvDetallePedido.Columns.Add("DPED_FECHA_ENTREGA_PREVISTA", "Fecha Entrega");
+            dgvDetallePedido.Columns.Add("DPED_CODIGONEMONICO", "Cod. Nemónico");
+            dgvDetallePedido.Columns.Add("DPED_FECHA_CANCELACION", "Fecha Cancelación");
+
+            dgvDetallePedido.Columns["DPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetallePedido.Columns["COC_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetallePedido.Columns["DPED_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetallePedido.Columns["DPED_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetallePedido.Columns["EDPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetallePedido.Columns["DPED_FECHA_ENTREGA_PREVISTA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetallePedido.Columns["DPED_CODIGONEMONICO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDetallePedido.Columns["DPED_FECHA_CANCELACION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            
+            //Alineacion de los numeros y las fechas en la grilla
+            dgvDetallePedido.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
+            dgvDetallePedido.Columns["DPED_CODIGONEMONICO"].Visible = false;
+
+            //Indicamos de que columna se obtienen los datos
             dgvDetallePedido.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
             dgvDetallePedido.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
             dgvDetallePedido.Columns["DPED_CANTIDAD"].DataPropertyName = "DPED_CANTIDAD";
             dgvDetallePedido.Columns["EDPED_CODIGO"].DataPropertyName = "EDPED_CODIGO";
+            dgvDetallePedido.Columns["DPED_FECHA_ENTREGA_PREVISTA"].DataPropertyName = "DPED_FECHA_ENTREGA_PREVISTA";
+            dgvDetallePedido.Columns["DPED_CODIGONEMONICO"].DataPropertyName = "DPED_CODIGONEMONICO";
+            dgvDetallePedido.Columns["DPED_FECHA_CANCELACION"].DataPropertyName = "DPED_FECHA_CANCELACION";
+
+            //*******************************************************************************************
+            //                              GRILLA DE COCINAS
+            //*******************************************************************************************
+
+            dgvCocinas.Columns.Add("COC_CODIGO_PRODUCTO", "Código");
+            dgvCocinas.Columns.Add("MOD_CODIGO", "Modelo");
+            dgvCocinas.Columns.Add("MCA_CODIGO", "Marca");
+            dgvCocinas.Columns["COC_CODIGO_PRODUCTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvCocinas.Columns["MOD_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvCocinas.Columns["MCA_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
             dgvCocinas.Columns["COC_CODIGO_PRODUCTO"].DataPropertyName = "COC_CODIGO_PRODUCTO";
             dgvCocinas.Columns["MOD_CODIGO"].DataPropertyName = "MOD_CODIGO";
@@ -762,71 +785,95 @@ namespace GyCAP.UI.GestionPedido
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if (dgvCocinas.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0 && nudCantidad.Value > 0)
-            {
-                bool agregarCocina; //variable que indica si se debe agregar la cocina al listado
-                
-                //Obtenemos el código de la pieza según sea nueva o modificada, lo hacemos acá porque lo vamos a usar mucho
+            {                   
+                //Obtenemos el código del pedido
                 int pedidoCodigo;
-                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno) { pedidoCodigo = -1; }
+                if (estadoInterface == estadoUI.cargarDetalle ) { pedidoCodigo = -1; }
                 else { pedidoCodigo = Convert.ToInt32(dvPedido[dgvLista.SelectedRows[0].Index]["ped_codigo"]); }
                 
-                //Obtenemos el código de la cocina, también lo vamos a usar mucho
+                //Obtenemos el código de la cocina
                 int cocinaCodigo = Convert.ToInt32(dvCocinas[dgvCocinas.SelectedRows[0].Index]["coc_codigo"]);
 
-                //Primero vemos si el pedido tiene algúna cocina cargada, como ya hemos filtrado el dataview
-                //esté sabrá decirnos cuantas filas tiene el conjunto seleccionado                
-                if (dvDetallePedido.Count > 0)
+                //Obtenemos la cantidad a cargar de stock y la de produccion
+                int cantidadStock = Convert.ToInt32(numCantStock.Value);
+                int cantidadProduccion = Convert.ToInt32(numCantProducir.Value);
+
+                //Agregamos la fila de movimiento de stock
+                if (cantidadStock > 0)
                 {
-                    //Algo tiene, comprobemos que no intente agregar la misma cocina haciendo una consulta al dataset,
-                    //no usamos el dataview porque no queremos volver a filtrar los datos y perderlos
-                    string filtro = "ped_codigo = " + pedidoCodigo + " AND coc_codigo = " + cocinaCodigo;
+                    //Obtenemos el codigo del estado
+                    int codigoEstado = BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Entrega Stock");
+
+                    //Se tiene que agregar una fila nueva al detalle de pedidos
+                    Data.dsCliente.DETALLE_PEDIDOSRow row = dsCliente.DETALLE_PEDIDOS.NewDETALLE_PEDIDOSRow();
+                    row.BeginEdit();
+
+                    //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
+                    //-- para que se vaya autodecrementando en cada inserción
+                    row.DPED_CODIGO = codigoDetalle--; 
+                    row.PED_CODIGO = pedidoCodigo;
+                    row.COC_CODIGO = cocinaCodigo;
+                    row.EDPED_CODIGO = codigoEstado; 
+                    row.DPED_CANTIDAD = int.Parse(numCantStock.Value.ToString());
+                    row.DPED_CODIGONEMONICO = "";
+                    row.DPED_FECHA_ENTREGA_PREVISTA = sfFechaPrevista.Value;
+                    row.EndEdit();
+
+                    //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
+                    //todavia no vamos a insertar en la db hasta que no haga Guardar
+                    dsCliente.DETALLE_PEDIDOS.AddDETALLE_PEDIDOSRow(row);                      
+                }
+
+                //Agregamos la fila de produccion
+                if (cantidadProduccion > 0)
+                {
+                    //Obtenemos el codigo del estado
+                    int codigoEstado = BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Pendiente");
+
+                    //Nos fijamos si ya esta agregado
+                    string filtro = "ped_codigo = " + pedidoCodigo + " AND coc_codigo = " + cocinaCodigo + "AND edped_codigo = " + codigoEstado;
                     Data.dsCliente.DETALLE_PEDIDOSRow[] rows = (Data.dsCliente.DETALLE_PEDIDOSRow[])dsCliente.DETALLE_PEDIDOS.Select(filtro);
-                    
+
                     if (rows.Length > 0)
                     {
                         //Ya lo ha agregado, preguntemos si quiere aumentar la cantidad existente o descartar
-                        DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjPreguntaAlUsuario("El Pedido ya posee la cocina seleccionada. ¿Desea sumar la cantidad ingresada?",this.Text); ;
+                        DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjPreguntaAlUsuario("El Pedido ya posee la cocina seleccionada. ¿Desea sumar la cantidad ingresada a lo planificado?", this.Text); ;
                         if (respuesta == DialogResult.Yes)
                         {
                             //Sumemos la cantidad ingresada a la existente, como hay una sola fila seleccionamos la 0 del array
-                            rows[0].DPED_CANTIDAD += int.Parse(nudCantidad.Value.ToString());
-                            nudCantidad.Value = 0;
+                            rows[0].DPED_CANTIDAD += int.Parse(numCantStock.Value.ToString());
                         }
-                        //Como ya existe marcamos que no debe agregarse
-                        agregarCocina = false;
                     }
                     else
                     {
-                        //No lo ha agregado, marcamos que debe agregarse
-                        agregarCocina = true;
+                        //Se tiene que agregar una fila nueva al detalle de pedidos
+                        Data.dsCliente.DETALLE_PEDIDOSRow row = dsCliente.DETALLE_PEDIDOS.NewDETALLE_PEDIDOSRow();
+                        row.BeginEdit();
+
+                        //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
+                        //-- para que se vaya autodecrementando en cada inserción
+                        row.DPED_CODIGO = codigoDetalle--;
+                        row.PED_CODIGO = pedidoCodigo;
+                        row.COC_CODIGO = cocinaCodigo;
+                        row.EDPED_CODIGO = codigoEstado;
+                        row.DPED_CANTIDAD = int.Parse(numCantProducir.Value.ToString());
+                        row.DPED_CODIGONEMONICO = "";
+                        row.DPED_FECHA_ENTREGA_PREVISTA = sfFechaPrevista.Value;
+                        row.EndEdit();
+
+                        //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
+                        //todavia no vamos a insertar en la db hasta que no haga Guardar
+                        dsCliente.DETALLE_PEDIDOS.AddDETALLE_PEDIDOSRow(row);
                     }
                 }
-                else
-                {
-                    //No tiene ningúna materia prima agregada, marcamos que debe agregarse
-                    agregarCocina = true;
-                }
 
-                //Ahora comprobamos si debe agregarse la cocina o no
-                if (agregarCocina)
-                {
-                    Data.dsCliente.DETALLE_PEDIDOSRow row = dsCliente.DETALLE_PEDIDOS.NewDETALLE_PEDIDOSRow();
-                    row.BeginEdit();
-                    
-                    //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
-                    row.DPED_CODIGO = codigoDetalle--; //-- para que se vaya autodecrementando en cada inserción
-                    row.PED_CODIGO = pedidoCodigo;
-                    row.COC_CODIGO = cocinaCodigo;
-                    row.EDPED_CODIGO = 1; //Esto tiene que ser un parametro
-                    row.DPED_CANTIDAD = int.Parse(nudCantidad.Value.ToString());
-                    row.EndEdit();
-                    
-                    //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
-                    //todavia no vamos a insertar en la db hasta que no haga Guardar
-                    dsCliente.DETALLE_PEDIDOS.AddDETALLE_PEDIDOSRow(row);
-                    nudCantidad.Value = 0;
-                }
+                //Volvemos la interfaz para que cargue mas detalles
                 nudCantidad.Value = 0;
+                sfFechaPrevista.Value = DateTime.Now;
+                cbUbicacionStock.SetSelectedIndex(-1);
+                btnValidar.Enabled = true;
+                btnAgregar.Enabled = false;
+                SetInterface(estadoUI.cargarDetalle);
             }
             else
             {
@@ -838,17 +885,55 @@ namespace GyCAP.UI.GestionPedido
 
         private void btnValidar_Click(object sender, EventArgs e)
         {
+            //Defino un que determine la validacion
+            string validacion = string.Empty;
+
             //Hay que validar que se ingrese una fecha y una cantidad total de cocinas
-            if (nudCantidad.Value != 0 && sfFechaPrevista.Value != null)
+            if (nudCantidad.Value > 0 && sfFechaPrevista.Value != null && cbUbicacionStock.GetSelectedIndex() != -1)
             {
-                //Obtenemos la ubicacion de stock desde el combo
+                //Obtenemos la ubicacion de stock, la fecha de necesidad y la cantidad
                 int ubicacionStock = Convert.ToInt32(cbUbicacionStock.GetSelectedValue());
                 DateTime fechaNecesidad =Convert.ToDateTime(sfFechaPrevista.Value);
-                
+                int cantidad = Convert.ToInt32(nudCantidad.Value);
+
                 //Verificamos si hay stock para una cocina determinada para esa fecha
-                decimal cantidadStock = BLL.FabricaBLL.GetStockForDay(ubicacionStock, fechaNecesidad);
+                decimal cantidadStock = Math.Round(BLL.FabricaBLL.GetStockForDay(ubicacionStock, fechaNecesidad),0);
+
+                if (cantidadStock > 0)
+                {
+                    //Si hay stock lo cargamos en el numeric de cantidad Stock
+                    numCantStock.Value = cantidadStock;
+                    validacion = validacion + "STOCK: Hay " + cantidadStock + " unidades disponibles para la fecha " + fechaNecesidad.ToShortDateString() + "\n";
+
+                    //La diferencia hay que colocarla para planificar
+                    numCantProducir.Value = (nudCantidad.Value - numCantStock.Value);
+                    validacion = validacion + "PLANIFICACION PRODUCCION: " + (nudCantidad.Value - numCantStock.Value).ToString() + " Unidades \n";
+
+                }
+                else
+                {
+                    //No hay stock disponible por eso se coloca cero
+                    numCantStock.Value = 0;
+
+                    //Escribimos el mensaje que avisa que no hay stock
+                    validacion = validacion + "STOCK: No hay stock disponible para la fecha " + fechaNecesidad.ToShortDateString() + "\n";
+
+                    //La diferencia hay que colocarla para planificar
+                    numCantProducir.Value = nudCantidad.Value;
+                    validacion = validacion + "PLANIFICACION PRODUCCION: " + nudCantidad.Value.ToString() + " Unidades \n";
+                }
                 
-                
+                //Mostramos el mensaje resultado de la validación
+                validacion = "Validación del pedido: \n" + validacion;
+                Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
+
+                //Habilito los controles que se tienen que ver
+                lblCantProducir.Visible = true;
+                numCantProducir.Visible = true;
+                lblCantStock.Visible = true;
+                numCantStock.Visible = true;
+                btnAgregar.Enabled = true;
+                btnValidar.Enabled = false;
             }
             else
             {

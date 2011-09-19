@@ -57,9 +57,9 @@ namespace GyCAP.BLL
         }
 
         //Metodo que obtiene los pedidos a partir de una fecha
-        public static void ObtenerPedido(DateTime fecha, Data.dsPlanMensual dsPlanMensual)
+        public static void ObtenerPedidoFecha(DateTime fecha, DataTable dtPedidos)
         {
-            DAL.PedidoDAL.ObtenerPedido(fecha, dsPlanMensual);
+            DAL.PedidoDAL.ObtenerPedidoFecha(fecha, dtPedidos);
         }
 
         //Metodo que cambia el estado del pedido
@@ -72,6 +72,7 @@ namespace GyCAP.BLL
         public static void ObtenerPedidoCliente(int codigoCliente, int estadoPedido, DataTable dtPedido)
         {
             DAL.PedidoDAL.ObtenerPedidosCliente(codigoCliente,estadoPedido,dtPedido);
-        }        
+        }       
+        
     }
 }
