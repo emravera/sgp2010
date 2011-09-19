@@ -135,7 +135,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvPedidos.Columns.Add("CLI_CODIGO", "Cliente");
             dgvPedidos.Columns.Add("EPED_CODIGO", "Estado");
             dgvPedidos.Columns.Add("PED_FECHA_ALTA", "Fecha Alta");
-            dgvPedidos.Columns.Add("PED_FECHAENTREGAPREVISTA", "Fecha Entrega");
             dgvPedidos.Columns.Add("PED_FECHAENTREGAREAL", "Fecha Real Entrega");
                
 
@@ -145,7 +144,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvPedidos.Columns["CLI_CODIGO"].DataPropertyName = "CLI_CODIGO";
             dgvPedidos.Columns["EPED_CODIGO"].DataPropertyName = "EPED_CODIGO";
             dgvPedidos.Columns["PED_FECHA_ALTA"].DataPropertyName = "PED_FECHA_ALTA";
-            dgvPedidos.Columns["PED_FECHAENTREGAPREVISTA"].DataPropertyName = "PED_FECHAENTREGAPREVISTA";
             dgvPedidos.Columns["PED_FECHAENTREGAREAL"].DataPropertyName = "PED_FECHAENTREGAREAL";
 
             //Seteamos el modo de tamaño de las columnas
@@ -339,8 +337,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                     //Escondo las columnas de las grillas de pedidos
                     dgvPedidos.Columns["PED_CODIGO"].Visible = false;
-                    dgvPedidos.Columns["PED_FECHAENTREGAREAL"].Visible = false;
-                    dgvPedidos.Columns["PED_FECHA_ALTA"].Visible = false;
+                    dgvPedidos.Columns["PED_FECHAENTREGAREAL"].Visible = false;                    
 
                     dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
                     dgvDetallePedido.Columns["PED_CODIGO"].Visible = false;
@@ -771,7 +768,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     DateTime fechaPedidos = Convert.ToDateTime("01/" + cont.ToString() + "/" + anio.ToString());
                     
                     //Busco los pedidos para esa fecha
-                    BLL.PedidoBLL.ObtenerPedido(fechaPedidos,dsPlanMensual);
+                    BLL.PedidoBLL.ObtenerPedidoFecha(fechaPedidos,dsPlanMensual.PEDIDOS);
 
                     if (dsPlanMensual.PEDIDOS.Rows.Count == 0)
                     {
@@ -965,7 +962,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 DateTime fechaPedidos = Convert.ToDateTime("01/" + cont.ToString() + "/" + anio.ToString());
 
                 //Busco los pedidos para esa fecha
-                BLL.PedidoBLL.ObtenerPedido(fechaPedidos, dsPlanMensual);
+                BLL.PedidoBLL.ObtenerPedidoFecha(fechaPedidos, dsPlanMensual.PEDIDOS);
 
                 if (dsPlanMensual.PEDIDOS.Rows.Count == 0)
                 {

@@ -102,26 +102,26 @@ namespace GyCAP.DAL
         }
 
         //Metodo que obtiene el pedido
-        public static void ObtenerPedido(DateTime fecha, Data.dsPlanMensual dsPlanMensual)
+        public static void ObtenerPedidoFecha(DateTime fecha, DataTable dtPedidos)
         {
-            string sql = @"SELECT ped_codigo, cli_codigo, eped_codigo, ped_fechaentregaprevista, ped_fechaentregareal, ped_fecha_alta, ped_numero
-                           FROM PEDIDOS WHERE ped_fechaentregaprevista >= @p0";
+            string sql = @"SELECT ped_codigo, cli_codigo, eped_codigo, ped_fechaentregareal, ped_fecha_alta, ped_numero
+                           FROM PEDIDOS WHERE ped_fecha_alta >= @p0";
             string dia = "'" + fecha.ToString() + "'";
             object[] valorParametros = { fecha };
+            
             try
             {
                 //Se llena el Dataset
-                DB.FillDataSet(dsPlanMensual, "PEDIDOS", sql, valorParametros);
+                DB.FillDataTable(dtPedidos, sql, valorParametros);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-
         }
 
         //Metodo que obtiene los pedidos de un cliente determinado en una fecha determinada
         public static void ObtenerPedidosCliente(int CodigoCliente, int estadoPedido, DataTable dtPedidos)
         {
 
-            string sql = @"SELECT ped_codigo, cli_codigo, eped_codigo, ped_fechaentregaprevista, ped_numero                       
+            string sql = @"SELECT ped_codigo, cli_codigo, eped_codigo, ped_fecha_alta, ped_numero                       
                            FROM PEDIDOS WHERE cli_codigo=@p0";
 
             object[] valorParametros = { CodigoCliente };
@@ -489,8 +489,6 @@ namespace GyCAP.DAL
 
                 transaccion.Commit();
                 DB.FinalizarTransaccion();
-
-
             }
             catch (SqlException)
             {

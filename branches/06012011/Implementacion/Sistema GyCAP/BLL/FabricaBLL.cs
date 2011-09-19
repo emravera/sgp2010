@@ -16,7 +16,7 @@ namespace GyCAP.BLL
         
         /// <summary>
         /// Obtiene la capacidad bruta de la fábrica anual. 
-        /// No tiene en cuenta la producción en curso.
+        /// No tiene en cuenta la producción  en curso.
         /// </summary>
         /// <param name="codigoCocina">La cocina base, si es null se determina una.</param>
         /// <param name="tipoHorario">El tipo de horario: normal o extendido.</param>

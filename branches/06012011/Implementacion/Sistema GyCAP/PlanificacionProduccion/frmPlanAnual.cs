@@ -43,9 +43,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-
-
+            
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["PAN_CODIGO"].DataPropertyName = "PAN_CODIGO";
             dgvLista.Columns["PAN_ANIO"].DataPropertyName = "PAN_ANIO";
