@@ -24,7 +24,7 @@ namespace GyCAP.BLL
             DAL.ClienteDAL.ObtenerCliente(nombre, estadoCliente, dsCliente);
         }
 
-        public static long Insertar(Entidades.Cliente cliente)
+        public static int Insertar(Entidades.Cliente cliente)
         {
             //Si existe lanzamos la excepción correspondiente
             if (EsCliente(cliente)) throw new Entidades.Excepciones.ElementoExistenteException();

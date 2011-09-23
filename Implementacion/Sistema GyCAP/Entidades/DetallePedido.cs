@@ -13,8 +13,10 @@ namespace GyCAP.Entidades
         private Cocina cocina;
         private int cantidad;
         private DateTime fechaCancelacion;
+        private DateTime fechaEntregaPrevista;
+        private DateTime fechaEntregaReal;
         private string codigoNemonico;
-
+        
         public string CodigoNemonico
         {
             get { return CodigoNemonico; }
@@ -57,5 +59,16 @@ namespace GyCAP.Entidades
             set { fechaCancelacion = value; }
         }
 
+        public DateTime FechaEntregaReal
+        {
+            get { return fechaEntregaReal; }
+            set { fechaEntregaReal = value; }
+        }
+
+        public DateTime FechaEntregaPrevista
+        {
+            get { return fechaEntregaPrevista; }
+            set { fechaEntregaPrevista = value; }
+        }
     }
 }

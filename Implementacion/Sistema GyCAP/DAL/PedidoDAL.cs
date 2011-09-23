@@ -151,25 +151,23 @@ namespace GyCAP.DAL
         //****************************************************************************
         //                      METODOS DE INSERCION
         //****************************************************************************
-        public static void Insertar(Data.dsCliente dsCliente)
+        public static int Insertar(Entidades.Pedido pedido, DataTable dtDetallePedido)
         {
             //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
             string sqlInsert = @"INSERT INTO [PEDIDOS]
                                ([CLI_CODIGO]
                                ,[EPED_CODIGO]
-                               ,[PED_FECHAENTREGAPREVISTA]
                                ,[PED_FECHA_ALTA]
                                ,[PED_OBSERVACIONES]
                                ,[PED_NUMERO]) 
-                               VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
+                               VALUES (@p0, @p1, @p2, @p3, @p4) SELECT @@Identity";
 
             //Así obtenemos el pedido nuevo del dataset, indicamos la primer fila de las agregadas ya que es una sola y convertimos al tipo correcto
-            Data.dsCliente.PEDIDOSRow rowPedido = dsCliente.PEDIDOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsCliente.PEDIDOSRow;
-            object[] valorParametros = { rowPedido.CLI_CODIGO, 
-                                         rowPedido.EPED_CODIGO, 
-                                         DB.GetFechaServidor(), 
-                                         rowPedido.PED_OBSERVACIONES, 
-                                         rowPedido.PED_NUMERO };
+            object[] valorParametros = { pedido.Cliente.Codigo, 
+                                         pedido.EstadoPedido.Codigo, 
+                                         pedido.FechaAlta, 
+                                         pedido.Observaciones, 
+                                         pedido.Numero };
 
             //Declaramos el objeto transaccion
             SqlTransaction transaccion = null;
@@ -178,57 +176,110 @@ namespace GyCAP.DAL
             {
                 //Iniciamos la transaccion
                 transaccion = DB.IniciarTransaccion();
-                //Insertamos la pieza y actualizamos su código en el dataset
-                rowPedido.BeginEdit();
-                rowPedido.PED_CODIGO = Convert.ToInt64(DB.executeScalar(sqlInsert, valorParametros, transaccion));
-                
-                rowPedido.PED_NUMERO = rowPedido.PED_CODIGO.ToString(); 
-                rowPedido.EndEdit();
-                
-                //Ahora insertamos el detalle, usamos el foreach para recorrer sólo los nuevos registros del dataset
-                Entidades.DetallePedido detalle = new GyCAP.Entidades.DetallePedido();
-                foreach (Data.dsCliente.DETALLE_PEDIDOSRow row in (Data.dsCliente.DETALLE_PEDIDOSRow[])dsCliente.DETALLE_PEDIDOS.Select(null, null, System.Data.DataViewRowState.Added))
-                {
-                    Entidades.Pedido lPedido = new Entidades.Pedido();
-                    lPedido.Codigo = Convert.ToInt64(rowPedido.PED_CODIGO);
-                    Entidades.Cocina lCocina = new GyCAP.Entidades.Cocina();
-                    lCocina.CodigoCocina = Convert.ToInt32(row.COC_CODIGO);
-                    Entidades.EstadoDetallePedido lEstadoDetalle = new GyCAP.Entidades.EstadoDetallePedido();
-                    lEstadoDetalle.Codigo = 1; //Hacer parametro, no puede quedar Hardcodado  
 
-                    detalle.Pedido = lPedido;
+                //Insertamos la pieza y obtenemos su codigo
+                pedido.Codigo = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParametros, transaccion));
+
+                //Hacemos update del valor del número de pedido
+                pedido.Numero = pedido.Codigo.ToString();
+                ActualizarNumero(pedido.Codigo, transaccion); 
+                                 
+                //Ahora insertamos el detalle, usamos el foreach para recorrer sólo los nuevos registros del datatable
+                Entidades.DetallePedido detalle = new GyCAP.Entidades.DetallePedido();
+                Entidades.EstadoDetallePedido lEstadoDetalle = new GyCAP.Entidades.EstadoDetallePedido();
+                Entidades.Cocina lCocina = new GyCAP.Entidades.Cocina();
+
+                int contador = 0;
+                
+                foreach (Data.dsCliente.DETALLE_PEDIDOSRow row in (Data.dsCliente.DETALLE_PEDIDOSRow[])dtDetallePedido.Select(null, null, System.Data.DataViewRowState.Added))
+                {
+                    //Creamos los objetos auxiliares
+                    lCocina.CodigoCocina = Convert.ToInt32(row.COC_CODIGO);
+                    lEstadoDetalle.Codigo = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("Pendiente"); 
+
+                    //Creamos el objeto de detalle de pedido
+                    contador += 1;
+                    detalle.Pedido = pedido;
                     detalle.Cocina = lCocina;
                     detalle.Cantidad = row.DPED_CANTIDAD;
-                    detalle.Estado = lEstadoDetalle; 
-                    DetallePedidoDAL.Insertar(detalle, transaccion);
+                    detalle.Estado = lEstadoDetalle;
+                    detalle.CodigoNemonico = "P" + pedido.Codigo.ToString() + "-D" + contador.ToString();
+                    detalle.FechaEntregaPrevista =Convert.ToDateTime(row.DPED_FECHA_ENTREGA_PREVISTA);
+                    
+                    if (detalle.Estado.Codigo == DAL.EstadoDetallePedidoDAL.ObtenerCodigoEstado("Pendiente"))
+                    {
+                        detalle.Codigo = DetallePedidoDAL.Insertar(detalle, transaccion);
+                    }
+                    else if (detalle.Estado.Codigo == DAL.EstadoDetallePedidoDAL.ObtenerCodigoEstado("Entrega Stock"))
+                    {
+                        //Insertamos el detalle de pedido
+                        detalle.Codigo = DetallePedidoDAL.Insertar(detalle, transaccion);
+
+                        //Ejecutamos el movimiento de stock planificado
+                        //Generamos el objeto movimiento de stock
+                        Entidades.MovimientoStock movStock = new GyCAP.Entidades.MovimientoStock();
+                        
+                        //Cargamos el estado del movimiento de stock
+                        movStock.Estado = new GyCAP.Entidades.EstadoMovimientoStock(DAL.MovimientoStockDAL.EstadoPlanificado);
+                        
+                        //Creamos las entidades de Origen, Destino y Dueño del movimiento
+                        Entidades.Entidad origen = new GyCAP.Entidades.Entidad();
+                        origen.Nombre = DAL.TipoEntidadDAL.UbicacionStockNombre;
+                        origen.TipoEntidad.Codigo = DAL.TipoEntidadDAL.GetCodigoTipoEntidad(DAL.TipoEntidadDAL.TipoEntidadEnum.UbicacionStock);
+                        origen.EntidadExterna = row.UBICACION_STOCK;
+                        DAL.EntidadDAL.GetEntidad(DAL.TipoEntidadDAL.TipoEntidadEnum.UbicacionStock, origen);
+                        movStock.Origen = origen;                       
+
+                        Entidades.Entidad destino = new GyCAP.Entidades.Entidad();
+                        destino.Nombre = DAL.TipoEntidadDAL.DetallePedidoNombre;
+                        destino.TipoEntidad.Codigo =DAL.TipoEntidadDAL.GetCodigoTipoEntidad(DAL.TipoEntidadDAL.TipoEntidadEnum.DetallePedido);
+                        destino.EntidadExterna = detalle.Codigo;
+                        DAL.EntidadDAL.GetEntidad(DAL.TipoEntidadDAL.TipoEntidadEnum.DetallePedido, destino);
+                        movStock.Destino = destino;
+
+                        Entidades.Entidad dueño = new GyCAP.Entidades.Entidad();
+                        dueño.Nombre = DAL.TipoEntidadDAL.PedidoNombre;
+                        dueño.TipoEntidad.Codigo = DAL.TipoEntidadDAL.GetCodigoTipoEntidad(DAL.TipoEntidadDAL.TipoEntidadEnum.Pedido);
+                        dueño.EntidadExterna = row.PED_CODIGO;
+                        DAL.EntidadDAL.GetEntidad(DAL.TipoEntidadDAL.TipoEntidadEnum.DetallePedido, destino);
+                        movStock.Duenio = dueño;
+                                                
+                        //Asignamos los demas parametros para el movimiento de stock                     
+                        movStock.Descripcion = "Movimiento Pedido";
+                        movStock.CantidadOrigenEstimada = Convert.ToInt32(row.DPED_CANTIDAD * -1);
+                        movStock.CantidadDestinoEstimada = Convert.ToInt32(row.DPED_CANTIDAD);
+                        movStock.FechaPrevista = row.DPED_FECHA_ENTREGA_PREVISTA;
+
+                        //Insertamos el movimiento de stock en la BD
+                        DAL.MovimientoStockDAL.InsertarPlanificado(movStock);
+
+                    }
+
+                    //Actualizamos el valor del codigo del Pedido
                     row.BeginEdit();
                     row.PED_CODIGO = detalle.Pedido.Codigo;
-                    row.COC_CODIGO = detalle.Cocina.CodigoCocina;
-                    row.DPED_CANTIDAD = detalle.Cantidad;
-                    row.EDPED_CODIGO = detalle.Estado.Codigo; 
                     row.EndEdit();
                 }
-                //Todo ok, commit
+                
                 transaccion.Commit();
-                ActualizarNumero(long.Parse(rowPedido.PED_CODIGO.ToString())); 
+                DB.FinalizarTransaccion();
+
+                //Devolvemos el código del pedido para actualizar
+                return pedido.Codigo;
             }
             catch (SqlException ex)
             {
                 //Error en alguna consulta, descartamos los cambios
                 transaccion.Rollback();
                 throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
-            }
-            finally
-            {
-                //En cualquier caso finalizamos la transaccion para que se cierre la conexion
-                DB.FinalizarTransaccion();
-            }
+            }            
         }
 
         //Determina si existe una pedido dado su nombre y terminación
         public static bool EsPedido(Entidades.Pedido pedido)
         {
-            string sql = "SELECT count(ped_codigo) FROM PEDIDOS WHERE PED_NUMERO = @p0 AND PED_codigo = @p1";
+            string sql = @"SELECT count(ped_codigo) FROM PEDIDOS 
+                            WHERE PED_NUMERO = @p0 AND PED_codigo = @p1";
 
             object[] valorParametros = { pedido.Numero, pedido.Codigo };
 
@@ -335,7 +386,7 @@ namespace GyCAP.DAL
                 foreach (Data.dsCliente.DETALLE_PEDIDOSRow row in (Data.dsCliente.DETALLE_PEDIDOSRow[])dsCliente.DETALLE_PEDIDOS.Select(null, null, System.Data.DataViewRowState.Added))
                 {
                     Entidades.Pedido lPedido = new Entidades.Pedido();
-                    lPedido.Codigo = Convert.ToInt64(rowPedido.PED_CODIGO);
+                    lPedido.Codigo = Convert.ToInt32(rowPedido.PED_CODIGO);
                     Entidades.Cocina lCocina = new GyCAP.Entidades.Cocina();
                     lCocina.CodigoCocina = Convert.ToInt32(row.COC_CODIGO);
                     Entidades.EstadoDetallePedido lEstadoDetalle = new GyCAP.Entidades.EstadoDetallePedido();
@@ -358,7 +409,7 @@ namespace GyCAP.DAL
                 foreach (Data.dsCliente.DETALLE_PEDIDOSRow row in (Data.dsCliente.DETALLE_PEDIDOSRow[])dsCliente.DETALLE_PEDIDOS.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent ))
                 {
                     Entidades.Pedido lPedido = new Entidades.Pedido();
-                    lPedido.Codigo = Convert.ToInt64(rowPedido.PED_CODIGO);
+                    lPedido.Codigo = Convert.ToInt32(rowPedido.PED_CODIGO);
                     Entidades.Cocina lCocina = new GyCAP.Entidades.Cocina();
                     lCocina.CodigoCocina = Convert.ToInt32(row.COC_CODIGO);
                     Entidades.EstadoDetallePedido lEstadoDetalle = new GyCAP.Entidades.EstadoDetallePedido();
@@ -394,25 +445,19 @@ namespace GyCAP.DAL
             }
         }
 
-        public static void ActualizarNumero(long codigo)
+        public static void ActualizarNumero(int codigo, SqlTransaction transaccion)
         {
                       
             string sqlUpdate = @"UPDATE PEDIDOS SET
-                                PED_NUMERO = @p0
-                               WHERE PED_CODIGO = @p0";
+                                PED_NUMERO = @p0 WHERE PED_CODIGO = @p0";
 
             object[] valorParametros = { codigo };
-
-            //Declaramos el objeto transaccion
-            SqlTransaction transaccion = null;
-
+            
             try
             {
-                //Iniciamos la transaccion
-                transaccion = DB.IniciarTransaccion();
-
                 //DB.executeNonQuery(sqlUpdate, valorParametros, transaccion);
-                DB.executeNonQuery(sqlUpdate, valorParametros, null);
+                DB.executeNonQuery(sqlUpdate, valorParametros, transaccion);
+                transaccion.Commit();
             }
             catch (SqlException ex)
             {

@@ -2319,6 +2319,8 @@ namespace GyCAP.Data {
             
             private global::System.Data.DataColumn columnDPED_FECHA_ENTREGA_REAL;
             
+            private global::System.Data.DataColumn columnUBICACION_STOCK;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public DETALLE_PEDIDOSDataTable() {
                 this.TableName = "DETALLE_PEDIDOS";
@@ -2413,6 +2415,13 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn UBICACION_STOCKColumn {
+                get {
+                    return this.columnUBICACION_STOCK;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2441,7 +2450,7 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DETALLE_PEDIDOSRow AddDETALLE_PEDIDOSRow(PEDIDOSRow parentPEDIDOSRowBydetallePedido_pedido_fk, ESTADO_DETALLE_PEDIDOSRow parentESTADO_DETALLE_PEDIDOSRowBydetallePedido_estadoDetallePedido_fk, COCINASRow parentCOCINASRowBydetallePedido_Cocina_fk, int DPED_CANTIDAD, System.DateTime DPED_FECHA_CANCELACION, string DPED_CODIGONEMONICO, System.DateTime DPED_FECHA_ENTREGA_PREVISTA, string DPED_FECHA_ENTREGA_REAL) {
+            public DETALLE_PEDIDOSRow AddDETALLE_PEDIDOSRow(PEDIDOSRow parentPEDIDOSRowBydetallePedido_pedido_fk, ESTADO_DETALLE_PEDIDOSRow parentESTADO_DETALLE_PEDIDOSRowBydetallePedido_estadoDetallePedido_fk, COCINASRow parentCOCINASRowBydetallePedido_Cocina_fk, int DPED_CANTIDAD, System.DateTime DPED_FECHA_CANCELACION, string DPED_CODIGONEMONICO, System.DateTime DPED_FECHA_ENTREGA_PREVISTA, string DPED_FECHA_ENTREGA_REAL, int UBICACION_STOCK) {
                 DETALLE_PEDIDOSRow rowDETALLE_PEDIDOSRow = ((DETALLE_PEDIDOSRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2452,7 +2461,8 @@ namespace GyCAP.Data {
                         DPED_FECHA_CANCELACION,
                         DPED_CODIGONEMONICO,
                         DPED_FECHA_ENTREGA_PREVISTA,
-                        DPED_FECHA_ENTREGA_REAL};
+                        DPED_FECHA_ENTREGA_REAL,
+                        UBICACION_STOCK};
                 if ((parentPEDIDOSRowBydetallePedido_pedido_fk != null)) {
                     columnValuesArray[1] = parentPEDIDOSRowBydetallePedido_pedido_fk[0];
                 }
@@ -2496,6 +2506,7 @@ namespace GyCAP.Data {
                 this.columnDPED_CODIGONEMONICO = base.Columns["DPED_CODIGONEMONICO"];
                 this.columnDPED_FECHA_ENTREGA_PREVISTA = base.Columns["DPED_FECHA_ENTREGA_PREVISTA"];
                 this.columnDPED_FECHA_ENTREGA_REAL = base.Columns["DPED_FECHA_ENTREGA_REAL"];
+                this.columnUBICACION_STOCK = base.Columns["UBICACION_STOCK"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2518,6 +2529,8 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnDPED_FECHA_ENTREGA_PREVISTA);
                 this.columnDPED_FECHA_ENTREGA_REAL = new global::System.Data.DataColumn("DPED_FECHA_ENTREGA_REAL", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDPED_FECHA_ENTREGA_REAL);
+                this.columnUBICACION_STOCK = new global::System.Data.DataColumn("UBICACION_STOCK", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUBICACION_STOCK);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnDPED_CODIGO}, true));
                 this.columnDPED_CODIGO.AutoIncrement = true;
@@ -4271,6 +4284,22 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int UBICACION_STOCK {
+                get {
+                    try {
+                        return ((int)(this[this.tableDETALLE_PEDIDOS.UBICACION_STOCKColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'UBICACION_STOCK\' de la tabla \'DETALLE_PEDIDOS\' es DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableDETALLE_PEDIDOS.UBICACION_STOCKColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public ESTADO_DETALLE_PEDIDOSRow ESTADO_DETALLE_PEDIDOSRow {
                 get {
                     return ((ESTADO_DETALLE_PEDIDOSRow)(this.GetParentRow(this.Table.ParentRelations["detallePedido_estadoDetallePedido_fk"])));
@@ -4328,6 +4357,16 @@ namespace GyCAP.Data {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetDPED_FECHA_ENTREGA_REALNull() {
                 this[this.tableDETALLE_PEDIDOS.DPED_FECHA_ENTREGA_REALColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsUBICACION_STOCKNull() {
+                return this.IsNull(this.tableDETALLE_PEDIDOS.UBICACION_STOCKColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetUBICACION_STOCKNull() {
+                this[this.tableDETALLE_PEDIDOS.UBICACION_STOCKColumn] = global::System.Convert.DBNull;
             }
         }
         
