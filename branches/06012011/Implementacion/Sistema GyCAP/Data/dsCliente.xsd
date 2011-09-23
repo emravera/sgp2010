@@ -860,6 +860,7 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="UBICACION_STOCK" msprop:Generator_UserColumnName="UBICACION_STOCK" msprop:nullValue="_throw" msprop:Generator_ColumnVarNameInTable="columnUBICACION_STOCK" msprop:Generator_ColumnPropNameInTable="UBICACION_STOCKColumn" msprop:Generator_ColumnPropNameInRow="UBICACION_STOCK" type="xs:int" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -885,7 +886,7 @@ SELECT USTCK_NUMERO, USTCK_CODIGO, USTCK_NOMBRE, USTCK_DESCRIPCION, USTCK_UBICAC
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="UBICACIONES_STOCK" msprop:Generator_UserTableName="UBICACIONES_STOCK" msprop:Generator_RowDeletedName="UBICACIONES_STOCKRowDeleted" msprop:Generator_TableClassName="UBICACIONES_STOCKDataTable" msprop:Generator_RowChangedName="UBICACIONES_STOCKRowChanged" msprop:Generator_RowClassName="UBICACIONES_STOCKRow" msprop:Generator_RowChangingName="UBICACIONES_STOCKRowChanging" msprop:Generator_RowEvArgName="UBICACIONES_STOCKRowChangeEvent" msprop:Generator_RowEvHandlerName="UBICACIONES_STOCKRowChangeEventHandler" msprop:Generator_TablePropName="UBICACIONES_STOCK" msprop:Generator_TableVarName="tableUBICACIONES_STOCK" msprop:Generator_RowDeletingName="UBICACIONES_STOCKRowDeleting">
+        <xs:element name="UBICACIONES_STOCK" msprop:Generator_UserTableName="UBICACIONES_STOCK" msprop:Generator_RowDeletedName="UBICACIONES_STOCKRowDeleted" msprop:Generator_RowChangedName="UBICACIONES_STOCKRowChanged" msprop:Generator_RowClassName="UBICACIONES_STOCKRow" msprop:Generator_RowChangingName="UBICACIONES_STOCKRowChanging" msprop:Generator_RowEvArgName="UBICACIONES_STOCKRowChangeEvent" msprop:Generator_RowEvHandlerName="UBICACIONES_STOCKRowChangeEventHandler" msprop:Generator_TableClassName="UBICACIONES_STOCKDataTable" msprop:Generator_TableVarName="tableUBICACIONES_STOCK" msprop:Generator_RowDeletingName="UBICACIONES_STOCKRowDeleting" msprop:Generator_TablePropName="UBICACIONES_STOCK">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="USTCK_NUMERO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="USTCK_NUMERO" msprop:Generator_ColumnPropNameInRow="USTCK_NUMERO" msprop:Generator_ColumnVarNameInTable="columnUSTCK_NUMERO" msprop:Generator_ColumnPropNameInTable="USTCK_NUMEROColumn" type="xs:decimal" />

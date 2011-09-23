@@ -181,7 +181,7 @@ namespace GyCAP.UI.GestionPedido
 
             cboEstadoBuscar.SetDatos(dvEstadoPedidoBuscar, "EPED_CODIGO", "EPED_NOMBRE", "--TODOS--", true);
             cboEstado.SetDatos(dvEstadoPedidoBuscar, "EPED_CODIGO", "EPED_NOMBRE", "", false);
-            cboClientes.SetDatos(dvClientes, "CLI_CODIGO", "CLI_RAZONSOCIAL", "", false);
+            cboClientes.SetDatos(dvClientes, "CLI_CODIGO", "CLI_RAZONSOCIAL", "--Seleccionar--", false);
 
             //Creamos el Dataview y se lo asignamos al combo de ubicaciones de stock
             dvCbUbicacionStock = new DataView(dsCliente.UBICACIONES_STOCK);
@@ -586,66 +586,65 @@ namespace GyCAP.UI.GestionPedido
             if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
                 //Revisamos que está haciendo
-                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
+              if (estadoInterface == estadoUI.cargarDetalle)
                 {
-                    //Está cargando uno nuevo
                     try
                     {
-                        //Como ahora tenemos más de una tabla y relacionadas vamos a trabajar diferente
-                        //Primero lo agregamos a la tabla Piezas del dataset con código -1, luego la entidad 
-                        //PiezaDAL se va a encargar de insertarle el código que corresponda y el stock inicial
+                        //Esta guardando un Pedido Nuevo
+                        //Creamos el objeto de Pedido
+                        Entidades.Pedido pedido = new Entidades.Pedido();
+                        //Creamos el objeto Cliente
+                        Entidades.Cliente cliente = new GyCAP.Entidades.Cliente();
+                        cliente.Codigo = Convert.ToInt32(cboClientes.GetSelectedValue());
+                        pedido.Cliente = cliente;
+                        //Creamos el objeto estado de pedido
+                        Entidades.EstadoPedido estadoPedido = new GyCAP.Entidades.EstadoPedido();
+                        estadoPedido.Codigo = Convert.ToInt32(cboEstado.GetSelectedValue());
+                        pedido.EstadoPedido = estadoPedido;
+                        pedido.FechaAlta = DBBLL.GetFechaServidor();
+                        pedido.Observaciones = txtObservacion.Text.Trim();
+                        pedido.Numero = string.Empty;
+                        
+                        //Guardamos el objeto y su detalle completo
+                        int codigoPedido = BLL.PedidoBLL.Insertar(pedido, dsCliente.DETALLE_PEDIDOS);
+                        
+                        //Primero lo agregamos a la tabla Pedidos                 
                         Data.dsCliente.PEDIDOSRow rowPedido = dsCliente.PEDIDOS.NewPEDIDOSRow();
                         rowPedido.BeginEdit();
-                        rowPedido.PED_CODIGO = -1;
-                        rowPedido.PED_NUMERO = string.Empty;
-                        rowPedido.PED_OBSERVACIONES = txtObservacion.Text.Trim();
-                        rowPedido.EPED_CODIGO = cboEstado.GetSelectedValueInt();
-                        rowPedido.CLI_CODIGO = long.Parse( cboClientes.GetSelectedValueInt().ToString()); 
-                        rowPedido.PED_FECHA_ALTA = DBBLL.GetFechaServidor() ;
+                        rowPedido.PED_CODIGO = codigoPedido;
+                        rowPedido.PED_NUMERO = codigoPedido.ToString();
+                        rowPedido.PED_OBSERVACIONES = pedido.Observaciones;
+                        rowPedido.EPED_CODIGO = pedido.EstadoPedido.Codigo;
+                        rowPedido.CLI_CODIGO = pedido.Cliente.Codigo;
+                        rowPedido.PED_FECHA_ALTA = pedido.FechaAlta;
                         rowPedido.EndEdit();
 
                         dsCliente.PEDIDOS.AddPEDIDOSRow(rowPedido);
-                        //Todavia no aceptamos los cambios porque necesitamos que queden marcadas como nuevas las filas
-                        //para que la entidad PiezaBLL y PiezaDAL sepan cuales insertar
-                        BLL.PedidoBLL.Insertar(dsCliente);
-                        
+                                                
                         //Ahora si aceptamos los cambios
                         dsCliente.PEDIDOS.AcceptChanges();
                         dsCliente.DETALLE_PEDIDOS.AcceptChanges();
                         
-                        //Y por último seteamos el estado de la interfaz
-                        //Vemos cómo se inició el formulario para determinar la acción a seguir
-                        if (estadoInterface == estadoUI.nuevoExterno)
-                        {
-                            //Nuevo desde acceso directo, cerramos el formulario
-                            btnSalir.PerformClick();
-                        }
-                        else
-                        {
-                            dgvLista.Refresh();
+                        //Refrescamos la Grilla
+                        dgvLista.Refresh();
 
-                            //Nuevo desde el mismo formulario, volvemos a la pestaña buscar
-                            SetInterface(estadoUI.inicio);
-                        }
+                        //Volvemos al estado inicial
+                        SetInterface(estadoUI.inicio);                        
                     }
                     catch (Entidades.Excepciones.ElementoExistenteException ex)
                     {
-                        //Ya existe la pieza, descartamos los cambios pero sólo de piezas ya que puede querer
-                        //modificar el nombre y/o la terminación e intentar de nuevo con la estructura cargada
                         dsCliente.PEDIDOS.RejectChanges();
                         Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
-                        //Hubo problemas con la BD, descartamos los cambios de piezas ya que puede intentar
-                        //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
                         dsCliente.PEDIDOS.RejectChanges();
                         Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                 }
                 else
                 {
-                    //Está modificando
+                    //Está modificando el pedido
                     //Primero obtenemos su código del dataview que está relacionado a la fila seleccionada
                     long codigoPedido = Convert.ToInt64(dvPedido[dgvLista.SelectedRows[0].Index]["ped_codigo"]);
                     
@@ -757,7 +756,7 @@ namespace GyCAP.UI.GestionPedido
             //aca seteas el elemento seleccionado o lo que quieras hacer
             dsCliente.CLIENTES.Clear();
             BLL.ClienteBLL.ObtenerTodos(dsCliente.CLIENTES);
-            cboClientes.SetDatos(dvClientes, "CLI_CODIGO", "CLI_RAZONSOCIAL", "", false);
+            cboClientes.SetDatos(dvClientes, "CLI_CODIGO", "CLI_RAZONSOCIAL", "--Seleccionar--", false);
             cboClientes.SetSelectedValue(Convert.ToInt32(cliente.Codigo.ToString()));
         }
 
@@ -817,6 +816,7 @@ namespace GyCAP.UI.GestionPedido
                     row.DPED_CANTIDAD = int.Parse(numCantStock.Value.ToString());
                     row.DPED_CODIGONEMONICO = "";
                     row.DPED_FECHA_ENTREGA_PREVISTA = sfFechaPrevista.Value;
+                    row.UBICACION_STOCK = Convert.ToInt32(cbUbicacionStock.GetSelectedValue());
                     row.EndEdit();
 
                     //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
@@ -906,8 +906,11 @@ namespace GyCAP.UI.GestionPedido
                     validacion = validacion + "STOCK: Hay " + cantidadStock + " unidades disponibles para la fecha " + fechaNecesidad.ToShortDateString() + "\n";
 
                     //La diferencia hay que colocarla para planificar
-                    numCantProducir.Value = (nudCantidad.Value - numCantStock.Value);
-                    validacion = validacion + "PLANIFICACION PRODUCCION: " + (nudCantidad.Value - numCantStock.Value).ToString() + " Unidades \n";
+                    if (cantidadStock < cantidad)
+                    {
+                        numCantProducir.Value = (nudCantidad.Value - numCantStock.Value);
+                        validacion = validacion + "PLANIFICACION PRODUCCION: " + (nudCantidad.Value - numCantStock.Value).ToString() + " Unidades \n";
+                    }
 
                 }
                 else

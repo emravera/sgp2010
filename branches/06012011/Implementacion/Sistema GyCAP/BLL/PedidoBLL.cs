@@ -15,19 +15,11 @@ namespace GyCAP.BLL
             DAL.PedidoDAL.ObtenerPedido(nombre, numero, idEstadoPedido, fechaDesde, fechaHasta, ds, obtenerDetalle);
         }
 
-        public static void Insertar(Data.dsCliente dsCliente)
-        {
-            //Si existe lanzamos la excepción correspondiente
-            Entidades.Pedido pedido = new GyCAP.Entidades.Pedido();
-            //Así obtenemos el pedido nuevo del dataset, indicamos la primer fila de la agregadas ya que es una sola y convertimos al tipo correcto
-            Data.dsCliente.PEDIDOSRow rowPedido = dsCliente.PEDIDOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsCliente.PEDIDOSRow;
-            //Creamos el objeto pedido para verificar si existe
-            pedido.Codigo = Convert.ToInt64(rowPedido.PED_CODIGO);
-            pedido.Numero = rowPedido.PED_NUMERO;
-            
+        public static int Insertar(Entidades.Pedido pedido, DataTable dtDetallePedido)
+        {    
             if (EsPedido(pedido)) throw new Entidades.Excepciones.ElementoExistenteException();
             //Como no existe lo creamos
-            DAL.PedidoDAL.Insertar(dsCliente);
+            return DAL.PedidoDAL.Insertar(pedido, dtDetallePedido);
         }
 
         //Comprueba si existe una pieza dado su nombre y terminación

@@ -9,22 +9,30 @@ namespace GyCAP.DAL
 {
     public class DetallePedidoDAL
     {
-        public static readonly int EstadoEnCurso = 2;
-
-        public static readonly int EstadoFinalizado = 5;
+        //Definimos las variables con los estados.
+        public static readonly int EstadoEnCurso = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("En Curso");
+        public static readonly int EstadoFinalizado = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("Finalizado");
         
-        public static void Insertar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
+        //Metodo para insertar el detalle de pedido
+        public static int Insertar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
         {
             string sqlInsert = @"INSERT INTO [DETALLE_PEDIDOS] 
                                         ([PED_CODIGO]
                                         ,[EDPED_CODIGO]
                                         ,[COC_CODIGO]
-                                        ,[DPED_CANTIDAD])
-                                        VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+                                        ,[DPED_CANTIDAD]
+                                        ,[DPED_CODIGONEMONICO]
+                                        ,[DPED_FECHA_ENTREGA_PREVISTA])
+                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
 
             object[] valorParametros = {detalle.Pedido.Codigo , detalle.Estado.Codigo
-                                       ,detalle.Cocina.CodigoCocina, detalle.Cantidad};
-            detalle.Codigo = Convert.ToInt64(DB.executeScalar(sqlInsert, valorParametros, transaccion));
+                                       , detalle.Cocina.CodigoCocina, detalle.Cantidad
+                                       , detalle.CodigoNemonico, detalle.FechaEntregaPrevista };
+
+            //Ejecutamos la consulta y obtenemos el codigo
+            detalle.Codigo = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParametros, transaccion));
+
+            return Convert.ToInt32(detalle.Codigo);
         }
 
         public static void Eliminar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
@@ -66,33 +74,30 @@ namespace GyCAP.DAL
             object[] parametros = { codigoEstado, codigoDetalle };
             DB.executeNonQuery(sql, parametros, transaccion);
         }
+
         public static void CambiarEstado(int codigoDetallePedido, int estado)
         {
             SqlTransaction transaccion = null;
 
             try
             {
-                //Inserto la demanda
+                
                 transaccion = DB.IniciarTransaccion();
 
-                string sql = string.Empty;
+                string sql = @"UPDATE [DETALLE_PEDIDOS] 
+                                SET edped_codigo=@p0 WHERE dped_codigo=@p1";
 
-
-                //Guardo las modificaciones
-                sql = "UPDATE [DETALLE_PEDIDOS] SET edped_codigo=@p0 WHERE dped_codigo=@p1";
                 object[] valorPar = { estado, codigoDetallePedido };
+                
                 DB.executeNonQuery(sql, valorPar, transaccion);
 
                 transaccion.Commit();
                 DB.FinalizarTransaccion();
-
-
             }
             catch (SqlException)
             {
                 transaccion.Rollback();
                 throw new Entidades.Excepciones.BaseDeDatosException();
-
             }
         }
 
@@ -110,6 +115,7 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
 
         }
+
         //Metodo que obtiene el detalle de pedido
         public static void ObtenerDetallePedido(DataTable dtDetallePedidos, int codigoPedido)
         {

@@ -7,16 +7,15 @@ namespace GyCAP.Entidades
 {
     public class Pedido
     {
-        private long codigo;
+        private int codigo;
         private string numero;  
         private Cliente cliente;
         private EstadoPedido estadoPedido;
-        private DateTime fechaEntregaPrevista;
         private DateTime fechaEntregaReal;
         private DateTime fechaAlta;
         private string observaciones;
 
-        public long Codigo
+        public int Codigo
         {
             get { return codigo; }
             set { codigo = value; }
@@ -38,13 +37,7 @@ namespace GyCAP.Entidades
         {
             get { return estadoPedido; }
             set { estadoPedido = value; }
-        }
-
-        public DateTime FechaEntregaPrevista
-        {
-            get { return fechaEntregaPrevista; }
-            set { fechaEntregaPrevista = value; }
-        }
+        }      
 
         public DateTime FechaEntregaReal
         {
