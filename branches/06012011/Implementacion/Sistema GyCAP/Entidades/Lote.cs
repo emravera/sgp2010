@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GyCAP.Entidades
 {
-    public class EstadoOrdenTrabajo
+    public class Lote
     {
         private int codigo;
 
@@ -21,12 +21,19 @@ namespace GyCAP.Entidades
             get { return nombre; }
             set { nombre = value; }
         }
-        private string descripcion;
+        private string numeroSerieDesde;
 
-        public string Descripcion
+        public string NumeroSerieDesde
         {
-            get { return descripcion; }
-            set { descripcion = value; }
+            get { return numeroSerieDesde; }
+            set { numeroSerieDesde = value; }
+        }
+        private string numeroSerieHasta;
+
+        public string NumeroSerieHasta
+        {
+            get { return numeroSerieHasta; }
+            set { numeroSerieHasta = value; }
         }
     }
 }

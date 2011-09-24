@@ -43,7 +43,7 @@ namespace GyCAP.DAL
             Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow rowOrdenP = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion);
             object ordpm = DBNull.Value, dpsem = DBNull.Value, cocina = DBNull.Value, stock = DBNull.Value;
             if (!rowOrdenP.IsDPSEM_CODIGONull()) { dpsem = rowOrdenP.DPSEM_CODIGO; }
-            else { ordpm = rowOrdenP.ORDPM_NUMERO; }
+            //else { ordpm = rowOrdenP.ORDPM_NUMERO; }
             if (!rowOrdenP.IsCOC_CODIGONull()) { cocina = rowOrdenP.COC_CODIGO; }
             if (!rowOrdenP.IsUSTCK_DESTINONull()) { stock = rowOrdenP.USTCK_DESTINO; }
             object[] valoresParametros = {   rowOrdenP.ORDP_CODIGO,
@@ -73,8 +73,8 @@ namespace GyCAP.DAL
                 transaccion = DB.IniciarTransaccion();
                 rowOrdenP.BeginEdit();
                 numeroOrdenProduccion = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
-                if (rowOrdenP.IsORDPM_NUMERONull()) { rowOrdenP.ORDP_CODIGO = "OPA-" + numeroOrdenProduccion; }
-                else { rowOrdenP.ORDP_CODIGO = "OPM-" + numeroOrdenProduccion; }
+                //if (rowOrdenP.IsORDPM_NUMERONull()) { rowOrdenP.ORDP_CODIGO = "OPA-" + numeroOrdenProduccion; }
+                //else { rowOrdenP.ORDP_CODIGO = "OPM-" + numeroOrdenProduccion; }
                 rowOrdenP.EndEdit();
 
                 valoresParametros = new object[] { rowOrdenP.ORDP_CODIGO, numeroOrdenProduccion };
@@ -88,12 +88,12 @@ namespace GyCAP.DAL
                     
                     foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in (Data.dsOrdenTrabajo.ORDENES_TRABAJORow[])dsOrdenTrabajo.ORDENES_TRABAJO.Select("ordt_ordensiguiente = " + rowOrdenTrabajo.ORDT_NUMERO))
                     {
-                        row.ORDT_ORDENSIGUIENTE = numero;
+                        //row.ORDT_ORDENSIGUIENTE = numero;
                     }
                     
                     rowOrdenTrabajo.ORDT_NUMERO = numero;
-                    if (rowOrdenP.IsORDPM_NUMERONull()) { rowOrdenTrabajo.ORDT_CODIGO = "OTA-" + rowOrdenTrabajo.ORDT_NUMERO.ToString(); }
-                    else { rowOrdenTrabajo.ORDT_CODIGO = "OTM-" + rowOrdenTrabajo.ORDT_NUMERO.ToString(); }
+                    //if (rowOrdenP.IsORDPM_NUMERONull()) { rowOrdenTrabajo.ORDT_CODIGO = "OTA-" + rowOrdenTrabajo.ORDT_NUMERO.ToString(); }
+                    //else { rowOrdenTrabajo.ORDT_CODIGO = "OTM-" + rowOrdenTrabajo.ORDT_NUMERO.ToString(); }
                     valoresParametros = new object[] { rowOrdenTrabajo.ORDT_CODIGO, rowOrdenTrabajo.ORDT_NUMERO };
                     DB.executeNonQuery(sqlUOT, valoresParametros, transaccion);
                     rowOrdenTrabajo.EndEdit();

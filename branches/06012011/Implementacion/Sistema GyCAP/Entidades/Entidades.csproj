@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArbolOrdenesTrabajo\ArbolProduccion.cs" />
+    <Compile Include="ArbolOrdenesTrabajo\NodoOrdenTrabajo.cs" />
     <Compile Include="Averia.cs" />
     <Compile Include="ArbolEstructura\ArbolEstructura.cs" />
     <Compile Include="ArbolEstructura\NodoEstructura.cs" />
@@ -78,6 +80,8 @@
     <Compile Include="Empleado.cs" />
     <Compile Include="Entidad.cs" />
     <Compile Include="EntregaProducto.cs" />
+    <Compile Include="Enumeraciones\CocinaEnum.cs" />
+    <Compile Include="Enumeraciones\OrdenesTrabajoEnum.cs" />
     <Compile Include="Enumeraciones\RecursosFabricacionEnum.cs" />
     <Compile Include="Enumeraciones\StockEnum.cs" />
     <Compile Include="EstadoCocina.cs" />
@@ -113,6 +117,7 @@
     <Compile Include="FabricanteMaquina.cs" />
     <Compile Include="HojaRuta.cs" />
     <Compile Include="Localidad.cs" />
+    <Compile Include="Lote.cs" />
     <Compile Include="Mantenimiento.cs" />
     <Compile Include="Maquina.cs" />
     <Compile Include="Marca.cs" />

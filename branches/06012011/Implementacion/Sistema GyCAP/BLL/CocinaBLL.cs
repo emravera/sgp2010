@@ -106,6 +106,11 @@ namespace GyCAP.BLL
         {
             return DAL.CocinaDAL.GetCodigoCocinaBase();
         }
+
+        public static IList<Entidades.Cocina> GetCocinasByCodigos(int[] codigosCocinas)
+        {
+            return DAL.CocinaDAL.GetCocinasByCodigos(codigosCocinas);
+        }
         
     }
 }

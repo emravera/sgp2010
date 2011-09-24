@@ -630,6 +630,7 @@
             this.btnConsultarParte.Text = "Consultar";
             this.btnConsultarParte.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnConsultarParte.UseVisualStyleBackColor = true;
+            this.btnConsultarParte.Click += new System.EventHandler(this.btnConsultarParte_Click);
             this.btnConsultarParte.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnConsultarParte.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
@@ -650,7 +651,7 @@
             this.btnNuevoParte.Text = "Nuevo";
             this.btnNuevoParte.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNuevoParte.UseVisualStyleBackColor = true;
-            this.btnNuevoParte.Click += new System.EventHandler(this.btnNuevoPieza_Click);
+            this.btnNuevoParte.Click += new System.EventHandler(this.btnNuevoParte_Click);
             this.btnNuevoParte.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
             this.btnNuevoParte.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using GyCAP.Entidades.Enumeraciones;
+using GyCAP.Entidades;
 
 namespace GyCAP.BLL
 {
@@ -16,6 +18,11 @@ namespace GyCAP.BLL
         public static int ObtenerEstadoGenerada()
         {
             return DAL.EstadoOrdenTrabajoDAL.ObtenerEstadoGenerada();
+        }
+
+        public static EstadoOrdenTrabajo GetEstado(OrdenesTrabajoEnum.EstadoOrdenEnum estado)
+        {
+            return DAL.EstadoOrdenTrabajoDAL.GetEstado(estado);
         }
     }
 }

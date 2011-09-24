@@ -4,6 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Windows.Forms;
+using GyCAP.Entidades;
+using GyCAP.Entidades.ArbolEstructura;
+using GyCAP.Entidades.ArbolOrdenesTrabajo;
+using GyCAP.Entidades.Enumeraciones;
+using GyCAP.Entidades.BindingEntity;
 
 namespace GyCAP.BLL
 {
@@ -104,7 +109,7 @@ namespace GyCAP.BLL
                         rowOrdenP.ORDP_ORIGEN = rowOrdenP.ORDP_CODIGO + "-" + rowDetalle.COCINASRow.COC_CODIGO_PRODUCTO;
                         rowOrdenP.SetORDP_FECHAINICIOREALNull();
                         rowOrdenP.SetORDP_FECHAFINREALNull();
-                        rowOrdenP.SetORDPM_NUMERONull();
+                        //rowOrdenP.SetORDPM_NUMERONull();
                         rowOrdenP.ORDP_PRIORIDAD = 0;
                         rowOrdenP.ORDP_OBSERVACIONES = string.Empty;
                         rowOrdenP.COC_CODIGO = rowDetalle.COC_CODIGO;
@@ -161,7 +166,7 @@ namespace GyCAP.BLL
                     rowOrdenP.ORDP_ORIGEN = rowOrdenP.ORDP_CODIGO + "-" + rowDetalle.COCINASRow.COC_CODIGO_PRODUCTO;
                     rowOrdenP.SetORDP_FECHAINICIOREALNull();
                     rowOrdenP.SetORDP_FECHAFINREALNull();
-                    rowOrdenP.SetORDPM_NUMERONull();
+                    //rowOrdenP.SetORDPM_NUMERONull();
                     rowOrdenP.ORDP_PRIORIDAD = 0;
                     rowOrdenP.ORDP_OBSERVACIONES = string.Empty;
                     rowOrdenP.COC_CODIGO = rowDetalle.COC_CODIGO;
@@ -218,7 +223,7 @@ namespace GyCAP.BLL
                 nodoDetalleOT.Name = rowOrdenT.ORDT_NUMERO.ToString();
                 nodoDetalleOT.Text = rowOrdenT.ORDT_ORIGEN;
                 nodoDetalleOT.Tag = nodoDetalleOrdenTrabajo;
-                if (rowOrdenT.IsORDT_ORDENSIGUIENTENull())
+                /*if (rowOrdenT.IsORDT_ORDENSIGUIENTENull())
                 {
                     nodoOrdenOT.Nodes.Add(nodoDetalleOT);
                 }
@@ -232,7 +237,7 @@ namespace GyCAP.BLL
                     {
                         nodoOrdenOT.Nodes.Find(rowOrdenT.ORDT_ORDENSIGUIENTE.ToString(), true)[0].Parent.Nodes.Add(nodoDetalleOT);
                     }
-                }
+                }*/
                 #endregion
 
                 #region Árbol dependencia completa
@@ -241,14 +246,14 @@ namespace GyCAP.BLL
                 nodoDetalleDC.Name = rowOrdenT.ORDT_NUMERO.ToString();
                 nodoDetalleDC.Text = rowOrdenT.ORDT_ORIGEN;
                 nodoDetalleDC.Tag = nodoDetalleOrdenTrabajo;
-                if (rowOrdenT.IsORDT_ORDENSIGUIENTENull())
+                /*if (rowOrdenT.IsORDT_ORDENSIGUIENTENull())
                 {
                     nodoOrdenDC.Nodes.Add(nodoDetalleDC);
                 }
                 else
                 {
                     nodoOrdenDC.Nodes.Find(rowOrdenT.ORDT_ORDENSIGUIENTE.ToString(), true)[0].Nodes.Add(nodoDetalleDC);
-                }
+                }*/
 
                 #endregion
 
@@ -257,7 +262,7 @@ namespace GyCAP.BLL
                 nodoDetalleOTyE.Name = rowOrdenT.ORDT_NUMERO.ToString();
                 nodoDetalleOTyE.Text = rowOrdenT.ORDT_ORIGEN;
                 nodoDetalleOTyE.Tag = nodoDetalleOrdenTrabajo;
-                if (rowOrdenT.IsORDT_ORDENSIGUIENTENull())
+                /*if (rowOrdenT.IsORDT_ORDENSIGUIENTENull())
                 {
                     parte = new TreeNode();
                     ordenes = new TreeNode();
@@ -298,7 +303,7 @@ namespace GyCAP.BLL
                         ultimoNodoParte = parte;
                         ultimoNodoParte.Nodes["ordenes"].Nodes.Add(nodoDetalleOTyE);
                     }
-                }
+                }*/
 
                 #endregion
             }
@@ -497,6 +502,63 @@ namespace GyCAP.BLL
         public static void FinalizarOrdenProduccion(int numeroOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsStock dsStock)
         {
             DAL.OrdenProduccionDAL.FinalizarOrdenProduccion(numeroOrdenProduccion, dsOrdenTrabajo, dsStock);
+        }
+
+        public static SortableBindingList<ArbolProduccion> GenerarOrdenesProduccion(int codigoDia, Data.dsPlanSemanal dsPlanSemanal, IList<Cocina> listaCocinas)
+        {
+            int numeroOrdenProduccion = 1;
+            SortableBindingList<ArbolProduccion> ordenesProduccion = new SortableBindingList<ArbolProduccion>();
+            EstadoOrdenTrabajo estadoOrden = EstadoOrdenTrabajoBLL.GetEstado(OrdenesTrabajoEnum.EstadoOrdenEnum.Generada);
+
+            foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow rowDetalle in (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow[])dsPlanSemanal.DETALLE_PLANES_SEMANALES.Select("diapsem_codigo = " + codigoDia))
+            {
+                //Primero controlamos si no tiene órdenes
+                if (rowDetalle.DPSEM_ESTADO == BLL.DetallePlanSemanalBLL.estadoGenerado)
+                {
+                    //No tiene órdenes, controlamos si la cocina tiene una estructura activa
+                    int codigoEstructura = CocinaBLL.ObtenerCodigoEstructuraActiva(Convert.ToInt32(rowDetalle.COC_CODIGO));
+                    string mensaje = string.Empty;
+                    if (codigoEstructura == 0)
+                    {
+                        //TODO: crear excepcion Cocina Sin Estructura
+                    }
+
+                    ordenesProduccion.Add(new ArbolProduccion()
+                    {
+                        OrdenProduccion = new OrdenProduccion()
+                                            {
+                                                Numero = numeroOrdenProduccion,
+                                                Codigo = string.Concat("OPA", numeroOrdenProduccion),
+                                                Estado = estadoOrden,
+                                                FechaAlta = DBBLL.GetFechaServidor(),
+                                                DetallePlanSemanal = new DetallePlanSemanal() { Codigo = Convert.ToInt32(rowDetalle.DPSEM_CODIGO) },
+                                                Origen = string.Concat("OPA", numeroOrdenProduccion, " - ", rowDetalle.COCINASRow.COC_CODIGO_PRODUCTO),
+                                                FechaInicioReal = null,
+                                                FechaFinReal = null,
+                                                FechaInicioEstimada = null,
+                                                FechaFinEstimada = null,
+                                                Prioridad = 0,
+                                                Observaciones = string.Empty,
+                                                Cocina = listaCocinas.First(p => p.CodigoCocina == Convert.ToInt32(rowDetalle.COC_CODIGO)),
+                                                CantidadEstimada = Convert.ToInt32(rowDetalle.DPSEM_CANTIDADESTIMADA),
+                                                CantidadReal = 0,
+                                                Estructura = 0
+                                            },
+                        OrdenesTrabajo = new List<NodoOrdenTrabajo>()
+                    });
+                    rowDetalle.BeginEdit();
+                    rowDetalle.DPSEM_ESTADO = BLL.DetallePlanSemanalBLL.estadoConOrden;
+                    rowDetalle.EndEdit();                    
+                }
+                numeroOrdenProduccion++;
+            }
+
+            return ordenesProduccion;
+        }
+        
+        public static ArbolProduccion GetArbolProduccion()
+        {
+            return new ArbolProduccion();
         }
     }
 }
