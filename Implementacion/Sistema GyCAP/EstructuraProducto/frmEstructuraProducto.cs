@@ -346,12 +346,22 @@ namespace GyCAP.UI.EstructuraProducto
 
         #region Parte
 
-        private void btnNuevoPieza_Click(object sender, EventArgs e)
+        private void btnNuevoParte_Click(object sender, EventArgs e)
         {
             frmParte.Instancia.TopLevel = false;            
             frmParte.Instancia.Parent = areaTrabajo;
             frmParte.Instancia.Location = PosicionarFormulario();
             frmParte.Instancia.SetEstadoInicial(frmParte.estadoInicialNuevo);
+            frmParte.Instancia.Show();
+            frmParte.Instancia.Focus();
+        }
+
+        private void btnConsultarParte_Click(object sender, EventArgs e)
+        {
+            frmParte.Instancia.TopLevel = false;
+            frmParte.Instancia.Parent = areaTrabajo;
+            frmParte.Instancia.Location = PosicionarFormulario();
+            frmParte.Instancia.SetEstadoInicial(frmParte.estadoInicialConsultar);
             frmParte.Instancia.Show();
             frmParte.Instancia.Focus();
         }
@@ -405,6 +415,8 @@ namespace GyCAP.UI.EstructuraProducto
         }
 
         #endregion
+
+        
 
 
     }

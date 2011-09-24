@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 namespace GyCAP.DAL
 {
     public class OrdenTrabajoDAL
-    {
+    {        
         public static readonly int EstadoGenerado = 1;
         public static readonly int EstadoEnEspera = 2;
         public static readonly int EstadoEnProceso = 3;
@@ -48,14 +48,14 @@ namespace GyCAP.DAL
                                  @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25) SELECT @@Identity";
 
             object siguiente = DBNull.Value, stockOrigen = DBNull.Value, stockDestino = DBNull.Value;
-            if (!row.IsORDT_ORDENSIGUIENTENull()) { siguiente = row.ORDT_ORDENSIGUIENTE; }
-            if (!row.IsUSTCK_ORIGENNull()) { stockOrigen = row.USTCK_ORIGEN; }
-            if (!row.IsUSTCK_DESTINONull()) { stockDestino = row.USTCK_DESTINO; }
+            //if (!row.IsORDT_ORDENSIGUIENTENull()) { siguiente = row.ORDT_ORDENSIGUIENTE; }
+            //if (!row.IsUSTCK_ORIGENNull()) { stockOrigen = row.USTCK_ORIGEN; }
+            //if (!row.IsUSTCK_DESTINONull()) { stockDestino = row.USTCK_DESTINO; }
             object[] valoresParametros = { row.ORDT_CODIGO,
                                              row.ORDP_NUMERO,
                                              row.EORD_CODIGO,
-                                             row.PAR_CODIGO,
-                                             row.PAR_TIPO,
+                                             0,//row.PAR_CODIGO,
+                                             0,//row.PAR_TIPO,
                                              row.ORDT_ORIGEN,
                                              row.ORDT_CANTIDADESTIMADA,
                                              row.ORDT_CANTIDADREAL,
@@ -63,20 +63,20 @@ namespace GyCAP.DAL
                                              DBNull.Value,
                                              row.ORDT_FECHAFINESTIMADA,
                                              DBNull.Value,
-                                             row.ORDT_HORAINICIOESTIMADA,
+                                             0,//row.ORDT_HORAINICIOESTIMADA,
                                              DBNull.Value,
-                                             row.ORDT_HORAFINESTIMADA,
+                                             0,//row.ORDT_HORAFINESTIMADA,
                                              DBNull.Value,
-                                             row.ESTR_CODIGO,
-                                             row.CTO_CODIGO,
-                                             row.OPR_NUMERO,
+                                             0,//row.ESTR_CODIGO,
+                                             0,//row.CTO_CODIGO,
+                                             0,//row.OPR_NUMERO,
                                              row.ORDT_OBSERVACIONES,
                                              siguiente,
-                                             row.ORDT_NIVEL,
+                                             0,//row.ORDT_NIVEL,
                                              row.ORDT_SECUENCIA,
                                              stockOrigen,
                                              stockDestino,
-                                             row.HR_CODIGO };
+                                             0};//row.HR_CODIGO };
 
             return Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
         }
@@ -160,7 +160,7 @@ namespace GyCAP.DAL
                 transaccion = DB.IniciarTransaccion();
                 //Insertamos el cierre parcial
                 Entidades.CierreParcialOrdenTrabajo cierre = new GyCAP.Entidades.CierreParcialOrdenTrabajo();
-                cierre.OrdenTrabajo = new GyCAP.Entidades.OrdenTrabajo(Convert.ToInt32(rowCierre.ORDT_NUMERO));
+                cierre.OrdenTrabajo = new GyCAP.Entidades.OrdenTrabajo();
                 cierre.Empleado = new GyCAP.Entidades.Empleado();
                 cierre.Empleado.Codigo = long.Parse(rowCierre.E_CODIGO.ToString());
                 if (!rowCierre.IsMAQ_CODIGONull()) 

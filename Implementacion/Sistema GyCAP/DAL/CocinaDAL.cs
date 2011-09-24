@@ -279,5 +279,40 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
+        public static IList<Entidades.Cocina> GetCocinasByCodigos(int[] codigos)
+        {
+            string sql = @"SELECT coc_codigo, col_codigo, mod_codigo, mca_codigo, te_codigo, desig_codigo, 
+                        coc_codigo_producto, coc_activo, coc_has_image, coc_is_base FROM COCINAS WHERE coc_codigo IN (@p0) ";
+            object[] parametros = { codigos };
+            Data.dsCocina.COCINASDataTable dt = new GyCAP.Data.dsCocina.COCINASDataTable();
+            IList<Entidades.Cocina> lista = new List<Entidades.Cocina>();
+
+            try
+            {
+                DB.FillDataTable(dt, sql, parametros);
+
+                foreach (Data.dsCocina.COCINASRow row in dt.Rows)
+                {
+                    lista.Add(new GyCAP.Entidades.Cocina()
+                    {
+                        CodigoCocina = Convert.ToInt32(row.COC_CODIGO),
+                        Activo = Convert.ToInt32(row.COC_ACTIVO),
+                        CodigoProducto = row.COC_CODIGO_PRODUCTO,
+                        Color = new GyCAP.Entidades.Color() { Codigo = Convert.ToInt32(row.COL_CODIGO) },
+                        Designacion = new GyCAP.Entidades.Designacion() { Codigo = Convert.ToInt32(row.DESIG_CODIGO) },
+                        EsBase = ((int)row.COC_IS_BASE == (int)Entidades.Enumeraciones.CocinaEnum.EsBaseEnum.EsBase) ? true : false,
+                        HasImage = Convert.ToInt32(row.COC_HAS_IMAGE),
+                        Marca = new GyCAP.Entidades.Marca() { Codigo = Convert.ToInt32(row.MCA_CODIGO) },
+                        Modelo = new GyCAP.Entidades.ModeloCocina() { Codigo = Convert.ToInt32(row.MOD_CODIGO) },
+                        TerminacionHorno = new GyCAP.Entidades.Terminacion() { Codigo = long.Parse(row.TE_CODIGO.ToString()) }
+                    });
+                }
+
+                return lista;
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+            
+        }
+
     }
 }

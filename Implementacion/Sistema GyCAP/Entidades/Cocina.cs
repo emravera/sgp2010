@@ -11,7 +11,6 @@ namespace GyCAP.Entidades
         private string codigoProducto;
         private Color color;
         private Designacion designacion;
-        private EstadoCocina estado;
         private Marca marca;
         private ModeloCocina modelo;
         private Terminacion terminacionHorno;
@@ -59,12 +58,6 @@ namespace GyCAP.Entidades
         {
             get { return designacion; }
             set { designacion = value; }
-        }
-        
-        public EstadoCocina Estado
-        {
-            get { return estado; }
-            set { estado = value; }
         }
         
         public Marca Marca

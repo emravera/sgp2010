@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using GyCAP.Entidades;
+using GyCAP.Entidades.Enumeraciones;
+using GyCAP.Entidades.BindingEntity;
 
 namespace GyCAP.DAL
 {
