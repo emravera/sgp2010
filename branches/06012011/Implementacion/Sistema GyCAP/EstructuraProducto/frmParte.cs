@@ -239,11 +239,11 @@ namespace GyCAP.UI.EstructuraProducto
                         dsParte.PARTES.FindByPART_NUMERO(numero).PAR_CODIGO = cboEstado.GetSelectedValueInt();
                         dsParte.PARTES.FindByPART_NUMERO(numero).TPAR_CODIGO = cboTipo.GetSelectedValueInt();
                         dsParte.PARTES.FindByPART_NUMERO(numero).PART_COSTO = nudCosto.Value;
-                        if (cboHojaRuta.GetSelectedIndex() != -1) { dsParte.PARTES.FindByPART_NUMERO(numero).HR_CODIGO = cboHojaRuta.GetSelectedValueInt(); }
+                        if (cboHojaRuta.GetSelectedValueInt() != -1) { dsParte.PARTES.FindByPART_NUMERO(numero).HR_CODIGO = cboHojaRuta.GetSelectedValueInt(); }
                         else { dsParte.PARTES.FindByPART_NUMERO(numero).SetHR_CODIGONull(); }
-                        if (cboPlano.GetSelectedIndex() != -1) { dsParte.PARTES.FindByPART_NUMERO(numero).PNO_CODIGO = cboPlano.GetSelectedValueInt(); }
+                        if (cboPlano.GetSelectedValueInt() != -1) { dsParte.PARTES.FindByPART_NUMERO(numero).PNO_CODIGO = cboPlano.GetSelectedValueInt(); }
                         else { dsParte.PARTES.FindByPART_NUMERO(numero).SetPNO_CODIGONull(); }
-                        if (cboTerminacion.GetSelectedIndex() != -1) { dsParte.PARTES.FindByPART_NUMERO(numero).TE_CODIGO = cboTerminacion.GetSelectedValueInt(); }
+                        if (cboTerminacion.GetSelectedValueInt() != -1) { dsParte.PARTES.FindByPART_NUMERO(numero).TE_CODIGO = cboTerminacion.GetSelectedValueInt(); }
                         else { dsParte.PARTES.FindByPART_NUMERO(numero).SetTE_CODIGONull(); }
                         dsParte.PARTES.FindByPART_NUMERO(numero).UMED_CODIGO = cboUnidadMedida.GetSelectedValueInt();
                         if (cboProveedor.GetSelectedValueInt() != -1) { dsParte.PARTES.FindByPART_NUMERO(numero).PROVE_CODIGO = cboProveedor.GetSelectedValueInt(); }
@@ -573,11 +573,11 @@ namespace GyCAP.UI.EstructuraProducto
             txtCodigo.Text = dsParte.PARTES.FindByPART_NUMERO(numero).PART_CODIGO;
             txtDescripcion.Text = dsParte.PARTES.FindByPART_NUMERO(numero).PART_DESCRIPCION;
             cboEstado.SetSelectedValue(Convert.ToInt32(dsParte.PARTES.FindByPART_NUMERO(numero).PAR_CODIGO));
-            if (dsParte.PARTES.FindByPART_NUMERO(numero).IsHR_CODIGONull()) { cboHojaRuta.SetTexto(string.Empty); }
+            if (dsParte.PARTES.FindByPART_NUMERO(numero).IsHR_CODIGONull()) { cboHojaRuta.SetSelectedValue(-1); }
             else { cboHojaRuta.SetSelectedValue(Convert.ToInt32(dsParte.PARTES.FindByPART_NUMERO(numero).HR_CODIGO)); }
-            if (dsParte.PARTES.FindByPART_NUMERO(numero).IsPNO_CODIGONull()) { cboPlano.SetTexto(string.Empty); }
+            if (dsParte.PARTES.FindByPART_NUMERO(numero).IsPNO_CODIGONull()) { cboPlano.SetSelectedValue(-1); }
             else { cboPlano.SetSelectedValue(Convert.ToInt32(dsParte.PARTES.FindByPART_NUMERO(numero).PNO_CODIGO)); }
-            if (dsParte.PARTES.FindByPART_NUMERO(numero).IsTE_CODIGONull()) { cboTerminacion.SetTexto(string.Empty); }
+            if (dsParte.PARTES.FindByPART_NUMERO(numero).IsTE_CODIGONull()) { cboTerminacion.SetSelectedValue(-1); }
             else { cboTerminacion.SetSelectedValue(Convert.ToInt32(dsParte.PARTES.FindByPART_NUMERO(numero).TE_CODIGO)); }
             cboTipo.SetSelectedValue(Convert.ToInt32(dsParte.PARTES.FindByPART_NUMERO(numero).TPAR_CODIGO));
             nudCosto.Value = dsParte.PARTES.FindByPART_NUMERO(numero).PART_COSTO;            

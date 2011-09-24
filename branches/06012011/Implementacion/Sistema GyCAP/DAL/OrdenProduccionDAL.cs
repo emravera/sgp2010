@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using GyCAP.Entidades.Enumeraciones;
+using GyCAP.Entidades;
+using GyCAP.Entidades.ArbolOrdenesTrabajo;
 
 namespace GyCAP.DAL
 {
@@ -11,21 +14,16 @@ namespace GyCAP.DAL
     {
         public static readonly int OrdenAutomatica = 1;
         public static readonly int OrdenManual = 2;
-
-        public static readonly int EstadoGenerado = 1;
-        public static readonly int EstadoEnEspera = 2;
-        public static readonly int EstadoEnProceso = 3;
-        public static readonly int EstadoFinalizado = 4;
-        public static readonly int EstadoCancelado = 5;
         
-        public static void Insertar(int numeroOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo)
+        public static void Insertar(ArbolProduccion arbol)
         {
+            OrdenProduccion orden = arbol.OrdenProduccion;
+
             string sql = @"INSERT INTO ORDENES_PRODUCCION 
                         ([ordp_codigo]
                         ,[eord_codigo]
                         ,[ordp_fechaalta]
                         ,[dpsem_codigo]
-                        ,[ordpm_numero]
                         ,[ordp_origen]
                         ,[ordp_fechainicioestimada]
                         ,[ordp_fechainicioreal]
@@ -37,82 +35,55 @@ namespace GyCAP.DAL
                         ,[ordp_cantidadestimada]
                         ,[ordp_cantidadreal]
                         ,[coc_codigo]
-                        ,[ustck_destino])
+                        ,[ustck_destino]
+                        ,[lot_codigo])
                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16) SELECT @@Identity";
 
-            Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow rowOrdenP = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion);
-            object ordpm = DBNull.Value, dpsem = DBNull.Value, cocina = DBNull.Value, stock = DBNull.Value;
-            if (!rowOrdenP.IsDPSEM_CODIGONull()) { dpsem = rowOrdenP.DPSEM_CODIGO; }
-            //else { ordpm = rowOrdenP.ORDPM_NUMERO; }
-            if (!rowOrdenP.IsCOC_CODIGONull()) { cocina = rowOrdenP.COC_CODIGO; }
-            if (!rowOrdenP.IsUSTCK_DESTINONull()) { stock = rowOrdenP.USTCK_DESTINO; }
-            object[] valoresParametros = {   rowOrdenP.ORDP_CODIGO,
-                                             rowOrdenP.EORD_CODIGO,
-                                             rowOrdenP.ORDP_FECHAALTA,
-                                             dpsem,
-                                             ordpm,
-                                             rowOrdenP.ORDP_ORIGEN,
-                                             rowOrdenP.ORDP_FECHAINICIOESTIMADA,
-                                             DBNull.Value,
-                                             rowOrdenP.ORDP_FECHAFINESTIMADA,
-                                             DBNull.Value,
-                                             rowOrdenP.ORDP_OBSERVACIONES,
-                                             rowOrdenP.ORDP_PRIORIDAD,
-                                             rowOrdenP.ESTR_CODIGO,
-                                             rowOrdenP.ORDP_CANTIDADESTIMADA,
-                                             rowOrdenP.ORDP_CANTIDADREAL, 
-                                             cocina,
-                                             stock };
+            object fechainicio = DBNull.Value, fechafinreal = DBNull.Value, lote = DBNull.Value;
+            if (orden.FechaInicioReal.HasValue) { fechainicio = orden.FechaInicioReal.Value.ToShortDateString(); }
+            if (orden.FechaFinReal.HasValue) { fechafinreal = orden.FechaFinReal.Value.ToShortDateString(); }
+            if (orden.Lote != null) { lote = orden.Lote.Codigo; }
+            object[] valoresParametros = {   
+                                             orden.Codigo,
+                                             orden.Estado.Codigo,
+                                             orden.FechaAlta.ToShortDateString(),
+                                             orden.DetallePlanSemanal.Codigo,
+                                             orden.Origen,
+                                             orden.FechaInicioEstimada.ToString(),
+                                             fechainicio,
+                                             orden.FechaFinEstimada.Value.ToShortDateString(),
+                                             fechafinreal,
+                                             orden.Observaciones,
+                                             orden.Prioridad,
+                                             orden.Estructura,
+                                             orden.CantidadEstimada,
+                                             orden.CantidadReal,
+                                             orden.Cocina.CodigoCocina,
+                                             orden.UbicacionStock.Numero,
+                                             lote
+                                         };
 
-            string sqlUOP = "UPDATE ORDENES_PRODUCCION SET ordp_codigo = @p0 WHERE ordp_numero = @p1";
-            string sqlUOT = "UPDATE ORDENES_TRABAJO SET ordt_codigo = @p0 WHERE ordt_numero = @p1";
             SqlTransaction transaccion = null;
             
             try
             {
                 transaccion = DB.IniciarTransaccion();
-                rowOrdenP.BeginEdit();
-                numeroOrdenProduccion = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
-                //if (rowOrdenP.IsORDPM_NUMERONull()) { rowOrdenP.ORDP_CODIGO = "OPA-" + numeroOrdenProduccion; }
-                //else { rowOrdenP.ORDP_CODIGO = "OPM-" + numeroOrdenProduccion; }
-                rowOrdenP.EndEdit();
+                orden.Numero = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
 
-                valoresParametros = new object[] { rowOrdenP.ORDP_CODIGO, numeroOrdenProduccion };
-                DB.executeNonQuery(sqlUOP, valoresParametros, transaccion);
-
-                foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOrdenTrabajo in rowOrdenP.GetORDENES_TRABAJORows())
+                foreach (OrdenTrabajo item in arbol.AsOrdenesTrabajoList())
                 {
-                    rowOrdenTrabajo.BeginEdit();
-                    rowOrdenTrabajo.ORDP_NUMERO = numeroOrdenProduccion;
-                    int numero = OrdenTrabajoDAL.Insertar(rowOrdenTrabajo, transaccion);
-                    
-                    foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in (Data.dsOrdenTrabajo.ORDENES_TRABAJORow[])dsOrdenTrabajo.ORDENES_TRABAJO.Select("ordt_ordensiguiente = " + rowOrdenTrabajo.ORDT_NUMERO))
-                    {
-                        //row.ORDT_ORDENSIGUIENTE = numero;
-                    }
-                    
-                    rowOrdenTrabajo.ORDT_NUMERO = numero;
-                    //if (rowOrdenP.IsORDPM_NUMERONull()) { rowOrdenTrabajo.ORDT_CODIGO = "OTA-" + rowOrdenTrabajo.ORDT_NUMERO.ToString(); }
-                    //else { rowOrdenTrabajo.ORDT_CODIGO = "OTM-" + rowOrdenTrabajo.ORDT_NUMERO.ToString(); }
-                    valoresParametros = new object[] { rowOrdenTrabajo.ORDT_CODIGO, rowOrdenTrabajo.ORDT_NUMERO };
-                    DB.executeNonQuery(sqlUOT, valoresParametros, transaccion);
-                    rowOrdenTrabajo.EndEdit();
+                    OrdenTrabajoDAL.Insertar(item, transaccion);
                 }
-                rowOrdenP.BeginEdit();
-                rowOrdenP.ORDP_NUMERO = numeroOrdenProduccion;
-                rowOrdenP.EndEdit();
                 
                 transaccion.Commit();
             }
             catch (SqlException ex)
             {
-                //Error en alguna consulta, descartamos los cambios
                 transaccion.Rollback();
                 throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
             }
             finally
             {
-                //En cualquier caso finalizamos la transaccion para que se cierre la conexion
                 DB.FinalizarTransaccion();
             }
         }
@@ -145,6 +116,43 @@ namespace GyCAP.DAL
             }
         }
 
+        public static void Eliminar(IList<Entidades.OrdenProduccion> ordenesProduccion)
+        {
+            string sqlOT = "DELETE FROM ORDENES_TRABAJO WHERE ordp_numero IN (@p0)";
+            string sqlOP = "DELETE FROM ORDENES_PRODUCCION WHERE ordp_numero IN (@p0)";
+
+            int[] ordenes = new int[ordenesProduccion.Count];
+            int[] detalles = new int[ordenesProduccion.Count];
+            for (int i = 0; i < ordenesProduccion.Count; i++) 
+            { 
+                ordenes[i] = ordenesProduccion[i].Numero;
+                detalles[i] = ordenesProduccion[i].DetallePlanSemanal.Codigo;
+            }
+
+            object[] parametros = { ordenes };
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                transaccion = DB.IniciarTransaccion();
+                DB.executeNonQuery(sqlOT, parametros, transaccion);
+                DB.executeNonQuery(sqlOP, parametros, transaccion);
+                DetallePlanSemanalDAL.ActualizarEstado(detalles, (int)PlanificacionEnum.EstadoDetallePlanSemanal.Generado, transaccion);
+                transaccion.Commit();
+            }
+            catch (SqlException ex)
+            {
+                //Error en alguna consulta, descartamos los cambios
+                transaccion.Rollback();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
+            }
+            finally
+            {
+                //En cualquier caso finalizamos la transaccion para que se cierre la conexion
+                DB.FinalizarTransaccion();
+            }
+        }
+
         public static void IniciarOrdenProduccion(int numeroOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsStock dsStock)
         {
             string sql = "UPDATE ORDENES_PRODUCCION SET eord_codigo = @p0, ordp_fechainicioreal = @p1 WHERE ordp_numero = @p2";
@@ -160,17 +168,17 @@ namespace GyCAP.DAL
                 //Actualizamos la orden de produccion
                 DB.executeNonQuery(sql, parametros, transaccion);
                 //Iniciamos las órdenes de trabajo que corresponden
-                string filtro = "ORDP_NUMERO = " + numeroOrdenProduccion + " AND EORD_CODIGO = " + EstadoEnProceso;
+                string filtro = "ORDP_NUMERO = " + numeroOrdenProduccion + " AND EORD_CODIGO = " + (int)OrdenesTrabajoEnum.EstadoOrdenEnum.EnProceso;
                 foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOT in (Data.dsOrdenTrabajo.ORDENES_TRABAJORow[])dsOrdenTrabajo.ORDENES_TRABAJO.Select(filtro))
                 {
                     OrdenTrabajoDAL.IniciarOrdenTrabajo(Convert.ToInt32(rowOT.ORDT_NUMERO), dsOrdenTrabajo, dsStock, transaccion);
                 }
 
                 //Actualizamos el estado del resto de las órdenes de trabajo
-                filtro = "ORDP_NUMERO = " + numeroOrdenProduccion + " AND EORD_CODIGO = " + EstadoEnEspera;
+                filtro = "ORDP_NUMERO = " + numeroOrdenProduccion + " AND EORD_CODIGO = " + (int)OrdenesTrabajoEnum.EstadoOrdenEnum.EnEspera;
                 foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOT in (Data.dsOrdenTrabajo.ORDENES_TRABAJORow[])dsOrdenTrabajo.ORDENES_TRABAJO.Select(filtro))
                 {
-                    OrdenTrabajoDAL.ActualizarEstado(Convert.ToInt32(rowOT.ORDT_NUMERO), EstadoEnEspera, transaccion);
+                    OrdenTrabajoDAL.ActualizarEstado(Convert.ToInt32(rowOT.ORDT_NUMERO), (int)OrdenesTrabajoEnum.EstadoOrdenEnum.EnEspera, transaccion);
                 }
 
                 //Si la orden de trabajo es por un pedido actualizamos su estado
@@ -298,7 +306,7 @@ namespace GyCAP.DAL
                         ordp_cantidadreal = ordp_cantidadestimada 
                         WHERE ordp_numero = @p1;";
 
-            object[] parametros = { EstadoFinalizado, numeroOrdenProduccion };
+            object[] parametros = { (int)OrdenesTrabajoEnum.EstadoOrdenEnum.Finalizada, numeroOrdenProduccion };
 
             SqlTransaction transaccion = null;
 
@@ -307,7 +315,7 @@ namespace GyCAP.DAL
                 transaccion = DB.IniciarTransaccion();
                 //Finalizo la orden de producción
                 DB.executeNonQuery(sql, parametros, transaccion);
-                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).EORD_CODIGO = EstadoFinalizado;
+                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).EORD_CODIGO = (int)OrdenesTrabajoEnum.EstadoOrdenEnum.Finalizada;
                 dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_CANTIDADREAL = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_CANTIDADESTIMADA;
                 dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_FECHAFINREAL = dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_FECHAFINESTIMADA;
 

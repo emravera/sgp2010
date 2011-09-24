@@ -98,8 +98,8 @@ namespace GyCAP.DAL
                                     hojaRuta,
                                     rowParte.UMED_CODIGO,
                                     proveedor,
-                                    rowParte.PART_NUMERO,
-                                    rowParte.PART_HAS_IMAGE
+                                    rowParte.PART_HAS_IMAGE,
+                                    rowParte.PART_NUMERO                                    
                                   };
 
             try

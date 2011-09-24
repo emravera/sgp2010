@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using GyCAP.Entidades.Enumeraciones;
 
 namespace GyCAP.UI.ControlTrabajoEnProceso
 {
@@ -449,7 +450,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                         int estado = Convert.ToInt32(BLL.PlanSemanalBLL.ObtenerEstado(codigoDetalle));
 
                         //si esta en proceso entonces tomo la cantidad y la pongo como cantidad en proceso
-                        if (estado == BLL.OrdenProduccionBLL.EstadoEnProceso)
+                        if (estado == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.EnProceso)
                         {
                             row.BeginEdit();
                             row.DPSEM_CANTIDADENPROCESO = Convert.ToDecimal(row.DPSEM_CANTIDADESTIMADA);
@@ -769,7 +770,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                         int estado = Convert.ToInt32(BLL.PlanSemanalBLL.ObtenerEstado(codigoDetalle));
 
                         //si esta en proceso entonces tomo la cantidad y la pongo como cantidad en proceso
-                        if (estado == BLL.OrdenProduccionBLL.EstadoEnProceso)
+                        if (estado == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.EnProceso)
                         {
                             row.BeginEdit();
                             row.DPSEM_CANTIDADENPROCESO = Convert.ToDecimal(row.DPSEM_CANTIDADESTIMADA);

@@ -14,32 +14,6 @@ namespace GyCAP.BLL
 {
     public class OrdenProduccionBLL
     {
-        public static readonly int parteTipoConjunto = 1;
-        public static readonly int parteTipoSubconjunto = 2;
-        public static readonly int parteTipoPieza = 3;
-        public static readonly int parteTipoMateriaPrima = 4;
-        public static readonly int nodoOrdenTrabajo = 1;
-        public static readonly int nodoDetalleOrdenTrabajo = 2;
-        public static readonly int nodoComplemento = 3;
-
-        public static readonly int EstadoGenerado = 1;
-        public static readonly int EstadoEnEspera = 2;
-        public static readonly int EstadoEnProceso = 3;
-        public static readonly int EstadoFinalizado = 4;
-        public static readonly int EstadoCancelado = 5;
-
-        public static readonly int OrdenAutomatica = 1;
-        public static readonly int OrdenManual = 2;
-
-        public static string GetTipoParte(int tipo)
-        {
-            if (tipo == parteTipoConjunto) return "Conjunto";
-            if (tipo == parteTipoSubconjunto) return "Subconjunto";
-            if (tipo == parteTipoPieza) return "Pieza";
-            if (tipo == parteTipoMateriaPrima) return "Materia Prima";
-            return string.Empty;
-        }
-
         public static void ObtenerOrdenesProduccion(object codigo, object estado, object modo, object fechaGeneracion, object fechaDesde, object fechaHasta, Data.dsOrdenTrabajo dsOrdenTrabajo)
         {
             if (estado != null && Convert.ToInt32(estado) <= 0) { estado = null; }
@@ -56,15 +30,32 @@ namespace GyCAP.BLL
             }
         }
         
-        public static void Insertar(int numeroOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo)
+        public static void Insertar(ArbolProduccion arbol)
         {
-            DAL.OrdenProduccionDAL.Insertar(numeroOrdenProduccion, dsOrdenTrabajo);
+            DAL.OrdenProduccionDAL.Insertar(arbol);
+        }
+
+        public static void Actualizar(ArbolProduccion arbol)
+        {
+
+        }
+
+        public static void Guardar(ArbolProduccion arbol)
+        {
+            if (arbol.OrdenProduccion.Numero > 0) { Insertar(arbol); }
+            else { Actualizar(arbol); }
         }
 
         public static void Eliminar(int numeroOrdenProduccion)
         {
             //revisar que condiciones hacen faltan para poder elimiarse - gonzalo
-            BLL.OrdenProduccionBLL.Eliminar(numeroOrdenProduccion);
+            DAL.OrdenProduccionDAL.Eliminar(numeroOrdenProduccion);
+        }
+
+        public static void Eliminar(IList<Entidades.OrdenProduccion> ordenesProduccion)
+        {
+            //revisar que condiciones hacen faltan para poder elimiarse - gonzalo
+            DAL.OrdenProduccionDAL.Eliminar(ordenesProduccion);
         }
 
         /// <summary>
@@ -204,15 +195,15 @@ namespace GyCAP.BLL
             TreeNode nodoOrdenDC = new TreeNode();
             nodoOrdenOT.Name = rowOrdenP.ORDP_NUMERO.ToString();
             nodoOrdenOT.Text = rowOrdenP.ORDP_ORIGEN;
-            nodoOrdenOT.Tag = nodoOrdenTrabajo;
+            nodoOrdenOT.Tag = 1;
             tvDependenciaSimple.Nodes.Add(nodoOrdenOT);
             nodoOrdenOTyE.Name = rowOrdenP.ORDP_NUMERO.ToString();
             nodoOrdenOTyE.Text = rowOrdenP.ORDP_ORIGEN;
-            nodoOrdenOTyE.Tag = nodoOrdenTrabajo;
+            nodoOrdenOTyE.Tag = 1;
             tvOrdenesYEstructura.Nodes.Add(nodoOrdenOTyE);
             nodoOrdenDC.Name = rowOrdenP.ORDP_NUMERO.ToString();
             nodoOrdenDC.Text = rowOrdenP.ORDP_ORIGEN;
-            nodoOrdenDC.Tag = nodoOrdenTrabajo;
+            nodoOrdenDC.Tag = 1;
             tvDependenciaCompleta.Nodes.Add(nodoOrdenDC);
 
             TreeNode nodoDetalleOT, nodoDetalleOTyE, nodoDetalleDC, ultimoNodoParte = new TreeNode(), parte, ordenes;
@@ -222,7 +213,7 @@ namespace GyCAP.BLL
                 nodoDetalleOT = new TreeNode();
                 nodoDetalleOT.Name = rowOrdenT.ORDT_NUMERO.ToString();
                 nodoDetalleOT.Text = rowOrdenT.ORDT_ORIGEN;
-                nodoDetalleOT.Tag = nodoDetalleOrdenTrabajo;
+                nodoDetalleOT.Tag = 1;
                 /*if (rowOrdenT.IsORDT_ORDENSIGUIENTENull())
                 {
                     nodoOrdenOT.Nodes.Add(nodoDetalleOT);
@@ -245,7 +236,7 @@ namespace GyCAP.BLL
                 nodoDetalleDC = new TreeNode();
                 nodoDetalleDC.Name = rowOrdenT.ORDT_NUMERO.ToString();
                 nodoDetalleDC.Text = rowOrdenT.ORDT_ORIGEN;
-                nodoDetalleDC.Tag = nodoDetalleOrdenTrabajo;
+                nodoDetalleDC.Tag = 0;
                 /*if (rowOrdenT.IsORDT_ORDENSIGUIENTENull())
                 {
                     nodoOrdenDC.Nodes.Add(nodoDetalleDC);
@@ -261,7 +252,7 @@ namespace GyCAP.BLL
                 nodoDetalleOTyE = new TreeNode();
                 nodoDetalleOTyE.Name = rowOrdenT.ORDT_NUMERO.ToString();
                 nodoDetalleOTyE.Text = rowOrdenT.ORDT_ORIGEN;
-                nodoDetalleOTyE.Tag = nodoDetalleOrdenTrabajo;
+                nodoDetalleOTyE.Tag = 0;
                 /*if (rowOrdenT.IsORDT_ORDENSIGUIENTENull())
                 {
                     parte = new TreeNode();
