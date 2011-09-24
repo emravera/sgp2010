@@ -80,9 +80,10 @@
             this.toolStripRepuestos = new System.Windows.Forms.ToolStripButton();
             this.toolStripTipoMantenimiento = new System.Windows.Forms.ToolStripButton();
             this.toolStripCausaFallo = new System.Windows.Forms.ToolStripButton();
+            this.toolStripUsuarios = new System.Windows.Forms.ToolStripButton();
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripUsuarios = new System.Windows.Forms.ToolStripButton();
+            this.toolPermisosAccceso = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -460,7 +461,8 @@
             this.toolStripRepuestos,
             this.toolStripTipoMantenimiento,
             this.toolStripCausaFallo,
-            this.toolStripUsuarios});
+            this.toolStripUsuarios,
+            this.toolPermisosAccceso});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(792, 38);
@@ -586,6 +588,16 @@
             this.toolStripCausaFallo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripCausaFallo.Click += new System.EventHandler(this.toolStripCausaFallo_Click);
             // 
+            // toolStripUsuarios
+            // 
+            this.toolStripUsuarios.Image = ((System.Drawing.Image)(resources.GetObject("toolStripUsuarios.Image")));
+            this.toolStripUsuarios.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripUsuarios.Name = "toolStripUsuarios";
+            this.toolStripUsuarios.Size = new System.Drawing.Size(56, 35);
+            this.toolStripUsuarios.Text = "Usuarios";
+            this.toolStripUsuarios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripUsuarios.Click += new System.EventHandler(this.toolStripUsuarios_Click);
+            // 
             // barraEstado
             // 
             this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -602,15 +614,15 @@
             this.lblEstado.Size = new System.Drawing.Size(39, 17);
             this.lblEstado.Text = "Status";
             // 
-            // toolStripUsuarios
+            // toolPermisosAccceso
             // 
-            this.toolStripUsuarios.Image = ((System.Drawing.Image)(resources.GetObject("toolStripUsuarios.Image")));
-            this.toolStripUsuarios.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripUsuarios.Name = "toolStripUsuarios";
-            this.toolStripUsuarios.Size = new System.Drawing.Size(56, 35);
-            this.toolStripUsuarios.Text = "Usuarios";
-            this.toolStripUsuarios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripUsuarios.Click += new System.EventHandler(this.toolStripUsuarios_Click);
+            this.toolPermisosAccceso.Image = ((System.Drawing.Image)(resources.GetObject("toolPermisosAccceso.Image")));
+            this.toolPermisosAccceso.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolPermisosAccceso.Name = "toolPermisosAccceso";
+            this.toolPermisosAccceso.Size = new System.Drawing.Size(103, 35);
+            this.toolPermisosAccceso.Text = "PermisosAccceso";
+            this.toolPermisosAccceso.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolPermisosAccceso.Click += new System.EventHandler(this.toolPermisosAccceso_Click);
             // 
             // frmPrincipal
             // 
@@ -695,6 +707,7 @@
         private System.Windows.Forms.ToolStripButton toolStripTipoMantenimiento;
         private System.Windows.Forms.ToolStripButton toolStripCausaFallo;
         private System.Windows.Forms.ToolStripButton toolStripUsuarios;
+        private System.Windows.Forms.ToolStripButton toolPermisosAccceso;
     }
 }
 

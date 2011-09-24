@@ -29,7 +29,7 @@ namespace GyCAP.DAL
         //BUSQUEDA
         //Metodo sobrecargado (3 Sobrecargas)
         //Busqueda por nombre
-        public static void ObtenerTodos(object nombre, string estado, Data.dsSeguridad ds)
+        public static void ObtenerTodos(object nombre, int estado, Data.dsSeguridad ds)
         {
             string sql = @"SELECT *
                              FROM USUARIOS
@@ -54,7 +54,7 @@ namespace GyCAP.DAL
 
 
             //ESTADO - Revisamos si es distinto de 0, o sea "todos"
-            if (estado != string.Empty)
+            if (estado != -1 )
             {
                 sql += " AND EU_CODIGO = @p" + cantidadParametros;
                 valoresFiltros[cantidadParametros] = estado;
@@ -128,8 +128,8 @@ namespace GyCAP.DAL
         //Metodo que valida que no se intente guardar algo que ya esta en la BD
         public static bool esUsuario(Entidades.Usuario usuario)
         {
-            string sql = "SELECT count(u_codigo) FROM USUARIOS WHERE u_usuario = @p0";
-            object[] valorParametros = { usuario.Login };
+            string sql = "SELECT count(u_codigo) FROM USUARIOS WHERE u_usuario = @p0 AND U_CODIGO <> @p1 " ;
+            object[] valorParametros = { usuario.Login, usuario.Codigo };
             try
             {
                 if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)

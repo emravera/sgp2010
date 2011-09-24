@@ -69,6 +69,8 @@
     <Compile Include="FabricaBLL.cs" />
     <Compile Include="ImageCache.cs" />
     <Compile Include="ImageRepository.cs" />
+    <Compile Include="MenuBLL.cs" />
+    <Compile Include="MenuUsuarioBLL.cs" />
     <Compile Include="MovimientoStockBLL.cs" />
     <Compile Include="NivelCriticidadBLL.cs" />
     <Compile Include="OrdenTrabajoBLL.cs" />
