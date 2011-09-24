@@ -95,6 +95,7 @@
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcPedido = new System.Windows.Forms.TabControl();
+            this.btnModificarDetalle = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePedido)).BeginInit();
             this.panelAcciones.SuspendLayout();
@@ -155,6 +156,7 @@
             this.panelAcciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panelAcciones.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelAcciones.Controls.Add(this.btnModificarDetalle);
             this.panelAcciones.Controls.Add(this.label7);
             this.panelAcciones.Controls.Add(this.label6);
             this.panelAcciones.Controls.Add(this.btnRestar);
@@ -170,7 +172,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(15, 124);
+            this.label7.Location = new System.Drawing.Point(15, 140);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 13);
             this.label7.TabIndex = 14;
@@ -181,7 +183,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(20, 8);
+            this.label6.Location = new System.Drawing.Point(20, 3);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(40, 13);
             this.label6.TabIndex = 13;
@@ -196,7 +198,7 @@
             this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Restar_Gris_25;
             this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestar.Location = new System.Drawing.Point(41, 140);
+            this.btnRestar.Location = new System.Drawing.Point(41, 156);
             this.btnRestar.Name = "btnRestar";
             this.btnRestar.Size = new System.Drawing.Size(30, 30);
             this.btnRestar.TabIndex = 16;
@@ -214,7 +216,7 @@
             this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSumar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Sumar_Gris_25;
             this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSumar.Location = new System.Drawing.Point(7, 140);
+            this.btnSumar.Location = new System.Drawing.Point(7, 156);
             this.btnSumar.Name = "btnSumar";
             this.btnSumar.Size = new System.Drawing.Size(30, 30);
             this.btnSumar.TabIndex = 15;
@@ -231,7 +233,7 @@
             this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Delete_25;
-            this.btnDelete.Location = new System.Drawing.Point(16, 68);
+            this.btnDelete.Location = new System.Drawing.Point(15, 58);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(53, 44);
             this.btnDelete.TabIndex = 14;
@@ -249,7 +251,7 @@
             this.btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.New_25;
-            this.btnNew.Location = new System.Drawing.Point(18, 24);
+            this.btnNew.Location = new System.Drawing.Point(18, 14);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(47, 47);
             this.btnNew.TabIndex = 13;
@@ -956,6 +958,21 @@
             this.tcPedido.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcPedido.TabIndex = 8;
             // 
+            // btnModificarDetalle
+            // 
+            this.btnModificarDetalle.FlatAppearance.BorderSize = 0;
+            this.btnModificarDetalle.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnModificarDetalle.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnModificarDetalle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificarDetalle.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Text_Editor_25;
+            this.btnModificarDetalle.Location = new System.Drawing.Point(7, 97);
+            this.btnModificarDetalle.Name = "btnModificarDetalle";
+            this.btnModificarDetalle.Size = new System.Drawing.Size(66, 44);
+            this.btnModificarDetalle.TabIndex = 17;
+            this.btnModificarDetalle.Text = "Modificar";
+            this.btnModificarDetalle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnModificarDetalle.UseVisualStyleBackColor = true;
+            // 
             // frmPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1067,5 +1084,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label14;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbUbicacionStock;
+        private System.Windows.Forms.Button btnModificarDetalle;
     }
 }

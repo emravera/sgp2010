@@ -14,7 +14,7 @@ namespace GyCAP.DAL
         public static readonly int EstadoFinalizado = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("Finalizado");
         
         //Metodo para insertar el detalle de pedido
-        public static int Insertar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
+        public static void Insertar(Data.dsCliente.DETALLE_PEDIDOSRow row, SqlTransaction transaccion)
         {
             string sqlInsert = @"INSERT INTO [DETALLE_PEDIDOS] 
                                         ([PED_CODIGO]
@@ -25,14 +25,11 @@ namespace GyCAP.DAL
                                         ,[DPED_FECHA_ENTREGA_PREVISTA])
                                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
 
-            object[] valorParametros = {detalle.Pedido.Codigo , detalle.Estado.Codigo
-                                       , detalle.Cocina.CodigoCocina, detalle.Cantidad
-                                       , detalle.CodigoNemonico, detalle.FechaEntregaPrevista };
+            object[] valorParametros = {row.PED_CODIGO, row.EDPED_CODIGO, row.COC_CODIGO, row.DPED_CANTIDAD,
+                                        row.DPED_CODIGONEMONICO, row.DPED_FECHA_ENTREGA_PREVISTA};
 
             //Ejecutamos la consulta y obtenemos el codigo
-            detalle.Codigo = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParametros, transaccion));
-
-            return Convert.ToInt32(detalle.Codigo);
+            DB.executeNonQuery(sqlInsert, valorParametros, transaccion);          
         }
 
         public static void Eliminar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
@@ -80,8 +77,7 @@ namespace GyCAP.DAL
             SqlTransaction transaccion = null;
 
             try
-            {
-                
+            {               
                 transaccion = DB.IniciarTransaccion();
 
                 string sql = @"UPDATE [DETALLE_PEDIDOS] 
@@ -119,7 +115,9 @@ namespace GyCAP.DAL
         //Metodo que obtiene el detalle de pedido
         public static void ObtenerDetallePedido(DataTable dtDetallePedidos, int codigoPedido)
         {
-            string sql = @"SELECT dped_codigo, ped_codigo, edped_codigo, coc_codigo, dped_cantidad, dped_fecha_cancelacion
+            string sql = @"SELECT dped_codigo, ped_codigo, edped_codigo, coc_codigo, 
+                                  dped_cantidad, dped_fecha_cancelacion, dped_codigonemonico,
+                                  dped_fecha_entrega_prevista, dped_fecha_entrega_real 
                            FROM DETALLE_PEDIDOS WHERE ped_codigo = @p0";
 
             object[] valorParametros = { codigoPedido };
@@ -129,10 +127,9 @@ namespace GyCAP.DAL
                 DB.FillDataTable(dtDetallePedidos, sql, valorParametros);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-
         }
 
-        public static bool PuedeEliminarse(long codigo)
+        public static bool PuedeEliminarse(int codigo)
         {
             //Hacer un for para recorrer los detalles
             string sqlDENT = "SELECT count(DENT_CODIGO) FROM DETALLE_ENTREGA_PRODUCTO WHERE DPED_codigo = @p0";

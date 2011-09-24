@@ -7,21 +7,21 @@ namespace GyCAP.Entidades
 {
     public class DetallePedido
     {
-        private long codigo;
-        private Pedido pedido;
-        private EstadoDetallePedido estado;
-        private Cocina cocina;
-        private int cantidad;
-        private DateTime fechaCancelacion;
-        private DateTime fechaEntregaPrevista;
-        private DateTime fechaEntregaReal;
-        private string codigoNemonico;
-        
+        long codigo;
+        Pedido pedido;
+        EstadoDetallePedido estado;
+        Cocina cocina;
+        int cantidad;
+        DateTime fechaCancelacion;
+        DateTime fechaEntregaPrevista;
+        DateTime fechaEntregaReal;
+        string codigoNemonico;
+
         public string CodigoNemonico
         {
-            get { return CodigoNemonico; }
-            set { CodigoNemonico = value; }
-        }
+            get { return codigoNemonico; }
+            set { codigoNemonico = value; }
+        }      
 
         public long Codigo
         {
