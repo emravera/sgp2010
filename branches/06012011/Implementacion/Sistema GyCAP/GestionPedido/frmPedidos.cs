@@ -247,6 +247,7 @@ namespace GyCAP.UI.GestionPedido
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.inicio;
                     tcPedido.SelectedTab = tpBuscar;
+                    dgvLista.Columns["PED_CODIGO"].Visible = false;
                     break;
                 case estadoUI.nuevo:
                     setControles(false);
@@ -263,6 +264,8 @@ namespace GyCAP.UI.GestionPedido
                     estadoInterface = estadoUI.nuevo;
                     dvDetallePedido.RowFilter = "DPED_CODIGO < 0";
                     tcPedido.SelectedTab = tpDatos;
+                    dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
+                    dgvDetallePedido.Columns["DPED_CODIGONEMONICO"].Visible = false;                        
                     break;
                 case estadoUI.nuevoExterno:
                     setControles(false);
@@ -294,7 +297,7 @@ namespace GyCAP.UI.GestionPedido
                     setControles(false);
                     btnGuardar.Enabled = true;
                     btnVolver.Enabled = true;
-                    btnNuevo.Enabled = false;
+                    btnNuevo.Enabled = true;
                     btnNewCliente.Enabled = true;
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
@@ -582,32 +585,33 @@ namespace GyCAP.UI.GestionPedido
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            //Validamos el formulario            
-            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
+            try
             {
-                //Revisamos que está haciendo
-              if (estadoInterface == estadoUI.cargarDetalle)
+                //Validamos el formulario y sus controles           
+                if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
                 {
-                    try
+                    //Creamos el objeto de Pedido
+                    Entidades.Pedido pedido = new Entidades.Pedido();
+                    //Creamos el objeto Cliente
+                    Entidades.Cliente cliente = new GyCAP.Entidades.Cliente();
+                    cliente.Codigo = Convert.ToInt32(cboClientes.GetSelectedValue());
+                    pedido.Cliente = cliente;
+                    //Creamos el objeto estado de pedido
+                    Entidades.EstadoPedido estadoPedido = new GyCAP.Entidades.EstadoPedido();
+                    estadoPedido.Codigo = Convert.ToInt32(cboEstado.GetSelectedValue());
+                    pedido.EstadoPedido = estadoPedido;
+                    pedido.FechaAlta = DBBLL.GetFechaServidor();
+                    pedido.Observaciones = txtObservacion.Text.Trim();
+                    pedido.Numero = string.Empty;
+                    
+                    //Revisamos que está haciendo
+                    if (estadoInterface == estadoUI.cargarDetalle)
                     {
                         //Esta guardando un Pedido Nuevo
-                        //Creamos el objeto de Pedido
-                        Entidades.Pedido pedido = new Entidades.Pedido();
-                        //Creamos el objeto Cliente
-                        Entidades.Cliente cliente = new GyCAP.Entidades.Cliente();
-                        cliente.Codigo = Convert.ToInt32(cboClientes.GetSelectedValue());
-                        pedido.Cliente = cliente;
-                        //Creamos el objeto estado de pedido
-                        Entidades.EstadoPedido estadoPedido = new GyCAP.Entidades.EstadoPedido();
-                        estadoPedido.Codigo = Convert.ToInt32(cboEstado.GetSelectedValue());
-                        pedido.EstadoPedido = estadoPedido;
-                        pedido.FechaAlta = DBBLL.GetFechaServidor();
-                        pedido.Observaciones = txtObservacion.Text.Trim();
-                        pedido.Numero = string.Empty;
                         
                         //Guardamos el objeto y su detalle completo
                         int codigoPedido = BLL.PedidoBLL.Insertar(pedido, dsCliente.DETALLE_PEDIDOS);
-                        
+
                         //Primero lo agregamos a la tabla Pedidos                 
                         Data.dsCliente.PEDIDOSRow rowPedido = dsCliente.PEDIDOS.NewPEDIDOSRow();
                         rowPedido.BeginEdit();
@@ -619,74 +623,50 @@ namespace GyCAP.UI.GestionPedido
                         rowPedido.PED_FECHA_ALTA = pedido.FechaAlta;
                         rowPedido.EndEdit();
 
-                        dsCliente.PEDIDOS.AddPEDIDOSRow(rowPedido);
-                                                
-                        //Ahora si aceptamos los cambios
-                        dsCliente.PEDIDOS.AcceptChanges();
-                        dsCliente.DETALLE_PEDIDOS.AcceptChanges();
-                        
-                        //Refrescamos la Grilla
-                        dgvLista.Refresh();
+                        dsCliente.PEDIDOS.AddPEDIDOSRow(rowPedido);                    
+                    }
+                    else if (estadoInterface == estadoUI.modificar)
+                    {
+                        //Está modificando el pedido
+                        //Primero obtenemos su código del dataview que está relacionado a la fila seleccionada
+                        pedido.Codigo = Convert.ToInt32(dvPedido[dgvLista.SelectedRows[0].Index]["ped_codigo"]);
 
-                        //Volvemos al estado inicial
-                        SetInterface(estadoUI.inicio);                        
+                        //Segundo obtenemos el resto de los datos que puede cambiar el usuario, el detalle se fué
+                        //actualizando en el dataset a medida que el usuario ejecutaba una acción
+                        dsCliente.PEDIDOS.FindByPED_CODIGO(pedido.Codigo).PED_NUMERO = txtNumero.Text;
+                        dsCliente.PEDIDOS.FindByPED_CODIGO(pedido.Codigo).CLI_CODIGO = long.Parse(cboClientes.GetSelectedValueInt().ToString());
+                        dsCliente.PEDIDOS.FindByPED_CODIGO(pedido.Codigo).EPED_CODIGO = cboEstado.GetSelectedValueInt();
+                        dsCliente.PEDIDOS.FindByPED_CODIGO(pedido.Codigo).PED_OBSERVACIONES = txtObservacion.Text;
+                                              
+                        //Lo actualizamos en la DB 
+                        BLL.PedidoBLL.Actualizar(pedido, dsCliente.DETALLE_PEDIDOS);                                              
                     }
-                    catch (Entidades.Excepciones.ElementoExistenteException ex)
-                    {
-                        dsCliente.PEDIDOS.RejectChanges();
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
-                    }
-                    catch (Entidades.Excepciones.BaseDeDatosException ex)
-                    {
-                        dsCliente.PEDIDOS.RejectChanges();
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
-                    }
+
+                    //El dataset ya se actualizó en las capas DAL y BLL, aceptamos los cambios
+                    dsCliente.PEDIDOS.AcceptChanges();
+                    dsCliente.DETALLE_PEDIDOS.AcceptChanges();
+
+                    //Avisamos que estuvo todo ok
+                    Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Pedido", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+
+                    //Y por último seteamos el estado de la interfaz
+                    SetInterface(estadoUI.inicio);
+
+                    dgvLista.Refresh(); 
                 }
-                else
-                {
-                    //Está modificando el pedido
-                    //Primero obtenemos su código del dataview que está relacionado a la fila seleccionada
-                    long codigoPedido = Convert.ToInt64(dvPedido[dgvLista.SelectedRows[0].Index]["ped_codigo"]);
-                    
-                    //Segundo obtenemos el resto de los datos que puede cambiar el usuario, el detalle se fué
-                    //actualizando en el dataset a medida que el usuario ejecutaba una acción
-                    dsCliente.PEDIDOS.FindByPED_CODIGO(codigoPedido).PED_NUMERO = txtNumero.Text;
-                    dsCliente.PEDIDOS.FindByPED_CODIGO(codigoPedido).CLI_CODIGO = long.Parse(cboClientes.GetSelectedValueInt().ToString());
-                    dsCliente.PEDIDOS.FindByPED_CODIGO(codigoPedido).EPED_CODIGO = cboEstado.GetSelectedValueInt();
-                    dsCliente.PEDIDOS.FindByPED_CODIGO(codigoPedido).PED_OBSERVACIONES = txtObservacion.Text;
-                                        
-                    try
-                    {
-                        //Lo actualizamos en la DB
-                        BLL.PedidoBLL.Actualizar(dsCliente);
-                        
-                        //El dataset ya se actualizó en las capas DAL y BLL, aceptamos los cambios
-                        dsCliente.PEDIDOS.AcceptChanges();
-                        dsCliente.DETALLE_PEDIDOS.AcceptChanges();
-                        
-                        //Avisamos que estuvo todo ok
-                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Pedido", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Modificación);
-                                                
-                        //Y por último seteamos el estado de la interfaz
-                        SetInterface(estadoUI.inicio);
-                    }
-                    catch (Entidades.Excepciones.BaseDeDatosException ex)
-                    {
-                        //Hubo problemas con la BD, descartamos los cambios de piezas ya que puede intentar
-                        //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
-                        dsCliente.PEDIDOS.RejectChanges();
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
-                    }
-                    catch (Entidades.Excepciones.ErrorInesperadoException ex)
-                    {
-                        //Hubo problemas no esperados, descartamos los cambios de piezas ya que puede intentar
-                        //de nuevo y funcionar, en caso contrario el botón volver se encargará de descartar todo
-                        dsCliente.PEDIDOS.RejectChanges();
-                        Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
-                    }
-                }
-                dgvLista.Refresh();
-            }            
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+            }
+            catch (Entidades.Excepciones.ElementoExistenteException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+            }
+            catch (Entidades.Excepciones.ErrorInesperadoException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+            }                    
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -695,7 +675,8 @@ namespace GyCAP.UI.GestionPedido
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 int estado = Convert.ToInt32(dvPedido[dgvLista.SelectedRows[0].Index]["eped_codigo"]);
-                if (estado == 1) //Si no esta pendiente no lo puede eliminar PARAMETRIZAR
+                
+                if (estado == BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Pendiente")) 
                 {
                     //Preguntamos si está seguro
                     DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjPreguntaAlUsuario("¿Está seguro que desea eliminar el Pedido seleccionado?", this.Text);
@@ -704,14 +685,20 @@ namespace GyCAP.UI.GestionPedido
                         try
                         {
                             //Obtenemos el codigo
-                            long codigo = Convert.ToInt64(dvPedido[dgvLista.SelectedRows[0].Index]["ped_codigo"]);
+                            int codigo = Convert.ToInt32(dvPedido[dgvLista.SelectedRows[0].Index]["ped_codigo"]);
                             
                             //Lo eliminamos de la DB
-                            BLL.PedidoBLL.Eliminar(codigo);
+                            BLL.PedidoBLL.Eliminar(codigo, dsCliente.DETALLE_PEDIDOS);
                             
                             //Lo eliminamos de la tabla conjuntos del dataset
                             dsCliente.PEDIDOS.FindByPED_CODIGO(codigo).Delete();
                             dsCliente.PEDIDOS.AcceptChanges();
+
+                            //Limpiamos el datatable de los detalles del pedido
+                            dsCliente.DETALLE_PEDIDOS.Clear();
+
+                            //Avisamos que se elimino correctamente el pedido
+                            Entidades.Mensajes.MensajesABM.MsjConfirmaEliminar(this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                         }
                         catch (Entidades.Excepciones.ElementoEnTransaccionException ex)
                         {
@@ -725,8 +712,8 @@ namespace GyCAP.UI.GestionPedido
                 }
                 else 
                 {
-                    string lEstado;
-                    lEstado = dsCliente.ESTADO_DETALLE_PEDIDOS.FindByEDPED_CODIGO(Convert.ToDecimal( dvPedido[dgvLista.SelectedRows[0].Index]["eped_codigo"])).EDPED_NOMBRE;
+                    // No se puede borrar pedidos que no esten pendientes
+                    string lEstado = dsCliente.ESTADO_DETALLE_PEDIDOS.FindByEDPED_CODIGO(Convert.ToDecimal( dvPedido[dgvLista.SelectedRows[0].Index]["eped_codigo"])).EDPED_NOMBRE;
                     Entidades.Mensajes.MensajesABM.MsjExcepcion("No puede eliminar un pedido con estado: " + lEstado, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
                 }
             }
@@ -813,9 +800,9 @@ namespace GyCAP.UI.GestionPedido
                     row.PED_CODIGO = pedidoCodigo;
                     row.COC_CODIGO = cocinaCodigo;
                     row.EDPED_CODIGO = codigoEstado; 
-                    row.DPED_CANTIDAD = int.Parse(numCantStock.Value.ToString());
-                    row.DPED_CODIGONEMONICO = "";
-                    row.DPED_FECHA_ENTREGA_PREVISTA = sfFechaPrevista.Value;
+                    row.DPED_CANTIDAD = Convert.ToInt32(numCantStock.Value);
+                    row.DPED_CODIGONEMONICO = string.Empty;
+                    row.DPED_FECHA_ENTREGA_PREVISTA =Convert.ToDateTime(sfFechaPrevista.Value.ToShortDateString());
                     row.UBICACION_STOCK = Convert.ToInt32(cbUbicacionStock.GetSelectedValue());
                     row.EndEdit();
 
@@ -851,14 +838,14 @@ namespace GyCAP.UI.GestionPedido
                         row.BeginEdit();
 
                         //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
-                        //-- para que se vaya autodecrementando en cada inserción
+                        //Se va autodecrementando en cada inserción
                         row.DPED_CODIGO = codigoDetalle--;
                         row.PED_CODIGO = pedidoCodigo;
                         row.COC_CODIGO = cocinaCodigo;
                         row.EDPED_CODIGO = codigoEstado;
-                        row.DPED_CANTIDAD = int.Parse(numCantProducir.Value.ToString());
-                        row.DPED_CODIGONEMONICO = "";
-                        row.DPED_FECHA_ENTREGA_PREVISTA = sfFechaPrevista.Value;
+                        row.DPED_CANTIDAD = Convert.ToInt32(numCantProducir.Value);
+                        row.DPED_CODIGONEMONICO = string.Empty;
+                        row.DPED_FECHA_ENTREGA_PREVISTA =Convert.ToDateTime(sfFechaPrevista.Value.ToShortDateString());
                         row.EndEdit();
 
                         //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
@@ -911,7 +898,6 @@ namespace GyCAP.UI.GestionPedido
                         numCantProducir.Value = (nudCantidad.Value - numCantStock.Value);
                         validacion = validacion + "PLANIFICACION PRODUCCION: " + (nudCantidad.Value - numCantStock.Value).ToString() + " Unidades \n";
                     }
-
                 }
                 else
                 {

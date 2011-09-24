@@ -9,11 +9,6 @@ namespace GyCAP.BLL
 {
     public class DetallePedidoBLL
     {        
-        public static void Insertar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
-        {
-            DAL.DetallePedidoDAL.Insertar(detalle, transaccion); 
-        }
-
         public static void Eliminar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
         {
             DAL.DetallePedidoDAL.Eliminar(detalle, transaccion); 

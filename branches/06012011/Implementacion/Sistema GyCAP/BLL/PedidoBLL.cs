@@ -15,6 +15,19 @@ namespace GyCAP.BLL
             DAL.PedidoDAL.ObtenerPedido(nombre, numero, idEstadoPedido, fechaDesde, fechaHasta, ds, obtenerDetalle);
         }
 
+        //Metodo que obtiene un pedido a partir de una fecha y para un cliente determinado
+        public static void ObtenerPedidoCliente(int codigoCliente, int estadoPedido, DataTable dtPedido)
+        {
+            DAL.PedidoDAL.ObtenerPedidosCliente(codigoCliente, estadoPedido, dtPedido);
+        }
+
+        //Metodo que obtiene los pedidos a partir de una fecha
+        public static void ObtenerPedidoFecha(DateTime fecha, DataTable dtPedidos)
+        {
+            DAL.PedidoDAL.ObtenerPedidoFecha(fecha, dtPedidos);
+        }
+        
+        //Metodo para insertar un pedido y su detalle
         public static int Insertar(Entidades.Pedido pedido, DataTable dtDetallePedido)
         {    
             if (EsPedido(pedido)) throw new Entidades.Excepciones.ElementoExistenteException();
@@ -27,44 +40,24 @@ namespace GyCAP.BLL
         {
             return DAL.PedidoDAL.EsPedido(pedido);
         }
-
-        public static void Actualizar(Data.dsCliente dsCliente)
+        
+        //Metodo para modificar un pedido y su detalle
+        public static void Actualizar(Entidades.Pedido pedido, DataTable dtDetallePedido)
         {
-            DAL.PedidoDAL.Actualizar(dsCliente);
+            DAL.PedidoDAL.Actualizar(pedido, dtDetallePedido);
         }
 
-        public static void Eliminar(long codigo)
+        //Metodo que elimina un pedido y su detalle
+        public static void Eliminar(int codigo, DataTable dtDetallePedido)
         {
-            //Revisamos que no esté en alguna transacción
-            if (DAL.PedidoDAL.PuedeEliminarse(codigo) && DAL.DetallePedidoDAL.PuedeEliminarse(codigo) )
-            {
-                //Puede eliminarse
-                DAL.PedidoDAL.Eliminar(codigo);
-            }
-            else
-            {
-                //No puede eliminarse, lanzamos nuestra excepción
-                throw new Entidades.Excepciones.ElementoEnTransaccionException();
-            }
+            //Puede eliminarse
+            DAL.PedidoDAL.Eliminar(codigo);                  
         }
-
-        //Metodo que obtiene los pedidos a partir de una fecha
-        public static void ObtenerPedidoFecha(DateTime fecha, DataTable dtPedidos)
-        {
-            DAL.PedidoDAL.ObtenerPedidoFecha(fecha, dtPedidos);
-        }
-
+        
         //Metodo que cambia el estado del pedido
         public static void CambiarEstadoPedido(int codigoPedido, int estado)
         {
             DAL.PedidoDAL.CambiarEstadoPedido(codigoPedido, estado);
-        }
-
-        //Metodo que obtiene un pedido a partir de una fecha y para un cliente determinado
-        public static void ObtenerPedidoCliente(int codigoCliente, int estadoPedido, DataTable dtPedido)
-        {
-            DAL.PedidoDAL.ObtenerPedidosCliente(codigoCliente,estadoPedido,dtPedido);
-        }       
-        
+        }        
     }
 }
