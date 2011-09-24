@@ -127,7 +127,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
                 catch (Entidades.Excepciones.BaseDeDatosException ex)
                 {
-                    MessageBox.Show(ex.Message, "Error: Generar Orden Trabajo - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);
                 }
             }
         }
@@ -146,7 +146,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
                 catch (Entidades.Excepciones.BaseDeDatosException ex)
                 {
-                    MessageBox.Show(ex.Message, "Error: Generar Orden Trabajo - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);
                 }
             }
         }
@@ -183,17 +183,17 @@ namespace GyCAP.UI.PlanificacionProduccion
                     }
                     else
                     {
-                        MessageBox.Show("No se encontraron Planes de Producción para la semana seleccionada.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MensajesABM.MsjBuscarNoEncontrado("Plan de Producción", this.Text);
                     }
                 }
                 catch (Entidades.Excepciones.BaseDeDatosException ex)
                 {
-                    MessageBox.Show(ex.Message, "Error: Generar Orden Trabajo - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Semana de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Semana", MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
@@ -260,15 +260,12 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
             {
-                //int codOrdenP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
-                //dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).ORDP_PRIORIDAD += 1;
-                object algo = dgvListaOrdenProduccion.SelectedRows[0].DataBoundItem;
-                int algo2 = dgvListaOrdenProduccion.SelectedRows[0].Index;
-                string algo3 = ordenesProduccionSortable[algo2].Codigo;
+                ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].Prioridad += 1;
+                dgvListaOrdenProduccion.Refresh();
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una orden de producción de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Orden de Producción", MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
@@ -276,15 +273,15 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
             {
-                //int codOrdenP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
-                //if (dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).ORDP_PRIORIDAD > 0)
-                //{
-                //    dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).ORDP_PRIORIDAD -= 1;
-                //}
+                if (ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].Prioridad > 0)
+                {
+                    ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].Prioridad -= 1;
+                    dgvListaOrdenProduccion.Refresh();
+                }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una orden de producción de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Orden de Producción", MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
@@ -292,14 +289,14 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
             {
-                //int codOrdenP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
-                //dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).ORDP_CANTIDADESTIMADA = nudCantidadOrdenP.Value;
-                //txtCantidadOrdenP.Text = nudCantidadOrdenP.Value.ToString();
-                //nudCantidadOrdenP.Value = 0;                
+                ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].CantidadEstimada = (int)nudCantidadOrdenP.Value;
+                txtCantidadOrdenP.Text = nudCantidadOrdenP.Value.ToString();
+                nudCantidadOrdenP.Value = 0;
+                dgvListaOrdenProduccion.Refresh();
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una orden de producción de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Orden de Producción", MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
@@ -311,13 +308,13 @@ namespace GyCAP.UI.PlanificacionProduccion
                 DataGridViewCheckBoxCell cellSelecion = fila.Cells[0] as DataGridViewCheckBoxCell;
                 if (Convert.ToBoolean(cellSelecion.FormattedValue))
                 {
-                    //int codigoOrdenP = Convert.ToInt32(dvOrdenProduccion[fila.Index]["ordp_numero"].ToString());
-                    //BLL.OrdenTrabajoBLL.GenerarOrdenesTrabajo(codigoOrdenP, dsOrdenTrabajo, dsEstructura, dsHojaRuta);
+                    int codigoOrdenP = ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].Numero;
+                    BLL.OrdenTrabajoBLL.GenerarOrdenesTrabajo(ordenesProduccion.First(p => p.OrdenProduccion.Numero == codigoOrdenP));
                     cantidad++;
                 }
             }
 
-            if (cantidad == 0) { MessageBox.Show("Debe seleccionar una o más Órdenes de Producción.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+            if (cantidad == 0) { MensajesABM.MsjSinSeleccion("Orden de Producción", MensajesABM.Generos.Femenino, this.Text); }
         }
 
         #endregion
@@ -366,7 +363,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
                 else { MessageBox.Show("Debe seleccionar:" + mensaje, "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
             }
-            else { MessageBox.Show("Debe seleccionar una Orden de Producción de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+            else { MensajesABM.MsjSinSeleccion("Orden de Producción", MensajesABM.Generos.Femenino, this.Text); }
         }
 
         private void btnAplicarCambios_Click(object sender, EventArgs e)
@@ -374,13 +371,23 @@ namespace GyCAP.UI.PlanificacionProduccion
             if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
             {
                 //ver si no existe en la DB, en ese caso actualizar - gonzalo
-                //int codOrdenP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
-                //dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).ORDP_CODIGO = txtCodigoOrdenP.Text;
-                //dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).ORDP_ORIGEN = txtOrigenOrdenP.Text;
-                //dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).ORDP_OBSERVACIONES = txtObservacionesOrdenP.Text;
-                //if (cboStockDestino.GetSelectedIndex() != -1) { dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).USTCK_DESTINO = cboStockDestino.GetSelectedValueInt(); }
-                //else { dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).SetUSTCK_DESTINONull(); }
-                //MessageBox.Show("Debe seleccionar una orden de producción de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].Codigo = txtCodigoOrdenP.Text;
+                ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].Origen = txtOrigenOrdenP.Text;
+                ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].Observaciones = txtObservacionesOrdenP.Text;
+
+                if (cboStockDestino.GetSelectedIndex() != -1)
+                {
+                    ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].UbicacionStock = new UbicacionStock() { Numero = cboStockDestino.GetSelectedValueInt() };
+                }
+                else
+                {
+                    ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].UbicacionStock = null;
+                }
+                dgvListaOrdenProduccion.Refresh();
+            }
+            else
+            {
+                MensajesABM.MsjSinSeleccion("Orden de Producción", MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
@@ -388,147 +395,101 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
             {
-                //int codOrdenP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
-                //bool eliminar = true;
-                //if (codOrdenP > 0)
-                //{
-                //    try
-                //    {
-                //        BLL.OrdenProduccionBLL.Eliminar(codOrdenP);
-                //        BLL.DetallePlanSemanalBLL.ActualizarEstado(codOrdenP, BLL.DetallePlanSemanalBLL.estadoGenerado);
-                //    }
-                //    catch (Entidades.Excepciones.BaseDeDatosException ex)
-                //    {
-                //        eliminar = false;
-                 //       MessageBox.Show(ex.Message, "Error: Generar Orden de Producción - Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                 //   }
-                //}
-
-                /*if (eliminar)
-                {
-                    foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOT in dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).GetORDENES_TRABAJORows())
-                    {
-                        rowOT.Delete();
-                    }
-                    dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).DPSEM_CODIGO).DPSEM_ESTADO = BLL.DetallePlanSemanalBLL.estadoGenerado;
-                    tvDetallePlan.Nodes.Find(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).DPSEM_CODIGO.ToString(), true)[0].ForeColor = System.Drawing.Color.Red;
-                    dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).Delete();
-                    MessageBox.Show("La Orden de Producción ha sido eliminada correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LimpiarControles();
-                }*/
-            }
-        }
-
-        private void btnEliminarTodas_Click(object sender, EventArgs e)
-        {
-            bool eliminar;
-            string mensaje = string.Empty;
-            IList<decimal> opeliminar = new List<decimal>();
-            /*foreach (Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow rowOP in dsOrdenTrabajo.ORDENES_PRODUCCION.Rows)
-            {
-                eliminar = true;
-                if (rowOP.ORDP_NUMERO > 0)
+                int codOrdenP = ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].Numero;
+                bool eliminar = true;
+                if (codOrdenP > 0)
                 {
                     try
                     {
-                        BLL.OrdenProduccionBLL.Eliminar(Convert.ToInt32(rowOP.ORDP_NUMERO));
-                        BLL.DetallePlanSemanalBLL.ActualizarEstado(Convert.ToInt32(rowOP.DPSEM_CODIGO), BLL.DetallePlanSemanalBLL.estadoGenerado);
+                        BLL.OrdenProduccionBLL.Eliminar(codOrdenP);
+                        BLL.DetallePlanSemanalBLL.ActualizarEstado(codOrdenP, BLL.DetallePlanSemanalBLL.estadoGenerado);
                     }
-                    catch (Entidades.Excepciones.BaseDeDatosException)
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
                         eliminar = false;
-                        mensaje += "\n- " + rowOP.ORDP_CODIGO;
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
                     }
                 }
 
                 if (eliminar)
                 {
-                    foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow rowOT in rowOP.GetORDENES_TRABAJORows())
-                    {
-                        rowOT.Delete();
-                    }
-                    dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(rowOP.DPSEM_CODIGO).DPSEM_ESTADO = BLL.DetallePlanSemanalBLL.estadoGenerado;
-                    tvDetallePlan.Nodes.Find(rowOP.DPSEM_CODIGO.ToString(), true)[0].ForeColor = System.Drawing.Color.Red;
-                    opeliminar.Add(rowOP.ORDP_NUMERO);
+                    int codDPSem = ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].DetallePlanSemanal.Codigo;
+                    dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(codDPSem).DPSEM_ESTADO = BLL.DetallePlanSemanalBLL.estadoGenerado;
+                    tvDetallePlan.Nodes.Find(codDPSem.ToString(), true)[0].ForeColor = System.Drawing.Color.Red;
+                    ordenesProduccionSortable.RemoveAt(dgvListaOrdenProduccion.SelectedRows[0].Index);
+                    MensajesABM.MsjConfirmaEliminar(this.Text, MensajesABM.Operaciones.Eliminación);
+                    LimpiarControles();
                 }
             }
-            foreach (decimal codigo in opeliminar)
+        }
+
+        private void btnEliminarTodas_Click(object sender, EventArgs e)
+        {
+            try
             {
-                dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codigo).Delete();
-            }
-            
-            if (string.IsNullOrEmpty(mensaje))
-            {
-                MessageBox.Show("Las Órdenes de Producción se eliminaron correctamente.", "Generar Orden de Producción - Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                BLL.OrdenProduccionBLL.Eliminar(ordenesProduccionSortable.ToList());
+
+                foreach (OrdenProduccion item in ordenesProduccionSortable)
+                {
+                    dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(item.DetallePlanSemanal.Codigo).DPSEM_ESTADO = Convert.ToDecimal(PlanificacionEnum.EstadoDetallePlanSemanal.Generado);
+                    tvDetallePlan.Nodes.Find(item.DetallePlanSemanal.Codigo.ToString(), true)[0].ForeColor = System.Drawing.Color.Red;
+                }
+
+                ordenesProduccionSortable.Clear();                
+                MensajesABM.MsjConfirmaEliminar(this.Text, MensajesABM.Operaciones.Eliminación);
                 LimpiarControles();
             }
-            else
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show("Error al eliminar las siguientes Órdenes de Producción:" + mensaje, "Generar Orden de Producción - Eliminar", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                LimpiarControles();
-            }*/
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
+            }
         }
 
         private void btnGuardarActual_Click(object sender, EventArgs e)
         {
             if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
             {
-                /*int codOrdenP = Convert.ToInt32(dvOrdenProduccion[dgvListaOrdenProduccion.SelectedRows[0].Index]["ordp_numero"].ToString());
+                int codOrdenP = ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].Numero;
                 string datosOK = string.Empty;
-                //if (dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).IsORDP_FECHAINICIOESTIMADANull()) { datosOK = "\n* Fechas"; }
-                if (dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(codOrdenP).IsUSTCK_DESTINONull()) { datosOK += "\n* Stock destino"; }
-                if(datosOK == string.Empty) 
-                { 
-                    GuardarOrden(codOrdenP);
-                    MessageBox.Show("La Orden de Producción se ha guardado correctamente.", "Información: Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }*/
-                //else { MessageBox.Show("Debe completar los datos:\n\n" + datosOK, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-
+                if (!ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].FechaInicioEstimada.HasValue) { datosOK = "\n* Fechas"; }
+                if (ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].UbicacionStock == null) { datosOK += "\n* Stock destino"; }
+                if(datosOK == string.Empty)
+                {
+                    try
+                    {
+                        BLL.OrdenProduccionBLL.Guardar(ordenesProduccion.First(p => p.OrdenProduccion.Numero == codOrdenP));
+                        MensajesABM.MsjConfirmaGuardar("Orden de Producción", this.Text, MensajesABM.Operaciones.Guardado);
+                    }
+                    catch (BaseDeDatosException ex) { MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado); }
+                }
+                else { MensajesABM.MsjValidacion(string.Concat("Debe completar los datos:\n\n", datosOK), this.Text); }
             }
-            else { MessageBox.Show("Debe seleccionar una Orden de Producción de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+            else { MensajesABM.MsjSinSeleccion("Orden de Producción", MensajesABM.Generos.Femenino, this.Text); }
         }
 
         private void btnGuardarTodo_Click(object sender, EventArgs e)
         {
             string datosOK = string.Empty;
-            /*foreach (Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow row in dsOrdenTrabajo.ORDENES_PRODUCCION.Rows)
-            {                
-                //if (row.IsORDP_FECHAINICIOESTIMADANull()) { datosOK += "\n* Fechas de Orden de Producción " + row.ORDP_CODIGO; };
-                if (row.IsUSTCK_DESTINONull()) { datosOK += "\n* Stock destino de Orden de Producción" + row.ORDP_CODIGO; };                
-            }
+
+            foreach (OrdenProduccion orden in ordenesProduccionSortable)
+            {
+                if (!orden.FechaInicioEstimada.HasValue) { datosOK += "Fechas de la Orden de Producción " + orden.Codigo + "\n"; }
+                if (orden.UbicacionStock == null) { datosOK += "Ubicación de Stock de la Orden de Producción " + orden.Codigo + "\n"; }
+            }            
             
             if(datosOK == string.Empty)
             {
-                foreach (Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow row in dsOrdenTrabajo.ORDENES_PRODUCCION.Rows)
+                foreach (ArbolProduccion item in ordenesProduccion)
                 {
-                    GuardarOrden(Convert.ToInt32(row.ORDP_NUMERO));
-                }
-                MessageBox.Show("Las Órdenes de Producción se han guardado correctamente.", "Información: Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }*/
-            //else { MessageBox.Show("Debe completar los datos:\n\n" + datosOK, "Información: Completar los Datos", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-        }
-
-        private void GuardarOrden(int numeroOrdenProduccion)
-        {
-            try
-            {
-                /*if (dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).ORDP_NUMERO < 0)
-                {
-                    //No se ha guardado todavía la orden de producción
-                    int codigoPlan = Convert.ToInt32(dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenProduccion).DPSEM_CODIGO);
-                    BLL.OrdenProduccionBLL.Insertar(numeroOrdenProduccion, dsOrdenTrabajo);
-                    BLL.DetallePlanSemanalBLL.ActualizarEstado(codigoPlan, BLL.DetallePlanSemanalBLL.estadoConOrden);
-                    dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(codigoPlan).DPSEM_ESTADO = BLL.DetallePlanSemanalBLL.estadoConOrden;
-                }
-                else
-                {
-                    //Ya se había guardado la orden de producción - actualizar - gonzalo
-                } */               
+                    try
+                    {
+                        BLL.OrdenProduccionBLL.Guardar(item);
+                        MensajesABM.MsjConfirmaGuardar("Órdenes de Producción", this.Text, MensajesABM.Operaciones.Guardado);
+                    }
+                    catch (BaseDeDatosException ex) { MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado); }
+                }                
             }
-            catch (Entidades.Excepciones.BaseDeDatosException ex)
-            {
-                MessageBox.Show(ex.Message, "Error: Generar Orden de Producción - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }            
+            else { MensajesABM.MsjValidacion(datosOK, this.Text); }
         }
 
         #endregion
@@ -577,10 +538,9 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void bnAplicar_Click(object sender, EventArgs e)
         {
-            Data.dsOrdenTrabajo.ORDENES_TRABAJORow row = (Data.dsOrdenTrabajo.ORDENES_TRABAJORow)(sourceOrdenTrabajo.Current as DataRowView).Row;
-            row.ORDT_CODIGO = txtCodigoOrdenT.Text;
-            row.ORDT_ORIGEN = txtOrigenOrdenT.Text;
-            row.ORDT_OBSERVACIONES = txtObservacionesOrdenT.Text;
+            (sourceOrdenTrabajo.Current as OrdenTrabajo).Codigo = txtCodigoOrdenT.Text;
+            (sourceOrdenTrabajo.Current as OrdenTrabajo).Origen = txtOrigenOrdenT.Text;
+            (sourceOrdenTrabajo.Current as OrdenTrabajo).Observaciones = txtObservacionesOrdenT.Text;
         }
 
         #endregion
@@ -617,20 +577,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvListaOrdenProduccion.Columns["ORDP_CANTIDADESTIMADA"].DataPropertyName = "CantidadEstimada";
             dgvListaOrdenProduccion.Columns["ORDP_FECHAINICIOESTIMADA"].DataPropertyName = "FechaInicioEstimada";
             dgvListaOrdenProduccion.Columns["ORDP_FECHAFINESTIMADA"].DataPropertyName = "FechaFinEstimada";
-            dgvListaOrdenProduccion.Columns["ORDP_PRIORIDAD"].DataPropertyName = "Prioridad";
-            dgvListaOrdenProduccion.Columns["ORDP_CODIGO"].ReadOnly = true;
-            dgvListaOrdenProduccion.Columns["ORDP_FECHAALTA"].ReadOnly = true;
-            dgvListaOrdenProduccion.Columns["ORDP_ORIGEN"].ReadOnly = true;
-            dgvListaOrdenProduccion.Columns["COC_CODIGO"].ReadOnly = true;
-            dgvListaOrdenProduccion.Columns["ORDP_CANTIDADESTIMADA"].ReadOnly = true;
-            dgvListaOrdenProduccion.Columns["ORDP_FECHAINICIOESTIMADA"].ReadOnly = true;
-            dgvListaOrdenProduccion.Columns["ORDP_FECHAFINESTIMADA"].ReadOnly = true;
-            dgvListaOrdenProduccion.Columns["ORDP_PRIORIDAD"].ReadOnly = true;
-            dgvListaOrdenProduccion.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            dgvListaOrdenProduccion.AllowUserToResizeColumns = true;
-            dgvListaOrdenProduccion.Columns["ORDP_FECHAALTA"].MinimumWidth = 110;
-            dgvListaOrdenProduccion.Columns["ORDP_FECHAINICIOESTIMADA"].MinimumWidth = 90;
-            dgvListaOrdenProduccion.Columns["ORDP_FECHAFINESTIMADA"].MinimumWidth = 90;
+            dgvListaOrdenProduccion.Columns["ORDP_PRIORIDAD"].DataPropertyName = "Prioridad";            
             dgvListaOrdenProduccion.Columns["ORDP_FECHAALTA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvListaOrdenProduccion.Columns["ORDP_FECHAINICIOESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvListaOrdenProduccion.Columns["ORDP_FECHAFINESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -647,7 +594,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             dvPlanAnual = new DataView(dsPlanSemanal.PLANES_ANUALES);
             dvMensual = new DataView(dsPlanSemanal.PLANES_MENSUALES);
             dvPlanSemanal = new DataView(dsPlanSemanal.PLANES_SEMANALES);
-            //dvOrdenTrabajo = new DataView(dsOrdenTrabajo.ORDENES_TRABAJO);
             dvStockDestino = new DataView(dsStock.UBICACIONES_STOCK);
             string[] nombres = { "Hacia adelante", "Hacia atrás" };
             int[] valores = { 0, 1 };
@@ -676,7 +622,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Generar Orden de Producción - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
             }
 
             cbAnioBuscar.SetDatos(dvPlanAnual, "PAN_CODIGO", "PAN_ANIO", "Seleccione", false);
@@ -827,7 +773,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         #endregion
 
-        #region Eventos Grilla orden producion
+        #region Eventos Grilla orden produccion
         private void dgvListaOrdenProduccion_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value != null && e.Value.ToString() != string.Empty)
@@ -923,7 +869,10 @@ namespace GyCAP.UI.PlanificacionProduccion
                     animador.SetFormulario(frmArbolOrdenesTrabajo.Instancia, this, Sistema.ControlesUsuarios.AnimadorFormulario.animacionDerecha, 300, false);
                     animador.MostrarFormulario();
                 }
-                else { MessageBox.Show("Debe seleccionar una Orden de Producción de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+                else 
+                {
+                    MensajesABM.MsjSinSeleccion("Orden de Producción", MensajesABM.Generos.Femenino, this.Text); 
+                }
             }
         }
 

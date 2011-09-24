@@ -28,5 +28,17 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
             codigoOrden--;
             return codigoOrden;
         }
+
+        public IList<OrdenTrabajo> AsOrdenesTrabajoList()
+        {
+            IList<OrdenTrabajo> lista = new List<OrdenTrabajo>();
+
+            foreach (NodoOrdenTrabajo nodo in ordenesTrabajo)
+            {
+                nodo.AsOrdenesTrabajoList(lista);
+            }
+
+            return lista;
+        }
     }
 }

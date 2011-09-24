@@ -4,25 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using GyCAP.Entidades.Enumeraciones;
+using GyCAP.Entidades.Excepciones;
+using GyCAP.Entidades;
 
 namespace GyCAP.DAL
 {
     public class OrdenTrabajoDAL
     {        
-        public static readonly int EstadoGenerado = 1;
-        public static readonly int EstadoEnEspera = 2;
-        public static readonly int EstadoEnProceso = 3;
-        public static readonly int EstadoFinalizado = 4;
-        public static readonly int EstadoCancelado = 5;
-        
-        public static int Insertar(Data.dsOrdenTrabajo.ORDENES_TRABAJORow row, SqlTransaction transaccion)
+        public static void Insertar(OrdenTrabajo orden, SqlTransaction transaccion)
         {
             string sql = @"INSERT INTO ORDENES_TRABAJO 
                          ([ordt_codigo]
                          ,[ordp_numero]
                          ,[eord_codigo]
                          ,[par_codigo]
-                         ,[par_tipo]
                          ,[ordt_origen]
                          ,[ordt_cantidadestimada]
                          ,[ordt_cantidadreal]
@@ -30,55 +26,34 @@ namespace GyCAP.DAL
                          ,[ordt_fechainicioreal]
                          ,[ordt_fechafinestimada]
                          ,[ordt_fechafinreal]
-                         ,[ordt_horainicioestimada]
-                         ,[ordt_horainicioreal]
-                         ,[ordt_horafinestimada]
-                         ,[ordt_horafinreal]
-                         ,[estr_codigo]
-                         ,[cto_codigo]
-                         ,[opr_numero]
                          ,[ordt_observaciones]
-                         ,[ordt_ordensiguiente]
-                         ,[ordt_nivel]
                          ,[ordt_secuencia]
-                         ,[ustck_origen]
-                         ,[ustck_destino]
-                         ,[hr_codigo])
-                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, 
-                                 @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25) SELECT @@Identity";
+                         ,[dhr_codigo])
+                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13) SELECT @@Identity";
+            
+            object fechainicioreal = DBNull.Value, fechafinreal = DBNull.Value, hr = DBNull.Value;
+            if (orden.FechaInicioReal.HasValue) { fechainicioreal = orden.FechaInicioReal.Value.ToShortDateString(); }
+            if (orden.FechaFinReal.HasValue) { fechafinreal = orden.FechaInicioReal.Value.ToShortDateString(); }
+            if (orden.DetalleHojaRuta != null) { hr = orden.DetalleHojaRuta.Codigo; }
 
-            object siguiente = DBNull.Value, stockOrigen = DBNull.Value, stockDestino = DBNull.Value;
-            //if (!row.IsORDT_ORDENSIGUIENTENull()) { siguiente = row.ORDT_ORDENSIGUIENTE; }
-            //if (!row.IsUSTCK_ORIGENNull()) { stockOrigen = row.USTCK_ORIGEN; }
-            //if (!row.IsUSTCK_DESTINONull()) { stockDestino = row.USTCK_DESTINO; }
-            object[] valoresParametros = { row.ORDT_CODIGO,
-                                             row.ORDP_NUMERO,
-                                             row.EORD_CODIGO,
-                                             0,//row.PAR_CODIGO,
-                                             0,//row.PAR_TIPO,
-                                             row.ORDT_ORIGEN,
-                                             row.ORDT_CANTIDADESTIMADA,
-                                             row.ORDT_CANTIDADREAL,
-                                             row.ORDT_FECHAINICIOESTIMADA,
-                                             DBNull.Value,
-                                             row.ORDT_FECHAFINESTIMADA,
-                                             DBNull.Value,
-                                             0,//row.ORDT_HORAINICIOESTIMADA,
-                                             DBNull.Value,
-                                             0,//row.ORDT_HORAFINESTIMADA,
-                                             DBNull.Value,
-                                             0,//row.ESTR_CODIGO,
-                                             0,//row.CTO_CODIGO,
-                                             0,//row.OPR_NUMERO,
-                                             row.ORDT_OBSERVACIONES,
-                                             siguiente,
-                                             0,//row.ORDT_NIVEL,
-                                             row.ORDT_SECUENCIA,
-                                             stockOrigen,
-                                             stockDestino,
-                                             0};//row.HR_CODIGO };
+            object[] valoresParametros = { 
+                                             orden.Codigo,
+                                             orden.OrdenProduccion,
+                                             orden.Estado.Codigo,
+                                             orden.Parte.Numero,
+                                             orden.Origen,
+                                             orden.CantidadEstimada,
+                                             orden.CantidadReal,
+                                             orden.FechaInicioEstimada.ToShortDateString(),
+                                             fechainicioreal,
+                                             orden.FechaFinEstimada.ToShortDateString(),
+                                             fechafinreal,
+                                             orden.Observaciones,
+                                             orden.Secuencia,
+                                             hr
+                                         };
 
-            return Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
+            orden.Numero = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
         }
 
         public static void IniciarOrdenTrabajo(int numeroOrdenTrabajo, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsStock dsStock, SqlTransaction transaccion)
@@ -221,16 +196,16 @@ namespace GyCAP.DAL
                         ,ordt_fechafinreal = ordt_fechafinestimada 
                         WHERE ordt_numero = @p1";
 
-            object[] parametros = { EstadoFinalizado, numeroOrdenTrabajo };
+            object[] parametros = { (int)OrdenesTrabajoEnum.EstadoOrdenEnum.Finalizada, numeroOrdenTrabajo };
 
             //Finalizo la orden de trabajo
             DB.executeNonQuery(sql, parametros, transaccion);
 
-            if (dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).EORD_CODIGO == EstadoEnProceso)
+            if (dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).EORD_CODIGO == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.EnProceso)
             {
                 //*************FINALIZACIÓN ÓRDENES INICIADAS*************************************************
 
-                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).EORD_CODIGO = EstadoFinalizado;
+                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).EORD_CODIGO = (int)OrdenesTrabajoEnum.EstadoOrdenEnum.Finalizada;
                 dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_CANTIDADREAL = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_CANTIDADESTIMADA;
                 dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_FECHAFINREAL = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_FECHAFINESTIMADA;
                                 
@@ -260,7 +235,7 @@ namespace GyCAP.DAL
             else
             {
                 //*************FINALIZACIÓN ÓRDENES EN ESPERA****************************************************
-                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).EORD_CODIGO = EstadoFinalizado;
+                dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).EORD_CODIGO = (int)OrdenesTrabajoEnum.EstadoOrdenEnum.Finalizada;
                 dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_CANTIDADREAL = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_CANTIDADESTIMADA;
                 dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_FECHAFINREAL = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_FECHAFINESTIMADA;
                 dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_FECHAINICIOREAL = dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenTrabajo).ORDT_FECHAINICIOESTIMADA;

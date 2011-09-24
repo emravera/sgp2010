@@ -60,7 +60,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void tvArbolDependenciaSimple_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (Convert.ToInt32(e.Node.Tag.ToString()) == BLL.OrdenProduccionBLL.nodoDetalleOrdenTrabajo)
+            if (Convert.ToInt32(e.Node.Tag.ToString()) == 0)
             {
                 frmGenerarOrdenTrabajo.InstanciaAutomatica.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
                 SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
@@ -69,7 +69,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void tvArbolDependenciaCompleta_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (Convert.ToInt32(e.Node.Tag.ToString()) == BLL.OrdenProduccionBLL.nodoDetalleOrdenTrabajo)
+            if (Convert.ToInt32(e.Node.Tag.ToString()) == 0)
             {
                 frmGenerarOrdenTrabajo.InstanciaAutomatica.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
                 SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
@@ -78,7 +78,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void tvArbolOrdenesYEstructura_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (Convert.ToInt32(e.Node.Tag.ToString()) == BLL.OrdenProduccionBLL.nodoDetalleOrdenTrabajo)
+            if (Convert.ToInt32(e.Node.Tag.ToString()) == 0)
             {
                 frmGenerarOrdenTrabajo.InstanciaAutomatica.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
                 SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));

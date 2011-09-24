@@ -45,5 +45,15 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
             get { return nodosHijos; }
             set { nodosHijos = value; }
         }
+
+        public void AsOrdenesTrabajoList(IList<OrdenTrabajo> lista)
+        {
+            lista.Add(this.ordenTrabajo);
+
+            foreach (NodoOrdenTrabajo nodo in this.NodosHijos)
+            {
+                nodo.AsOrdenesTrabajoList(lista);
+            }
+        }
     }
 }

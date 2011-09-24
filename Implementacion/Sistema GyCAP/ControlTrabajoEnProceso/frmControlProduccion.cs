@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Enumeraciones;
 
 namespace GyCAP.UI.ControlTrabajoEnProceso
 {
@@ -63,7 +64,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                 {
                     int numeroOrdenOP = Convert.ToInt32(dvOrdenProduccion[dgvOrdenesProduccion.SelectedRows[0].Index]["ordp_numero"]);
                     //Comprobamos si puede iniciarse
-                    if (dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenOP).EORD_CODIGO == BLL.OrdenProduccionBLL.EstadoGenerado)
+                    if (dsOrdenTrabajo.ORDENES_PRODUCCION.FindByORDP_NUMERO(numeroOrdenOP).EORD_CODIGO == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.Generada)
                     {
                         try
                         {
@@ -87,7 +88,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                 if (dgvOrdenesTrabajo.SelectedRows.Count > 0)
                 {
                     int numeroOrdenOT = Convert.ToInt32(dvOrdenTrabajo[dgvOrdenesTrabajo.SelectedRows[0].Index]["ordt_numero"]);
-                    if (dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenOT).EORD_CODIGO == BLL.OrdenTrabajoBLL.EstadoGenerado)
+                    if (dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOrdenOT).EORD_CODIGO == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.Generada)
                     {
                         //preguntar si desea forzar el inicio de la orden de trabajo
                     }
@@ -235,7 +236,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
             if (dgvOrdenesTrabajo.SelectedRows.Count > 0)
             {
                 int numeroOT = Convert.ToInt32(dvOrdenTrabajo[dgvOrdenesTrabajo.SelectedRows[0].Index]["ORDT_NUMERO"]);
-                if (dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOT).EORD_CODIGO == BLL.OrdenTrabajoBLL.EstadoEnProceso)
+                if (dsOrdenTrabajo.ORDENES_TRABAJO.FindByORDT_NUMERO(numeroOT).EORD_CODIGO == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.EnProceso)
                 {
                     gbAgregarCierreParcial.Enabled = true;
                     LimpiarDatosCierre();
@@ -535,7 +536,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
             dvMaquina = new DataView();//dsOrdenTrabajo.MAQUINAS);
             cboMaquinaCierre.SetDatos(dvMaquina, "MAQ_CODIGO", "MAQ_NOMBRE", "Seleccione", false);
             string[] nombres = { "Automático", "Manual" };
-            int[] valores = { BLL.OrdenProduccionBLL.OrdenAutomatica, BLL.OrdenProduccionBLL.OrdenManual };
+            int[] valores = { 1, 0 };
             cboModoOPBuscar.SetDatos(nombres, valores, "--TODOS--", true);
             dvEstadoOTBuscar = new DataView(dsOrdenTrabajo.ESTADO_ORDENES_TRABAJO);
             cboEstadoOTFiltrar.SetDatos(dvEstadoOTBuscar, "EORD_CODIGO", "EORD_NOMBRE", "--TODOS--", true);
