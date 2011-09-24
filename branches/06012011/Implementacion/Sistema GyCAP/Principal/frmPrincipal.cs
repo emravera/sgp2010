@@ -254,6 +254,12 @@ namespace Principal
             GyCAP.UI.Seguridad.frmUsuario.Instancia.Show();
         }
 
+        private void toolPermisosAccceso_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Seguridad.frmPermisosAcceso.Instancia.MdiParent = this;
+            GyCAP.UI.Seguridad.frmPermisosAcceso.Instancia.Show();
+        }
+
 
     }
 }

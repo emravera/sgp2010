@@ -19,7 +19,7 @@ namespace GyCAP.BLL
             DAL.UsuarioDAL.ObtenerTodos(dt);
         }
 
-        public static void ObtenerTodos(string nombre, string estado, Data.dsSeguridad ds)
+        public static void ObtenerTodos(string nombre, int estado, Data.dsSeguridad ds)
         {
             DAL.UsuarioDAL.ObtenerTodos(nombre, estado, ds);
         }

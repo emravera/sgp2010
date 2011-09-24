@@ -13,7 +13,7 @@ namespace GyCAP.UI.Seguridad
     {
         private static frmUsuario _frm = null;
         private GyCAP.Data.dsSeguridad dsSeguridad = new GyCAP.Data.dsSeguridad();
-        private DataView dvUsuario, dvRoles;
+        private DataView dvUsuario, dvRoles, dvEstado;
         private enum estadoUI { inicio, nuevo, consultar, modificar, nuevoExterno };
         private estadoUI estadoInterface;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
@@ -46,8 +46,8 @@ namespace GyCAP.UI.Seguridad
             dgvLista.Columns["U_CODIGO"].DataPropertyName = "U_CODIGO";
             dgvLista.Columns["U_NOMBRE"].DataPropertyName = "U_NOMBRE";
             dgvLista.Columns["U_USUARIO"].DataPropertyName = "U_USUARIO";
-            dgvLista.Columns["U_USUARIO"].DataPropertyName = "U_USUARIO";
-            dgvLista.Columns["ROL_CODIGO"].DataPropertyName = "U_MAIL";
+            dgvLista.Columns["ROL_CODIGO"].DataPropertyName = "ROL_CODIGO";
+            dgvLista.Columns["U_MAIL"].DataPropertyName = "U_MAIL";
             dgvLista.Columns["EU_CODIGO"].DataPropertyName = "EU_CODIGO";
 
             //Alineacion de los numeros y las fechas en la grilla
@@ -60,29 +60,23 @@ namespace GyCAP.UI.Seguridad
             dgvLista.DataSource = dvUsuario;
 
             //CARGA DE COMBOS
-            cboBuscarEstado.Items.Add("Todos");
-            cboBuscarEstado.Items.Add("Activo");
-            cboBuscarEstado.Items.Add("Inactivo");
-            cboBuscarEstado.SelectedIndex = 0;
-
-            cboEstado.Items.Add("Activo");
-            cboEstado.Items.Add("Inactivo");
-            cboEstado.SelectedIndex = 0;
-
-            //Cargamos los Roles
             try
             {
                 BLL.RolBLL.ObtenerTodos(dsSeguridad.ROLES);
+                BLL.EstadoUsuarioBLL.ObtenerTodos(dsSeguridad.ESTADO_USUARIOS);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex) { Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Inicio); }
 
             //Dataviews
             dvRoles = new DataView(dsSeguridad.ROLES);
             dvRoles.Sort = "ROL_NOMBRE ASC";
+            dvEstado = new DataView(dsSeguridad.ESTADO_USUARIOS);
+            dvEstado.Sort = "EU_NOMBRE ASC"; 
 
             //Combos
             cboRol.SetDatos(dvRoles, "ROL_CODIGO", "ROL_NOMBRE", "Seleccione...", false);
-
+            cboEstado.SetDatos(dvEstado, "EU_CODIGO", "EU_NOMBRE", "Seleccione...", false);
+            cboBuscarEstado.SetDatos(dvEstado, "EU_CODIGO", "EU_NOMBRE", "Todos", true);
 
             //Seteo el maxlenght de los textbox para que no de error en la bd
             txtNombre.MaxLength = 80;
@@ -132,10 +126,11 @@ namespace GyCAP.UI.Seguridad
                     txtMail.Text = string.Empty;
                     txtPassword.Text = string.Empty;
                     txtPassword2.Text = string.Empty;
+                    cboRol.SetSelectedIndex(-1);
                     try
                     {
                         cboEstado.SetSelectedValue(BLL.EstadoUsuarioBLL.EstadoActivo);
-                        cboRol.SetSelectedValue(BLL.RolBLL.RolAdministrador);
+                        //cboRol.SetSelectedValue(BLL.RolBLL.RolAdministrador);
                     }
                     catch
                     {
@@ -161,16 +156,17 @@ namespace GyCAP.UI.Seguridad
                     txtMail.Text = string.Empty;
                     txtPassword.Text = string.Empty;
                     txtPassword2.Text = string.Empty;
+                    cboRol.SetSelectedIndex(-1);
                     try
                     {
                         cboEstado.SetSelectedValue(BLL.EstadoUsuarioBLL.EstadoActivo);
-                        cboRol.SetSelectedValue(BLL.RolBLL.RolAdministrador);
+                        //cboRol.SetSelectedValue(BLL.RolBLL.RolAdministrador);
                     }
                     catch
                     {
                         cboEstado.SetSelectedIndex(-1);
                         cboRol.SetSelectedIndex(-1);
-                    }       
+                    }          
 
                     //gbGuardarCancelar.Enabled = true;
                     btnGuardar.Enabled = true;
@@ -190,7 +186,7 @@ namespace GyCAP.UI.Seguridad
                     btnVolver.Enabled = true;
                     estadoInterface = estadoUI.consultar;
                     tcABM.SelectedTab = tpDatos;
-                    btnVolver.Focus();
+                    //btnVolver.Focus();
                     break;
                 case estadoUI.modificar:
                     setControles(false);
@@ -310,20 +306,8 @@ namespace GyCAP.UI.Seguridad
         {
             try
             {
-                string estado;
-                estado = string.Empty;
-                switch (cboBuscarEstado.Text.Substring(0, 1))
-                {
-                    case "A":
-                        estado = "A";
-                        break;
-                    case "I":
-                        estado = "I";
-                        break;
-                }
-
                 dsSeguridad.USUARIOS.Clear();
-                GyCAP.BLL.UsuarioBLL.ObtenerTodos(txtNombre.Text, estado, dsSeguridad);
+                GyCAP.BLL.UsuarioBLL.ObtenerTodos(txtNombre.Text, cboBuscarEstado.GetSelectedValueInt(), dsSeguridad);
                 //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
                 //por una consulta a la BD
                 dvUsuario.Table = dsSeguridad.USUARIOS;
@@ -406,6 +390,17 @@ namespace GyCAP.UI.Seguridad
             //Revisamos que escribió algo y selecciono algo en el combo
             if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
             {
+
+                //Validar el password
+                if (txtPassword.Text.Trim() != txtPassword2.Text.Trim())
+                {
+                    txtPassword.Text = string.Empty; 
+                    txtPassword2.Text = string.Empty;
+                    txtPassword.Focus();
+                    Entidades.Mensajes.MensajesABM.MsjValidacion("Las contraseñas ingresadas no coinciden. Ingrese nuevamente las contraseñas.", this.Text);
+                    return;
+                }
+
                 Entidades.Usuario usuario = new GyCAP.Entidades.Usuario(); 
                 Entidades.EstadoUsuario estado = new GyCAP.Entidades.EstadoUsuario();
                 Entidades.Rol rol = new GyCAP.Entidades.Rol();
@@ -413,6 +408,16 @@ namespace GyCAP.UI.Seguridad
                 //Revisamos que está haciendo
                 if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.nuevoExterno)
                 {
+                    //Validamos que no exista el login
+                    Entidades.Usuario usuarioAux = new GyCAP.Entidades.Usuario();
+                    usuarioAux.Login = txtLogin.Text.Trim();
+                    if (BLL.UsuarioBLL.EsUsuario(usuarioAux) == true)
+                    {
+                        txtLogin.Focus();
+                        Entidades.Mensajes.MensajesABM.MsjValidacion("El login ingresado ya existe en el sistema. Ingrese nuevamente un login.", this.Text);
+                        return;
+                    }
+
                     //Está cargando un nuevo Usuario
                     usuario.Nombre = txtNombre.Text.Trim();
                     usuario.Mail = txtMail.Text.Trim();

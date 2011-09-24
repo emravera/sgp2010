@@ -65,6 +65,8 @@
     <Compile Include="EntregaProductoDAL.cs" />
     <Compile Include="EstadoMovimientoStockDAL.cs" />
     <Compile Include="FabricaDAL.cs" />
+    <Compile Include="MenuDAL.cs" />
+    <Compile Include="MenuUsuarioDAL.cs" />
     <Compile Include="MovimientoStockDAL.cs" />
     <Compile Include="NivelCriticidadDAL.cs" />
     <Compile Include="OrdenTrabajoDAL.cs" />

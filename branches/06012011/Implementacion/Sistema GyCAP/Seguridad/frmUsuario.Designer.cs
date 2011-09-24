@@ -34,6 +34,8 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboRol = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label2 = new System.Windows.Forms.Label();
             this.txtPassword2 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -59,12 +61,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cboBuscarEstado = new System.Windows.Forms.ComboBox();
+            this.cboBuscarEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
             this.tcABM = new System.Windows.Forms.TabControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cboRol = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tpDatos.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.gbDatos.SuspendLayout();
@@ -166,6 +166,26 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos Usuarios";
             // 
+            // cboEstado
+            // 
+            this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboEstado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboEstado.FormattingEnabled = true;
+            this.cboEstado.Location = new System.Drawing.Point(119, 178);
+            this.cboEstado.Name = "cboEstado";
+            this.cboEstado.Size = new System.Drawing.Size(149, 21);
+            this.cboEstado.TabIndex = 10;
+            // 
+            // cboRol
+            // 
+            this.cboRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRol.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboRol.FormattingEnabled = true;
+            this.cboRol.Location = new System.Drawing.Point(119, 151);
+            this.cboRol.Name = "cboRol";
+            this.cboRol.Size = new System.Drawing.Size(149, 21);
+            this.cboRol.TabIndex = 9;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -180,6 +200,7 @@
             this.txtPassword2.Location = new System.Drawing.Point(119, 102);
             this.txtPassword2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPassword2.Name = "txtPassword2";
+            this.txtPassword2.PasswordChar = '*';
             this.txtPassword2.Size = new System.Drawing.Size(152, 20);
             this.txtPassword2.TabIndex = 7;
             this.txtPassword2.Enter += new System.EventHandler(this.txtPassword2_Enter);
@@ -198,6 +219,7 @@
             this.txtPassword.Location = new System.Drawing.Point(119, 78);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(152, 20);
             this.txtPassword.TabIndex = 6;
             this.txtPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
@@ -400,6 +422,9 @@
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(526, 223);
             this.dgvLista.TabIndex = 3;
+            this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
+            this.dgvLista.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvLista_CellFormatting);
+            this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // label1
             // 
@@ -444,11 +469,12 @@
             // 
             this.cboBuscarEstado.CausesValidation = false;
             this.cboBuscarEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboBuscarEstado.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboBuscarEstado.FormattingEnabled = true;
             this.cboBuscarEstado.Location = new System.Drawing.Point(58, 17);
             this.cboBuscarEstado.Name = "cboBuscarEstado";
-            this.cboBuscarEstado.Size = new System.Drawing.Size(123, 21);
-            this.cboBuscarEstado.TabIndex = 0;
+            this.cboBuscarEstado.Size = new System.Drawing.Size(149, 21);
+            this.cboBuscarEstado.TabIndex = 11;
             // 
             // label4
             // 
@@ -492,26 +518,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(562, 372);
             this.tableLayoutPanel1.TabIndex = 15;
-            // 
-            // cboEstado
-            // 
-            this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEstado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEstado.FormattingEnabled = true;
-            this.cboEstado.Location = new System.Drawing.Point(119, 178);
-            this.cboEstado.Name = "cboEstado";
-            this.cboEstado.Size = new System.Drawing.Size(149, 21);
-            this.cboEstado.TabIndex = 10;
-            // 
-            // cboRol
-            // 
-            this.cboRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboRol.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboRol.FormattingEnabled = true;
-            this.cboRol.Location = new System.Drawing.Point(119, 151);
-            this.cboRol.Name = "cboRol";
-            this.cboRol.Size = new System.Drawing.Size(149, 21);
-            this.cboRol.TabIndex = 9;
             // 
             // frmUsuario
             // 
@@ -574,11 +580,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tpBuscar;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox cboBuscarEstado;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabControl tcABM;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboRol;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboEstado;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboBuscarEstado;
     }
 }
