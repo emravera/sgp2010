@@ -64,9 +64,9 @@ namespace GyCAP.Entidades
             get { return cantidadReal; }
             set { cantidadReal = value; }
         }
-        private DateTime fechaInicioEstimada;
+        private DateTime? fechaInicioEstimada;
 
-        public DateTime FechaInicioEstimada
+        public DateTime? FechaInicioEstimada
         {
             get { return fechaInicioEstimada; }
             set { fechaInicioEstimada = value; }
@@ -78,9 +78,9 @@ namespace GyCAP.Entidades
             get { return fechaInicioReal; }
             set { fechaInicioReal = value; }
         }
-        private DateTime fechaFinEstimada;
+        private DateTime? fechaFinEstimada;
 
-        public DateTime FechaFinEstimada
+        public DateTime? FechaFinEstimada
         {
             get { return fechaFinEstimada; }
             set { fechaFinEstimada = value; }

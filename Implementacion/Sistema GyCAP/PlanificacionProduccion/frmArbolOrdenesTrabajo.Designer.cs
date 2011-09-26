@@ -31,13 +31,10 @@
             this.tvArbolDependenciaSimple = new System.Windows.Forms.TreeView();
             this.tcArbol = new System.Windows.Forms.TabControl();
             this.tpArbol1 = new System.Windows.Forms.TabPage();
-            this.tpArbol2 = new System.Windows.Forms.TabPage();
-            this.tvArbolDependenciaCompleta = new System.Windows.Forms.TreeView();
             this.tpArbol3 = new System.Windows.Forms.TabPage();
             this.tvArbolOrdenesYEstructura = new System.Windows.Forms.TreeView();
             this.tcArbol.SuspendLayout();
             this.tpArbol1.SuspendLayout();
-            this.tpArbol2.SuspendLayout();
             this.tpArbol3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +54,6 @@
             // tcArbol
             // 
             this.tcArbol.Controls.Add(this.tpArbol1);
-            this.tcArbol.Controls.Add(this.tpArbol2);
             this.tcArbol.Controls.Add(this.tpArbol3);
             this.tcArbol.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcArbol.Location = new System.Drawing.Point(0, 0);
@@ -75,30 +71,8 @@
             this.tpArbol1.Padding = new System.Windows.Forms.Padding(3);
             this.tpArbol1.Size = new System.Drawing.Size(369, 548);
             this.tpArbol1.TabIndex = 0;
-            this.tpArbol1.Text = "Dependencia simple";
+            this.tpArbol1.Text = "Órdenes";
             this.tpArbol1.UseVisualStyleBackColor = true;
-            // 
-            // tpArbol2
-            // 
-            this.tpArbol2.Controls.Add(this.tvArbolDependenciaCompleta);
-            this.tpArbol2.Location = new System.Drawing.Point(4, 22);
-            this.tpArbol2.Name = "tpArbol2";
-            this.tpArbol2.Padding = new System.Windows.Forms.Padding(3);
-            this.tpArbol2.Size = new System.Drawing.Size(369, 548);
-            this.tpArbol2.TabIndex = 1;
-            this.tpArbol2.Text = "Dependencia completa";
-            this.tpArbol2.UseVisualStyleBackColor = true;
-            // 
-            // tvArbolDependenciaCompleta
-            // 
-            this.tvArbolDependenciaCompleta.BackColor = System.Drawing.SystemColors.Control;
-            this.tvArbolDependenciaCompleta.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvArbolDependenciaCompleta.HideSelection = false;
-            this.tvArbolDependenciaCompleta.Location = new System.Drawing.Point(3, 3);
-            this.tvArbolDependenciaCompleta.Name = "tvArbolDependenciaCompleta";
-            this.tvArbolDependenciaCompleta.Size = new System.Drawing.Size(363, 542);
-            this.tvArbolDependenciaCompleta.TabIndex = 0;
-            this.tvArbolDependenciaCompleta.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvArbolDependenciaCompleta_NodeMouseClick);
             // 
             // tpArbol3
             // 
@@ -136,7 +110,6 @@
             this.ShowInTaskbar = false;
             this.tcArbol.ResumeLayout(false);
             this.tpArbol1.ResumeLayout(false);
-            this.tpArbol2.ResumeLayout(false);
             this.tpArbol3.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -147,9 +120,7 @@
         private System.Windows.Forms.TreeView tvArbolDependenciaSimple;
         private System.Windows.Forms.TabControl tcArbol;
         private System.Windows.Forms.TabPage tpArbol1;
-        private System.Windows.Forms.TabPage tpArbol2;
         private System.Windows.Forms.TabPage tpArbol3;
-        private System.Windows.Forms.TreeView tvArbolDependenciaCompleta;
         private System.Windows.Forms.TreeView tvArbolOrdenesYEstructura;
     }
 }

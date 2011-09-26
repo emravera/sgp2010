@@ -349,5 +349,18 @@ namespace GyCAP.Entidades.ArbolEstructura
                 nodo.NodoPadre.NodosHijos.Remove(nodo);
             }
         }
+
+        public void SetProductQuantity(int cantidad)
+        {
+            if (this.nodoRaiz != null)
+            {
+                nodoRaiz.Compuesto.Cantidad = cantidad;
+
+                foreach (NodoEstructura nodo in nodoRaiz.NodosHijos)
+                {
+                    nodo.SetProductQuantity(cantidad);
+                }
+            }
+        }
     }
 }

@@ -16,56 +16,68 @@ namespace GyCAP.BLL
         /// <summary>
         /// Genera las órdenes de trabajo para la orden de producción dada.
         /// </summary>
-        /// <param name="codigoOrdenProduccion"></param>
-        /// <param name="dsPlanSemanal"></param>
-        /// <param name="dsOrdenTrabajo"></param>
-        /// <param name="dsEstructura"></param>
-        /// <param name="dsHojaRuta"></param>
+        /// <param name="arbolProduccion">La Orden de Producción</param>
         public static void GenerarOrdenesTrabajo(ArbolProduccion arbolProduccion)
         {
             //Si la orden de producción tiene órdenes de trabajo generadas las eliminamos
             //Y si ya estan en la DB ??? - gonzalo
             arbolProduccion.OrdenesTrabajo = new List<NodoOrdenTrabajo>();
-            
-            //Generamos los códigos de las órdenes de trabajo            
-            int numeroOrdenT = 0;
-            //Obtenemos la estructura completa de la cocina            
+                       
+            int numeroOrdenT = -1;          
             ArbolEstructura arbolEstructura = EstructuraBLL.GetArbolEstructura(arbolProduccion.OrdenProduccion.Cocina.CodigoCocina, true);
-
-            //Creamos las órdenes de trabajo, generamos una para cada par operación-centro de la hoja de ruta de la parte
-            //De forma recursiva empezando por el nivel más alto de la estructura
+            arbolEstructura.SetProductQuantity(arbolProduccion.OrdenProduccion.CantidadEstimada);
             EstadoOrdenTrabajo estadoGenerado = EstadoOrdenTrabajoBLL.GetEstado(OrdenesTrabajoEnum.EstadoOrdenEnum.Generada);
 
-            if (arbolEstructura.NodoRaiz.Compuesto.Parte.HojaRuta != null)
+            ProcessNodo(arbolEstructura.NodoRaiz, arbolProduccion, ref numeroOrdenT, estadoGenerado, null);
+        }
+
+        private static void ProcessNodo(NodoEstructura nodoEstructura, ArbolProduccion arbolProduccion, ref int numeroOrdenT, EstadoOrdenTrabajo estadoGenerado, NodoOrdenTrabajo lastNodoOT)
+        {
+            if (nodoEstructura.Contenido != NodoEstructura.tipoContenido.MateriaPrima && nodoEstructura.Compuesto.Parte.HojaRuta != null)
             {
-                foreach (DetalleHojaRuta detalleHR in arbolEstructura.NodoRaiz.Compuesto.Parte.HojaRuta.Detalle)
-	            {
-                    arbolProduccion.OrdenesTrabajo.Add(new NodoOrdenTrabajo()
+                foreach (DetalleHojaRuta detalleHR in nodoEstructura.Compuesto.Parte.HojaRuta.Detalle)
+                {
+                    NodoOrdenTrabajo nodoOT = new NodoOrdenTrabajo()
                     {
                         CodigoNodo = arbolProduccion.GetNextCodigoOrden(),
-                        NodoPadre = null,
+                        NodoPadre = lastNodoOT,
                         NodosHijos = new List<NodoOrdenTrabajo>(),
-                        Text = "texto",
+                        Text = string.Concat("OTA", (numeroOrdenT + 1) * -1),
                         OrdenTrabajo = new OrdenTrabajo()
                         {
                             Numero = numeroOrdenT--,
-                            Codigo = "codigo",
-                            Origen = "origen",
+                            Codigo = string.Concat("OTA", (numeroOrdenT + 1) * -1),
+                            Origen = string.Concat(arbolProduccion.OrdenProduccion.Origen, " / ", nodoEstructura.Compuesto.Parte.Codigo),
                             Observaciones = "",
                             Estado = estadoGenerado,
-                            CantidadEstimada = 0,
+                            CantidadEstimada = Convert.ToInt32(nodoEstructura.Compuesto.Cantidad),
                             CantidadReal = 0,
                             DetalleHojaRuta = detalleHR,
-                            FechaInicioEstimada = DateTime.Now,
+                            FechaInicioEstimada = null,
                             FechaInicioReal = null,
-                            FechaFinEstimada = DateTime.Now,
+                            FechaFinEstimada = null,
                             FechaFinReal = null,
                             OrdenProduccion = arbolProduccion.OrdenProduccion.Numero,
-                            Parte = arbolEstructura.NodoRaiz.Compuesto.Parte,
-                            Secuencia = 0
+                            Parte = nodoEstructura.Compuesto.Parte,
+                            Secuencia = detalleHR.Secuencia
                         }
-                    });
-            	}
+                    };
+
+                    if (lastNodoOT == null)
+                    {
+                        arbolProduccion.OrdenesTrabajo.Add(nodoOT);
+                    }
+                    else
+                    {
+                        lastNodoOT.NodosHijos.Add(nodoOT);
+                    }
+                    lastNodoOT = nodoOT;
+                }
+
+                foreach (NodoEstructura item in nodoEstructura.NodosHijos)
+                {
+                    ProcessNodo(item, arbolProduccion, ref numeroOrdenT, estadoGenerado, lastNodoOT);
+                }
             }
         }
 

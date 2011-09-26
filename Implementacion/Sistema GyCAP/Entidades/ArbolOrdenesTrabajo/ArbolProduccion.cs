@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace GyCAP.Entidades.ArbolOrdenesTrabajo
 {
@@ -39,6 +40,24 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
             }
 
             return lista;
+        }
+
+        public TreeView AsTreeView()
+        {
+            TreeView treeReturn = new TreeView();
+            treeReturn.BeginUpdate();
+            TreeNode nodoInicio = new TreeNode();
+            nodoInicio.Text = this.ordenProduccion.Codigo;
+            nodoInicio.Name = this.ordenProduccion.Numero.ToString();
+
+            foreach (NodoOrdenTrabajo item in this.OrdenesTrabajo)
+            {
+                nodoInicio.Nodes.Add(item.AsTreeNode());
+            }
+
+            treeReturn.Nodes.Add(nodoInicio);
+            treeReturn.EndUpdate();
+            return treeReturn;
         }
     }
 }

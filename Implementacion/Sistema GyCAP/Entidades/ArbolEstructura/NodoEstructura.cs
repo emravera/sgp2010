@@ -253,6 +253,14 @@ namespace GyCAP.Entidades.ArbolEstructura
             return base.GetHashCode();
         }
 
-        
+        public void SetProductQuantity(int cantidad)
+        {
+            this.Compuesto.Cantidad *= cantidad;
+
+            foreach (NodoEstructura nodo in this.nodosHijos)
+            {
+                nodo.SetProductQuantity(Convert.ToInt32(this.compuesto.Cantidad));
+            }
+        }
     }
 }
