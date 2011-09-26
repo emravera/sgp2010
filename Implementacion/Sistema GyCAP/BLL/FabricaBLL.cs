@@ -11,9 +11,7 @@ using System.Data;
 namespace GyCAP.BLL
 {
     public class FabricaBLL
-    {
-        public enum TipoHorario { Normal, Extendido };
-        
+    {        
         /// <summary>
         /// Obtiene la capacidad bruta de la fábrica anual. 
         /// No tiene en cuenta la producción  en curso.
@@ -22,7 +20,7 @@ namespace GyCAP.BLL
         /// <param name="tipoHorario">El tipo de horario: normal o extendido.</param>
         /// <returns>El código de la cocina base.</returns>
         /// <exception cref="Entidades.CocinaBaseException">Cuando no exite una cocina base definida.</exception>
-        public static int GetCapacidadSemanalBruta(int? codigoCocina, TipoHorario tipoHorario)
+        public static int GetCapacidadSemanalBruta(int? codigoCocina, RecursosFabricacionEnum.TipoHorario tipoHorario)
         {
             int capacidad = 0;
 
@@ -47,7 +45,7 @@ namespace GyCAP.BLL
                 
                 if (row.Field<decimal>("cto_activo") == BLL.CentroTrabajoBLL.CentroActivo)
                 {
-                    if (tipoHorario == TipoHorario.Normal)
+                    if (tipoHorario == RecursosFabricacionEnum.TipoHorario.Normal)
                     {
                         horasTrabajo = row.Field<decimal>("cto_horastrabajonormal");
                     }
@@ -97,7 +95,7 @@ namespace GyCAP.BLL
         /// </summary>
         /// <returns>La cantidad de cocinas que puede fabricarse.</returns>
         /// <exception cref="Entidades.CocinaBseException">Cuando no exite una cocina base definida.</exception>
-        public static int GetCapacidadAnualBruta(int? codigoCocina, TipoHorario tipoHorario)
+        public static int GetCapacidadAnualBruta(int? codigoCocina, RecursosFabricacionEnum.TipoHorario tipoHorario)
         {
             int capacidad = GetCapacidadSemanalBruta(codigoCocina, tipoHorario);
 
