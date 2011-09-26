@@ -95,11 +95,13 @@
             this.btnGuardarActual = new System.Windows.Forms.Button();
             this.btnEliminarActual = new System.Windows.Forms.Button();
             this.gbDatosOrdenP = new System.Windows.Forms.GroupBox();
+            this.cboStockDestino = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.txtFechaInicioOrdenP = new System.Windows.Forms.TextBox();
             this.txtFechaAltaOrdenP = new System.Windows.Forms.TextBox();
             this.txtFechaFinOrdenP = new System.Windows.Forms.TextBox();
             this.txtCantidadOrdenP = new System.Windows.Forms.TextBox();
             this.txtObservacionesOrdenP = new System.Windows.Forms.RichTextBox();
+            this.lblStock = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.txtCocinaOrdenP = new System.Windows.Forms.TextBox();
@@ -115,10 +117,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tpOrdenTrabajo = new System.Windows.Forms.TabPage();
             this.gbDatosOrdenT = new System.Windows.Forms.GroupBox();
-            this.txtFechaInicioOrdenT = new System.Windows.Forms.TextBox();
-            this.txtHoraInicioOrdenT = new System.Windows.Forms.TextBox();
-            this.txtFechaFinOrdenT = new System.Windows.Forms.TextBox();
-            this.txtHoraFinOrdenT = new System.Windows.Forms.TextBox();
             this.txtObservacionesOrdenT = new System.Windows.Forms.RichTextBox();
             this.label33 = new System.Windows.Forms.Label();
             this.txtOperacion = new System.Windows.Forms.TextBox();
@@ -134,15 +132,11 @@
             this.label29 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.gbNavegador = new System.Windows.Forms.GroupBox();
             this.bnNavegador = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -162,8 +156,10 @@
             this.cmsGrillaOrdenesProduccion = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiBloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDesbloquearColumna = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblStock = new System.Windows.Forms.Label();
-            this.cboStockDestino = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.txtFechaFinOrdenT = new System.Windows.Forms.TextBox();
+            this.txtFechaInicioOrdenT = new System.Windows.Forms.TextBox();
             this.tcOrdenTrabajo.SuspendLayout();
             this.tpAutomatico.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1069,6 +1065,16 @@
             this.gbDatosOrdenP.TabStop = false;
             this.gbDatosOrdenP.Text = "Datos de la Orden de Producción";
             // 
+            // cboStockDestino
+            // 
+            this.cboStockDestino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboStockDestino.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboStockDestino.FormattingEnabled = true;
+            this.cboStockDestino.Location = new System.Drawing.Point(602, 25);
+            this.cboStockDestino.Name = "cboStockDestino";
+            this.cboStockDestino.Size = new System.Drawing.Size(160, 21);
+            this.cboStockDestino.TabIndex = 53;
+            // 
             // txtFechaInicioOrdenP
             // 
             this.txtFechaInicioOrdenP.Location = new System.Drawing.Point(325, 99);
@@ -1109,6 +1115,15 @@
             this.txtObservacionesOrdenP.Size = new System.Drawing.Size(748, 96);
             this.txtObservacionesOrdenP.TabIndex = 48;
             this.txtObservacionesOrdenP.Text = "";
+            // 
+            // lblStock
+            // 
+            this.lblStock.AutoSize = true;
+            this.lblStock.Location = new System.Drawing.Point(501, 28);
+            this.lblStock.Name = "lblStock";
+            this.lblStock.Size = new System.Drawing.Size(75, 13);
+            this.lblStock.TabIndex = 40;
+            this.lblStock.Text = "Stock destino:";
             // 
             // label7
             // 
@@ -1237,9 +1252,7 @@
             // gbDatosOrdenT
             // 
             this.gbDatosOrdenT.Controls.Add(this.txtFechaInicioOrdenT);
-            this.gbDatosOrdenT.Controls.Add(this.txtHoraInicioOrdenT);
             this.gbDatosOrdenT.Controls.Add(this.txtFechaFinOrdenT);
-            this.gbDatosOrdenT.Controls.Add(this.txtHoraFinOrdenT);
             this.gbDatosOrdenT.Controls.Add(this.txtObservacionesOrdenT);
             this.gbDatosOrdenT.Controls.Add(this.label33);
             this.gbDatosOrdenT.Controls.Add(this.txtOperacion);
@@ -1262,8 +1275,6 @@
             this.gbDatosOrdenT.Controls.Add(this.label21);
             this.gbDatosOrdenT.Controls.Add(this.label18);
             this.gbDatosOrdenT.Controls.Add(this.label8);
-            this.gbDatosOrdenT.Controls.Add(this.label3);
-            this.gbDatosOrdenT.Controls.Add(this.label4);
             this.gbDatosOrdenT.Controls.Add(this.gbNavegador);
             this.gbDatosOrdenT.Location = new System.Drawing.Point(9, 3);
             this.gbDatosOrdenT.Name = "gbDatosOrdenT";
@@ -1272,55 +1283,19 @@
             this.gbDatosOrdenT.TabStop = false;
             this.gbDatosOrdenT.Text = "Órdenes de trabajo";
             // 
-            // txtFechaInicioOrdenT
-            // 
-            this.txtFechaInicioOrdenT.Location = new System.Drawing.Point(82, 188);
-            this.txtFechaInicioOrdenT.Name = "txtFechaInicioOrdenT";
-            this.txtFechaInicioOrdenT.ReadOnly = true;
-            this.txtFechaInicioOrdenT.Size = new System.Drawing.Size(130, 21);
-            this.txtFechaInicioOrdenT.TabIndex = 64;
-            this.txtFechaInicioOrdenT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtHoraInicioOrdenT
-            // 
-            this.txtHoraInicioOrdenT.Location = new System.Drawing.Point(82, 213);
-            this.txtHoraInicioOrdenT.Name = "txtHoraInicioOrdenT";
-            this.txtHoraInicioOrdenT.ReadOnly = true;
-            this.txtHoraInicioOrdenT.Size = new System.Drawing.Size(130, 21);
-            this.txtHoraInicioOrdenT.TabIndex = 63;
-            this.txtHoraInicioOrdenT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtFechaFinOrdenT
-            // 
-            this.txtFechaFinOrdenT.Location = new System.Drawing.Point(342, 188);
-            this.txtFechaFinOrdenT.Name = "txtFechaFinOrdenT";
-            this.txtFechaFinOrdenT.ReadOnly = true;
-            this.txtFechaFinOrdenT.Size = new System.Drawing.Size(130, 21);
-            this.txtFechaFinOrdenT.TabIndex = 62;
-            this.txtFechaFinOrdenT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // txtHoraFinOrdenT
-            // 
-            this.txtHoraFinOrdenT.Location = new System.Drawing.Point(342, 213);
-            this.txtHoraFinOrdenT.Name = "txtHoraFinOrdenT";
-            this.txtHoraFinOrdenT.ReadOnly = true;
-            this.txtHoraFinOrdenT.Size = new System.Drawing.Size(130, 21);
-            this.txtHoraFinOrdenT.TabIndex = 61;
-            this.txtHoraFinOrdenT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // txtObservacionesOrdenT
             // 
-            this.txtObservacionesOrdenT.Location = new System.Drawing.Point(10, 282);
+            this.txtObservacionesOrdenT.Location = new System.Drawing.Point(10, 256);
             this.txtObservacionesOrdenT.MaxLength = 300;
             this.txtObservacionesOrdenT.Name = "txtObservacionesOrdenT";
-            this.txtObservacionesOrdenT.Size = new System.Drawing.Size(737, 103);
+            this.txtObservacionesOrdenT.Size = new System.Drawing.Size(737, 129);
             this.txtObservacionesOrdenT.TabIndex = 41;
             this.txtObservacionesOrdenT.Text = "";
             // 
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(9, 266);
+            this.label33.Location = new System.Drawing.Point(7, 240);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(82, 13);
             this.label33.TabIndex = 60;
@@ -1436,24 +1411,6 @@
             this.label26.TabIndex = 42;
             this.label26.Text = "Número:";
             // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(241, 191);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(95, 13);
-            this.label25.TabIndex = 41;
-            this.label25.Text = "Fecha finalización:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(10, 191);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(66, 13);
-            this.label12.TabIndex = 40;
-            this.label12.Text = "Fecha inicio:";
-            // 
             // label22
             // 
             this.label22.AutoSize = true;
@@ -1498,24 +1455,6 @@
             this.label8.Size = new System.Drawing.Size(71, 13);
             this.label8.TabIndex = 6;
             this.label8.Text = "Hoja de ruta:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 216);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Hora inicio:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(241, 216);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Hora finalización:";
             // 
             // gbNavegador
             // 
@@ -1707,24 +1646,41 @@
             this.tsmiDesbloquearColumna.Text = "Desbloquear columna";
             this.tsmiDesbloquearColumna.Click += new System.EventHandler(this.tsmiDesbloquearColumna_Click);
             // 
-            // lblStock
+            // label12
             // 
-            this.lblStock.AutoSize = true;
-            this.lblStock.Location = new System.Drawing.Point(501, 28);
-            this.lblStock.Name = "lblStock";
-            this.lblStock.Size = new System.Drawing.Size(75, 13);
-            this.lblStock.TabIndex = 40;
-            this.lblStock.Text = "Stock destino:";
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(10, 191);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(66, 13);
+            this.label12.TabIndex = 40;
+            this.label12.Text = "Fecha inicio:";
             // 
-            // cboStockDestino
+            // label25
             // 
-            this.cboStockDestino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboStockDestino.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboStockDestino.FormattingEnabled = true;
-            this.cboStockDestino.Location = new System.Drawing.Point(602, 25);
-            this.cboStockDestino.Name = "cboStockDestino";
-            this.cboStockDestino.Size = new System.Drawing.Size(160, 21);
-            this.cboStockDestino.TabIndex = 53;
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(241, 191);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(95, 13);
+            this.label25.TabIndex = 41;
+            this.label25.Text = "Fecha finalización:";
+            // 
+            // txtFechaFinOrdenT
+            // 
+            this.txtFechaFinOrdenT.Location = new System.Drawing.Point(342, 188);
+            this.txtFechaFinOrdenT.Name = "txtFechaFinOrdenT";
+            this.txtFechaFinOrdenT.ReadOnly = true;
+            this.txtFechaFinOrdenT.Size = new System.Drawing.Size(130, 21);
+            this.txtFechaFinOrdenT.TabIndex = 62;
+            this.txtFechaFinOrdenT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // txtFechaInicioOrdenT
+            // 
+            this.txtFechaInicioOrdenT.Location = new System.Drawing.Point(82, 188);
+            this.txtFechaInicioOrdenT.Name = "txtFechaInicioOrdenT";
+            this.txtFechaInicioOrdenT.ReadOnly = true;
+            this.txtFechaInicioOrdenT.Size = new System.Drawing.Size(130, 21);
+            this.txtFechaInicioOrdenT.TabIndex = 64;
+            this.txtFechaInicioOrdenT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // frmGenerarOrdenTrabajo
             // 
@@ -1853,15 +1809,11 @@
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox gbNavegador;
         private System.Windows.Forms.BindingNavigator bnNavegador;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
@@ -1893,10 +1845,6 @@
         private System.Windows.Forms.Button btnAsignarCantidad;
         private System.Windows.Forms.NumericUpDown nudCantidadOrdenP;
         private System.Windows.Forms.Button btnGenerarOrdenT;
-        private System.Windows.Forms.TextBox txtFechaInicioOrdenT;
-        private System.Windows.Forms.TextBox txtHoraInicioOrdenT;
-        private System.Windows.Forms.TextBox txtFechaFinOrdenT;
-        private System.Windows.Forms.TextBox txtHoraFinOrdenT;
         private System.Windows.Forms.Button btnAplicarCambios;
         private System.Windows.Forms.Button btnEliminarTodas;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -1925,6 +1873,10 @@
         private System.Windows.Forms.GroupBox groupBox10;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboStockDestino;
         private System.Windows.Forms.Label lblStock;
+        private System.Windows.Forms.TextBox txtFechaInicioOrdenT;
+        private System.Windows.Forms.TextBox txtFechaFinOrdenT;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label12;
 
     }
 }
