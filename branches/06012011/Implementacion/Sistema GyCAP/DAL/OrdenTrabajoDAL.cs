@@ -18,7 +18,7 @@ namespace GyCAP.DAL
                          ([ordt_codigo]
                          ,[ordp_numero]
                          ,[eord_codigo]
-                         ,[par_codigo]
+                         ,[part_numero]
                          ,[ordt_origen]
                          ,[ordt_cantidadestimada]
                          ,[ordt_cantidadreal]

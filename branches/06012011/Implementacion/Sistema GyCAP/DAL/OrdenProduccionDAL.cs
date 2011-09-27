@@ -72,6 +72,7 @@ namespace GyCAP.DAL
 
                 foreach (OrdenTrabajo item in arbol.AsOrdenesTrabajoList())
                 {
+                    item.OrdenProduccion = orden.Numero;
                     OrdenTrabajoDAL.Insertar(item, transaccion);
                 }
                 
