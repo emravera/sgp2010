@@ -17,8 +17,9 @@ namespace GyCAP.UI.GestionPedido
         private Data.dsCliente dsCliente = new GyCAP.Data.dsCliente();
         private DataView dvPedido, dvDetallePedido, dvCocinas, dvEstadoPedido;
         private DataView dvEstadoDetallePedido, dvClientes, dvEstadoPedidoBuscar, dvCbUbicacionStock;
-        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, cargarDetalle };
+        private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar, cargarDetalle, modificarDetalle };
         private estadoUI estadoInterface;
+        private int codigoDetalleModificado = 0;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
 
@@ -302,21 +303,41 @@ namespace GyCAP.UI.GestionPedido
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
-                    panelAcciones.Enabled = true;
+                    panelAcciones.Enabled = true;                   
                     estadoInterface = estadoUI.modificar;
                     tcPedido.SelectedTab = tpDatos;
+                    //Escondemos las columnas del detalle
+                    dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
+                    dgvDetallePedido.Columns["DPED_CODIGONEMONICO"].Visible = false;
                     break;
                 case estadoUI.cargarDetalle:
                     btnAgregar.Enabled = false;
+                    btnValidar.Enabled = true;
                     lblCantProducir.Visible = false;
                     lblCantStock.Visible = false;
                     numCantProducir.Visible = false;
                     numCantStock.Visible = false;
-                    
+                    nudCantidad.Enabled = true;
+                    lblTotalCocina.Enabled = true;
+
                     //Escondemos los numeros y reseteamos los controles
                     numCantProducir.Value=0;
                     numCantStock.Value=0;
                     estadoInterface = estadoUI.cargarDetalle;
+                    tcPedido.SelectedTab = tpDatos;
+                    break;
+                case estadoUI.modificarDetalle:
+                    btnAgregar.Enabled = true;
+                    btnValidar.Enabled = false;
+                    lblCantProducir.Visible = true;
+                    lblCantStock.Visible = true;
+                    numCantProducir.Visible = true;
+                    numCantStock.Visible = true;
+                    nudCantidad.Enabled = false;
+                    lblTotalCocina.Enabled = false;
+
+                    //Escondemos los numeros y reseteamos los controles
+                    estadoInterface = estadoUI.modificarDetalle;
                     tcPedido.SelectedTab = tpDatos;
                     break;
                 default:
@@ -547,42 +568,7 @@ namespace GyCAP.UI.GestionPedido
                 Entidades.Mensajes.MensajesABM.MsjExcepcion("Debe seleccionar una Cocina de la lista.", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación );
             }
         }
-
-        private void btnSumar_Click(object sender, EventArgs e)
-        {
-            if (dgvDetallePedido.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            {
-                //Obtenemos el código
-                int codigoDetalle = Convert.ToInt32(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_codigo"]);
-                //Aumentamos la cantidad                
-                dsCliente.DETALLE_PEDIDOS.FindByDPED_CODIGO(codigoDetalle).DPED_CANTIDAD += 1;
-                dgvDetallePedido.Refresh();
-            }
-            else
-            {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion("Debe seleccionar una Cocina de la lista.", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
-            }
-        }
-
-        private void btnRestar_Click(object sender, EventArgs e)
-        {
-            if (dgvDetallePedido.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
-            {
-                //Obtenemos el código
-                long codigoDetalle = Convert.ToInt64(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_codigo"]);
-                //Disminuimos la cantidad
-                if (dsCliente.DETALLE_PEDIDOS.FindByDPED_CODIGO(codigoDetalle).DPED_CANTIDAD > 1)
-                {
-                    dsCliente.DETALLE_PEDIDOS.FindByDPED_CODIGO(codigoDetalle).DPED_CANTIDAD -= 1;
-                }
-                dgvDetallePedido.Refresh();
-            }
-            else
-            {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion("Debe seleccionar una Cocina de la lista.", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
-            }
-        }
-
+        
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -768,9 +754,36 @@ namespace GyCAP.UI.GestionPedido
 
         #region Pestaña Detalle
 
+        //Valida cuando se intenta agregar un objeto
+        private string ValidarAgregar()
+        {
+            string validacion = string.Empty;
+
+            if (estadoInterface == estadoUI.cargarDetalle)
+            {
+                if (dgvCocinas.Rows.GetRowCount(DataGridViewElementStates.Selected) == 0) validacion += "-Debe seleccionar una Cocina de la lista.\n";
+                if (nudCantidad.Value > 0) validacion += "-La Cantidad Total debe ser mayor a cero.\n";
+
+            }
+            else if (estadoInterface == estadoUI.modificarDetalle)
+            {
+                if (dgvCocinas.Rows.GetRowCount(DataGridViewElementStates.Selected) == 0) validacion += "-Debe seleccionar una Cocina de la lista.\n";
+            }
+
+            //Le agrego la cabecera al mensaje
+            if (validacion.Length > 0)
+            {
+                validacion = "Se han encontrado los siguientes errores de validación:\n" + validacion;
+            }
+
+            return validacion;
+        }
+
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (dgvCocinas.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0 && nudCantidad.Value > 0)
+            string validacion = ValidarAgregar();
+
+            if (validacion == string.Empty )
             {                   
                 //Obtenemos el código del pedido
                 int pedidoCodigo;
@@ -784,74 +797,93 @@ namespace GyCAP.UI.GestionPedido
                 int cantidadStock = Convert.ToInt32(numCantStock.Value);
                 int cantidadProduccion = Convert.ToInt32(numCantProducir.Value);
 
-                //Agregamos la fila de movimiento de stock
-                if (cantidadStock > 0)
+                //Si esta en modo de cargar detalle
+                if (estadoInterface == estadoUI.cargarDetalle)
                 {
-                    //Obtenemos el codigo del estado
-                    int codigoEstado = BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Entrega Stock");
-
-                    //Se tiene que agregar una fila nueva al detalle de pedidos
-                    Data.dsCliente.DETALLE_PEDIDOSRow row = dsCliente.DETALLE_PEDIDOS.NewDETALLE_PEDIDOSRow();
-                    row.BeginEdit();
-
-                    //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
-                    //-- para que se vaya autodecrementando en cada inserción
-                    row.DPED_CODIGO = codigoDetalle--; 
-                    row.PED_CODIGO = pedidoCodigo;
-                    row.COC_CODIGO = cocinaCodigo;
-                    row.EDPED_CODIGO = codigoEstado; 
-                    row.DPED_CANTIDAD = Convert.ToInt32(numCantStock.Value);
-                    row.DPED_CODIGONEMONICO = string.Empty;
-                    row.DPED_FECHA_ENTREGA_PREVISTA =Convert.ToDateTime(sfFechaPrevista.Value.ToShortDateString());
-                    row.UBICACION_STOCK = Convert.ToInt32(cbUbicacionStock.GetSelectedValue());
-                    row.EndEdit();
-
-                    //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
-                    //todavia no vamos a insertar en la db hasta que no haga Guardar
-                    dsCliente.DETALLE_PEDIDOS.AddDETALLE_PEDIDOSRow(row);                      
-                }
-
-                //Agregamos la fila de produccion
-                if (cantidadProduccion > 0)
-                {
-                    //Obtenemos el codigo del estado
-                    int codigoEstado = BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Pendiente");
-
-                    //Nos fijamos si ya esta agregado
-                    string filtro = "ped_codigo = " + pedidoCodigo + " AND coc_codigo = " + cocinaCodigo + "AND edped_codigo = " + codigoEstado;
-                    Data.dsCliente.DETALLE_PEDIDOSRow[] rows = (Data.dsCliente.DETALLE_PEDIDOSRow[])dsCliente.DETALLE_PEDIDOS.Select(filtro);
-
-                    if (rows.Length > 0)
+                    //Agregamos la fila de movimiento de stock
+                    if (cantidadStock > 0)
                     {
-                        //Ya lo ha agregado, preguntemos si quiere aumentar la cantidad existente o descartar
-                        DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjPreguntaAlUsuario("El Pedido ya posee la cocina seleccionada. ¿Desea sumar la cantidad ingresada a lo planificado?", this.Text); ;
-                        if (respuesta == DialogResult.Yes)
-                        {
-                            //Sumemos la cantidad ingresada a la existente, como hay una sola fila seleccionamos la 0 del array
-                            rows[0].DPED_CANTIDAD += int.Parse(numCantStock.Value.ToString());
-                        }
-                    }
-                    else
-                    {
+                        //Obtenemos el codigo del estado
+                        int codigoEstado = BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Entrega Stock");
+
                         //Se tiene que agregar una fila nueva al detalle de pedidos
                         Data.dsCliente.DETALLE_PEDIDOSRow row = dsCliente.DETALLE_PEDIDOS.NewDETALLE_PEDIDOSRow();
                         row.BeginEdit();
 
                         //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
-                        //Se va autodecrementando en cada inserción
+                        //-- para que se vaya autodecrementando en cada inserción
                         row.DPED_CODIGO = codigoDetalle--;
                         row.PED_CODIGO = pedidoCodigo;
                         row.COC_CODIGO = cocinaCodigo;
                         row.EDPED_CODIGO = codigoEstado;
-                        row.DPED_CANTIDAD = Convert.ToInt32(numCantProducir.Value);
+                        row.DPED_CANTIDAD = Convert.ToInt32(numCantStock.Value);
                         row.DPED_CODIGONEMONICO = string.Empty;
-                        row.DPED_FECHA_ENTREGA_PREVISTA =Convert.ToDateTime(sfFechaPrevista.Value.ToShortDateString());
+                        row.DPED_FECHA_ENTREGA_PREVISTA = Convert.ToDateTime(sfFechaPrevista.Value.ToShortDateString());
+                        row.UBICACION_STOCK = Convert.ToInt32(cbUbicacionStock.GetSelectedValue());
                         row.EndEdit();
 
                         //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
                         //todavia no vamos a insertar en la db hasta que no haga Guardar
                         dsCliente.DETALLE_PEDIDOS.AddDETALLE_PEDIDOSRow(row);
                     }
+
+                    //Agregamos la fila de produccion
+                    if (cantidadProduccion > 0)
+                    {
+                        //Obtenemos el codigo del estado
+                        int codigoEstado = BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Pendiente");
+
+                        //Nos fijamos si ya esta agregado
+                        string filtro = "ped_codigo = " + pedidoCodigo + " AND coc_codigo = " + cocinaCodigo + "AND edped_codigo = " + codigoEstado;
+                        Data.dsCliente.DETALLE_PEDIDOSRow[] rows = (Data.dsCliente.DETALLE_PEDIDOSRow[])dsCliente.DETALLE_PEDIDOS.Select(filtro);
+
+                        if (rows.Length > 0)
+                        {
+                            //Ya lo ha agregado, preguntemos si quiere aumentar la cantidad existente o descartar
+                            DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjPreguntaAlUsuario("El Pedido ya posee la cocina seleccionada. ¿Desea sumar la cantidad ingresada a lo planificado?", this.Text); ;
+                            if (respuesta == DialogResult.Yes)
+                            {
+                                //Sumemos la cantidad ingresada a la existente, como hay una sola fila seleccionamos la 0 del array
+                                rows[0].DPED_CANTIDAD += int.Parse(numCantStock.Value.ToString());
+                            }
+                        }
+                        else
+                        {
+                            //Se tiene que agregar una fila nueva al detalle de pedidos
+                            Data.dsCliente.DETALLE_PEDIDOSRow row = dsCliente.DETALLE_PEDIDOS.NewDETALLE_PEDIDOSRow();
+                            row.BeginEdit();
+
+                            //Agregamos una fila nueva con nuestro código autodecremental, luego al guardar en la db se actualizará
+                            //Se va autodecrementando en cada inserción
+                            row.DPED_CODIGO = codigoDetalle--;
+                            row.PED_CODIGO = pedidoCodigo;
+                            row.COC_CODIGO = cocinaCodigo;
+                            row.EDPED_CODIGO = codigoEstado;
+                            row.DPED_CANTIDAD = Convert.ToInt32(numCantProducir.Value);
+                            row.DPED_CODIGONEMONICO = string.Empty;
+                            row.DPED_FECHA_ENTREGA_PREVISTA = Convert.ToDateTime(sfFechaPrevista.Value.ToShortDateString());
+                            row.EndEdit();
+
+                            //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
+                            //todavia no vamos a insertar en la db hasta que no haga Guardar
+                            dsCliente.DETALLE_PEDIDOS.AddDETALLE_PEDIDOSRow(row);
+
+                        }
+                    }
+                }
+                //Si esta modificando un detalle de pedido
+                else if (estadoInterface == estadoUI.modificarDetalle)
+                {
+                    //Hay que modificar el datatable con los datos nuevos
+                    Data.dsCliente.DETALLE_PEDIDOSRow row = dsCliente.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToDecimal(codigoDetalleModificado));
+                    
+                    row.BeginEdit();
+                    //Modificamos solo aquellos valores que se pueden cambiar
+                    row.COC_CODIGO = cocinaCodigo;
+                    if (numCantProducir.Value > 0) row.DPED_CANTIDAD = Convert.ToInt32(numCantProducir.Value);
+                    else row.DPED_CANTIDAD = Convert.ToInt32(numCantStock.Value);
+                    row.DPED_FECHA_ENTREGA_PREVISTA = Convert.ToDateTime(sfFechaPrevista.Value.ToShortDateString());
+                    row.EndEdit();
                 }
 
                 //Volvemos la interfaz para que cargue mas detalles
@@ -864,7 +896,7 @@ namespace GyCAP.UI.GestionPedido
             }
             else
             {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion("Debe seleccionar una Cocina de la lista y asignarle una cantidad mayor a 0.", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
             }
         }       
 
@@ -928,7 +960,63 @@ namespace GyCAP.UI.GestionPedido
             {
                 Entidades.Mensajes.MensajesABM.MsjValidacion("Debe completar los datos obligatorios", this.Text);
             }
-        }  
+        }
 
+        private void btnModificarDetalle_Click(object sender, EventArgs e)
+        {
+            if (dgvDetallePedido.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+
+                slideControl.ForwardTo("slideAgregar");
+                panelAcciones.Enabled = false;
+                SetInterface(estadoUI.modificarDetalle);
+
+                //Cargamos los valores en los controles
+                int estado = Convert.ToInt32(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["edped_codigo"]);
+                codigoDetalleModificado = Convert.ToInt32(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_codigo"]);
+
+                //Seleccionamos la cocina de la lista
+                int codigoCocina = Convert.ToInt32(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["coc_codigo"]);
+                dvCocinas.Sort = "coc_codigo";
+                int fila = dvCocinas.Find(codigoCocina);
+                dgvCocinas.Rows[fila].Selected = true;
+
+                //Modificamos el comportamiento segun sea el estado
+                if (estado == BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Pendiente"))
+                {
+                    numCantProducir.Value = Convert.ToDecimal(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_cantidad"]);
+                    numCantStock.Enabled = false;
+                    numCantProducir.Enabled = true;
+                }
+                else if (estado == BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Entrega Stock"))
+                {
+                    numCantStock.Value = Convert.ToDecimal(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_cantidad"]);
+                    numCantProducir.Enabled = false;
+                    numCantStock.Enabled = true;
+                }
+                sfFechaPrevista.Value = Convert.ToDateTime(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_fecha_entrega_prevista"]);
+            }
+            else
+            {
+                Entidades.Mensajes.MensajesABM.MsjValidacion("Debe seleccionar un Detalle de Pedido", this.Text);
+            }
+        }
+
+        private void btnCancelarPedido_Click(object sender, EventArgs e)
+        {
+
+            if (dgvDetallePedido.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            {
+                //Cancelar un estado de Pedido
+
+
+            }
+            else
+            {
+                Entidades.Mensajes.MensajesABM.MsjValidacion("Debe seleccionar un Detalle de Pedido", this.Text);
+            }
+        }       
     }
 }
+
+

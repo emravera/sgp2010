@@ -31,10 +31,9 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgvDetallePedido = new System.Windows.Forms.DataGridView();
             this.panelAcciones = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
+            this.btnCancelarPedido = new System.Windows.Forms.Button();
+            this.btnModificarDetalle = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnRestar = new System.Windows.Forms.Button();
-            this.btnSumar = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
@@ -53,7 +52,7 @@
             this.sfFechaPrevista = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblTotalCocina = new System.Windows.Forms.Label();
             this.btnValidar = new System.Windows.Forms.Button();
             this.nudCantidad = new System.Windows.Forms.NumericUpDown();
             this.dgvCocinas = new System.Windows.Forms.DataGridView();
@@ -95,7 +94,6 @@
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcPedido = new System.Windows.Forms.TabControl();
-            this.btnModificarDetalle = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePedido)).BeginInit();
             this.panelAcciones.SuspendLayout();
@@ -156,11 +154,9 @@
             this.panelAcciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panelAcciones.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelAcciones.Controls.Add(this.btnCancelarPedido);
             this.panelAcciones.Controls.Add(this.btnModificarDetalle);
-            this.panelAcciones.Controls.Add(this.label7);
             this.panelAcciones.Controls.Add(this.label6);
-            this.panelAcciones.Controls.Add(this.btnRestar);
-            this.panelAcciones.Controls.Add(this.btnSumar);
             this.panelAcciones.Controls.Add(this.btnDelete);
             this.panelAcciones.Controls.Add(this.btnNew);
             this.panelAcciones.Location = new System.Drawing.Point(614, 16);
@@ -168,16 +164,37 @@
             this.panelAcciones.Size = new System.Drawing.Size(78, 188);
             this.panelAcciones.TabIndex = 11;
             // 
-            // label7
+            // btnCancelarPedido
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(15, 140);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(50, 13);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Cantidad";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnCancelarPedido.FlatAppearance.BorderSize = 0;
+            this.btnCancelarPedido.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnCancelarPedido.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnCancelarPedido.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelarPedido.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Warning_25;
+            this.btnCancelarPedido.Location = new System.Drawing.Point(5, 137);
+            this.btnCancelarPedido.Name = "btnCancelarPedido";
+            this.btnCancelarPedido.Size = new System.Drawing.Size(66, 44);
+            this.btnCancelarPedido.TabIndex = 18;
+            this.btnCancelarPedido.Text = "Cancelar";
+            this.btnCancelarPedido.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancelarPedido.UseVisualStyleBackColor = true;
+            this.btnCancelarPedido.Click += new System.EventHandler(this.btnCancelarPedido_Click);
+            // 
+            // btnModificarDetalle
+            // 
+            this.btnModificarDetalle.FlatAppearance.BorderSize = 0;
+            this.btnModificarDetalle.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnModificarDetalle.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnModificarDetalle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnModificarDetalle.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Text_Editor_25;
+            this.btnModificarDetalle.Location = new System.Drawing.Point(7, 97);
+            this.btnModificarDetalle.Name = "btnModificarDetalle";
+            this.btnModificarDetalle.Size = new System.Drawing.Size(66, 44);
+            this.btnModificarDetalle.TabIndex = 17;
+            this.btnModificarDetalle.Text = "Modificar";
+            this.btnModificarDetalle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnModificarDetalle.UseVisualStyleBackColor = true;
+            this.btnModificarDetalle.Click += new System.EventHandler(this.btnModificarDetalle_Click);
             // 
             // label6
             // 
@@ -189,42 +206,6 @@
             this.label6.TabIndex = 13;
             this.label6.Text = "Detalle";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnRestar
-            // 
-            this.btnRestar.FlatAppearance.BorderSize = 0;
-            this.btnRestar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnRestar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRestar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Restar_Gris_25;
-            this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestar.Location = new System.Drawing.Point(41, 156);
-            this.btnRestar.Name = "btnRestar";
-            this.btnRestar.Size = new System.Drawing.Size(30, 30);
-            this.btnRestar.TabIndex = 16;
-            this.btnRestar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRestar.UseVisualStyleBackColor = true;
-            this.btnRestar.Click += new System.EventHandler(this.btnRestar_Click);
-            this.btnRestar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnRestar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnSumar
-            // 
-            this.btnSumar.FlatAppearance.BorderSize = 0;
-            this.btnSumar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnSumar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSumar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Sumar_Gris_25;
-            this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSumar.Location = new System.Drawing.Point(7, 156);
-            this.btnSumar.Name = "btnSumar";
-            this.btnSumar.Size = new System.Drawing.Size(30, 30);
-            this.btnSumar.TabIndex = 15;
-            this.btnSumar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSumar.UseVisualStyleBackColor = true;
-            this.btnSumar.Click += new System.EventHandler(this.btnSumar_Click);
-            this.btnSumar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnSumar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // btnDelete
             // 
@@ -338,7 +319,7 @@
             this.panel1.Controls.Add(this.sfFechaPrevista);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnAgregar);
-            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.lblTotalCocina);
             this.panel1.Controls.Add(this.btnValidar);
             this.panel1.Controls.Add(this.nudCantidad);
             this.panel1.Location = new System.Drawing.Point(471, 17);
@@ -419,7 +400,7 @@
             // sfFechaPrevista
             // 
             this.sfFechaPrevista.CustomFormat = " ";
-            this.sfFechaPrevista.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.sfFechaPrevista.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.sfFechaPrevista.Location = new System.Drawing.Point(91, 38);
             this.sfFechaPrevista.Name = "sfFechaPrevista";
             this.sfFechaPrevista.Size = new System.Drawing.Size(131, 20);
@@ -445,15 +426,15 @@
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // label8
+            // lblTotalCocina
             // 
-            this.label8.AutoSize = true;
-            this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.label8.Location = new System.Drawing.Point(21, 14);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(70, 13);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Total Cocina:";
+            this.lblTotalCocina.AutoSize = true;
+            this.lblTotalCocina.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lblTotalCocina.Location = new System.Drawing.Point(21, 14);
+            this.lblTotalCocina.Name = "lblTotalCocina";
+            this.lblTotalCocina.Size = new System.Drawing.Size(70, 13);
+            this.lblTotalCocina.TabIndex = 1;
+            this.lblTotalCocina.Text = "Total Cocina:";
             // 
             // btnValidar
             // 
@@ -958,21 +939,6 @@
             this.tcPedido.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcPedido.TabIndex = 8;
             // 
-            // btnModificarDetalle
-            // 
-            this.btnModificarDetalle.FlatAppearance.BorderSize = 0;
-            this.btnModificarDetalle.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnModificarDetalle.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnModificarDetalle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModificarDetalle.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Text_Editor_25;
-            this.btnModificarDetalle.Location = new System.Drawing.Point(7, 97);
-            this.btnModificarDetalle.Name = "btnModificarDetalle";
-            this.btnModificarDetalle.Size = new System.Drawing.Size(66, 44);
-            this.btnModificarDetalle.TabIndex = 17;
-            this.btnModificarDetalle.Text = "Modificar";
-            this.btnModificarDetalle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnModificarDetalle.UseVisualStyleBackColor = true;
-            // 
             // frmPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1020,10 +986,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dgvDetallePedido;
         private System.Windows.Forms.Panel panelAcciones;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btnRestar;
-        private System.Windows.Forms.Button btnSumar;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.GroupBox gbGuardarCancelar;
@@ -1059,7 +1022,7 @@
         private System.Windows.Forms.GroupBox gbCocinas;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblTotalCocina;
         private System.Windows.Forms.Button btnValidar;
         private System.Windows.Forms.NumericUpDown nudCantidad;
         private System.Windows.Forms.DataGridView dgvCocinas;
@@ -1085,5 +1048,6 @@
         private System.Windows.Forms.Label label14;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbUbicacionStock;
         private System.Windows.Forms.Button btnModificarDetalle;
+        private System.Windows.Forms.Button btnCancelarPedido;
     }
 }
