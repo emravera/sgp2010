@@ -410,13 +410,11 @@ namespace GyCAP.DAL
             string sqlUpdate = @"UPDATE PEDIDOS SET
                                CLI_CODIGO = @p0,
                                EPED_CODIGO = @p1,
-                               PED_FECHAENTREGAREAL = @p2,
-                               PED_OBSERVACIONES = @p3                               
-                               WHERE PED_CODIGO = @p4";
+                               PED_OBSERVACIONES = @p2                               
+                               WHERE PED_CODIGO = @p3";
              
             object[] valorParametros = { pedido.Cliente.Codigo,
-                                         pedido.EstadoPedido.Codigo,
-                                         pedido.FechaEntregaReal,
+                                         pedido.EstadoPedido.Codigo,                                         
                                          pedido.Observaciones,
                                          pedido.Codigo};
 
@@ -449,7 +447,7 @@ namespace GyCAP.DAL
                 //Si todo resulto correcto, commit
                 transaccion.Commit();
 
-                //En cualquier caso finalizamos la transaccion para que se cierre la conexion
+                //Finalizamos la transaccion para que se cierre la conexion
                 DB.FinalizarTransaccion();
             }
             catch (SqlException ex)
