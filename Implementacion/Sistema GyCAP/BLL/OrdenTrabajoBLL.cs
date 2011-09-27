@@ -21,6 +21,7 @@ namespace GyCAP.BLL
         {
             //Si la orden de producción tiene órdenes de trabajo generadas las eliminamos
             //Y si ya estan en la DB ??? - gonzalo
+            //Crear excepciones
             arbolProduccion.OrdenesTrabajo = new List<NodoOrdenTrabajo>();
                        
             int numeroOrdenT = -1;          

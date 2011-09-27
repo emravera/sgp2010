@@ -348,13 +348,13 @@ namespace GyCAP.UI.PlanificacionProduccion
                     {
                         //Planeamos hacia adelante                        
                         DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
-                        BLL.OrdenProduccionBLL.PlanearFechaHaciaDelante(fecha, arbol);
+                        arbol.GetFechaFinalizacion(fecha);
                     }
                     else
                     {
                         //Planeamos hacia atrás
                         DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
-                        BLL.OrdenProduccionBLL.PlanearFechaHaciaAtras(fecha, arbol);                        
+                        arbol.GetFechaInicio(fecha);
                     }
 
                     sourceOrdenTrabajo.DataSource = arbol.AsOrdenesTrabajoList();
@@ -625,7 +625,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 BLL.PlanAnualBLL.ObtenerTodos(dsPlanSemanal.PLANES_ANUALES);
                 BLL.CocinaBLL.ObtenerCocinas(dsPlanSemanal.COCINAS);
-                BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsStock.UBICACIONES_STOCK);
+                BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsStock.UBICACIONES_STOCK, (int)StockEnum.ContenidoUbicacion.Cocina);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -633,6 +633,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
 
             cbAnioBuscar.SetDatos(dvPlanAnual, "PAN_CODIGO", "PAN_ANIO", "Seleccione", false);
+            dvStockDestino.RowFilter = "TUS_CODIGO <> " + (int)StockEnum.TipoUbicacion.Vista;
             cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "Seleccione", false);
         }
 

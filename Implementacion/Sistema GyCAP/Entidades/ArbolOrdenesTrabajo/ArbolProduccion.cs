@@ -59,5 +59,35 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
             treeReturn.EndUpdate();
             return treeReturn;
         }
+
+        public DateTime GetFechaFinalizacion(DateTime fechaInicio)
+        {
+            this.ordenProduccion.FechaInicioEstimada = fechaInicio;
+            DateTime fechaReturn = fechaInicio;
+
+            foreach (NodoOrdenTrabajo nodo in ordenesTrabajo)
+            {
+                DateTime fechaTemp = nodo.GetFechaFinalizacion(fechaInicio);
+                if (fechaTemp > fechaReturn) { fechaReturn = fechaTemp; }
+            }
+            
+            this.ordenProduccion.FechaFinEstimada = fechaReturn;
+            return fechaReturn;
+        }
+
+        public DateTime GetFechaInicio(DateTime fechaFinalizacion)
+        {
+            this.ordenProduccion.FechaFinEstimada = fechaFinalizacion;
+            DateTime fechaReturn = fechaFinalizacion;
+
+            foreach (NodoOrdenTrabajo nodo in ordenesTrabajo)
+            {
+                DateTime fechaTemp = nodo.GetFechaInicio(fechaFinalizacion);
+                if (fechaTemp < fechaReturn) { fechaReturn = fechaTemp; }
+            }
+
+            this.ordenProduccion.FechaInicioEstimada = fechaReturn;
+            return fechaReturn;
+        }
     }
 }

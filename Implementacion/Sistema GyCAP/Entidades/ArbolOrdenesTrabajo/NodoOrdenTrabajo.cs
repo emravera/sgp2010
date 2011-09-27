@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Enumeraciones;
 
 namespace GyCAP.Entidades.ArbolOrdenesTrabajo
 {
@@ -69,6 +70,50 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
             }
 
             return nodo;
+        }
+
+        public DateTime GetFechaFinalizacion(DateTime fechaInicio)
+        {
+            DateTime fechaMayor = fechaInicio;
+            foreach (NodoOrdenTrabajo nodo in nodosHijos)
+            {
+                DateTime fechaTemp = nodo.GetFechaFinalizacion(fechaInicio);
+                if (fechaTemp > fechaMayor) { fechaMayor = fechaTemp; }
+            }
+
+            this.ordenTrabajo.FechaInicioEstimada = fechaMayor;
+            this.ordenTrabajo.FechaFinEstimada = fechaMayor.AddMinutes(GetOperationTime() * this.ordenTrabajo.CantidadEstimada);
+            return this.ordenTrabajo.FechaFinEstimada.Value;
+        }
+
+        private double GetOperationTime()
+        {
+            if (this.ordenTrabajo.DetalleHojaRuta.CentroTrabajo.Tipo == (int)RecursosFabricacionEnum.TipoCentroTrabajo.TipoHombre)
+            {
+                double temp = (double)(60 / (this.ordenTrabajo.DetalleHojaRuta.CentroTrabajo.CapacidadUnidadHora * this.ordenTrabajo.DetalleHojaRuta.CentroTrabajo.Eficiencia));
+                return temp;
+            }
+            else
+            {
+                double temp = (double)(1 / (this.ordenTrabajo.DetalleHojaRuta.CentroTrabajo.CapacidadCiclo * this.ordenTrabajo.DetalleHojaRuta.CentroTrabajo.Eficiencia)) * 60;
+                return temp;
+            }
+        }
+
+        public DateTime GetFechaInicio(DateTime fechaFinalizacion)
+        {
+            this.ordenTrabajo.FechaFinEstimada = fechaFinalizacion;
+            double tiempo = GetOperationTime() * this.ordenTrabajo.CantidadEstimada;
+            this.ordenTrabajo.FechaInicioEstimada = fechaFinalizacion.Subtract(TimeSpan.FromMinutes(tiempo));
+            DateTime fechaMenor = this.ordenTrabajo.FechaInicioEstimada.Value;
+
+            foreach (NodoOrdenTrabajo nodo in nodosHijos)
+            {
+                DateTime fechaTemp = nodo.GetFechaInicio(this.ordenTrabajo.FechaInicioEstimada.Value);
+                if (fechaTemp < fechaMenor) { fechaMenor = fechaTemp; }
+            }
+
+            return fechaMenor;
         }
     }
 }
