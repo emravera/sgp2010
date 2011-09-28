@@ -101,6 +101,23 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
+        //Metodo para eliminar el/los movimientos de stock de un pedido
+        public static void EliminarMovimientosPedido(int numeroEntidadPedido)
+        {
+            string sql = @"DELETE FROM MOVIMIENTOS_STOCK 
+                                  WHERE mvto_codigo = 'Pedido' AND entd_dueño = @p0";
+
+            object[] parametros = { numeroEntidadPedido };
+
+            try
+            {
+                DB.executeNonQuery(sql, parametros, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+
+
         public static void ObtenerMovimientosStockOrdenTrabajo(int numeroOrdenTrabajo, DataTable dtMovimientos)
         {
             string sql = @"SELECT mvto_numero, mvto_codigo, mvto_descripcion, mvto_fechaalta, mvto_fechaprevista, mvto_fechareal

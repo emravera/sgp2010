@@ -14,9 +14,9 @@ namespace GyCAP.BLL
             DAL.DetallePedidoDAL.Eliminar(detalle, transaccion); 
         }
 
-        public static void Actualizar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
+        public static void Actualizar(Data.dsCliente.DETALLE_PEDIDOSRow row, SqlTransaction transaccion)
         {
-            DAL.DetallePedidoDAL.Actualizar(detalle, transaccion); 
+            DAL.DetallePedidoDAL.Actualizar(row, transaccion); 
         }
 
         public static void EliminarDetallePedido(long codigoPedido, SqlTransaction transaccion)
@@ -27,6 +27,12 @@ namespace GyCAP.BLL
         public static void ObtenerDetallePedido(DataTable dtDetallePedido, int codigoPedido)
         {
             DAL.DetallePedidoDAL.ObtenerDetallePedido(dtDetallePedido, codigoPedido);
+        }
+
+        //Metodo para cancelar un detalle de pedido
+        public static void CancelarDetallePedido(int codigoDetallePedido, DateTime fechaCancelacion)
+        {
+            
         }
 
         public static void CambiarEstado(int codigoDetallePedido, int estado)

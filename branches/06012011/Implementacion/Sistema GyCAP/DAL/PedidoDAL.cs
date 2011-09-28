@@ -209,6 +209,7 @@ namespace GyCAP.DAL
             {
                 //Ahora insertamos el detalle, usamos el foreach para recorrer sólo los nuevos registros del datatable
                 int contador = 0;
+                int codigoDetalle = 0;
                 
                 foreach (Data.dsCliente.DETALLE_PEDIDOSRow row in (Data.dsCliente.DETALLE_PEDIDOSRow[])dtDetallePedido.Select(null, null, System.Data.DataViewRowState.Added))
                 {
@@ -225,13 +226,24 @@ namespace GyCAP.DAL
                     if (Convert.ToInt32(row.EDPED_CODIGO) == DAL.EstadoDetallePedidoDAL.ObtenerCodigoEstado("Pendiente"))
                     {
                         //Inserto el detalle de pedido
-                        DAL.DetallePedidoDAL.Insertar(row, transaccion);
+                        codigoDetalle =  DAL.DetallePedidoDAL.Insertar(row, transaccion);
+
+                        //Actualizo el numero de Detalle de pedido
+                        row.BeginEdit();
+                        row.DPED_CODIGO = codigoDetalle;
+                        row.EndEdit();
+
                     }
                     else if (Convert.ToInt32(row.EDPED_CODIGO) == DAL.EstadoDetallePedidoDAL.ObtenerCodigoEstado("Entrega Stock"))
                     {
                         //Insertamos el detalle de pedido
-                        DAL.DetallePedidoDAL.Insertar(row, transaccion);
-                        
+                        codigoDetalle = DAL.DetallePedidoDAL.Insertar(row, transaccion);
+
+                        //Actualizo el numero de Detalle de pedido
+                        row.BeginEdit();
+                        row.DPED_CODIGO = codigoDetalle;
+                        row.EndEdit();
+
                         //Ejecutamos el movimiento de stock
                         MovimientoStockPlanificado(transaccion, row);                        
                     }
@@ -426,9 +438,10 @@ namespace GyCAP.DAL
                 //Iniciamos la transaccion
                 transaccion = DB.IniciarTransaccion();
 
-                //Actualizamos el detalle
+                //Actualizamos el pedido (cabecera)
                 DB.executeNonQuery(sqlUpdate, valorParametros, transaccion);
-                           
+                 
+                //Actualizamos el detalle de pedido 
                 //Primero, insertamos aquellos detalles de pedido nuevos
                 DAL.PedidoDAL.InsertarDetalle(dtDetallePedido, pedido.Codigo, transaccion);
 
@@ -463,21 +476,28 @@ namespace GyCAP.DAL
         {
             try
             {
+                //Borramos el movimiento de stock que se habia generado para ese pedido ya que se cargan nuevos
+                //Obtengo el id de la entidad dueña (por el codigo de pedido)
+                int idEntidadPedido = DAL.EntidadDAL.ObtenerCodigoEntidad(codigoPedido);
+
+                //Eliminamos los movimientos de stock que incluyan esa entidad dueña y sean pedidos
+                DAL.MovimientoStockDAL.EliminarMovimientosPedido(idEntidadPedido);
+
                 //Se actualiza el detalle de pedido con lo que se haya cargado
                 foreach (Data.dsCliente.DETALLE_PEDIDOSRow row in (Data.dsCliente.DETALLE_PEDIDOSRow[])dtDetallePedido.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
                     //Se guarda dependiendo del tipo de operacion que se esta realizando
                     if (Convert.ToInt32(row.EDPED_CODIGO) == DAL.EstadoDetallePedidoDAL.ObtenerCodigoEstado("Pendiente"))
                     {
-                        //Inserto el detalle de pedido
-                        DAL.DetallePedidoDAL.Insertar(row, transaccion);
+                        //Actualizo el detalle de pedido Pendiente
+                        DAL.DetallePedidoDAL.Actualizar(row, transaccion);
                     }
                     else if (Convert.ToInt32(row.EDPED_CODIGO) == DAL.EstadoDetallePedidoDAL.ObtenerCodigoEstado("Entrega Stock"))
                     {
-                        //Insertamos el detalle de pedido
-                        DAL.DetallePedidoDAL.Insertar(row, transaccion);
-
-                        //Ejecutamos el movimiento de stock
+                        //Actualizamos el detalle de pedido y el movimiento de stock
+                        DAL.DetallePedidoDAL.Actualizar(row, transaccion);
+                                       
+                        //Ejecutamos un nuevo movimiento de stock
                         MovimientoStockPlanificado(transaccion, row);
                     }
                 }
