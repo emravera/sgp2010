@@ -12,13 +12,32 @@ namespace GyCAP.DAL
     {
         public static void ObtenerTodos(Data.dsStock.ENTIDADESDataTable table)
         {
-            string sql = "SELECT entd_codigo, entd_nombre, tentd_codigo, entd_id FROM ENTIDADES";
+            string sql = @"SELECT entd_codigo, entd_nombre, tentd_codigo, entd_id 
+                           FROM ENTIDADES";
 
             try
             {
                 DB.FillDataTable(table, sql, null);
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+        public static int ObtenerCodigoEntidad(int entidadID)
+        {
+            int codigoEntidad=0;
+
+            string sql = @"SELECT entd_codigo 
+                           FROM ENTIDADES WHERE ENTD_ID = @p0 ";
+
+            object[] parametros = { entidadID };
+
+            try
+            {
+                codigoEntidad = Convert.ToInt32(DB.executeScalar(sql, parametros, null));
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+
+            return codigoEntidad;
         }
 
         public static void GetEntidad(TipoEntidadDAL.TipoEntidadEnum tipo, Entidad entidad)

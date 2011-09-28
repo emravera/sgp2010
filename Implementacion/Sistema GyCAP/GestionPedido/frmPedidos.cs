@@ -261,6 +261,7 @@ namespace GyCAP.UI.GestionPedido
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    btnCancelarPedido.Enabled = false;
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
                     dvDetallePedido.RowFilter = "DPED_CODIGO < 0";
@@ -279,6 +280,7 @@ namespace GyCAP.UI.GestionPedido
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    btnCancelarPedido.Enabled = false;
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.nuevoExterno;
                     dvDetallePedido.RowFilter = "DPED_CODIGO < 0";
@@ -303,6 +305,7 @@ namespace GyCAP.UI.GestionPedido
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    btnCancelarPedido.Enabled = true;
                     panelAcciones.Enabled = true;                   
                     estadoInterface = estadoUI.modificar;
                     tcPedido.SelectedTab = tpDatos;
@@ -313,6 +316,7 @@ namespace GyCAP.UI.GestionPedido
                 case estadoUI.cargarDetalle:
                     btnAgregar.Enabled = false;
                     btnValidar.Enabled = true;
+                    btnCancelarPedido.Enabled = false;
                     lblCantProducir.Visible = false;
                     lblCantStock.Visible = false;
                     numCantProducir.Visible = false;
@@ -329,6 +333,7 @@ namespace GyCAP.UI.GestionPedido
                 case estadoUI.modificarDetalle:
                     btnAgregar.Enabled = true;
                     btnValidar.Enabled = false;
+                    btnCancelarPedido.Enabled = false;
                     lblCantProducir.Visible = true;
                     lblCantStock.Visible = true;
                     numCantProducir.Visible = true;
@@ -867,7 +872,6 @@ namespace GyCAP.UI.GestionPedido
                             //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
                             //todavia no vamos a insertar en la db hasta que no haga Guardar
                             dsCliente.DETALLE_PEDIDOS.AddDETALLE_PEDIDOSRow(row);
-
                         }
                     }
                 }
@@ -898,9 +902,7 @@ namespace GyCAP.UI.GestionPedido
             {
                 Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
             }
-        }       
-
-        #endregion      
+        }
 
         private void btnValidar_Click(object sender, EventArgs e)
         {
@@ -912,11 +914,11 @@ namespace GyCAP.UI.GestionPedido
             {
                 //Obtenemos la ubicacion de stock, la fecha de necesidad y la cantidad
                 int ubicacionStock = Convert.ToInt32(cbUbicacionStock.GetSelectedValue());
-                DateTime fechaNecesidad =Convert.ToDateTime(sfFechaPrevista.Value);
+                DateTime fechaNecesidad = Convert.ToDateTime(sfFechaPrevista.Value);
                 int cantidad = Convert.ToInt32(nudCantidad.Value);
 
                 //Verificamos si hay stock para una cocina determinada para esa fecha
-                decimal cantidadStock = Math.Round(BLL.FabricaBLL.GetStockForDay(ubicacionStock, fechaNecesidad),0);
+                decimal cantidadStock = Math.Round(BLL.FabricaBLL.GetStockForDay(ubicacionStock, fechaNecesidad), 0);
 
                 if (cantidadStock > 0)
                 {
@@ -943,7 +945,7 @@ namespace GyCAP.UI.GestionPedido
                     numCantProducir.Value = nudCantidad.Value;
                     validacion = validacion + "PLANIFICACION PRODUCCION: " + nudCantidad.Value.ToString() + " Unidades \n";
                 }
-                
+
                 //Mostramos el mensaje resultado de la validación
                 validacion = "Validación del pedido: \n" + validacion;
                 Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
@@ -1004,18 +1006,54 @@ namespace GyCAP.UI.GestionPedido
 
         private void btnCancelarPedido_Click(object sender, EventArgs e)
         {
-
-            if (dgvDetallePedido.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            try
             {
-                //Cancelar un estado de Pedido
+                if (dgvDetallePedido.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+                {
+                    //Cancelar un detalle de Pedido
+                    DateTime fechaCancelacion = DBBLL.GetFechaServidor();
+                    int codigoDetalle = Convert.ToInt32(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_codigo"]);
+                    int estadoActual = Convert.ToInt32(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["edped_codigo"]);
 
+                    if (estadoActual == BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Pendiente"))
+                    {
+                        BLL.DetallePedidoBLL.CancelarDetallePedido(codigoDetalle, fechaCancelacion);
+                    }
+                    else if (estadoActual == BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Pendiente"))
+                    {
+                        //Cancelamos el detalle de pedido
+                        BLL.DetallePedidoBLL.CancelarDetallePedido(codigoDetalle, fechaCancelacion);
 
+                        //Se tienen que eliminar los movimientos de stock asociados
+                        
+                    }
+                    //Modificamos el dataset de pedido
+                    Data.dsCliente.DETALLE_PEDIDOSRow row = dsCliente.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToDecimal(codigoDetalle));
+
+                    row.BeginEdit();
+                    row.DPED_FECHA_CANCELACION = fechaCancelacion;
+                    row.EDPED_CODIGO = BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Cancelado");
+                    row.EndEdit();
+
+                    dgvDetallePedido.Refresh();
+
+                    //Muestro un mensaje que se cancelo un detalle de pedido
+                    Entidades.Mensajes.MensajesABM.MsjValidacion("Se cancelo el detalle de pedido correctamente", this.Text);
+                }
+                else
+                {
+                    Entidades.Mensajes.MensajesABM.MsjValidacion("Debe seleccionar un Detalle de Pedido", this.Text);
+                }
             }
-            else
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                Entidades.Mensajes.MensajesABM.MsjValidacion("Debe seleccionar un Detalle de Pedido", this.Text);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
         }       
+
+        #endregion      
+
+        
     }
 }
 

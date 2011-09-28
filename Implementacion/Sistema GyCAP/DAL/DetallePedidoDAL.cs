@@ -14,7 +14,7 @@ namespace GyCAP.DAL
         public static readonly int EstadoFinalizado = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("Finalizado");
         
         //Metodo para insertar el detalle de pedido
-        public static void Insertar(Data.dsCliente.DETALLE_PEDIDOSRow row, SqlTransaction transaccion)
+        public static int Insertar(Data.dsCliente.DETALLE_PEDIDOSRow row, SqlTransaction transaccion)
         {
             string sqlInsert = @"INSERT INTO [DETALLE_PEDIDOS] 
                                         ([PED_CODIGO]
@@ -28,8 +28,12 @@ namespace GyCAP.DAL
             object[] valorParametros = {row.PED_CODIGO, row.EDPED_CODIGO, row.COC_CODIGO, row.DPED_CANTIDAD,
                                         row.DPED_CODIGONEMONICO, row.DPED_FECHA_ENTREGA_PREVISTA};
 
+            int codigoDetalle = 0;
+
             //Ejecutamos la consulta y obtenemos el codigo
-            DB.executeNonQuery(sqlInsert, valorParametros, transaccion);          
+            codigoDetalle = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParametros, transaccion));
+
+            return codigoDetalle;
         }
 
         public static void Eliminar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
@@ -39,11 +43,14 @@ namespace GyCAP.DAL
             DB.executeNonQuery(sqlDelete, valorParametros, transaccion);
         }
 
-        public static void Actualizar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
+        public static void Actualizar(Data.dsCliente.DETALLE_PEDIDOSRow row, SqlTransaction transaccion)
         {
-            string sqlUpdate = @"UPDATE DETALLE_PEDIDOS SET DPED_CANTIDAD = @p0 
-                               WHERE DPED_CODIGO = @p1";
-            object[] valorParametros = { detalle.Cantidad, detalle.Codigo };
+            string sqlUpdate = @"UPDATE DETALLE_PEDIDOS SET 
+                                        DPED_CANTIDAD = @p0, 
+                                        DPED_FECHA_ENTREGA_PREVISTA = @p1,
+                                        COC_CODIGO = @p2
+                               WHERE DPED_CODIGO = @p3";
+            object[] valorParametros = { row.DPED_CANTIDAD, row.DPED_FECHA_ENTREGA_PREVISTA, row.COC_CODIGO, row.DPED_CODIGO };
             DB.executeNonQuery(sqlUpdate, valorParametros, transaccion);
         }
 
@@ -70,6 +77,20 @@ namespace GyCAP.DAL
             string sql = "UPDATE DETALLE_PEDIDOS SET edped_codigo = @p0 WHERE dped_codigo = @p1";
             object[] parametros = { codigoEstado, codigoDetalle };
             DB.executeNonQuery(sql, parametros, transaccion);
+        }
+
+        public static void CancelarDetallePedido(int codigoDetalle, DateTime fechaCancelacion)
+        {
+            int codigoCancelado = DAL.EstadoDetallePedidoDAL.ObtenerCodigoEstado("Cancelado");
+
+            string sql = @"UPDATE DETALLE_PEDIDOS 
+                           SET edped_codigo = @p0,
+                           dped_fecha_cancelacion = @p1 
+                           WHERE dped_codigo = @p2";
+
+            object[] parametros = { codigoCancelado, fechaCancelacion, codigoDetalle };
+            
+            DB.executeNonQuery(sql, parametros, null);
         }
 
         public static void CambiarEstado(int codigoDetallePedido, int estado)
