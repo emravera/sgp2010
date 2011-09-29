@@ -113,5 +113,13 @@ namespace GyCAP.Entidades
             get { return detalleHojaRuta; }
             set { detalleHojaRuta = value; }
         }
+
+        private int ordenTrabajoPadre;
+
+        public int OrdenTrabajoPadre
+        {
+            get { return ordenTrabajoPadre; }
+            set { ordenTrabajoPadre = value; }
+        }
     }
 }

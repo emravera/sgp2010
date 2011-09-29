@@ -42,6 +42,18 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
             return lista;
         }
 
+        public IList<NodoOrdenTrabajo> AsNodoOrdenTrabajoList()
+        {
+            IList<NodoOrdenTrabajo> lista = new List<NodoOrdenTrabajo>();
+
+            foreach (NodoOrdenTrabajo nodo in this.ordenesTrabajo)
+            {
+                nodo.AsNodoOrdenTrabajoList(lista);
+            }
+
+            return lista;
+        }
+
         public TreeView AsTreeView()
         {
             TreeView treeReturn = new TreeView();
@@ -88,6 +100,16 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
 
             this.ordenProduccion.FechaInicioEstimada = fechaReturn;
             return fechaReturn;
+        }
+
+        public NodoOrdenTrabajo BuscarNodoByCodigoNodo(int codigoNodo)
+        {
+            return this.AsNodoOrdenTrabajoList().FirstOrDefault(p => p.CodigoNodo == codigoNodo);
+        }
+
+        public OrdenTrabajo BuscarNodoByNumeroOrden(int numeroOrdenTrabajo)
+        {
+            return this.AsOrdenesTrabajoList().FirstOrDefault(p => p.Numero == numeroOrdenTrabajo);
         }
     }
 }

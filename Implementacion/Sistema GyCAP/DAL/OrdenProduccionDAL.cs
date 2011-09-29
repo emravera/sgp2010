@@ -69,11 +69,25 @@ namespace GyCAP.DAL
             {
                 transaccion = DB.IniciarTransaccion();
                 orden.Numero = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
-
-                foreach (OrdenTrabajo item in arbol.AsOrdenesTrabajoList())
+                orden.Codigo = string.Concat("GA", orden.Numero);
+                ActualizarCodigo(orden.Codigo, orden.Numero, transaccion);
+                DetallePlanSemanalDAL.ActualizarEstado(new int[] { orden.DetallePlanSemanal.Codigo }, (int)PlanificacionEnum.EstadoDetallePlanSemanal.ConOrden, transaccion);
+                if (orden.DetallePlanSemanal.DetallePedido != null)
                 {
+                    DetallePedidoDAL.ActualizarEstadoAEnCurso((int)(orden.DetallePlanSemanal.DetallePedido.Codigo), transaccion);
+                }
+                IList<OrdenTrabajo> ordenesTrabajo = arbol.AsOrdenesTrabajoList().OrderByDescending(p => p.Numero).ToList();
+                
+                foreach (OrdenTrabajo item in ordenesTrabajo)
+                {
+                    int oldNumber = item.Numero;
                     item.OrdenProduccion = orden.Numero;
+                    
                     OrdenTrabajoDAL.Insertar(item, transaccion);
+                    foreach (OrdenTrabajo ordt in ordenesTrabajo.Where(p => p.OrdenTrabajoPadre == oldNumber))
+                    {
+                        ordt.OrdenTrabajoPadre = item.Numero;
+                    }
                 }
                 
                 transaccion.Commit();
@@ -89,6 +103,14 @@ namespace GyCAP.DAL
             }
         }
 
+        private static void ActualizarCodigo(string codigo, int numeroOrden, SqlTransaction transaccion)
+        {
+            string sql = "UPDATE ORDENES_PRODUCCION SET ordp_codigo = @p0 WHERE ordp_numero = @p1";
+            object[] parametros = { codigo, numeroOrden };
+
+            DB.executeNonQuery(sql, parametros, transaccion);
+        }
+        
         public static void Eliminar(int numeroOrdenProduccion)
         {
             string sqlOT = "DELETE FROM ORDENES_TRABAJO WHERE ordp_numero = @p0";

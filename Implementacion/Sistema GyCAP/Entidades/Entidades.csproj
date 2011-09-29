@@ -82,6 +82,7 @@
     <Compile Include="EntregaProducto.cs" />
     <Compile Include="Enumeraciones\CocinaEnum.cs" />
     <Compile Include="Enumeraciones\OrdenesTrabajoEnum.cs" />
+    <Compile Include="Enumeraciones\PedidoEnum.cs" />
     <Compile Include="Enumeraciones\PlanificacionEnum.cs" />
     <Compile Include="Enumeraciones\RecursosFabricacionEnum.cs" />
     <Compile Include="Enumeraciones\StockEnum.cs" />
