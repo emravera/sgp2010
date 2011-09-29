@@ -39,10 +39,13 @@
             // 
             // gbExcepciones
             // 
+            this.gbExcepciones.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbExcepciones.Controls.Add(this.dgvLista);
-            this.gbExcepciones.Location = new System.Drawing.Point(3, -1);
+            this.gbExcepciones.Location = new System.Drawing.Point(6, 6);
             this.gbExcepciones.Name = "gbExcepciones";
-            this.gbExcepciones.Size = new System.Drawing.Size(514, 277);
+            this.gbExcepciones.Size = new System.Drawing.Size(514, 292);
             this.gbExcepciones.TabIndex = 0;
             this.gbExcepciones.TabStop = false;
             this.gbExcepciones.Text = "Listado de Excepciones";
@@ -59,21 +62,23 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(508, 258);
+            this.dgvLista.Size = new System.Drawing.Size(508, 273);
             this.dgvLista.TabIndex = 2;
             this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnVolver);
-            this.groupBox1.Location = new System.Drawing.Point(2, 276);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox1.Location = new System.Drawing.Point(0, 298);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(514, 56);
+            this.groupBox1.Size = new System.Drawing.Size(525, 56);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
             // btnVolver
             // 
+            this.btnVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnVolver.Location = new System.Drawing.Point(432, 19);
             this.btnVolver.Name = "btnVolver";
@@ -87,10 +92,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 339);
+            this.ClientSize = new System.Drawing.Size(525, 354);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbExcepciones);
             this.Name = "frmExcepcionesPlan";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Excepciones Plan";
             this.gbExcepciones.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
