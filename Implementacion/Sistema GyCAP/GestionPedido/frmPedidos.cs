@@ -69,14 +69,9 @@ namespace GyCAP.UI.GestionPedido
             dgvLista.Columns.Add("EPED_CODIGO", "Estado");
             dgvLista.Columns.Add("PED_OBSERVACIONES", "Observaciones");
 
-            dgvLista.Columns["PED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["PED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvLista.Columns["PED_NUMERO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvLista.Columns["PED_NUMERO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvLista.Columns["CLI_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["EPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns["PED_OBSERVACIONES"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
+            
             //Alineacion de los numeros y las fechas en la grilla
             dgvLista.Columns["PED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["PED_CODIGO"].Visible = false;
@@ -99,20 +94,9 @@ namespace GyCAP.UI.GestionPedido
             dgvDetallePedido.Columns.Add("DPED_FECHA_ENTREGA_PREVISTA", "Fecha Entrega");
             dgvDetallePedido.Columns.Add("DPED_CODIGONEMONICO", "Cod. Nemónico");
             dgvDetallePedido.Columns.Add("DPED_FECHA_CANCELACION", "Fecha Cancelación");
-
-            dgvDetallePedido.Columns["DPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePedido.Columns["COC_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePedido.Columns["DPED_CANTIDAD"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePedido.Columns["DPED_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvDetallePedido.Columns["EDPED_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePedido.Columns["DPED_FECHA_ENTREGA_PREVISTA"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePedido.Columns["DPED_CODIGONEMONICO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePedido.Columns["DPED_FECHA_CANCELACION"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             
-            //Alineacion de los numeros y las fechas en la grilla
-            dgvDetallePedido.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
-            dgvDetallePedido.Columns["DPED_CODIGONEMONICO"].Visible = false;
+            
+            dgvDetallePedido.Columns["DPED_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;      
 
             //Indicamos de que columna se obtienen los datos
             dgvDetallePedido.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
@@ -142,7 +126,10 @@ namespace GyCAP.UI.GestionPedido
             dvPedido = new DataView(dsCliente.PEDIDOS);
             dvPedido.Sort = "PED_CODIGO ASC";
             dgvLista.DataSource = dvPedido;
-
+            
+            //Escondemos las columnas del detalle
+            dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
+            dgvDetallePedido.Columns["DPED_CODIGONEMONICO"].Visible = false;
             dvDetallePedido = new DataView(dsCliente.DETALLE_PEDIDOS);
             dgvDetallePedido.DataSource = dvDetallePedido;
 
@@ -245,10 +232,14 @@ namespace GyCAP.UI.GestionPedido
                     btnEliminar.Enabled = hayDatos;
                     btnConsultar.Enabled = hayDatos;
                     btnNuevo.Enabled = true;
+
+                    //Escondo las columnas que no quiero que se vean
+                    dgvLista.Columns["PED_CODIGO"].Visible = false;
+                    dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
+                    dgvDetallePedido.Columns["DPED_CODIGONEMONICO"].Visible = false;
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.inicio;
-                    tcPedido.SelectedTab = tpBuscar;
-                    dgvLista.Columns["PED_CODIGO"].Visible = false;
+                    tcPedido.SelectedTab = tpBuscar;                    
                     break;
                 case estadoUI.nuevo:
                     setControles(false);
@@ -306,12 +297,10 @@ namespace GyCAP.UI.GestionPedido
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
                     btnCancelarPedido.Enabled = true;
-                    panelAcciones.Enabled = true;                   
-                    estadoInterface = estadoUI.modificar;
-                    tcPedido.SelectedTab = tpDatos;
-                    //Escondemos las columnas del detalle
+                    panelAcciones.Enabled = true;
                     dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
-                    dgvDetallePedido.Columns["DPED_CODIGONEMONICO"].Visible = false;
+                    estadoInterface = estadoUI.modificar;
+                    tcPedido.SelectedTab = tpDatos;                   
                     break;
                 case estadoUI.cargarDetalle:
                     btnAgregar.Enabled = false;
@@ -333,7 +322,7 @@ namespace GyCAP.UI.GestionPedido
                 case estadoUI.modificarDetalle:
                     btnAgregar.Enabled = true;
                     btnValidar.Enabled = false;
-                    btnCancelarPedido.Enabled = false;
+                    btnCancelarPedido.Enabled = true;
                     lblCantProducir.Visible = true;
                     lblCantStock.Visible = true;
                     numCantProducir.Visible = true;
@@ -536,12 +525,11 @@ namespace GyCAP.UI.GestionPedido
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            if (estadoInterface == estadoUI.cargarDetalle)
+            if (estadoInterface == estadoUI.cargarDetalle || estadoInterface == estadoUI.modificarDetalle)
             {
                 slideControl.BackwardTo("slideDatos");
                 nudCantidad.Value = 0;
-                panelAcciones.Enabled = true;              
-
+                panelAcciones.Enabled = true;
             }
             else
             {
@@ -616,7 +604,7 @@ namespace GyCAP.UI.GestionPedido
 
                         dsCliente.PEDIDOS.AddPEDIDOSRow(rowPedido);                    
                     }
-                    else if (estadoInterface == estadoUI.modificar)
+                    else if (estadoInterface == estadoUI.modificar || estadoInterface == estadoUI.modificarDetalle)
                     {
                         //Está modificando el pedido
                         //Primero obtenemos su código del dataview que está relacionado a la fila seleccionada
@@ -824,7 +812,7 @@ namespace GyCAP.UI.GestionPedido
                         row.DPED_CANTIDAD = Convert.ToInt32(numCantStock.Value);
                         row.DPED_CODIGONEMONICO = string.Empty;
                         row.DPED_FECHA_ENTREGA_PREVISTA = Convert.ToDateTime(sfFechaPrevista.Value.ToShortDateString());
-                        row.UBICACION_STOCK = Convert.ToInt32(cbUbicacionStock.GetSelectedValue());
+                        row.UBICACION_STOCK = cbUbicacionStock.GetSelectedValue().ToString();
                         row.EndEdit();
 
                         //Agregamos la fila nueva al dataset sin aceptar cambios para que quede marcada como nueva ya que
@@ -888,6 +876,9 @@ namespace GyCAP.UI.GestionPedido
                     else row.DPED_CANTIDAD = Convert.ToInt32(numCantStock.Value);
                     row.DPED_FECHA_ENTREGA_PREVISTA = Convert.ToDateTime(sfFechaPrevista.Value.ToShortDateString());
                     row.EndEdit();
+
+                    //Se vuelve a la pantalla principal del pedido
+                    btnVolver.PerformClick();
                 }
 
                 //Volvemos la interfaz para que cargue mas detalles
@@ -895,8 +886,7 @@ namespace GyCAP.UI.GestionPedido
                 sfFechaPrevista.Value = DateTime.Now;
                 cbUbicacionStock.SetSelectedIndex(-1);
                 btnValidar.Enabled = true;
-                btnAgregar.Enabled = false;
-                SetInterface(estadoUI.cargarDetalle);
+                btnAgregar.Enabled = false;                
             }
             else
             {
@@ -968,7 +958,6 @@ namespace GyCAP.UI.GestionPedido
         {
             if (dgvDetallePedido.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
-
                 slideControl.ForwardTo("slideAgregar");
                 panelAcciones.Enabled = false;
                 SetInterface(estadoUI.modificarDetalle);
@@ -997,6 +986,7 @@ namespace GyCAP.UI.GestionPedido
                     numCantStock.Enabled = true;
                 }
                 sfFechaPrevista.Value = Convert.ToDateTime(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_fecha_entrega_prevista"]);
+                SetInterface(estadoUI.modificarDetalle);
             }
             else
             {
@@ -1014,6 +1004,10 @@ namespace GyCAP.UI.GestionPedido
                     DateTime fechaCancelacion = DBBLL.GetFechaServidor();
                     int codigoDetalle = Convert.ToInt32(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_codigo"]);
                     int estadoActual = Convert.ToInt32(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["edped_codigo"]);
+                    int codigoPedido = Convert.ToInt32(dvDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["ped_codigo"]);
+
+                    //Defino la fila de detalle de pedido
+                    Data.dsCliente.DETALLE_PEDIDOSRow row = dsCliente.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToDecimal(codigoDetalle));
 
                     if (estadoActual == BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Pendiente"))
                     {
@@ -1024,14 +1018,17 @@ namespace GyCAP.UI.GestionPedido
                         //Cancelamos el detalle de pedido
                         BLL.DetallePedidoBLL.CancelarDetallePedido(codigoDetalle, fechaCancelacion);
 
-                        //Se tienen que eliminar los movimientos de stock asociados
-                        
-                    }
-                    //Modificamos el dataset de pedido
-                    Data.dsCliente.DETALLE_PEDIDOSRow row = dsCliente.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToDecimal(codigoDetalle));
+                        //Se tienen que eliminar los movimientos de stock asociados a ese detalle
+                        int codigoEntidadPedido = BLL.EntidadBLL.ObtenerCodigoEntidad(codigoPedido);
+
+                        BLL.MovimientoStockBLL.EliminarMovimientosPedido(codigoEntidadPedido);
+
+                        //Generamos un nuevo detalle de pedido                        
+                        BLL.PedidoBLL.MovimientoStockPlanificado(row);
+                    }          
 
                     row.BeginEdit();
-                    row.DPED_FECHA_CANCELACION = fechaCancelacion;
+                    row.DPED_FECHA_CANCELACION =Convert.ToDateTime(fechaCancelacion.ToShortDateString());
                     row.EDPED_CODIGO = BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Cancelado");
                     row.EndEdit();
 
@@ -1051,9 +1048,7 @@ namespace GyCAP.UI.GestionPedido
             }
         }       
 
-        #endregion      
-
-        
+        #endregion     
     }
 }
 

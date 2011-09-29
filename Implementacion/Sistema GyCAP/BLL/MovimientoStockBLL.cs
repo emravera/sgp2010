@@ -38,7 +38,12 @@ namespace GyCAP.BLL
             ValidarMovimiento(movimientoStock);
             DAL.MovimientoStockDAL.Finalizar(movimientoStock, null);
         }
-        
+
+        public static void EliminarMovimientosPedido(int codigoEntidad)
+        {
+            DAL.MovimientoStockDAL.EliminarMovimientosPedido(codigoEntidad, null);
+        }
+
         public static void Cancelar(int numeroMovimiento)
         {
             if (DAL.MovimientoStockDAL.EsFinalizado(numeroMovimiento)) { throw new Entidades.Excepciones.ElementoFinalizadoException(); }

@@ -166,6 +166,7 @@
             // 
             // btnCancelarPedido
             // 
+            this.btnCancelarPedido.CausesValidation = false;
             this.btnCancelarPedido.FlatAppearance.BorderSize = 0;
             this.btnCancelarPedido.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.btnCancelarPedido.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
@@ -182,6 +183,7 @@
             // 
             // btnModificarDetalle
             // 
+            this.btnModificarDetalle.CausesValidation = false;
             this.btnModificarDetalle.FlatAppearance.BorderSize = 0;
             this.btnModificarDetalle.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.btnModificarDetalle.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
@@ -209,6 +211,7 @@
             // 
             // btnDelete
             // 
+            this.btnDelete.CausesValidation = false;
             this.btnDelete.FlatAppearance.BorderSize = 0;
             this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
@@ -227,6 +230,7 @@
             // 
             // btnNew
             // 
+            this.btnNew.CausesValidation = false;
             this.btnNew.FlatAppearance.BorderSize = 0;
             this.btnNew.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
@@ -399,6 +403,7 @@
             // 
             // sfFechaPrevista
             // 
+            this.sfFechaPrevista.CausesValidation = false;
             this.sfFechaPrevista.CustomFormat = " ";
             this.sfFechaPrevista.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.sfFechaPrevista.Location = new System.Drawing.Point(91, 38);

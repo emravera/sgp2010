@@ -13,6 +13,11 @@ namespace GyCAP.BLL
             DAL.EntidadDAL.ObtenerTodos(table);
         }
 
+        public static int ObtenerCodigoEntidad(int codigoPedido)
+        {
+            return DAL.EntidadDAL.ObtenerCodigoEntidad(codigoPedido);
+        }
+
         public static IList<Entidad> ObtenerTodos()
         {
             Data.dsStock.ENTIDADESDataTable dt = new GyCAP.Data.dsStock.ENTIDADESDataTable();

@@ -32,7 +32,7 @@ namespace GyCAP.BLL
         //Metodo para cancelar un detalle de pedido
         public static void CancelarDetallePedido(int codigoDetallePedido, DateTime fechaCancelacion)
         {
-            
+            DAL.DetallePedidoDAL.CancelarDetallePedido(codigoDetallePedido, fechaCancelacion);
         }
 
         public static void CambiarEstado(int codigoDetallePedido, int estado)

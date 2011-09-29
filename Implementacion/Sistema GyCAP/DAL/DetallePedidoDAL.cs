@@ -91,6 +91,7 @@ namespace GyCAP.DAL
             object[] parametros = { codigoCancelado, fechaCancelacion, codigoDetalle };
             
             DB.executeNonQuery(sql, parametros, null);
+
         }
 
         public static void CambiarEstado(int codigoDetallePedido, int estado)
@@ -124,6 +125,7 @@ namespace GyCAP.DAL
                            FROM DETALLE_PEDIDOS WHERE dped_codigo = @p0";
 
             object[] valorParametros = { codigoDetalle };
+
             try
             {
                 //Se llena el Datatable

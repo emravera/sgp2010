@@ -53,7 +53,13 @@ namespace GyCAP.BLL
             //Puede eliminarse
             DAL.PedidoDAL.Eliminar(codigo);                  
         }
-        
+
+        //Metodo que cambia el estado del pedido
+        public static void MovimientoStockPlanificado(Data.dsCliente.DETALLE_PEDIDOSRow row)
+        {
+            DAL.PedidoDAL.MovimientoStockPlanificado(null, row);
+        }        
+
         //Metodo que cambia el estado del pedido
         public static void CambiarEstadoPedido(int codigoPedido, int estado)
         {
