@@ -265,7 +265,6 @@ namespace GyCAP.DAL
             //Cargamos el estado del movimiento de stock
             movStock.Estado = new GyCAP.Entidades.EstadoMovimientoStock(DAL.MovimientoStockDAL.EstadoPlanificado);
             
-
             //Creamos las entidades de Origen, Destino y Dueño del movimiento
             Entidades.Entidad origen = new GyCAP.Entidades.Entidad();
             Entidades.TipoEntidad tipoEntidadOrigen = new GyCAP.Entidades.TipoEntidad();
@@ -378,6 +377,13 @@ namespace GyCAP.DAL
                 //Primero se eliminan los detalles de pedidos
                 DetallePedidoDAL.EliminarDetallePedido(codigoPedido, transaccion);
                 
+                //Se eliminan los movimientos de stock asociados al detalle de pedido
+                //Borramos el movimiento de stock que se habia generado para ese pedido ya que se cargan nuevos
+                int idEntidadPedido = DAL.EntidadDAL.ObtenerCodigoEntidad(codigoPedido);
+
+                //Eliminamos los movimientos de stock que incluyan esa entidad dueña y sean pedidos
+                DAL.MovimientoStockDAL.EliminarMovimientosPedido(idEntidadPedido, transaccion);
+                
                 //Se ejecuta la eliminacion
                 DB.executeNonQuery(sql, valorParametros, transaccion);
                 
@@ -481,7 +487,7 @@ namespace GyCAP.DAL
                 int idEntidadPedido = DAL.EntidadDAL.ObtenerCodigoEntidad(codigoPedido);
 
                 //Eliminamos los movimientos de stock que incluyan esa entidad dueña y sean pedidos
-                DAL.MovimientoStockDAL.EliminarMovimientosPedido(idEntidadPedido);
+                DAL.MovimientoStockDAL.EliminarMovimientosPedido(idEntidadPedido, transaccion);
 
                 //Se actualiza el detalle de pedido con lo que se haya cargado
                 foreach (Data.dsCliente.DETALLE_PEDIDOSRow row in (Data.dsCliente.DETALLE_PEDIDOSRow[])dtDetallePedido.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))

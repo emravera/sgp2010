@@ -33,7 +33,7 @@ namespace GyCAP.UI.EstructuraProducto
             dgvLista.Columns.Add("MP_DESCRIPCION", "Descripción");
             dgvLista.Columns.Add("UMED_CODIGO", "Unidad de Medida");
             dgvLista.Columns.Add("MP_COSTO", "Costo/Unidad");
-            dgvLista.Columns.Add("USTCK_NUMERO", "Ubicacion Stock");
+            dgvLista.Columns.Add("USTCK_NUMERO", "Ubicación Stock");
             dgvLista.Columns.Add("MP_ESPRINCIPAL", "Principal");
             dgvLista.Columns.Add("MP_CANTIDAD", "Cantidad");
 
@@ -564,7 +564,7 @@ namespace GyCAP.UI.EstructuraProducto
         {
             try
             {
-                if (estadoInterface == estadoUI.nuevo)
+                if (estadoInterface == estadoUI.nuevo || estadoInterface == estadoUI.modificar)
                 {
                     if (cbTipoUnMedida.GetSelectedIndex() != -1)
                     {

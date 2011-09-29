@@ -102,16 +102,16 @@ namespace GyCAP.DAL
         }
 
         //Metodo para eliminar el/los movimientos de stock de un pedido
-        public static void EliminarMovimientosPedido(int numeroEntidadPedido)
+        public static void EliminarMovimientosPedido(int numeroEntidadPedido, SqlTransaction transaccion)
         {
             string sql = @"DELETE FROM MOVIMIENTOS_STOCK 
-                                  WHERE mvto_codigo = 'Pedido' AND entd_dueño = @p0";
+                                  WHERE mvto_codigo = 'Pedido' AND entd_duenio = @p0";
 
             object[] parametros = { numeroEntidadPedido };
 
             try
             {
-                DB.executeNonQuery(sql, parametros, null);
+                DB.executeNonQuery(sql, parametros, transaccion);
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }

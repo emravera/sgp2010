@@ -30,10 +30,10 @@ namespace GyCAP.UI.GestionStock
             dgvLista.AutoGenerateColumns = false;
             //Agregamos las columnas
             dgvLista.Columns.Add("PROVE_CODIGO", "Código");
-            dgvLista.Columns.Add("PROVE_RAZONSOCIAL", "Razon Social");
+            dgvLista.Columns.Add("PROVE_RAZONSOCIAL", "Razón Social");
             dgvLista.Columns.Add("SEC_CODIGO", "Sector");
-            dgvLista.Columns.Add("PROVE_TELPRINCIPAL", "Telefono Principal");
-            dgvLista.Columns.Add("PROVE_TELALTERNATIVO", "Telefono Alternativo");
+            dgvLista.Columns.Add("PROVE_TELPRINCIPAL", "Teléfono Principal");
+            dgvLista.Columns.Add("PROVE_TELALTERNATIVO", "Teléfono Alternativo");
             
             //Seteamos el modo de tamaño de las columnas
             dgvLista.Columns["PROVE_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -154,6 +154,7 @@ namespace GyCAP.UI.GestionStock
                     btnModificar.Enabled = hayDatos;
                     btnEliminar.Enabled = hayDatos;
                     btnConsultar.Enabled = hayDatos;
+                    btnDelete.Enabled = false;
                     btnNuevo.Enabled = true;
                     
                     //Limpio la tabla de domicilios
@@ -200,6 +201,7 @@ namespace GyCAP.UI.GestionStock
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    btnDelete.Enabled = true;
                     tcABM.SelectedTab = tpDatos;
                     estadoInterface = estadoUI.nuevo;
                     break;
@@ -237,6 +239,7 @@ namespace GyCAP.UI.GestionStock
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
+                    btnDelete.Enabled = true;
                     tcABM.SelectedTab = tpDatos;
                     estadoInterface = estadoUI.modificar;
                     break;
@@ -424,25 +427,32 @@ namespace GyCAP.UI.GestionStock
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvDomicilios.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
+            if (dgvDomicilios.Rows.Count > 1)
             {
-                //Preguntamos si está seguro
-                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Proveedor", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
-                if (respuesta == DialogResult.Yes)
+                if (dgvDomicilios.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
                 {
-                    //Obtengo el código del domicilio
-                    int codigo = Convert.ToInt32(dvListaDomicilios[dgvDomicilios.SelectedRows[0].Index]["dom_codigo"]);
+                    //Preguntamos si está seguro
+                    DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Domicilio", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
+                    if (respuesta == DialogResult.Yes)
+                    {
+                        //Obtengo el código del domicilio
+                        int codigo = Convert.ToInt32(dvListaDomicilios[dgvDomicilios.SelectedRows[0].Index]["dom_codigo"]);
 
-                    //Elimino el Domicilio de la BD
-                    BLL.DomicilioBLL.EliminarDomicilios(codigo);
+                        //Elimino el Domicilio de la BD
+                        BLL.DomicilioBLL.EliminarDomicilios(codigo);
 
-                    //Elimino del dataset el domicilio
-                    dsProveedor.DOMICILIOS.FindByDOM_CODIGO(codigo).Delete();
+                        //Elimino del dataset el domicilio
+                        dsProveedor.DOMICILIOS.FindByDOM_CODIGO(codigo).Delete();
+                    }
+                }
+                else
+                {
+                    Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Domicilio", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
                 }
             }
             else
             {
-                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Domicilio", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);
+                Entidades.Mensajes.MensajesABM.MsjValidacion("Existe un solo domicilio cargado. Antes de eliminar el existente cargue uno nuevo.", this.Text);
             }
         }
 
@@ -676,6 +686,5 @@ namespace GyCAP.UI.GestionStock
            }
        }
         #endregion          
-
     }
 }

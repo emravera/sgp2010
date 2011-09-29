@@ -51,7 +51,6 @@
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbListadoDomicilios = new System.Windows.Forms.GroupBox();
             this.panelAcciones = new System.Windows.Forms.Panel();
-            this.label14 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.dgvDomicilios = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -168,7 +167,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(73, 13);
             this.label9.TabIndex = 16;
-            this.label9.Text = "Razon Social:";
+            this.label9.Text = "Razón Social:";
             // 
             // txtTelefonoPcipal
             // 
@@ -333,7 +332,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Razon Social";
+            this.label1.Text = "Razón Social";
             // 
             // tpDatos
             // 
@@ -366,22 +365,12 @@
             // panelAcciones
             // 
             this.panelAcciones.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelAcciones.Controls.Add(this.label14);
             this.panelAcciones.Controls.Add(this.btnDelete);
             this.panelAcciones.Location = new System.Drawing.Point(8, 19);
             this.panelAcciones.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelAcciones.Name = "panelAcciones";
             this.panelAcciones.Size = new System.Drawing.Size(49, 86);
             this.panelAcciones.TabIndex = 14;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(0, 20);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(43, 13);
-            this.label14.TabIndex = 17;
-            this.label14.Text = "Eliminar";
             // 
             // btnDelete
             // 
@@ -390,13 +379,13 @@
             this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Delete_25;
-            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(4, 30);
+            this.btnDelete.Location = new System.Drawing.Point(-1, 14);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(30, 30);
+            this.btnDelete.Size = new System.Drawing.Size(51, 49);
             this.btnDelete.TabIndex = 12;
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDelete.Text = "Eliminar";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -768,7 +757,6 @@
             this.tpDatos.ResumeLayout(false);
             this.gbListadoDomicilios.ResumeLayout(false);
             this.panelAcciones.ResumeLayout(false);
-            this.panelAcciones.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDomicilios)).EndInit();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -833,7 +821,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox gbListadoDomicilios;
         private System.Windows.Forms.Panel panelAcciones;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridView dgvDomicilios;
         private System.Windows.Forms.Button btnAgregarDomicilio;
