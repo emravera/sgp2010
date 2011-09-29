@@ -146,7 +146,7 @@ namespace GyCAP.BLL
             DAL.OrdenProduccionDAL.FinalizarOrdenProduccion(numeroOrdenProduccion, dsOrdenTrabajo, dsStock);
         }
 
-        public static SortableBindingList<ArbolProduccion> GenerarOrdenesProduccion(int codigoDia, Data.dsPlanSemanal dsPlanSemanal, IList<Cocina> listaCocinas)
+        public static SortableBindingList<ArbolProduccion> GenerarOrdenesProduccion(int codigoDia, Data.dsPlanSemanal dsPlanSemanal, IList<Cocina> listaCocinas, IList<ExcepcionesPlan> listaExcepciones)
         {
             int numeroOrdenProduccion = 1;
             SortableBindingList<ArbolProduccion> ordenesProduccion = new SortableBindingList<ArbolProduccion>();
@@ -158,11 +158,12 @@ namespace GyCAP.BLL
                 if (rowDetalle.DPSEM_ESTADO == BLL.DetallePlanSemanalBLL.estadoGenerado)
                 {
                     //No tiene órdenes, controlamos si la cocina tiene una estructura activa
-                    int codigoEstructura = CocinaBLL.ObtenerCodigoEstructuraActiva(Convert.ToInt32(rowDetalle.COC_CODIGO));
+                    Cocina cocina = listaCocinas.First(p => p.CodigoCocina == Convert.ToInt32(rowDetalle.COC_CODIGO));
+                    int codigoEstructura = CocinaBLL.ObtenerCodigoEstructuraActiva(cocina.CodigoCocina);
                     string mensaje = string.Empty;
                     if (codigoEstructura == 0)
                     {
-                        //TODO: crear excepcion Cocina Sin Estructura activa - gonzalo
+                        listaExcepciones.Add(ExcepcionesPlanBLL.Add_ExcepcionCocinaSinEstructura(cocina.CodigoProducto));
                     }
 
                     ordenesProduccion.Add(new ArbolProduccion()
@@ -173,15 +174,18 @@ namespace GyCAP.BLL
                                                 Codigo = string.Concat("OPA", numeroOrdenProduccion),
                                                 Estado = estadoOrden,
                                                 FechaAlta = DBBLL.GetFechaServidor(),
-                                                DetallePlanSemanal = new DetallePlanSemanal() { Codigo = Convert.ToInt32(rowDetalle.DPSEM_CODIGO) },
-                                                Origen = string.Concat("OPA", numeroOrdenProduccion, " - ", rowDetalle.COCINASRow.COC_CODIGO_PRODUCTO),
+                                                DetallePlanSemanal = new DetallePlanSemanal() { 
+                                                    Codigo = Convert.ToInt32(rowDetalle.DPSEM_CODIGO), 
+                                                    DetallePedido = (rowDetalle.IsDPED_CODIGONull()) ? null : new DetallePedido() { Codigo = long.Parse(rowDetalle.DPED_CODIGO.ToString()) } 
+                                                                                              },
+                                                Origen = string.Concat("GA / ", (rowDetalle.IsDPED_CODIGONull()) ? "Planificación" : string.Concat("Pedido", rowDetalle.DPED_CODIGO)),
                                                 FechaInicioReal = null,
                                                 FechaFinReal = null,
                                                 FechaInicioEstimada = null,
                                                 FechaFinEstimada = null,
                                                 Prioridad = 0,
                                                 Observaciones = string.Empty,
-                                                Cocina = listaCocinas.First(p => p.CodigoCocina == Convert.ToInt32(rowDetalle.COC_CODIGO)),
+                                                Cocina = cocina,
                                                 CantidadEstimada = Convert.ToInt32(rowDetalle.DPSEM_CANTIDADESTIMADA),
                                                 CantidadReal = 0,
                                                 Estructura = codigoEstructura

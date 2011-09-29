@@ -28,13 +28,16 @@ namespace GyCAP.DAL
                          ,[ordt_fechafinreal]
                          ,[ordt_observaciones]
                          ,[ordt_secuencia]
-                         ,[dhr_codigo])
-                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13) SELECT @@Identity";
-            
-            object fechainicioreal = DBNull.Value, fechafinreal = DBNull.Value, hr = DBNull.Value;
+                         ,[dhr_codigo]
+                         ,[ordt_numero_padre])
+                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14) SELECT @@Identity";
+
+            object fechainicioreal = DBNull.Value, fechafinreal = DBNull.Value, hr = DBNull.Value, padre = DBNull.Value;
             if (orden.FechaInicioReal.HasValue) { fechainicioreal = orden.FechaInicioReal.Value.ToShortDateString(); }
             if (orden.FechaFinReal.HasValue) { fechafinreal = orden.FechaInicioReal.Value.ToShortDateString(); }
             if (orden.DetalleHojaRuta != null) { hr = orden.DetalleHojaRuta.Codigo; }
+            if (orden.OrdenTrabajoPadre > 0) { padre = orden.OrdenTrabajoPadre; }
+            orden.Origen = orden.Origen.Replace("OPA", string.Concat("OPA", orden.OrdenProduccion));
 
             object[] valoresParametros = { 
                                              orden.Codigo,
@@ -50,12 +53,23 @@ namespace GyCAP.DAL
                                              fechafinreal,
                                              orden.Observaciones,
                                              orden.Secuencia,
-                                             hr
+                                             hr,
+                                             padre
                                          };
 
             orden.Numero = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
+            orden.Codigo = string.Concat("OTA", orden.Numero);
+            ActualizarCodigo(orden.Codigo, orden.Numero, transaccion);
         }
 
+        private static void ActualizarCodigo(string codigo, int numeroOrden, SqlTransaction transaccion)
+        {
+            string sql = "UPDATE ORDENES_TRABAJO SET ordt_codigo = @p0 WHERE ordt_numero = @p1";
+            object[] parametros = { codigo, numeroOrden };
+
+            DB.executeNonQuery(sql, parametros, transaccion);
+        }
+        
         public static void IniciarOrdenTrabajo(int numeroOrdenTrabajo, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsStock dsStock, SqlTransaction transaccion)
         {
             string sql = "UPDATE ORDENES_TRABAJO SET eord_codigo = @p0, ordt_fechainicioreal = @p1 WHERE ordt_numero = @p2";

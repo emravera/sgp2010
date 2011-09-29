@@ -58,6 +58,16 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
             }
         }
 
+        public void AsNodoOrdenTrabajoList(IList<NodoOrdenTrabajo> lista)
+        {
+            lista.Add(this);
+
+            foreach (NodoOrdenTrabajo nodo in this.NodosHijos)
+            {
+                nodo.AsNodoOrdenTrabajoList(lista);
+            }
+        }
+
         public TreeNode AsTreeNode()
         {
             TreeNode nodo = new TreeNode();

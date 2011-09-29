@@ -41,7 +41,7 @@ namespace GyCAP.Entidades.Mensajes
         //***************************************************************************************
         //                                  Enumeraciones Publicas
         //***************************************************************************************
-        public enum Operaciones { Inicio, Búsqueda, Eliminación, Guardado, Modificación }
+        public enum Operaciones { Inicio, Búsqueda, Eliminación, Guardado, Modificación, Generación }
         public enum Generos { Femenino, Masculino }
         public enum Validaciones { Seleccion, CompletarDatos, SoloEspacios, Logica }
 
