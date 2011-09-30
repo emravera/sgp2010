@@ -236,6 +236,11 @@ namespace GyCAP.UI.Soporte
         }
 
         #endregion
+
+        private void txtNombre_Enter(object sender, EventArgs e)
+        {
+            txtNombre.SelectAll();
+        }
      
     }
 }

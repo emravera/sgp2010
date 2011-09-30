@@ -144,6 +144,40 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        public static bool validarUsuario(Entidades.Usuario usuario)
+        {
+            string sql = "SELECT * FROM USUARIOS WHERE u_usuario = @p0 AND U_password = @p1 ";
+            object[] valorParametros = { usuario.Login, usuario.Password };
+            try
+            {
+                if (Convert.ToInt32(DB.executeScalar(sql, valorParametros, null)) == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+        public static int GetCodigoUsuario(Entidades.Usuario usuario)
+        {
+            string sql = "SELECT u_codigo FROM USUARIOS WHERE u_usuario = @p0 AND U_password = @p1 ";
+            object[] valorParametros = { usuario.Login, usuario.Password };
+
+            try
+            {
+                object result = DB.executeScalar(sql, valorParametros, null);
+                if (result == null) { throw new Entidades.Excepciones.UsuarioException("No existe el usuario."); }
+                if (Convert.ToInt32(result) <= 0) { throw new Entidades.Excepciones.UsuarioException("No existe el usuario."); }
+
+                return Convert.ToInt32(result);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
         //Metodo que inserta en la base de datos
         public static int Insertar(Entidades.Usuario usuario)
         {
@@ -178,5 +212,7 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+
+       
     }
 }

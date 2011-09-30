@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using GyCAP.UI.Seguridad;
 
 namespace Seguridad
 {
@@ -15,7 +16,7 @@ namespace Seguridad
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Seguridad());
+            Application.Run(new frmLogin());
         }
     }
 }

@@ -59,6 +59,15 @@ namespace GyCAP.BLL
         {
             return DAL.UsuarioDAL.esUsuario(usuario);
         }
-        
+
+        public static bool validarUsuario(Entidades.Usuario usuario)
+        {
+            return DAL.UsuarioDAL.validarUsuario(usuario);
+        }
+
+        public static int GetCodigoUsuario(Entidades.Usuario usuario)
+        {
+            return DAL.UsuarioDAL.GetCodigoUsuario(usuario);
+        }
     }
 }

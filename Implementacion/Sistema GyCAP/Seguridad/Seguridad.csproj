@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{20AD5C3B-5266-415B-BE70-1F80851445FC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -53,11 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmLogin.cs">
+    <Compile Include="frmLogin_NO USAR.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLogin.Designer.cs">
-      <DependentUpon>frmLogin.cs</DependentUpon>
+    <Compile Include="frmLogin_NO USAR.Designer.cs">
+      <DependentUpon>frmLogin_NO USAR.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPermisosAcceso.cs">
       <SubType>Form</SubType>
@@ -79,6 +79,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmLogin_NO USAR.resx">
+      <DependentUpon>frmLogin_NO USAR.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPermisosAcceso.resx">
       <DependentUpon>frmPermisosAcceso.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -205,6 +208,15 @@
       <Project>{BF769C01-D311-4BC9-813A-C63DC3B89319}</Project>
       <Name>Entidades %28Entidades\Entidades%29</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\User-Login-128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\User-256.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

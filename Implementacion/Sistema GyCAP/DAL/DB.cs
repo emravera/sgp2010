@@ -69,6 +69,9 @@ namespace GyCAP.DAL
                     case "SABRINA-PC": //notebook - sabrina
                         cadenaConexion = conexionSabrina;
                         break;
+                    case "CHATO-NBK": //notebook - marcelo
+                        cadenaConexion = conexionRemota;
+                        break;
                     default:
                         throw new Entidades.Excepciones.BaseDeDatosException();
                 }

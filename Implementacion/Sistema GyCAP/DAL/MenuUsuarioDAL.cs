@@ -27,7 +27,7 @@ namespace GyCAP.DAL
             object[] valorParametros = { codigo };
             try
             {
-                DB.executeNonQuery(sql, valorParametros, null);
+                DB.executeNonQuery(sql,  valorParametros, null);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
@@ -40,6 +40,21 @@ namespace GyCAP.DAL
             {
                 //Se llena el Dataset
                 DB.FillDataSet(ds, "MENU_USUARIOS", sql, null);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+        public static void ObtenerTodos(int codUsuario, Data.dsSeguridad ds)
+        {
+            string sql = @"SELECT *
+                             FROM MENU_USUARIOS
+                            WHERE U_CODIGO = @p0 ";
+            object[] valorParametros = { codUsuario };
+
+            try
+            {
+                //Se llena el Dataset
+                DB.FillDataSet(ds, "MENU_USUARIOS", sql, valorParametros);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }

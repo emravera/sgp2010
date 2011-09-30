@@ -228,6 +228,27 @@ namespace GyCAP.UI.Seguridad.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap user_128 {
+            get {
+                object obj = ResourceManager.GetObject("user_128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap User_256 {
+            get {
+                object obj = ResourceManager.GetObject("User_256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap User_Login_128 {
+            get {
+                object obj = ResourceManager.GetObject("User_Login_128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Warning_25 {
             get {
                 object obj = ResourceManager.GetObject("Warning_25", resourceCulture);

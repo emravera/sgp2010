@@ -81,9 +81,10 @@
             this.toolStripTipoMantenimiento = new System.Windows.Forms.ToolStripButton();
             this.toolStripCausaFallo = new System.Windows.Forms.ToolStripButton();
             this.toolStripUsuarios = new System.Windows.Forms.ToolStripButton();
+            this.toolPermisosAccceso = new System.Windows.Forms.ToolStripButton();
+            this.toolLogin = new System.Windows.Forms.ToolStripButton();
             this.barraEstado = new System.Windows.Forms.StatusStrip();
             this.lblEstado = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolPermisosAccceso = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.barraEstado.SuspendLayout();
@@ -104,7 +105,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.MdiWindowListItem = this.menuVentana;
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(792, 24);
+            this.menuStrip.Size = new System.Drawing.Size(946, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -462,10 +463,11 @@
             this.toolStripTipoMantenimiento,
             this.toolStripCausaFallo,
             this.toolStripUsuarios,
-            this.toolPermisosAccceso});
+            this.toolPermisosAccceso,
+            this.toolLogin});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(792, 38);
+            this.toolStrip.Size = new System.Drawing.Size(946, 38);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "ToolStrip";
             // 
@@ -598,22 +600,6 @@
             this.toolStripUsuarios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripUsuarios.Click += new System.EventHandler(this.toolStripUsuarios_Click);
             // 
-            // barraEstado
-            // 
-            this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblEstado});
-            this.barraEstado.Location = new System.Drawing.Point(0, 548);
-            this.barraEstado.Name = "barraEstado";
-            this.barraEstado.Size = new System.Drawing.Size(792, 22);
-            this.barraEstado.TabIndex = 2;
-            this.barraEstado.Text = "StatusStrip";
-            // 
-            // lblEstado
-            // 
-            this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(39, 17);
-            this.lblEstado.Text = "Status";
-            // 
             // toolPermisosAccceso
             // 
             this.toolPermisosAccceso.Image = ((System.Drawing.Image)(resources.GetObject("toolPermisosAccceso.Image")));
@@ -624,11 +610,37 @@
             this.toolPermisosAccceso.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolPermisosAccceso.Click += new System.EventHandler(this.toolPermisosAccceso_Click);
             // 
+            // toolLogin
+            // 
+            this.toolLogin.Image = ((System.Drawing.Image)(resources.GetObject("toolLogin.Image")));
+            this.toolLogin.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolLogin.Name = "toolLogin";
+            this.toolLogin.Size = new System.Drawing.Size(41, 35);
+            this.toolLogin.Text = "Login";
+            this.toolLogin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolLogin.Click += new System.EventHandler(this.toolLogin_Click);
+            // 
+            // barraEstado
+            // 
+            this.barraEstado.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblEstado});
+            this.barraEstado.Location = new System.Drawing.Point(0, 548);
+            this.barraEstado.Name = "barraEstado";
+            this.barraEstado.Size = new System.Drawing.Size(946, 22);
+            this.barraEstado.TabIndex = 2;
+            this.barraEstado.Text = "StatusStrip";
+            // 
+            // lblEstado
+            // 
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(39, 17);
+            this.lblEstado.Text = "Status";
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 570);
+            this.ClientSize = new System.Drawing.Size(946, 570);
             this.Controls.Add(this.barraEstado);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
@@ -708,6 +720,7 @@
         private System.Windows.Forms.ToolStripButton toolStripCausaFallo;
         private System.Windows.Forms.ToolStripButton toolStripUsuarios;
         private System.Windows.Forms.ToolStripButton toolPermisosAccceso;
+        private System.Windows.Forms.ToolStripButton toolLogin;
     }
 }
 
