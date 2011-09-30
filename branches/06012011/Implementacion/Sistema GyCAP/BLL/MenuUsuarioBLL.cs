@@ -17,10 +17,10 @@ namespace GyCAP.BLL
         //    DAL.MenuUsuarioDAL.ObtenerTodos(dt);
         //}
 
-        //public static void ObtenerTodos(int usuario, Data.dsSeguridad ds)
-        //{
-        //    DAL.MenuUsuarioDAL.ObtenerTodos(usuario, ds);
-        //}
+        public static void ObtenerTodos(int usuario, Data.dsSeguridad ds)
+        {
+            DAL.MenuUsuarioDAL.ObtenerTodos(usuario, ds);
+        }
 
         public static int Insertar(Entidades.MenuUsuario mu)
         {

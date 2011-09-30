@@ -260,6 +260,12 @@ namespace Principal
             GyCAP.UI.Seguridad.frmPermisosAcceso.Instancia.Show();
         }
 
+        private void toolLogin_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Seguridad.frmLogin.Instancia.MdiParent = this;
+            GyCAP.UI.Seguridad.frmLogin.Instancia.Show();
+        }
+
 
     }
 }

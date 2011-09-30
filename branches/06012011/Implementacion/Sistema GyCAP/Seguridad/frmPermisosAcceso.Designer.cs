@@ -50,7 +50,7 @@
             this.treeMenu.CheckBoxes = true;
             this.treeMenu.Location = new System.Drawing.Point(11, 40);
             this.treeMenu.Name = "treeMenu";
-            this.treeMenu.Size = new System.Drawing.Size(499, 409);
+            this.treeMenu.Size = new System.Drawing.Size(428, 409);
             this.treeMenu.TabIndex = 14;
             this.treeMenu.BeforeCheck += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeMenu_BeforeCheck);
             this.treeMenu.Click += new System.EventHandler(this.treeMenu_Click);
@@ -58,7 +58,7 @@
             // btnSalir
             // 
             this.btnSalir.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnSalir.Location = new System.Drawing.Point(445, 454);
+            this.btnSalir.Location = new System.Drawing.Point(375, 454);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(64, 26);
@@ -70,7 +70,7 @@
             // btnAplicar
             // 
             this.btnAplicar.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnAplicar.Location = new System.Drawing.Point(305, 454);
+            this.btnAplicar.Location = new System.Drawing.Point(235, 454);
             this.btnAplicar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAplicar.Name = "btnAplicar";
             this.btnAplicar.Size = new System.Drawing.Size(64, 26);
@@ -82,7 +82,7 @@
             // btnAceptar
             // 
             this.btnAceptar.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnAceptar.Location = new System.Drawing.Point(375, 454);
+            this.btnAceptar.Location = new System.Drawing.Point(305, 454);
             this.btnAceptar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(64, 26);
@@ -109,7 +109,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(521, 491);
+            this.ClientSize = new System.Drawing.Size(451, 491);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnAplicar);
