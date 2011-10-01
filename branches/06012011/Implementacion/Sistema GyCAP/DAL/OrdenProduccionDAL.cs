@@ -230,11 +230,11 @@ namespace GyCAP.DAL
             }
         }
         
-        public static void ObtenerOrdenesProduccion(object codigo, object estado, object modo, object fechaGeneracion, object fechaDesde, object fechaHasta, Data.dsOrdenTrabajo dsOrdenTrabajo)
+        public static void ObtenerOrdenesProduccion(object codigo, object estado, object modo, object fechaGeneracion, object fechaDesde, object fechaHasta, Data.dsOrdenTrabajo ds)
         {
-            string sql = @"SELECT ordp_numero, ordp_codigo, eord_codigo, ordp_fechaalta, dpsem_codigo, ordpm_numero, ordp_origen, ordp_fechainicioestimada, 
+            string sql = @"SELECT ordp_numero, ordp_codigo, eord_codigo, ordp_fechaalta, dpsem_codigo, ordp_origen, ordp_fechainicioestimada, 
                         ordp_fechainicioreal, ordp_fechafinestimada, ordp_fechafinreal, ordp_observaciones, ordp_prioridad, estr_codigo, 
-                        ordp_cantidadestimada, ordp_cantidadreal, coc_codigo, ustck_destino 
+                        ordp_cantidadestimada, ordp_cantidadreal, coc_codigo, ustck_destino, lot_codigo  
                         FROM ORDENES_PRODUCCION WHERE 1 = 1";
 
             //Sirve para armar el nombre de los parámetros
@@ -285,7 +285,7 @@ namespace GyCAP.DAL
             }
 
             //Revisamos si pasó algun valor y si es un integer
-            if (modo != null && modo.GetType() == cantidadParametros.GetType())
+            /*if (modo != null && modo.GetType() == cantidadParametros.GetType())
             {
                 if (Convert.ToInt32(modo) == OrdenAutomatica)
                 {
@@ -295,7 +295,7 @@ namespace GyCAP.DAL
                 {
                     sql += " AND ordpm_numero IS NOT NULL";
                 }                
-            }
+            }*/
 
             if (cantidadParametros > 0)
             {
@@ -307,15 +307,7 @@ namespace GyCAP.DAL
                 }
                 try
                 {
-                    DB.FillDataSet(dsOrdenTrabajo, "ORDENES_PRODUCCION", sql, valorParametros);
-                }
-                catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-            }
-            else if (modo != null)
-            {
-                try
-                {
-                    DB.FillDataSet(dsOrdenTrabajo, "ORDENES_PRODUCCION", sql, null);
+                    DB.FillDataSet(ds, "ORDENES_PRODUCCION", sql, valorParametros);
                 }
                 catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
             }

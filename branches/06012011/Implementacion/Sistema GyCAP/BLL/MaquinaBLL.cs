@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using GyCAP.Entidades;
+using GyCAP.Entidades.BindingEntity;
 
 namespace GyCAP.BLL
 {
@@ -65,6 +67,33 @@ namespace GyCAP.BLL
         public static void ObtenerMaquinas(Data.dsMantenimiento dsMantenimiento)
         {
             DAL.MaquinaDAL.ObtenerMaquinas(dsMantenimiento);
+        }
+
+        public static SortableBindingList<Maquina> GetAll()
+        {
+            Data.dsMaquina.MAQUINASDataTable dt = new GyCAP.Data.dsMaquina.MAQUINASDataTable();
+            ObtenerMaquinas(dt);
+            SortableBindingList<Maquina> lista = new SortableBindingList<Maquina>();
+
+            foreach (Data.dsMaquina.MAQUINASRow row in dt.Rows)
+            {
+                Maquina maquina = new Maquina()
+                {
+                    Codigo = Convert.ToInt32(row.MAQ_CODIGO),
+                    EsCritica = row.MAQ_ES_CRITICA,
+                    Estado = new EstadoMaquina() { Codigo = Convert.ToInt32(row.EMAQ_CODIGO) },
+                    Fabricante = new FabricanteMaquina() { Codigo = Convert.ToInt32(row.FAB_CODIGO) },
+                    FechaAlta = row.MAQ_FECHAALTA,
+                    Marca = row.MAQ_MARCA,
+                    Modelo = new ModeloMaquina() { Codigo = Convert.ToInt32(row.MODM_CODIGO) },
+                    Nombre = row.MAQ_NOMBRE,
+                    NumeroSerie = row.MAQ_NUMEROSERIE
+                };
+
+                lista.Add(maquina);
+            }
+
+            return lista;
         }
     }
 }

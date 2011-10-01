@@ -14,22 +14,30 @@ namespace GyCAP.BLL
 {
     public class OrdenProduccionBLL
     {
-        public static void ObtenerOrdenesProduccion(object codigo, object estado, object modo, object fechaGeneracion, object fechaDesde, object fechaHasta, Data.dsOrdenTrabajo dsOrdenTrabajo)
+        public static SortableBindingList<OrdenProduccion> ObtenerOrdenesProduccion(object codigo, object estado, object modo, object fechaGeneracion, object fechaDesde, object fechaHasta)
         {
             if (estado != null && Convert.ToInt32(estado) <= 0) { estado = null; }
             if (modo != null && Convert.ToInt32(modo) <= 0) { modo = null; }
-            DAL.OrdenProduccionDAL.ObtenerOrdenesProduccion(codigo, estado, modo, fechaGeneracion, fechaDesde, fechaHasta, dsOrdenTrabajo);
-            foreach (Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow row in dsOrdenTrabajo.ORDENES_PRODUCCION)
+            Data.dsOrdenTrabajo ds = new GyCAP.Data.dsOrdenTrabajo();
+            DAL.OrdenProduccionDAL.ObtenerOrdenesProduccion(codigo, estado, modo, fechaGeneracion, fechaDesde, fechaHasta, ds);
+            SortableBindingList<OrdenProduccion> lista = new SortableBindingList<OrdenProduccion>();
+
+            foreach (Data.dsOrdenTrabajo.ORDENES_PRODUCCIONRow row in ds.ORDENES_PRODUCCION)
             {
-                OrdenTrabajoBLL.ObtenerOrdenesTrabajo(Convert.ToInt32(row.ORDP_NUMERO), dsOrdenTrabajo, true);
+                //OrdenProduccion orden = new OrdenProduccion();
+                //orden.Numero = Convert.ToInt32(row.ORDP_NUMERO)
+                
+                //OrdenTrabajoBLL.ObtenerOrdenesTrabajo(Convert.ToInt32(row.ORDP_NUMERO), dsOrdenTrabajo, true);
             }
 
-            foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in dsOrdenTrabajo.ORDENES_TRABAJO)
+            /*foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in dsOrdenTrabajo.ORDENES_TRABAJO)
             {
                 CierreParcialOrdenTrabajoBLL.ObtenerCierresParcialesOrdenTrabajo(Convert.ToInt32(row.ORDT_NUMERO), dsOrdenTrabajo.CIERRE_ORDEN_TRABAJO);
-            }
+            }*/
+
+            return lista;
         }
-        
+
         public static void Insertar(ArbolProduccion arbol)
         {
             DAL.OrdenProduccionDAL.Insertar(arbol);
