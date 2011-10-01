@@ -135,8 +135,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvPedidos.Columns.Add("CLI_CODIGO", "Cliente");
             dgvPedidos.Columns.Add("EPED_CODIGO", "Estado");
             dgvPedidos.Columns.Add("PED_FECHA_ALTA", "Fecha Alta");
-            dgvPedidos.Columns.Add("PED_FECHAENTREGAREAL", "Fecha Real Entrega");
-               
+            dgvPedidos.Columns.Add("PED_FECHAENTREGAREAL", "Fecha Real Entrega");               
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvPedidos.Columns["PED_CODIGO"].DataPropertyName = "PED_CODIGO";
@@ -275,6 +274,11 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnConsultar.Enabled = false;
                     btnEliminar.Enabled = false;
                     btnModificar.Enabled = false;
+
+                    //Limpiamos los datasets de Plan mensual y Detalle de plan mensual
+                    dsPlanMensual.DETALLE_PLANES_MENSUALES.Clear();
+                    dsPlanMensual.PLANES_MENSUALES.Clear();
+
                     cbMes.SetSelectedIndex(-1);
                     tcPlanAnual.SelectedTab = tpBuscar;
                     estadoActual = estadoUI.inicio;
@@ -677,6 +681,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             string msjerror = string.Empty;
 
             if (cbCocinas.SelectedIndex == -1) msjerror = msjerror + "-Debe seleccionar un modelo de cocina\n";
+            
             if (rbUnidades.Checked == true)
             {
                 if (numUnidades.Value == 0) msjerror = msjerror + "-La cantidad en unidades debe ser mayor a cero\n";
@@ -686,8 +691,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                 if (numPorcentaje.Value == 0) msjerror = msjerror + "-El porcentaje debe ser mayor a cero\n";
             }
 
-            //Validamos que no se quiera agregar un modelo que ya está en el dataset
-            foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])dsPlanMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.Added))
+            //Validamos que no se quiera agregar un modelo que ya está en el dataset como planificado
+            foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])dsPlanMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.CurrentRows))
             {
                 if (row["DPED_CODIGO"].ToString() == "0")
                 {
@@ -696,16 +701,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                         msjerror = msjerror + "-El modelo de cocina que intenta agregar ya se encuentra en la planificación\n";
                     }
                 }
-            }
-
-            //Validamos que no se quiera agregar un modelo que ya está en el dataset
-            foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])dsPlanMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.CurrentRows))
-            {
-                if (row["COC_CODIGO"].ToString() == Convert.ToString(cbCocinas.GetSelectedValue()))
-                {
-                    msjerror = msjerror + "-El modelo de cocina que intenta agregar ya se encuentra en la planificación\n";
-                }
-            }
+            }            
 
             if (msjerror.Length > 0)
             {
@@ -796,7 +792,6 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                         //Borro los detalles del dataset
                         dsPlanMensual.DETALLE_PLANES_MENSUALES.Clear();
-
                     }
                     else
                     {
@@ -819,100 +814,109 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             try
             {
-                //Checkeo las excepciones relacionadas con el Plan Mensual
-                List<Entidades.ExcepcionesPlan> excepciones = new List<GyCAP.Entidades.ExcepcionesPlan>();
-                excepciones = BLL.PlanMensualBLL.CheckeoExcepciones(dsPlanMensual.DETALLE_PLANES_MENSUALES);
-
-                if (excepciones.Count == 0 || checkeoExcepciones == true)
+                //Chequeamos que exista un detalle de pedido
+                if (dsPlanMensual.DETALLE_PLANES_MENSUALES.Rows.Count > 0)
                 {
-                    //Creamos el objeto de plan anual
-                    Entidades.PlanAnual planAnual = new GyCAP.Entidades.PlanAnual();
-                    planAnual.Codigo = Convert.ToInt32(cbPlanAnual.GetSelectedValue());
-                    planAnual.Anio = Convert.ToInt32(cbPlanAnual.GetSelectedText());
+                    //Checkeo las excepciones relacionadas con el Plan Mensual
+                    List<Entidades.ExcepcionesPlan> excepciones = new List<GyCAP.Entidades.ExcepcionesPlan>();
+                    excepciones = BLL.PlanMensualBLL.CheckeoExcepciones(dsPlanMensual.DETALLE_PLANES_MENSUALES);
 
-                    //Creamos el objeto del plan mensual
-                    Entidades.PlanMensual planMensual = new GyCAP.Entidades.PlanMensual();
-                    planMensual.FechaCreacion = BLL.DBBLL.GetFechaServidor();
-                    planMensual.Mes = cbMesDatos.GetSelectedText();
-                    planMensual.PlanAnual = planAnual;
-
-                    if (estadoActual == estadoUI.cargaDetalle)
+                    if (excepciones.Count == 0 || checkeoExcepciones == true)
                     {
-                        //Enviamos los datos para guardar
-                        BLL.PlanMensualBLL.GuardarPlan(planMensual, dsPlanMensual);
-                    }
-                    else if (estadoActual == estadoUI.modificar)
-                    {
-                        planMensual.Codigo = Convert.ToInt32(dvListaPlanes[dgvLista.SelectedRows[0].Index]["pmes_codigo"]);
-                        BLL.PlanMensualBLL.GuardarPlanModificado(planMensual, dsPlanMensual);
-                    }
-                    //Si esta todo bien aceptamos los cambios que se le hacen al dataset
-                    dsPlanMensual.AcceptChanges();
+                        //Creamos el objeto de plan anual
+                        Entidades.PlanAnual planAnual = new GyCAP.Entidades.PlanAnual();
+                        planAnual.Codigo = Convert.ToInt32(cbPlanAnual.GetSelectedValue());
+                        planAnual.Anio = Convert.ToInt32(cbPlanAnual.GetSelectedText());
 
-                    Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Plan Mensual", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+                        //Creamos el objeto del plan mensual
+                        Entidades.PlanMensual planMensual = new GyCAP.Entidades.PlanMensual();
+                        planMensual.FechaCreacion = BLL.DBBLL.GetFechaServidor();
+                        planMensual.Mes = cbMesDatos.GetSelectedText();
+                        planMensual.PlanAnual = planAnual;
 
-                    if (estadoActual == estadoUI.cargaDetalle || estadoActual == estadoUI.modificar)
-                    {
-                        //Cambio el estado a los detalles de pedido que fueron Planificados
-                        foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in dsPlanMensual.DETALLE_PLANES_MENSUALES.Rows)
+                        if (estadoActual == estadoUI.cargaDetalle)
                         {
-                            if (row["DPED_CODIGO"].ToString() != Convert.ToString(0))
-                            {
-                                //Actualizo el valor del estado en la BD
-                                BLL.DetallePedidoBLL.CambiarEstado(Convert.ToInt32(row.DPED_CODIGO), BLL.EstadoPedidoBLL.EstadoEnCurso);
-
-                                //lo actualizo el el dataset
-                                dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).BeginEdit();
-                                dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).EDPED_CODIGO = BLL.EstadoPedidoBLL.EstadoEnCurso;
-                                dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).EndEdit();
-                                dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).AcceptChanges();
-                            }
+                            //Enviamos los datos para guardar
+                            BLL.PlanMensualBLL.GuardarPlan(planMensual, dsPlanMensual);
                         }
-                        //Cambio el estado del pedido que fue planificado si todos los detalles lo fueron
-                        int cont = 0; int cantfilas = 0;
-                        foreach (Data.dsPlanMensual.PEDIDOSRow pm in dsPlanMensual.PEDIDOS.Rows)
+                        else if (estadoActual == estadoUI.modificar)
                         {
-                            foreach (Data.dsPlanMensual.DETALLE_PEDIDOSRow row in (Data.dsPlanMensual.DETALLE_PEDIDOSRow[])dsPlanMensual.DETALLE_PEDIDOS.Select("ped_codigo=" + pm.PED_CODIGO.ToString()))
+                            planMensual.Codigo = Convert.ToInt32(dvListaPlanes[dgvLista.SelectedRows[0].Index]["pmes_codigo"]);
+                            BLL.PlanMensualBLL.GuardarPlanModificado(planMensual, dsPlanMensual);
+                        }
+                        //Si esta todo bien aceptamos los cambios que se le hacen al dataset
+                        dsPlanMensual.AcceptChanges();
+
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Plan Mensual", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+
+                        if (estadoActual == estadoUI.cargaDetalle || estadoActual == estadoUI.modificar)
+                        {
+                            //Cambio el estado a los detalles de pedido que fueron Planificados
+                            foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in dsPlanMensual.DETALLE_PLANES_MENSUALES.Rows)
                             {
-                                if (Convert.ToInt32(row["EDPED_CODIGO"]) == BLL.EstadoPedidoBLL.EstadoEnCurso)
+                                if (row["DPED_CODIGO"].ToString() != Convert.ToString(0))
                                 {
-                                    cont++;
+                                    //Actualizo el valor del estado en la BD
+                                    BLL.DetallePedidoBLL.CambiarEstado(Convert.ToInt32(row.DPED_CODIGO), BLL.EstadoPedidoBLL.EstadoEnCurso);
+
+                                    //Lo actualizo el el dataset
+                                    dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).BeginEdit();
+                                    dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).EDPED_CODIGO = BLL.EstadoPedidoBLL.EstadoEnCurso;
+                                    dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).EndEdit();
+                                    dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).AcceptChanges();
                                 }
-                                cantfilas++;
                             }
 
-                            if (cont == cantfilas)
+                            //Cambio el estado del pedido que fue planificado si todos los detalles lo fueron
+                            int cont = 0; int cantfilas = 0;
+                            foreach (Data.dsPlanMensual.PEDIDOSRow pm in dsPlanMensual.PEDIDOS.Rows)
                             {
-                                //Cambio el estado del pedido en la bd
-                                BLL.PedidoBLL.CambiarEstadoPedido(Convert.ToInt32(pm.PED_CODIGO), BLL.EstadoPedidoBLL.EstadoEnCurso);
+                                foreach (Data.dsPlanMensual.DETALLE_PEDIDOSRow row in (Data.dsPlanMensual.DETALLE_PEDIDOSRow[])dsPlanMensual.DETALLE_PEDIDOS.Select("ped_codigo=" + pm.PED_CODIGO.ToString()))
+                                {
+                                    if (Convert.ToInt32(row["EDPED_CODIGO"]) == BLL.EstadoPedidoBLL.EstadoEnCurso)
+                                    {
+                                        cont++;
+                                    }
+                                    cantfilas++;
+                                }
 
-                                //lo actualizo el el dataset
-                                pm.BeginEdit();
-                                pm.EPED_CODIGO = BLL.EstadoPedidoBLL.EstadoEnCurso;
-                                pm.EndEdit();
-                                pm.AcceptChanges();
+                                if (cont == cantfilas)
+                                {
+                                    //Cambio el estado del pedido en la bd
+                                    BLL.PedidoBLL.CambiarEstadoPedido(Convert.ToInt32(pm.PED_CODIGO), BLL.EstadoPedidoBLL.EstadoEnCurso);
+
+                                    //Lo actualizo el el dataset
+                                    pm.BeginEdit();
+                                    pm.EPED_CODIGO = BLL.EstadoPedidoBLL.EstadoEnCurso;
+                                    pm.EndEdit();
+                                    pm.AcceptChanges();
+                                }
+                                //pongo los contadores en cero
+                                cont = 0;
+                                cantfilas = 0;
                             }
-                            //pongo los contadores en cero
-                            cont = 0;
-                            cantfilas = 0;
                         }
-                    }
 
-                    //Vuelvo al estado inicial de la interface
-                    SetInterface(estadoUI.inicio);
+                        //Vuelvo al estado inicial de la interface
+                        SetInterface(estadoUI.inicio);
+                    }
+                    else
+                    {
+                        //Si existen excepciones relacionadas con el Plan mensual
+                        PlanificacionProduccion.frmExcepcionesPlan frmExcepciones = new frmExcepcionesPlan();
+                        frmExcepciones.TopLevel = false;
+                        frmExcepciones.Parent = this.Parent;
+                        frmExcepciones.CargarGrilla(excepciones);
+                        frmExcepciones.Show();
+                        frmExcepciones.BringToFront();
+
+                        //Cambio el valor de checkeo excepciones a TRUE para que pase una vez
+                        checkeoExcepciones = true;
+                    }
                 }
                 else
                 {
-                    //Si existen excepciones relacionadas con el Plan mensual
-                    PlanificacionProduccion.frmExcepcionesPlan frmExcepciones= new frmExcepcionesPlan();
-                    frmExcepciones.TopLevel = false;
-                    frmExcepciones.Parent = this.Parent;
-                    frmExcepciones.CargarGrilla(excepciones);
-                    frmExcepciones.Show();
-                    frmExcepciones.BringToFront();
-
-                    //Cambio el valor de checkeo excepciones a TRUE para que pase una vez
-                    checkeoExcepciones = true;
+                    Entidades.Mensajes.MensajesABM.MsjValidacion("No hay detalles de Plan Mensual", this.Text);
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -1147,7 +1151,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 //Valido que no tenga detalles de planes semanales ya creados
                 validacion = BLL.PlanMensualBLL.ExistePlanSemanalPedido(Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dped_codigo"]));
-
             }
 
             if (validacion == true)
@@ -1178,7 +1181,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             if (Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dped_codigo"]) == 0)
             {
-                if (1 < (Convert.ToInt32(txtCantAPlanificar.Text) - Convert.ToInt32(txtCantPlanificada.Text)))
+                if (0 < (Convert.ToInt32(txtCantAPlanificar.Text) - Convert.ToInt32(txtCantPlanificada.Text)))
                 {
                     if (dgvDatos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
                     {
@@ -1242,6 +1245,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             int codigoPlan = -1; int cantidad;
+
             try
             {
                 //Ejecutamos la validacion para verificar que este todo OK

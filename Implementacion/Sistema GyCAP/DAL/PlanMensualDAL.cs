@@ -145,26 +145,27 @@ namespace GyCAP.DAL
         //METODO QUE GUARDA LOS DATOS   
         public static void GuardarPlan(Entidades.PlanMensual plan, Data.dsPlanMensual planMensual)
         {
-
             SqlTransaction transaccion = null;
 
             try
             {
-                //Inserto la demanda
-                transaccion = DB.IniciarTransaccion();
+               transaccion = DB.IniciarTransaccion();
 
                 //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
-                string sql = "INSERT INTO [PLANES_MENSUALES] ([pan_codigo], [pmes_mes], [pmes_fechacreacion]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
+                string sql = @"INSERT INTO [PLANES_MENSUALES] ([pan_codigo], [pmes_mes], [pmes_fechacreacion]) 
+                                           VALUES (@p0, @p1, @p2) SELECT @@Identity";
+
                 object[] valorParametros = { plan.PlanAnual.Codigo, plan.Mes, plan.FechaCreacion };
                 plan.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, transaccion));
 
                 //Inserto el Detalle
-                
                 foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[]) planMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.Added))
                 {
                     if (row.DPED_CODIGO != 0)
                     {
-                        sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada], [dpmes_cantidadreal], [dped_codigo]) VALUES (@p0, @p1, @p2, @p3, @p4) SELECT @@Identity";
+                        sql = @"INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada], [dpmes_cantidadreal], [dped_codigo]) 
+                                       VALUES (@p0, @p1, @p2, @p3, @p4) SELECT @@Identity";
+
                         object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA, Convert.ToInt32(0), row.DPED_CODIGO };
                         row.BeginEdit();
                         row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
@@ -173,13 +174,14 @@ namespace GyCAP.DAL
                     }
                     else
                     {
-                        sql = "INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada], [dpmes_cantidadreal]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+                        sql = @"INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada], [dpmes_cantidadreal]) 
+                                       VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+
                         object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA, Convert.ToInt32(0) };
                         row.BeginEdit();
                         row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
                         row.PMES_CODIGO = plan.Codigo;
                         row.EndEdit();
-
                     }
                 }
 
@@ -191,9 +193,9 @@ namespace GyCAP.DAL
             {
                 transaccion.Rollback();
                 throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
-            }            
-          
+            }                      
         }
+
         //METODO QUE GUARDA LOS DATOS DEL PLAN MODIFICADOS   
         public static void GuardarPlanModificado(Entidades.PlanMensual plan, Data.dsPlanMensual planMensual)
         {
@@ -232,10 +234,10 @@ namespace GyCAP.DAL
                 }
 
                 //Guardo las modificaciones
-                sql = "UPDATE [DETALLE_PLANES_MENSUALES] SET dpmes_cantidadestimada=@p0 ";
+                sql = "UPDATE [DETALLE_PLANES_MENSUALES] SET dpmes_cantidadestimada=@p0 where dpmes_codigo=@p1";
                 foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])planMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
                 {
-                    object[] valorPar = { row.DPMES_CANTIDADESTIMADA };
+                    object[] valorPar = { row.DPMES_CANTIDADESTIMADA, row.DPMES_CODIGO };
                     DB.executeNonQuery(sql, valorPar, transaccion);
                 }
 

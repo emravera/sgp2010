@@ -8,9 +8,9 @@ namespace GyCAP.BLL
 {
     public class EstadoPedidoBLL
     {
-        public static readonly int EstadoEnCurso = 2;
-        public static readonly int EstadoFinalizado = 5;
-        public static readonly int EstadoEntregado = 6;
+        public static readonly int EstadoEnCurso = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("En Curso");
+        public static readonly int EstadoFinalizado = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("Finalizado");
+        public static readonly int EstadoEntregado = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("Entregado");
         
         public static long Insertar(Entidades.EstadoPedido estadoPedido)
         {
