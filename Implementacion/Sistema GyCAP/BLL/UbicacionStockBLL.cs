@@ -129,6 +129,32 @@ namespace GyCAP.BLL
             return ubicacion;
         }
 
+        public static SortableBindingList<UbicacionStock> GetAll()
+        {
+            Data.dsStock dsStock = new GyCAP.Data.dsStock();
+            ObtenerUbicacionesStock(dsStock.UBICACIONES_STOCK);
+            ContenidoUbicacionStockBLL.ObtenerContenidosUbicacionStock(dsStock.CONTENIDO_UBICACION_STOCK);
+            TipoUbicacionStockBLL.ObtenerTiposUbicacionStock(dsStock.TIPOS_UBICACIONES_STOCK);
+            UnidadMedidaBLL.ObtenerTodos(dsStock.UNIDADES_MEDIDA);
+            TipoUnidadMedidaBLL.ObtenerTodos(dsStock.TIPOS_UNIDADES_MEDIDA);
+            SortableBindingList<UbicacionStock> lista = new SortableBindingList<UbicacionStock>();
+
+            foreach (Data.dsStock.UBICACIONES_STOCKRow row in dsStock.UBICACIONES_STOCK.Rows)
+            {
+                lista.Add(AsUbicacionStock(Convert.ToInt32(row.USTCK_NUMERO), dsStock));
+            }
+
+            foreach (UbicacionStock ustck in lista)
+            {
+                if (ustck.UbicacionPadre != null)
+                {
+                    ustck.UbicacionPadre = lista.First(p => p.Numero == ustck.UbicacionPadre.Numero);
+                }
+            }
+
+            return lista;
+        }
+
         public static void ActualizarCantidadesStock(int numeroUbicacion, decimal cantidadReal)
         {
             DAL.UbicacionStockDAL.ActualizarCantidadesStock(numeroUbicacion, cantidadReal, null);

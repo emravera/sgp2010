@@ -275,7 +275,7 @@ namespace GyCAP.DAL
         {
             string sql = @"SELECT E_CODIGO, EE_CODIGO, SEC_CODIGO, E_APELLIDO, E_NOMBRE,
                            E_FECHANACIMIENTO, E_LEGAJO, E_FECHA_ALTA, E_FECHA_BAJA, E_HAS_IMAGE  
-                           FROM EMPLEADOS";
+                           FROM EMPLEADOS ORDER BY e_apellido ASC, e_nombre ASC";
 
             DB.FillDataTable(dtEmpleado, sql, null);
         }

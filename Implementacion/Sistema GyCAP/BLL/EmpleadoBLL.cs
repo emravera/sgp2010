@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Drawing;
+using GyCAP.Entidades;
+using GyCAP.Entidades.BindingEntity;
 
 namespace GyCAP.BLL
 {
@@ -81,6 +83,35 @@ namespace GyCAP.BLL
         public static void ObtenerEmpleados(Data.dsMantenimiento dsMantenimeinto)
         {
             DAL.EmpleadoDAL.ObtenerEmpleados(dsMantenimeinto);
+        }
+
+        public static SortableBindingList<Empleado> GetAll()
+        {
+            Data.dsEmpleado.EMPLEADOSDataTable dt = new GyCAP.Data.dsEmpleado.EMPLEADOSDataTable();
+            ObtenerEmpleados(dt);
+
+            SortableBindingList<Empleado> listaEmpleados = new SortableBindingList<Empleado>();
+
+            foreach (Data.dsEmpleado.EMPLEADOSRow row in dt.Rows)
+            {
+                Empleado empleado = new Empleado()
+                {
+                    Codigo = long.Parse(row.E_CODIGO.ToString()),
+                    Apellido = row.E_APELLIDO,
+                    Nombre = row.E_NOMBRE,
+                    FechaAlta = row.E_FECHA_ALTA,
+                    FechaBaja = (row.IsE_FECHA_BAJANull()) ? DateTime.Now : row.E_FECHA_BAJA,
+                    FechaNacimiento = row.E_FECHANACIMIENTO,
+                    Legajo = row.E_LEGAJO,
+                    Sector = new SectorTrabajo() { Codigo = Convert.ToInt32(row.SEC_CODIGO) },
+                    Estado = new EstadoEmpleado() { Codigo = Convert.ToInt32(row.EE_CODIGO) },
+                    Telefono = row.E_LEGAJO
+                };
+
+                listaEmpleados.Add(empleado);
+            }
+
+            return listaEmpleados;
         }
 
         /// <summary>

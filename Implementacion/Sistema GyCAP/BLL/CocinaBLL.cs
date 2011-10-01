@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Drawing;
+using GyCAP.Entidades;
+using GyCAP.Entidades.Enumeraciones;
+using GyCAP.Entidades.BindingEntity;
 
 namespace GyCAP.BLL
 {
@@ -111,6 +114,31 @@ namespace GyCAP.BLL
         {
             return DAL.CocinaDAL.GetCocinasByCodigos(codigosCocinas);
         }
-        
+
+        public static SortableBindingList<Cocina> GetAll()
+        {
+            Data.dsCocina.COCINASDataTable dt = new GyCAP.Data.dsCocina.COCINASDataTable();
+            SortableBindingList<Cocina> lista = new SortableBindingList<Cocina>();
+            ObtenerCocinas(dt);
+
+            foreach (Data.dsCocina.COCINASRow row in dt.Rows)
+            {
+                lista.Add(new GyCAP.Entidades.Cocina()
+                {
+                    CodigoCocina = Convert.ToInt32(row.COC_CODIGO),
+                    Activo = Convert.ToInt32(row.COC_ACTIVO),
+                    CodigoProducto = row.COC_CODIGO_PRODUCTO,
+                    Color = new GyCAP.Entidades.Color() { Codigo = Convert.ToInt32(row.COL_CODIGO) },
+                    Designacion = new GyCAP.Entidades.Designacion() { Codigo = Convert.ToInt32(row.DESIG_CODIGO) },
+                    EsBase = ((int)row.COC_IS_BASE == (int)CocinaEnum.EsBaseEnum.EsBase) ? true : false,
+                    HasImage = Convert.ToInt32(row.COC_HAS_IMAGE),
+                    Marca = new GyCAP.Entidades.Marca() { Codigo = Convert.ToInt32(row.MCA_CODIGO) },
+                    Modelo = new GyCAP.Entidades.ModeloCocina() { Codigo = Convert.ToInt32(row.MOD_CODIGO) },
+                    TerminacionHorno = new GyCAP.Entidades.Terminacion() { Codigo = long.Parse(row.TE_CODIGO.ToString()) }
+                });
+            }
+
+            return lista;
+        }
     }
 }

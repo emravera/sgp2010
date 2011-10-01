@@ -24,6 +24,17 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
+        public static void ObtenerEstados(Data.dsStock.ESTADO_MOVIMIENTOS_STOCKDataTable dtEstadosMovimientoStock)
+        {
+            string sql = "SELECT emvto_codigo, emvto_nombre, emvto_descripcion FROM ESTADO_MOVIMIENTOS_STOCK";
+
+            try
+            {
+                DB.FillDataTable(dtEstadosMovimientoStock, sql, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
         public static Entidades.EstadoMovimientoStock GetEstadoEntity(string nombreEstado)
         {
             string sql = @"SELECT emvto_codigo, emvto_nombre, emvto_descripcion FROM ESTADO_MOVIMIENTOS_STOCK

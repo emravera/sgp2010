@@ -171,7 +171,7 @@ namespace GyCAP.DAL
         {
             string sql = @"SELECT MAQ_CODIGO, EMAQ_CODIGO, MODM_CODIGO, FAB_CODIGO, MAQ_NOMBRE,
                            MAQ_NUMEROSERIE, MAQ_FECHAALTA, MAQ_MARCA, MAQ_ES_CRITICA 
-                           FROM MAQUINAS ";
+                           FROM MAQUINAS ORDER BY maq_nombre ASC";
 
             try
             {

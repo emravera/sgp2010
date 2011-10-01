@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using GyCAP.Entidades;
+using GyCAP.Entidades.Enumeraciones;
+using GyCAP.Entidades.BindingEntity;
 
 namespace GyCAP.BLL
 {
@@ -74,7 +77,7 @@ namespace GyCAP.BLL
                 HorasTrabajoExtendido = row.CTO_HORASTRABAJOEXTENDIDO,
                 HorasTrabajoNormal = row.CTO_HORASTRABAJONORMAL,
                 Nombre = row.CTO_NOMBRE,
-                Sector = null,
+                Sector = new GyCAP.Entidades.SectorTrabajo() { Codigo = Convert.ToInt32(row.SEC_CODIGO) },
                 TiempoAntes = row.CTO_TIEMPOANTES,
                 TiempoDespues = row.CTO_TIEMPODESPUES,
                 Tipo = Convert.ToInt32(row.CTO_TIPO),
@@ -82,6 +85,39 @@ namespace GyCAP.BLL
             };
 
             return centro;
+        }
+
+        public static SortableBindingList<CentroTrabajo> GetAll()
+        {
+            Data.dsHojaRuta.CENTROS_TRABAJOSDataTable dt = new GyCAP.Data.dsHojaRuta.CENTROS_TRABAJOSDataTable();
+            ObetenerCentrosTrabajo(null, null, null, null, dt);
+            SortableBindingList<CentroTrabajo> lista = new SortableBindingList<CentroTrabajo>();
+
+            foreach (Data.dsHojaRuta.CENTROS_TRABAJOSRow row in dt.Rows)
+            {
+                lista.Add(new CentroTrabajo()
+                {
+                    Activo = Convert.ToInt32(row.CTO_ACTIVO),
+                    CapacidadCiclo = row.CTO_CAPACIDADCICLO,
+                    CapacidadUnidadHora = row.CTO_CAPACIDADUNIDADHORA,
+                    Codigo = Convert.ToInt32(row.CTO_CODIGO),
+                    CostoCiclo = row.CTO_COSTOCICLO,
+                    CostoHora = row.CTO_COSTOHORA,
+                    Descripcion = row.CTO_DESCRIPCION,
+                    Eficiencia = row.CTO_EFICIENCIA,
+                    HorasCiclo = row.CTO_HORASCICLO,
+                    HorasTrabajoExtendido = row.CTO_HORASTRABAJOEXTENDIDO,
+                    HorasTrabajoNormal = row.CTO_HORASTRABAJONORMAL,
+                    Nombre = row.CTO_NOMBRE,
+                    Sector = new GyCAP.Entidades.SectorTrabajo() { Codigo = Convert.ToInt32(row.SEC_CODIGO) },
+                    TiempoAntes = row.CTO_TIEMPOANTES,
+                    TiempoDespues = row.CTO_TIEMPODESPUES,
+                    Tipo = Convert.ToInt32(row.CTO_TIPO),
+                    TurnosTrabajo = null
+                });
+            }
+
+            return lista;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace GyCAP.DAL
     {
         public static void ObtenerEstados(DataTable dtEstadosOrden)
         {
-            string sql = "SELECT eord_codigo, eord_nombre, eord_descripcion FROM ESTADO_ORDENES_TRABAJO";
+            string sql = "SELECT eord_codigo, eord_nombre, eord_descripcion FROM ESTADO_ORDENES_TRABAJO ORDER BY eord_nombre ASC";
 
             try
             {

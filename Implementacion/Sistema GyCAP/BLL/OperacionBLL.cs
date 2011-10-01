@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using GyCAP.Entidades;
+using GyCAP.Entidades.BindingEntity;
 
 namespace GyCAP.BLL
 {
@@ -50,6 +52,27 @@ namespace GyCAP.BLL
             };
 
             return operacion;
+        }
+
+        public static SortableBindingList<OperacionFabricacion> GetAll()
+        {
+            Data.dsHojaRuta.OPERACIONESDataTable dt = new GyCAP.Data.dsHojaRuta.OPERACIONESDataTable();
+            SortableBindingList<OperacionFabricacion> lista = new SortableBindingList<OperacionFabricacion>();
+            ObetenerOperaciones(dt);
+
+            foreach (Data.dsHojaRuta.OPERACIONESRow row in dt.Rows)
+            {
+                lista.Add(new OperacionFabricacion()
+                {
+                    Codigo = Convert.ToInt32(row.OPR_NUMERO),
+                    Codificacion = row.OPR_CODIGO,
+                    Descripcion = row.OPR_DESCRIPCION,
+                    HorasRequeridas = row.OPR_HORASREQUERIDA,
+                    Nombre = row.OPR_NOMBRE
+                });
+            }
+
+            return lista;
         }
     }
 }
