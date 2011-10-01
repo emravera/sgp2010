@@ -232,10 +232,15 @@ namespace GyCAP.UI.PlanificacionProduccion
                     numPuntoEquilibrio.Value = 0;
                     numPuntoEquilibrio.Enabled = false;
                     chPuntoEquilibrio.Checked = false;
-                    numCapacidadProducción.Value = 0;
-                    numCapacidadStock.Value = 0;
                     numCostofijo.Value = 0;
                     numCostoVariable.Value = 0;
+                    //Obtengo los valores de capcidad de stock y produccion calculados
+                    numCapacidadProducción.Value = BLL.FabricaBLL.GetCapacidadAnualBruta(BLL.CocinaBLL.GetCodigoCocinaBase(), GyCAP.Entidades.Enumeraciones.RecursosFabricacionEnum.TipoHorario.Normal);
+                    numCapacidadStock.Value = BLL.ConfiguracionSistemaBLL.GetConfiguracion<int>("CapacidadStock");
+                    
+                    //Cargo el costo variable del producto
+                    
+
                     //Escondo los controles que no se tienen que ver
                     numAdelantamiento.Visible = true;
                     numCapacidadProducción.Visible = true;
@@ -1483,6 +1488,8 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
         #endregion              
+
+        
         
     }
 }
