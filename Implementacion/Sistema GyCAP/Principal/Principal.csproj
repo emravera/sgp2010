@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{AE7890FB-1E14-4037-BF00-F0406BA4364A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -87,6 +87,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOpciones.resx">
       <DependentUpon>frmOpciones.cs</DependentUpon>
@@ -98,6 +99,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal2.resx">
       <DependentUpon>frmPrincipal2.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
