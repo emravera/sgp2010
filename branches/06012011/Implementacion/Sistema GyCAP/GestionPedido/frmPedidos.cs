@@ -755,7 +755,7 @@ namespace GyCAP.UI.GestionPedido
             if (estadoInterface == estadoUI.cargarDetalle)
             {
                 if (dgvCocinas.Rows.GetRowCount(DataGridViewElementStates.Selected) == 0) validacion += "-Debe seleccionar una Cocina de la lista.\n";
-                if (nudCantidad.Value > 0) validacion += "-La Cantidad Total debe ser mayor a cero.\n";
+                if (nudCantidad.Value == 0) validacion += "-La Cantidad Total debe ser mayor a cero.\n";
 
             }
             else if (estadoInterface == estadoUI.modificarDetalle)
@@ -875,11 +875,11 @@ namespace GyCAP.UI.GestionPedido
                     if (numCantProducir.Value > 0) row.DPED_CANTIDAD = Convert.ToInt32(numCantProducir.Value);
                     else row.DPED_CANTIDAD = Convert.ToInt32(numCantStock.Value);
                     row.DPED_FECHA_ENTREGA_PREVISTA = Convert.ToDateTime(sfFechaPrevista.Value.ToShortDateString());
-                    row.EndEdit();
-
-                    //Se vuelve a la pantalla principal del pedido
-                    btnVolver.PerformClick();
+                    row.EndEdit();                    
                 }
+
+                //Se vuelve a la pantalla principal del pedido
+                btnVolver.PerformClick();
 
                 //Volvemos la interfaz para que cargue mas detalles
                 nudCantidad.Value = 0;
@@ -912,15 +912,20 @@ namespace GyCAP.UI.GestionPedido
 
                 if (cantidadStock > 0)
                 {
-                    //Si hay stock lo cargamos en el numeric de cantidad Stock
-                    numCantStock.Value = cantidadStock;
-                    validacion = validacion + "STOCK: Hay " + cantidadStock + " unidades disponibles para la fecha " + fechaNecesidad.ToShortDateString() + "\n";
-
                     //La diferencia hay que colocarla para planificar
                     if (cantidadStock < cantidad)
                     {
+                        //Si hay stock lo cargamos en el numeric de cantidad Stock
+                        numCantStock.Value = cantidadStock;
+                        validacion = validacion + "STOCK: Hay " + cantidadStock + " unidades disponibles para la fecha " + fechaNecesidad.ToShortDateString() + "\n";
+
                         numCantProducir.Value = (nudCantidad.Value - numCantStock.Value);
                         validacion = validacion + "PLANIFICACION PRODUCCION: " + (nudCantidad.Value - numCantStock.Value).ToString() + " Unidades \n";
+                    }
+                    else
+                    {
+                        numCantStock.Value = cantidad;
+                        validacion = validacion + "STOCK: Hay " + cantidadStock + " unidades disponibles para la fecha " + fechaNecesidad.ToShortDateString() + "\n";
                     }
                 }
                 else

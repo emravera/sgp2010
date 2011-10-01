@@ -184,6 +184,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnPlanificar.Enabled = false;
                     chListAnios.Visible = false;
 
+                    gbCapacidadFabrica.Visible = false;
                     gbModificacion.Visible = false;
                     gbGraficoEstimacion.Visible = true;
                     gbEstimacionMes.Visible = true;
@@ -219,11 +220,13 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbEstimacionMes.Visible = false;
                     gbGraficoEstimacion.Visible = false;
                     gbBotones.Visible = false;
+                    gbCapacidadFabrica.Visible = true;
                     gbDatosPrincipales.Enabled = true;
                     gbModificacion.Visible = false;
                     tcPlanAnual.SelectedTab = tpDatos;
                     estadoActual = estadoUI.nuevo;
                     CargarAñosBase();   
+                    
                     //Manejo los controles
                     txtAnio.Focus();
                     numPuntoEquilibrio.Enabled = false;
@@ -234,12 +237,13 @@ namespace GyCAP.UI.PlanificacionProduccion
                     chPuntoEquilibrio.Checked = false;
                     numCostofijo.Value = 0;
                     numCostoVariable.Value = 0;
+
                     //Obtengo los valores de capcidad de stock y produccion calculados
-                    numCapacidadProducción.Value = BLL.FabricaBLL.GetCapacidadAnualBruta(BLL.CocinaBLL.GetCodigoCocinaBase(), GyCAP.Entidades.Enumeraciones.RecursosFabricacionEnum.TipoHorario.Normal);
+                    numCapacidadProducción.Value = BLL.FabricaBLL.GetCapacidadAnualBruta(null, GyCAP.Entidades.Enumeraciones.RecursosFabricacionEnum.TipoHorario.Normal);
                     numCapacidadStock.Value = BLL.ConfiguracionSistemaBLL.GetConfiguracion<int>("CapacidadStock");
                     
                     //Cargo el costo variable del producto
-                    
+                    numCostoVariable.Value = BLL.FabricaBLL.GetCostoTotalProducto(null);
 
                     //Escondo los controles que no se tienen que ver
                     numAdelantamiento.Visible = true;
@@ -1066,6 +1070,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             try
             {
                 string validacion = string.Empty;
+                
                 //Creo el objeto de Demanda
                 Entidades.PlanAnual planAnual = new GyCAP.Entidades.PlanAnual();
                 Entidades.DemandaAnual demanda = new GyCAP.Entidades.DemandaAnual();

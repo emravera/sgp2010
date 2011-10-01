@@ -2537,7 +2537,6 @@ namespace GyCAP.Data {
                 this.columnDPED_CODIGO.AutoIncrementSeed = -1;
                 this.columnDPED_CODIGO.AutoIncrementStep = -1;
                 this.columnDPED_CODIGO.AllowDBNull = false;
-                this.columnDPED_CODIGO.ReadOnly = true;
                 this.columnDPED_CODIGO.Unique = true;
                 this.columnPED_CODIGO.AllowDBNull = false;
                 this.columnEDPED_CODIGO.AllowDBNull = false;

@@ -340,7 +340,7 @@
             this.cbUbicacionStock.Location = new System.Drawing.Point(91, 62);
             this.cbUbicacionStock.Name = "cbUbicacionStock";
             this.cbUbicacionStock.Size = new System.Drawing.Size(131, 21);
-            this.cbUbicacionStock.TabIndex = 40;
+            this.cbUbicacionStock.TabIndex = 32;
             // 
             // label14
             // 
@@ -373,7 +373,7 @@
             0});
             this.numCantProducir.Name = "numCantProducir";
             this.numCantProducir.Size = new System.Drawing.Size(131, 20);
-            this.numCantProducir.TabIndex = 38;
+            this.numCantProducir.TabIndex = 35;
             this.numCantProducir.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblCantStock
@@ -398,7 +398,7 @@
             0});
             this.numCantStock.Name = "numCantStock";
             this.numCantStock.Size = new System.Drawing.Size(131, 20);
-            this.numCantStock.TabIndex = 36;
+            this.numCantStock.TabIndex = 33;
             this.numCantStock.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // sfFechaPrevista
@@ -409,7 +409,7 @@
             this.sfFechaPrevista.Location = new System.Drawing.Point(91, 38);
             this.sfFechaPrevista.Name = "sfFechaPrevista";
             this.sfFechaPrevista.Size = new System.Drawing.Size(131, 20);
-            this.sfFechaPrevista.TabIndex = 33;
+            this.sfFechaPrevista.TabIndex = 31;
             // 
             // label1
             // 
@@ -426,7 +426,7 @@
             this.btnAgregar.Location = new System.Drawing.Point(118, 138);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(102, 22);
-            this.btnAgregar.TabIndex = 31;
+            this.btnAgregar.TabIndex = 37;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
@@ -447,7 +447,7 @@
             this.btnValidar.Location = new System.Drawing.Point(3, 138);
             this.btnValidar.Name = "btnValidar";
             this.btnValidar.Size = new System.Drawing.Size(109, 22);
-            this.btnValidar.TabIndex = 32;
+            this.btnValidar.TabIndex = 36;
             this.btnValidar.Text = "Validar";
             this.btnValidar.UseVisualStyleBackColor = true;
             this.btnValidar.Click += new System.EventHandler(this.btnValidar_Click);

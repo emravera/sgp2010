@@ -82,7 +82,7 @@
             this.lblUnidad1 = new System.Windows.Forms.Label();
             this.numAdelantamiento = new System.Windows.Forms.NumericUpDown();
             this.lblAdelantamiento = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbCapacidadFabrica = new System.Windows.Forms.GroupBox();
             this.lblUnidad2 = new System.Windows.Forms.Label();
             this.lblUnidad3 = new System.Windows.Forms.Label();
             this.numCapacidadStock = new System.Windows.Forms.NumericUpDown();
@@ -107,7 +107,6 @@
             this.rbDemandaActual = new System.Windows.Forms.RadioButton();
             this.rbOtraDemanda = new System.Windows.Forms.RadioButton();
             this.chListAnios = new System.Windows.Forms.CheckedListBox();
-            this.cbEstimacionDemanda = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
             this.txtAnio = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -120,6 +119,7 @@
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnPlanificar = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cbEstimacionDemanda = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             ((System.ComponentModel.ISupportInitialize)(this.numDiciembre)).BeginInit();
             this.tcPlanAnual.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -147,7 +147,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numEnero)).BeginInit();
             this.gbDatosPrincipales.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAdelantamiento)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.gbCapacidadFabrica.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCapacidadStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCapacidadProducción)).BeginInit();
             this.gbPuntoEquilibrio.SuspendLayout();
@@ -764,7 +764,7 @@
             this.gbDatosPrincipales.Controls.Add(this.lblUnidad1);
             this.gbDatosPrincipales.Controls.Add(this.numAdelantamiento);
             this.gbDatosPrincipales.Controls.Add(this.lblAdelantamiento);
-            this.gbDatosPrincipales.Controls.Add(this.groupBox2);
+            this.gbDatosPrincipales.Controls.Add(this.gbCapacidadFabrica);
             this.gbDatosPrincipales.Controls.Add(this.gbPuntoEquilibrio);
             this.gbDatosPrincipales.Controls.Add(this.gbDemandaAñoSiguiente);
             this.gbDatosPrincipales.Controls.Add(this.cbEstimacionDemanda);
@@ -782,7 +782,7 @@
             // 
             this.lblUnidad1.AutoSize = true;
             this.lblUnidad1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnidad1.Location = new System.Drawing.Point(268, 69);
+            this.lblUnidad1.Location = new System.Drawing.Point(276, 72);
             this.lblUnidad1.Name = "lblUnidad1";
             this.lblUnidad1.Size = new System.Drawing.Size(50, 13);
             this.lblUnidad1.TabIndex = 26;
@@ -790,7 +790,7 @@
             // 
             // numAdelantamiento
             // 
-            this.numAdelantamiento.Location = new System.Drawing.Point(169, 67);
+            this.numAdelantamiento.Location = new System.Drawing.Point(177, 70);
             this.numAdelantamiento.Maximum = new decimal(new int[] {
             52,
             0,
@@ -804,26 +804,26 @@
             // lblAdelantamiento
             // 
             this.lblAdelantamiento.AutoSize = true;
-            this.lblAdelantamiento.Location = new System.Drawing.Point(3, 69);
+            this.lblAdelantamiento.Location = new System.Drawing.Point(11, 72);
             this.lblAdelantamiento.Name = "lblAdelantamiento";
             this.lblAdelantamiento.Size = new System.Drawing.Size(164, 13);
             this.lblAdelantamiento.TabIndex = 24;
             this.lblAdelantamiento.Text = "Adelantamiento Prod./Demanda:";
             // 
-            // groupBox2
+            // gbCapacidadFabrica
             // 
-            this.groupBox2.Controls.Add(this.lblUnidad2);
-            this.groupBox2.Controls.Add(this.lblUnidad3);
-            this.groupBox2.Controls.Add(this.numCapacidadStock);
-            this.groupBox2.Controls.Add(this.numCapacidadProducción);
-            this.groupBox2.Controls.Add(this.lblCapacidadStock);
-            this.groupBox2.Controls.Add(this.lblCapacidadProduccion);
-            this.groupBox2.Location = new System.Drawing.Point(3, 95);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(341, 69);
-            this.groupBox2.TabIndex = 23;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Datos Planta Fabril";
+            this.gbCapacidadFabrica.Controls.Add(this.lblUnidad2);
+            this.gbCapacidadFabrica.Controls.Add(this.lblUnidad3);
+            this.gbCapacidadFabrica.Controls.Add(this.numCapacidadStock);
+            this.gbCapacidadFabrica.Controls.Add(this.numCapacidadProducción);
+            this.gbCapacidadFabrica.Controls.Add(this.lblCapacidadStock);
+            this.gbCapacidadFabrica.Controls.Add(this.lblCapacidadProduccion);
+            this.gbCapacidadFabrica.Location = new System.Drawing.Point(3, 95);
+            this.gbCapacidadFabrica.Name = "gbCapacidadFabrica";
+            this.gbCapacidadFabrica.Size = new System.Drawing.Size(341, 69);
+            this.gbCapacidadFabrica.TabIndex = 23;
+            this.gbCapacidadFabrica.TabStop = false;
+            this.gbCapacidadFabrica.Text = "Datos Planta Fabril";
             // 
             // lblUnidad2
             // 
@@ -1099,20 +1099,10 @@
             this.chListAnios.Size = new System.Drawing.Size(167, 20);
             this.chListAnios.TabIndex = 9;
             // 
-            // cbEstimacionDemanda
-            // 
-            this.cbEstimacionDemanda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstimacionDemanda.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEstimacionDemanda.FormattingEnabled = true;
-            this.cbEstimacionDemanda.Location = new System.Drawing.Point(169, 41);
-            this.cbEstimacionDemanda.Name = "cbEstimacionDemanda";
-            this.cbEstimacionDemanda.Size = new System.Drawing.Size(139, 21);
-            this.cbEstimacionDemanda.TabIndex = 2;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(43, 44);
+            this.label4.Location = new System.Drawing.Point(51, 47);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(124, 13);
             this.label4.TabIndex = 8;
@@ -1120,7 +1110,7 @@
             // 
             // txtAnio
             // 
-            this.txtAnio.Location = new System.Drawing.Point(170, 17);
+            this.txtAnio.Location = new System.Drawing.Point(178, 20);
             this.txtAnio.Name = "txtAnio";
             this.txtAnio.Size = new System.Drawing.Size(92, 21);
             this.txtAnio.TabIndex = 1;
@@ -1128,7 +1118,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(47, 17);
+            this.label17.Location = new System.Drawing.Point(55, 20);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(117, 13);
             this.label17.TabIndex = 0;
@@ -1245,6 +1235,16 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 532);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
+            // cbEstimacionDemanda
+            // 
+            this.cbEstimacionDemanda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstimacionDemanda.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEstimacionDemanda.FormattingEnabled = true;
+            this.cbEstimacionDemanda.Location = new System.Drawing.Point(177, 44);
+            this.cbEstimacionDemanda.Name = "cbEstimacionDemanda";
+            this.cbEstimacionDemanda.Size = new System.Drawing.Size(139, 21);
+            this.cbEstimacionDemanda.TabIndex = 2;
+            // 
             // frmPlanAnual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1288,8 +1288,8 @@
             this.gbDatosPrincipales.ResumeLayout(false);
             this.gbDatosPrincipales.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAdelantamiento)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gbCapacidadFabrica.ResumeLayout(false);
+            this.gbCapacidadFabrica.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCapacidadStock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCapacidadProducción)).EndInit();
             this.gbPuntoEquilibrio.ResumeLayout(false);
@@ -1390,7 +1390,7 @@
         public System.Windows.Forms.ToolStripButton btnNuevo;
         private System.Windows.Forms.CheckBox chPuntoEquilibrio;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gbCapacidadFabrica;
         private System.Windows.Forms.Label lblUnidad2;
         private System.Windows.Forms.Label lblUnidad3;
         private System.Windows.Forms.NumericUpDown numCapacidadStock;
