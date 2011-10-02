@@ -11,6 +11,7 @@ using GyCAP.Entidades.Enumeraciones;
 using GyCAP.Entidades.BindingEntity;
 using System.Data.SqlClient;
 using GyCAP.Entidades.Excepciones;
+using System.Data.SqlClient;
 
 namespace GyCAP.BLL
 {
@@ -57,7 +58,61 @@ namespace GyCAP.BLL
 
         public static void Insertar(ArbolProduccion arbol)
         {
-            DAL.OrdenProduccionDAL.Insertar(arbol);
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                transaccion = DAL.DB.IniciarTransaccion();
+
+                ArbolEstructura arbolEstructura = EstructuraBLL.GetArbolEstructura(arbol.OrdenProduccion.Cocina.CodigoCocina, true);
+
+                //Guardamos la orden de producción y de trabajo
+                DAL.OrdenProduccionDAL.Insertar(arbol, transaccion);
+                
+                //Actualizamos los estados del detalle plan y del detalle pedido
+                DAL.DetallePlanSemanalDAL.ActualizarEstado(new int[] { arbol.OrdenProduccion.DetallePlanSemanal.Codigo }, (int)PlanificacionEnum.EstadoDetallePlanSemanal.ConOrden, transaccion);
+                if (arbol.OrdenProduccion.DetallePlanSemanal.DetallePedido != null)
+                {
+                    DAL.DetallePedidoDAL.ActualizarEstadoAEnCurso((int)(arbol.OrdenProduccion.DetallePlanSemanal.DetallePedido.Codigo), transaccion);
+                }
+                
+                //Creamos los movimientos de stock
+                foreach (OrdenTrabajo orden in arbol.AsOrdenesTrabajoList())
+                {
+                    Entidad entidadOrigen, entidadDestino;
+                    if (orden.DetalleHojaRuta.StockOrigen != null)
+                    {
+                        //especifico un ustck, usemoslo
+                        //entidadOrigen = EntidadBLL.GetEntidad(TipoEntidadBLL.UbicacionStockNombre, orden.DetalleHojaRuta.StockOrigen.Numero);
+                    }
+                    else
+                    {
+                        //nos fijamos en la estructura y vemos si la parte tiene mps definidas
+                        NodoEstructura nodoEstructura = arbolEstructura.FindByPartNumber(orden.Parte.Numero);
+                        IList<MateriaPrima> listaMP = new List<MateriaPrima>();
+
+                        foreach (NodoEstructura hijo in nodoEstructura.NodosHijos)
+                        {
+                            if (hijo.Contenido == NodoEstructura.tipoContenido.MateriaPrima)
+                            {
+                                listaMP.Add(hijo.Compuesto.MateriaPrima);
+                            }
+                        }
+
+                    }
+                }
+
+                transaccion.Commit();
+            }
+            catch (SqlException ex)
+            {
+                transaccion.Rollback();
+                throw new BaseDeDatosException(ex.Message);
+            }
+            finally
+            {
+                DAL.DB.FinalizarTransaccion();
+            }
         }
 
         public static void Actualizar(ArbolProduccion arbol)

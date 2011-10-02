@@ -83,26 +83,26 @@ namespace GyCAP.UI.GestionStock
                         for (int i = 0; i < listaMovimientos.Count; i++)
                         {
                             //Sin terminar - gonzalo
-                            switch (listaMovimientos[i].Estado.Nombre)
+                            /*switch (listaMovimientos[i].Estado.Nombre)
                             {
                                 case BLL.EstadoMovimientoStockBLL.Planificado:
-                                    valores[i+1] = 50 + listaMovimientos[i].CantidadOrigenEstimada;
+                                    //valores[i+1] = 50 + listaMovimientos[i].CantidadOrigenEstimada;
                                     fechas[i+1] = listaMovimientos[i].FechaPrevista.Value.ToShortDateString();
                                     break;
                                 case BLL.EstadoMovimientoStockBLL.Finalizado:
-                                    if (listaMovimientos[i].Origen.TipoEntidad.Nombre == BLL.TipoEntidadBLL.UbicacionStockNombre)
-                                    {
-                                        valores[i+1] = 50 + listaMovimientos[i].CantidadOrigenReal;
-                                    }
-                                    else if (listaMovimientos[i].Destino.TipoEntidad.Nombre == BLL.TipoEntidadBLL.UbicacionStockNombre)
-                                    {
-                                        valores[i+1] = 50 + listaMovimientos[i].CantidadDestinoReal;
-                                    }
+                                    //if (listaMovimientos[i].Origen.TipoEntidad.Nombre == BLL.TipoEntidadBLL.UbicacionStockNombre)
+                                    //{
+                                    //    valores[i+1] = 50 + listaMovimientos[i].CantidadOrigenReal;
+                                    //}
+                                    //else if (listaMovimientos[i].Destino.TipoEntidad.Nombre == BLL.TipoEntidadBLL.UbicacionStockNombre)
+                                    //{
+                                    //    valores[i+1] = 50 + listaMovimientos[i].CantidadDestinoReal;
+                                    //}
                                     fechas[i+1] = listaMovimientos[i].FechaReal.Value.ToShortDateString();
                                     break;
                                 default:
                                     break;
-                            }
+                            }*/
                         }
 
                         GenerarGrafico(valores, fechas, dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(cboStock.GetSelectedValueInt()).USTCK_NOMBRE);
@@ -147,42 +147,7 @@ namespace GyCAP.UI.GestionStock
             cboEstado.SetDatos(dvEstado, "emvto_codigo", "emvto_nombre", "Seleccione...", false);
             dvContenido = new DataView(dsStock.CONTENIDO_UBICACION_STOCK);
             cboContenido.SetDatos(dvContenido, "con_codigo", "con_nombre", "--TODOS--", true);
-        }
-
-        private string GetNombreExternalEntity(Entidad entidad)
-        {
-            if (entidad.EntidadExterna == null && entidad.TipoEntidad.Nombre == BLL.TipoEntidadBLL.ManualNombre) { return BLL.TipoEntidadBLL.ManualNombre; }
-            string nombre = string.Empty;
-
-            switch (entidad.TipoEntidad.Nombre)
-            {
-                case BLL.TipoEntidadBLL.PedidoNombre:
-                    nombre = string.Concat("Pedido ", (entidad.EntidadExterna as Pedido).Numero);
-                    break;
-                case BLL.TipoEntidadBLL.DetallePedidoNombre:
-                    nombre = (entidad.EntidadExterna as DetallePedido).CodigoNemonico;
-                    break;
-                case BLL.TipoEntidadBLL.ManualNombre:
-                    nombre = BLL.TipoEntidadBLL.ManualNombre;
-                    break;
-                case BLL.TipoEntidadBLL.OrdenProduccionNombre:
-                    nombre = (entidad.EntidadExterna as OrdenProduccion).Codigo;
-                    break;
-                case BLL.TipoEntidadBLL.OrdenTrabajoNombre:
-                    nombre = string.Concat("OrdT ", (entidad.EntidadExterna as OrdenTrabajo).Numero);
-                    break;
-                case BLL.TipoEntidadBLL.MantenimientoNombre:
-                    nombre = string.Concat("ManT ", (entidad.EntidadExterna as Mantenimiento).Codigo);
-                    break;
-                case BLL.TipoEntidadBLL.UbicacionStockNombre:
-                    nombre = (entidad.EntidadExterna as UbicacionStock).Nombre;
-                    break;
-                default:
-                    break;
-            }
-
-            return nombre;
-        }
+        }        
 
         #endregion
 

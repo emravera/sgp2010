@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using GyCAP.Data;
 using GyCAP.Entidades;
+using GyCAP.Entidades.Enumeraciones;
 using GyCAP.Entidades.Mensajes;
 
 namespace GyCAP.UI.GestionStock
@@ -185,7 +186,7 @@ namespace GyCAP.UI.GestionStock
         {
             if (codigoEntity < 0) { return codigoEntity; }
 
-            int temp = BLL.TipoEntidadBLL.GetTipoEntidadEntity(BLL.TipoEntidadBLL.UbicacionStockNombre).Codigo;
+            int temp = BLL.TipoEntidadBLL.GetTipoEntidadEntity(EntidadEnum.TipoEntidadEnum.UbicacionStock).Codigo;
             
             decimal entity = (from x in dsStock.ENTIDADES
                               where x.IsENTD_IDNull() == false
@@ -198,30 +199,29 @@ namespace GyCAP.UI.GestionStock
 
         private string GetNombreExternalEntity(Entidad entidad)
         {
-            if (entidad.EntidadExterna == null && entidad.TipoEntidad.Nombre == BLL.TipoEntidadBLL.ManualNombre) { return BLL.TipoEntidadBLL.ManualNombre; }
             string nombre = string.Empty;
 
-            switch (entidad.TipoEntidad.Nombre)
+            switch (entidad.TipoEntidad.Codigo)
             {
-                case BLL.TipoEntidadBLL.PedidoNombre:
+                case (int)EntidadEnum.TipoEntidadEnum.Pedido:
                     nombre = string.Concat("Pedido ", (entidad.EntidadExterna as Pedido).Numero);
                     break;
-                case BLL.TipoEntidadBLL.DetallePedidoNombre:
+                case (int)EntidadEnum.TipoEntidadEnum.DetallePedido:
                     nombre = (entidad.EntidadExterna as DetallePedido).CodigoNemonico;
                     break;
-                case BLL.TipoEntidadBLL.ManualNombre:
-                    nombre = BLL.TipoEntidadBLL.ManualNombre;
+                case (int)EntidadEnum.TipoEntidadEnum.Manual:
+                    nombre = EntidadEnum.TipoEntidadEnum.Manual.ToString();
                     break;
-                case BLL.TipoEntidadBLL.OrdenProduccionNombre:
+                case (int)EntidadEnum.TipoEntidadEnum.OrdenProduccion:
                     nombre = (entidad.EntidadExterna as OrdenProduccion).Codigo;
                     break;
-                case BLL.TipoEntidadBLL.OrdenTrabajoNombre:
+                case (int)EntidadEnum.TipoEntidadEnum.OrdenTrabajo:
                     nombre = string.Concat("OrdT ", (entidad.EntidadExterna as OrdenTrabajo).Numero);
                     break;
-                case BLL.TipoEntidadBLL.MantenimientoNombre:
+                case (int)EntidadEnum.TipoEntidadEnum.Mantenimiento:
                     nombre = string.Concat("ManT ", (entidad.EntidadExterna as Mantenimiento).Codigo);
                     break;
-                case BLL.TipoEntidadBLL.UbicacionStockNombre:
+                case (int)EntidadEnum.TipoEntidadEnum.UbicacionStock:
                     nombre = (entidad.EntidadExterna as UbicacionStock).Nombre;
                     break;
                 default:

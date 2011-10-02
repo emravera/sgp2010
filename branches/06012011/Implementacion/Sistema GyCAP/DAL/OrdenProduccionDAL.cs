@@ -15,7 +15,7 @@ namespace GyCAP.DAL
         public static readonly int OrdenAutomatica = 1;
         public static readonly int OrdenManual = 2;
         
-        public static void Insertar(ArbolProduccion arbol)
+        public static void Insertar(ArbolProduccion arbol, SqlTransaction transaccion)
         {
             OrdenProduccion orden = arbol.OrdenProduccion;
 
@@ -62,44 +62,24 @@ namespace GyCAP.DAL
                                              orden.UbicacionStock.Numero,
                                              lote
                                          };
-
-            SqlTransaction transaccion = null;
+                                   
             
-            try
+            orden.Numero = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
+            orden.Codigo = string.Concat("GA", orden.Numero);
+            ActualizarCodigo(orden.Codigo, orden.Numero, transaccion);
+            
+            IList<OrdenTrabajo> ordenesTrabajo = arbol.AsOrdenesTrabajoList().OrderBy(p => p.FechaInicioEstimada).ToList();
+            
+            foreach (OrdenTrabajo item in ordenesTrabajo)
             {
-                transaccion = DB.IniciarTransaccion();
-                orden.Numero = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
-                orden.Codigo = string.Concat("GA", orden.Numero);
-                ActualizarCodigo(orden.Codigo, orden.Numero, transaccion);
-                DetallePlanSemanalDAL.ActualizarEstado(new int[] { orden.DetallePlanSemanal.Codigo }, (int)PlanificacionEnum.EstadoDetallePlanSemanal.ConOrden, transaccion);
-                if (orden.DetallePlanSemanal.DetallePedido != null)
-                {
-                    DetallePedidoDAL.ActualizarEstadoAEnCurso((int)(orden.DetallePlanSemanal.DetallePedido.Codigo), transaccion);
-                }
-                IList<OrdenTrabajo> ordenesTrabajo = arbol.AsOrdenesTrabajoList().OrderByDescending(p => p.Numero).ToList();
+                int oldNumber = item.Numero;
+                item.OrdenProduccion = orden.Numero;
                 
-                foreach (OrdenTrabajo item in ordenesTrabajo)
+                OrdenTrabajoDAL.Insertar(item, transaccion);
+                foreach (OrdenTrabajo ordt in ordenesTrabajo.Where(p => p.OrdenTrabajoPadre == oldNumber))
                 {
-                    int oldNumber = item.Numero;
-                    item.OrdenProduccion = orden.Numero;
-                    
-                    OrdenTrabajoDAL.Insertar(item, transaccion);
-                    foreach (OrdenTrabajo ordt in ordenesTrabajo.Where(p => p.OrdenTrabajoPadre == oldNumber))
-                    {
-                        ordt.OrdenTrabajoPadre = item.Numero;
-                    }
+                    ordt.OrdenTrabajoPadre = item.Numero;
                 }
-                
-                transaccion.Commit();
-            }
-            catch (SqlException ex)
-            {
-                transaccion.Rollback();
-                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
-            }
-            finally
-            {
-                DB.FinalizarTransaccion();
             }
         }
 

@@ -1026,7 +1026,7 @@ namespace GyCAP.UI.GestionPedido
                         //Se tienen que eliminar los movimientos de stock asociados a ese detalle
                         int codigoEntidadPedido = BLL.EntidadBLL.ObtenerCodigoEntidad(codigoPedido);
 
-                        BLL.MovimientoStockBLL.EliminarMovimientosPedido(codigoEntidadPedido);
+                        //BLL.MovimientoStockBLL.EliminarMovimientosPedido(codigoEntidadPedido);
 
                         //Generamos un nuevo detalle de pedido                        
                         BLL.PedidoBLL.MovimientoStockPlanificado(row);

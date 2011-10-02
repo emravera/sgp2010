@@ -5,6 +5,7 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using GyCAP.Entidades;
+using GyCAP.Entidades.Enumeraciones;
 
 namespace GyCAP.DAL
 {
@@ -40,37 +41,37 @@ namespace GyCAP.DAL
             return codigoEntidad;
         }
 
-        public static void GetEntidad(TipoEntidadDAL.TipoEntidadEnum tipo, Entidad entidad)
+        public static void GetEntidad(EntidadEnum.TipoEntidadEnum tipo, Entidad entidad)
         {
             object[] parametros = { };
 
             switch (tipo)
             {
-                case TipoEntidadDAL.TipoEntidadEnum.Pedido:
+                case EntidadEnum.TipoEntidadEnum.Pedido:
                     entidad.Codigo = Existe(tipo, Convert.ToInt32((entidad.EntidadExterna as Pedido).Codigo));
                     parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, Convert.ToInt32((entidad.EntidadExterna as Pedido).Codigo) };
                     break;
-                case TipoEntidadDAL.TipoEntidadEnum.DetallePedido:
+                case EntidadEnum.TipoEntidadEnum.DetallePedido:
                     entidad.Codigo = Existe(tipo, Convert.ToInt32((entidad.EntidadExterna as DetallePedido).Codigo));
                     parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, Convert.ToInt32((entidad.EntidadExterna as DetallePedido).Codigo) };
                     break;
-                case TipoEntidadDAL.TipoEntidadEnum.Manual:
+                case EntidadEnum.TipoEntidadEnum.Manual:
                     entidad.Codigo = Existe(tipo, -1);
                     parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, DBNull.Value };
                     break;
-                case TipoEntidadDAL.TipoEntidadEnum.OrdenProduccion:
+                case EntidadEnum.TipoEntidadEnum.OrdenProduccion:
                     entidad.Codigo = Existe(tipo, (entidad.EntidadExterna as OrdenProduccion).Numero);
                     parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, (entidad.EntidadExterna as OrdenProduccion).Numero };
                     break;
-                case TipoEntidadDAL.TipoEntidadEnum.OrdenTrabajo:
+                case EntidadEnum.TipoEntidadEnum.OrdenTrabajo:
                     entidad.Codigo = Existe(tipo, (entidad.EntidadExterna as OrdenTrabajo).Numero);
                     parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, (entidad.EntidadExterna as OrdenTrabajo).Numero };
                     break;
-                case TipoEntidadDAL.TipoEntidadEnum.Mantenimiento:
+                case EntidadEnum.TipoEntidadEnum.Mantenimiento:
                     entidad.Codigo = Existe(tipo, Convert.ToInt32((entidad.EntidadExterna as Mantenimiento).Codigo));
                     parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, Convert.ToInt32((entidad.EntidadExterna as Mantenimiento).Codigo) };
                     break;
-                case TipoEntidadDAL.TipoEntidadEnum.UbicacionStock:
+                case EntidadEnum.TipoEntidadEnum.UbicacionStock:
                     entidad.Codigo = Existe(tipo, (entidad.EntidadExterna as UbicacionStock).Numero);
                     parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, (entidad.EntidadExterna as UbicacionStock).Numero };
                     break;
@@ -91,7 +92,7 @@ namespace GyCAP.DAL
                         
         }
 
-        public static int Existe(TipoEntidadDAL.TipoEntidadEnum tipoEntidad, int codigoEntidad)
+        public static int Existe(EntidadEnum.TipoEntidadEnum tipoEntidad, int codigoEntidad)
         {
             string sql = string.Empty;
             object[] parametros = { };
@@ -99,12 +100,12 @@ namespace GyCAP.DAL
             if (codigoEntidad > 0)
             {
                 sql = "SELECT entd_codigo FROM ENTIDADES WHERE tentd_codigo = @p0 AND entd_id = @p1";
-                parametros = new object[] { TipoEntidadDAL.GetCodigoTipoEntidad(tipoEntidad), codigoEntidad };
+                parametros = new object[] { (int)tipoEntidad, codigoEntidad };
             }
             else
             {
                 sql = "SELECT entd_codigo FROM ENTIDADES WHERE tentd_codigo = @p0 AND entd_id IS NULL";
-                parametros = new object[] { TipoEntidadDAL.GetCodigoTipoEntidad(tipoEntidad) };
+                parametros = new object[] { (int)tipoEntidad };
             }            
 
             try

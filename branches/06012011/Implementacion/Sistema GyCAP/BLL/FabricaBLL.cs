@@ -113,21 +113,23 @@ namespace GyCAP.BLL
             UbicacionStock ubicacion = UbicacionStockBLL.GetUbicacionStock(stock);
             if (ubicacion == null) { throw new Entidades.Excepciones.ElementoInexistenteException(); }
             
-            IList<MovimientoStock> lista = MovimientoStockBLL.ObtenerMovimientosUbicacionStock(DateTime.Today, fecha, stock, EstadoMovimientoStockBLL.Planificado, StockEnum.TipoFecha.FechaPrevista);
-            
-            for (int i = 0; i < lista.Count; i++)
+            IList<MovimientoStock> lista = MovimientoStockBLL.ObtenerMovimientosUbicacionStock(DateTime.Today, fecha, stock, (int)StockEnum.EstadoMovimientoStock.Planificado, StockEnum.TipoFecha.FechaPrevista);
+
+            foreach (MovimientoStock item in lista)
             {
-                if (lista[i].Origen.TipoEntidad.Nombre == TipoEntidadBLL.UbicacionStockNombre
-                    &&
-                   (lista[i].Origen.EntidadExterna as UbicacionStock).Codigo == ubicacion.Codigo)
+                if (item.Destino.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
                 {
-                    ubicacion.CantidadReal += lista[i].CantidadOrigenEstimada;
+                    ubicacion.CantidadReal += item.CantidadDestinoEstimada;
                 }
-                else
+
+                foreach (OrigenMovimiento origenM in item.OrigenesMultiples)
                 {
-                    ubicacion.CantidadReal += lista[i].CantidadDestinoEstimada;
+                    if (origenM.Entidad.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
+                    {
+                        ubicacion.CantidadReal -= origenM.CantidadEstimada;
+                    }
                 }
-            }
+            }            
 
             return ubicacion.CantidadReal;
         }

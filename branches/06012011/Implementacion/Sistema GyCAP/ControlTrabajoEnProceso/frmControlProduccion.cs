@@ -153,9 +153,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                                                                                         listaCocinas,
                                                                                         listaEstadosOrden,
                                                                                         listaUbicacionesStock);
-
-                SetInterface(estadoUI.pestañaProduccion);
-
+                
                 if (listaOrdenesProduccion.Count == 0)
                 {
                     MensajesABM.MsjBuscarNoEncontrado("Órdenes de Producción", this.Text);
@@ -164,6 +162,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                 {
                     dgvOrdenesProduccion.DataSource = listaOrdenesProduccion;
                 }
+                SetInterface(estadoUI.pestañaProduccion);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
