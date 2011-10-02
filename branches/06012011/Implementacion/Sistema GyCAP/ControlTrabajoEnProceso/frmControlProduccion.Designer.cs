@@ -701,6 +701,7 @@
             this.dgvCierresParciales.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCierresParciales_RowEnter);
             this.dgvCierresParciales.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCierresParciales_ColumnHeaderMouseClick);
             this.dgvCierresParciales.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCierresParciales_CellFormatting);
+            this.dgvCierresParciales.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // btnAgregarCierre
             // 

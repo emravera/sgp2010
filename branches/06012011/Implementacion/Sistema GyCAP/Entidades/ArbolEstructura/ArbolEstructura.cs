@@ -82,7 +82,8 @@ namespace GyCAP.Entidades.ArbolEstructura
                     foreach (DetalleHojaRuta detalle in parte.Parte.HojaRuta.Detalle)
                     {                        
                         decimal costo = 0;
-                        if (detalle.CentroTrabajo.Tipo == (int)Enumeraciones.RecursosFabricacionEnum.TipoCentroTrabajo.TipoHombre)
+                        if (detalle.CentroTrabajo.Tipo.Codigo == (int)Enumeraciones.RecursosFabricacionEnum.TipoCentroTrabajo.Hombre
+                            || detalle.CentroTrabajo.Tipo.Codigo == (int)Enumeraciones.RecursosFabricacionEnum.TipoCentroTrabajo.Proveedor)
                         {
                             costo = (detalle.CentroTrabajo.CostoHora / detalle.CentroTrabajo.CapacidadUnidadHora) * parte.Cantidad;
                         }
@@ -233,7 +234,8 @@ namespace GyCAP.Entidades.ArbolEstructura
                         nodoDetalle.Name = detalle.Codigo.ToString();
 
                         decimal costo = 0;
-                        if (detalle.CentroTrabajo.Tipo == (int)Enumeraciones.RecursosFabricacionEnum.TipoCentroTrabajo.TipoHombre)
+                        if (detalle.CentroTrabajo.Tipo.Codigo == (int)Enumeraciones.RecursosFabricacionEnum.TipoCentroTrabajo.Hombre
+                            || detalle.CentroTrabajo.Tipo.Codigo == (int)Enumeraciones.RecursosFabricacionEnum.TipoCentroTrabajo.Proveedor)
                         {
                             costo = (detalle.CentroTrabajo.CostoHora / detalle.CentroTrabajo.CapacidadUnidadHora) * parte.Cantidad;
                         }

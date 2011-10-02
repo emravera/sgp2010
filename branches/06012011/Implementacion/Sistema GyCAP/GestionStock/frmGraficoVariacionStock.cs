@@ -177,9 +177,6 @@ namespace GyCAP.UI.GestionStock
                 case BLL.TipoEntidadBLL.UbicacionStockNombre:
                     nombre = (entidad.EntidadExterna as UbicacionStock).Nombre;
                     break;
-                case BLL.TipoEntidadBLL.OrdenCompraNombre:
-                    nombre = (entidad.EntidadExterna as OrdenCompra).Codigo;
-                    break;
                 default:
                     break;
             }

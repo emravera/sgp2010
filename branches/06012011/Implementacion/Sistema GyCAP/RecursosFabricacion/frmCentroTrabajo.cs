@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using GyCAP.Entidades.Mensajes;
 using GyCAP.UI.Sistema.Validaciones;
+using GyCAP.Entidades.Enumeraciones;
 
 namespace GyCAP.UI.RecursosFabricacion
 {
@@ -20,7 +21,7 @@ namespace GyCAP.UI.RecursosFabricacion
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
         Data.dsHojaRuta dsCentroTrabajo = new GyCAP.Data.dsHojaRuta();
-        DataView dvCentrosTrabajo, dvSectorBuscar, dvSector, dvTurnoTrabajo;
+        DataView dvCentrosTrabajo, dvSectorBuscar, dvSector, dvTurnoTrabajo, dvTipoBuscar, dvTipo;
         int txct = -1;
 
         #region Inicio
@@ -164,11 +165,13 @@ namespace GyCAP.UI.RecursosFabricacion
                         nombre = dsCentroTrabajo.SECTORES.FindBySEC_CODIGO(Convert.ToInt32(e.Value.ToString())).SEC_NOMBRE;
                         e.Value = nombre;
                         break;
-                    case "CTO_TIPO":
-                        if (Convert.ToInt32(e.Value.ToString()) == BLL.CentroTrabajoBLL.TipoMaquina)
-                        { nombre = "Máquina"; }
-                        else if (Convert.ToInt32(e.Value.ToString()) == BLL.CentroTrabajoBLL.TipoHombre)
+                    case "CT_TIPO":
+                        if (Convert.ToInt32(e.Value.ToString()) == (int)RecursosFabricacionEnum.TipoCentroTrabajo.Hombre)
                         { nombre = "Hombre"; }
+                        else if (Convert.ToInt32(e.Value.ToString()) == (int)RecursosFabricacionEnum.TipoCentroTrabajo.Maquina)
+                        { nombre = "Máquina"; }
+                        else if (Convert.ToInt32(e.Value.ToString()) == (int)RecursosFabricacionEnum.TipoCentroTrabajo.Proveedor)
+                        { nombre = "Proveedor"; }
                         e.Value = nombre;
                         break;
                     case "CTO_ACTIVO":
@@ -188,7 +191,7 @@ namespace GyCAP.UI.RecursosFabricacion
         {
             int codigoCentro = Convert.ToInt32(dvCentrosTrabajo[e.RowIndex]["cto_codigo"]);
             txtNombre.Text = dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigoCentro).CTO_NOMBRE;
-            cbTipo.SetSelectedValue(Convert.ToInt32(dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigoCentro).CTO_TIPO));
+            cbTipo.SetSelectedValue(Convert.ToInt32(dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigoCentro).CT_TIPO));
             cbSector.SetSelectedValue(Convert.ToInt32(dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigoCentro).SEC_CODIGO));
             txtDescripcion.Text = dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigoCentro).CTO_DESCRIPCION;
             nudHorasNormal.Value = dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigoCentro).CTO_HORASTRABAJONORMAL;
@@ -245,7 +248,7 @@ namespace GyCAP.UI.RecursosFabricacion
                         rowCentro.CTO_NOMBRE = txtNombre.Text;
                         rowCentro.CTO_TIEMPOANTES = nudTiempoAntes.Value;
                         rowCentro.CTO_TIEMPODESPUES = nudTiempoDespues.Value;
-                        rowCentro.CTO_TIPO = cbTipo.GetSelectedValueInt();
+                        rowCentro.CT_TIPO = cbTipo.GetSelectedValueInt();
                         rowCentro.CTO_CAPACIDADUNIDADHORA = nudCapacidadUnidadHora.Value;
                         rowCentro.EndEdit();
                         dsCentroTrabajo.CENTROS_TRABAJOS.AddCENTROS_TRABAJOSRow(rowCentro);
@@ -318,7 +321,7 @@ namespace GyCAP.UI.RecursosFabricacion
                     dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigoCentro).CTO_NOMBRE = txtNombre.Text;
                     dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigoCentro).CTO_TIEMPOANTES = nudTiempoAntes.Value;
                     dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigoCentro).CTO_TIEMPODESPUES = nudTiempoDespues.Value;
-                    dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigoCentro).CTO_TIPO = cbTipo.GetSelectedValueInt();
+                    dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigoCentro).CT_TIPO = cbTipo.GetSelectedValueInt();
                     dsCentroTrabajo.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigoCentro).CTO_CAPACIDADUNIDADHORA = nudCapacidadUnidadHora.Value;
                     //los turnos
                     foreach (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow row in (Data.dsHojaRuta.TURNOSXCENTROTRABAJORow[])dsCentroTrabajo.TURNOSXCENTROTRABAJO.Select("CTO_CODIGO = " + codigoCentro))
@@ -520,7 +523,7 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvLista.AutoGenerateColumns = false;
             dgvLista.Columns.Add("CTO_NOMBRE", "Nombre");
             dgvLista.Columns.Add("SEC_CODIGO", "Sector");
-            dgvLista.Columns.Add("CTO_TIPO", "Tipo");
+            dgvLista.Columns.Add("CT_TIPO", "Tipo");
             dgvLista.Columns.Add("CTO_ACTIVO", "Activo");
             dgvLista.Columns.Add("CTO_HORASTRABAJONORMAL", "Horas normal");
             dgvLista.Columns.Add("CTO_HORASTRABAJOEXTENDIDO", "Horas extendido");            
@@ -528,7 +531,7 @@ namespace GyCAP.UI.RecursosFabricacion
             dgvLista.Columns["CTO_HORASTRABAJOEXTENDIDO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvLista.Columns["CTO_NOMBRE"].DataPropertyName = "CTO_NOMBRE";
             dgvLista.Columns["SEC_CODIGO"].DataPropertyName = "SEC_CODIGO";
-            dgvLista.Columns["CTO_TIPO"].DataPropertyName = "CTO_TIPO";
+            dgvLista.Columns["CT_TIPO"].DataPropertyName = "CT_TIPO";
             dgvLista.Columns["CTO_ACTIVO"].DataPropertyName = "CTO_ACTIVO";
             dgvLista.Columns["CTO_HORASTRABAJONORMAL"].DataPropertyName = "CTO_HORASTRABAJONORMAL";
             dgvLista.Columns["CTO_HORASTRABAJOEXTENDIDO"].DataPropertyName = "CTO_HORASTRABAJOEXTENDIDO";
@@ -538,6 +541,7 @@ namespace GyCAP.UI.RecursosFabricacion
             {
                 BLL.TurnoTrabajoBLL.ObtenerTurnos(dsCentroTrabajo.TURNOS_TRABAJO);
                 BLL.SectorBLL.ObtenerTodos(dsCentroTrabajo.SECTORES);
+                BLL.TipoCentroTrabajoBLL.GetAll(dsCentroTrabajo.TIPOS_CENTRO_TRABAJO);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -556,14 +560,12 @@ namespace GyCAP.UI.RecursosFabricacion
             dvSector.Sort = "SEC_NOMBRE ASC";
             cbSectorBuscar.SetDatos(dvSectorBuscar, "SEC_CODIGO", "SEC_NOMBRE", "--TODOS--", true);
             cbSector.SetDatos(dvSector, "SEC_CODIGO", "SEC_NOMBRE", "Seleccione...", false);
-            string[] nombres;
-            int[] valores;
-            nombres = new string[] { "Humano", "Máquina" };
-            valores = new int[] { BLL.CentroTrabajoBLL.TipoHombre, BLL.CentroTrabajoBLL.TipoMaquina };
-            cbTipoBuscar.SetDatos(nombres, valores, "--TODOS--", true);
-            cbTipo.SetDatos(nombres, valores, "Seleccione", false);
-            nombres = new string[] { "Activo", "Inactivo"};
-            valores = new int[] { BLL.CentroTrabajoBLL.CentroActivo, BLL.CentroTrabajoBLL.CentroInactivo };
+            dvTipoBuscar = new DataView(dsCentroTrabajo.TIPOS_CENTRO_TRABAJO);
+            cbTipoBuscar.SetDatos(dvTipoBuscar, "TC_CODIGO", "TC_NOMBRE", "--TODOS--", true);
+            dvTipo = new DataView(dsCentroTrabajo.TIPOS_CENTRO_TRABAJO);
+            cbTipo.SetDatos(dvTipo, "TC_CODIGO", "TC_NOMBRE", "Seleccione...", false);
+            string[] nombres = new string[] { "Activo", "Inactivo"};
+            int[] valores = new int[] { BLL.CentroTrabajoBLL.CentroActivo, BLL.CentroTrabajoBLL.CentroInactivo };
             cbActivoBuscar.SetDatos(nombres, valores, "--TODOS--", true);
             cbActivo.SetDatos(nombres, valores, "Seleccione...", false);
             dvTurnoTrabajo = new DataView(dsCentroTrabajo.TURNOS_TRABAJO);

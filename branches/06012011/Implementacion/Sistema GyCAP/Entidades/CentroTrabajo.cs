@@ -28,9 +28,9 @@ namespace GyCAP.Entidades
             get { return sector; }
             set { sector = value; }
         }
-        private int tipo;
+        private TipoCentroTrabajo tipo;
 
-        public int Tipo
+        public TipoCentroTrabajo Tipo
         {
             get { return tipo; }
             set { tipo = value; }

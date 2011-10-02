@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using GyCAP.Entidades;
+using GyCAP.Entidades.Enumeraciones;
+using GyCAP.Entidades.Excepciones;
 
 namespace GyCAP.DAL
 {
     public class CierreParcialOrdenTrabajoDAL
     {
-        public static void Insertar(Entidades.CierreParcialOrdenTrabajo cierreOrdenTrabajo, SqlTransaction transaccion)
+        public static void Insertar(CierreParcialOrdenTrabajo cierreOrdenTrabajo, SqlTransaction transaccion)
         {
             string sql = @"INSERT INTO [CIERRE_ORDEN_TRABAJO] 
                         ([ordt_numero]
@@ -19,13 +22,11 @@ namespace GyCAP.DAL
                         ,[cord_fechacierre]
                         ,[cord_horacierre]
                         ,[cord_observaciones]) 
-                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6) SELECT @@Identity";
-
-            object maquina = DBNull.Value;
-            if (cierreOrdenTrabajo.Maquina != null) { maquina = cierreOrdenTrabajo.Maquina.Codigo; }
+                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6) SELECT @@Identity";                        
+            
             object[] parametros = { cierreOrdenTrabajo.OrdenTrabajo.Numero,
                                       cierreOrdenTrabajo.Empleado.Codigo,
-                                      maquina,
+                                      cierreOrdenTrabajo.Maquina.Codigo,
                                       cierreOrdenTrabajo.Cantidad,
                                       cierreOrdenTrabajo.Fecha,
                                       cierreOrdenTrabajo.Hora,

@@ -42,9 +42,9 @@ namespace GyCAP.Entidades
             get { return cantidad; }
             set { cantidad = value; }
         }
-        private DateTime fecha;
+        private DateTime? fecha;
 
-        public DateTime Fecha
+        public DateTime? Fecha
         {
             get { return fecha; }
             set { fecha = value; }

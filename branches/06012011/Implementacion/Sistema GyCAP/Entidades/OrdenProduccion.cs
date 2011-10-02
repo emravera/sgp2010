@@ -134,5 +134,13 @@ namespace GyCAP.Entidades
             get { return lote; }
             set { lote = value; }
         }
+
+        private BindingEntity.SortableBindingList<OrdenTrabajo> ordenesTrabajo;
+
+        public BindingEntity.SortableBindingList<OrdenTrabajo> OrdenesTrabajo
+        {
+            get { return ordenesTrabajo; }
+            set { ordenesTrabajo = value; }
+        }
     }
 }

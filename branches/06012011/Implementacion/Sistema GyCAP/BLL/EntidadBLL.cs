@@ -65,9 +65,6 @@ namespace GyCAP.BLL
                 case GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.UbicacionStock:
                     entidad.EntidadExterna = new object();
                     break;
-                case GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.OrdenCompra:
-                    entidad.EntidadExterna = new object();
-                    break;
                 default:
                     break;
             }
@@ -117,11 +114,6 @@ namespace GyCAP.BLL
                     entidad.Nombre = TipoEntidadBLL.UbicacionStockNombre;
                     tipo = GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.UbicacionStock;
                     break;
-                case TipoEntidadBLL.OrdenCompraNombre:
-                    entidad.EntidadExterna = new OrdenCompra() { Numero = idEntidad };
-                    entidad.Nombre = TipoEntidadBLL.OrdenCompraNombre;
-                    tipo = GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.OrdenCompra;
-                    break;
                 default:
                     break;
             }
@@ -166,9 +158,6 @@ namespace GyCAP.BLL
                     break;
                 case TipoEntidadBLL.UbicacionStockNombre:
                     entidad.EntidadExterna = UbicacionStockBLL.GetUbicacionStock(Convert.ToInt32(dt.Rows[0]["entd_id"].ToString()));
-                    break;
-                case TipoEntidadBLL.OrdenCompraNombre:
-                    entidad.EntidadExterna = new OrdenCompra() { Numero = Convert.ToInt32(dt.Rows[0]["entd_id"].ToString()) };
                     break;
                 default:
                     break;

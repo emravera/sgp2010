@@ -175,9 +175,9 @@
             this.chkOTSBuscar.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkOTSBuscar.Location = new System.Drawing.Point(328, 57);
             this.chkOTSBuscar.Name = "chkOTSBuscar";
-            this.chkOTSBuscar.Size = new System.Drawing.Size(138, 17);
+            this.chkOTSBuscar.Size = new System.Drawing.Size(98, 17);
             this.chkOTSBuscar.TabIndex = 9;
-            this.chkOTSBuscar.Text = "Orden trabajo/servicio:";
+            this.chkOTSBuscar.Text = "Orden trabajo:";
             this.chkOTSBuscar.UseVisualStyleBackColor = true;
             // 
             // chkTerminadoBuscar
@@ -392,9 +392,9 @@
             this.label11.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(180, 157);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(47, 13);
+            this.label11.Size = new System.Drawing.Size(198, 13);
             this.label11.TabIndex = 26;
-            this.label11.Text = "????????";
+            this.label11.Text = "(Requiere operaciones de ensamblado.)";
             // 
             // label10
             // 
@@ -402,9 +402,9 @@
             this.label10.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(180, 122);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(342, 13);
+            this.label10.Size = new System.Drawing.Size(142, 13);
             this.label10.TabIndex = 25;
-            this.label10.Text = "(Generar orden de trabajo, de servicio o compra según corresponda.)";
+            this.label10.Text = "(Generar orden de trabajo.)";
             // 
             // label9
             // 

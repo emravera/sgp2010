@@ -74,10 +74,6 @@ namespace GyCAP.DAL
                     entidad.Codigo = Existe(tipo, (entidad.EntidadExterna as UbicacionStock).Numero);
                     parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, (entidad.EntidadExterna as UbicacionStock).Numero };
                     break;
-                case TipoEntidadDAL.TipoEntidadEnum.OrdenCompra:
-                    entidad.Codigo = Existe(tipo, (entidad.EntidadExterna as OrdenCompra).Numero);
-                    parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, (entidad.EntidadExterna as OrdenCompra).Numero };
-                    break;
                 default:
                     break;
             }
