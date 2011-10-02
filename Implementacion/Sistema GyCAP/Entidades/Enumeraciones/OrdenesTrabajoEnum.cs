@@ -8,6 +8,7 @@ namespace GyCAP.Entidades.Enumeraciones
     public class OrdenesTrabajoEnum
     {
         public enum EstadoOrdenEnum { Generada = 1, EnEspera = 2, EnProceso = 3, Finalizada = 4, Cancelada = 5 };
+        public enum TipoOrden { Fabricación, Adquisición };
 
         public static string GetFriendlyName(EstadoOrdenEnum estado)
         {

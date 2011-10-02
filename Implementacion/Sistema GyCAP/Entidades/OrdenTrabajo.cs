@@ -114,12 +114,28 @@ namespace GyCAP.Entidades
             set { detalleHojaRuta = value; }
         }
 
-        private int ordenTrabajoPadre;
+        private int? ordenTrabajoPadre;
 
-        public int OrdenTrabajoPadre
+        public int? OrdenTrabajoPadre
         {
             get { return ordenTrabajoPadre; }
             set { ordenTrabajoPadre = value; }
+        }
+
+        private BindingEntity.SortableBindingList<CierreParcialOrdenTrabajo> cierresParciales;
+
+        public BindingEntity.SortableBindingList<CierreParcialOrdenTrabajo> CierresParciales
+        {
+            get { return cierresParciales; }
+            set { cierresParciales = value; }
+        }
+
+        private int tipo;
+
+        public int Tipo
+        {
+            get { return tipo; }
+            set { tipo = value; }
         }
     }
 }

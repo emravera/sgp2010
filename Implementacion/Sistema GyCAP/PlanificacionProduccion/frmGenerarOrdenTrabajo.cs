@@ -591,7 +591,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             columnaCheck.ReadOnly = false;
             columnaCheck.TrueValue = true;
             columnaCheck.FalseValue = false;
-            columnaCheck.MinimumWidth = 20;
+            columnaCheck.Width = 25;
             columnaCheck.Frozen = true;
             
             dgvListaOrdenProduccion.AutoGenerateColumns = false;
@@ -627,7 +627,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvListaOrdenProduccion.Columns["ORDP_PRIORIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvListaOrdenProduccion.DataSource = ordenesProduccionSortable;
             chkSeleccionarOP.Parent = dgvListaOrdenProduccion;
-            chkSeleccionarOP.Location = new Point(5, 3);
+            chkSeleccionarOP.Location = new Point(7, 10);
             chkSeleccionarOP.Text = string.Empty;
             chkSeleccionarOP.AutoSize = true;
             chkSeleccionarOP.CheckedChanged += new EventHandler(chkSeleccionarOP_CheckedChanged);
@@ -674,14 +674,17 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         void chkSeleccionarOP_CheckedChanged(object sender, EventArgs e)
         {
-            dgvListaOrdenProduccion.BeginEdit(true);
-            foreach (DataGridViewRow fila in dgvListaOrdenProduccion.Rows)
+            if (dgvListaOrdenProduccion.RowCount > 0)
             {
-                DataGridViewCheckBoxCell cellSelecion = fila.Cells[0] as DataGridViewCheckBoxCell;
-                cellSelecion.Value = chkSeleccionarOP.Checked;
+                dgvListaOrdenProduccion.BeginEdit(true);
+                foreach (DataGridViewRow fila in dgvListaOrdenProduccion.Rows)
+                {
+                    DataGridViewCheckBoxCell cellSelecion = fila.Cells[0] as DataGridViewCheckBoxCell;
+                    cellSelecion.Value = chkSeleccionarOP.Checked;
+                }
+                dgvListaOrdenProduccion.EndEdit();
+                dgvListaOrdenProduccion.Refresh();
             }
-            dgvListaOrdenProduccion.EndEdit();
-            dgvListaOrdenProduccion.Refresh();
         }
         #endregion
 
@@ -747,6 +750,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 txtObservacionesOrdenT.Text = orden.Observaciones;
                 txtFechaInicioOrdenT.Text = (orden.FechaInicioEstimada.HasValue) ? orden.FechaInicioEstimada.Value.ToShortDateString() : string.Empty;
                 txtFechaFinOrdenT.Text = (orden.FechaFinEstimada.HasValue) ? orden.FechaFinEstimada.Value.ToShortDateString() : string.Empty;
+                txtTipoOrden.Text = (orden.Tipo == (int)OrdenesTrabajoEnum.TipoOrden.Fabricación) ? "Fabricación" : "Adquisición";
             }
         }
 

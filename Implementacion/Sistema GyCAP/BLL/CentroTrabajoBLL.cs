@@ -61,8 +61,10 @@ namespace GyCAP.BLL
             DAL.CentroTrabajoDAL.ObetenerCentrosTrabajo(nombre, tipo, sector, estado, ds);
         }
 
-        public static Entidades.CentroTrabajo AsCentroTrabajoEntity(Data.dsHojaRuta.CENTROS_TRABAJOSRow row)
+        public static Entidades.CentroTrabajo AsCentroTrabajoEntity(int codigo, Data.dsHojaRuta ds)
         {
+            Data.dsHojaRuta.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.FindByCTO_CODIGO(codigo);
+
             Entidades.CentroTrabajo centro = new GyCAP.Entidades.CentroTrabajo()
             {
                 Activo = Convert.ToInt32(row.CTO_ACTIVO),
@@ -80,7 +82,7 @@ namespace GyCAP.BLL
                 Sector = new GyCAP.Entidades.SectorTrabajo() { Codigo = Convert.ToInt32(row.SEC_CODIGO) },
                 TiempoAntes = row.CTO_TIEMPOANTES,
                 TiempoDespues = row.CTO_TIEMPODESPUES,
-                Tipo = Convert.ToInt32(row.CTO_TIPO),
+                Tipo = TipoCentroTrabajoBLL.AsTipoEntity(Convert.ToInt32(row.CT_TIPO), ds),
                 TurnosTrabajo = null
             };
 
@@ -92,6 +94,7 @@ namespace GyCAP.BLL
             Data.dsHojaRuta.CENTROS_TRABAJOSDataTable dt = new GyCAP.Data.dsHojaRuta.CENTROS_TRABAJOSDataTable();
             ObetenerCentrosTrabajo(null, null, null, null, dt);
             SortableBindingList<CentroTrabajo> lista = new SortableBindingList<CentroTrabajo>();
+            SortableBindingList<TipoCentroTrabajo> tipos = TipoCentroTrabajoBLL.GetAll();
 
             foreach (Data.dsHojaRuta.CENTROS_TRABAJOSRow row in dt.Rows)
             {
@@ -112,7 +115,7 @@ namespace GyCAP.BLL
                     Sector = new GyCAP.Entidades.SectorTrabajo() { Codigo = Convert.ToInt32(row.SEC_CODIGO) },
                     TiempoAntes = row.CTO_TIEMPOANTES,
                     TiempoDespues = row.CTO_TIEMPODESPUES,
-                    Tipo = Convert.ToInt32(row.CTO_TIPO),
+                    Tipo = tipos.Where(p => p.Codigo == Convert.ToInt32(row.CT_TIPO)).Single(),
                     TurnosTrabajo = null
                 });
             }

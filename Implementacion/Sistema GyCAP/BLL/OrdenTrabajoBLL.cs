@@ -8,6 +8,7 @@ using GyCAP.Entidades.ArbolOrdenesTrabajo;
 using GyCAP.Entidades.ArbolEstructura;
 using GyCAP.Entidades.Enumeraciones;
 using GyCAP.Entidades.Excepciones;
+using GyCAP.Entidades.BindingEntity;
 
 namespace GyCAP.BLL
 {
@@ -70,7 +71,8 @@ namespace GyCAP.BLL
                                 OrdenProduccion = arbolProduccion.OrdenProduccion.Numero,
                                 Parte = nodoEstructura.Compuesto.Parte,
                                 Secuencia = detalleHR.Secuencia,
-                                OrdenTrabajoPadre = (lastNodoOT != null) ? lastNodoOT.OrdenTrabajo.Numero : 0
+                                OrdenTrabajoPadre = (lastNodoOT != null) ? lastNodoOT.OrdenTrabajo.Numero : 0,
+                                Tipo = (detalleHR.CentroTrabajo.Tipo.Codigo == (int)RecursosFabricacionEnum.TipoCentroTrabajo.Proveedor) ? (int)OrdenesTrabajoEnum.TipoOrden.Adquisición : (int)OrdenesTrabajoEnum.TipoOrden.Fabricación
                             }
                         };
 
@@ -102,14 +104,53 @@ namespace GyCAP.BLL
             }
         }
 
-        public static void ObtenerOrdenesTrabajo(int numeroOrdenProduccion, Data.dsOrdenTrabajo dsOrdenTrabajo, bool obtenerCierresParciales)
+        public static SortableBindingList<OrdenTrabajo> ObtenerOrdenesTrabajo(OrdenProduccion ordenProduccion, 
+                                                                              SortableBindingList<EstadoOrdenTrabajo> estados, 
+                                                                              SortableBindingList<Parte> partes, 
+                                                                              SortableBindingList<HojaRuta> hojasRutas,
+                                                                              bool obtenerCierresParciales)
         {
-            DAL.OrdenTrabajoDAL.ObtenerOrdenesTrabajo(numeroOrdenProduccion, dsOrdenTrabajo, obtenerCierresParciales);
+            Data.dsOrdenTrabajo ds = new GyCAP.Data.dsOrdenTrabajo();
+            DAL.OrdenTrabajoDAL.ObtenerOrdenesTrabajo(ordenProduccion.Numero, ds, obtenerCierresParciales);
+            SortableBindingList<OrdenTrabajo> lista = new SortableBindingList<OrdenTrabajo>();
+
+            foreach (Data.dsOrdenTrabajo.ORDENES_TRABAJORow row in ds.ORDENES_TRABAJO.Rows)
+            {
+                OrdenTrabajo orden = new OrdenTrabajo();
+                orden.Numero = Convert.ToInt32(row.ORDT_NUMERO);
+                orden.Codigo = row.ORDT_CODIGO;
+                orden.Origen = row.ORDT_ORIGEN;
+                orden.Observaciones = row.ORDT_OBSERVACIONES;
+                orden.OrdenProduccion = ordenProduccion.Numero;
+                orden.CantidadEstimada = Convert.ToInt32(row.ORDT_CANTIDADESTIMADA);
+                orden.CantidadReal = Convert.ToInt32(row.ORDT_CANTIDADREAL);
+                foreach (HojaRuta item in hojasRutas)
+                {
+                    orden.DetalleHojaRuta = item.Detalle.FirstOrDefault(p => p.Codigo == Convert.ToInt32(row.DHR_CODIGO));
+                    if (orden.DetalleHojaRuta != null) { break; }
+                }
+                orden.Estado = estados.Where(p => p.Codigo == Convert.ToInt32(row.EORD_CODIGO)).Single();
+                orden.FechaFinEstimada = row.ORDT_FECHAFINESTIMADA;
+                orden.FechaInicioEstimada = row.ORDT_FECHAINICIOESTIMADA;
+                if (row.IsORDT_FECHAINICIOREALNull()) { orden.FechaInicioReal = null; }
+                else { orden.FechaInicioReal = row.ORDT_FECHAINICIOREAL; }
+                if (row.IsORDT_FECHAFINREALNull()) { orden.FechaFinReal = null; }
+                else { orden.FechaFinReal = row.ORDT_FECHAFINREAL; }
+                if (row.IsORDT_NUMERO_PADRENull()) { orden.OrdenTrabajoPadre = null; }
+                else { orden.OrdenTrabajoPadre = Convert.ToInt32(row.ORDT_NUMERO_PADRE); }
+                orden.Parte = partes.Where(p => p.Numero == Convert.ToInt32(row.PART_NUMERO)).Single();
+                orden.Secuencia = Convert.ToInt32(row.ORDT_SECUENCIA);
+                orden.Tipo = Convert.ToInt32(row.ORDT_TIPO);
+
+                lista.Add(orden);
+            }
+
+            return ordenProduccion.OrdenesTrabajo = lista;
         }
 
-        public static void RegistrarCierreParcial(int numeroOrdenTrabajo, Data.dsOrdenTrabajo dsOrdenTrabajo, Data.dsStock dsStock)
+        public static void RegistrarCierreParcial(CierreParcialOrdenTrabajo cierre)
         {
-            DAL.OrdenTrabajoDAL.RegistrarCierreParcial(numeroOrdenTrabajo, dsOrdenTrabajo, dsStock);
+            DAL.OrdenTrabajoDAL.RegistrarCierreParcial(cierre);
         }
     }
 }

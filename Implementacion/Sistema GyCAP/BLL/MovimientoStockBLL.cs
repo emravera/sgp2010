@@ -16,7 +16,6 @@ namespace GyCAP.BLL
         public const string CodigoMantenimiento = "MNT";
         public const string CodigoOrdenProduccion = "ORDP";
         public const string CodigoOrdenTrabajo = "ORDT";
-        public const string CodgioOrdenCompra = "ORDC";
         
         public static void InsertarPlanificado(Entidades.MovimientoStock movimientoStock)
         {

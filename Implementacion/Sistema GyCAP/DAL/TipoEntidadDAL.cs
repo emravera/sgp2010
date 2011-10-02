@@ -17,9 +17,8 @@ namespace GyCAP.DAL
         public const string OrdenTrabajoNombre = "OrdenTrabajo";
         public const string MantenimientoNombre = "Mantenimiento";
         public const string UbicacionStockNombre = "UbicacionStock";
-        public const string OrdenCompraNombre = "OrdenCompra";
 
-        public enum TipoEntidadEnum { Pedido, DetallePedido, Manual, OrdenProduccion, OrdenTrabajo, Mantenimiento, UbicacionStock, OrdenCompra };
+        public enum TipoEntidadEnum { Pedido, DetallePedido, Manual, OrdenProduccion, OrdenTrabajo, Mantenimiento, UbicacionStock };
         
         public static void ObtenerTodos(Data.dsStock.TIPOS_ENTIDADDataTable table)
         {
@@ -93,9 +92,6 @@ namespace GyCAP.DAL
                 case UbicacionStockNombre:
                     return TipoEntidadEnum.UbicacionStock;
                     break;
-                case OrdenCompraNombre:
-                    return TipoEntidadEnum.OrdenCompra;
-                    break;
                 default:
                     break;
             }
@@ -132,9 +128,6 @@ namespace GyCAP.DAL
                         break;
                     case TipoEntidadEnum.UbicacionStock:
                         parametros = new object[] { UbicacionStockNombre };
-                        break;
-                    case TipoEntidadEnum.OrdenCompra:
-                        parametros = new object[] { OrdenCompraNombre };
                         break;
                     default:
                         parametros = new object[] { "error" };

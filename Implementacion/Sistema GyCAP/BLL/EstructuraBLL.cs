@@ -262,6 +262,7 @@ namespace GyCAP.BLL
             HojaRutaBLL.ObtenerHojasRuta(null, null, dsHoja, true);
             UnidadMedidaBLL.ObtenerTodos(dsHoja.UNIDADES_MEDIDA);
             TipoUnidadMedidaBLL.ObtenerTodos(dsHoja.TIPOS_UNIDADES_MEDIDA);
+            TipoCentroTrabajoBLL.GetAll(dsHoja.TIPOS_CENTRO_TRABAJO);
 
             IList<ParteNecesidadCombinada> listaPartes = arbol.AsListOfParts();
 

@@ -15,7 +15,6 @@ namespace GyCAP.BLL
         public const string OrdenTrabajoNombre = DAL.TipoEntidadDAL.OrdenTrabajoNombre;
         public const string MantenimientoNombre = DAL.TipoEntidadDAL.MantenimientoNombre;
         public const string UbicacionStockNombre = DAL.TipoEntidadDAL.UbicacionStockNombre;
-        public const string OrdenCompraNombre = DAL.TipoEntidadDAL.OrdenCompraNombre;
         
         public static void ObtenerTodos(Data.dsStock.TIPOS_ENTIDADDataTable table)
         {

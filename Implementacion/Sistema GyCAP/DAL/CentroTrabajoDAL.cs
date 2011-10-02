@@ -19,7 +19,7 @@ namespace GyCAP.DAL
             string sql = @"INSERT INTO [CENTROS_TRABAJOS] 
                            ([cto_nombre], 
                             [sec_codigo], 
-                            [cto_tipo], 
+                            [ct_tipo], 
                             [cto_horastrabajonormal], 
                             [cto_horastrabajoextendido], 
                             [cto_activo], 
@@ -37,7 +37,7 @@ namespace GyCAP.DAL
             Data.dsHojaRuta.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsHojaRuta.CENTROS_TRABAJOSRow;
             object[] valoresParametros = { row.CTO_NOMBRE,
                                            row.SEC_CODIGO,
-                                           row.CTO_TIPO,
+                                           row.CT_TIPO,
                                            row.CTO_HORASTRABAJONORMAL,
                                            row.CTO_HORASTRABAJOEXTENDIDO,
                                            row.CTO_ACTIVO,
@@ -88,7 +88,7 @@ namespace GyCAP.DAL
             string sqlCentro = @"UPDATE CENTROS_TRABAJOS SET 
                                 cto_nombre = @p0, 
                                 sec_codigo = @p1, 
-                                cto_tipo = @p2, 
+                                ct_tipo = @p2, 
                                 cto_horastrabajonormal = @p3, 
                                 cto_horastrabajoextendido = @p4, 
                                 cto_activo = @p5, 
@@ -106,7 +106,7 @@ namespace GyCAP.DAL
             Data.dsHojaRuta.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsHojaRuta.CENTROS_TRABAJOSRow;
             object[] valorParametros = { row.CTO_NOMBRE, 
                                            row.SEC_CODIGO,
-                                           row.CTO_TIPO,
+                                           row.CT_TIPO,
                                            row.CTO_HORASTRABAJONORMAL,
                                            row.CTO_HORASTRABAJOEXTENDIDO,
                                            row.CTO_ACTIVO,
@@ -217,7 +217,7 @@ namespace GyCAP.DAL
 
         public static void ObetenerCentrosTrabajo(object nombre, object tipo, object sector, object estado, DataTable dtCentrosTrabajo)
         {
-            string sql = @"SELECT cto_codigo, cto_nombre, sec_codigo, cto_tipo, cto_horastrabajonormal, cto_horastrabajoextendido,
+            string sql = @"SELECT cto_codigo, cto_nombre, sec_codigo, ct_tipo, cto_horastrabajonormal, cto_horastrabajoextendido,
                                   cto_activo, cto_descripcion, cto_capacidadciclo, cto_horasciclo, cto_tiempoantes, cto_tiempodespues, 
                                   cto_eficiencia, cto_costohora, cto_costociclo, cto_capacidadunidadhora FROM CENTROS_TRABAJOS WHERE 1=1 ";
 
@@ -239,7 +239,7 @@ namespace GyCAP.DAL
             if (tipo != null && tipo.GetType() == cantidadParametros.GetType())
             {
                 //Si aplica el filtro lo usamos
-                sql += " AND cto_tipo = @p" + cantidadParametros;
+                sql += " AND ct_tipo = @p" + cantidadParametros;
                 valoresFiltros[cantidadParametros] = tipo;
                 cantidadParametros++;
             }
@@ -288,7 +288,7 @@ namespace GyCAP.DAL
 
         public static void ObetenerCentrosTrabajo(object nombre, object tipo, object sector, object estado, Data.dsHojaRuta ds)
         {
-            string sql = @"SELECT cto_codigo, cto_nombre, sec_codigo, cto_tipo, cto_horastrabajonormal, cto_horastrabajoextendido,
+            string sql = @"SELECT cto_codigo, cto_nombre, sec_codigo, ct_tipo, cto_horastrabajonormal, cto_horastrabajoextendido,
                                   cto_activo, cto_descripcion, cto_capacidadciclo, cto_horasciclo, cto_tiempoantes, cto_tiempodespues, 
                                   cto_eficiencia, cto_costohora, cto_costociclo, cto_capacidadunidadhora FROM CENTROS_TRABAJOS WHERE 1=1 ";
 
@@ -310,7 +310,7 @@ namespace GyCAP.DAL
             if (tipo != null && tipo.GetType() == cantidadParametros.GetType())
             {
                 //Si aplica el filtro lo usamos
-                sql += " AND cto_tipo = @p" + cantidadParametros;
+                sql += " AND ct_tipo = @p" + cantidadParametros;
                 valoresFiltros[cantidadParametros] = tipo;
                 cantidadParametros++;
             }
@@ -360,7 +360,7 @@ namespace GyCAP.DAL
 
         public static void ObtenerCentroTrabajo(int codigoCentro, bool turnos, Data.dsHojaRuta ds)
         {
-            string sql = @"SELECT cto_codigo, cto_nombre, sec_codigo, cto_tipo, cto_horastrabajonormal, cto_horastrabajoextendido,
+            string sql = @"SELECT cto_codigo, cto_nombre, sec_codigo, ct_tipo, cto_horastrabajonormal, cto_horastrabajoextendido,
                                   cto_activo, cto_descripcion, cto_capacidadciclo, cto_horasciclo, cto_tiempoantes, cto_tiempodespues, 
                                   cto_eficiencia, cto_costohora, cto_costociclo, cto_capacidadunidadhora FROM CENTROS_TRABAJOS WHERE cto_codigo = @p0";
 

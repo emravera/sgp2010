@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Drawing;
+using GyCAP.Entidades;
+using GyCAP.Entidades.BindingEntity;
+using GyCAP.Entidades.Enumeraciones;
+using GyCAP.Entidades.ArbolEstructura;
 
 namespace GyCAP.BLL
 {
     public class ParteBLL
-    {
-        public static readonly int CostoFijoChecked = 1;
-        public static readonly int CostoFijoUnChecked = 0;
-        
+    {        
         public static void ObtenerPartes(object nombre, object codigo, object terminacion, object tipo, object estado, object plano, DataTable dtPartes)
         {
             if (terminacion != null && Convert.ToInt32(terminacion) <= 0) { terminacion = null; }
@@ -19,6 +20,22 @@ namespace GyCAP.BLL
             if (estado != null && Convert.ToInt32(estado) <= 0) { estado = null; }
             if (plano != null && Convert.ToInt32(plano) <= 0) { plano = null; }
             DAL.ParteDAL.ObtenerPartes(nombre, codigo, terminacion, tipo, estado, plano, dtPartes);
+        }
+
+        public static SortableBindingList<Parte> GetAll()
+        {
+            Data.dsEstructuraProducto ds = new GyCAP.Data.dsEstructuraProducto();
+            SortableBindingList<Parte> lista = new SortableBindingList<Parte>();
+            ObtenerPartes(null, null, null, null, null, null, ds.PARTES);
+            TipoParteBLL.ObtenerTodos(ds.TIPOS_PARTES);
+            EstadoParteBLL.ObtenerTodos(ds.ESTADO_PARTES);
+
+            foreach (Data.dsEstructuraProducto.PARTESRow row in ds.PARTES.Rows)
+            {
+                lista.Add(AsParteEntity(Convert.ToInt32(row.PART_NUMERO), ds));
+            }
+
+            return lista;
         }
 
         public static int Insertar(Data.dsEstructuraProducto dsParte)
@@ -98,6 +115,14 @@ namespace GyCAP.BLL
             };
 
             return parte;
+        }
+
+        public static void AsignarEntidades(SortableBindingList<Parte> partes, SortableBindingList<HojaRuta> hojasRutas)
+        {
+            foreach (Parte parte in partes)
+            {
+                if (parte.HojaRuta != null) { parte.HojaRuta = hojasRutas.Where(p => p.Codigo == parte.HojaRuta.Codigo).Single(); }
+            }
         }
     }
 }

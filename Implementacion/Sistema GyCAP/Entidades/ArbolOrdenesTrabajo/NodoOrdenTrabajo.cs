@@ -98,7 +98,7 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
 
         private double GetOperationTime()
         {
-            if (this.ordenTrabajo.DetalleHojaRuta.CentroTrabajo.Tipo == (int)RecursosFabricacionEnum.TipoCentroTrabajo.TipoHombre)
+            if (this.ordenTrabajo.DetalleHojaRuta.CentroTrabajo.Tipo.Codigo == (int)RecursosFabricacionEnum.TipoCentroTrabajo.Hombre)
             {
                 double temp = (double)(60 / (this.ordenTrabajo.DetalleHojaRuta.CentroTrabajo.CapacidadUnidadHora * this.ordenTrabajo.DetalleHojaRuta.CentroTrabajo.Eficiencia));
                 return temp;

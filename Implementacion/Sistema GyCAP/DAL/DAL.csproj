@@ -122,6 +122,7 @@
     <Compile Include="StockMateriaPrimaDAL.cs" />
     <Compile Include="TareaDAL.cs" />
     <Compile Include="TerminacionDAL.cs" />
+    <Compile Include="TipoCentroTrabajoDAL.cs" />
     <Compile Include="TipoEntidadDAL.cs" />
     <Compile Include="TipoMantenimientoDAL.cs" />
     <Compile Include="TipoParteDAL.cs" />
