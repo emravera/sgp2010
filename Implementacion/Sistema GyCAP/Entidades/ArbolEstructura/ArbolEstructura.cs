@@ -124,6 +124,27 @@ namespace GyCAP.Entidades.ArbolEstructura
             return null;
         }
 
+        public NodoEstructura FindByPartNumber(int numero)
+        {
+            List<NodoEstructura> abierta = new List<NodoEstructura>();
+            abierta.Add(this.NodoRaiz);
+            NodoEstructura nodo = null;
+
+            while (true)
+            {
+                if (abierta.Count == 0) { break; }
+                nodo = abierta.First();
+                abierta.RemoveAt(0);
+                if (nodo.Contenido != NodoEstructura.tipoContenido.MateriaPrima && nodo.Compuesto.Parte.Numero == numero) { break; }
+                else
+                {
+                    abierta.AddRange(nodo.NodosHijos);
+                }
+            }
+
+            return nodo;        
+        }
+
         private NodoEstructura BuscarNodoByCodigoNodo(int? codigoNodo)
         {
             NodoEstructura nodo = null;

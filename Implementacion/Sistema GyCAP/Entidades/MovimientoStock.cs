@@ -7,6 +7,11 @@ namespace GyCAP.Entidades
 {
     public class MovimientoStock
     {
+        public MovimientoStock()
+        {
+            origenesMultiples = new List<OrigenMovimiento>();
+        }
+        
         private int numero;
 
         public int Numero
@@ -49,13 +54,6 @@ namespace GyCAP.Entidades
             get { return fechaReal; }
             set { fechaReal = value; }
         }
-        private Entidad origen;
-
-        public Entidad Origen
-        {
-            get { return origen; }
-            set { origen = value; }
-        }
         private Entidad destino;
 
         public Entidad Destino
@@ -63,13 +61,7 @@ namespace GyCAP.Entidades
             get { return destino; }
             set { destino = value; }
         }
-        private decimal cantidadOrigenEstimada;
-
-        public decimal CantidadOrigenEstimada
-        {
-            get { return cantidadOrigenEstimada; }
-            set { cantidadOrigenEstimada = value; }
-        }
+        
         private decimal cantidadDestinoEstimada;
 
         public decimal CantidadDestinoEstimada
@@ -78,13 +70,7 @@ namespace GyCAP.Entidades
             set { cantidadDestinoEstimada = value; }
         }
 
-        private decimal cantidadOrigenReal;
-
-        public decimal CantidadOrigenReal
-        {
-            get { return cantidadOrigenReal; }
-            set { cantidadOrigenReal = value; }
-        }
+        
         private decimal cantidadDestinoReal;
 
         public decimal CantidadDestinoReal
@@ -107,6 +93,14 @@ namespace GyCAP.Entidades
         {
             get { return duenio; }
             set { duenio = value; }
+        }
+
+        private IList<OrigenMovimiento> origenesMultiples;
+
+        public IList<OrigenMovimiento> OrigenesMultiples
+        {
+            get { return origenesMultiples; }
+            set { origenesMultiples = value; }
         }
     }
 }

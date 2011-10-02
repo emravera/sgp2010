@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GyCAP.Entidades;
+using GyCAP.Entidades.Enumeraciones;
 
 namespace GyCAP.BLL
 {
@@ -16,103 +17,36 @@ namespace GyCAP.BLL
         public static int ObtenerCodigoEntidad(int codigoPedido)
         {
             return DAL.EntidadDAL.ObtenerCodigoEntidad(codigoPedido);
-        }
+        }     
 
-        public static IList<Entidad> ObtenerTodos()
-        {
-            Data.dsStock.ENTIDADESDataTable dt = new GyCAP.Data.dsStock.ENTIDADESDataTable();
-            ObtenerTodos(dt);
-            IList<Entidad> lista = new List<Entidad>();
-
-            foreach (Data.dsStock.ENTIDADESRow row in dt.Rows)
-            {
-                lista.Add(AsEntidad(row));
-            }
-
-            return lista;
-        }
-
-        public static Entidad AsEntidad(Data.dsStock.ENTIDADESRow row)
-        {
-            Data.dsStock.TIPOS_ENTIDADDataTable dt = new GyCAP.Data.dsStock.TIPOS_ENTIDADDataTable();
-            DAL.TipoEntidadDAL.ObtenerTodos(dt);
-
-            Entidad entidad = new Entidad();
-            entidad.Codigo = Convert.ToInt32(row.ENTD_CODIGO);
-            entidad.Nombre = row.ENTD_NOMBRE;
-            entidad.TipoEntidad = TipoEntidadBLL.AsTipoEntidad(dt.FindByTENTD_CODIGO(row.TENTD_CODIGO));
-
-            switch (TipoEntidadBLL.GetTipoEntidad(entidad.TipoEntidad.Nombre))
-            {
-                case GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.Pedido:
-                    entidad.EntidadExterna = new object();
-                    break;
-                case GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.DetallePedido:
-                    entidad.EntidadExterna = new object();
-                    break;
-                case GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.Manual:
-                    entidad.EntidadExterna = new object();
-                    break;
-                case GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.OrdenProduccion:
-                    entidad.EntidadExterna = new object();
-                    break;
-                case GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.OrdenTrabajo:
-                    entidad.EntidadExterna = new object();
-                    break;
-                case GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.Mantenimiento:
-                    entidad.EntidadExterna = new object();
-                    break;
-                case GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.UbicacionStock:
-                    entidad.EntidadExterna = new object();
-                    break;
-                default:
-                    break;
-            }
-
-            return entidad;
-        }
-
-        public static Entidad GetEntidad(string nombreTipoEntidad, int idEntidad)
+        public static Entidad GetEntidad(EntidadEnum.TipoEntidadEnum tipo, int idEntidadExterna)
         {
             Entidad entidad = new Entidad();
-            entidad.TipoEntidad = TipoEntidadBLL.GetTipoEntidadEntity(nombreTipoEntidad);
-            DAL.TipoEntidadDAL.TipoEntidadEnum tipo = GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.Manual;
+            entidad.TipoEntidad = TipoEntidadBLL.GetTipoEntidadEntity(tipo);
+            entidad.Nombre = tipo.ToString();
 
-            switch (entidad.TipoEntidad.Nombre)
+            switch (tipo)
             {
-                case TipoEntidadBLL.PedidoNombre:
-                    entidad.EntidadExterna = new Pedido() { Codigo = idEntidad };
-                    entidad.Nombre = TipoEntidadBLL.PedidoNombre;
-                    tipo = GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.Pedido;
+                case EntidadEnum.TipoEntidadEnum.Manual:
+                    entidad.EntidadExterna = null;                   
                     break;
-                case TipoEntidadBLL.DetallePedidoNombre:
-                    entidad.EntidadExterna = new DetallePedido() { Codigo = idEntidad };
-                    entidad.Nombre = TipoEntidadBLL.DetallePedidoNombre;
-                    tipo = GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.DetallePedido;
+                case EntidadEnum.TipoEntidadEnum.Pedido:
+                    entidad.EntidadExterna = new Pedido() { Codigo = idEntidadExterna };
                     break;
-                case TipoEntidadBLL.ManualNombre:
-                    entidad.EntidadExterna = null;
-                    entidad.Nombre = TipoEntidadBLL.ManualNombre;
+                case EntidadEnum.TipoEntidadEnum.DetallePedido:
+                    entidad.EntidadExterna = new DetallePedido() { Codigo = idEntidadExterna };
                     break;
-                case TipoEntidadBLL.OrdenProduccionNombre:
-                    entidad.EntidadExterna = new OrdenProduccion() { Numero = idEntidad };
-                    entidad.Nombre = TipoEntidadBLL.OrdenProduccionNombre;
-                    tipo = GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.OrdenProduccion;
+                case EntidadEnum.TipoEntidadEnum.OrdenProduccion:
+                    entidad.EntidadExterna = new OrdenProduccion() { Numero = idEntidadExterna };
                     break;
-                case TipoEntidadBLL.OrdenTrabajoNombre:
-                    entidad.EntidadExterna = new OrdenTrabajo() { Numero = idEntidad };
-                    entidad.Nombre = TipoEntidadBLL.OrdenTrabajoNombre;
-                    tipo = GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.OrdenTrabajo;
+                case EntidadEnum.TipoEntidadEnum.OrdenTrabajo:
+                    entidad.EntidadExterna = new OrdenTrabajo() { Numero = idEntidadExterna };
                     break;
-                case TipoEntidadBLL.MantenimientoNombre:
-                    entidad.EntidadExterna = new Mantenimiento() { Codigo = idEntidad };
-                    entidad.Nombre = TipoEntidadBLL.MantenimientoNombre;
-                    tipo = GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.Mantenimiento;
+                case EntidadEnum.TipoEntidadEnum.Mantenimiento:
+                    entidad.EntidadExterna = new Mantenimiento() { Codigo = idEntidadExterna };
                     break;
-                case TipoEntidadBLL.UbicacionStockNombre:
-                    entidad.EntidadExterna = new UbicacionStock() { Numero = idEntidad };
-                    entidad.Nombre = TipoEntidadBLL.UbicacionStockNombre;
-                    tipo = GyCAP.DAL.TipoEntidadDAL.TipoEntidadEnum.UbicacionStock;
+                case EntidadEnum.TipoEntidadEnum.UbicacionStock:
+                    entidad.EntidadExterna = new UbicacionStock() { Numero = idEntidadExterna };
                     break;
                 default:
                     break;
@@ -134,29 +68,28 @@ namespace GyCAP.BLL
                 entidad.Nombre = dt.Rows[0]["entd_nombre"].ToString();
                 entidad.TipoEntidad = BLL.TipoEntidadBLL.GetTipoEntidadEntity(Convert.ToInt32(dt.Rows[0]["tentd_codigo"].ToString()));
             }
-            
-            switch (entidad.TipoEntidad.Nombre)
+
+            switch (entidad.TipoEntidad.Codigo)
             {
-                case TipoEntidadBLL.PedidoNombre:
+                case (int)EntidadEnum.TipoEntidadEnum.Pedido:
                     entidad.EntidadExterna = new Pedido() { Codigo = Convert.ToInt32(dt.Rows[0]["entd_id"].ToString()) };
                     break;
-                case TipoEntidadBLL.DetallePedidoNombre:
+                case (int)EntidadEnum.TipoEntidadEnum.DetallePedido:
                     entidad.EntidadExterna = new DetallePedido() { Codigo = Convert.ToInt32(dt.Rows[0]["entd_id"].ToString()) };
                     break;
-                case TipoEntidadBLL.ManualNombre:
+                case (int)EntidadEnum.TipoEntidadEnum.Manual:
                     entidad.EntidadExterna = null;
-                    entidad.Nombre = TipoEntidadBLL.ManualNombre;
                     break;
-                case TipoEntidadBLL.OrdenProduccionNombre:
+                case (int)EntidadEnum.TipoEntidadEnum.OrdenProduccion:
                     entidad.EntidadExterna = new OrdenProduccion() { Numero = Convert.ToInt32(dt.Rows[0]["entd_id"].ToString()) };
                     break;
-                case TipoEntidadBLL.OrdenTrabajoNombre:
+                case (int)EntidadEnum.TipoEntidadEnum.OrdenTrabajo:
                     entidad.EntidadExterna = new OrdenTrabajo() { Numero = Convert.ToInt32(dt.Rows[0]["entd_id"].ToString()) };
                     break;
-                case TipoEntidadBLL.MantenimientoNombre:
+                case (int)EntidadEnum.TipoEntidadEnum.Mantenimiento:
                     entidad.EntidadExterna = new Mantenimiento() { Codigo = Convert.ToInt32(dt.Rows[0]["entd_id"].ToString()) };
                     break;
-                case TipoEntidadBLL.UbicacionStockNombre:
+                case (int)EntidadEnum.TipoEntidadEnum.UbicacionStock:
                     entidad.EntidadExterna = UbicacionStockBLL.GetUbicacionStock(Convert.ToInt32(dt.Rows[0]["entd_id"].ToString()));
                     break;
                 default:

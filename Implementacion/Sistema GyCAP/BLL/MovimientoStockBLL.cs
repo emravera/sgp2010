@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using GyCAP.Entidades;
+using GyCAP.Entidades.Enumeraciones;
 using GyCAP.Entidades.Excepciones;
 
 namespace GyCAP.BLL
@@ -19,14 +20,14 @@ namespace GyCAP.BLL
         
         public static void InsertarPlanificado(Entidades.MovimientoStock movimientoStock)
         {
-            movimientoStock.Estado = BLL.EstadoMovimientoStockBLL.GetEstadoEntity(BLL.EstadoMovimientoStockBLL.Planificado);
+            movimientoStock.Estado = BLL.EstadoMovimientoStockBLL.GetEstadoEntity(StockEnum.EstadoMovimientoStock.Planificado);
             ValidarMovimiento(movimientoStock);
             DAL.MovimientoStockDAL.InsertarPlanificado(movimientoStock);
         }
 
         public static void InsertarFinalizado(Entidades.MovimientoStock movimientoStock)
         {
-            movimientoStock.Estado = BLL.EstadoMovimientoStockBLL.GetEstadoEntity(BLL.EstadoMovimientoStockBLL.Finalizado);
+            movimientoStock.Estado = BLL.EstadoMovimientoStockBLL.GetEstadoEntity(StockEnum.EstadoMovimientoStock.Finalizado);
             ValidarMovimiento(movimientoStock);
             DAL.MovimientoStockDAL.InsertarFinalizado(movimientoStock);
         }
@@ -40,7 +41,7 @@ namespace GyCAP.BLL
 
         public static void EliminarMovimientosPedido(int codigoEntidad)
         {
-            DAL.MovimientoStockDAL.EliminarMovimientosPedido(codigoEntidad, null);
+            //DAL.MovimientoStockDAL.EliminarMovimientosPedido(codigoEntidad, null);
         }
 
         public static void Cancelar(int numeroMovimiento)
@@ -65,11 +66,11 @@ namespace GyCAP.BLL
             DAL.MovimientoStockDAL.ObtenerTodos(fechaDesde, fechaHasta, origen, destino, estado, dt);
         }
 
-        public static IList<Entidades.MovimientoStock> ObtenerTodos(object fechaDesde, object fechaHasta, object origen, object destino, object estado)
+        public static IList<MovimientoStock> ObtenerTodos(object fechaDesde, object fechaHasta, object origen, object destino, object estado)
         {
             Data.dsStock.MOVIMIENTOS_STOCKDataTable dt = new GyCAP.Data.dsStock.MOVIMIENTOS_STOCKDataTable();
             ObtenerTodos(fechaDesde, fechaHasta, origen, destino, estado, dt);
-            IList<Entidades.MovimientoStock> lista = new List<Entidades.MovimientoStock>();
+            IList<MovimientoStock> lista = new List<MovimientoStock>();
 
             if (dt.Rows.Count > 0)
             {
@@ -83,14 +84,12 @@ namespace GyCAP.BLL
                     movimiento.FechaAlta = row.MVTO_FECHAALTA;
                     if(!row.IsMVTO_FECHAPREVISTANull()) { movimiento.FechaPrevista = row.MVTO_FECHAPREVISTA; }
                     if (!row.IsMVTO_FECHAREALNull()) { movimiento.FechaReal = row.MVTO_FECHAREAL; }
-                    movimiento.Estado = BLL.EstadoMovimientoStockBLL.GetEstadoEntity(Convert.ToInt32(row.EMVTO_CODIGO));
-                    movimiento.CantidadOrigenEstimada = row.MVTO_CANTIDAD_ORIGEN_ESTIMADA;
-                    movimiento.CantidadDestinoEstimada = row.MVTO_CANTIDAD_DESTINO_ESTIMADA;
-                    movimiento.CantidadOrigenReal = row.MVTO_CANTIDAD_ORIGEN_REAL;
+                    movimiento.Estado = EstadoMovimientoStockBLL.GetEstadoEntity(Convert.ToInt32(row.EMVTO_CODIGO));                    
+                    movimiento.CantidadDestinoEstimada = row.MVTO_CANTIDAD_DESTINO_ESTIMADA;                    
                     movimiento.CantidadDestinoReal = row.MVTO_CANTIDAD_DESTINO_REAL;
-                    movimiento.Origen = (!row.IsENTD_ORIGENNull()) ? BLL.EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_ORIGEN)) : null;
-                    movimiento.Destino = (!row.IsENTD_DESTINONull()) ? BLL.EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_DESTINO)) : null;
-                    movimiento.Duenio = (!row.IsENTD_DUENIONull()) ? BLL.EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_DUENIO)) : null;
+                    movimiento.OrigenesMultiples = GetOrigenesMovimiento(Convert.ToInt32(row.MVTO_NUMERO));
+                    movimiento.Destino = (!row.IsENTD_DESTINONull()) ? EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_DESTINO)) : null;
+                    movimiento.Duenio = (!row.IsENTD_DUENIONull()) ? EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_DUENIO)) : null;
 
                     lista.Add(movimiento);
             	}
@@ -99,13 +98,33 @@ namespace GyCAP.BLL
             return lista;
         }
 
-        public static IList<Entidades.MovimientoStock> ObtenerMovimientosUbicacionStock(object fechaDesde, object fechaHasta, object numeroStock, object estado, Entidades.Enumeraciones.StockEnum.TipoFecha tipoFecha)
+        private static IList<OrigenMovimiento> GetOrigenesMovimiento(int numeroMovimiento)
         {
-            IList<Entidades.MovimientoStock> lista = new List<Entidades.MovimientoStock>();
+            Data.dsStock.ORIGENES_MOVIMIENTO_STOCKDataTable dt = DAL.MovimientoStockDAL.ObtenerOrigenes(numeroMovimiento);
+            IList<OrigenMovimiento> lista = new List<OrigenMovimiento>();
+
+            foreach (Data.dsStock.ORIGENES_MOVIMIENTO_STOCKRow row in dt.Rows)
+            {
+                lista.Add(new OrigenMovimiento()
+                {
+                    Codigo = Convert.ToInt32(row.OM_CODIGO),
+                    CantidadEstimada = row.OM_CANTIDAD_ESTIMADA,
+                    CantidadReal = row.OM_CANTIDAD_REAL,
+                    MovimientoStock = Convert.ToInt32(row.MVTO_NUMERO),
+                    Entidad = EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_CODIGO))
+                });
+            }
+
+            return lista;
+        }
+
+        public static IList<MovimientoStock> ObtenerMovimientosUbicacionStock(object fechaDesde, object fechaHasta, object numeroStock, object estado, Entidades.Enumeraciones.StockEnum.TipoFecha tipoFecha)
+        {
+            IList<MovimientoStock> lista = new List<MovimientoStock>();
 
             if (numeroStock == null) { return lista; }
 
-            int codigoEntidad = EntidadBLL.GetEntidad(BLL.TipoEntidadBLL.UbicacionStockNombre, Convert.ToInt32(numeroStock)).Codigo;
+            int codigoEntidad = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, Convert.ToInt32(numeroStock)).Codigo;
             
             Data.dsStock.MOVIMIENTOS_STOCKDataTable dt = DAL.MovimientoStockDAL.ObtenerMovimientosUbicacionStock(fechaDesde, fechaHasta, codigoEntidad, estado, tipoFecha);
 
@@ -121,14 +140,12 @@ namespace GyCAP.BLL
                     movimiento.FechaAlta = row.MVTO_FECHAALTA;
                     if (!row.IsMVTO_FECHAPREVISTANull()) { movimiento.FechaPrevista = row.MVTO_FECHAPREVISTA; }
                     if (!row.IsMVTO_FECHAREALNull()) { movimiento.FechaReal = row.MVTO_FECHAREAL; }
-                    movimiento.Estado = BLL.EstadoMovimientoStockBLL.GetEstadoEntity(Convert.ToInt32(row.EMVTO_CODIGO));
-                    movimiento.CantidadOrigenEstimada = row.MVTO_CANTIDAD_ORIGEN_ESTIMADA;
-                    movimiento.CantidadDestinoEstimada = row.MVTO_CANTIDAD_DESTINO_ESTIMADA;
-                    movimiento.CantidadOrigenReal = row.MVTO_CANTIDAD_ORIGEN_REAL;
+                    movimiento.Estado = EstadoMovimientoStockBLL.GetEstadoEntity(Convert.ToInt32(row.EMVTO_CODIGO));                    
+                    movimiento.CantidadDestinoEstimada = row.MVTO_CANTIDAD_DESTINO_ESTIMADA;                    
                     movimiento.CantidadDestinoReal = row.MVTO_CANTIDAD_DESTINO_REAL;
-                    movimiento.Origen = (!row.IsENTD_ORIGENNull()) ? BLL.EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_ORIGEN)) : null;
-                    movimiento.Destino = (!row.IsENTD_DESTINONull()) ? BLL.EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_DESTINO)) : null;
-                    movimiento.Duenio = (!row.IsENTD_DUENIONull()) ? BLL.EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_DUENIO)) : null;
+                    movimiento.OrigenesMultiples = GetOrigenesMovimiento(Convert.ToInt32(row.MVTO_NUMERO));
+                    movimiento.Destino = (!row.IsENTD_DESTINONull()) ? EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_DESTINO)) : null;
+                    movimiento.Duenio = (!row.IsENTD_DUENIONull()) ? EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_DUENIO)) : null;
 
                     lista.Add(movimiento);
                 }
@@ -140,19 +157,19 @@ namespace GyCAP.BLL
         private static void ValidarMovimiento(MovimientoStock movimiento)
         {
             //Fechas
-            if (movimiento.FechaAlta.CompareTo(DateTime.Today) > 0) { throw new MovimientoMalConfiguradoException("La fecha de alta es mayor que la fecha del presente día."); }
-            if (movimiento.FechaReal.HasValue && movimiento.FechaReal.Value.CompareTo(DateTime.Today) > 0) { throw new MovimientoMalConfiguradoException("La fecha real es mayor que la fecha del presente día."); }
-            if (movimiento.FechaPrevista.HasValue && movimiento.FechaPrevista.Value.CompareTo(DateTime.Today) < 0) { throw new MovimientoMalConfiguradoException("La fecha prevista es menor que la fecha del presente día."); }
+            //if (movimiento.FechaAlta.CompareTo(DateTime.Today) > 0) { throw new MovimientoMalConfiguradoException("La fecha de alta es mayor que la fecha del presente día."); }
+            //if (movimiento.FechaReal.HasValue && movimiento.FechaReal.Value.CompareTo(DateTime.Today) > 0) { throw new MovimientoMalConfiguradoException("La fecha real es mayor que la fecha del presente día."); }
+            //if (movimiento.FechaPrevista.HasValue && movimiento.FechaPrevista.Value.CompareTo(DateTime.Today) < 0) { throw new MovimientoMalConfiguradoException("La fecha prevista es menor que la fecha del presente día."); }
 
             //Origen, destino y dueño
-            if (movimiento.Origen == null) { throw new MovimientoMalConfiguradoException("El origen es nulo."); }
+            if (movimiento.OrigenesMultiples.Count == 0) { throw new MovimientoMalConfiguradoException("El origen es nulo."); }
             if (movimiento.Destino == null) { throw new MovimientoMalConfiguradoException("El destino es nulo."); }
-            if (movimiento.Origen.Equals(movimiento.Destino)) { throw new MovimientoMalConfiguradoException("El origen y el destino son iguales."); }
-            if (movimiento.Duenio == null) { throw new MovimientoMalConfiguradoException("El dueño es nulo."); }
-
-            //Cantidades
-            if (movimiento.CantidadOrigenEstimada + movimiento.CantidadDestinoEstimada != 0) { throw new MovimientoMalConfiguradoException("Las cantidades estimadas origen y destino no son válidas."); }
-            if (movimiento.CantidadOrigenReal + movimiento.CantidadDestinoReal != 0) { throw new MovimientoMalConfiguradoException("Las cantidades reales origen y destino no son válidas."); }
+            foreach (OrigenMovimiento item in movimiento.OrigenesMultiples)
+            {
+                if (item.Entidad.Equals(movimiento.Destino)) { throw new MovimientoMalConfiguradoException("El origen y el destino son iguales."); }
+            }
+            
+            if (movimiento.Duenio == null) { throw new MovimientoMalConfiguradoException("El dueño es nulo."); }            
         }
     }
 }

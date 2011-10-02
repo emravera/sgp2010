@@ -5,15 +5,12 @@ using System.Text;
 using System.Data;
 using GyCAP.Entidades;
 using GyCAP.Entidades.BindingEntity;
+using GyCAP.Entidades.Enumeraciones;
 
 namespace GyCAP.BLL
 {
     public class EstadoMovimientoStockBLL
-    {
-        public const string Planificado = DAL.EstadoMovimientoStockDAL.Planificado;
-        public const string Finalizado = DAL.EstadoMovimientoStockDAL.Finalizado;
-        public const string Cancelado = DAL.EstadoMovimientoStockDAL.Cancelado;
-        
+    {        
         public static void ObtenerEstadosMovimiento(DataTable dtEstadosMovimientoStock)
         {
             DAL.EstadoMovimientoStockDAL.ObtenerEstados(dtEstadosMovimientoStock);
@@ -24,14 +21,14 @@ namespace GyCAP.BLL
             DAL.EstadoMovimientoStockDAL.ObtenerEstados(dtEstadosMovimientoStock);
         }
 
-        public static Entidades.EstadoMovimientoStock GetEstadoEntity(string nombreEstado)
+        public static EstadoMovimientoStock GetEstadoEntity(StockEnum.EstadoMovimientoStock estado)
         {
-            return DAL.EstadoMovimientoStockDAL.GetEstadoEntity(nombreEstado);
+            return GetAll().Where(p => p.Codigo == (int)estado).Single();
         }
 
-        public static Entidades.EstadoMovimientoStock GetEstadoEntity(int codigoEstado)
+        public static EstadoMovimientoStock GetEstadoEntity(int estado)
         {
-            return DAL.EstadoMovimientoStockDAL.GetEstadoEntity(codigoEstado);
+            return GetAll().Where(p => p.Codigo == estado).Single();
         }
 
         public static SortableBindingList<EstadoMovimientoStock> GetAll()

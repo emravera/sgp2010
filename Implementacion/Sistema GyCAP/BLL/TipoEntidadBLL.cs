@@ -3,19 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GyCAP.Entidades;
+using GyCAP.Entidades.Enumeraciones;
 
 namespace GyCAP.BLL
 {
     public class TipoEntidadBLL
-    {
-        public const string PedidoNombre = DAL.TipoEntidadDAL.PedidoNombre;
-        public const string DetallePedidoNombre = DAL.TipoEntidadDAL.DetallePedidoNombre;
-        public const string ManualNombre = DAL.TipoEntidadDAL.ManualNombre;
-        public const string OrdenProduccionNombre = DAL.TipoEntidadDAL.OrdenProduccionNombre;
-        public const string OrdenTrabajoNombre = DAL.TipoEntidadDAL.OrdenTrabajoNombre;
-        public const string MantenimientoNombre = DAL.TipoEntidadDAL.MantenimientoNombre;
-        public const string UbicacionStockNombre = DAL.TipoEntidadDAL.UbicacionStockNombre;
-        
+    {        
         public static void ObtenerTodos(Data.dsStock.TIPOS_ENTIDADDataTable table)
         {
             DAL.TipoEntidadDAL.ObtenerTodos(table);
@@ -37,7 +30,7 @@ namespace GyCAP.BLL
             return lista;
         }
 
-        public static TipoEntidad AsTipoEntidad(Data.dsStock.TIPOS_ENTIDADRow row)
+        private static TipoEntidad AsTipoEntidad(Data.dsStock.TIPOS_ENTIDADRow row)
         {
             return new TipoEntidad()
             {
@@ -47,29 +40,14 @@ namespace GyCAP.BLL
             };
         }
 
-        public static DAL.TipoEntidadDAL.TipoEntidadEnum GetTipoEntidad(int codigoTipo)
+        public static TipoEntidad GetTipoEntidadEntity(EntidadEnum.TipoEntidadEnum tipo)
         {
-            return DAL.TipoEntidadDAL.GetTipoEntidad(codigoTipo);            
+            return GetTipoEntidadEntity((int)tipo);
         }
 
-        public static string GetNombreTipoEntidad(int codigoTipo)
+        public static TipoEntidad GetTipoEntidadEntity(int codigo)
         {
-            return DAL.TipoEntidadDAL.GetNombreTipoEntidad(codigoTipo);
-        }
-
-        public static DAL.TipoEntidadDAL.TipoEntidadEnum GetTipoEntidad(string nombreTipoEntidad)
-        {
-            return DAL.TipoEntidadDAL.GetTipoEntidad(nombreTipoEntidad);
-        }
-
-        public static TipoEntidad GetTipoEntidadEntity(string nombreTipo)
-        {
-            return DAL.TipoEntidadDAL.GetTipoEntidadEntity(nombreTipo);
-        }
-
-        public static TipoEntidad GetTipoEntidadEntity(int codigoTipoEntidad)
-        {
-            return DAL.TipoEntidadDAL.GetTipoEntidadEntity(codigoTipoEntidad);
+            return ObtenerTodos().Where(p => p.Codigo == codigo).Single();
         }
     }
 }

@@ -81,6 +81,7 @@
     <Compile Include="Entidad.cs" />
     <Compile Include="EntregaProducto.cs" />
     <Compile Include="Enumeraciones\CocinaEnum.cs" />
+    <Compile Include="Enumeraciones\EntidadEnum.cs" />
     <Compile Include="Enumeraciones\OrdenesTrabajoEnum.cs" />
     <Compile Include="Enumeraciones\PedidoEnum.cs" />
     <Compile Include="Enumeraciones\PlanificacionEnum.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="OperacionFabricacion.cs" />
     <Compile Include="OrdenProduccion.cs" />
     <Compile Include="OrdenTrabajo.cs" />
+    <Compile Include="OrigenMovimiento.cs" />
     <Compile Include="Parte.cs" />
     <Compile Include="ParteNecesidadCombinada.cs" />
     <Compile Include="Pedido.cs" />

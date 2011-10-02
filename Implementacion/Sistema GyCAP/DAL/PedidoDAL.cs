@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using GyCAP.Entidades;
+using GyCAP.Entidades.Enumeraciones;
+using GyCAP.Entidades.Excepciones;
 
 namespace GyCAP.DAL
 {
@@ -263,16 +266,19 @@ namespace GyCAP.DAL
         {
             //Ejecutamos el movimiento de stock planificado
             //Generamos el objeto movimiento de stock
-            Entidades.MovimientoStock movStock = new GyCAP.Entidades.MovimientoStock();
+            /*MovimientoStock movStock = new MovimientoStock();
 
             //Cargamos el estado del movimiento de stock
-            movStock.Estado = new GyCAP.Entidades.EstadoMovimientoStock(DAL.MovimientoStockDAL.EstadoPlanificado);
+            movStock.Estado = EstadoMovimientoStockDAL.GetEstadoEntity((int)StockEnum.EstadoMovimientoStock.Planificado);
             
             //Creamos las entidades de Origen, Destino y Dueño del movimiento
-            Entidades.Entidad origen = new GyCAP.Entidades.Entidad();
-            Entidades.TipoEntidad tipoEntidadOrigen = new GyCAP.Entidades.TipoEntidad();
-            origen.Nombre = DAL.TipoEntidadDAL.UbicacionStockNombre;
-            tipoEntidadOrigen.Codigo = DAL.TipoEntidadDAL.GetCodigoTipoEntidad(DAL.TipoEntidadDAL.TipoEntidadEnum.UbicacionStock);
+            OrigenMovimiento origen = new OrigenMovimiento();
+            origen.Entidad = EntidadDAL.GetEntidad
+            
+            Entidad origen = new Entidad();
+            TipoEntidad tipoEntidadOrigen = new TipoEntidad();
+            origen.Nombre = TipoEntidadDAL.UbicacionStockNombre;
+            tipoEntidadOrigen.Codigo = TipoEntidadDAL.GetCodigoTipoEntidad(TipoEntidadDAL.TipoEntidadEnum.UbicacionStock);
             origen.TipoEntidad = tipoEntidadOrigen;
             Entidades.UbicacionStock ubstck = new GyCAP.Entidades.UbicacionStock();
             ubstck.Numero = Convert.ToInt32(row.UBICACION_STOCK);
@@ -318,7 +324,7 @@ namespace GyCAP.DAL
             catch (SqlException ex)
             {
                 throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
-            }
+            }*/
         }
         
         //Metodo que actualiza el numero

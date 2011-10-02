@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GyCAP.Entidades.Mensajes;
+using GyCAP.Entidades;
+using GyCAP.Entidades.Enumeraciones;
 
 
 namespace GyCAP.UI.GestionStock
@@ -136,53 +138,56 @@ namespace GyCAP.UI.GestionStock
                 {
                     int numero = Convert.ToInt32(dvUbicaciones[dgvLista.SelectedRows[0].Index]["ustck_numero"]);
 
-                    Entidades.MovimientoStock movimiento = new Entidades.MovimientoStock();
+                    MovimientoStock movimiento = new MovimientoStock();
                     movimiento.Numero = 0;
                     movimiento.Codigo = BLL.MovimientoStockBLL.CodigoManual;
                     movimiento.Descripcion = txtDescripcion.Text;
                     movimiento.FechaAlta = BLL.DBBLL.GetFechaServidor();
                     movimiento.FechaPrevista = null;
                     movimiento.FechaReal = DateTime.Parse(dtpFecha.GetFecha().ToString());
-                    movimiento.Estado = BLL.EstadoMovimientoStockBLL.GetEstadoEntity(BLL.EstadoMovimientoStockBLL.Finalizado);
+                    movimiento.Estado = BLL.EstadoMovimientoStockBLL.GetEstadoEntity(StockEnum.EstadoMovimientoStock.Finalizado);
 
                     decimal cantidadMovimiento = nudCantidadNueva.Value - dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_CANTIDADREAL;
+                    OrigenMovimiento origenMvto = new OrigenMovimiento();
 
                     if (cantidadMovimiento < 0)
                     {
-                        //origen es la ubicacion stock, se le está restando cantidad
-                        movimiento.Origen = BLL.EntidadBLL.GetEntidad(BLL.TipoEntidadBLL.UbicacionStockNombre, numero);
-                        movimiento.Origen.EntidadExterna = BLL.UbicacionStockBLL.GetUbicacionStock(numero);
+                        //origen es la ubicacion stock, se le está restando cantidad                        
+                        origenMvto.Entidad = BLL.EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, numero);
+                        origenMvto.Entidad.EntidadExterna = BLL.UbicacionStockBLL.GetUbicacionStock(numero);
                         //destino es la entidad manual
-                        movimiento.Destino = BLL.EntidadBLL.GetEntidad(BLL.TipoEntidadBLL.ManualNombre, -1);
+                        movimiento.Destino = BLL.EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.Manual, -1);
                         //el dueño es la entidad manual, es el evento que generó el movimiento
                         movimiento.Duenio = movimiento.Destino;
-                        movimiento.CantidadOrigenReal = cantidadMovimiento;
-                        movimiento.CantidadOrigenEstimada = cantidadMovimiento;
-                        movimiento.CantidadDestinoReal = cantidadMovimiento * -1;
-                        movimiento.CantidadDestinoEstimada = cantidadMovimiento * -1;
+                        origenMvto.CantidadReal = cantidadMovimiento;
+                        origenMvto.CantidadEstimada = cantidadMovimiento;
+                        movimiento.OrigenesMultiples.Add(origenMvto);
+                        movimiento.CantidadDestinoReal = cantidadMovimiento;
+                        movimiento.CantidadDestinoEstimada = cantidadMovimiento;
                     }
                     else
                     {
                         //es el caso contrario, se le está sumando cantidad a la ubicación de stock
-                        movimiento.Origen = BLL.EntidadBLL.GetEntidad(BLL.TipoEntidadBLL.ManualNombre, -1);
-                        movimiento.Destino = BLL.EntidadBLL.GetEntidad(BLL.TipoEntidadBLL.UbicacionStockNombre, numero);
-                        movimiento.Destino.EntidadExterna = BLL.UbicacionStockBLL.GetUbicacionStock(numero);
-                        movimiento.Duenio = movimiento.Origen;
-                        movimiento.CantidadOrigenReal = cantidadMovimiento * -1;
-                        movimiento.CantidadOrigenEstimada = cantidadMovimiento * -1;
+                        origenMvto.Entidad = BLL.EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.Manual, -1);
+                        movimiento.Destino = BLL.EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, numero);
+                        movimiento.Destino.EntidadExterna = BLL.UbicacionStockBLL.GetUbicacionStock(numero);                        
+                        origenMvto.CantidadEstimada = cantidadMovimiento;
+                        origenMvto.CantidadReal = cantidadMovimiento;
+                        movimiento.OrigenesMultiples.Add(origenMvto);
                         movimiento.CantidadDestinoReal = cantidadMovimiento;
                         movimiento.CantidadDestinoEstimada = cantidadMovimiento;
+                        movimiento.Duenio = movimiento.OrigenesMultiples[0].Entidad;
                     }
 
                     BLL.MovimientoStockBLL.InsertarFinalizado(movimiento);                    
 
                     MensajesABM.MsjConfirmaGuardar("Stock", this.Text, MensajesABM.Operaciones.Guardado);
 
-                    if (movimiento.Origen.TipoEntidad.Nombre == BLL.TipoEntidadBLL.UbicacionStockNombre)
+                    if (movimiento.OrigenesMultiples[0].Entidad.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
                     {
-                        ActualizarDataset((movimiento.Origen.EntidadExterna as Entidades.UbicacionStock).Numero, movimiento.CantidadOrigenReal);
+                        ActualizarDataset((movimiento.OrigenesMultiples[0].Entidad.EntidadExterna as Entidades.UbicacionStock).Numero, movimiento.OrigenesMultiples[0].CantidadReal);
                     }
-                    if (movimiento.Destino.TipoEntidad.Nombre == BLL.TipoEntidadBLL.UbicacionStockNombre)
+                    if (movimiento.Destino.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
                     {
                         ActualizarDataset((movimiento.Destino.EntidadExterna as Entidades.UbicacionStock).Numero, movimiento.CantidadDestinoReal);
                     }

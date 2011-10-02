@@ -16,5 +16,7 @@ namespace GyCAP.Entidades.Enumeraciones
 
         public enum TipoUbicacion { Vista = 1, Proveedor = 2, Interna = 3, Logística = 4 };
 
+        public enum EstadoMovimientoStock { Planificado = 1, Finalizado = 2, Cancelado = 3 };
+
     }
 }

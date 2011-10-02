@@ -217,6 +217,8 @@ namespace GyCAP.Entidades.ArbolEstructura
                 }
             }
         }
+        
+
 
         private IList<string> ValidateAddChild(NodoEstructura nodo)
         {
