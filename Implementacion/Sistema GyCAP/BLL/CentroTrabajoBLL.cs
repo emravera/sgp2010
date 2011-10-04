@@ -13,6 +13,7 @@ namespace GyCAP.BLL
     {
         public static readonly int TipoHombre = 1;
         public static readonly int TipoMaquina = 2;
+        public static readonly int TipoProveedor = 3;
         public static readonly int CentroInactivo = 0;
         public static readonly int CentroActivo = 1;
         

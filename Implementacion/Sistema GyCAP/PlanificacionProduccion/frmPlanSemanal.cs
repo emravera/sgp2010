@@ -1468,6 +1468,5 @@ namespace GyCAP.UI.PlanificacionProduccion
         }       
 
         #endregion
-
     }
 }

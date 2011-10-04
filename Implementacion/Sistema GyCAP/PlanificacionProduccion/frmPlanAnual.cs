@@ -144,16 +144,17 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnEliminar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnPlanificar.Enabled = false;
-
-                    //Ponemos las columnas en visible false
-                    dgvLista.Columns["PAN_CODIGO"].Visible = false;
-                    dgvDetalle.Columns["DPAN_CODIGO"].Visible = false;
-
+                    
                     //Limpiamos los datatables de la busqueda
                     dsPlanAnual.PLANES_ANUALES.Clear();
                     dsPlanAnual.DETALLE_PLAN_ANUAL.Clear();
 
                     tcPlanAnual.SelectedTab = tpBuscar;
+                    
+                    //Ponemos las columnas en visible false
+                    dgvLista.Columns["PAN_CODIGO"].Visible = false;
+                    dgvDetalle.Columns["DPAN_CODIGO"].Visible = false;
+
                     estadoActual = estadoUI.inicio;
                     break;
 
