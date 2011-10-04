@@ -56,7 +56,7 @@ namespace GyCAP.BLL
                     
                     horasTrabajo -= (tiempoAntes + tiempoDespues) * BLL.ConfiguracionSistemaBLL.GetConfiguracion<int>("DiasLaborales");
 
-                    if (row.Field<decimal>("cto_tipo") == BLL.CentroTrabajoBLL.TipoHombre)
+                    if (row.Field<decimal>("ct_tipo") == BLL.CentroTrabajoBLL.TipoHombre)
                     {
                         capacidadUnidadHora = row.Field<decimal>("cto_capacidadunidadhora");
                         capacidadCentro = horasTrabajo * capacidadUnidadHora;
