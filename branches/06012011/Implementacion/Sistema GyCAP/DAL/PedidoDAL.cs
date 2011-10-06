@@ -126,7 +126,6 @@ namespace GyCAP.DAL
         //Metodo que obtiene los pedidos de un cliente determinado en una fecha determinada
         public static void ObtenerPedidosCliente(int CodigoCliente, int estadoPedido, DataTable dtPedidos)
         {
-
             string sql = @"SELECT ped_codigo, cli_codigo, eped_codigo, ped_fecha_alta, ped_numero                       
                            FROM PEDIDOS WHERE cli_codigo=@p0";
 

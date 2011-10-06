@@ -24,6 +24,7 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+        
         //Metodo que trae las cantidades planificadas de una cocina
         public static int? obtenerCocinasPlanificadas(int codigoCocina, int codigoPA, int codigoPM)
         {
@@ -79,6 +80,7 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+
         //Metodo que valida que no ecista el dia que se quiere insertar en otro plan semanal
         public static bool ValidarDia(DateTime dia)
         {
@@ -96,10 +98,10 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+
         //METODO DE INSERCION
         public static int GuardarPlanSemanal(Entidades.PlanSemanal planSemanal, Entidades.DiasPlanSemanal diaPlanSemanal, Data.dsPlanSemanal dsPlanSemanal, bool esPrimero)
         {
-
             SqlTransaction transaccion = null;
 
             try
@@ -123,13 +125,21 @@ namespace GyCAP.DAL
                     object[] valorPara = { diaPlanSemanal.Dia, diaPlanSemanal.Fecha, diaPlanSemanal.PlanSemanal.Codigo };
                     diaPlanSemanal.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorPara, transaccion));
 
+
+                    int contador = 0; 
                     //Inserto el Detalle                    
                     foreach (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow row in (Data.dsPlanSemanal.DETALLE_PLANES_SEMANALESRow[])dsPlanSemanal.DETALLE_PLANES_SEMANALES.Select(null, null, System.Data.DataViewRowState.Added))
                     {
+                        //Generamos el codigo nemonico del detalle
+                        contador += 1;
+                        string codigoNemonico = "D" + contador.ToString() + "-" + diaPlanSemanal.Fecha.ToShortDateString(); 
+
                         if (row.DPED_CODIGO != 0)
                         {
-                            sql = "INSERT INTO [DETALLE_PLANES_SEMANALES] ([diapsem_codigo], [coc_codigo], [dpsem_cantidadestimada],[dpsem_cantidadreal], [dpsem_estado], [dped_codigo]) VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
-                            object[] valorParam = { diaPlanSemanal.Codigo, row.COC_CODIGO, row.DPSEM_CANTIDADESTIMADA, row.DPSEM_ESTADO,0, row.DPED_CODIGO };
+                            sql = @"INSERT INTO [DETALLE_PLANES_SEMANALES] ([diapsem_codigo], [coc_codigo], [dpsem_cantidadestimada],
+                                    [dpsem_cantidadreal], [dpsem_estado], [dped_codigo], [dpsem_cod_nemonico]) 
+                                    VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6) SELECT @@Identity";
+                            object[] valorParam = { diaPlanSemanal.Codigo, row.COC_CODIGO, row.DPSEM_CANTIDADESTIMADA, row.DPSEM_ESTADO,0, row.DPED_CODIGO, codigoNemonico };
                             row.BeginEdit();
                             row.DPSEM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
                             row.DIAPSEM_CODIGO = diaPlanSemanal.Codigo;
@@ -137,30 +147,30 @@ namespace GyCAP.DAL
                         }
                         else
                         {
-                            sql = "INSERT INTO [DETALLE_PLANES_SEMANALES] ([diapsem_codigo], [coc_codigo], [dpsem_cantidadestimada],[dpsem_cantidadreal],[dpsem_estado]) VALUES (@p0, @p1, @p2, @p3 ,@p4) SELECT @@Identity";
-                            object[] valorParam = { diaPlanSemanal.Codigo, row.COC_CODIGO, row.DPSEM_CANTIDADESTIMADA,0, row.DPSEM_ESTADO };
+                            sql = @"INSERT INTO [DETALLE_PLANES_SEMANALES] ([diapsem_codigo], [coc_codigo], [dpsem_cantidadestimada],
+                                    [dpsem_cantidadreal],[dpsem_estado], [dpsem_cod_nemonico])
+                                    VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
+                            object[] valorParam = { diaPlanSemanal.Codigo, row.COC_CODIGO, row.DPSEM_CANTIDADESTIMADA,0, row.DPSEM_ESTADO, codigoNemonico };
                             row.BeginEdit();
                             row.DPSEM_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
                             row.DIAPSEM_CODIGO = diaPlanSemanal.Codigo;
                             row.EndEdit();
-
                         }
                     }
 
                     transaccion.Commit();
                     DB.FinalizarTransaccion();
-
                  
                 return codigo;
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
                 transaccion.Rollback();
-                throw new Entidades.Excepciones.BaseDeDatosException();
-
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
             }
 
         }
+
         //METODO DE MODIFICACION
         //METODO QUE GUARDA LOS DATOS DEL PLAN MODIFICADOS   
         public static void GuardarPlanModificado(Entidades.PlanSemanal planSemanal, Entidades.DiasPlanSemanal diaPlanSemanal, Data.dsPlanSemanal dsPlanSemanal)
@@ -214,10 +224,10 @@ namespace GyCAP.DAL
             {
                 transaccion.Rollback();
                 throw new Entidades.Excepciones.BaseDeDatosException();
-
             }
 
         }
+
         //METODO DE ELIMINACION DE LA BASE DE DATOS
         public static void EliminarPlan(int codigoPlan, Data.dsPlanSemanal dsPlanSemanal)
         {
@@ -244,7 +254,6 @@ namespace GyCAP.DAL
                     {
                         throw new Entidades.Excepciones.ElementoEnTransaccionException();
                     }
-
                 }
 
                 foreach (Data.dsPlanSemanal.DIAS_PLAN_SEMANALRow row in dsPlanSemanal.DIAS_PLAN_SEMANAL.Rows)
@@ -266,10 +275,10 @@ namespace GyCAP.DAL
                 transaccion.Commit();
                 DB.FinalizarTransaccion();
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
                 transaccion.Rollback();
-                throw new Entidades.Excepciones.BaseDeDatosException();
+                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
             }
             catch (Entidades.Excepciones.ElementoEnTransaccionException)
             {
@@ -297,6 +306,7 @@ namespace GyCAP.DAL
 
             return estado;
         }
+        
         //METODO QUE VERIFICA SI EXISTE UNA ORDEN DE PRODUCCIÓN PARA ESE DETALLE
         public static int VerificarOrdenProduccion(int codigoDetallePS)
         {
@@ -315,6 +325,7 @@ namespace GyCAP.DAL
 
             return cantidad;
         }
+        
         //Metodo que obtiene los planes Mesnuales creados para un plan anual
         public static void obtenerPlanesMensuales(int codigoPlanAnual, Data.dsPlanSemanal dsPlanSemanal)
         {

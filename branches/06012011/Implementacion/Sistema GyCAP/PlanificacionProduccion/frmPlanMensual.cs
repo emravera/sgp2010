@@ -89,6 +89,11 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetalle.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
+            //Seteamos las alineaciones de las columnas
+            dgvDetalle.Columns["DPMES_CANTIDADESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetalle.Columns["DPMES_CANTIDADREAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetalle.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            
             //Ocultamos las columnas de Detalle de Pedido
             dgvDetalle.Columns["DPMES_CODIGO"].Visible = false;
             dgvDetalle.Columns["PMES_CODIGO"].Visible = false;
@@ -99,7 +104,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.DataSource = dvListaDetalle;
 
             //******************************************************************************************
-            //Lista de Datos
+            //                                      Lista de Datos
+            //******************************************************************************************
+
             //Agregamos la columnas
             dgvDatos.Columns.Add("DPMES_CODIGO", "Código");
             dgvDatos.Columns.Add("PMES_CODIGO", "Mes");
@@ -124,6 +131,11 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDatos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDatos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
+            //Seteamos la alineacion de las columnas numericas
+            dgvDatos.Columns["DPMES_CANTIDADESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns["DPMES_CANTIDADREAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDatos = new DataView(dsPlanMensual.DETALLE_PLANES_MENSUALES);
             dgvDatos.DataSource = dvListaDatos;
@@ -153,6 +165,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvPedidos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvPedidos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
 
+            //Seteamos la alineacion de las columnas numericas
+            dgvPedidos.Columns["PED_NUMERO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
             //Creamos el dataview y lo asignamos a la grilla
             dvListaPedidos = new DataView(dsPlanMensual.PEDIDOS);
             dgvPedidos.DataSource = dvListaPedidos;
@@ -181,6 +196,10 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetallePedido.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetallePedido.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDetallePedido.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            
+            //Seteamos la alineación de las columnas numéricas
+            dgvDetallePedido.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetallePedido.Columns["DPED_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetallePedido = new DataView(dsPlanMensual.DETALLE_PEDIDOS);
@@ -390,7 +409,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     break;
             }
         }
-
         #endregion
 
         #region Controles

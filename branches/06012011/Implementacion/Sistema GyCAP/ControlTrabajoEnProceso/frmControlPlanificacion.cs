@@ -453,7 +453,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                         if (estado == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.EnProceso)
                         {
                             row.BeginEdit();
-                            row.DPSEM_CANTIDADENPROCESO = Convert.ToDecimal(row.DPSEM_CANTIDADESTIMADA);
+                            row.DPSEM_CANTIDADENPROCESO = row.DPSEM_CANTIDADESTIMADA;
                             row.EndEdit();
                         }
                         else
@@ -773,7 +773,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                         if (estado == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.EnProceso)
                         {
                             row.BeginEdit();
-                            row.DPSEM_CANTIDADENPROCESO = Convert.ToDecimal(row.DPSEM_CANTIDADESTIMADA);
+                            row.DPSEM_CANTIDADENPROCESO = row.DPSEM_CANTIDADESTIMADA;
                             row.EndEdit();
                         }
                         else

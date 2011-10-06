@@ -13,8 +13,10 @@ namespace GyCAP.DAL
         //Metodo de Busqueda
         public static void ObtenerDetalle(DataTable dtDetalle, int idCodigo)
         {
-            string sql = @"SELECT dpsem_codigo, coc_codigo, dpsem_cantidadestimada, dpsem_cantidadreal, diapsem_codigo, dpsem_estado, dped_codigo  
-                        FROM DETALLE_PLANES_SEMANALES WHERE diapsem_codigo=@p0";
+            string sql = @"SELECT dpsem_codigo, coc_codigo, dpsem_cantidadestimada, 
+                                  dpsem_cantidadreal, diapsem_codigo, dpsem_estado, 
+                                  dped_codigo, dpsem_cod_nemonico 
+                           FROM DETALLE_PLANES_SEMANALES WHERE diapsem_codigo=@p0";
 
             object[] parametros = { idCodigo };
 
@@ -71,6 +73,5 @@ namespace GyCAP.DAL
 
             DiasPlanSemanalDAL.SumarCantidadFinalizada(Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion)), codigoCocina, cantidad, transaccion);
         }
-
     }
 }
