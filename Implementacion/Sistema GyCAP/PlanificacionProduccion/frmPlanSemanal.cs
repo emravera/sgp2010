@@ -68,6 +68,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Lista de Detalles de Planes Semanales
             //Agregamos la columnas
             dgvDetalle.Columns.Add("DPSEM_CODIGO", "Código");
+            dgvDetalle.Columns.Add("DPSEM_COD_NEMONICO", "Cod. Detalle");
             dgvDetalle.Columns.Add("COC_CODIGO", "Cocina");
             dgvDetalle.Columns.Add("DIAPSEM_CODIGO", "Código Día");
             dgvDetalle.Columns.Add("DPSEM_CANTIDADESTIMADA", "C.Estimada");
@@ -76,6 +77,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvDetalle.Columns["DPSEM_CODIGO"].DataPropertyName = "DPSEM_CODIGO";
             dgvDetalle.Columns["DIAPSEM_CODIGO"].DataPropertyName = "DIAPSEM_CODIGO";
+            dgvDetalle.Columns["DPSEM_COD_NEMONICO"].DataPropertyName = "DPSEM_COD_NEMONICO";
             dgvDetalle.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
             dgvDetalle.Columns["DPSEM_CANTIDADESTIMADA"].DataPropertyName = "DPSEM_CANTIDADESTIMADA";
             dgvDetalle.Columns["DPSEM_CANTIDADREAL"].DataPropertyName = "DPSEM_CANTIDADREAL";
@@ -90,7 +92,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns["DIAPSEM_CODIGO"].Visible = false;
             dgvDetalle.Columns["DPSEM_CODIGO"].Visible = false;
             dgvDetalle.Columns["DPSEM_CANTIDADREAL"].Visible = false;
-
+            
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetalle = new DataView(dsPlanSemanal.DETALLE_PLANES_SEMANALES);
             dgvDetalle.DataSource = dvListaDetalle;
@@ -117,6 +119,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvPlanMensual.Columns["DPMES_CANTIDADESTIMADA"].DataPropertyName = "DPMES_CANTIDADESTIMADA";
             dgvPlanMensual.Columns["DPMES_CANTIDADREAL"].DataPropertyName = "DPMES_CANTIDADREAL";
             dgvPlanMensual.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
+            
 
             //Seteamos el modo de tamaño de las columnas
             dgvPlanMensual.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -127,6 +130,12 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvPlanMensual.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvPlanMensual.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
+            //Alineamos las columnas que hacen falta
+            dgvPlanMensual.Columns["DPMES_CANTPLANIFICADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvPlanMensual.Columns["DPMES_CANTIDADESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvPlanMensual.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvPlanMensual.Columns["DPMES_CANTIDADREAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
             //Creamos el dataview y lo asignamos a la grilla
             dvListaPlanesMensuales = new DataView(dsPlanSemanal.DETALLE_PLANES_MENSUALES);
             dgvPlanMensual.DataSource = dvListaPlanesMensuales;
@@ -134,6 +143,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Lista de Detalle del Plan Semanal
             //Agregamos la columnas
             dgvDatos.Columns.Add("DPSEM_CODIGO", "Código");
+            dgvDatos.Columns.Add("DPSEM_COD_NEMONICO", "Cod. Detalle");
             dgvDatos.Columns.Add("COC_CODIGO", "Cocina");
             dgvDatos.Columns.Add("DIAPSEM_CODIGO", "Día Semana");
             dgvDatos.Columns.Add("DPSEM_CANTIDADESTIMADA", "C.Estimada");
@@ -143,6 +153,8 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvDatos.Columns["DPSEM_CODIGO"].DataPropertyName = "DPSEM_CODIGO";
+            dgvDatos.Columns["DPSEM_COD_NEMONICO"].DataPropertyName = "DPSEM_COD_NEMONICO";
+            dgvDatos.Columns["DIAPSEM_CODIGO"].DataPropertyName = "DIAPSEM_CODIGO";
             dgvDatos.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
             dgvDatos.Columns["DIAPSEM_CODIGO"].DataPropertyName = "DIAPSEM_CODIGO";
             dgvDatos.Columns["DPSEM_CANTIDADESTIMADA"].DataPropertyName = "DPSEM_CANTIDADESTIMADA";
@@ -154,12 +166,12 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDatos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDatos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDatos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDatos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvDatos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvDatos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDatos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             dgvDatos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDatos.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvDatos.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            dgvDatos.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             
-
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDatos = new DataView(dsPlanSemanal.DETALLE_PLANES_SEMANALES);
             dgvDatos.DataSource = dvListaDatos;
@@ -244,6 +256,9 @@ namespace GyCAP.UI.PlanificacionProduccion
                     //Limpiamos los valores ya buscados
                     dsPlanSemanal.DIAS_PLAN_SEMANAL.Clear();
                     dsPlanSemanal.DETALLE_PLANES_SEMANALES.Clear();
+
+                    //Escondemos las columnas que no queremos que se vea
+                    dgvDetalle.Columns["DPSEM_CODIGO"].Visible = false;
 
                     tcPlanAnual.SelectedTab = tpBuscar;
                     estadoActual = estadoUI.inicio;
@@ -330,6 +345,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     dgvDatos.Columns["DIAPSEM_CODIGO"].Visible = false;
                     dgvDatos.Columns["DPSEM_ESTADO"].Visible = false;
                     dgvDatos.Columns["DPSEM_CANTIDADREAL"].Visible = false;
+                    dgvDatos.Columns["DPSEM_COD_NEMONICO"].Visible = false;
 
                     //Limpiamos el dataset
                     dsPlanSemanal.DETALLE_PLANES_SEMANALES.Clear();
@@ -435,6 +451,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             int anio =Convert.ToInt32(cbPlanAnual.GetSelectedText());
             DateTime fechaDia= dtpFechaDia.Value;
+            
             //Verifico que numero de mes es            
             string[] Meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
             int cont = 0;
@@ -449,26 +466,29 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
                 cont++;
             }
+            
             //Valido la fecha
             if (fechaDia.Year != anio) msjerror = msjerror + "-El año debe coincidir con el plan anual a producir\n";
             if (fechaDia.Month != numeroMes) msjerror = msjerror + "-El mes debe coincidir con el plan mensual a producir\n";
 
             //Valido que se este seleccionando algo
-            if (dgvPlanMensual.Rows.GetRowCount(DataGridViewElementStates.Selected) == 0) msjerror = msjerror + "-Debe Seleccionar un detalle del plan mensual a producir\n";
+            if (dgvPlanMensual.Rows.GetRowCount(DataGridViewElementStates.Selected) == 0) msjerror = msjerror + "-Debe seleccionar un detalle del plan mensual a producir\n";
 
-            //Validamos las cantidades ingresadas
-            
+            //Validamos las cantidades ingresadas            
             if (rbUnidades.Checked == true)
             {
                 if (numUnidades.Value == 0) msjerror = msjerror + "-La cantidad en unidades debe ser mayor a cero\n";
+
+                //Validamos que las unidades ingresadas no sean mayores que las del detalle
+                int cantidad = Convert.ToInt32(dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["dpmes_cantidadestimada"]);
+                if (numUnidades.Value > cantidad) msjerror = msjerror + "-La cantidad ingresada es mayor a la planificada en el detalle de Plan Mensual";
             }
             if (rbPorcentaje.Checked == true)
             {
                 if (numPorcentaje.Value == 0) msjerror = msjerror + "-El porcentaje debe ser mayor a cero\n";
             }
             
-            //Se valida que no se quiera agregar un modelo que ya este en el detalle
-            
+            //Se valida que no se quiera agregar un modelo de cocina que ya este en el detalle            
             int codigo = Convert.ToInt32(dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["coc_codigo"]);
             int codigoPedido=0;
 
@@ -483,11 +503,11 @@ namespace GyCAP.UI.PlanificacionProduccion
                 {
                     if (row["DPED_CODIGO"].ToString() == codigoPedido.ToString())
                     {
-                        msjerror = msjerror + "-El modelo de cocina que intenta agregar ya se encuentra en la planificación\n";
+                        msjerror = msjerror + "-El modelo de cocina para ese detalle de pedido ya se encuentra en la planificación\n";
                     }
                 }
             }
-            //Valido que no exista un plan para el dia que selecciono}
+            //Valido que no exista un plan para el dia que selecciono
             if (BLL.PlanSemanalBLL.validarDia(Convert.ToDateTime(dtpFechaDia.Value)) == false) msjerror = msjerror + "-El día que intenta agregar ya esta incluido en otro plan semanal\n"; ;
             
             //Verifico si hay errores y les agrego una cabecera
@@ -552,6 +572,10 @@ namespace GyCAP.UI.PlanificacionProduccion
             Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
         }
 
+        private void dgvDatos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
         #endregion
 
         #region Pestaña Buscar
@@ -682,7 +706,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     SetInterface(estadoUI.buscar);
                     gbGrillaDetalle.Visible = true;
                 }
-
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -979,7 +1002,8 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             try
             {
-                string validacion =ValidarDetalle();
+                string validacion = ValidarDetalle();
+                
                 int cantidad = 0;
 
                 if (validacion == string.Empty)
@@ -1036,22 +1060,23 @@ namespace GyCAP.UI.PlanificacionProduccion
                         pedido = Convert.ToString(dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["dped_codigo"]);
 
                     }
-                        //Se calcula la cantidad ya planificada para cada cocina
-                        foreach (Data.dsPlanSemanal.DETALLE_PLANES_MENSUALESRow rows in dsPlanSemanal.DETALLE_PLANES_MENSUALES.Rows)
-                        {
-                            //busco el codigo del modelo de cocina
-                            int codigoCocina = Convert.ToInt32(rows.COC_CODIGO);
 
-                            if (codigoCocina == codigoCocinaAgregada)
+                    //Se calcula la cantidad ya planificada para cada cocina
+                    foreach (Data.dsPlanSemanal.DETALLE_PLANES_MENSUALESRow rows in dsPlanSemanal.DETALLE_PLANES_MENSUALES.Rows)
+                    {
+                        //busco el codigo del modelo de cocina
+                        int codigoCocina = Convert.ToInt32(rows.COC_CODIGO);
+
+                        if (codigoCocina == codigoCocinaAgregada)
+                        {
+                            if (pedido == rows["DPED_CODIGO"].ToString())
                             {
-                                if (pedido == rows["DPED_CODIGO"].ToString())
-                                {
-                                    rows.BeginEdit();
-                                    rows.DPMES_CANTPLANIFICADA += cantidad;
-                                    rows.EndEdit();
-                                }
+                                rows.BeginEdit();
+                                rows.DPMES_CANTPLANIFICADA += cantidad;
+                                rows.EndEdit();
                             }
-                        }                   
+                        }
+                    }                   
 
                     //Seteo los valores de los controles en cero
                     rbUnidades.Checked = true;
@@ -1237,7 +1262,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                 //Valido que el detalle del plan no sea nulo
                 if (dsPlanSemanal.DETALLE_PLANES_SEMANALES.Count > 0)
                 {
-
                     //Checkeo las excepciones relacionadas con el Plan Semanal
                     List<Entidades.ExcepcionesPlan> excepciones = new List<GyCAP.Entidades.ExcepcionesPlan>();
                     excepciones = BLL.PlanSemanalBLL.CheckeoExcepciones(dsPlanSemanal.DETALLE_PLANES_SEMANALES);
@@ -1468,5 +1492,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         }       
 
         #endregion
+
+       
     }
 }

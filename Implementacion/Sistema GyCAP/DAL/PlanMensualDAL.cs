@@ -68,6 +68,7 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+
         //Metodo que obtiene todos los planes mensuales
         public static void ObtenerTodos(DataTable dtPlanesMensuales)
         {
@@ -79,6 +80,7 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+
         //Metodo que obtiene los planes mensuales de un plan anual determinado
         public static void ObtenerPMAnio(DataTable dtPlanesMensuales, int codigoPlanAnual)
         {
@@ -283,8 +285,8 @@ namespace GyCAP.DAL
             }
             
         }
+        
         //METODO PARA ELIMINAR DATOS DE LA BASE DE DATOS
-        //Metodo que elimina de la base de datos
         public static void EliminarPlan(int codigoPlan)
         {
             SqlTransaction transaccion = null;
@@ -302,8 +304,7 @@ namespace GyCAP.DAL
                 //Elimino la demanda
                 sql = "DELETE FROM PLANES_MENSUALES WHERE pmes_codigo = @p0";
                 DB.executeNonQuery(sql, valorParametros, transaccion);
-
-
+                
                 transaccion.Commit();
                 DB.FinalizarTransaccion();
             }
@@ -322,8 +323,7 @@ namespace GyCAP.DAL
             string sql = @"SELECT sum(det.dpmes_cantidadestimada)
                         FROM PLANES_MENSUALES as pm, PLANES_ANUALES as pa, DETALLE_PLANES_MENSUALES as det
                         WHERE pa.pan_codigo=pm.pan_codigo and pm.pmes_codigo=det.pmes_codigo and
-                              pa.pan_anio=@p0 and pm.pmes_mes LIKE @p1";
-            
+                              pa.pan_anio=@p0 and pm.pmes_mes LIKE @p1";            
             
             mes = "%" + mes + "%";
             object[] parametros = { anio, mes };
