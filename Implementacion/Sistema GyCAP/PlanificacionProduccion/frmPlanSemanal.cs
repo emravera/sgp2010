@@ -308,6 +308,12 @@ namespace GyCAP.UI.PlanificacionProduccion
                     dsPlanSemanal.PLANES_SEMANALES.Clear();
                     cbSemanaDatos.Items.Clear();
 
+                    //Cargamos la capacidad Diaria de la Fabrica
+                    decimal capacidadFabrica = Convert.ToDecimal(BLL.FabricaBLL.GetCapacidadSemanalBruta(null, GyCAP.Entidades.Enumeraciones.RecursosFabricacionEnum.TipoHorario.Normal));
+                    decimal diasLaborales = Convert.ToDecimal(BLL.ConfiguracionSistemaBLL.GetConfiguracion<int>("DiasLaborales"));
+                    decimal capacidadDiaria = Math.Round(capacidadFabrica / diasLaborales, 0);
+                    txtCapDiaria.Text = capacidadDiaria.ToString();
+
                     //Seteamos los estados de los groupbox
                     gbDatosPrincipales.Visible = true;
                     gbDatosPrincipales.Enabled = true;
@@ -449,7 +455,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             string msjerror = string.Empty;
 
-            int anio =Convert.ToInt32(cbPlanAnual.GetSelectedText());
+            int anio = Convert.ToInt32(cbPlanAnual.GetSelectedText());
             DateTime fechaDia= dtpFechaDia.Value;
             
             //Verifico que numero de mes es            
@@ -474,7 +480,11 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Valido que se este seleccionando algo
             if (dgvPlanMensual.Rows.GetRowCount(DataGridViewElementStates.Selected) == 0) msjerror = msjerror + "-Debe seleccionar un detalle del plan mensual a producir\n";
 
-            //Validamos las cantidades ingresadas            
+            //Validamos las cantidades ingresadas con respecto a la capacidad de nuestra fabrica
+            decimal capacidadFabrica = Convert.ToDecimal(BLL.FabricaBLL.GetCapacidadSemanalBruta(null, GyCAP.Entidades.Enumeraciones.RecursosFabricacionEnum.TipoHorario.Normal));
+            decimal diasLaborales = Convert.ToDecimal(BLL.ConfiguracionSistemaBLL.GetConfiguracion<int>("DiasLaborales"));
+            decimal capacidadDiaria = Math.Round(capacidadFabrica / diasLaborales, 0);                
+
             if (rbUnidades.Checked == true)
             {
                 if (numUnidades.Value == 0) msjerror = msjerror + "-La cantidad en unidades debe ser mayor a cero\n";
@@ -482,10 +492,18 @@ namespace GyCAP.UI.PlanificacionProduccion
                 //Validamos que las unidades ingresadas no sean mayores que las del detalle
                 int cantidad = Convert.ToInt32(dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["dpmes_cantidadestimada"]);
                 if (numUnidades.Value > cantidad) msjerror = msjerror + "-La cantidad ingresada es mayor a la planificada en el detalle de Plan Mensual";
+
+                //Validamos que las unidades ingresadas no sean mayores a la capacidad de la fabrica    
+                if(numUnidades.Value > capacidadDiaria) msjerror = msjerror + "-La cantidad ingresada es mayor a la capadidad de la fábrica.\n-CAPACIDAD DIARIA DE PRODUCCION = " + capacidadDiaria.ToString() + " Unidades\n";
             }
+            
             if (rbPorcentaje.Checked == true)
             {
                 if (numPorcentaje.Value == 0) msjerror = msjerror + "-El porcentaje debe ser mayor a cero\n";
+
+                //Validamos que las unidades ingresadas no sean mayores a la capacidad de la fabrica    
+                decimal cantidadPorcentaje = Convert.ToDecimal(Convert.ToDecimal(dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["dpmes_cantidadestimada"]) * (numPorcentaje.Value / 100));
+                if (cantidadPorcentaje > capacidadDiaria) msjerror = msjerror + "-La cantidad ingresada es mayor a la capadidad de la fábrica.\n-CAPACIDAD DIARIA DE PRODUCCION = " + capacidadDiaria.ToString() + " Unidades \n" + "-CANTIDAD INGRESADA=" + cantidadPorcentaje.ToString();
             }
             
             //Se valida que no se quiera agregar un modelo de cocina que ya este en el detalle            
