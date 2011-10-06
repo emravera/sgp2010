@@ -194,6 +194,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     tcPlanAnual.SelectedTab = tpDatos;
                     estadoActual = estadoUI.modificar;
                     DesactivaControles(false);
+
                     //Escondo los controles que no se tienen que ver
                     numAdelantamiento.Visible = false;
                     numCapacidadProducción.Visible = false;
