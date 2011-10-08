@@ -140,7 +140,7 @@ namespace GyCAP.UI.GestionStock
 
                     MovimientoStock movimiento = new MovimientoStock();
                     movimiento.Numero = 0;
-                    movimiento.Codigo = BLL.MovimientoStockBLL.CodigoManual;
+                    movimiento.Codigo = StockEnum.CodigoMovimiento.Manual.ToString();
                     movimiento.Descripcion = txtDescripcion.Text;
                     movimiento.FechaAlta = BLL.DBBLL.GetFechaServidor();
                     movimiento.FechaPrevista = null;
@@ -153,10 +153,10 @@ namespace GyCAP.UI.GestionStock
                     if (cantidadMovimiento < 0)
                     {
                         //origen es la ubicacion stock, se le está restando cantidad                        
-                        origenMvto.Entidad = BLL.EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, numero);
+                        origenMvto.Entidad = BLL.EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, numero, null);
                         origenMvto.Entidad.EntidadExterna = BLL.UbicacionStockBLL.GetUbicacionStock(numero);
                         //destino es la entidad manual
-                        movimiento.Destino = BLL.EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.Manual, -1);
+                        movimiento.Destino = BLL.EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.Manual, -1, null);
                         //el dueño es la entidad manual, es el evento que generó el movimiento
                         movimiento.Duenio = movimiento.Destino;
                         origenMvto.CantidadReal = cantidadMovimiento;
@@ -168,8 +168,8 @@ namespace GyCAP.UI.GestionStock
                     else
                     {
                         //es el caso contrario, se le está sumando cantidad a la ubicación de stock
-                        origenMvto.Entidad = BLL.EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.Manual, -1);
-                        movimiento.Destino = BLL.EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, numero);
+                        origenMvto.Entidad = BLL.EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.Manual, -1, null);
+                        movimiento.Destino = BLL.EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, numero, null);
                         movimiento.Destino.EntidadExterna = BLL.UbicacionStockBLL.GetUbicacionStock(numero);                        
                         origenMvto.CantidadEstimada = cantidadMovimiento;
                         origenMvto.CantidadReal = cantidadMovimiento;
@@ -179,7 +179,7 @@ namespace GyCAP.UI.GestionStock
                         movimiento.Duenio = movimiento.OrigenesMultiples[0].Entidad;
                     }
 
-                    BLL.MovimientoStockBLL.InsertarFinalizado(movimiento);                    
+                    BLL.MovimientoStockBLL.InsertarFinalizado(movimiento, null);                    
 
                     MensajesABM.MsjConfirmaGuardar("Stock", this.Text, MensajesABM.Operaciones.Guardado);
 

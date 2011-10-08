@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using GyCAP.Entidades;
 using GyCAP.Entidades.Enumeraciones;
+using System.Data.SqlClient;
 
 namespace GyCAP.BLL
 {
@@ -19,7 +20,7 @@ namespace GyCAP.BLL
             return DAL.EntidadDAL.ObtenerCodigoEntidad(codigoPedido);
         }     
 
-        public static Entidad GetEntidad(EntidadEnum.TipoEntidadEnum tipo, int idEntidadExterna)
+        public static Entidad GetEntidad(EntidadEnum.TipoEntidadEnum tipo, int idEntidadExterna, SqlTransaction transaccion)
         {
             Entidad entidad = new Entidad();
             entidad.TipoEntidad = TipoEntidadBLL.GetTipoEntidadEntity(tipo);
@@ -52,7 +53,7 @@ namespace GyCAP.BLL
                     break;
             }
 
-            DAL.EntidadDAL.GetEntidad(tipo, entidad);
+            DAL.EntidadDAL.GetEntidad(tipo, entidad, transaccion);
 
             return entidad;
         }

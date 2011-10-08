@@ -4,16 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using GyCAP.Entidades.Enumeraciones;
 
 namespace GyCAP.DAL
 {
     public class CentroTrabajoDAL
-    {
-        public static readonly int TipoHombre = 1;
-        public static readonly int TipoMaquina = 2;
-        public static readonly int CentroInactivo = 0;
-        public static readonly int CentroActivo = 1;
-        
+    {        
         public static int Insertar(Data.dsHojaRuta ds)
         {
             string sql = @"INSERT INTO [CENTROS_TRABAJOS] 

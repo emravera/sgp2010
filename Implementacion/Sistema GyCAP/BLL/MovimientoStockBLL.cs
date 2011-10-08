@@ -6,30 +6,45 @@ using System.Data;
 using GyCAP.Entidades;
 using GyCAP.Entidades.Enumeraciones;
 using GyCAP.Entidades.Excepciones;
+using System.Data.SqlClient;
 
 namespace GyCAP.BLL
 {
     public class MovimientoStockBLL
-    {
-        public const string CodigoManual = "AM";
-        public const string CodigoPedido = "APED";
-        public const string CodigoDetallePedido = "ADPED";
-        public const string CodigoMantenimiento = "MNT";
-        public const string CodigoOrdenProduccion = "ORDP";
-        public const string CodigoOrdenTrabajo = "ORDT";
-        
-        public static void InsertarPlanificado(Entidades.MovimientoStock movimientoStock)
+    {        
+        public static void InsertarPlanificado(Entidades.MovimientoStock movimientoStock, SqlTransaction transaccion)
         {
-            movimientoStock.Estado = BLL.EstadoMovimientoStockBLL.GetEstadoEntity(StockEnum.EstadoMovimientoStock.Planificado);
             ValidarMovimiento(movimientoStock);
-            DAL.MovimientoStockDAL.InsertarPlanificado(movimientoStock);
+            DAL.MovimientoStockDAL.InsertarPlanificado(movimientoStock, transaccion);
         }
 
-        public static void InsertarFinalizado(Entidades.MovimientoStock movimientoStock)
+        public static void InsertarFinalizado(Entidades.MovimientoStock movimientoStock, SqlTransaction transaccion)
         {
-            movimientoStock.Estado = BLL.EstadoMovimientoStockBLL.GetEstadoEntity(StockEnum.EstadoMovimientoStock.Finalizado);
-            ValidarMovimiento(movimientoStock);
-            DAL.MovimientoStockDAL.InsertarFinalizado(movimientoStock);
+            if (transaccion == null)
+            {
+                try
+                {
+                    transaccion = DAL.DB.IniciarTransaccion();
+                    ValidarMovimiento(movimientoStock);
+                    DAL.MovimientoStockDAL.InsertarFinalizado(movimientoStock, transaccion);
+                    transaccion.Commit();
+                }
+                catch (SqlException ex)
+                {
+                    transaccion.Rollback();
+                    throw new BaseDeDatosException(ex.Message);
+                }
+                finally
+                {
+                    DAL.DB.FinalizarTransaccion();
+                }
+            }
+            else
+            {
+                transaccion = DAL.DB.IniciarTransaccion();
+                ValidarMovimiento(movimientoStock);
+                DAL.MovimientoStockDAL.InsertarFinalizado(movimientoStock, transaccion);
+            }
         }
 
         public static void Finalizar(Entidades.MovimientoStock movimientoStock)
@@ -124,7 +139,7 @@ namespace GyCAP.BLL
 
             if (numeroStock == null) { return lista; }
 
-            int codigoEntidad = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, Convert.ToInt32(numeroStock)).Codigo;
+            int codigoEntidad = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, Convert.ToInt32(numeroStock), null).Codigo;
             
             Data.dsStock.MOVIMIENTOS_STOCKDataTable dt = DAL.MovimientoStockDAL.ObtenerMovimientosUbicacionStock(fechaDesde, fechaHasta, codigoEntidad, estado, tipoFecha);
 
@@ -169,7 +184,21 @@ namespace GyCAP.BLL
                 if (item.Entidad.Equals(movimiento.Destino)) { throw new MovimientoMalConfiguradoException("El origen y el destino son iguales."); }
             }
             
-            if (movimiento.Duenio == null) { throw new MovimientoMalConfiguradoException("El dueño es nulo."); }            
+            if (movimiento.Duenio == null) { throw new MovimientoMalConfiguradoException("El dueño es nulo."); }
+            if (movimiento.Estado == null) { throw new MovimientoMalConfiguradoException("El estado es nulo"); }
+        }
+
+        public static MovimientoStock GetMovimientoConfigurado(StockEnum.CodigoMovimiento codigo, StockEnum.EstadoMovimientoStock estado)
+        {
+            MovimientoStock movimiento = new MovimientoStock();
+            movimiento.Numero = 0;
+            movimiento.Codigo = codigo.ToString();
+            movimiento.Descripcion = "poner descripcion gonzalo";
+            movimiento.CantidadDestinoReal = 0;
+            movimiento.Estado = EstadoMovimientoStockBLL.GetEstadoEntity(estado);
+            movimiento.FechaAlta = DAL.DB.GetFechaServidor();
+            movimiento.OrigenesMultiples = new List<OrigenMovimiento>();
+            return movimiento;
         }
     }
 }

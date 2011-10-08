@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GyCAP.Entidades.Mensajes;
+using GyCAP.Entidades.Enumeraciones;
 
 namespace GyCAP.UI.ProcesoFabricacion
 {
@@ -576,7 +577,7 @@ namespace GyCAP.UI.ProcesoFabricacion
 
             try
             {
-                BLL.CentroTrabajoBLL.ObetenerCentrosTrabajo(null, null, null, BLL.CentroTrabajoBLL.CentroActivo, dsHojaRuta.CENTROS_TRABAJOS);
+                BLL.CentroTrabajoBLL.ObetenerCentrosTrabajo(null, null, null, (int)RecursosFabricacionEnum.EstadoCentroTrabajo.Activo, dsHojaRuta.CENTROS_TRABAJOS);
                 BLL.SectorBLL.ObtenerTodos(dsHojaRuta.SECTORES);
                 BLL.OperacionBLL.ObetenerOperaciones(dsHojaRuta.OPERACIONES);
                 BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsHojaRuta.UBICACIONES_STOCK);

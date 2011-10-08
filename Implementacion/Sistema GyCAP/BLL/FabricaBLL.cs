@@ -43,7 +43,7 @@ namespace GyCAP.BLL
                 decimal eficiencia = row.Field<decimal>("cto_eficiencia");
                 decimal capacidadCiclo = 0, horasCiclo = 0, capacidadUnidadHora = 0, capacidadCentro = 0;
                 
-                if (row.Field<decimal>("cto_activo") == BLL.CentroTrabajoBLL.CentroActivo)
+                if (row.Field<decimal>("cto_activo") == (decimal)RecursosFabricacionEnum.EstadoCentroTrabajo.Activo)
                 {
                     if (tipoHorario == RecursosFabricacionEnum.TipoHorario.Normal)
                     {
@@ -56,7 +56,8 @@ namespace GyCAP.BLL
                     
                     horasTrabajo -= (tiempoAntes + tiempoDespues) * BLL.ConfiguracionSistemaBLL.GetConfiguracion<int>("DiasLaborales");
 
-                    if (row.Field<decimal>("ct_tipo") == BLL.CentroTrabajoBLL.TipoHombre)
+                    if (row.Field<decimal>("ct_tipo") == (decimal)RecursosFabricacionEnum.TipoCentroTrabajo.Hombre
+                        || row.Field<decimal>("ct_tipo") == (decimal)RecursosFabricacionEnum.TipoCentroTrabajo.Proveedor)
                     {
                         capacidadUnidadHora = row.Field<decimal>("cto_capacidadunidadhora");
                         capacidadCentro = horasTrabajo * capacidadUnidadHora;
