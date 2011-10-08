@@ -65,7 +65,8 @@ namespace GyCAP.BLL
                 transaccion = DAL.DB.IniciarTransaccion();
 
                 ArbolEstructura arbolEstructura = EstructuraBLL.GetArbolEstructura(arbol.OrdenProduccion.Cocina.CodigoCocina, true);
-
+                arbolEstructura.SetProductQuantity(arbol.OrdenProduccion.CantidadEstimada);
+                
                 //Guardamos la orden de producción y de trabajo
                 DAL.OrdenProduccionDAL.Insertar(arbol, transaccion);
                 
@@ -76,30 +77,112 @@ namespace GyCAP.BLL
                     DAL.DetallePedidoDAL.ActualizarEstadoAEnCurso((int)(arbol.OrdenProduccion.DetallePlanSemanal.DetallePedido.Codigo), transaccion);
                 }
                 
-                //Creamos los movimientos de stock
+                //Creamos los movimientos de stock                
+                IList<MovimientoStock> listaMovimientos = new List<MovimientoStock>();
+                
                 foreach (OrdenTrabajo orden in arbol.AsOrdenesTrabajoList())
-                {
-                    Entidad entidadOrigen, entidadDestino;
-                    if (orden.DetalleHojaRuta.StockOrigen != null)
-                    {
-                        //especifico un ustck, usemoslo
-                        //entidadOrigen = EntidadBLL.GetEntidad(TipoEntidadBLL.UbicacionStockNombre, orden.DetalleHojaRuta.StockOrigen.Numero);
+                {                    
+                    MovimientoStock movimiento = MovimientoStockBLL.GetMovimientoConfigurado(StockEnum.CodigoMovimiento.OrdenTrabajo, StockEnum.EstadoMovimientoStock.Planificado);
+                    Entidad entidadOrden = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.OrdenTrabajo, orden.Numero, transaccion);
+                    
+                    if (orden.Secuencia == 0)
+                    {                        
+                        //es la primer operación de la hoja de ruta de la parte, usamos los stock de los hijos de la estructura
+                        foreach (NodoEstructura nodoEstr in arbolEstructura.FindByPartNumber(orden.Parte.Numero).NodosHijos)
+                        {                            
+                            OrigenMovimiento origen = new OrigenMovimiento()
+                            {
+                                Codigo = 0,
+                                CantidadEstimada = nodoEstr.Compuesto.Cantidad,
+                                CantidadReal = 0,
+                                Entidad = null,
+                                MovimientoStock = 0
+                            };
+
+                            if (nodoEstr.Contenido == NodoEstructura.tipoContenido.MateriaPrima)
+                            {
+                                if (nodoEstr.Compuesto.MateriaPrima.UbicacionStock != null)
+                                {
+                                    origen.Entidad = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, nodoEstr.Compuesto.MateriaPrima.UbicacionStock.Numero, transaccion);
+                                }
+                            }
+                            else
+                            {
+                                if (nodoEstr.Compuesto.Parte.HojaRuta.UbicacionStock != null)
+                                {
+                                    origen.Entidad = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, nodoEstr.Compuesto.Parte.HojaRuta.UbicacionStock.Numero, transaccion);                                    
+                                }
+                            }
+
+                            if (origen.Entidad != null) { movimiento.OrigenesMultiples.Add(origen); }
+
+                            if (orden.DetalleHojaRuta.StockDestino != null)
+                            {
+                                movimiento.Destino = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, orden.DetalleHojaRuta.StockDestino.Numero, transaccion);
+                            }
+                            else
+                            {
+                                if (nodoEstr.Compuesto.Parte.HojaRuta.Detalle.Max(p => p.Codigo) == orden.DetalleHojaRuta.Codigo)
+                                {
+                                    movimiento.Destino = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, nodoEstr.Compuesto.Parte.HojaRuta.UbicacionStock.Numero, transaccion);
+                                }
+                                else
+                                {
+                                    movimiento.Destino = entidadOrden;
+                                }
+                            }                            
+                        }                        
                     }
                     else
                     {
-                        //nos fijamos en la estructura y vemos si la parte tiene mps definidas
-                        NodoEstructura nodoEstructura = arbolEstructura.FindByPartNumber(orden.Parte.Numero);
-                        IList<MateriaPrima> listaMP = new List<MateriaPrima>();
-
-                        foreach (NodoEstructura hijo in nodoEstructura.NodosHijos)
+                        //como no es la primer operación usamos el stock origen si está definido                        
+                        OrigenMovimiento origen = new OrigenMovimiento()
                         {
-                            if (hijo.Contenido == NodoEstructura.tipoContenido.MateriaPrima)
-                            {
-                                listaMP.Add(hijo.Compuesto.MateriaPrima);
-                            }
+                            CantidadEstimada = orden.CantidadEstimada,
+                            CantidadReal = 0,
+                            Codigo = 0,
+                            Entidad = null,
+                            MovimientoStock = 0
+                        };
+
+                        if (orden.DetalleHojaRuta.StockOrigen != null)
+                        {
+                            origen.Entidad = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, orden.DetalleHojaRuta.StockOrigen.Numero, transaccion);
+                        }
+                        else
+                        {
+                            origen.Entidad = entidadOrden;
                         }
 
+                        movimiento.OrigenesMultiples.Add(origen);
+                        
+                        if (orden.DetalleHojaRuta.StockDestino != null)
+                        {
+                            movimiento.Destino = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, orden.DetalleHojaRuta.StockDestino.Numero, transaccion);
+                        }
+                        else
+                        {
+                            if (orden.Parte.HojaRuta.Detalle.Max(p => p.Codigo) == orden.DetalleHojaRuta.Codigo)
+                            {
+                                movimiento.Destino = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, orden.Parte.HojaRuta.UbicacionStock.Numero, transaccion);
+                            }
+                            else
+                            {
+                                movimiento.Destino = entidadOrden;
+                            }
+                        }
                     }
+
+                    movimiento.FechaPrevista = orden.FechaInicioEstimada.Value;
+                    movimiento.CantidadDestinoEstimada = orden.CantidadEstimada;
+                    movimiento.Duenio = entidadOrden;
+
+                    if (movimiento.OrigenesMultiples.Count > 0 && movimiento.Destino != null) { listaMovimientos.Add(movimiento); }
+                }
+
+                foreach (var item in listaMovimientos)
+                {
+                    if (item.OrigenesMultiples.Count > 0 && item.Destino != null) { MovimientoStockBLL.InsertarPlanificado(item, transaccion); }
                 }
 
                 transaccion.Commit();
@@ -209,7 +292,7 @@ namespace GyCAP.BLL
                         OrdenProduccion = new OrdenProduccion()
                                             {
                                                 Numero = numeroOrdenProduccion,
-                                                Codigo = string.Concat("OPA", numeroOrdenProduccion),
+                                                Codigo = string.Concat("OPA", " Agregar código plan Gonzalo"),
                                                 Estado = estadoOrden,
                                                 FechaAlta = DBBLL.GetFechaServidor(),
                                                 DetallePlanSemanal = new DetallePlanSemanal() { 

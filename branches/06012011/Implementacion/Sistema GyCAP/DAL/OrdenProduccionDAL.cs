@@ -61,14 +61,13 @@ namespace GyCAP.DAL
                                              orden.Cocina.CodigoCocina,
                                              orden.UbicacionStock.Numero,
                                              lote
-                                         };
-                                   
+                                         };                                   
             
             orden.Numero = Convert.ToInt32(DB.executeScalar(sql, valoresParametros, transaccion));
             orden.Codigo = string.Concat("GA", orden.Numero);
             ActualizarCodigo(orden.Codigo, orden.Numero, transaccion);
             
-            IList<OrdenTrabajo> ordenesTrabajo = arbol.AsOrdenesTrabajoList().OrderBy(p => p.FechaInicioEstimada).ToList();
+            IList<OrdenTrabajo> ordenesTrabajo = arbol.AsOrdenesTrabajoList();
             
             foreach (OrdenTrabajo item in ordenesTrabajo)
             {

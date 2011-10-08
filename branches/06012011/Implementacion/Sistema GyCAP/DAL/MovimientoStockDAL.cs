@@ -12,47 +12,15 @@ namespace GyCAP.DAL
 {
     public class MovimientoStockDAL
     {        
-        public static void InsertarPlanificado(MovimientoStock movimientoStock)
-        {
-            SqlTransaction transaccion = null;
-
-            try
-            {
-                transaccion = DB.IniciarTransaccion();
-                Insertar(movimientoStock, transaccion);
-                transaccion.Commit();
-            }
-            catch (SqlException ex)
-            {
-                transaccion.Rollback();
-                throw new BaseDeDatosException(ex.Message);
-            }
-            finally
-            {
-                DB.FinalizarTransaccion();
-            }
+        public static void InsertarPlanificado(MovimientoStock movimientoStock, SqlTransaction transaccion)
+        {           
+            Insertar(movimientoStock, transaccion);
         }
 
-        public static void InsertarFinalizado(MovimientoStock movimientoStock)
+        public static void InsertarFinalizado(MovimientoStock movimientoStock, SqlTransaction transaccion)
         {
-            SqlTransaction transaccion = null;
-
-            try
-            {
-                transaccion = DB.IniciarTransaccion();
-                Insertar(movimientoStock, transaccion);
-                Finalizar(movimientoStock, transaccion);
-                transaccion.Commit();
-            }
-            catch (SqlException ex)
-            {
-                transaccion.Rollback();
-                throw new BaseDeDatosException(ex.Message);
-            }
-            finally
-            {
-                DB.FinalizarTransaccion();
-            }
+            Insertar(movimientoStock, transaccion);
+            Finalizar(movimientoStock, transaccion);
         }
 
         private static void Insertar(MovimientoStock movimientoStock, SqlTransaction transaccion)

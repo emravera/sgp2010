@@ -175,9 +175,9 @@ namespace GyCAP.UI.RecursosFabricacion
                         e.Value = nombre;
                         break;
                     case "CTO_ACTIVO":
-                        if (Convert.ToInt32(e.Value.ToString()) == BLL.CentroTrabajoBLL.CentroActivo)
+                        if ( Convert.ToInt32(e.Value.ToString()) == (int)RecursosFabricacionEnum.EstadoCentroTrabajo.Activo)
                         { nombre = "Activo"; }
-                        else if (Convert.ToInt32(e.Value.ToString()) == BLL.CentroTrabajoBLL.CentroInactivo)
+                        else if (Convert.ToInt32(e.Value.ToString()) == (int)RecursosFabricacionEnum.EstadoCentroTrabajo.Inactivo)
                         { nombre = "Inactivo"; }
                         e.Value = nombre;
                         break;
@@ -565,7 +565,7 @@ namespace GyCAP.UI.RecursosFabricacion
             dvTipo = new DataView(dsCentroTrabajo.TIPOS_CENTRO_TRABAJO);
             cbTipo.SetDatos(dvTipo, "TC_CODIGO", "TC_NOMBRE", "Seleccione...", false);
             string[] nombres = new string[] { "Activo", "Inactivo"};
-            int[] valores = new int[] { BLL.CentroTrabajoBLL.CentroActivo, BLL.CentroTrabajoBLL.CentroInactivo };
+            int[] valores = new int[] { (int)RecursosFabricacionEnum.EstadoCentroTrabajo.Activo, (int)RecursosFabricacionEnum.EstadoCentroTrabajo.Inactivo };
             cbActivoBuscar.SetDatos(nombres, valores, "--TODOS--", true);
             cbActivo.SetDatos(nombres, valores, "Seleccione...", false);
             dvTurnoTrabajo = new DataView(dsCentroTrabajo.TURNOS_TRABAJO);

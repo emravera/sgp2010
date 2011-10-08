@@ -41,38 +41,38 @@ namespace GyCAP.DAL
             return codigoEntidad;
         }
 
-        public static void GetEntidad(EntidadEnum.TipoEntidadEnum tipo, Entidad entidad)
+        public static void GetEntidad(EntidadEnum.TipoEntidadEnum tipo, Entidad entidad, SqlTransaction transaccion)
         {
             object[] parametros = { };
 
             switch (tipo)
             {
                 case EntidadEnum.TipoEntidadEnum.Pedido:
-                    entidad.Codigo = Existe(tipo, Convert.ToInt32((entidad.EntidadExterna as Pedido).Codigo));
+                    entidad.Codigo = Existe(tipo, Convert.ToInt32((entidad.EntidadExterna as Pedido).Codigo), transaccion);
                     parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, Convert.ToInt32((entidad.EntidadExterna as Pedido).Codigo) };
                     break;
                 case EntidadEnum.TipoEntidadEnum.DetallePedido:
-                    entidad.Codigo = Existe(tipo, Convert.ToInt32((entidad.EntidadExterna as DetallePedido).Codigo));
+                    entidad.Codigo = Existe(tipo, Convert.ToInt32((entidad.EntidadExterna as DetallePedido).Codigo), transaccion);
                     parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, Convert.ToInt32((entidad.EntidadExterna as DetallePedido).Codigo) };
                     break;
                 case EntidadEnum.TipoEntidadEnum.Manual:
-                    entidad.Codigo = Existe(tipo, -1);
+                    entidad.Codigo = Existe(tipo, -1, transaccion);
                     parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, DBNull.Value };
                     break;
                 case EntidadEnum.TipoEntidadEnum.OrdenProduccion:
-                    entidad.Codigo = Existe(tipo, (entidad.EntidadExterna as OrdenProduccion).Numero);
+                    entidad.Codigo = Existe(tipo, (entidad.EntidadExterna as OrdenProduccion).Numero, transaccion);
                     parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, (entidad.EntidadExterna as OrdenProduccion).Numero };
                     break;
                 case EntidadEnum.TipoEntidadEnum.OrdenTrabajo:
-                    entidad.Codigo = Existe(tipo, (entidad.EntidadExterna as OrdenTrabajo).Numero);
+                    entidad.Codigo = Existe(tipo, (entidad.EntidadExterna as OrdenTrabajo).Numero, transaccion);
                     parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, (entidad.EntidadExterna as OrdenTrabajo).Numero };
                     break;
                 case EntidadEnum.TipoEntidadEnum.Mantenimiento:
-                    entidad.Codigo = Existe(tipo, Convert.ToInt32((entidad.EntidadExterna as Mantenimiento).Codigo));
+                    entidad.Codigo = Existe(tipo, Convert.ToInt32((entidad.EntidadExterna as Mantenimiento).Codigo), transaccion);
                     parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, Convert.ToInt32((entidad.EntidadExterna as Mantenimiento).Codigo) };
                     break;
                 case EntidadEnum.TipoEntidadEnum.UbicacionStock:
-                    entidad.Codigo = Existe(tipo, (entidad.EntidadExterna as UbicacionStock).Numero);
+                    entidad.Codigo = Existe(tipo, (entidad.EntidadExterna as UbicacionStock).Numero, transaccion);
                     parametros = new object[] { entidad.Nombre, entidad.TipoEntidad.Codigo, (entidad.EntidadExterna as UbicacionStock).Numero };
                     break;
                 default:
@@ -86,13 +86,12 @@ namespace GyCAP.DAL
 
             try
             {
-                entidad.Codigo = Convert.ToInt32(DB.executeScalar(sql, parametros, null));
+                entidad.Codigo = Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion));
             }
-            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-                        
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }                        
         }
 
-        public static int Existe(EntidadEnum.TipoEntidadEnum tipoEntidad, int codigoEntidad)
+        public static int Existe(EntidadEnum.TipoEntidadEnum tipoEntidad, int codigoEntidad, SqlTransaction transaccion)
         {
             string sql = string.Empty;
             object[] parametros = { };
@@ -110,7 +109,7 @@ namespace GyCAP.DAL
 
             try
             {
-                object result = DB.executeScalar(sql, parametros, null);
+                object result = DB.executeScalar(sql, parametros, transaccion);
 
                 if (result != null)
                 {
