@@ -92,6 +92,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcPlanAnual = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
+            this.txtCapMes = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.cbMes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbCocinas = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.cbPlanAnual = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
@@ -145,7 +147,7 @@
             // btnCargaDetalle
             // 
             this.btnCargaDetalle.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnCargaDetalle.Location = new System.Drawing.Point(655, 18);
+            this.btnCargaDetalle.Location = new System.Drawing.Point(649, 23);
             this.btnCargaDetalle.Name = "btnCargaDetalle";
             this.btnCargaDetalle.Size = new System.Drawing.Size(82, 23);
             this.btnCargaDetalle.TabIndex = 25;
@@ -156,7 +158,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 24);
+            this.label3.Location = new System.Drawing.Point(14, 29);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(122, 13);
             this.label3.TabIndex = 24;
@@ -165,7 +167,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(325, 24);
+            this.label4.Location = new System.Drawing.Point(319, 29);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(91, 13);
             this.label4.TabIndex = 8;
@@ -362,7 +364,7 @@
             this.tcDatos.Location = new System.Drawing.Point(3, 72);
             this.tcDatos.Name = "tcDatos";
             this.tcDatos.SelectedIndex = 0;
-            this.tcDatos.Size = new System.Drawing.Size(356, 278);
+            this.tcDatos.Size = new System.Drawing.Size(356, 274);
             this.tcDatos.TabIndex = 19;
             this.tcDatos.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tcDatos_Selecting);
             // 
@@ -373,7 +375,7 @@
             this.tpPlanificacion.Location = new System.Drawing.Point(4, 22);
             this.tpPlanificacion.Name = "tpPlanificacion";
             this.tpPlanificacion.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPlanificacion.Size = new System.Drawing.Size(348, 252);
+            this.tpPlanificacion.Size = new System.Drawing.Size(348, 248);
             this.tpPlanificacion.TabIndex = 0;
             this.tpPlanificacion.Text = "Planificación";
             // 
@@ -409,7 +411,7 @@
             this.groupBox3.Controls.Add(this.numPorcentaje);
             this.groupBox3.Controls.Add(this.rbPorcentaje);
             this.groupBox3.Controls.Add(this.rbUnidades);
-            this.groupBox3.Location = new System.Drawing.Point(6, 90);
+            this.groupBox3.Location = new System.Drawing.Point(6, 88);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(316, 88);
             this.groupBox3.TabIndex = 2;
@@ -466,7 +468,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 50);
+            this.label5.Location = new System.Drawing.Point(3, 42);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(94, 13);
             this.label5.TabIndex = 0;
@@ -480,7 +482,7 @@
             this.tpPedidos.Location = new System.Drawing.Point(4, 22);
             this.tpPedidos.Name = "tpPedidos";
             this.tpPedidos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPedidos.Size = new System.Drawing.Size(348, 252);
+            this.tpPedidos.Size = new System.Drawing.Size(348, 248);
             this.tpPedidos.TabIndex = 1;
             this.tpPedidos.Text = "Pedidos Mes";
             // 
@@ -503,7 +505,7 @@
             this.gbPedidos.Controls.Add(this.lblMensaje);
             this.gbPedidos.Location = new System.Drawing.Point(8, 6);
             this.gbPedidos.Name = "gbPedidos";
-            this.gbPedidos.Size = new System.Drawing.Size(336, 206);
+            this.gbPedidos.Size = new System.Drawing.Size(336, 202);
             this.gbPedidos.TabIndex = 0;
             this.gbPedidos.TabStop = false;
             this.gbPedidos.Text = "Pedidos";
@@ -515,13 +517,14 @@
             this.dgvPedidos.AllowUserToResizeColumns = false;
             this.dgvPedidos.AllowUserToResizeRows = false;
             this.dgvPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPedidos.Location = new System.Drawing.Point(6, 19);
+            this.dgvPedidos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPedidos.Location = new System.Drawing.Point(3, 17);
             this.dgvPedidos.Name = "dgvPedidos";
             this.dgvPedidos.ReadOnly = true;
             this.dgvPedidos.RowHeadersVisible = false;
             this.dgvPedidos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvPedidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPedidos.Size = new System.Drawing.Size(319, 172);
+            this.dgvPedidos.Size = new System.Drawing.Size(330, 182);
             this.dgvPedidos.TabIndex = 7;
             this.dgvPedidos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPedidos_CellFormatting);
             this.dgvPedidos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPedidos_DataBindingComplete);
@@ -542,7 +545,7 @@
             this.tpDetallePedido.Controls.Add(this.gbDetallePedido);
             this.tpDetallePedido.Location = new System.Drawing.Point(4, 22);
             this.tpDetallePedido.Name = "tpDetallePedido";
-            this.tpDetallePedido.Size = new System.Drawing.Size(348, 252);
+            this.tpDetallePedido.Size = new System.Drawing.Size(348, 248);
             this.tpDetallePedido.TabIndex = 2;
             this.tpDetallePedido.Text = "Detalle de Pedido";
             // 
@@ -566,7 +569,7 @@
             this.gbDetallePedido.Controls.Add(this.lblMensajeDetalle);
             this.gbDetallePedido.Location = new System.Drawing.Point(7, 6);
             this.gbDetallePedido.Name = "gbDetallePedido";
-            this.gbDetallePedido.Size = new System.Drawing.Size(337, 202);
+            this.gbDetallePedido.Size = new System.Drawing.Size(337, 198);
             this.gbDetallePedido.TabIndex = 1;
             this.gbDetallePedido.TabStop = false;
             this.gbDetallePedido.Text = "Detalle Pedido";
@@ -578,13 +581,14 @@
             this.dgvDetallePedido.AllowUserToResizeColumns = false;
             this.dgvDetallePedido.AllowUserToResizeRows = false;
             this.dgvDetallePedido.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetallePedido.Location = new System.Drawing.Point(6, 19);
+            this.dgvDetallePedido.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDetallePedido.Location = new System.Drawing.Point(3, 17);
             this.dgvDetallePedido.Name = "dgvDetallePedido";
             this.dgvDetallePedido.ReadOnly = true;
             this.dgvDetallePedido.RowHeadersVisible = false;
             this.dgvDetallePedido.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvDetallePedido.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetallePedido.Size = new System.Drawing.Size(321, 177);
+            this.dgvDetallePedido.Size = new System.Drawing.Size(331, 178);
             this.dgvDetallePedido.TabIndex = 7;
             this.dgvDetallePedido.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetallePedido_CellFormatting);
             this.dgvDetallePedido.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDetallePedido_DataBindingComplete);
@@ -610,36 +614,38 @@
             // gbCantidades
             // 
             this.gbCantidades.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbCantidades.Controls.Add(this.txtCapMes);
+            this.gbCantidades.Controls.Add(this.label12);
             this.gbCantidades.Controls.Add(this.txtRestaPlanificar);
             this.gbCantidades.Controls.Add(this.txtCantPlanificada);
             this.gbCantidades.Controls.Add(this.txtCantAPlanificar);
             this.gbCantidades.Controls.Add(this.label10);
             this.gbCantidades.Controls.Add(this.label9);
             this.gbCantidades.Controls.Add(this.label8);
-            this.gbCantidades.Location = new System.Drawing.Point(3, 352);
+            this.gbCantidades.Location = new System.Drawing.Point(3, 348);
             this.gbCantidades.Name = "gbCantidades";
-            this.gbCantidades.Size = new System.Drawing.Size(352, 105);
+            this.gbCantidades.Size = new System.Drawing.Size(352, 112);
             this.gbCantidades.TabIndex = 18;
             this.gbCantidades.TabStop = false;
             this.gbCantidades.Text = "Cantidades a Planificar";
             // 
             // txtRestaPlanificar
             // 
-            this.txtRestaPlanificar.Location = new System.Drawing.Point(170, 71);
+            this.txtRestaPlanificar.Location = new System.Drawing.Point(155, 64);
             this.txtRestaPlanificar.Name = "txtRestaPlanificar";
             this.txtRestaPlanificar.Size = new System.Drawing.Size(135, 21);
             this.txtRestaPlanificar.TabIndex = 9;
             // 
             // txtCantPlanificada
             // 
-            this.txtCantPlanificada.Location = new System.Drawing.Point(170, 45);
+            this.txtCantPlanificada.Location = new System.Drawing.Point(155, 39);
             this.txtCantPlanificada.Name = "txtCantPlanificada";
             this.txtCantPlanificada.Size = new System.Drawing.Size(135, 21);
             this.txtCantPlanificada.TabIndex = 8;
             // 
             // txtCantAPlanificar
             // 
-            this.txtCantAPlanificar.Location = new System.Drawing.Point(170, 19);
+            this.txtCantAPlanificar.Location = new System.Drawing.Point(155, 13);
             this.txtCantAPlanificar.Name = "txtCantAPlanificar";
             this.txtCantAPlanificar.Size = new System.Drawing.Size(135, 21);
             this.txtCantAPlanificar.TabIndex = 7;
@@ -647,7 +653,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(40, 74);
+            this.label10.Location = new System.Drawing.Point(25, 68);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(85, 13);
             this.label10.TabIndex = 6;
@@ -656,7 +662,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(40, 47);
+            this.label9.Location = new System.Drawing.Point(25, 42);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(108, 13);
             this.label9.TabIndex = 4;
@@ -665,7 +671,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(40, 22);
+            this.label8.Location = new System.Drawing.Point(25, 16);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(109, 13);
             this.label8.TabIndex = 3;
@@ -678,9 +684,9 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.gbDetalleGrilla.Controls.Add(this.dgvDatos);
             this.gbDetalleGrilla.Controls.Add(this.panelAcciones);
-            this.gbDetalleGrilla.Location = new System.Drawing.Point(365, 88);
+            this.gbDetalleGrilla.Location = new System.Drawing.Point(365, 72);
             this.gbDetalleGrilla.Name = "gbDetalleGrilla";
-            this.gbDetalleGrilla.Size = new System.Drawing.Size(394, 309);
+            this.gbDetalleGrilla.Size = new System.Drawing.Size(394, 325);
             this.gbDetalleGrilla.TabIndex = 17;
             this.gbDetalleGrilla.TabStop = false;
             this.gbDetalleGrilla.Text = "Detalle";
@@ -699,7 +705,7 @@
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.RowHeadersVisible = false;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(382, 232);
+            this.dgvDatos.Size = new System.Drawing.Size(382, 248);
             this.dgvDatos.TabIndex = 5;
             this.dgvDatos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDatos_CellFormatting);
             this.dgvDatos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDatos_DataBindingComplete);
@@ -714,7 +720,7 @@
             this.panelAcciones.Controls.Add(this.btnSumar);
             this.panelAcciones.Controls.Add(this.label6);
             this.panelAcciones.Controls.Add(this.btnDelete);
-            this.panelAcciones.Location = new System.Drawing.Point(6, 248);
+            this.panelAcciones.Location = new System.Drawing.Point(6, 264);
             this.panelAcciones.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelAcciones.Name = "panelAcciones";
             this.panelAcciones.Size = new System.Drawing.Size(382, 56);
@@ -906,6 +912,22 @@
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
             // 
+            // txtCapMes
+            // 
+            this.txtCapMes.Location = new System.Drawing.Point(155, 89);
+            this.txtCapMes.Name = "txtCapMes";
+            this.txtCapMes.Size = new System.Drawing.Size(135, 21);
+            this.txtCapMes.TabIndex = 11;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(25, 92);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(111, 13);
+            this.label12.TabIndex = 10;
+            this.label12.Text = "Cap. Producción Mes:";
+            // 
             // cbMes
             // 
             this.cbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -921,7 +943,7 @@
             this.cbCocinas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCocinas.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbCocinas.FormattingEnabled = true;
-            this.cbCocinas.Location = new System.Drawing.Point(103, 47);
+            this.cbCocinas.Location = new System.Drawing.Point(103, 39);
             this.cbCocinas.Name = "cbCocinas";
             this.cbCocinas.Size = new System.Drawing.Size(219, 21);
             this.cbCocinas.TabIndex = 1;
@@ -931,7 +953,7 @@
             this.cbPlanAnual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbPlanAnual.FormattingEnabled = true;
-            this.cbPlanAnual.Location = new System.Drawing.Point(166, 20);
+            this.cbPlanAnual.Location = new System.Drawing.Point(160, 25);
             this.cbPlanAnual.Name = "cbPlanAnual";
             this.cbPlanAnual.Size = new System.Drawing.Size(94, 21);
             this.cbPlanAnual.TabIndex = 23;
@@ -941,7 +963,7 @@
             this.cbMesDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMesDatos.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbMesDatos.FormattingEnabled = true;
-            this.cbMesDatos.Location = new System.Drawing.Point(424, 20);
+            this.cbMesDatos.Location = new System.Drawing.Point(418, 25);
             this.cbMesDatos.Name = "cbMesDatos";
             this.cbMesDatos.Size = new System.Drawing.Size(135, 21);
             this.cbMesDatos.TabIndex = 2;
@@ -1069,5 +1091,7 @@
         private System.Windows.Forms.DataGridView dgvDetallePedido;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lblMensajeDetalle;
+        private System.Windows.Forms.TextBox txtCapMes;
+        private System.Windows.Forms.Label label12;
     }
 }

@@ -30,11 +30,15 @@
         {
             this.gbExcepciones = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnVolver = new System.Windows.Forms.Button();
+            this.tsMenu = new System.Windows.Forms.ToolStrip();
+            this.btnImprimirInforme = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.gbExcepciones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.tsMenu.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbExcepciones
@@ -43,9 +47,9 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.gbExcepciones.Controls.Add(this.dgvLista);
-            this.gbExcepciones.Location = new System.Drawing.Point(6, 6);
+            this.gbExcepciones.Location = new System.Drawing.Point(1, 54);
             this.gbExcepciones.Name = "gbExcepciones";
-            this.gbExcepciones.Size = new System.Drawing.Size(514, 292);
+            this.gbExcepciones.Size = new System.Drawing.Size(554, 336);
             this.gbExcepciones.TabIndex = 0;
             this.gbExcepciones.TabStop = false;
             this.gbExcepciones.Text = "Listado de Excepciones";
@@ -62,38 +66,68 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(508, 273);
+            this.dgvLista.Size = new System.Drawing.Size(548, 317);
             this.dgvLista.TabIndex = 2;
             this.dgvLista.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
-            // groupBox1
+            // tsMenu
             // 
-            this.groupBox1.Controls.Add(this.btnVolver);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(0, 298);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(525, 56);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
+            this.tsMenu.BackColor = System.Drawing.Color.Silver;
+            this.tsMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnImprimirInforme,
+            this.toolStripSeparator1,
+            this.btnSalir});
+            this.tsMenu.Location = new System.Drawing.Point(0, 0);
+            this.tsMenu.Name = "tsMenu";
+            this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
+            this.tsMenu.Size = new System.Drawing.Size(554, 52);
+            this.tsMenu.TabIndex = 8;
+            this.tsMenu.Text = "toolStrip1";
             // 
-            // btnVolver
+            // btnImprimirInforme
             // 
-            this.btnVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVolver.Location = new System.Drawing.Point(432, 19);
-            this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 26);
-            this.btnVolver.TabIndex = 6;
-            this.btnVolver.Text = "Salir";
-            this.btnVolver.UseVisualStyleBackColor = true;
-            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            this.btnImprimirInforme.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Printer_25;
+            this.btnImprimirInforme.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnImprimirInforme.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnImprimirInforme.Name = "btnImprimirInforme";
+            this.btnImprimirInforme.Size = new System.Drawing.Size(49, 49);
+            this.btnImprimirInforme.Text = "&Imprimir";
+            this.btnImprimirInforme.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnImprimirInforme.Click += new System.EventHandler(this.btnImprimirInforme_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 62);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Salir_25;
+            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(31, 49);
+            this.btnSalir.Text = "&Salir";
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.tsMenu);
+            this.panel1.Location = new System.Drawing.Point(1, -1);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(554, 52);
+            this.panel1.TabIndex = 9;
             // 
             // frmExcepcionesPlan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 354);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(554, 391);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.gbExcepciones);
             this.Name = "frmExcepcionesPlan";
             this.ShowIcon = false;
@@ -101,7 +135,10 @@
             this.Text = "Excepciones Plan";
             this.gbExcepciones.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
-            this.groupBox1.ResumeLayout(false);
+            this.tsMenu.ResumeLayout(false);
+            this.tsMenu.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -110,7 +147,10 @@
 
         private System.Windows.Forms.GroupBox gbExcepciones;
         private System.Windows.Forms.DataGridView dgvLista;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.ToolStrip tsMenu;
+        private System.Windows.Forms.ToolStripButton btnImprimirInforme;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton btnSalir;
+        private System.Windows.Forms.Panel panel1;
     }
 }

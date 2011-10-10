@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections;
-using System.Globalization;
 using GyCAP.UI.Sistema.Validaciones;
 
 namespace GyCAP.UI.PlanificacionProduccion
@@ -730,36 +729,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         #endregion
 
         #region Funciones Formulario
-        
-        private int[] SemanasAño(int año)
-        {
-            int[] semanasMes = new int[12];
-
-            for (int i = 1; i <= 12; i++)
-            {
-                int ultimaSemana, primerSemana;
-
-                //Calculo en que semana esta el primer dia
-                DateTime s1 = new DateTime(año, i, 01);
-                primerSemana = System.Globalization.CultureInfo.CurrentUICulture.Calendar.GetWeekOfYear(s1, CalendarWeekRule.FirstDay, s1.DayOfWeek);
-
-                if (i < 12)
-                {   //Calculo la semana del proximo mes
-                    DateTime s2 = new DateTime(año, i + 1, 01);
-                    ultimaSemana = System.Globalization.CultureInfo.CurrentUICulture.Calendar.GetWeekOfYear(s2, CalendarWeekRule.FirstDay, s2.DayOfWeek);
-                }
-                else
-                {
-                    //Calculo la semana del proximo mes
-                    DateTime s2 = new DateTime(año, i, 31);
-                    ultimaSemana = System.Globalization.CultureInfo.CurrentUICulture.Calendar.GetWeekOfYear(s2, CalendarWeekRule.FirstDay, s2.DayOfWeek);
-                }
-                semanasMes[i - 1] = ultimaSemana - primerSemana;
-            }
-
-            return semanasMes;
-        }   
-        
+         
         private void LlenarDetalle()
         {
             try
@@ -867,7 +837,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Calculo la capacidad de la fabrica
             int capacidadFabrica = (BLL.FabricaBLL.GetCapacidadSemanalBruta(null, GyCAP.Entidades.Enumeraciones.RecursosFabricacionEnum.TipoHorario.Normal));
             int[] semanasMes = new int[12];
-            semanasMes = SemanasAño(Convert.ToInt32(txtAnio.Text));
+            semanasMes = BLL.DemandaAnualBLL.SemanasAño(Convert.ToInt32(txtAnio.Text));
             
             lblCapacidadMensual.Text = "Mes 4 Semanas:" + (capacidadFabrica * 4).ToString() + " Unidades \n" + "Mes 5 Semanas:" + (capacidadFabrica * 5).ToString() + " Unidades \n";
 
@@ -1089,10 +1059,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             numCrecimiento.Select(0, 10);
         }
         #endregion         
-
-       
-
-      
 
     }
 }

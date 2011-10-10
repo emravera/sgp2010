@@ -1511,9 +1511,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 btnPuntoEquilibrio.Enabled = true;
             }
         }
-        #endregion              
-
-        
+        #endregion                     
         
     }
 }
