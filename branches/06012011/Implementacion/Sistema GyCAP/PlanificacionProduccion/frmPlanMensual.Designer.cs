@@ -524,6 +524,7 @@
             this.dgvPedidos.Size = new System.Drawing.Size(319, 172);
             this.dgvPedidos.TabIndex = 7;
             this.dgvPedidos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPedidos_CellFormatting);
+            this.dgvPedidos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPedidos_DataBindingComplete);
             // 
             // lblMensaje
             // 
@@ -547,7 +548,7 @@
             // 
             // btnPlanificar
             // 
-            this.btnPlanificar.Location = new System.Drawing.Point(268, 214);
+            this.btnPlanificar.Location = new System.Drawing.Point(268, 218);
             this.btnPlanificar.Name = "btnPlanificar";
             this.btnPlanificar.Size = new System.Drawing.Size(76, 23);
             this.btnPlanificar.TabIndex = 14;
@@ -586,6 +587,7 @@
             this.dgvDetallePedido.Size = new System.Drawing.Size(321, 177);
             this.dgvDetallePedido.TabIndex = 7;
             this.dgvDetallePedido.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetallePedido_CellFormatting);
+            this.dgvDetallePedido.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDetallePedido_DataBindingComplete);
             // 
             // label11
             // 

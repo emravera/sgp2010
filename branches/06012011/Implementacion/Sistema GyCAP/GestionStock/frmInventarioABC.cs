@@ -36,20 +36,12 @@ namespace GyCAP.UI.GestionStock
             //Grilla de Modelos
             //Agregamos la columnas
             
-            dgvModelos.Columns.Add("CODIGO_MODELO", "Código");
             dgvModelos.Columns.Add("CODIGO_MODELO_PRODUCIDO", "Modelo");
             dgvModelos.Columns.Add("MODELO_PORCENTAJE", "Porcentaje");
             dgvModelos.Columns.Add("MODELO_CANTIDAD", "Cantidad");
 
-            //Seteamos el modo de tamaño de las columnas
-            dgvModelos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvModelos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvModelos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvModelos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvModelos.Columns["CODIGO_MODELO_PRODUCIDO"].DataPropertyName = "CODIGO_MODELO_PRODUCIDO";
-            dgvModelos.Columns["CODIGO_MODELO"].DataPropertyName = "CODIGO_MODELO";
             dgvModelos.Columns["MODELO_PORCENTAJE"].DataPropertyName = "MODELO_PORCENTAJE";
             dgvModelos.Columns["MODELO_CANTIDAD"].DataPropertyName = "MODELO_CANTIDAD";
 
@@ -59,9 +51,6 @@ namespace GyCAP.UI.GestionStock
             dgvModelos.Columns["MODELO_PORCENTAJE"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvModelos.Columns["MODELO_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            //Ocultamos las columnas que no queremos que se vean
-            dgvModelos.Columns["CODIGO_MODELO"].Visible = false;
-            
             //Creamos el dataview y lo asignamos a la grilla
             dvListaModelos = new DataView(dsInventarioABC.MODELOS_PRODUCIDOS);
             dgvModelos.DataSource = dvListaModelos;
@@ -174,10 +163,6 @@ namespace GyCAP.UI.GestionStock
                     rbNuevo.Checked = true;
                     cbAñoHistorico.Visible = false;
                     txtCantAnual.ReadOnly = true;
-
-                    //Ocultamos las columnas que no queremos que se vean
-                    dgvModelos.Columns["CODIGO_MODELO"].Visible = false;
-
                     break;
 
                 case estadoUI.CargaDetalle:
@@ -188,7 +173,7 @@ namespace GyCAP.UI.GestionStock
 
                     //Limpiamos los controles
                     cbCocinas.SetSelectedIndex(-1);
-                    numPorcentaje.Value = Convert.ToDecimal(0.00);
+                    numPorcentaje.Value = Convert.ToDecimal(0.00);                   
                     break;
 
                 case estadoUI.generaHistorico:
@@ -242,14 +227,14 @@ namespace GyCAP.UI.GestionStock
         {
             string msjerror = string.Empty;
 
-            int Porcentaje = 0;
+            decimal Porcentaje = 0;
 
             //Validamos que no se quiera agregar un modelo que ya está en el dataset
             foreach (Data.dsInventarioABC.MODELOS_PRODUCIDOSRow row in dsInventarioABC.MODELOS_PRODUCIDOS.Rows)
             {
                 if (row["MODELO_PORCENTAJE"].ToString() != string.Empty)
                 {
-                    Porcentaje = Porcentaje + Convert.ToInt32(row["MODELO_PORCENTAJE"]);
+                    Porcentaje = Porcentaje + Convert.ToDecimal(row["MODELO_PORCENTAJE"]);
                 }
             }
 
@@ -754,6 +739,6 @@ namespace GyCAP.UI.GestionStock
         }
 
         #endregion  
-
+    
     }
 }

@@ -67,6 +67,7 @@ namespace GyCAP.UI.GestionPedido
             dgvLista.Columns.Add("PED_NUMERO", "Número");
             dgvLista.Columns.Add("CLI_CODIGO", "Cliente");
             dgvLista.Columns.Add("EPED_CODIGO", "Estado");
+            dgvLista.Columns.Add("PED_FECHA_ALTA", "Fecha Alta");
             dgvLista.Columns.Add("PED_OBSERVACIONES", "Observaciones");
 
             dgvLista.Columns["PED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -81,6 +82,7 @@ namespace GyCAP.UI.GestionPedido
             dgvLista.Columns["PED_NUMERO"].DataPropertyName = "PED_NUMERO";
             dgvLista.Columns["CLI_CODIGO"].DataPropertyName = "CLI_CODIGO";
             dgvLista.Columns["EPED_CODIGO"].DataPropertyName = "EPED_CODIGO";
+            dgvLista.Columns["PED_FECHA_ALTA"].DataPropertyName = "PED_FECHA_ALTA";
             dgvLista.Columns["PED_OBSERVACIONES"].DataPropertyName = "PED_OBSERVACIONES";
 
             //*******************************************************************************************
@@ -94,8 +96,7 @@ namespace GyCAP.UI.GestionPedido
             dgvDetallePedido.Columns.Add("DPED_FECHA_ENTREGA_PREVISTA", "Fecha Entrega");
             dgvDetallePedido.Columns.Add("DPED_CODIGONEMONICO", "Cod. Nemónico");
             dgvDetallePedido.Columns.Add("DPED_FECHA_CANCELACION", "Fecha Cancelación");
-            
-            
+                        
             dgvDetallePedido.Columns["DPED_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;      
 
             //Indicamos de que columna se obtienen los datos
@@ -114,10 +115,7 @@ namespace GyCAP.UI.GestionPedido
             dgvCocinas.Columns.Add("COC_CODIGO_PRODUCTO", "Código");
             dgvCocinas.Columns.Add("MOD_CODIGO", "Modelo");
             dgvCocinas.Columns.Add("MCA_CODIGO", "Marca");
-            dgvCocinas.Columns["COC_CODIGO_PRODUCTO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCocinas.Columns["MOD_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvCocinas.Columns["MCA_CODIGO"].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
+            
             dgvCocinas.Columns["COC_CODIGO_PRODUCTO"].DataPropertyName = "COC_CODIGO_PRODUCTO";
             dgvCocinas.Columns["MOD_CODIGO"].DataPropertyName = "MOD_CODIGO";
             dgvCocinas.Columns["MCA_CODIGO"].DataPropertyName = "MCA_CODIGO";
@@ -130,6 +128,7 @@ namespace GyCAP.UI.GestionPedido
             //Escondemos las columnas del detalle
             dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
             dgvDetallePedido.Columns["DPED_CODIGONEMONICO"].Visible = false;
+            
             dvDetallePedido = new DataView(dsCliente.DETALLE_PEDIDOS);
             dgvDetallePedido.DataSource = dvDetallePedido;
 
@@ -237,10 +236,12 @@ namespace GyCAP.UI.GestionPedido
                     dgvLista.Columns["PED_CODIGO"].Visible = false;
                     dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
                     dgvDetallePedido.Columns["DPED_CODIGONEMONICO"].Visible = false;
+
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.inicio;
                     tcPedido.SelectedTab = tpBuscar;                    
                     break;
+
                 case estadoUI.nuevo:
                     setControles(false);
                     limpiarControles(true);
@@ -260,6 +261,7 @@ namespace GyCAP.UI.GestionPedido
                     dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
                     dgvDetallePedido.Columns["DPED_CODIGONEMONICO"].Visible = false;                        
                     break;
+
                 case estadoUI.nuevoExterno:
                     setControles(false);
                     limpiarControles(true);
@@ -277,6 +279,7 @@ namespace GyCAP.UI.GestionPedido
                     dvDetallePedido.RowFilter = "DPED_CODIGO < 0";
                     tcPedido.SelectedTab = tpDatos;
                     break;
+
                 case estadoUI.consultar:
                     setControles(true);
                     btnGuardar.Enabled = false;
@@ -287,6 +290,7 @@ namespace GyCAP.UI.GestionPedido
                     estadoInterface = estadoUI.consultar;
                     tcPedido.SelectedTab = tpDatos;
                     break;
+
                 case estadoUI.modificar:
                     setControles(false);
                     btnGuardar.Enabled = true;
@@ -302,6 +306,7 @@ namespace GyCAP.UI.GestionPedido
                     estadoInterface = estadoUI.modificar;
                     tcPedido.SelectedTab = tpDatos;                   
                     break;
+
                 case estadoUI.cargarDetalle:
                     btnAgregar.Enabled = false;
                     btnValidar.Enabled = true;
@@ -319,6 +324,7 @@ namespace GyCAP.UI.GestionPedido
                     estadoInterface = estadoUI.cargarDetalle;
                     tcPedido.SelectedTab = tpDatos;
                     break;
+
                 case estadoUI.modificarDetalle:
                     btnAgregar.Enabled = true;
                     btnValidar.Enabled = false;
@@ -334,6 +340,7 @@ namespace GyCAP.UI.GestionPedido
                     estadoInterface = estadoUI.modificarDetalle;
                     tcPedido.SelectedTab = tpDatos;
                     break;
+
                 default:
                     break;
             }
@@ -399,7 +406,7 @@ namespace GyCAP.UI.GestionPedido
                         nombre = dsCliente.ESTADO_PEDIDOS.FindByEPED_CODIGO(Convert.ToInt64(e.Value.ToString())).EPED_NOMBRE;
                         e.Value = nombre;
                         break;
-                    case "PED_FECHAENTREGAPREVISTA":
+                    case "PED_FECHA_ALTA":
                         nombre = DateTime.Parse(e.Value.ToString()).ToShortDateString();
                         e.Value = nombre;
                         break;
@@ -761,13 +768,7 @@ namespace GyCAP.UI.GestionPedido
             else if (estadoInterface == estadoUI.modificarDetalle)
             {
                 if (dgvCocinas.Rows.GetRowCount(DataGridViewElementStates.Selected) == 0) validacion += "-Debe seleccionar una Cocina de la lista.\n";
-            }
-
-            //Le agrego la cabecera al mensaje
-            if (validacion.Length > 0)
-            {
-                validacion = "Se han encontrado los siguientes errores de validación:\n" + validacion;
-            }
+            }           
 
             return validacion;
         }
@@ -942,7 +943,6 @@ namespace GyCAP.UI.GestionPedido
                 }
 
                 //Mostramos el mensaje resultado de la validación
-                validacion = "Validación del pedido: \n" + validacion;
                 Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
 
                 //Habilito los controles que se tienen que ver

@@ -42,13 +42,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvLista.Columns.Add("PAN_ANIO", "Año Plan Anual");
             dgvLista.Columns.Add("PMES_MES", "Mes del Plan Mensual");
             dgvLista.Columns.Add("PMES_FECHACREACION", "Fecha Creación Plan Mensual");
-
-            //Seteamos el modo de tamaño de las columnas
-            dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
+                   
             //Oculto la columnas que no se van a mostrar
             dgvLista.Columns["PMES_CODIGO"].Visible = false;
             dgvLista.Columns["PAN_CODIGO"].Visible = false;
@@ -80,15 +74,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns["DPMES_CANTIDADESTIMADA"].DataPropertyName = "DPMES_CANTIDADESTIMADA";
             dgvDetalle.Columns["DPMES_CANTIDADREAL"].DataPropertyName = "DPMES_CANTIDADREAL";
             dgvDetalle.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
-
-            //Seteamos el modo de tamaño de las columnas
-            dgvDetalle.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetalle.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetalle.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetalle.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetalle.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetalle.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
+     
             //Seteamos las alineaciones de las columnas
             dgvDetalle.Columns["DPMES_CANTIDADESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDetalle.Columns["DPMES_CANTIDADREAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -123,14 +109,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDatos.Columns["DPMES_CANTIDADREAL"].DataPropertyName = "DPMES_CANTIDADREAL";
             dgvDatos.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
 
-            //Seteamos el modo de tamaño de las columnas
-            dgvDatos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDatos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDatos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDatos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDatos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDatos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
             //Seteamos la alineacion de las columnas numericas
             dgvDatos.Columns["DPMES_CANTIDADESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDatos.Columns["DPMES_CANTIDADREAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -142,28 +120,17 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             //*********************************** Lista de Pedidos *****************************************
             //Agregamos la columnas
-            dgvPedidos.Columns.Add("PED_CODIGO", "Código");
             dgvPedidos.Columns.Add("PED_NUMERO", "Número");
             dgvPedidos.Columns.Add("CLI_CODIGO", "Cliente");
             dgvPedidos.Columns.Add("EPED_CODIGO", "Estado");
-            dgvPedidos.Columns.Add("PED_FECHA_ALTA", "Fecha Alta");
-            dgvPedidos.Columns.Add("PED_FECHAENTREGAREAL", "Fecha Real Entrega");               
+            dgvPedidos.Columns.Add("PED_FECHA_ALTA", "Fecha Alta");                         
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvPedidos.Columns["PED_CODIGO"].DataPropertyName = "PED_CODIGO";
             dgvPedidos.Columns["PED_NUMERO"].DataPropertyName = "PED_NUMERO";
             dgvPedidos.Columns["CLI_CODIGO"].DataPropertyName = "CLI_CODIGO";
             dgvPedidos.Columns["EPED_CODIGO"].DataPropertyName = "EPED_CODIGO";
             dgvPedidos.Columns["PED_FECHA_ALTA"].DataPropertyName = "PED_FECHA_ALTA";
-            dgvPedidos.Columns["PED_FECHAENTREGAREAL"].DataPropertyName = "PED_FECHAENTREGAREAL";
-
-            //Seteamos el modo de tamaño de las columnas
-            dgvPedidos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPedidos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPedidos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPedidos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPedidos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPedidos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            
 
             //Seteamos la alineacion de las columnas numericas
             dgvPedidos.Columns["PED_NUMERO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -174,29 +141,17 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             //*********************************** Lista de Detalle de Pedidos *****************************************
             //Agregamos la columnas
-            dgvDetallePedido.Columns.Add("DPED_CODIGO", "Código");
-            dgvDetallePedido.Columns.Add("PED_CODIGO", "Pedido");
+            dgvDetallePedido.Columns.Add("DPED_CODIGO", "Núm. Detalle");
             dgvDetallePedido.Columns.Add("EDPED_CODIGO", "Estado");
             dgvDetallePedido.Columns.Add("COC_CODIGO", "Cocina");
             dgvDetallePedido.Columns.Add("DPED_CANTIDAD", "Cantidad");
-            dgvDetallePedido.Columns.Add("DPED_FECHA_CANCELACION", "Fecha Cancelación");
-
+            
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvDetallePedido.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
-            dgvDetallePedido.Columns["PED_CODIGO"].DataPropertyName = "PED_CODIGO";
             dgvDetallePedido.Columns["EDPED_CODIGO"].DataPropertyName = "EDPED_CODIGO";
             dgvDetallePedido.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
             dgvDetallePedido.Columns["DPED_CANTIDAD"].DataPropertyName = "DPED_CANTIDAD";
-            dgvDetallePedido.Columns["DPED_FECHA_CANCELACION"].DataPropertyName = "DPED_FECHA_CANCELACION";
-            
-            //Seteamos el modo de tamaño de las columnas
-            dgvDetallePedido.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePedido.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePedido.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePedido.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePedido.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetallePedido.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            
+                       
             //Seteamos la alineación de las columnas numéricas
             dgvDetallePedido.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDetallePedido.Columns["DPED_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -257,6 +212,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Setemoa el valor de la interface
             SetInterface(estadoUI.inicio);
         }
+
         #endregion 
 
         #region Servicios
@@ -356,15 +312,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     //Escondo las columnas que no quiero mostrar de la grilla
                     dgvDatos.Columns["DPMES_CODIGO"].Visible = false;
                     dgvDatos.Columns["PMES_CODIGO"].Visible = false;
-                    dgvDatos.Columns["DPMES_CANTIDADREAL"].Visible = false;
-
-                    //Escondo las columnas de las grillas de pedidos
-                    dgvPedidos.Columns["PED_CODIGO"].Visible = false;
-                    dgvPedidos.Columns["PED_FECHAENTREGAREAL"].Visible = false;                    
-
-                    dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
-                    dgvDetallePedido.Columns["PED_CODIGO"].Visible = false;
-                    dgvDetallePedido.Columns["DPED_FECHA_CANCELACION"].Visible = false;
+                    dgvDatos.Columns["DPMES_CANTIDADREAL"].Visible = false;                   
                     break;
                     
                 case estadoUI.modificar:
@@ -376,12 +324,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     SetInterface(estadoUI.cargaDetalle);
                     estadoActual = estadoUI.modificar;
                     //Radiobuttons
-                    rbUnidades.Checked = true;
-
-                    //Escondo las columnas que no quiero mostrar de la grilla
-                    dgvDatos.Columns["DPMES_CODIGO"].Visible = false;
-                    dgvDatos.Columns["PMES_CODIGO"].Visible = false;
-                    dgvDatos.Columns["DPMES_CANTIDADREAL"].Visible = false;
+                    rbUnidades.Checked = true;                    
                     break;
 
                 case estadoUI.nuevo:
@@ -469,6 +412,10 @@ namespace GyCAP.UI.PlanificacionProduccion
                         nombre = dsPlanMensual.CLIENTES.FindByCLI_CODIGO(Convert.ToInt32(e.Value)).CLI_RAZONSOCIAL;
                         e.Value = nombre;
                         break;
+                    case "PED_FECHA_ALTA":
+                        nombre = Convert.ToDateTime(e.Value).ToShortDateString();
+                        e.Value = nombre;
+                        break;
                     default:
                         break;
                 }
@@ -547,6 +494,16 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
 
         private void dgvDatos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
+        private void dgvDetallePedido_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
+        private void dgvPedidos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
         }
@@ -1131,10 +1088,10 @@ namespace GyCAP.UI.PlanificacionProduccion
             try
             {
                 //Busco el Codigo del Pedido
-                int codigoPedido = Convert.ToInt32(dvListaPedidos[dgvPedidos.SelectedRows[0].Index]["ped_codigo"]);
+                int codigoPedido = Convert.ToInt32(dvListaPedidos[dgvPedidos.SelectedRows[0].Index]["ped_numero"]);
 
                 //Obtengo el detalle del pedido
-                BLL.DetallePedidoBLL.ObtenerDetallePedido(dsPlanMensual.DETALLE_PEDIDOS, codigoPedido);
+                BLL.DetallePedidoBLL.ObtenerDetallePedidoEstado(dsPlanMensual.DETALLE_PEDIDOS, codigoPedido, BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Pendiente"));
 
                 if (dsPlanMensual.DETALLE_PEDIDOS.Rows.Count > 0)
                 {
@@ -1142,16 +1099,13 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbDetallePedido.Visible = true;
                     btnPlanificar.Enabled = true;
                     seleccionPestaña = true;
-                    tcDatos.SelectedTab = tpDetallePedido;
-
-                    //Oculto la columna de código de detalle
-                    dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
+                    tcDatos.SelectedTab = tpDetallePedido;                  
                 }
                 else
                 {
                     gbDetallePedido.Visible = false;
                     btnPlanificar.Enabled = false;
-                    Entidades.Mensajes.MensajesABM.MsjValidacion("El Pedido Seleccionado no tiene Detalle", this.Text);
+                    Entidades.Mensajes.MensajesABM.MsjValidacion("El pedido seleccionado no tiene detalle.", this.Text);
                 }
 
             }
@@ -1312,5 +1266,6 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
 
         #endregion       
+   
     }
 }
