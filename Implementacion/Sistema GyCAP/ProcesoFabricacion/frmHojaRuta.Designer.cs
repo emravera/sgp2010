@@ -261,9 +261,9 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(8, 105);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(84, 13);
+            this.label14.Size = new System.Drawing.Size(75, 13);
             this.label14.TabIndex = 32;
-            this.label14.Text = "Ubicación stock:";
+            this.label14.Text = "Stock destino:";
             // 
             // cboUbicacionStock
             // 
@@ -309,7 +309,7 @@
             this.txtDescripcion.Location = new System.Drawing.Point(97, 129);
             this.txtDescripcion.MaxLength = 200;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(371, 93);
+            this.txtDescripcion.Size = new System.Drawing.Size(455, 93);
             this.txtDescripcion.TabIndex = 9;
             this.txtDescripcion.Text = "";
             // 
@@ -475,7 +475,7 @@
             0,
             0});
             this.nudSecuencia.Name = "nudSecuencia";
-            this.nudSecuencia.Size = new System.Drawing.Size(252, 21);
+            this.nudSecuencia.Size = new System.Drawing.Size(140, 21);
             this.nudSecuencia.TabIndex = 17;
             this.nudSecuencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 

@@ -137,5 +137,13 @@ namespace GyCAP.Entidades
             get { return tipo; }
             set { tipo = value; }
         }
+
+        private IList<MovimientoStock> movimientosStock;
+
+        public IList<MovimientoStock> MovimientosStock
+        {
+            get { return movimientosStock; }
+            set { movimientosStock = value; }
+        }
     }
 }

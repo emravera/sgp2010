@@ -16,7 +16,8 @@ namespace GyCAP.Entidades
             ParteSinHojaRuta, 
             CocinaSinEstructuraActiva,
             CentroTrabajoInactivo,
-            SinUbicacionStock
+            SinUbicacionStock,
+            StockInsuficiente
         };
 
         public enum TipoElemento

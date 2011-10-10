@@ -9,6 +9,7 @@ namespace GyCAP.Entidades.Enumeraciones
     {
         public enum EstadoOrdenEnum { Generada = 1, EnEspera = 2, EnProceso = 3, Finalizada = 4, Cancelada = 5 };
         public enum TipoOrden { Fabricación, Adquisición };
+        public enum NonWorkingDays { Sábado, Domingo, Saturday, Sunday };
 
         public static string GetFriendlyName(EstadoOrdenEnum estado)
         {

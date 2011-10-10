@@ -53,6 +53,16 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
+        public static void ObtenerTurnosPorCentros(DataTable dtTurnosPorCentros)
+        {
+            string sql = "SELECT txct_codigo, tur_codigo, cto_codigo FROM TURNOSXCENTROTRABAJO";
+            try
+            {
+                DB.FillDataTable(dtTurnosPorCentros, sql, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
         public static bool PuedeEliminarse(int codigo)
         {
             string sql = "SELECT count(tur_codigo) FROM TURNOSXCENTROTRABAJO WHERE tur_codigo = @p0";

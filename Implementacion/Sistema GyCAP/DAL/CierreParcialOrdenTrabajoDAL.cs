@@ -20,8 +20,8 @@ namespace GyCAP.DAL
                         ,[maq_codigo]
                         ,[cord_cantidad]
                         ,[cord_fechacierre]
-                        ,[cord_horacierre]
-                        ,[cord_observaciones]) 
+                        ,[cord_observaciones]
+                        ,[opr_fallidas]) 
                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6) SELECT @@Identity";                        
             
             object[] parametros = { cierreOrdenTrabajo.OrdenTrabajo.Numero,
@@ -29,8 +29,8 @@ namespace GyCAP.DAL
                                       cierreOrdenTrabajo.Maquina.Codigo,
                                       cierreOrdenTrabajo.Cantidad,
                                       cierreOrdenTrabajo.Fecha,
-                                      cierreOrdenTrabajo.Hora,
-                                      cierreOrdenTrabajo.Observaciones };
+                                      cierreOrdenTrabajo.Observaciones,
+                                      cierreOrdenTrabajo.OperacionesFallidas};
 
             cierreOrdenTrabajo.Codigo = Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion));
         }
@@ -54,16 +54,16 @@ namespace GyCAP.DAL
                         ,maq_codigo = @p1
                         ,cord_cantidad = @p2
                         ,cord_fechacierre = @p3
-                        ,cord_horacierre = @p4
-                        ,cord_observaciones = @p5 
+                        ,cord_observaciones = @p4
+                        ,opr_fallidas = @p5 
                         WHERE cord_codigo = @p6";
 
             object[] parametros = { cierreOrdenTrabajo.Empleado.Codigo,
                                       cierreOrdenTrabajo.Maquina.Codigo,
                                       cierreOrdenTrabajo.Cantidad,
                                       cierreOrdenTrabajo.Fecha,
-                                      cierreOrdenTrabajo.Hora,
-                                      cierreOrdenTrabajo.Observaciones };
+                                      cierreOrdenTrabajo.Observaciones,
+                                      cierreOrdenTrabajo.OperacionesFallidas};
 
             try
             {
@@ -74,7 +74,7 @@ namespace GyCAP.DAL
         
         public static void ObtenerCierresParcialesOrdenTrabajo(int numeroOrdenTrabajo, DataTable dtCierreParcialOrdenTrabajo)
         {
-            string sql = @"SELECT cord_codigo, ordt_numero, e_codigo, maq_codigo, cord_cantidad, cord_fechacierre, cord_horacierre, cord_observaciones 
+            string sql = @"SELECT cord_codigo, ordt_numero, e_codigo, maq_codigo, cord_cantidad, cord_fechacierre, cord_observaciones, opr_fallidas  
                         FROM CIERRE_ORDEN_TRABAJO WHERE ordt_numero = @p0";
 
             object[] parametros = { numeroOrdenTrabajo };

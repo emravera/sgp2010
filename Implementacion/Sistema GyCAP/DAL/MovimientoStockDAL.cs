@@ -20,7 +20,7 @@ namespace GyCAP.DAL
         public static void InsertarFinalizado(MovimientoStock movimientoStock, SqlTransaction transaccion)
         {
             Insertar(movimientoStock, transaccion);
-            Finalizar(movimientoStock, transaccion);
+            FinalizarMovimiento(movimientoStock, transaccion);
         }
 
         private static void Insertar(MovimientoStock movimientoStock, SqlTransaction transaccion)
@@ -39,15 +39,15 @@ namespace GyCAP.DAL
                         VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9) SELECT @@Identity";
 
             object fechaPrevista = DBNull.Value, fechaReal = DBNull.Value, destino = DBNull.Value, duenio = DBNull.Value;
-            if (movimientoStock.FechaPrevista.HasValue) { fechaPrevista = movimientoStock.FechaPrevista.Value.ToShortDateString(); }
-            if (movimientoStock.FechaReal.HasValue) { fechaReal = movimientoStock.FechaReal.Value.ToShortDateString(); }
+            if (movimientoStock.FechaPrevista.HasValue) { fechaPrevista = movimientoStock.FechaPrevista.Value.ToString("yyyyMMdd"); }
+            if (movimientoStock.FechaReal.HasValue) { fechaReal = movimientoStock.FechaReal.Value.ToString("yyyyMMdd"); }
             if (movimientoStock.Destino != null) { destino = movimientoStock.Destino.Codigo; }
             if (movimientoStock.Duenio != null) { duenio = movimientoStock.Duenio.Codigo; }
 
             object[] parametros = { 
                                       movimientoStock.Codigo,
                                       movimientoStock.Descripcion,
-                                      movimientoStock.FechaAlta.ToShortDateString(),
+                                      movimientoStock.FechaAlta.ToString("yyyyMMdd"),
                                       fechaPrevista,
                                       fechaReal,
                                       movimientoStock.CantidadDestinoEstimada,
@@ -72,10 +72,15 @@ namespace GyCAP.DAL
                             ([entd_codigo]
                             ,[om_cantidad_estimada]
                             ,[om_cantidad_real]
-                            ,[mvto_numero])
-                            VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+                            ,[mvto_numero]
+                            ,[om_fechaprevista])
+                            VALUES (@p0, @p1, @p2, @p3, @p4) SELECT @@Identity";
 
-            object[] parametros = { origen.Entidad.Codigo, origen.CantidadEstimada, origen.CantidadReal, origen.MovimientoStock };
+            object[] parametros = { origen.Entidad.Codigo, 
+                                      origen.CantidadEstimada, 
+                                      origen.CantidadReal, 
+                                      origen.MovimientoStock, 
+                                      origen.FechaPrevista.ToString("yyyyMMdd") };
 
             origen.Codigo = Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion));
         }
@@ -120,19 +125,22 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new BaseDeDatosException(ex.Message); }
         }
-        
-        public static void ActualizarCantidadesParciales(int numeroMovimiento, decimal cantidadOrigenReal, decimal cantidadDestinoReal, SqlTransaction transaccion)
-        {
-            string sql = @"UPDATE MOVIMIENTOS_STOCK SET 
-                         mvto_cantidad_origen_real  = mvto_cantidad_origen_real + @p0 
-                        ,mvto_cantidad_destino_real = mvto_cantidad_destino_real + @p1 
-                         WHERE mvto_numero = @p2";
 
-            object[] parametros = { cantidadOrigenReal, cantidadDestinoReal, numeroMovimiento };
+        public static void IniciarMovimiento(MovimientoStock movimiento, SqlTransaction transaccion)
+        {
+            string sql = "UPDATE MOVIMIENTOS_STOCK SET emvto_codigo = @p0 WHERE mvto_numero = @p1";
+
+            object[] parametros = { movimiento.Estado.Codigo, movimiento.Numero };
+
             DB.executeNonQuery(sql, parametros, transaccion);
+
+            foreach (OrigenMovimiento origen in movimiento.OrigenesMultiples)
+	        {
+                FinalizarOrigen(origen, transaccion);
+        	}
         }
 
-        public static void Finalizar(MovimientoStock movimiento, SqlTransaction transaccion)
+        public static void FinalizarMovimiento(MovimientoStock movimiento, SqlTransaction transaccion)
         {
             string sql = @"UPDATE MOVIMIENTOS_STOCK SET 
                          mvto_cantidad_destino_real = @p0
@@ -142,7 +150,7 @@ namespace GyCAP.DAL
             
             object[] parametros = { 
                                       movimiento.CantidadDestinoReal, 
-                                      movimiento.FechaReal.Value.ToShortDateString(), 
+                                      movimiento.FechaReal.Value.ToString("yyyyMMdd"), 
                                       movimiento.Estado.Codigo,
                                       movimiento.Numero 
                                   };
@@ -153,14 +161,9 @@ namespace GyCAP.DAL
             {
                 _transaccion = (transaccion == null) ? DB.IniciarTransaccion() : transaccion;
 
-                DB.executeNonQuery(sql, parametros, _transaccion);
-
-                foreach (OrigenMovimiento item in movimiento.OrigenesMultiples)
-                {
-                    FinalizarOrigen(item, transaccion);
-                }                
+                DB.executeNonQuery(sql, parametros, _transaccion);                
                 
-                if (movimiento.Destino.EntidadExterna != null && movimiento.Destino.EntidadExterna.GetType() == typeof(Entidades.UbicacionStock))
+                if (movimiento.Destino.EntidadExterna != null && movimiento.Destino.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
                 {
                     UbicacionStockDAL.ActualizarCantidadesStockAndParents((movimiento.Destino.EntidadExterna as Entidades.UbicacionStock).Numero, movimiento.CantidadDestinoReal, _transaccion);
                 }
@@ -183,14 +186,15 @@ namespace GyCAP.DAL
         private static void FinalizarOrigen(OrigenMovimiento origen, SqlTransaction transaccion)
         {
             string sql = @"UPDATE ORIGENES_MOVIMIENTO_STOCK SET 
-                            om_cantidad_real = @p0
-                            WHERE om_codigo = @p1";
+                            om_cantidad_real = @p0,
+                            om_fechareal = @p1
+                            WHERE om_codigo = @p2";
 
-            object[] parametros = { origen.CantidadReal, origen.Codigo };
+            object[] parametros = { origen.CantidadReal, origen.FechaReal.Value.ToString("yyyyMMdd"), origen.Codigo };
 
-            if (origen.Entidad.EntidadExterna != null && origen.Entidad.EntidadExterna.GetType() == typeof(Entidades.UbicacionStock))
+            if (origen.Entidad.EntidadExterna != null && origen.Entidad.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
             {
-                UbicacionStockDAL.ActualizarCantidadesStockAndParents((origen.Entidad.EntidadExterna as Entidades.UbicacionStock).Numero, origen.CantidadReal, transaccion);
+                UbicacionStockDAL.ActualizarCantidadesStockAndParents((origen.Entidad.EntidadExterna as Entidades.UbicacionStock).Numero, origen.CantidadReal * -1, transaccion);
             }
             
             DB.executeNonQuery(sql, parametros, transaccion);
@@ -205,7 +209,7 @@ namespace GyCAP.DAL
 
             try
             {
-                object[] parametros = { DB.GetFechaServidor().ToShortDateString(), (int)StockEnum.EstadoMovimientoStock.Cancelado, numeroMovimiento };
+                object[] parametros = { DB.GetFechaServidor().ToString("yyyyMMdd"), (int)StockEnum.EstadoMovimientoStock.Cancelado, numeroMovimiento };
 
                 DB.executeNonQuery(sql, parametros, null);
             }
@@ -309,10 +313,14 @@ namespace GyCAP.DAL
 
         public static Data.dsStock.ORIGENES_MOVIMIENTO_STOCKDataTable ObtenerOrigenes(int numeroMovimiento)
         {
-            string sql = "SELECT om_codigo, om_cantidad_estimada, om_cantidad_real, entd_codigo, mvto_numero FROM ORIGENES_MOVIMIENTO_STOCK";
+            string sql = @"SELECT om_codigo, om_cantidad_estimada, om_cantidad_real, entd_codigo, mvto_numero, om_fechaprevista, om_fechareal  
+                            FROM ORIGENES_MOVIMIENTO_STOCK WHERE mvto_numero = @p0";
+
             object[] parametros = { numeroMovimiento };
             Data.dsStock.ORIGENES_MOVIMIENTO_STOCKDataTable dt = new GyCAP.Data.dsStock.ORIGENES_MOVIMIENTO_STOCKDataTable();
+            
             DB.FillDataTable(dt, sql, parametros);
+
             return dt;
         }
 
@@ -395,6 +403,18 @@ namespace GyCAP.DAL
             }
 
             return dt;
+        }
+
+        public static void GetMovimientosByOwner(Entidad owner, DataTable dt)
+        {
+            string sql = @"SELECT mvto_numero, mvto_codigo, mvto_descripcion, mvto_fechaalta, mvto_fechaprevista, 
+                            mvto_fechareal, mvto_cantidad_destino_estimada, mvto_cantidad_destino_real, emvto_codigo, 
+                            entd_destino, entd_duenio   
+                            FROM MOVIMIENTOS_STOCK WHERE entd_duenio = @p0 ";
+
+            object[] parametros = { owner.Codigo };
+            
+            DB.FillDataTable(dt, sql, parametros);
         }
     }
 }

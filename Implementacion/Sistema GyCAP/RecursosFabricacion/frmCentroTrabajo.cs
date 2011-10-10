@@ -622,5 +622,38 @@ namespace GyCAP.UI.RecursosFabricacion
         }
 
         #endregion
+
+        private void cbTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                switch (cbTipo.GetSelectedValueInt())
+                {
+                    case (int)RecursosFabricacionEnum.TipoCentroTrabajo.Hombre:
+                    case (int)RecursosFabricacionEnum.TipoCentroTrabajo.Proveedor:
+                        nudCapacidadCiclo.Enabled = false;
+                        nudCapacidadUnidadHora.Enabled = true;
+                        nudCostoCiclo.Enabled = false;
+                        nudCostoHora.Enabled = true;
+                        nudTiempoCiclo.Enabled = false;
+                        nudCapacidadCiclo.Value = 0;
+                        nudTiempoCiclo.Value = 0;
+                        nudCostoCiclo.Value = 0;
+                        break;
+                    case (int)RecursosFabricacionEnum.TipoCentroTrabajo.Maquina:
+                        nudCapacidadCiclo.Enabled = true;
+                        nudCapacidadUnidadHora.Enabled = false;
+                        nudCostoCiclo.Enabled = true;
+                        nudCostoHora.Enabled = false;
+                        nudTiempoCiclo.Enabled = true;
+                        nudCapacidadUnidadHora.Value = 0;
+                        nudCostoHora.Value = 0;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception) { }
+        }
     }
 }

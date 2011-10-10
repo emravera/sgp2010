@@ -47,11 +47,16 @@ namespace GyCAP.BLL
             }
         }
 
-        public static void Finalizar(Entidades.MovimientoStock movimientoStock)
+        public static void Iniciar(MovimientoStock movimiento, SqlTransaction transaccion)
         {
-            if (DAL.MovimientoStockDAL.EsFinalizado(movimientoStock.Numero)) { return; }
+            ValidarMovimiento(movimiento);
+            DAL.MovimientoStockDAL.IniciarMovimiento(movimiento, transaccion);
+        }
+
+        public static void Finalizar(MovimientoStock movimientoStock, SqlTransaction transaccion)
+        {
             ValidarMovimiento(movimientoStock);
-            DAL.MovimientoStockDAL.Finalizar(movimientoStock, null);
+            DAL.MovimientoStockDAL.FinalizarMovimiento(movimientoStock, transaccion);
         }
 
         public static void EliminarMovimientosPedido(int codigoEntidad)
@@ -126,7 +131,8 @@ namespace GyCAP.BLL
                     CantidadEstimada = row.OM_CANTIDAD_ESTIMADA,
                     CantidadReal = row.OM_CANTIDAD_REAL,
                     MovimientoStock = Convert.ToInt32(row.MVTO_NUMERO),
-                    Entidad = EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_CODIGO))
+                    Entidad = EntidadBLL.GetEntidad(Convert.ToInt32(row.ENTD_CODIGO)),
+                    FechaPrevista = row.OM_FECHAPREVISTA
                 });
             }
 
@@ -199,6 +205,35 @@ namespace GyCAP.BLL
             movimiento.FechaAlta = DAL.DB.GetFechaServidor();
             movimiento.OrigenesMultiples = new List<OrigenMovimiento>();
             return movimiento;
+        }
+
+        public static IList<MovimientoStock> GetMovimientosByOwner(Entidad owner)
+        {
+            Data.dsStock.MOVIMIENTOS_STOCKDataTable dt = new GyCAP.Data.dsStock.MOVIMIENTOS_STOCKDataTable();
+            Data.dsStock.ORIGENES_MOVIMIENTO_STOCKDataTable dtOrigenes = new GyCAP.Data.dsStock.ORIGENES_MOVIMIENTO_STOCKDataTable();
+            DAL.MovimientoStockDAL.GetMovimientosByOwner(owner, dt);
+            IList<MovimientoStock> listaMovimientos = new List<MovimientoStock>();
+            
+            foreach (Data.dsStock.MOVIMIENTOS_STOCKRow rowMVTO in dt.Rows)
+            {
+                MovimientoStock mvto = new MovimientoStock();
+                mvto.Numero = Convert.ToInt32(rowMVTO.MVTO_NUMERO);
+                mvto.Codigo = rowMVTO.MVTO_CODIGO;
+                mvto.Descripcion = rowMVTO.MVTO_DESCRIPCION;
+                mvto.FechaAlta = rowMVTO.MVTO_FECHAALTA;
+                if (!rowMVTO.IsMVTO_FECHAPREVISTANull()) { mvto.FechaPrevista = rowMVTO.MVTO_FECHAPREVISTA; }
+                if (!rowMVTO.IsMVTO_FECHAREALNull()) { mvto.FechaReal = rowMVTO.MVTO_FECHAREAL; }
+                mvto.Estado = EstadoMovimientoStockBLL.GetEstadoEntity(Convert.ToInt32(rowMVTO.EMVTO_CODIGO));
+                mvto.CantidadDestinoEstimada = rowMVTO.MVTO_CANTIDAD_DESTINO_ESTIMADA;
+                mvto.CantidadDestinoReal = rowMVTO.MVTO_CANTIDAD_DESTINO_REAL;
+                mvto.OrigenesMultiples = GetOrigenesMovimiento(Convert.ToInt32(rowMVTO.MVTO_NUMERO));
+                mvto.Destino = (!rowMVTO.IsENTD_DESTINONull()) ? EntidadBLL.GetEntidad(Convert.ToInt32(rowMVTO.ENTD_DESTINO)) : null;
+                mvto.Duenio = owner;
+
+                listaMovimientos.Add(mvto);
+            }
+
+            return listaMovimientos;
         }
     }
 }

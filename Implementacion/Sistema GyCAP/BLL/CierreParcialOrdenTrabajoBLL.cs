@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Data.SqlClient;
 using GyCAP.Entidades;
 using GyCAP.Entidades.BindingEntity;
 
@@ -32,19 +33,23 @@ namespace GyCAP.BLL
             {
                 CierreParcialOrdenTrabajo cierre = new CierreParcialOrdenTrabajo();
                 cierre.Codigo = Convert.ToInt32(row.CORD_CODIGO);
-                cierre.Cantidad = row.CORD_CANTIDAD;
+                cierre.Cantidad = Convert.ToInt32(row.CORD_CANTIDAD);
                 cierre.Empleado = empleados.Where(p => p.Codigo == long.Parse(row.E_CODIGO.ToString())).Single();
-                if (row.IsCORD_FECHACIERRENull()) { cierre.Fecha = null; }
-                else { cierre.Fecha = row.CORD_FECHACIERRE; }
-                cierre.Hora = 0;
+                cierre.Fecha = row.CORD_FECHACIERRE;
                 cierre.Maquina = maquinas.Where(p => p.Codigo == Convert.ToInt32(row.MAQ_CODIGO)).Single();
                 cierre.Observaciones = row.CORD_OBSERVACIONES;
+                cierre.OperacionesFallidas = Convert.ToInt32(row.OPR_FALLIDAS);
                 cierre.OrdenTrabajo = orden;
 
                 lista.Add(cierre);
             }
 
             return orden.CierresParciales = lista;
+        }
+
+        public static void Insertar(CierreParcialOrdenTrabajo cierre, SqlTransaction transaccion)
+        {
+            DAL.CierreParcialOrdenTrabajoDAL.Insertar(cierre, transaccion);
         }
     }
 }
