@@ -172,7 +172,7 @@
             this.btnCancelarPedido.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnCancelarPedido.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelarPedido.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Warning_25;
-            this.btnCancelarPedido.Location = new System.Drawing.Point(5, 137);
+            this.btnCancelarPedido.Location = new System.Drawing.Point(7, 137);
             this.btnCancelarPedido.Name = "btnCancelarPedido";
             this.btnCancelarPedido.Size = new System.Drawing.Size(66, 44);
             this.btnCancelarPedido.TabIndex = 18;
@@ -345,7 +345,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(19, 66);
+            this.label14.Location = new System.Drawing.Point(19, 65);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(72, 13);
             this.label14.TabIndex = 39;
@@ -819,7 +819,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(48, 13);
             this.label9.TabIndex = 7;
-            this.label9.Text = "Numero:";
+            this.label9.Text = "Número:";
             // 
             // cboEstado
             // 

@@ -36,13 +36,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvLista.Columns.Add("PAN_CODIGO", "Código");
             dgvLista.Columns.Add("PAN_ANIO", "Año Plan");
             dgvLista.Columns.Add("DEMAN_CODIGO", "Demanda");
-            dgvLista.Columns.Add("PAN_FECHACREACION", "Fecha Creación");
-
-            //Seteamos el modo de tamaño de las columnas
-            dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvLista.Columns.Add("PAN_FECHACREACION", "Fecha Creación");         
             
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["PAN_CODIGO"].DataPropertyName = "PAN_CODIGO";
@@ -67,12 +61,8 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns["DPAN_CANTIDADMES"].DataPropertyName = "DPAN_CANTIDADMES";
             
             //Seteamos el modo de tamaño de las columnas
-            dgvDetalle.Columns[0].Visible = false;
-            dgvDetalle.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetalle.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetalle.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-            dgvDetalle.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetalle.Columns["DPAN_CODIGO"].Visible = false;
+            dgvDetalle.Columns["DPAN_CANTIDADMES"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetalle = new DataView(dsPlanAnual.DETALLE_PLAN_ANUAL);
@@ -241,7 +231,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     numCostoVariable.Value = 0;
 
                     //Obtengo los valores de capcidad de stock y produccion calculados
-                    numCapacidadProducción.Value = BLL.FabricaBLL.GetCapacidadAnualBruta(null, GyCAP.Entidades.Enumeraciones.RecursosFabricacionEnum.TipoHorario.Normal);
+                    numCapacidadProducción.Value = BLL.FabricaBLL.GetCapacidadSemanalBruta(null, GyCAP.Entidades.Enumeraciones.RecursosFabricacionEnum.TipoHorario.Normal);
                     numCapacidadStock.Value = BLL.ConfiguracionSistemaBLL.GetConfiguracion<int>("CapacidadStock");
                     
                     //Cargo el costo variable del producto
@@ -416,11 +406,8 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
         private void CalculaTotal()
         {
-            int totalDemanda=0;
-            if (txtTotal.Text != string.Empty && txtDemandaNoCubierta.Text != string.Empty)
-            {
-                totalDemanda = Convert.ToInt32(txtTotal.Text) + Convert.ToInt32(txtDemandaNoCubierta.Text);
-            }
+            int totalDemanda = BLL.DetalleDemandaAnualBLL.ObtenerTotal(Convert.ToInt32(cbEstimacionDemanda.GetSelectedValue()));
+            
             totalActual = 0;
             totalActual += Convert.ToDecimal(numEnero.Value);
             totalActual += Convert.ToDecimal(numFebrero.Value);
@@ -437,32 +424,60 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             //Se lo asigno al texbox que lo muestra por pantalla
             txtTotal.Text = totalActual.ToString();
-            txtDemandaNoCubierta.Text = Convert.ToString(totalDemanda - totalActual);           
+
+            //Se calculan los valores de demanda no cubierta y de sobreproduccion
+            decimal result = totalDemanda - totalActual;
+            if (result > 0)
+            {
+                txtDemandaNoCubierta.Text = Convert.ToString(result);                
+                txtSobreproduccion.Text = Convert.ToString(0);
+            }
+            else
+            {
+                txtDemandaNoCubierta.Text = Convert.ToString(0);
+                txtSobreproduccion.Text = Convert.ToString(result);
+            }
         }
 
         //Metodo para generar gráficos a partir de un array
         private void GenerarGrafico(int[] Plan)
         {
-            //Creo el grafico
-            //Elimino la serie que esta ahora
-            chartDemanda.Series.Remove(chartDemanda.Series[0]);
+            //Elimino las series
+            chartDemanda.Series.Clear();
+
+            seriesGraficos += 1;
+
+            //Calculo la capacidad de la fabrica
+            int capacidadFabrica = (BLL.FabricaBLL.GetCapacidadSemanalBruta(null, GyCAP.Entidades.Enumeraciones.RecursosFabricacionEnum.TipoHorario.Normal));
+            int[] semanasMes = new int[12];
+            semanasMes = SemanasAño(Convert.ToInt32(txtAnio.Text));            
+
             //Agrego una serie nueva con el nombre del contador de series
             chartDemanda.Series.Add(seriesGraficos.ToString());
-            seriesGraficos += seriesGraficos;
+            chartDemanda.Series.Add("Constante" + seriesGraficos.ToString());
+
             //Defino el tipo de grafico que deseo
             chartDemanda.Series[seriesGraficos.ToString()].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Column;
+            chartDemanda.Series["Constante" + seriesGraficos.ToString()].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            chartDemanda.Series["Constante" + seriesGraficos.ToString()].Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
 
-            //Lo dibujo
+            //Dibujo los valores del grafico de la estimacion
             double plotY = 0;
             if (chartDemanda.Series[seriesGraficos.ToString()].Points.Count > 0)
             {
                 plotY = chartDemanda.Series[seriesGraficos.ToString()].Points[chartDemanda.Series[seriesGraficos.ToString()].Points.Count - 1].YValues[0];
             }
 
+            if (chartDemanda.Series["Constante" + seriesGraficos.ToString()].Points.Count > 0)
+            {
+                capacidadFabrica = Convert.ToInt32(chartDemanda.Series["Constante" + seriesGraficos.ToString()].Points[chartDemanda.Series["Constante" + seriesGraficos.ToString()].Points.Count - 1].YValues[0]);
+            }
+
             for (int pointIndex = 0; pointIndex < Plan.Count(); pointIndex++)
             {
                 plotY = Convert.ToInt32(Plan[pointIndex]);
                 chartDemanda.Series[seriesGraficos.ToString()].Points.AddY(plotY);
+                chartDemanda.Series["Constante" + seriesGraficos.ToString()].Points.AddY(Convert.ToDouble(capacidadFabrica) * semanasMes[pointIndex]);
             }
         }
 
@@ -585,6 +600,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                         demandaActualCantidades[i] = BLL.DetalleDemandaAnualBLL.CantidadAñoMes(demandaActual.Anio, demandaActual.Nombre, Meses[i]);
 
                     }
+                    
                     //3-Lo paso a semanas
                     //3-1-Obtengo las semanas en cada mes 
                     int[] semanasMesDA = new int[13];
@@ -933,7 +949,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             int[] semanasMes = new int[12];
 
-            for (int i = 1; i <= 12; i++)
+           for (int i = 1; i <= 12; i++)
             {
                 int ultimaSemana, primerSemana;
 
@@ -954,6 +970,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
                 semanasMes[i - 1] = ultimaSemana - primerSemana;
             }
+
             return semanasMes;
         }
 

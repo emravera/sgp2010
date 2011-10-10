@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tcPlanes = new System.Windows.Forms.TabControl();
             this.tpPlanSemanal = new System.Windows.Forms.TabPage();
             this.gbDetallePlanSemanal = new System.Windows.Forms.GroupBox();
@@ -47,6 +47,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dgvDetalleDiario = new System.Windows.Forms.DataGridView();
             this.gbDatosPrincipales = new System.Windows.Forms.GroupBox();
+            this.cbPlanSemanal = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbPlanMensual = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbPlanAnual = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label12 = new System.Windows.Forms.Label();
             this.btnCargaPlanSemanal = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -66,6 +69,7 @@
             this.dgvDetalleMensual = new System.Windows.Forms.DataGridView();
             this.btnVolver2 = new System.Windows.Forms.Button();
             this.gbDatosPlanAnual = new System.Windows.Forms.GroupBox();
+            this.cbPlanAnual2 = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.btnDatosPlanAnual = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.gbGraficaPlanAnual = new System.Windows.Forms.GroupBox();
@@ -76,10 +80,6 @@
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.cbPlanSemanal = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbPlanMensual = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbPlanAnual = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbPlanAnual2 = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.tcPlanes.SuspendLayout();
             this.tpPlanSemanal.SuspendLayout();
             this.gbDetallePlanSemanal.SuspendLayout();
@@ -134,7 +134,7 @@
             this.gbDetallePlanSemanal.Controls.Add(this.tcDetalle);
             this.gbDetallePlanSemanal.Location = new System.Drawing.Point(3, 80);
             this.gbDetallePlanSemanal.Name = "gbDetallePlanSemanal";
-            this.gbDetallePlanSemanal.Size = new System.Drawing.Size(563, 328);
+            this.gbDetallePlanSemanal.Size = new System.Drawing.Size(718, 328);
             this.gbDetallePlanSemanal.TabIndex = 16;
             this.gbDetallePlanSemanal.TabStop = false;
             this.gbDetallePlanSemanal.Text = "Detalle de Plan";
@@ -146,7 +146,7 @@
             this.tcDetalle.Location = new System.Drawing.Point(9, 19);
             this.tcDetalle.Name = "tcDetalle";
             this.tcDetalle.SelectedIndex = 0;
-            this.tcDetalle.Size = new System.Drawing.Size(532, 303);
+            this.tcDetalle.Size = new System.Drawing.Size(597, 303);
             this.tcDetalle.TabIndex = 6;
             // 
             // tpDias
@@ -158,9 +158,9 @@
             this.tpDias.Location = new System.Drawing.Point(4, 22);
             this.tpDias.Name = "tpDias";
             this.tpDias.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDias.Size = new System.Drawing.Size(524, 277);
+            this.tpDias.Size = new System.Drawing.Size(589, 277);
             this.tpDias.TabIndex = 0;
-            this.tpDias.Text = "Dias Plan";
+            this.tpDias.Text = "Días Plan";
             this.tpDias.UseVisualStyleBackColor = true;
             // 
             // chDetallesDiarios
@@ -168,24 +168,24 @@
             this.chDetallesDiarios.AutoSize = true;
             this.chDetallesDiarios.Location = new System.Drawing.Point(19, 249);
             this.chDetallesDiarios.Name = "chDetallesDiarios";
-            this.chDetallesDiarios.Size = new System.Drawing.Size(96, 17);
+            this.chDetallesDiarios.Size = new System.Drawing.Size(98, 17);
             this.chDetallesDiarios.TabIndex = 8;
-            this.chDetallesDiarios.Text = "Todos los Dias";
+            this.chDetallesDiarios.Text = "Todos los Días";
             this.chDetallesDiarios.UseVisualStyleBackColor = true;
             // 
             // btnAvanceDiario
             // 
-            this.btnAvanceDiario.Location = new System.Drawing.Point(337, 245);
+            this.btnAvanceDiario.Location = new System.Drawing.Point(413, 245);
             this.btnAvanceDiario.Name = "btnAvanceDiario";
             this.btnAvanceDiario.Size = new System.Drawing.Size(82, 23);
             this.btnAvanceDiario.TabIndex = 7;
-            this.btnAvanceDiario.Text = "Ver Grafica";
+            this.btnAvanceDiario.Text = "Ver Gráfica";
             this.btnAvanceDiario.UseVisualStyleBackColor = true;
             this.btnAvanceDiario.Click += new System.EventHandler(this.btnAvanceDiario_Click);
             // 
             // btnDetalleDiario
             // 
-            this.btnDetalleDiario.Location = new System.Drawing.Point(425, 245);
+            this.btnDetalleDiario.Location = new System.Drawing.Point(501, 245);
             this.btnDetalleDiario.Name = "btnDetalleDiario";
             this.btnDetalleDiario.Size = new System.Drawing.Size(82, 23);
             this.btnDetalleDiario.TabIndex = 5;
@@ -206,8 +206,9 @@
             this.dgvDetallePlan.RowHeadersVisible = false;
             this.dgvDetallePlan.RowTemplate.ReadOnly = true;
             this.dgvDetallePlan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetallePlan.Size = new System.Drawing.Size(501, 236);
+            this.dgvDetallePlan.Size = new System.Drawing.Size(577, 236);
             this.dgvDetallePlan.TabIndex = 1;
+            this.dgvDetallePlan.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDetallePlan_DataBindingComplete);
             this.dgvDetallePlan.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetallePlan_CellContentClick);
             // 
             // tpDetalleDiario
@@ -217,14 +218,14 @@
             this.tpDetalleDiario.Location = new System.Drawing.Point(4, 22);
             this.tpDetalleDiario.Name = "tpDetalleDiario";
             this.tpDetalleDiario.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDetalleDiario.Size = new System.Drawing.Size(524, 277);
+            this.tpDetalleDiario.Size = new System.Drawing.Size(589, 277);
             this.tpDetalleDiario.TabIndex = 1;
             this.tpDetalleDiario.Text = "Detalle Diario";
             this.tpDetalleDiario.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(424, 248);
+            this.button1.Location = new System.Drawing.Point(501, 248);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(82, 23);
             this.button1.TabIndex = 6;
@@ -245,9 +246,10 @@
             this.dgvDetalleDiario.ReadOnly = true;
             this.dgvDetalleDiario.RowHeadersVisible = false;
             this.dgvDetalleDiario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalleDiario.Size = new System.Drawing.Size(502, 230);
+            this.dgvDetalleDiario.Size = new System.Drawing.Size(577, 230);
             this.dgvDetalleDiario.TabIndex = 2;
-            this.dgvDetalleDiario.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetalleMensual_CellFormatting);
+            this.dgvDetalleDiario.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetalleDiario_CellFormatting);
+            this.dgvDetalleDiario.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDetalleDiario_DataBindingComplete);
             this.dgvDetalleDiario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleDiario_CellContentClick);
             // 
             // gbDatosPrincipales
@@ -265,6 +267,38 @@
             this.gbDatosPrincipales.TabIndex = 14;
             this.gbDatosPrincipales.TabStop = false;
             this.gbDatosPrincipales.Text = "Datos Principales";
+            // 
+            // cbPlanSemanal
+            // 
+            this.cbPlanSemanal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlanSemanal.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlanSemanal.FormattingEnabled = true;
+            this.cbPlanSemanal.Location = new System.Drawing.Point(511, 22);
+            this.cbPlanSemanal.Name = "cbPlanSemanal";
+            this.cbPlanSemanal.Size = new System.Drawing.Size(95, 21);
+            this.cbPlanSemanal.TabIndex = 30;
+            // 
+            // cbPlanMensual
+            // 
+            this.cbPlanMensual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlanMensual.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlanMensual.FormattingEnabled = true;
+            this.cbPlanMensual.Location = new System.Drawing.Point(355, 22);
+            this.cbPlanMensual.Name = "cbPlanMensual";
+            this.cbPlanMensual.Size = new System.Drawing.Size(95, 21);
+            this.cbPlanMensual.TabIndex = 29;
+            this.cbPlanMensual.DropDownClosed += new System.EventHandler(this.cbPlanMensual_DropDownClosed);
+            // 
+            // cbPlanAnual
+            // 
+            this.cbPlanAnual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlanAnual.FormattingEnabled = true;
+            this.cbPlanAnual.Location = new System.Drawing.Point(144, 21);
+            this.cbPlanAnual.Name = "cbPlanAnual";
+            this.cbPlanAnual.Size = new System.Drawing.Size(95, 21);
+            this.cbPlanAnual.TabIndex = 28;
+            this.cbPlanAnual.DropDownClosed += new System.EventHandler(this.cbPlanAnual_DropDownClosed);
             // 
             // label12
             // 
@@ -326,17 +360,16 @@
             // 
             // chartAvance
             // 
-            chartArea9.Name = "ChartArea1";
-            this.chartAvance.ChartAreas.Add(chartArea9);
-            legend9.Name = "LeyendaPS";
-            this.chartAvance.Legends.Add(legend9);
+            chartArea3.Name = "ChartArea1";
+            this.chartAvance.ChartAreas.Add(chartArea3);
+            legend3.Name = "LeyendaPS";
+            this.chartAvance.Legends.Add(legend3);
             this.chartAvance.Location = new System.Drawing.Point(32, 19);
             this.chartAvance.Name = "chartAvance";
-            this.chartAvance.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
-            series9.ChartArea = "ChartArea1";
-            series9.Legend = "LeyendaPS";
-            series9.Name = "Series1";
-            this.chartAvance.Series.Add(series9);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "LeyendaPS";
+            series3.Name = "Series1";
+            this.chartAvance.Series.Add(series3);
             this.chartAvance.Size = new System.Drawing.Size(663, 270);
             this.chartAvance.TabIndex = 1;
             this.chartAvance.Text = "chart1";
@@ -359,7 +392,7 @@
             this.gbDetallePlanAnual.Controls.Add(this.tcPlanAnual);
             this.gbDetallePlanAnual.Location = new System.Drawing.Point(3, 74);
             this.gbDetallePlanAnual.Name = "gbDetallePlanAnual";
-            this.gbDetallePlanAnual.Size = new System.Drawing.Size(568, 328);
+            this.gbDetallePlanAnual.Size = new System.Drawing.Size(710, 328);
             this.gbDetallePlanAnual.TabIndex = 20;
             this.gbDetallePlanAnual.TabStop = false;
             this.gbDetallePlanAnual.Text = "Detalle de Plan Anual";
@@ -371,7 +404,7 @@
             this.tcPlanAnual.Location = new System.Drawing.Point(6, 19);
             this.tcPlanAnual.Name = "tcPlanAnual";
             this.tcPlanAnual.SelectedIndex = 0;
-            this.tcPlanAnual.Size = new System.Drawing.Size(545, 310);
+            this.tcPlanAnual.Size = new System.Drawing.Size(646, 310);
             this.tcPlanAnual.TabIndex = 6;
             // 
             // tpMesesPlanAnual
@@ -383,14 +416,14 @@
             this.tpMesesPlanAnual.Location = new System.Drawing.Point(4, 22);
             this.tpMesesPlanAnual.Name = "tpMesesPlanAnual";
             this.tpMesesPlanAnual.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMesesPlanAnual.Size = new System.Drawing.Size(537, 284);
+            this.tpMesesPlanAnual.Size = new System.Drawing.Size(638, 284);
             this.tpMesesPlanAnual.TabIndex = 0;
             this.tpMesesPlanAnual.Text = "Meses Plan";
             this.tpMesesPlanAnual.UseVisualStyleBackColor = true;
             // 
             // btnGraficaPA
             // 
-            this.btnGraficaPA.Location = new System.Drawing.Point(367, 250);
+            this.btnGraficaPA.Location = new System.Drawing.Point(463, 250);
             this.btnGraficaPA.Name = "btnGraficaPA";
             this.btnGraficaPA.Size = new System.Drawing.Size(82, 23);
             this.btnGraficaPA.TabIndex = 9;
@@ -401,7 +434,7 @@
             // chTodosMeses
             // 
             this.chTodosMeses.AutoSize = true;
-            this.chTodosMeses.Location = new System.Drawing.Point(17, 250);
+            this.chTodosMeses.Location = new System.Drawing.Point(20, 254);
             this.chTodosMeses.Name = "chTodosMeses";
             this.chTodosMeses.Size = new System.Drawing.Size(105, 17);
             this.chTodosMeses.TabIndex = 8;
@@ -410,7 +443,7 @@
             // 
             // btnDetalleMeses
             // 
-            this.btnDetalleMeses.Location = new System.Drawing.Point(449, 250);
+            this.btnDetalleMeses.Location = new System.Drawing.Point(551, 250);
             this.btnDetalleMeses.Name = "btnDetalleMeses";
             this.btnDetalleMeses.Size = new System.Drawing.Size(82, 23);
             this.btnDetalleMeses.TabIndex = 5;
@@ -427,10 +460,13 @@
             this.dgvMesesPlanAnual.Location = new System.Drawing.Point(4, 6);
             this.dgvMesesPlanAnual.MultiSelect = false;
             this.dgvMesesPlanAnual.Name = "dgvMesesPlanAnual";
+            this.dgvMesesPlanAnual.ReadOnly = true;
             this.dgvMesesPlanAnual.RowHeadersVisible = false;
             this.dgvMesesPlanAnual.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMesesPlanAnual.Size = new System.Drawing.Size(519, 238);
+            this.dgvMesesPlanAnual.Size = new System.Drawing.Size(628, 238);
             this.dgvMesesPlanAnual.TabIndex = 1;
+            this.dgvMesesPlanAnual.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvMesesPlanAnual_CellFormatting);
+            this.dgvMesesPlanAnual.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvMesesPlanAnual_DataBindingComplete);
             this.dgvMesesPlanAnual.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMesesPlanAnual_CellContentClick);
             // 
             // tpDetalleMeses
@@ -440,7 +476,7 @@
             this.tpDetalleMeses.Location = new System.Drawing.Point(4, 22);
             this.tpDetalleMeses.Name = "tpDetalleMeses";
             this.tpDetalleMeses.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDetalleMeses.Size = new System.Drawing.Size(537, 284);
+            this.tpDetalleMeses.Size = new System.Drawing.Size(638, 284);
             this.tpDetalleMeses.TabIndex = 1;
             this.tpDetalleMeses.Text = "Detalle Meses";
             this.tpDetalleMeses.UseVisualStyleBackColor = true;
@@ -455,16 +491,18 @@
             this.dgvDetalleMensual.Location = new System.Drawing.Point(6, 6);
             this.dgvDetalleMensual.MultiSelect = false;
             this.dgvDetalleMensual.Name = "dgvDetalleMensual";
+            this.dgvDetalleMensual.ReadOnly = true;
             this.dgvDetalleMensual.RowHeadersVisible = false;
             this.dgvDetalleMensual.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalleMensual.Size = new System.Drawing.Size(512, 234);
+            this.dgvDetalleMensual.Size = new System.Drawing.Size(626, 234);
             this.dgvDetalleMensual.TabIndex = 7;
             this.dgvDetalleMensual.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetalleMensual_CellFormatting);
+            this.dgvDetalleMensual.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDetalleMensual_DataBindingComplete);
             this.dgvDetalleMensual.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleMensual_CellContentClick);
             // 
             // btnVolver2
             // 
-            this.btnVolver2.Location = new System.Drawing.Point(436, 255);
+            this.btnVolver2.Location = new System.Drawing.Point(550, 255);
             this.btnVolver2.Name = "btnVolver2";
             this.btnVolver2.Size = new System.Drawing.Size(82, 23);
             this.btnVolver2.TabIndex = 6;
@@ -483,6 +521,16 @@
             this.gbDatosPlanAnual.TabIndex = 17;
             this.gbDatosPlanAnual.TabStop = false;
             this.gbDatosPlanAnual.Text = "Datos Principales";
+            // 
+            // cbPlanAnual2
+            // 
+            this.cbPlanAnual2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlanAnual2.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlanAnual2.FormattingEnabled = true;
+            this.cbPlanAnual2.Location = new System.Drawing.Point(144, 21);
+            this.cbPlanAnual2.Name = "cbPlanAnual2";
+            this.cbPlanAnual2.Size = new System.Drawing.Size(95, 21);
+            this.cbPlanAnual2.TabIndex = 28;
             // 
             // btnDatosPlanAnual
             // 
@@ -526,17 +574,16 @@
             // 
             // chartPlanAnual
             // 
-            chartArea10.Name = "ChartArea1";
-            this.chartPlanAnual.ChartAreas.Add(chartArea10);
-            legend10.Name = "LeyendaPA";
-            this.chartPlanAnual.Legends.Add(legend10);
+            chartArea4.Name = "ChartArea1";
+            this.chartPlanAnual.ChartAreas.Add(chartArea4);
+            legend4.Name = "LeyendaPA";
+            this.chartPlanAnual.Legends.Add(legend4);
             this.chartPlanAnual.Location = new System.Drawing.Point(11, 19);
             this.chartPlanAnual.Name = "chartPlanAnual";
-            this.chartPlanAnual.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
-            series10.ChartArea = "ChartArea1";
-            series10.Legend = "LeyendaPA";
-            series10.Name = "Series1";
-            this.chartPlanAnual.Series.Add(series10);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "LeyendaPA";
+            series4.Name = "Series1";
+            this.chartPlanAnual.Series.Add(series4);
             this.chartPlanAnual.Size = new System.Drawing.Size(680, 281);
             this.chartPlanAnual.TabIndex = 1;
             this.chartPlanAnual.Text = "chart1";
@@ -599,48 +646,6 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // cbPlanSemanal
-            // 
-            this.cbPlanSemanal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPlanSemanal.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbPlanSemanal.FormattingEnabled = true;
-            this.cbPlanSemanal.Location = new System.Drawing.Point(511, 22);
-            this.cbPlanSemanal.Name = "cbPlanSemanal";
-            this.cbPlanSemanal.Size = new System.Drawing.Size(95, 21);
-            this.cbPlanSemanal.TabIndex = 30;
-            // 
-            // cbPlanMensual
-            // 
-            this.cbPlanMensual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPlanMensual.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbPlanMensual.FormattingEnabled = true;
-            this.cbPlanMensual.Location = new System.Drawing.Point(355, 22);
-            this.cbPlanMensual.Name = "cbPlanMensual";
-            this.cbPlanMensual.Size = new System.Drawing.Size(95, 21);
-            this.cbPlanMensual.TabIndex = 29;
-            this.cbPlanMensual.DropDownClosed += new System.EventHandler(this.cbPlanMensual_DropDownClosed);
-            // 
-            // cbPlanAnual
-            // 
-            this.cbPlanAnual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbPlanAnual.FormattingEnabled = true;
-            this.cbPlanAnual.Location = new System.Drawing.Point(144, 21);
-            this.cbPlanAnual.Name = "cbPlanAnual";
-            this.cbPlanAnual.Size = new System.Drawing.Size(95, 21);
-            this.cbPlanAnual.TabIndex = 28;
-            this.cbPlanAnual.DropDownClosed += new System.EventHandler(this.cbPlanAnual_DropDownClosed);
-            // 
-            // cbPlanAnual2
-            // 
-            this.cbPlanAnual2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPlanAnual2.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbPlanAnual2.FormattingEnabled = true;
-            this.cbPlanAnual2.Location = new System.Drawing.Point(144, 21);
-            this.cbPlanAnual2.Name = "cbPlanAnual2";
-            this.cbPlanAnual2.Size = new System.Drawing.Size(95, 21);
-            this.cbPlanAnual2.TabIndex = 28;
-            // 
             // frmControlPlanificacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -650,7 +655,7 @@
             this.Name = "frmControlPlanificacion";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Control Planificacion";
+            this.Text = "Control Planificación";
             this.tcPlanes.ResumeLayout(false);
             this.tpPlanSemanal.ResumeLayout(false);
             this.gbDetallePlanSemanal.ResumeLayout(false);

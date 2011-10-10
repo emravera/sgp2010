@@ -107,6 +107,7 @@
             this.rbDemandaActual = new System.Windows.Forms.RadioButton();
             this.rbOtraDemanda = new System.Windows.Forms.RadioButton();
             this.chListAnios = new System.Windows.Forms.CheckedListBox();
+            this.cbEstimacionDemanda = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
             this.txtAnio = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -119,7 +120,8 @@
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnPlanificar = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cbEstimacionDemanda = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.txtSobreproduccion = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numDiciembre)).BeginInit();
             this.tcPlanAnual.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -162,7 +164,7 @@
             // 
             // numDiciembre
             // 
-            this.numDiciembre.Location = new System.Drawing.Point(208, 158);
+            this.numDiciembre.Location = new System.Drawing.Point(208, 145);
             this.numDiciembre.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -416,6 +418,8 @@
             // 
             this.gbEstimacionMes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbEstimacionMes.Controls.Add(this.txtSobreproduccion);
+            this.gbEstimacionMes.Controls.Add(this.label3);
             this.gbEstimacionMes.Controls.Add(this.txtDemandaNoCubierta);
             this.gbEstimacionMes.Controls.Add(this.label31);
             this.gbEstimacionMes.Controls.Add(this.numDiciembre);
@@ -454,15 +458,15 @@
             // txtDemandaNoCubierta
             // 
             this.txtDemandaNoCubierta.Enabled = false;
-            this.txtDemandaNoCubierta.Location = new System.Drawing.Point(7, 204);
+            this.txtDemandaNoCubierta.Location = new System.Drawing.Point(5, 185);
             this.txtDemandaNoCubierta.Name = "txtDemandaNoCubierta";
-            this.txtDemandaNoCubierta.Size = new System.Drawing.Size(120, 21);
+            this.txtDemandaNoCubierta.Size = new System.Drawing.Size(133, 21);
             this.txtDemandaNoCubierta.TabIndex = 25;
             // 
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(10, 188);
+            this.label31.Location = new System.Drawing.Point(15, 169);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(112, 13);
             this.label31.TabIndex = 26;
@@ -470,7 +474,7 @@
             // 
             // numNoviembre
             // 
-            this.numNoviembre.Location = new System.Drawing.Point(208, 132);
+            this.numNoviembre.Location = new System.Drawing.Point(208, 119);
             this.numNoviembre.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -485,7 +489,7 @@
             // 
             // numOctubre
             // 
-            this.numOctubre.Location = new System.Drawing.Point(208, 106);
+            this.numOctubre.Location = new System.Drawing.Point(208, 93);
             this.numOctubre.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -500,7 +504,7 @@
             // 
             // numSeptiembre
             // 
-            this.numSeptiembre.Location = new System.Drawing.Point(208, 80);
+            this.numSeptiembre.Location = new System.Drawing.Point(208, 67);
             this.numSeptiembre.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -515,7 +519,7 @@
             // 
             // numAgosto
             // 
-            this.numAgosto.Location = new System.Drawing.Point(208, 54);
+            this.numAgosto.Location = new System.Drawing.Point(208, 41);
             this.numAgosto.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -530,7 +534,7 @@
             // 
             // numJunio
             // 
-            this.numJunio.Location = new System.Drawing.Point(52, 158);
+            this.numJunio.Location = new System.Drawing.Point(52, 145);
             this.numJunio.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -545,7 +549,7 @@
             // 
             // numMayo
             // 
-            this.numMayo.Location = new System.Drawing.Point(52, 132);
+            this.numMayo.Location = new System.Drawing.Point(52, 119);
             this.numMayo.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -560,7 +564,7 @@
             // 
             // numAbril
             // 
-            this.numAbril.Location = new System.Drawing.Point(52, 106);
+            this.numAbril.Location = new System.Drawing.Point(52, 93);
             this.numAbril.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -575,7 +579,7 @@
             // 
             // numMarzo
             // 
-            this.numMarzo.Location = new System.Drawing.Point(52, 80);
+            this.numMarzo.Location = new System.Drawing.Point(52, 67);
             this.numMarzo.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -590,7 +594,7 @@
             // 
             // numFebrero
             // 
-            this.numFebrero.Location = new System.Drawing.Point(52, 54);
+            this.numFebrero.Location = new System.Drawing.Point(52, 41);
             this.numFebrero.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -605,7 +609,7 @@
             // 
             // numJulio
             // 
-            this.numJulio.Location = new System.Drawing.Point(208, 27);
+            this.numJulio.Location = new System.Drawing.Point(208, 14);
             this.numJulio.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -620,7 +624,7 @@
             // 
             // numEnero
             // 
-            this.numEnero.Location = new System.Drawing.Point(52, 27);
+            this.numEnero.Location = new System.Drawing.Point(52, 14);
             this.numEnero.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -635,7 +639,7 @@
             // 
             // txtTotal
             // 
-            this.txtTotal.Location = new System.Drawing.Point(166, 204);
+            this.txtTotal.Location = new System.Drawing.Point(166, 185);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(128, 21);
             this.txtTotal.TabIndex = 18;
@@ -643,7 +647,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(212, 188);
+            this.label18.Location = new System.Drawing.Point(217, 169);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(31, 13);
             this.label18.TabIndex = 24;
@@ -652,7 +656,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(144, 162);
+            this.label16.Location = new System.Drawing.Point(144, 149);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(53, 13);
             this.label16.TabIndex = 22;
@@ -661,7 +665,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(144, 136);
+            this.label15.Location = new System.Drawing.Point(144, 123);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(58, 13);
             this.label15.TabIndex = 20;
@@ -670,7 +674,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(144, 110);
+            this.label14.Location = new System.Drawing.Point(144, 97);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(46, 13);
             this.label14.TabIndex = 18;
@@ -679,7 +683,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(144, 84);
+            this.label13.Location = new System.Drawing.Point(144, 71);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(61, 13);
             this.label13.TabIndex = 16;
@@ -688,7 +692,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(144, 58);
+            this.label12.Location = new System.Drawing.Point(144, 45);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(41, 13);
             this.label12.TabIndex = 14;
@@ -697,7 +701,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(144, 31);
+            this.label11.Location = new System.Drawing.Point(144, 18);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(28, 13);
             this.label11.TabIndex = 12;
@@ -706,7 +710,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 162);
+            this.label10.Location = new System.Drawing.Point(6, 149);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(32, 13);
             this.label10.TabIndex = 10;
@@ -715,7 +719,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 136);
+            this.label9.Location = new System.Drawing.Point(6, 123);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(33, 13);
             this.label9.TabIndex = 8;
@@ -724,7 +728,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 110);
+            this.label8.Location = new System.Drawing.Point(6, 97);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(28, 13);
             this.label8.TabIndex = 6;
@@ -733,7 +737,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 84);
+            this.label7.Location = new System.Drawing.Point(6, 71);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(36, 13);
             this.label7.TabIndex = 4;
@@ -742,7 +746,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 58);
+            this.label6.Location = new System.Drawing.Point(6, 45);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(45, 13);
             this.label6.TabIndex = 2;
@@ -751,7 +755,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 31);
+            this.label5.Location = new System.Drawing.Point(6, 18);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 13);
             this.label5.TabIndex = 0;
@@ -804,7 +808,7 @@
             // lblAdelantamiento
             // 
             this.lblAdelantamiento.AutoSize = true;
-            this.lblAdelantamiento.Location = new System.Drawing.Point(11, 72);
+            this.lblAdelantamiento.Location = new System.Drawing.Point(9, 72);
             this.lblAdelantamiento.Name = "lblAdelantamiento";
             this.lblAdelantamiento.Size = new System.Drawing.Size(164, 13);
             this.lblAdelantamiento.TabIndex = 24;
@@ -829,7 +833,7 @@
             // 
             this.lblUnidad2.AutoSize = true;
             this.lblUnidad2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnidad2.Location = new System.Drawing.Point(270, 22);
+            this.lblUnidad2.Location = new System.Drawing.Point(273, 21);
             this.lblUnidad2.Name = "lblUnidad2";
             this.lblUnidad2.Size = new System.Drawing.Size(51, 13);
             this.lblUnidad2.TabIndex = 27;
@@ -839,7 +843,7 @@
             // 
             this.lblUnidad3.AutoSize = true;
             this.lblUnidad3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnidad3.Location = new System.Drawing.Point(273, 47);
+            this.lblUnidad3.Location = new System.Drawing.Point(273, 45);
             this.lblUnidad3.Name = "lblUnidad3";
             this.lblUnidad3.Size = new System.Drawing.Size(60, 13);
             this.lblUnidad3.TabIndex = 26;
@@ -874,7 +878,7 @@
             // lblCapacidadStock
             // 
             this.lblCapacidadStock.AutoSize = true;
-            this.lblCapacidadStock.Location = new System.Drawing.Point(39, 22);
+            this.lblCapacidadStock.Location = new System.Drawing.Point(15, 21);
             this.lblCapacidadStock.Name = "lblCapacidadStock";
             this.lblCapacidadStock.Size = new System.Drawing.Size(129, 13);
             this.lblCapacidadStock.TabIndex = 25;
@@ -1099,10 +1103,20 @@
             this.chListAnios.Size = new System.Drawing.Size(167, 20);
             this.chListAnios.TabIndex = 9;
             // 
+            // cbEstimacionDemanda
+            // 
+            this.cbEstimacionDemanda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstimacionDemanda.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEstimacionDemanda.FormattingEnabled = true;
+            this.cbEstimacionDemanda.Location = new System.Drawing.Point(177, 44);
+            this.cbEstimacionDemanda.Name = "cbEstimacionDemanda";
+            this.cbEstimacionDemanda.Size = new System.Drawing.Size(139, 21);
+            this.cbEstimacionDemanda.TabIndex = 2;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(51, 47);
+            this.label4.Location = new System.Drawing.Point(9, 47);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(124, 13);
             this.label4.TabIndex = 8;
@@ -1118,7 +1132,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(55, 20);
+            this.label17.Location = new System.Drawing.Point(9, 20);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(117, 13);
             this.label17.TabIndex = 0;
@@ -1235,15 +1249,22 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 532);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
-            // cbEstimacionDemanda
+            // txtSobreproduccion
             // 
-            this.cbEstimacionDemanda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstimacionDemanda.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEstimacionDemanda.FormattingEnabled = true;
-            this.cbEstimacionDemanda.Location = new System.Drawing.Point(177, 44);
-            this.cbEstimacionDemanda.Name = "cbEstimacionDemanda";
-            this.cbEstimacionDemanda.Size = new System.Drawing.Size(139, 21);
-            this.cbEstimacionDemanda.TabIndex = 2;
+            this.txtSobreproduccion.Enabled = false;
+            this.txtSobreproduccion.Location = new System.Drawing.Point(6, 222);
+            this.txtSobreproduccion.Name = "txtSobreproduccion";
+            this.txtSobreproduccion.Size = new System.Drawing.Size(132, 21);
+            this.txtSobreproduccion.TabIndex = 27;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 207);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(137, 13);
+            this.label3.TabIndex = 28;
+            this.label3.Text = "Producción sobre Demanda";
             // 
             // frmPlanAnual
             // 
@@ -1400,6 +1421,8 @@
         private System.Windows.Forms.Label lblUnidad1;
         private System.Windows.Forms.NumericUpDown numAdelantamiento;
         private System.Windows.Forms.Label lblAdelantamiento;
+        private System.Windows.Forms.TextBox txtSobreproduccion;
+        private System.Windows.Forms.Label label3;
 
 
 

@@ -152,6 +152,24 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        //Metodo que obtiene el detalle de pedido
+        public static void ObtenerDetallePedidoEstado(DataTable dtDetallePedidos, int codigoPedido, int codigoEstado)
+        {
+            string sql = @"SELECT dped_codigo, ped_codigo, edped_codigo, coc_codigo, 
+                                  dped_cantidad, dped_fecha_cancelacion, dped_codigonemonico,
+                                  dped_fecha_entrega_prevista, dped_fecha_entrega_real 
+                           FROM DETALLE_PEDIDOS WHERE ped_codigo = @p0 and edped_codigo = @p1";
+
+            object[] valorParametros = { codigoPedido, codigoEstado };
+            try
+            {
+                //Se llena el Datatable
+                DB.FillDataTable(dtDetallePedidos, sql, valorParametros);
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+        }
+
+
         public static bool PuedeEliminarse(int codigo)
         {
             //Hacer un for para recorrer los detalles

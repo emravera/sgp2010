@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections;
+using System.Globalization;
 using GyCAP.UI.Sistema.Validaciones;
 
 namespace GyCAP.UI.PlanificacionProduccion
@@ -19,7 +20,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private enum estadoUI { inicio, nuevo, buscar, modificar, cargaHistorico, calcularEstimacion };
         private static estadoUI estadoActual;
         //Defino el valor total de la estimacion global para el formulario
-        private static decimal totalsistema = 0, totalActual, seriesGraficos;
+        private static decimal totalsistema = 0, totalActual=0, seriesGraficos=0;
 
         #region Inicio
 
@@ -729,6 +730,36 @@ namespace GyCAP.UI.PlanificacionProduccion
         #endregion
 
         #region Funciones Formulario
+        
+        private int[] SemanasAño(int año)
+        {
+            int[] semanasMes = new int[12];
+
+            for (int i = 1; i <= 12; i++)
+            {
+                int ultimaSemana, primerSemana;
+
+                //Calculo en que semana esta el primer dia
+                DateTime s1 = new DateTime(año, i, 01);
+                primerSemana = System.Globalization.CultureInfo.CurrentUICulture.Calendar.GetWeekOfYear(s1, CalendarWeekRule.FirstDay, s1.DayOfWeek);
+
+                if (i < 12)
+                {   //Calculo la semana del proximo mes
+                    DateTime s2 = new DateTime(año, i + 1, 01);
+                    ultimaSemana = System.Globalization.CultureInfo.CurrentUICulture.Calendar.GetWeekOfYear(s2, CalendarWeekRule.FirstDay, s2.DayOfWeek);
+                }
+                else
+                {
+                    //Calculo la semana del proximo mes
+                    DateTime s2 = new DateTime(año, i, 31);
+                    ultimaSemana = System.Globalization.CultureInfo.CurrentUICulture.Calendar.GetWeekOfYear(s2, CalendarWeekRule.FirstDay, s2.DayOfWeek);
+                }
+                semanasMes[i - 1] = ultimaSemana - primerSemana;
+            }
+
+            return semanasMes;
+        }   
+        
         private void LlenarDetalle()
         {
             try
@@ -828,27 +859,45 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void GenerarGrafico(decimal[] promedio)
         {
-            //Creo el grafico
-            //Elimino la serie que esta ahora
-            chartDemanda.Series.Remove(chartDemanda.Series[0]);
+            //Elimino las series
+            chartDemanda.Series.Clear();
+
+            seriesGraficos += 1;
+
+            //Calculo la capacidad de la fabrica
+            int capacidadFabrica = (BLL.FabricaBLL.GetCapacidadSemanalBruta(null, GyCAP.Entidades.Enumeraciones.RecursosFabricacionEnum.TipoHorario.Normal));
+            int[] semanasMes = new int[12];
+            semanasMes = SemanasAño(Convert.ToInt32(txtAnio.Text));
+            
+            lblCapacidadMensual.Text = "Mes 4 Semanas:" + (capacidadFabrica * 4).ToString() + " Unidades \n" + "Mes 5 Semanas:" + (capacidadFabrica * 5).ToString() + " Unidades \n";
+
             //Agrego una serie nueva con el nombre del contador de series
             chartDemanda.Series.Add(seriesGraficos.ToString());
-            seriesGraficos += seriesGraficos;
+            chartDemanda.Series.Add("Constante" + seriesGraficos.ToString());
+                   
             //Defino el tipo de grafico que deseo
             chartDemanda.Series[seriesGraficos.ToString()].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Column;
-
-            //Lo dibujo
+            chartDemanda.Series["Constante" + seriesGraficos.ToString()].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            chartDemanda.Series["Constante" + seriesGraficos.ToString()].Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
+                        
+            //Dibujo los valores del grafico de la estimacion
             double plotY = 0;
             if (chartDemanda.Series[seriesGraficos.ToString()].Points.Count > 0)
             {
                 plotY = chartDemanda.Series[seriesGraficos.ToString()].Points[chartDemanda.Series[seriesGraficos.ToString()].Points.Count - 1].YValues[0];
             }
 
+            if (chartDemanda.Series["Constante" + seriesGraficos.ToString()].Points.Count > 0)
+            {
+                capacidadFabrica = Convert.ToInt32(chartDemanda.Series["Constante" + seriesGraficos.ToString()].Points[chartDemanda.Series["Constante" + seriesGraficos.ToString()].Points.Count - 1].YValues[0]);
+            }
+            
             for (int pointIndex = 0; pointIndex < promedio.Count(); pointIndex++)
             {
                 plotY = Convert.ToInt32(promedio[pointIndex]);
                 chartDemanda.Series[seriesGraficos.ToString()].Points.AddY(plotY);
-            }
+                chartDemanda.Series["Constante" + seriesGraficos.ToString()].Points.AddY(Convert.ToDouble(capacidadFabrica)* semanasMes[pointIndex]);
+            }    
         }
         
         private void DesactivaControles(bool estado)
@@ -941,7 +990,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     default:
                         break;
                 }
-
             }
 
         }
@@ -1041,6 +1089,8 @@ namespace GyCAP.UI.PlanificacionProduccion
             numCrecimiento.Select(0, 10);
         }
         #endregion         
+
+       
 
       
 

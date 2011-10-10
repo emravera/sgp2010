@@ -29,6 +29,11 @@ namespace GyCAP.BLL
             DAL.DetallePedidoDAL.ObtenerDetallePedido(dtDetallePedido, codigoPedido);
         }
 
+        public static void ObtenerDetallePedidoEstado(DataTable dtDetallePedido, int codigoPedido, int codigoEstado)
+        {
+            DAL.DetallePedidoDAL.ObtenerDetallePedidoEstado(dtDetallePedido, codigoPedido, codigoEstado);
+        }
+
         //Metodo para cancelar un detalle de pedido
         public static void CancelarDetallePedido(int codigoDetallePedido, DateTime fechaCancelacion)
         {

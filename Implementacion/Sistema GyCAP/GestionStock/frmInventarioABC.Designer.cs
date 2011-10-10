@@ -182,7 +182,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(170, 30);
+            this.label7.Location = new System.Drawing.Point(186, 27);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(58, 13);
             this.label7.TabIndex = 20;
@@ -196,7 +196,7 @@
             this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestar.Image = ((System.Drawing.Image)(resources.GetObject("btnRestar.Image")));
             this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestar.Location = new System.Drawing.Point(200, 1);
+            this.btnRestar.Location = new System.Drawing.Point(216, -2);
             this.btnRestar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRestar.Name = "btnRestar";
             this.btnRestar.Size = new System.Drawing.Size(30, 30);
@@ -213,7 +213,7 @@
             this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSumar.Image = ((System.Drawing.Image)(resources.GetObject("btnSumar.Image")));
             this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSumar.Location = new System.Drawing.Point(164, 1);
+            this.btnSumar.Location = new System.Drawing.Point(180, -2);
             this.btnSumar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSumar.Name = "btnSumar";
             this.btnSumar.Size = new System.Drawing.Size(30, 30);
@@ -225,7 +225,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(25, 30);
+            this.label6.Location = new System.Drawing.Point(50, 30);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 13);
             this.label6.TabIndex = 17;
@@ -239,7 +239,7 @@
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Delete_25;
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(28, -2);
+            this.btnDelete.Location = new System.Drawing.Point(53, -2);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(30, 30);
@@ -250,7 +250,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(144, 347);
+            this.btnVolver.Location = new System.Drawing.Point(144, 353);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(90, 25);
             this.btnVolver.TabIndex = 30;
@@ -260,7 +260,7 @@
             // 
             // btnCalcularABC
             // 
-            this.btnCalcularABC.Location = new System.Drawing.Point(241, 347);
+            this.btnCalcularABC.Location = new System.Drawing.Point(241, 353);
             this.btnCalcularABC.Name = "btnCalcularABC";
             this.btnCalcularABC.Size = new System.Drawing.Size(90, 25);
             this.btnCalcularABC.TabIndex = 29;
@@ -382,11 +382,11 @@
             this.dgvMP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMP.Location = new System.Drawing.Point(3, 16);
             this.dgvMP.Name = "dgvMP";
+            this.dgvMP.ReadOnly = true;
             this.dgvMP.RowHeadersVisible = false;
             this.dgvMP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMP.Size = new System.Drawing.Size(453, 365);
             this.dgvMP.TabIndex = 29;
-            this.dgvMP.DataMemberChanged += new System.EventHandler(this.dgvMP_DataBindingComplete);
             this.dgvMP.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvMP_CellFormatting);
             // 
             // frmInventarioABC
