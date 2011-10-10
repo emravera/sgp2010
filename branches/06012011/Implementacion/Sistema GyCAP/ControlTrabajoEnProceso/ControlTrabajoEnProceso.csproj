@@ -137,6 +137,10 @@
       <Project>{BF769C01-D311-4BC9-813A-C63DC3B89319}</Project>
       <Name>Entidades %28Entidades\Entidades%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PlanificacionProduccion\PlanificacionProduccion.csproj">
+      <Project>{959ABFBF-7696-414D-B0CA-8807851367E8}</Project>
+      <Name>PlanificacionProduccion</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Salir-25.png" />

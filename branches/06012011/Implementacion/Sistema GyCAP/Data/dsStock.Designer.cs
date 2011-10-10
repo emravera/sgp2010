@@ -3273,6 +3273,10 @@ namespace GyCAP.Data {
             
             private global::System.Data.DataColumn columnMVTO_NUMERO;
             
+            private global::System.Data.DataColumn columnOM_FECHAPREVISTA;
+            
+            private global::System.Data.DataColumn columnOM_FECHAREAL;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public ORIGENES_MOVIMIENTO_STOCKDataTable() {
                 this.TableName = "ORIGENES_MOVIMIENTO_STOCK";
@@ -3339,6 +3343,20 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OM_FECHAPREVISTAColumn {
+                get {
+                    return this.columnOM_FECHAPREVISTA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OM_FECHAREALColumn {
+                get {
+                    return this.columnOM_FECHAREAL;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3367,14 +3385,16 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ORIGENES_MOVIMIENTO_STOCKRow AddORIGENES_MOVIMIENTO_STOCKRow(ENTIDADESRow parentENTIDADESRowByFK_ORIGENES_MIVIMIENTO_STOCK_ENTIDADES, decimal OM_CANTIDAD_ESTIMADA, decimal OM_CANTIDAD_REAL, MOVIMIENTOS_STOCKRow parentMOVIMIENTOS_STOCKRowByFK_ORIGENES_MIVIMIENTO_STOCK_MOVIMIENTOS_STOCK) {
+            public ORIGENES_MOVIMIENTO_STOCKRow AddORIGENES_MOVIMIENTO_STOCKRow(ENTIDADESRow parentENTIDADESRowByFK_ORIGENES_MIVIMIENTO_STOCK_ENTIDADES, decimal OM_CANTIDAD_ESTIMADA, decimal OM_CANTIDAD_REAL, MOVIMIENTOS_STOCKRow parentMOVIMIENTOS_STOCKRowByFK_ORIGENES_MIVIMIENTO_STOCK_MOVIMIENTOS_STOCK, System.DateTime OM_FECHAPREVISTA, System.DateTime OM_FECHAREAL) {
                 ORIGENES_MOVIMIENTO_STOCKRow rowORIGENES_MOVIMIENTO_STOCKRow = ((ORIGENES_MOVIMIENTO_STOCKRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
                         OM_CANTIDAD_ESTIMADA,
                         OM_CANTIDAD_REAL,
-                        null};
+                        null,
+                        OM_FECHAPREVISTA,
+                        OM_FECHAREAL};
                 if ((parentENTIDADESRowByFK_ORIGENES_MIVIMIENTO_STOCK_ENTIDADES != null)) {
                     columnValuesArray[1] = parentENTIDADESRowByFK_ORIGENES_MIVIMIENTO_STOCK_ENTIDADES[0];
                 }
@@ -3411,6 +3431,8 @@ namespace GyCAP.Data {
                 this.columnOM_CANTIDAD_ESTIMADA = base.Columns["OM_CANTIDAD_ESTIMADA"];
                 this.columnOM_CANTIDAD_REAL = base.Columns["OM_CANTIDAD_REAL"];
                 this.columnMVTO_NUMERO = base.Columns["MVTO_NUMERO"];
+                this.columnOM_FECHAPREVISTA = base.Columns["OM_FECHAPREVISTA"];
+                this.columnOM_FECHAREAL = base.Columns["OM_FECHAREAL"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3425,6 +3447,10 @@ namespace GyCAP.Data {
                 base.Columns.Add(this.columnOM_CANTIDAD_REAL);
                 this.columnMVTO_NUMERO = new global::System.Data.DataColumn("MVTO_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMVTO_NUMERO);
+                this.columnOM_FECHAPREVISTA = new global::System.Data.DataColumn("OM_FECHAPREVISTA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOM_FECHAPREVISTA);
+                this.columnOM_FECHAREAL = new global::System.Data.DataColumn("OM_FECHAREAL", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOM_FECHAREAL);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnOM_CODIGO}, true));
                 this.columnOM_CODIGO.AutoIncrement = true;
@@ -3436,6 +3462,7 @@ namespace GyCAP.Data {
                 this.columnOM_CANTIDAD_ESTIMADA.AllowDBNull = false;
                 this.columnOM_CANTIDAD_REAL.AllowDBNull = false;
                 this.columnMVTO_NUMERO.AllowDBNull = false;
+                this.columnOM_FECHAPREVISTA.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4741,6 +4768,32 @@ namespace GyCAP.Data {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime OM_FECHAPREVISTA {
+                get {
+                    return ((global::System.DateTime)(this[this.tableORIGENES_MOVIMIENTO_STOCK.OM_FECHAPREVISTAColumn]));
+                }
+                set {
+                    this[this.tableORIGENES_MOVIMIENTO_STOCK.OM_FECHAPREVISTAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime OM_FECHAREAL {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableORIGENES_MOVIMIENTO_STOCK.OM_FECHAREALColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OM_FECHAREAL\' in table \'ORIGENES_MOVIMIENTO_STOCK\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tableORIGENES_MOVIMIENTO_STOCK.OM_FECHAREALColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public ENTIDADESRow ENTIDADESRow {
                 get {
                     return ((ENTIDADESRow)(this.GetParentRow(this.Table.ParentRelations["FK_ORIGENES_MIVIMIENTO_STOCK_ENTIDADES"])));
@@ -4758,6 +4811,16 @@ namespace GyCAP.Data {
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_ORIGENES_MIVIMIENTO_STOCK_MOVIMIENTOS_STOCK"]);
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOM_FECHAREALNull() {
+                return this.IsNull(this.tableORIGENES_MOVIMIENTO_STOCK.OM_FECHAREALColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOM_FECHAREALNull() {
+                this[this.tableORIGENES_MOVIMIENTO_STOCK.OM_FECHAREALColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -8696,39 +8759,51 @@ SELECT MVTO_NUMERO, MVTO_CODIGO, MVTO_DESCRIPCION, MVTO_FECHAALTA, MVTO_FECHAPRE
             tableMapping.ColumnMappings.Add("OM_CANTIDAD_ESTIMADA", "OM_CANTIDAD_ESTIMADA");
             tableMapping.ColumnMappings.Add("OM_CANTIDAD_REAL", "OM_CANTIDAD_REAL");
             tableMapping.ColumnMappings.Add("MVTO_NUMERO", "MVTO_NUMERO");
+            tableMapping.ColumnMappings.Add("OM_FECHAPREVISTA", "OM_FECHAPREVISTA");
+            tableMapping.ColumnMappings.Add("OM_FECHAREAL", "OM_FECHAREAL");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[ORIGENES_MOVIMIENTO_STOCK] WHERE (([OM_CODIGO] = @Original_OM_CODIGO) AND ([ENTD_CODIGO] = @Original_ENTD_CODIGO) AND ([OM_CANTIDAD_ESTIMADA] = @Original_OM_CANTIDAD_ESTIMADA) AND ([OM_CANTIDAD_REAL] = @Original_OM_CANTIDAD_REAL) AND ([MVTO_NUMERO] = @Original_MVTO_NUMERO))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[ORIGENES_MOVIMIENTO_STOCK] WHERE (([OM_CODIGO] = @Original_OM_CODIGO) AND ([ENTD_CODIGO] = @Original_ENTD_CODIGO) AND ([OM_CANTIDAD_ESTIMADA] = @Original_OM_CANTIDAD_ESTIMADA) AND ([OM_CANTIDAD_REAL] = @Original_OM_CANTIDAD_REAL) AND ([MVTO_NUMERO] = @Original_MVTO_NUMERO) AND ([OM_FECHAPREVISTA] = @Original_OM_FECHAPREVISTA) AND ((@IsNull_OM_FECHAREAL = 1 AND [OM_FECHAREAL] IS NULL) OR ([OM_FECHAREAL] = @Original_OM_FECHAREAL)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "OM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OM_CANTIDAD_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 3, "OM_CANTIDAD_ESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OM_CANTIDAD_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 3, "OM_CANTIDAD_REAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MVTO_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OM_FECHAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OM_FECHAPREVISTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_OM_FECHAREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OM_FECHAREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OM_FECHAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OM_FECHAREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[ORIGENES_MOVIMIENTO_STOCK] ([ENTD_CODIGO], [OM_CANTIDAD_ESTIMADA], [OM_CANTIDAD_REAL], [MVTO_NUMERO]) VALUES (@ENTD_CODIGO, @OM_CANTIDAD_ESTIMADA, @OM_CANTIDAD_REAL, @MVTO_NUMERO);
-SELECT OM_CODIGO, ENTD_CODIGO, OM_CANTIDAD_ESTIMADA, OM_CANTIDAD_REAL, MVTO_NUMERO FROM ORIGENES_MOVIMIENTO_STOCK WHERE (OM_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[ORIGENES_MOVIMIENTO_STOCK] ([ENTD_CODIGO], [OM_CANTIDAD_ESTIMADA], [OM_CANTIDAD_REAL], [MVTO_NUMERO], [OM_FECHAPREVISTA], [OM_FECHAREAL]) VALUES (@ENTD_CODIGO, @OM_CANTIDAD_ESTIMADA, @OM_CANTIDAD_REAL, @MVTO_NUMERO, @OM_FECHAPREVISTA, @OM_FECHAREAL);
+SELECT OM_CODIGO, ENTD_CODIGO, OM_CANTIDAD_ESTIMADA, OM_CANTIDAD_REAL, MVTO_NUMERO, OM_FECHAPREVISTA, OM_FECHAREAL FROM ORIGENES_MOVIMIENTO_STOCK WHERE (OM_CODIGO = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ENTD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OM_CANTIDAD_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 3, "OM_CANTIDAD_ESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OM_CANTIDAD_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 3, "OM_CANTIDAD_REAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MVTO_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OM_FECHAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OM_FECHAPREVISTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OM_FECHAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OM_FECHAREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[ORIGENES_MOVIMIENTO_STOCK] SET [ENTD_CODIGO] = @ENTD_CODIGO, [OM_CANTIDAD_ESTIMADA] = @OM_CANTIDAD_ESTIMADA, [OM_CANTIDAD_REAL] = @OM_CANTIDAD_REAL, [MVTO_NUMERO] = @MVTO_NUMERO WHERE (([OM_CODIGO] = @Original_OM_CODIGO) AND ([ENTD_CODIGO] = @Original_ENTD_CODIGO) AND ([OM_CANTIDAD_ESTIMADA] = @Original_OM_CANTIDAD_ESTIMADA) AND ([OM_CANTIDAD_REAL] = @Original_OM_CANTIDAD_REAL) AND ([MVTO_NUMERO] = @Original_MVTO_NUMERO));
-SELECT OM_CODIGO, ENTD_CODIGO, OM_CANTIDAD_ESTIMADA, OM_CANTIDAD_REAL, MVTO_NUMERO FROM ORIGENES_MOVIMIENTO_STOCK WHERE (OM_CODIGO = @OM_CODIGO)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[ORIGENES_MOVIMIENTO_STOCK] SET [ENTD_CODIGO] = @ENTD_CODIGO, [OM_CANTIDAD_ESTIMADA] = @OM_CANTIDAD_ESTIMADA, [OM_CANTIDAD_REAL] = @OM_CANTIDAD_REAL, [MVTO_NUMERO] = @MVTO_NUMERO, [OM_FECHAPREVISTA] = @OM_FECHAPREVISTA, [OM_FECHAREAL] = @OM_FECHAREAL WHERE (([OM_CODIGO] = @Original_OM_CODIGO) AND ([ENTD_CODIGO] = @Original_ENTD_CODIGO) AND ([OM_CANTIDAD_ESTIMADA] = @Original_OM_CANTIDAD_ESTIMADA) AND ([OM_CANTIDAD_REAL] = @Original_OM_CANTIDAD_REAL) AND ([MVTO_NUMERO] = @Original_MVTO_NUMERO) AND ([OM_FECHAPREVISTA] = @Original_OM_FECHAPREVISTA) AND ((@IsNull_OM_FECHAREAL = 1 AND [OM_FECHAREAL] IS NULL) OR ([OM_FECHAREAL] = @Original_OM_FECHAREAL)));
+SELECT OM_CODIGO, ENTD_CODIGO, OM_CANTIDAD_ESTIMADA, OM_CANTIDAD_REAL, MVTO_NUMERO, OM_FECHAPREVISTA, OM_FECHAREAL FROM ORIGENES_MOVIMIENTO_STOCK WHERE (OM_CODIGO = @OM_CODIGO)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ENTD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OM_CANTIDAD_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 3, "OM_CANTIDAD_ESTIMADA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OM_CANTIDAD_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 3, "OM_CANTIDAD_REAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MVTO_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MVTO_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OM_FECHAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OM_FECHAPREVISTA", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OM_FECHAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OM_FECHAREAL", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OM_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "OM_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ENTD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ENTD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OM_CANTIDAD_ESTIMADA", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 3, "OM_CANTIDAD_ESTIMADA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OM_CANTIDAD_REAL", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 3, "OM_CANTIDAD_REAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MVTO_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MVTO_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OM_FECHAPREVISTA", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OM_FECHAPREVISTA", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_OM_FECHAREAL", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OM_FECHAREAL", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OM_FECHAREAL", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OM_FECHAREAL", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OM_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "OM_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -8744,7 +8819,7 @@ SELECT OM_CODIGO, ENTD_CODIGO, OM_CANTIDAD_ESTIMADA, OM_CANTIDAD_REAL, MVTO_NUME
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT OM_CODIGO, ENTD_CODIGO, OM_CANTIDAD_ESTIMADA, OM_CANTIDAD_REAL, MVTO_NUMER" +
-                "O FROM dbo.ORIGENES_MOVIMIENTO_STOCK";
+                "O, OM_FECHAPREVISTA, OM_FECHAREAL FROM dbo.ORIGENES_MOVIMIENTO_STOCK";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -8798,12 +8873,21 @@ SELECT OM_CODIGO, ENTD_CODIGO, OM_CANTIDAD_ESTIMADA, OM_CANTIDAD_REAL, MVTO_NUME
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_OM_CODIGO, decimal Original_ENTD_CODIGO, decimal Original_OM_CANTIDAD_ESTIMADA, decimal Original_OM_CANTIDAD_REAL, decimal Original_MVTO_NUMERO) {
+        public virtual int Delete(decimal Original_OM_CODIGO, decimal Original_ENTD_CODIGO, decimal Original_OM_CANTIDAD_ESTIMADA, decimal Original_OM_CANTIDAD_REAL, decimal Original_MVTO_NUMERO, System.DateTime Original_OM_FECHAPREVISTA, global::System.Nullable<global::System.DateTime> Original_OM_FECHAREAL) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_OM_CODIGO));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_ENTD_CODIGO));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_OM_CANTIDAD_ESTIMADA));
             this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_OM_CANTIDAD_REAL));
             this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_MVTO_NUMERO));
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((System.DateTime)(Original_OM_FECHAPREVISTA));
+            if ((Original_OM_FECHAREAL.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((System.DateTime)(Original_OM_FECHAREAL.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8823,11 +8907,18 @@ SELECT OM_CODIGO, ENTD_CODIGO, OM_CANTIDAD_ESTIMADA, OM_CANTIDAD_REAL, MVTO_NUME
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(decimal ENTD_CODIGO, decimal OM_CANTIDAD_ESTIMADA, decimal OM_CANTIDAD_REAL, decimal MVTO_NUMERO) {
+        public virtual int Insert(decimal ENTD_CODIGO, decimal OM_CANTIDAD_ESTIMADA, decimal OM_CANTIDAD_REAL, decimal MVTO_NUMERO, System.DateTime OM_FECHAPREVISTA, global::System.Nullable<global::System.DateTime> OM_FECHAREAL) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ENTD_CODIGO));
             this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(OM_CANTIDAD_ESTIMADA));
             this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(OM_CANTIDAD_REAL));
             this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(MVTO_NUMERO));
+            this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(OM_FECHAPREVISTA));
+            if ((OM_FECHAREAL.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((System.DateTime)(OM_FECHAREAL.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8847,17 +8938,33 @@ SELECT OM_CODIGO, ENTD_CODIGO, OM_CANTIDAD_ESTIMADA, OM_CANTIDAD_REAL, MVTO_NUME
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal ENTD_CODIGO, decimal OM_CANTIDAD_ESTIMADA, decimal OM_CANTIDAD_REAL, decimal MVTO_NUMERO, decimal Original_OM_CODIGO, decimal Original_ENTD_CODIGO, decimal Original_OM_CANTIDAD_ESTIMADA, decimal Original_OM_CANTIDAD_REAL, decimal Original_MVTO_NUMERO, decimal OM_CODIGO) {
+        public virtual int Update(decimal ENTD_CODIGO, decimal OM_CANTIDAD_ESTIMADA, decimal OM_CANTIDAD_REAL, decimal MVTO_NUMERO, System.DateTime OM_FECHAPREVISTA, global::System.Nullable<global::System.DateTime> OM_FECHAREAL, decimal Original_OM_CODIGO, decimal Original_ENTD_CODIGO, decimal Original_OM_CANTIDAD_ESTIMADA, decimal Original_OM_CANTIDAD_REAL, decimal Original_MVTO_NUMERO, System.DateTime Original_OM_FECHAPREVISTA, global::System.Nullable<global::System.DateTime> Original_OM_FECHAREAL, decimal OM_CODIGO) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(ENTD_CODIGO));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(OM_CANTIDAD_ESTIMADA));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(OM_CANTIDAD_REAL));
             this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(MVTO_NUMERO));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(Original_OM_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(Original_ENTD_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_OM_CANTIDAD_ESTIMADA));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_OM_CANTIDAD_REAL));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_MVTO_NUMERO));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(OM_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(OM_FECHAPREVISTA));
+            if ((OM_FECHAREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(OM_FECHAREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(Original_OM_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_ENTD_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_OM_CANTIDAD_ESTIMADA));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(Original_OM_CANTIDAD_REAL));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_MVTO_NUMERO));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(Original_OM_FECHAPREVISTA));
+            if ((Original_OM_FECHAREAL.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((System.DateTime)(Original_OM_FECHAREAL.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(OM_CODIGO));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8877,8 +8984,8 @@ SELECT OM_CODIGO, ENTD_CODIGO, OM_CANTIDAD_ESTIMADA, OM_CANTIDAD_REAL, MVTO_NUME
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal ENTD_CODIGO, decimal OM_CANTIDAD_ESTIMADA, decimal OM_CANTIDAD_REAL, decimal MVTO_NUMERO, decimal Original_OM_CODIGO, decimal Original_ENTD_CODIGO, decimal Original_OM_CANTIDAD_ESTIMADA, decimal Original_OM_CANTIDAD_REAL, decimal Original_MVTO_NUMERO) {
-            return this.Update(ENTD_CODIGO, OM_CANTIDAD_ESTIMADA, OM_CANTIDAD_REAL, MVTO_NUMERO, Original_OM_CODIGO, Original_ENTD_CODIGO, Original_OM_CANTIDAD_ESTIMADA, Original_OM_CANTIDAD_REAL, Original_MVTO_NUMERO, Original_OM_CODIGO);
+        public virtual int Update(decimal ENTD_CODIGO, decimal OM_CANTIDAD_ESTIMADA, decimal OM_CANTIDAD_REAL, decimal MVTO_NUMERO, System.DateTime OM_FECHAPREVISTA, global::System.Nullable<global::System.DateTime> OM_FECHAREAL, decimal Original_OM_CODIGO, decimal Original_ENTD_CODIGO, decimal Original_OM_CANTIDAD_ESTIMADA, decimal Original_OM_CANTIDAD_REAL, decimal Original_MVTO_NUMERO, System.DateTime Original_OM_FECHAPREVISTA, global::System.Nullable<global::System.DateTime> Original_OM_FECHAREAL) {
+            return this.Update(ENTD_CODIGO, OM_CANTIDAD_ESTIMADA, OM_CANTIDAD_REAL, MVTO_NUMERO, OM_FECHAPREVISTA, OM_FECHAREAL, Original_OM_CODIGO, Original_ENTD_CODIGO, Original_OM_CANTIDAD_ESTIMADA, Original_OM_CANTIDAD_REAL, Original_MVTO_NUMERO, Original_OM_FECHAPREVISTA, Original_OM_FECHAREAL, Original_OM_CODIGO);
         }
     }
     

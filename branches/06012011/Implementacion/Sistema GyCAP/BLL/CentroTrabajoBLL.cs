@@ -81,6 +81,11 @@ namespace GyCAP.BLL
                 TurnosTrabajo = null
             };
 
+            if (ds.TURNOS_TRABAJO.Rows.Count > 0 && ds.TURNOSXCENTROTRABAJO.Rows.Count > 0)
+            {
+                centro.TurnosTrabajo = TurnoTrabajoBLL.AsTurnosTrabajoEntity(codigo, ds);
+            }
+
             return centro;
         }
 

@@ -44,5 +44,21 @@ namespace GyCAP.Entidades
             get { return movimientoStock; }
             set { movimientoStock = value; }
         }
+
+        private DateTime fechaPrevista;
+
+        public DateTime FechaPrevista
+        {
+            get { return fechaPrevista; }
+            set { fechaPrevista = value; }
+        }
+
+        private DateTime? fechaReal;
+
+        public DateTime? FechaReal
+        {
+            get { return fechaReal; }
+            set { fechaReal = value; }
+        }
     }
 }

@@ -35,9 +35,9 @@ namespace GyCAP.Entidades
             get { return maquina; }
             set { maquina = value; }
         }
-        private decimal cantidad;
+        private int cantidad;
 
-        public decimal Cantidad
+        public int Cantidad
         {
             get { return cantidad; }
             set { cantidad = value; }
@@ -49,19 +49,20 @@ namespace GyCAP.Entidades
             get { return fecha; }
             set { fecha = value; }
         }
-        private decimal hora;
-
-        public decimal Hora
-        {
-            get { return hora; }
-            set { hora = value; }
-        }
         private string observaciones;
 
         public string Observaciones
         {
             get { return observaciones; }
             set { observaciones = value; }
+        }
+
+        private int operacionesFallidas;
+
+        public int OperacionesFallidas
+        {
+            get { return operacionesFallidas; }
+            set { operacionesFallidas = value; }
         }
     }
 }

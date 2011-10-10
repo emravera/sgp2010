@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Enumeraciones;
 
 namespace GyCAP.UI.GestionStock
 {
@@ -223,7 +224,7 @@ namespace GyCAP.UI.GestionStock
             BLL.UnidadMedidaBLL.ObtenerTodos(dsEntregaProducto.UNIDADES_MEDIDA);
 
             //Se carga el stock de productos terminados
-            BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsEntregaProducto.UBICACIONES_STOCK, BLL.ContenidoUbicacionStockBLL.ContenidoCocina);
+            BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsEntregaProducto.UBICACIONES_STOCK, (int)StockEnum.ContenidoUbicacion.Cocina);
 
             //Cargamos el combo de busqueda
             //Cargamos el combo de los clientes

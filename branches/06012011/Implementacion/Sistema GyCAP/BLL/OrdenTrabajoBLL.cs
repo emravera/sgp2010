@@ -9,6 +9,7 @@ using GyCAP.Entidades.ArbolEstructura;
 using GyCAP.Entidades.Enumeraciones;
 using GyCAP.Entidades.Excepciones;
 using GyCAP.Entidades.BindingEntity;
+using System.Data.SqlClient;
 
 namespace GyCAP.BLL
 {
@@ -41,7 +42,7 @@ namespace GyCAP.BLL
         }
 
         private static void ProcessNodo(NodoEstructura nodoEstructura, ArbolProduccion arbolProduccion, ref int numeroOrdenT, EstadoOrdenTrabajo estadoGenerado, NodoOrdenTrabajo lastNodoOT, IList<ExcepcionesPlan> listaExcepciones)
-        {
+        {            
             if (nodoEstructura.Contenido != NodoEstructura.tipoContenido.MateriaPrima)
             {
                 if (nodoEstructura.Compuesto.Parte.HojaRuta != null)
@@ -148,9 +149,57 @@ namespace GyCAP.BLL
             return ordenProduccion.OrdenesTrabajo = lista;
         }
 
-        public static void RegistrarCierreParcial(CierreParcialOrdenTrabajo cierre)
+        public static void IniciarOrdenTrabajo(OrdenTrabajo ordenT, SqlTransaction transaccion)
         {
-            DAL.OrdenTrabajoDAL.RegistrarCierreParcial(cierre);
+            DAL.OrdenTrabajoDAL.IniciarOrdenTrabajo(ordenT, transaccion);
+        }
+
+        public static void ActualizarEstado(OrdenTrabajo ordenT, SqlTransaction transaccion)
+        {
+            DAL.OrdenTrabajoDAL.ActualizarEstado(ordenT, transaccion);
+        }
+
+        public static void RegistrarCierreParcial(CierreParcialOrdenTrabajo cierre, SqlTransaction transaccion)
+        {
+            SqlTransaction _transaccion = null;
+
+            try
+            {
+                _transaccion = (transaccion == null) ? DAL.DB.IniciarTransaccion() : transaccion;
+
+                CierreParcialOrdenTrabajoBLL.Insertar(cierre, _transaccion);
+                cierre.OrdenTrabajo.CierresParciales.Add(cierre);
+                cierre.OrdenTrabajo.CantidadReal += cierre.Cantidad;
+                DAL.OrdenTrabajoDAL.RegistrarCierreParcial(cierre, _transaccion);
+
+                if (transaccion == null) { _transaccion.Commit(); }
+            }
+            catch (SqlException ex)
+            {
+                if (transaccion == null)
+                {
+                    _transaccion.Rollback();
+                    throw new BaseDeDatosException(ex.Message);
+                }
+                else
+                {
+                    throw ex;
+                }
+            }
+            finally
+            {
+                if (transaccion == null) { DAL.DB.FinalizarTransaccion(); }
+            }            
+        }
+
+        public static void Finalizar(OrdenTrabajo ordenT, SqlTransaction transaccion)
+        {            
+            DAL.OrdenTrabajoDAL.FinalizarOrdenTrabajo(ordenT, transaccion);
+
+            foreach (MovimientoStock mvto in ordenT.MovimientosStock)
+            {
+                MovimientoStockBLL.Finalizar(mvto, transaccion);
+            }
         }
     }
 }

@@ -31,9 +31,9 @@ namespace GyCAP.Data {
         
         private LOTES_COCINADataTable tableLOTES_COCINA;
         
-        private CIERRE_ORDEN_TRABAJODataTable tableCIERRE_ORDEN_TRABAJO;
-        
         private ORDENES_TRABAJODataTable tableORDENES_TRABAJO;
+        
+        private CIERRE_ORDEN_TRABAJODataTable tableCIERRE_ORDEN_TRABAJO;
         
         private ReporteOrdenTrabajoDataTable tableReporteOrdenTrabajo;
         
@@ -43,11 +43,11 @@ namespace GyCAP.Data {
         
         private global::System.Data.DataRelation relationFK_ORDENES_TRABAJO_ORDEN_TRABAJO_PADRE;
         
-        private global::System.Data.DataRelation relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO;
-        
         private global::System.Data.DataRelation relationFK_ORDENES_PRODUCCION_ORDENES_TRABAJO;
         
         private global::System.Data.DataRelation relationFK_ORDENES_TRABAJO_ESTADO_ORDENES_TRABAJO;
+        
+        private global::System.Data.DataRelation relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -84,11 +84,11 @@ namespace GyCAP.Data {
                 if ((ds.Tables["LOTES_COCINA"] != null)) {
                     base.Tables.Add(new LOTES_COCINADataTable(ds.Tables["LOTES_COCINA"]));
                 }
-                if ((ds.Tables["CIERRE_ORDEN_TRABAJO"] != null)) {
-                    base.Tables.Add(new CIERRE_ORDEN_TRABAJODataTable(ds.Tables["CIERRE_ORDEN_TRABAJO"]));
-                }
                 if ((ds.Tables["ORDENES_TRABAJO"] != null)) {
                     base.Tables.Add(new ORDENES_TRABAJODataTable(ds.Tables["ORDENES_TRABAJO"]));
+                }
+                if ((ds.Tables["CIERRE_ORDEN_TRABAJO"] != null)) {
+                    base.Tables.Add(new CIERRE_ORDEN_TRABAJODataTable(ds.Tables["CIERRE_ORDEN_TRABAJO"]));
                 }
                 if ((ds.Tables["ReporteOrdenTrabajo"] != null)) {
                     base.Tables.Add(new ReporteOrdenTrabajoDataTable(ds.Tables["ReporteOrdenTrabajo"]));
@@ -141,18 +141,18 @@ namespace GyCAP.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public CIERRE_ORDEN_TRABAJODataTable CIERRE_ORDEN_TRABAJO {
+        public ORDENES_TRABAJODataTable ORDENES_TRABAJO {
             get {
-                return this.tableCIERRE_ORDEN_TRABAJO;
+                return this.tableORDENES_TRABAJO;
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public ORDENES_TRABAJODataTable ORDENES_TRABAJO {
+        public CIERRE_ORDEN_TRABAJODataTable CIERRE_ORDEN_TRABAJO {
             get {
-                return this.tableORDENES_TRABAJO;
+                return this.tableCIERRE_ORDEN_TRABAJO;
             }
         }
         
@@ -233,11 +233,11 @@ namespace GyCAP.Data {
                 if ((ds.Tables["LOTES_COCINA"] != null)) {
                     base.Tables.Add(new LOTES_COCINADataTable(ds.Tables["LOTES_COCINA"]));
                 }
-                if ((ds.Tables["CIERRE_ORDEN_TRABAJO"] != null)) {
-                    base.Tables.Add(new CIERRE_ORDEN_TRABAJODataTable(ds.Tables["CIERRE_ORDEN_TRABAJO"]));
-                }
                 if ((ds.Tables["ORDENES_TRABAJO"] != null)) {
                     base.Tables.Add(new ORDENES_TRABAJODataTable(ds.Tables["ORDENES_TRABAJO"]));
+                }
+                if ((ds.Tables["CIERRE_ORDEN_TRABAJO"] != null)) {
+                    base.Tables.Add(new CIERRE_ORDEN_TRABAJODataTable(ds.Tables["CIERRE_ORDEN_TRABAJO"]));
                 }
                 if ((ds.Tables["ReporteOrdenTrabajo"] != null)) {
                     base.Tables.Add(new ReporteOrdenTrabajoDataTable(ds.Tables["ReporteOrdenTrabajo"]));
@@ -290,16 +290,16 @@ namespace GyCAP.Data {
                     this.tableLOTES_COCINA.InitVars();
                 }
             }
-            this.tableCIERRE_ORDEN_TRABAJO = ((CIERRE_ORDEN_TRABAJODataTable)(base.Tables["CIERRE_ORDEN_TRABAJO"]));
-            if ((initTable == true)) {
-                if ((this.tableCIERRE_ORDEN_TRABAJO != null)) {
-                    this.tableCIERRE_ORDEN_TRABAJO.InitVars();
-                }
-            }
             this.tableORDENES_TRABAJO = ((ORDENES_TRABAJODataTable)(base.Tables["ORDENES_TRABAJO"]));
             if ((initTable == true)) {
                 if ((this.tableORDENES_TRABAJO != null)) {
                     this.tableORDENES_TRABAJO.InitVars();
+                }
+            }
+            this.tableCIERRE_ORDEN_TRABAJO = ((CIERRE_ORDEN_TRABAJODataTable)(base.Tables["CIERRE_ORDEN_TRABAJO"]));
+            if ((initTable == true)) {
+                if ((this.tableCIERRE_ORDEN_TRABAJO != null)) {
+                    this.tableCIERRE_ORDEN_TRABAJO.InitVars();
                 }
             }
             this.tableReporteOrdenTrabajo = ((ReporteOrdenTrabajoDataTable)(base.Tables["ReporteOrdenTrabajo"]));
@@ -311,9 +311,9 @@ namespace GyCAP.Data {
             this.relationFK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO = this.Relations["FK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO"];
             this.relationFK_ORDENES_PRODUCCION_LOTES_COCINA = this.Relations["FK_ORDENES_PRODUCCION_LOTES_COCINA"];
             this.relationFK_ORDENES_TRABAJO_ORDEN_TRABAJO_PADRE = this.Relations["FK_ORDENES_TRABAJO_ORDEN_TRABAJO_PADRE"];
-            this.relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO = this.Relations["FK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO"];
             this.relationFK_ORDENES_PRODUCCION_ORDENES_TRABAJO = this.Relations["FK_ORDENES_PRODUCCION_ORDENES_TRABAJO"];
             this.relationFK_ORDENES_TRABAJO_ESTADO_ORDENES_TRABAJO = this.Relations["FK_ORDENES_TRABAJO_ESTADO_ORDENES_TRABAJO"];
+            this.relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO = this.Relations["FK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -329,10 +329,10 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tableORDENES_PRODUCCION);
             this.tableLOTES_COCINA = new LOTES_COCINADataTable();
             base.Tables.Add(this.tableLOTES_COCINA);
-            this.tableCIERRE_ORDEN_TRABAJO = new CIERRE_ORDEN_TRABAJODataTable();
-            base.Tables.Add(this.tableCIERRE_ORDEN_TRABAJO);
             this.tableORDENES_TRABAJO = new ORDENES_TRABAJODataTable();
             base.Tables.Add(this.tableORDENES_TRABAJO);
+            this.tableCIERRE_ORDEN_TRABAJO = new CIERRE_ORDEN_TRABAJODataTable();
+            base.Tables.Add(this.tableCIERRE_ORDEN_TRABAJO);
             this.tableReporteOrdenTrabajo = new ReporteOrdenTrabajoDataTable();
             base.Tables.Add(this.tableReporteOrdenTrabajo);
             this.relationFK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO = new global::System.Data.DataRelation("FK_ORDENES_PRODUCCION_ESTADO_ORDENES_TRABAJO", new global::System.Data.DataColumn[] {
@@ -347,10 +347,6 @@ namespace GyCAP.Data {
                         this.tableORDENES_TRABAJO.ORDT_NUMEROColumn}, new global::System.Data.DataColumn[] {
                         this.tableORDENES_TRABAJO.ORDT_NUMERO_PADREColumn}, false);
             this.Relations.Add(this.relationFK_ORDENES_TRABAJO_ORDEN_TRABAJO_PADRE);
-            this.relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO = new global::System.Data.DataRelation("FK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO", new global::System.Data.DataColumn[] {
-                        this.tableORDENES_TRABAJO.ORDT_NUMEROColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCIERRE_ORDEN_TRABAJO.ORDT_NUMEROColumn}, false);
-            this.Relations.Add(this.relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO);
             this.relationFK_ORDENES_PRODUCCION_ORDENES_TRABAJO = new global::System.Data.DataRelation("FK_ORDENES_PRODUCCION_ORDENES_TRABAJO", new global::System.Data.DataColumn[] {
                         this.tableORDENES_PRODUCCION.ORDP_NUMEROColumn}, new global::System.Data.DataColumn[] {
                         this.tableORDENES_TRABAJO.ORDP_NUMEROColumn}, false);
@@ -359,6 +355,10 @@ namespace GyCAP.Data {
                         this.tableESTADO_ORDENES_TRABAJO.EORD_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableORDENES_TRABAJO.EORD_CODIGOColumn}, false);
             this.Relations.Add(this.relationFK_ORDENES_TRABAJO_ESTADO_ORDENES_TRABAJO);
+            this.relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO = new global::System.Data.DataRelation("FK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO", new global::System.Data.DataColumn[] {
+                        this.tableORDENES_TRABAJO.ORDT_NUMEROColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCIERRE_ORDEN_TRABAJO.ORDT_NUMEROColumn}, false);
+            this.Relations.Add(this.relationFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -377,12 +377,12 @@ namespace GyCAP.Data {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeCIERRE_ORDEN_TRABAJO() {
+        private bool ShouldSerializeORDENES_TRABAJO() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeORDENES_TRABAJO() {
+        private bool ShouldSerializeCIERRE_ORDEN_TRABAJO() {
             return false;
         }
         
@@ -450,9 +450,9 @@ namespace GyCAP.Data {
         
         public delegate void LOTES_COCINARowChangeEventHandler(object sender, LOTES_COCINARowChangeEvent e);
         
-        public delegate void CIERRE_ORDEN_TRABAJORowChangeEventHandler(object sender, CIERRE_ORDEN_TRABAJORowChangeEvent e);
-        
         public delegate void ORDENES_TRABAJORowChangeEventHandler(object sender, ORDENES_TRABAJORowChangeEvent e);
+        
+        public delegate void CIERRE_ORDEN_TRABAJORowChangeEventHandler(object sender, CIERRE_ORDEN_TRABAJORowChangeEvent e);
         
         public delegate void ReporteOrdenTrabajoRowChangeEventHandler(object sender, ReporteOrdenTrabajoRowChangeEvent e);
         
@@ -1499,340 +1499,6 @@ namespace GyCAP.Data {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class CIERRE_ORDEN_TRABAJODataTable : global::System.Data.TypedTableBase<CIERRE_ORDEN_TRABAJORow> {
-            
-            private global::System.Data.DataColumn columnCORD_CODIGO;
-            
-            private global::System.Data.DataColumn columnORDT_NUMERO;
-            
-            private global::System.Data.DataColumn columnE_CODIGO;
-            
-            private global::System.Data.DataColumn columnMAQ_CODIGO;
-            
-            private global::System.Data.DataColumn columnCORD_CANTIDAD;
-            
-            private global::System.Data.DataColumn columnCORD_FECHACIERRE;
-            
-            private global::System.Data.DataColumn columnCORD_HORACIERRE;
-            
-            private global::System.Data.DataColumn columnCORD_OBSERVACIONES;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CIERRE_ORDEN_TRABAJODataTable() {
-                this.TableName = "CIERRE_ORDEN_TRABAJO";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal CIERRE_ORDEN_TRABAJODataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected CIERRE_ORDEN_TRABAJODataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CORD_CODIGOColumn {
-                get {
-                    return this.columnCORD_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ORDT_NUMEROColumn {
-                get {
-                    return this.columnORDT_NUMERO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn E_CODIGOColumn {
-                get {
-                    return this.columnE_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn MAQ_CODIGOColumn {
-                get {
-                    return this.columnMAQ_CODIGO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CORD_CANTIDADColumn {
-                get {
-                    return this.columnCORD_CANTIDAD;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CORD_FECHACIERREColumn {
-                get {
-                    return this.columnCORD_FECHACIERRE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CORD_HORACIERREColumn {
-                get {
-                    return this.columnCORD_HORACIERRE;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CORD_OBSERVACIONESColumn {
-                get {
-                    return this.columnCORD_OBSERVACIONES;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CIERRE_ORDEN_TRABAJORow this[int index] {
-                get {
-                    return ((CIERRE_ORDEN_TRABAJORow)(this.Rows[index]));
-                }
-            }
-            
-            public event CIERRE_ORDEN_TRABAJORowChangeEventHandler CIERRE_ORDEN_TRABAJORowChanging;
-            
-            public event CIERRE_ORDEN_TRABAJORowChangeEventHandler CIERRE_ORDEN_TRABAJORowChanged;
-            
-            public event CIERRE_ORDEN_TRABAJORowChangeEventHandler CIERRE_ORDEN_TRABAJORowDeleting;
-            
-            public event CIERRE_ORDEN_TRABAJORowChangeEventHandler CIERRE_ORDEN_TRABAJORowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddCIERRE_ORDEN_TRABAJORow(CIERRE_ORDEN_TRABAJORow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CIERRE_ORDEN_TRABAJORow AddCIERRE_ORDEN_TRABAJORow(ORDENES_TRABAJORow parentORDENES_TRABAJORowByFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO, decimal E_CODIGO, decimal MAQ_CODIGO, decimal CORD_CANTIDAD, System.DateTime CORD_FECHACIERRE, decimal CORD_HORACIERRE, string CORD_OBSERVACIONES) {
-                CIERRE_ORDEN_TRABAJORow rowCIERRE_ORDEN_TRABAJORow = ((CIERRE_ORDEN_TRABAJORow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        null,
-                        E_CODIGO,
-                        MAQ_CODIGO,
-                        CORD_CANTIDAD,
-                        CORD_FECHACIERRE,
-                        CORD_HORACIERRE,
-                        CORD_OBSERVACIONES};
-                if ((parentORDENES_TRABAJORowByFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO != null)) {
-                    columnValuesArray[1] = parentORDENES_TRABAJORowByFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO[0];
-                }
-                rowCIERRE_ORDEN_TRABAJORow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowCIERRE_ORDEN_TRABAJORow);
-                return rowCIERRE_ORDEN_TRABAJORow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CIERRE_ORDEN_TRABAJORow FindByCORD_CODIGO(decimal CORD_CODIGO) {
-                return ((CIERRE_ORDEN_TRABAJORow)(this.Rows.Find(new object[] {
-                            CORD_CODIGO})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                CIERRE_ORDEN_TRABAJODataTable cln = ((CIERRE_ORDEN_TRABAJODataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new CIERRE_ORDEN_TRABAJODataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnCORD_CODIGO = base.Columns["CORD_CODIGO"];
-                this.columnORDT_NUMERO = base.Columns["ORDT_NUMERO"];
-                this.columnE_CODIGO = base.Columns["E_CODIGO"];
-                this.columnMAQ_CODIGO = base.Columns["MAQ_CODIGO"];
-                this.columnCORD_CANTIDAD = base.Columns["CORD_CANTIDAD"];
-                this.columnCORD_FECHACIERRE = base.Columns["CORD_FECHACIERRE"];
-                this.columnCORD_HORACIERRE = base.Columns["CORD_HORACIERRE"];
-                this.columnCORD_OBSERVACIONES = base.Columns["CORD_OBSERVACIONES"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnCORD_CODIGO = new global::System.Data.DataColumn("CORD_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCORD_CODIGO);
-                this.columnORDT_NUMERO = new global::System.Data.DataColumn("ORDT_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnORDT_NUMERO);
-                this.columnE_CODIGO = new global::System.Data.DataColumn("E_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnE_CODIGO);
-                this.columnMAQ_CODIGO = new global::System.Data.DataColumn("MAQ_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMAQ_CODIGO);
-                this.columnCORD_CANTIDAD = new global::System.Data.DataColumn("CORD_CANTIDAD", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCORD_CANTIDAD);
-                this.columnCORD_FECHACIERRE = new global::System.Data.DataColumn("CORD_FECHACIERRE", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCORD_FECHACIERRE);
-                this.columnCORD_HORACIERRE = new global::System.Data.DataColumn("CORD_HORACIERRE", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCORD_HORACIERRE);
-                this.columnCORD_OBSERVACIONES = new global::System.Data.DataColumn("CORD_OBSERVACIONES", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCORD_OBSERVACIONES);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnCORD_CODIGO}, true));
-                this.columnCORD_CODIGO.AutoIncrement = true;
-                this.columnCORD_CODIGO.AutoIncrementSeed = -1;
-                this.columnCORD_CODIGO.AutoIncrementStep = -1;
-                this.columnCORD_CODIGO.AllowDBNull = false;
-                this.columnCORD_CODIGO.Unique = true;
-                this.columnORDT_NUMERO.AllowDBNull = false;
-                this.columnE_CODIGO.AllowDBNull = false;
-                this.columnCORD_CANTIDAD.AllowDBNull = false;
-                this.columnCORD_OBSERVACIONES.MaxLength = 300;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CIERRE_ORDEN_TRABAJORow NewCIERRE_ORDEN_TRABAJORow() {
-                return ((CIERRE_ORDEN_TRABAJORow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new CIERRE_ORDEN_TRABAJORow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(CIERRE_ORDEN_TRABAJORow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.CIERRE_ORDEN_TRABAJORowChanged != null)) {
-                    this.CIERRE_ORDEN_TRABAJORowChanged(this, new CIERRE_ORDEN_TRABAJORowChangeEvent(((CIERRE_ORDEN_TRABAJORow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.CIERRE_ORDEN_TRABAJORowChanging != null)) {
-                    this.CIERRE_ORDEN_TRABAJORowChanging(this, new CIERRE_ORDEN_TRABAJORowChangeEvent(((CIERRE_ORDEN_TRABAJORow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.CIERRE_ORDEN_TRABAJORowDeleted != null)) {
-                    this.CIERRE_ORDEN_TRABAJORowDeleted(this, new CIERRE_ORDEN_TRABAJORowChangeEvent(((CIERRE_ORDEN_TRABAJORow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.CIERRE_ORDEN_TRABAJORowDeleting != null)) {
-                    this.CIERRE_ORDEN_TRABAJORowDeleting(this, new CIERRE_ORDEN_TRABAJORowChangeEvent(((CIERRE_ORDEN_TRABAJORow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveCIERRE_ORDEN_TRABAJORow(CIERRE_ORDEN_TRABAJORow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsOrdenTrabajo ds = new dsOrdenTrabajo();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "CIERRE_ORDEN_TRABAJODataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class ORDENES_TRABAJODataTable : global::System.Data.TypedTableBase<ORDENES_TRABAJORow> {
             
             private global::System.Data.DataColumn columnORDT_NUMERO;
@@ -2270,6 +1936,344 @@ namespace GyCAP.Data {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "ORDENES_TRABAJODataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class CIERRE_ORDEN_TRABAJODataTable : global::System.Data.TypedTableBase<CIERRE_ORDEN_TRABAJORow> {
+            
+            private global::System.Data.DataColumn columnCORD_CODIGO;
+            
+            private global::System.Data.DataColumn columnORDT_NUMERO;
+            
+            private global::System.Data.DataColumn columnE_CODIGO;
+            
+            private global::System.Data.DataColumn columnMAQ_CODIGO;
+            
+            private global::System.Data.DataColumn columnCORD_CANTIDAD;
+            
+            private global::System.Data.DataColumn columnCORD_FECHACIERRE;
+            
+            private global::System.Data.DataColumn columnCORD_OBSERVACIONES;
+            
+            private global::System.Data.DataColumn columnOPR_FALLIDAS;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CIERRE_ORDEN_TRABAJODataTable() {
+                this.TableName = "CIERRE_ORDEN_TRABAJO";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal CIERRE_ORDEN_TRABAJODataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected CIERRE_ORDEN_TRABAJODataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CORD_CODIGOColumn {
+                get {
+                    return this.columnCORD_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ORDT_NUMEROColumn {
+                get {
+                    return this.columnORDT_NUMERO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn E_CODIGOColumn {
+                get {
+                    return this.columnE_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MAQ_CODIGOColumn {
+                get {
+                    return this.columnMAQ_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CORD_CANTIDADColumn {
+                get {
+                    return this.columnCORD_CANTIDAD;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CORD_FECHACIERREColumn {
+                get {
+                    return this.columnCORD_FECHACIERRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CORD_OBSERVACIONESColumn {
+                get {
+                    return this.columnCORD_OBSERVACIONES;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OPR_FALLIDASColumn {
+                get {
+                    return this.columnOPR_FALLIDAS;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CIERRE_ORDEN_TRABAJORow this[int index] {
+                get {
+                    return ((CIERRE_ORDEN_TRABAJORow)(this.Rows[index]));
+                }
+            }
+            
+            public event CIERRE_ORDEN_TRABAJORowChangeEventHandler CIERRE_ORDEN_TRABAJORowChanging;
+            
+            public event CIERRE_ORDEN_TRABAJORowChangeEventHandler CIERRE_ORDEN_TRABAJORowChanged;
+            
+            public event CIERRE_ORDEN_TRABAJORowChangeEventHandler CIERRE_ORDEN_TRABAJORowDeleting;
+            
+            public event CIERRE_ORDEN_TRABAJORowChangeEventHandler CIERRE_ORDEN_TRABAJORowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddCIERRE_ORDEN_TRABAJORow(CIERRE_ORDEN_TRABAJORow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CIERRE_ORDEN_TRABAJORow AddCIERRE_ORDEN_TRABAJORow(ORDENES_TRABAJORow parentORDENES_TRABAJORowByFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO, decimal E_CODIGO, decimal MAQ_CODIGO, decimal CORD_CANTIDAD, System.DateTime CORD_FECHACIERRE, string CORD_OBSERVACIONES, decimal OPR_FALLIDAS) {
+                CIERRE_ORDEN_TRABAJORow rowCIERRE_ORDEN_TRABAJORow = ((CIERRE_ORDEN_TRABAJORow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        E_CODIGO,
+                        MAQ_CODIGO,
+                        CORD_CANTIDAD,
+                        CORD_FECHACIERRE,
+                        CORD_OBSERVACIONES,
+                        OPR_FALLIDAS};
+                if ((parentORDENES_TRABAJORowByFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO != null)) {
+                    columnValuesArray[1] = parentORDENES_TRABAJORowByFK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO[0];
+                }
+                rowCIERRE_ORDEN_TRABAJORow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowCIERRE_ORDEN_TRABAJORow);
+                return rowCIERRE_ORDEN_TRABAJORow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CIERRE_ORDEN_TRABAJORow FindByCORD_CODIGO(decimal CORD_CODIGO) {
+                return ((CIERRE_ORDEN_TRABAJORow)(this.Rows.Find(new object[] {
+                            CORD_CODIGO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                CIERRE_ORDEN_TRABAJODataTable cln = ((CIERRE_ORDEN_TRABAJODataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new CIERRE_ORDEN_TRABAJODataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnCORD_CODIGO = base.Columns["CORD_CODIGO"];
+                this.columnORDT_NUMERO = base.Columns["ORDT_NUMERO"];
+                this.columnE_CODIGO = base.Columns["E_CODIGO"];
+                this.columnMAQ_CODIGO = base.Columns["MAQ_CODIGO"];
+                this.columnCORD_CANTIDAD = base.Columns["CORD_CANTIDAD"];
+                this.columnCORD_FECHACIERRE = base.Columns["CORD_FECHACIERRE"];
+                this.columnCORD_OBSERVACIONES = base.Columns["CORD_OBSERVACIONES"];
+                this.columnOPR_FALLIDAS = base.Columns["OPR_FALLIDAS"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnCORD_CODIGO = new global::System.Data.DataColumn("CORD_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCORD_CODIGO);
+                this.columnORDT_NUMERO = new global::System.Data.DataColumn("ORDT_NUMERO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnORDT_NUMERO);
+                this.columnE_CODIGO = new global::System.Data.DataColumn("E_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnE_CODIGO);
+                this.columnMAQ_CODIGO = new global::System.Data.DataColumn("MAQ_CODIGO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMAQ_CODIGO);
+                this.columnCORD_CANTIDAD = new global::System.Data.DataColumn("CORD_CANTIDAD", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCORD_CANTIDAD);
+                this.columnCORD_FECHACIERRE = new global::System.Data.DataColumn("CORD_FECHACIERRE", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCORD_FECHACIERRE);
+                this.columnCORD_OBSERVACIONES = new global::System.Data.DataColumn("CORD_OBSERVACIONES", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCORD_OBSERVACIONES);
+                this.columnOPR_FALLIDAS = new global::System.Data.DataColumn("OPR_FALLIDAS", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOPR_FALLIDAS);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnCORD_CODIGO}, true));
+                this.columnCORD_CODIGO.AutoIncrement = true;
+                this.columnCORD_CODIGO.AutoIncrementSeed = -1;
+                this.columnCORD_CODIGO.AutoIncrementStep = -1;
+                this.columnCORD_CODIGO.AllowDBNull = false;
+                this.columnCORD_CODIGO.Unique = true;
+                this.columnORDT_NUMERO.AllowDBNull = false;
+                this.columnE_CODIGO.AllowDBNull = false;
+                this.columnMAQ_CODIGO.AllowDBNull = false;
+                this.columnCORD_CANTIDAD.AllowDBNull = false;
+                this.columnCORD_FECHACIERRE.AllowDBNull = false;
+                this.columnCORD_OBSERVACIONES.AllowDBNull = false;
+                this.columnCORD_OBSERVACIONES.MaxLength = 300;
+                this.columnOPR_FALLIDAS.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public CIERRE_ORDEN_TRABAJORow NewCIERRE_ORDEN_TRABAJORow() {
+                return ((CIERRE_ORDEN_TRABAJORow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new CIERRE_ORDEN_TRABAJORow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(CIERRE_ORDEN_TRABAJORow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.CIERRE_ORDEN_TRABAJORowChanged != null)) {
+                    this.CIERRE_ORDEN_TRABAJORowChanged(this, new CIERRE_ORDEN_TRABAJORowChangeEvent(((CIERRE_ORDEN_TRABAJORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.CIERRE_ORDEN_TRABAJORowChanging != null)) {
+                    this.CIERRE_ORDEN_TRABAJORowChanging(this, new CIERRE_ORDEN_TRABAJORowChangeEvent(((CIERRE_ORDEN_TRABAJORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.CIERRE_ORDEN_TRABAJORowDeleted != null)) {
+                    this.CIERRE_ORDEN_TRABAJORowDeleted(this, new CIERRE_ORDEN_TRABAJORowChangeEvent(((CIERRE_ORDEN_TRABAJORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.CIERRE_ORDEN_TRABAJORowDeleting != null)) {
+                    this.CIERRE_ORDEN_TRABAJORowDeleting(this, new CIERRE_ORDEN_TRABAJORowChangeEvent(((CIERRE_ORDEN_TRABAJORow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveCIERRE_ORDEN_TRABAJORow(CIERRE_ORDEN_TRABAJORow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsOrdenTrabajo ds = new dsOrdenTrabajo();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "CIERRE_ORDEN_TRABAJODataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -3141,173 +3145,6 @@ namespace GyCAP.Data {
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class CIERRE_ORDEN_TRABAJORow : global::System.Data.DataRow {
-            
-            private CIERRE_ORDEN_TRABAJODataTable tableCIERRE_ORDEN_TRABAJO;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal CIERRE_ORDEN_TRABAJORow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableCIERRE_ORDEN_TRABAJO = ((CIERRE_ORDEN_TRABAJODataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CORD_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableCIERRE_ORDEN_TRABAJO.CORD_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableCIERRE_ORDEN_TRABAJO.CORD_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal ORDT_NUMERO {
-                get {
-                    return ((decimal)(this[this.tableCIERRE_ORDEN_TRABAJO.ORDT_NUMEROColumn]));
-                }
-                set {
-                    this[this.tableCIERRE_ORDEN_TRABAJO.ORDT_NUMEROColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal E_CODIGO {
-                get {
-                    return ((decimal)(this[this.tableCIERRE_ORDEN_TRABAJO.E_CODIGOColumn]));
-                }
-                set {
-                    this[this.tableCIERRE_ORDEN_TRABAJO.E_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal MAQ_CODIGO {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCIERRE_ORDEN_TRABAJO.MAQ_CODIGOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MAQ_CODIGO\' in table \'CIERRE_ORDEN_TRABAJO\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableCIERRE_ORDEN_TRABAJO.MAQ_CODIGOColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CORD_CANTIDAD {
-                get {
-                    return ((decimal)(this[this.tableCIERRE_ORDEN_TRABAJO.CORD_CANTIDADColumn]));
-                }
-                set {
-                    this[this.tableCIERRE_ORDEN_TRABAJO.CORD_CANTIDADColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime CORD_FECHACIERRE {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableCIERRE_ORDEN_TRABAJO.CORD_FECHACIERREColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CORD_FECHACIERRE\' in table \'CIERRE_ORDEN_TRABAJO\' is DBNull" +
-                                ".", e);
-                    }
-                }
-                set {
-                    this[this.tableCIERRE_ORDEN_TRABAJO.CORD_FECHACIERREColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal CORD_HORACIERRE {
-                get {
-                    try {
-                        return ((decimal)(this[this.tableCIERRE_ORDEN_TRABAJO.CORD_HORACIERREColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CORD_HORACIERRE\' in table \'CIERRE_ORDEN_TRABAJO\' is DBNull." +
-                                "", e);
-                    }
-                }
-                set {
-                    this[this.tableCIERRE_ORDEN_TRABAJO.CORD_HORACIERREColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string CORD_OBSERVACIONES {
-                get {
-                    if (this.IsCORD_OBSERVACIONESNull()) {
-                        return string.Empty;
-                    }
-                    else {
-                        return ((string)(this[this.tableCIERRE_ORDEN_TRABAJO.CORD_OBSERVACIONESColumn]));
-                    }
-                }
-                set {
-                    this[this.tableCIERRE_ORDEN_TRABAJO.CORD_OBSERVACIONESColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ORDENES_TRABAJORow ORDENES_TRABAJORow {
-                get {
-                    return ((ORDENES_TRABAJORow)(this.GetParentRow(this.Table.ParentRelations["FK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsMAQ_CODIGONull() {
-                return this.IsNull(this.tableCIERRE_ORDEN_TRABAJO.MAQ_CODIGOColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetMAQ_CODIGONull() {
-                this[this.tableCIERRE_ORDEN_TRABAJO.MAQ_CODIGOColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCORD_FECHACIERRENull() {
-                return this.IsNull(this.tableCIERRE_ORDEN_TRABAJO.CORD_FECHACIERREColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCORD_FECHACIERRENull() {
-                this[this.tableCIERRE_ORDEN_TRABAJO.CORD_FECHACIERREColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCORD_HORACIERRENull() {
-                return this.IsNull(this.tableCIERRE_ORDEN_TRABAJO.CORD_HORACIERREColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCORD_HORACIERRENull() {
-                this[this.tableCIERRE_ORDEN_TRABAJO.CORD_HORACIERREColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCORD_OBSERVACIONESNull() {
-                return this.IsNull(this.tableCIERRE_ORDEN_TRABAJO.CORD_OBSERVACIONESColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCORD_OBSERVACIONESNull() {
-                this[this.tableCIERRE_ORDEN_TRABAJO.CORD_OBSERVACIONESColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public partial class ORDENES_TRABAJORow : global::System.Data.DataRow {
             
             private ORDENES_TRABAJODataTable tableORDENES_TRABAJO;
@@ -3611,6 +3448,111 @@ namespace GyCAP.Data {
                 }
                 else {
                     return ((CIERRE_ORDEN_TRABAJORow[])(base.GetChildRows(this.Table.ChildRelations["FK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class CIERRE_ORDEN_TRABAJORow : global::System.Data.DataRow {
+            
+            private CIERRE_ORDEN_TRABAJODataTable tableCIERRE_ORDEN_TRABAJO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal CIERRE_ORDEN_TRABAJORow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableCIERRE_ORDEN_TRABAJO = ((CIERRE_ORDEN_TRABAJODataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CORD_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCIERRE_ORDEN_TRABAJO.CORD_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCIERRE_ORDEN_TRABAJO.CORD_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal ORDT_NUMERO {
+                get {
+                    return ((decimal)(this[this.tableCIERRE_ORDEN_TRABAJO.ORDT_NUMEROColumn]));
+                }
+                set {
+                    this[this.tableCIERRE_ORDEN_TRABAJO.ORDT_NUMEROColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal E_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCIERRE_ORDEN_TRABAJO.E_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCIERRE_ORDEN_TRABAJO.E_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal MAQ_CODIGO {
+                get {
+                    return ((decimal)(this[this.tableCIERRE_ORDEN_TRABAJO.MAQ_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableCIERRE_ORDEN_TRABAJO.MAQ_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal CORD_CANTIDAD {
+                get {
+                    return ((decimal)(this[this.tableCIERRE_ORDEN_TRABAJO.CORD_CANTIDADColumn]));
+                }
+                set {
+                    this[this.tableCIERRE_ORDEN_TRABAJO.CORD_CANTIDADColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime CORD_FECHACIERRE {
+                get {
+                    return ((global::System.DateTime)(this[this.tableCIERRE_ORDEN_TRABAJO.CORD_FECHACIERREColumn]));
+                }
+                set {
+                    this[this.tableCIERRE_ORDEN_TRABAJO.CORD_FECHACIERREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string CORD_OBSERVACIONES {
+                get {
+                    return ((string)(this[this.tableCIERRE_ORDEN_TRABAJO.CORD_OBSERVACIONESColumn]));
+                }
+                set {
+                    this[this.tableCIERRE_ORDEN_TRABAJO.CORD_OBSERVACIONESColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal OPR_FALLIDAS {
+                get {
+                    return ((decimal)(this[this.tableCIERRE_ORDEN_TRABAJO.OPR_FALLIDASColumn]));
+                }
+                set {
+                    this[this.tableCIERRE_ORDEN_TRABAJO.OPR_FALLIDASColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public ORDENES_TRABAJORow ORDENES_TRABAJORow {
+                get {
+                    return ((ORDENES_TRABAJORow)(this.GetParentRow(this.Table.ParentRelations["FK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_CIERRE_ORDENTRABAJO_ORDENES_TRABAJO"]);
                 }
             }
         }
@@ -3928,20 +3870,20 @@ namespace GyCAP.Data {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class CIERRE_ORDEN_TRABAJORowChangeEvent : global::System.EventArgs {
+        public class ORDENES_TRABAJORowChangeEvent : global::System.EventArgs {
             
-            private CIERRE_ORDEN_TRABAJORow eventRow;
+            private ORDENES_TRABAJORow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CIERRE_ORDEN_TRABAJORowChangeEvent(CIERRE_ORDEN_TRABAJORow row, global::System.Data.DataRowAction action) {
+            public ORDENES_TRABAJORowChangeEvent(ORDENES_TRABAJORow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CIERRE_ORDEN_TRABAJORow Row {
+            public ORDENES_TRABAJORow Row {
                 get {
                     return this.eventRow;
                 }
@@ -3959,20 +3901,20 @@ namespace GyCAP.Data {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class ORDENES_TRABAJORowChangeEvent : global::System.EventArgs {
+        public class CIERRE_ORDEN_TRABAJORowChangeEvent : global::System.EventArgs {
             
-            private ORDENES_TRABAJORow eventRow;
+            private CIERRE_ORDEN_TRABAJORow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ORDENES_TRABAJORowChangeEvent(ORDENES_TRABAJORow row, global::System.Data.DataRowAction action) {
+            public CIERRE_ORDEN_TRABAJORowChangeEvent(CIERRE_ORDEN_TRABAJORow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ORDENES_TRABAJORow Row {
+            public CIERRE_ORDEN_TRABAJORow Row {
                 get {
                     return this.eventRow;
                 }
@@ -5538,459 +5480,6 @@ SELECT LOT_CODIGO, LOT_NOMBRE, LOT_DESDENUMEROSERIE, LOT_HASTANUMEROSERIE FROM L
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class CIERRE_ORDEN_TRABAJOTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public CIERRE_ORDEN_TRABAJOTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "CIERRE_ORDEN_TRABAJO";
-            tableMapping.ColumnMappings.Add("CORD_CODIGO", "CORD_CODIGO");
-            tableMapping.ColumnMappings.Add("ORDT_NUMERO", "ORDT_NUMERO");
-            tableMapping.ColumnMappings.Add("E_CODIGO", "E_CODIGO");
-            tableMapping.ColumnMappings.Add("MAQ_CODIGO", "MAQ_CODIGO");
-            tableMapping.ColumnMappings.Add("CORD_CANTIDAD", "CORD_CANTIDAD");
-            tableMapping.ColumnMappings.Add("CORD_FECHACIERRE", "CORD_FECHACIERRE");
-            tableMapping.ColumnMappings.Add("CORD_HORACIERRE", "CORD_HORACIERRE");
-            tableMapping.ColumnMappings.Add("CORD_OBSERVACIONES", "CORD_OBSERVACIONES");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[CIERRE_ORDEN_TRABAJO] WHERE (([CORD_CODIGO] = @Original_CORD_CODIGO) AND ([ORDT_NUMERO] = @Original_ORDT_NUMERO) AND ([E_CODIGO] = @Original_E_CODIGO) AND ((@IsNull_MAQ_CODIGO = 1 AND [MAQ_CODIGO] IS NULL) OR ([MAQ_CODIGO] = @Original_MAQ_CODIGO)) AND ([CORD_CANTIDAD] = @Original_CORD_CANTIDAD) AND ((@IsNull_CORD_FECHACIERRE = 1 AND [CORD_FECHACIERRE] IS NULL) OR ([CORD_FECHACIERRE] = @Original_CORD_FECHACIERRE)) AND ((@IsNull_CORD_HORACIERRE = 1 AND [CORD_HORACIERRE] IS NULL) OR ([CORD_HORACIERRE] = @Original_CORD_HORACIERRE)) AND ((@IsNull_CORD_OBSERVACIONES = 1 AND [CORD_OBSERVACIONES] IS NULL) OR ([CORD_OBSERVACIONES] = @Original_CORD_OBSERVACIONES)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CORD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "E_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MAQ_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MAQ_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MAQ_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MAQ_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CORD_CANTIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CORD_FECHACIERRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_FECHACIERRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_FECHACIERRE", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_FECHACIERRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CORD_HORACIERRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_HORACIERRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_HORACIERRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CORD_HORACIERRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CORD_OBSERVACIONES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_OBSERVACIONES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_OBSERVACIONES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[CIERRE_ORDEN_TRABAJO] ([ORDT_NUMERO], [E_CODIGO], [MAQ_CODIGO], [CORD_CANTIDAD], [CORD_FECHACIERRE], [CORD_HORACIERRE], [CORD_OBSERVACIONES]) VALUES (@ORDT_NUMERO, @E_CODIGO, @MAQ_CODIGO, @CORD_CANTIDAD, @CORD_FECHACIERRE, @CORD_HORACIERRE, @CORD_OBSERVACIONES);
-SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHACIERRE, CORD_HORACIERRE, CORD_OBSERVACIONES FROM CIERRE_ORDEN_TRABAJO WHERE (CORD_CODIGO = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "E_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MAQ_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MAQ_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CORD_CANTIDAD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_FECHACIERRE", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_FECHACIERRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_HORACIERRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CORD_HORACIERRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_OBSERVACIONES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[CIERRE_ORDEN_TRABAJO] SET [ORDT_NUMERO] = @ORDT_NUMERO, [E_CODIGO] = @E_CODIGO, [MAQ_CODIGO] = @MAQ_CODIGO, [CORD_CANTIDAD] = @CORD_CANTIDAD, [CORD_FECHACIERRE] = @CORD_FECHACIERRE, [CORD_HORACIERRE] = @CORD_HORACIERRE, [CORD_OBSERVACIONES] = @CORD_OBSERVACIONES WHERE (([CORD_CODIGO] = @Original_CORD_CODIGO) AND ([ORDT_NUMERO] = @Original_ORDT_NUMERO) AND ([E_CODIGO] = @Original_E_CODIGO) AND ((@IsNull_MAQ_CODIGO = 1 AND [MAQ_CODIGO] IS NULL) OR ([MAQ_CODIGO] = @Original_MAQ_CODIGO)) AND ([CORD_CANTIDAD] = @Original_CORD_CANTIDAD) AND ((@IsNull_CORD_FECHACIERRE = 1 AND [CORD_FECHACIERRE] IS NULL) OR ([CORD_FECHACIERRE] = @Original_CORD_FECHACIERRE)) AND ((@IsNull_CORD_HORACIERRE = 1 AND [CORD_HORACIERRE] IS NULL) OR ([CORD_HORACIERRE] = @Original_CORD_HORACIERRE)) AND ((@IsNull_CORD_OBSERVACIONES = 1 AND [CORD_OBSERVACIONES] IS NULL) OR ([CORD_OBSERVACIONES] = @Original_CORD_OBSERVACIONES)));
-SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHACIERRE, CORD_HORACIERRE, CORD_OBSERVACIONES FROM CIERRE_ORDEN_TRABAJO WHERE (CORD_CODIGO = @CORD_CODIGO)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "E_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MAQ_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MAQ_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CORD_CANTIDAD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_FECHACIERRE", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_FECHACIERRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_HORACIERRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CORD_HORACIERRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_OBSERVACIONES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CORD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "E_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MAQ_CODIGO", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MAQ_CODIGO", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MAQ_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MAQ_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CORD_CANTIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CORD_FECHACIERRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_FECHACIERRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_FECHACIERRE", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_FECHACIERRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CORD_HORACIERRE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_HORACIERRE", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_HORACIERRE", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 5, 2, "CORD_HORACIERRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CORD_OBSERVACIONES", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_OBSERVACIONES", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_OBSERVACIONES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "CORD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHAC" +
-                "IERRE, CORD_HORACIERRE, CORD_OBSERVACIONES FROM dbo.CIERRE_ORDEN_TRABAJO";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsOrdenTrabajo.CIERRE_ORDEN_TRABAJODataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsOrdenTrabajo.CIERRE_ORDEN_TRABAJODataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsOrdenTrabajo.CIERRE_ORDEN_TRABAJODataTable dataTable = new dsOrdenTrabajo.CIERRE_ORDEN_TRABAJODataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsOrdenTrabajo.CIERRE_ORDEN_TRABAJODataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(dsOrdenTrabajo dataSet) {
-            return this.Adapter.Update(dataSet, "CIERRE_ORDEN_TRABAJO");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(decimal Original_CORD_CODIGO, decimal Original_ORDT_NUMERO, decimal Original_E_CODIGO, global::System.Nullable<decimal> Original_MAQ_CODIGO, decimal Original_CORD_CANTIDAD, global::System.Nullable<global::System.DateTime> Original_CORD_FECHACIERRE, global::System.Nullable<decimal> Original_CORD_HORACIERRE, string Original_CORD_OBSERVACIONES) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_CORD_CODIGO));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_ORDT_NUMERO));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_E_CODIGO));
-            if ((Original_MAQ_CODIGO.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_MAQ_CODIGO.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.DeleteCommand.Parameters[5].Value = ((decimal)(Original_CORD_CANTIDAD));
-            if ((Original_CORD_FECHACIERRE.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((System.DateTime)(Original_CORD_FECHACIERRE.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CORD_HORACIERRE.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((decimal)(Original_CORD_HORACIERRE.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CORD_OBSERVACIONES == null)) {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((string)(Original_CORD_OBSERVACIONES));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(decimal ORDT_NUMERO, decimal E_CODIGO, global::System.Nullable<decimal> MAQ_CODIGO, decimal CORD_CANTIDAD, global::System.Nullable<global::System.DateTime> CORD_FECHACIERRE, global::System.Nullable<decimal> CORD_HORACIERRE, string CORD_OBSERVACIONES) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ORDT_NUMERO));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(E_CODIGO));
-            if ((MAQ_CODIGO.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(MAQ_CODIGO.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(CORD_CANTIDAD));
-            if ((CORD_FECHACIERRE.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(CORD_FECHACIERRE.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((CORD_HORACIERRE.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(CORD_HORACIERRE.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((CORD_OBSERVACIONES == null)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(CORD_OBSERVACIONES));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    decimal ORDT_NUMERO, 
-                    decimal E_CODIGO, 
-                    global::System.Nullable<decimal> MAQ_CODIGO, 
-                    decimal CORD_CANTIDAD, 
-                    global::System.Nullable<global::System.DateTime> CORD_FECHACIERRE, 
-                    global::System.Nullable<decimal> CORD_HORACIERRE, 
-                    string CORD_OBSERVACIONES, 
-                    decimal Original_CORD_CODIGO, 
-                    decimal Original_ORDT_NUMERO, 
-                    decimal Original_E_CODIGO, 
-                    global::System.Nullable<decimal> Original_MAQ_CODIGO, 
-                    decimal Original_CORD_CANTIDAD, 
-                    global::System.Nullable<global::System.DateTime> Original_CORD_FECHACIERRE, 
-                    global::System.Nullable<decimal> Original_CORD_HORACIERRE, 
-                    string Original_CORD_OBSERVACIONES, 
-                    decimal CORD_CODIGO) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(ORDT_NUMERO));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(E_CODIGO));
-            if ((MAQ_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(MAQ_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(CORD_CANTIDAD));
-            if ((CORD_FECHACIERRE.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(CORD_FECHACIERRE.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((CORD_HORACIERRE.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(CORD_HORACIERRE.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((CORD_OBSERVACIONES == null)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(CORD_OBSERVACIONES));
-            }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_CORD_CODIGO));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_ORDT_NUMERO));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(Original_E_CODIGO));
-            if ((Original_MAQ_CODIGO.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_MAQ_CODIGO.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_CORD_CANTIDAD));
-            if ((Original_CORD_FECHACIERRE.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((System.DateTime)(Original_CORD_FECHACIERRE.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CORD_HORACIERRE.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((decimal)(Original_CORD_HORACIERRE.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CORD_OBSERVACIONES == null)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_CORD_OBSERVACIONES));
-            }
-            this.Adapter.UpdateCommand.Parameters[19].Value = ((decimal)(CORD_CODIGO));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(decimal ORDT_NUMERO, decimal E_CODIGO, global::System.Nullable<decimal> MAQ_CODIGO, decimal CORD_CANTIDAD, global::System.Nullable<global::System.DateTime> CORD_FECHACIERRE, global::System.Nullable<decimal> CORD_HORACIERRE, string CORD_OBSERVACIONES, decimal Original_CORD_CODIGO, decimal Original_ORDT_NUMERO, decimal Original_E_CODIGO, global::System.Nullable<decimal> Original_MAQ_CODIGO, decimal Original_CORD_CANTIDAD, global::System.Nullable<global::System.DateTime> Original_CORD_FECHACIERRE, global::System.Nullable<decimal> Original_CORD_HORACIERRE, string Original_CORD_OBSERVACIONES) {
-            return this.Update(ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHACIERRE, CORD_HORACIERRE, CORD_OBSERVACIONES, Original_CORD_CODIGO, Original_ORDT_NUMERO, Original_E_CODIGO, Original_MAQ_CODIGO, Original_CORD_CANTIDAD, Original_CORD_FECHACIERRE, Original_CORD_HORACIERRE, Original_CORD_OBSERVACIONES, Original_CORD_CODIGO);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class ORDENES_TRABAJOTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
@@ -6691,6 +6180,375 @@ SELECT ORDT_NUMERO, ORDT_CODIGO, ORDP_NUMERO, EORD_CODIGO, PART_NUMERO, ORDT_ORI
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class CIERRE_ORDEN_TRABAJOTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public CIERRE_ORDEN_TRABAJOTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "CIERRE_ORDEN_TRABAJO";
+            tableMapping.ColumnMappings.Add("CORD_CODIGO", "CORD_CODIGO");
+            tableMapping.ColumnMappings.Add("ORDT_NUMERO", "ORDT_NUMERO");
+            tableMapping.ColumnMappings.Add("E_CODIGO", "E_CODIGO");
+            tableMapping.ColumnMappings.Add("MAQ_CODIGO", "MAQ_CODIGO");
+            tableMapping.ColumnMappings.Add("CORD_CANTIDAD", "CORD_CANTIDAD");
+            tableMapping.ColumnMappings.Add("CORD_FECHACIERRE", "CORD_FECHACIERRE");
+            tableMapping.ColumnMappings.Add("CORD_OBSERVACIONES", "CORD_OBSERVACIONES");
+            tableMapping.ColumnMappings.Add("OPR_FALLIDAS", "OPR_FALLIDAS");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[CIERRE_ORDEN_TRABAJO] WHERE (([CORD_CODIGO] = @Original_CORD_CODIGO) AND ([ORDT_NUMERO] = @Original_ORDT_NUMERO) AND ([E_CODIGO] = @Original_E_CODIGO) AND ([MAQ_CODIGO] = @Original_MAQ_CODIGO) AND ([CORD_CANTIDAD] = @Original_CORD_CANTIDAD) AND ([CORD_FECHACIERRE] = @Original_CORD_FECHACIERRE) AND ([CORD_OBSERVACIONES] = @Original_CORD_OBSERVACIONES) AND ([OPR_FALLIDAS] = @Original_OPR_FALLIDAS))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CORD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "E_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MAQ_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MAQ_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CORD_CANTIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_FECHACIERRE", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_FECHACIERRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_OBSERVACIONES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OPR_FALLIDAS", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "OPR_FALLIDAS", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[CIERRE_ORDEN_TRABAJO] ([ORDT_NUMERO], [E_CODIGO], [MAQ_CODIGO], [CORD_CANTIDAD], [CORD_FECHACIERRE], [CORD_OBSERVACIONES], [OPR_FALLIDAS]) VALUES (@ORDT_NUMERO, @E_CODIGO, @MAQ_CODIGO, @CORD_CANTIDAD, @CORD_FECHACIERRE, @CORD_OBSERVACIONES, @OPR_FALLIDAS);
+SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHACIERRE, CORD_OBSERVACIONES, OPR_FALLIDAS FROM CIERRE_ORDEN_TRABAJO WHERE (CORD_CODIGO = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "E_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MAQ_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MAQ_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CORD_CANTIDAD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_FECHACIERRE", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_FECHACIERRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_OBSERVACIONES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OPR_FALLIDAS", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "OPR_FALLIDAS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[CIERRE_ORDEN_TRABAJO] SET [ORDT_NUMERO] = @ORDT_NUMERO, [E_CODIGO] = @E_CODIGO, [MAQ_CODIGO] = @MAQ_CODIGO, [CORD_CANTIDAD] = @CORD_CANTIDAD, [CORD_FECHACIERRE] = @CORD_FECHACIERRE, [CORD_OBSERVACIONES] = @CORD_OBSERVACIONES, [OPR_FALLIDAS] = @OPR_FALLIDAS WHERE (([CORD_CODIGO] = @Original_CORD_CODIGO) AND ([ORDT_NUMERO] = @Original_ORDT_NUMERO) AND ([E_CODIGO] = @Original_E_CODIGO) AND ([MAQ_CODIGO] = @Original_MAQ_CODIGO) AND ([CORD_CANTIDAD] = @Original_CORD_CANTIDAD) AND ([CORD_FECHACIERRE] = @Original_CORD_FECHACIERRE) AND ([CORD_OBSERVACIONES] = @Original_CORD_OBSERVACIONES) AND ([OPR_FALLIDAS] = @Original_OPR_FALLIDAS));
+SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHACIERRE, CORD_OBSERVACIONES, OPR_FALLIDAS FROM CIERRE_ORDEN_TRABAJO WHERE (CORD_CODIGO = @CORD_CODIGO)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@E_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "E_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MAQ_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MAQ_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CORD_CANTIDAD", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_FECHACIERRE", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_FECHACIERRE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_OBSERVACIONES", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OPR_FALLIDAS", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "OPR_FALLIDAS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CORD_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ORDT_NUMERO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "ORDT_NUMERO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_E_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "E_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MAQ_CODIGO", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "MAQ_CODIGO", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_CANTIDAD", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "CORD_CANTIDAD", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_FECHACIERRE", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_FECHACIERRE", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CORD_OBSERVACIONES", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CORD_OBSERVACIONES", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_OPR_FALLIDAS", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 0, "OPR_FALLIDAS", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CORD_CODIGO", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 10, 0, "CORD_CODIGO", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::GyCAP.Data.Properties.Settings.Default.ProyectoConnectionString2;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT CORD_CODIGO, ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHAC" +
+                "IERRE, CORD_OBSERVACIONES, OPR_FALLIDAS FROM dbo.CIERRE_ORDEN_TRABAJO";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(dsOrdenTrabajo.CIERRE_ORDEN_TRABAJODataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual dsOrdenTrabajo.CIERRE_ORDEN_TRABAJODataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            dsOrdenTrabajo.CIERRE_ORDEN_TRABAJODataTable dataTable = new dsOrdenTrabajo.CIERRE_ORDEN_TRABAJODataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsOrdenTrabajo.CIERRE_ORDEN_TRABAJODataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(dsOrdenTrabajo dataSet) {
+            return this.Adapter.Update(dataSet, "CIERRE_ORDEN_TRABAJO");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(decimal Original_CORD_CODIGO, decimal Original_ORDT_NUMERO, decimal Original_E_CODIGO, decimal Original_MAQ_CODIGO, decimal Original_CORD_CANTIDAD, System.DateTime Original_CORD_FECHACIERRE, string Original_CORD_OBSERVACIONES, decimal Original_OPR_FALLIDAS) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((decimal)(Original_CORD_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((decimal)(Original_ORDT_NUMERO));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((decimal)(Original_E_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_MAQ_CODIGO));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_CORD_CANTIDAD));
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((System.DateTime)(Original_CORD_FECHACIERRE));
+            if ((Original_CORD_OBSERVACIONES == null)) {
+                throw new global::System.ArgumentNullException("Original_CORD_OBSERVACIONES");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_CORD_OBSERVACIONES));
+            }
+            this.Adapter.DeleteCommand.Parameters[7].Value = ((decimal)(Original_OPR_FALLIDAS));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(decimal ORDT_NUMERO, decimal E_CODIGO, decimal MAQ_CODIGO, decimal CORD_CANTIDAD, System.DateTime CORD_FECHACIERRE, string CORD_OBSERVACIONES, decimal OPR_FALLIDAS) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((decimal)(ORDT_NUMERO));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(E_CODIGO));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(MAQ_CODIGO));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(CORD_CANTIDAD));
+            this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(CORD_FECHACIERRE));
+            if ((CORD_OBSERVACIONES == null)) {
+                throw new global::System.ArgumentNullException("CORD_OBSERVACIONES");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(CORD_OBSERVACIONES));
+            }
+            this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(OPR_FALLIDAS));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    decimal ORDT_NUMERO, 
+                    decimal E_CODIGO, 
+                    decimal MAQ_CODIGO, 
+                    decimal CORD_CANTIDAD, 
+                    System.DateTime CORD_FECHACIERRE, 
+                    string CORD_OBSERVACIONES, 
+                    decimal OPR_FALLIDAS, 
+                    decimal Original_CORD_CODIGO, 
+                    decimal Original_ORDT_NUMERO, 
+                    decimal Original_E_CODIGO, 
+                    decimal Original_MAQ_CODIGO, 
+                    decimal Original_CORD_CANTIDAD, 
+                    System.DateTime Original_CORD_FECHACIERRE, 
+                    string Original_CORD_OBSERVACIONES, 
+                    decimal Original_OPR_FALLIDAS, 
+                    decimal CORD_CODIGO) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((decimal)(ORDT_NUMERO));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(E_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(MAQ_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(CORD_CANTIDAD));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(CORD_FECHACIERRE));
+            if ((CORD_OBSERVACIONES == null)) {
+                throw new global::System.ArgumentNullException("CORD_OBSERVACIONES");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(CORD_OBSERVACIONES));
+            }
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(OPR_FALLIDAS));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((decimal)(Original_CORD_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(Original_ORDT_NUMERO));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(Original_E_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_MAQ_CODIGO));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_CORD_CANTIDAD));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((System.DateTime)(Original_CORD_FECHACIERRE));
+            if ((Original_CORD_OBSERVACIONES == null)) {
+                throw new global::System.ArgumentNullException("Original_CORD_OBSERVACIONES");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_CORD_OBSERVACIONES));
+            }
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(Original_OPR_FALLIDAS));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((decimal)(CORD_CODIGO));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(decimal ORDT_NUMERO, decimal E_CODIGO, decimal MAQ_CODIGO, decimal CORD_CANTIDAD, System.DateTime CORD_FECHACIERRE, string CORD_OBSERVACIONES, decimal OPR_FALLIDAS, decimal Original_CORD_CODIGO, decimal Original_ORDT_NUMERO, decimal Original_E_CODIGO, decimal Original_MAQ_CODIGO, decimal Original_CORD_CANTIDAD, System.DateTime Original_CORD_FECHACIERRE, string Original_CORD_OBSERVACIONES, decimal Original_OPR_FALLIDAS) {
+            return this.Update(ORDT_NUMERO, E_CODIGO, MAQ_CODIGO, CORD_CANTIDAD, CORD_FECHACIERRE, CORD_OBSERVACIONES, OPR_FALLIDAS, Original_CORD_CODIGO, Original_ORDT_NUMERO, Original_E_CODIGO, Original_MAQ_CODIGO, Original_CORD_CANTIDAD, Original_CORD_FECHACIERRE, Original_CORD_OBSERVACIONES, Original_OPR_FALLIDAS, Original_CORD_CODIGO);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -6709,9 +6567,9 @@ SELECT ORDT_NUMERO, ORDT_CODIGO, ORDP_NUMERO, EORD_CODIGO, PART_NUMERO, ORDT_ORI
         
         private LOTES_COCINATableAdapter _lOTES_COCINATableAdapter;
         
-        private CIERRE_ORDEN_TRABAJOTableAdapter _cIERRE_ORDEN_TRABAJOTableAdapter;
-        
         private ORDENES_TRABAJOTableAdapter _oRDENES_TRABAJOTableAdapter;
+        
+        private CIERRE_ORDEN_TRABAJOTableAdapter _cIERRE_ORDEN_TRABAJOTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -6770,12 +6628,12 @@ SELECT ORDT_NUMERO, ORDT_CODIGO, ORDP_NUMERO, EORD_CODIGO, PART_NUMERO, ORDT_ORI
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
             "", "System.Drawing.Design.UITypeEditor")]
-        public CIERRE_ORDEN_TRABAJOTableAdapter CIERRE_ORDEN_TRABAJOTableAdapter {
+        public ORDENES_TRABAJOTableAdapter ORDENES_TRABAJOTableAdapter {
             get {
-                return this._cIERRE_ORDEN_TRABAJOTableAdapter;
+                return this._oRDENES_TRABAJOTableAdapter;
             }
             set {
-                this._cIERRE_ORDEN_TRABAJOTableAdapter = value;
+                this._oRDENES_TRABAJOTableAdapter = value;
             }
         }
         
@@ -6783,12 +6641,12 @@ SELECT ORDT_NUMERO, ORDT_CODIGO, ORDP_NUMERO, EORD_CODIGO, PART_NUMERO, ORDT_ORI
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
             "", "System.Drawing.Design.UITypeEditor")]
-        public ORDENES_TRABAJOTableAdapter ORDENES_TRABAJOTableAdapter {
+        public CIERRE_ORDEN_TRABAJOTableAdapter CIERRE_ORDEN_TRABAJOTableAdapter {
             get {
-                return this._oRDENES_TRABAJOTableAdapter;
+                return this._cIERRE_ORDEN_TRABAJOTableAdapter;
             }
             set {
-                this._oRDENES_TRABAJOTableAdapter = value;
+                this._cIERRE_ORDEN_TRABAJOTableAdapter = value;
             }
         }
         
@@ -6821,13 +6679,13 @@ SELECT ORDT_NUMERO, ORDT_CODIGO, ORDP_NUMERO, EORD_CODIGO, PART_NUMERO, ORDT_ORI
                             && (this._lOTES_COCINATableAdapter.Connection != null))) {
                     return this._lOTES_COCINATableAdapter.Connection;
                 }
-                if (((this._cIERRE_ORDEN_TRABAJOTableAdapter != null) 
-                            && (this._cIERRE_ORDEN_TRABAJOTableAdapter.Connection != null))) {
-                    return this._cIERRE_ORDEN_TRABAJOTableAdapter.Connection;
-                }
                 if (((this._oRDENES_TRABAJOTableAdapter != null) 
                             && (this._oRDENES_TRABAJOTableAdapter.Connection != null))) {
                     return this._oRDENES_TRABAJOTableAdapter.Connection;
+                }
+                if (((this._cIERRE_ORDEN_TRABAJOTableAdapter != null) 
+                            && (this._cIERRE_ORDEN_TRABAJOTableAdapter.Connection != null))) {
+                    return this._cIERRE_ORDEN_TRABAJOTableAdapter.Connection;
                 }
                 return null;
             }
@@ -6850,10 +6708,10 @@ SELECT ORDT_NUMERO, ORDT_CODIGO, ORDP_NUMERO, EORD_CODIGO, PART_NUMERO, ORDT_ORI
                 if ((this._lOTES_COCINATableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._cIERRE_ORDEN_TRABAJOTableAdapter != null)) {
+                if ((this._oRDENES_TRABAJOTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._oRDENES_TRABAJOTableAdapter != null)) {
+                if ((this._cIERRE_ORDEN_TRABAJOTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -7064,13 +6922,13 @@ SELECT ORDT_NUMERO, ORDT_CODIGO, ORDP_NUMERO, EORD_CODIGO, PART_NUMERO, ORDT_ORI
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._cIERRE_ORDEN_TRABAJOTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._cIERRE_ORDEN_TRABAJOTableAdapter.Connection) == false))) {
+            if (((this._oRDENES_TRABAJOTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._oRDENES_TRABAJOTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._oRDENES_TRABAJOTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._oRDENES_TRABAJOTableAdapter.Connection) == false))) {
+            if (((this._cIERRE_ORDEN_TRABAJOTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._cIERRE_ORDEN_TRABAJOTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -7133,15 +6991,6 @@ SELECT ORDT_NUMERO, ORDT_CODIGO, ORDP_NUMERO, EORD_CODIGO, PART_NUMERO, ORDT_ORI
                         adaptersWithAcceptChangesDuringUpdate.Add(this._lOTES_COCINATableAdapter.Adapter);
                     }
                 }
-                if ((this._cIERRE_ORDEN_TRABAJOTableAdapter != null)) {
-                    revertConnections.Add(this._cIERRE_ORDEN_TRABAJOTableAdapter, this._cIERRE_ORDEN_TRABAJOTableAdapter.Connection);
-                    this._cIERRE_ORDEN_TRABAJOTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._cIERRE_ORDEN_TRABAJOTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._cIERRE_ORDEN_TRABAJOTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._cIERRE_ORDEN_TRABAJOTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._cIERRE_ORDEN_TRABAJOTableAdapter.Adapter);
-                    }
-                }
                 if ((this._oRDENES_TRABAJOTableAdapter != null)) {
                     revertConnections.Add(this._oRDENES_TRABAJOTableAdapter, this._oRDENES_TRABAJOTableAdapter.Connection);
                     this._oRDENES_TRABAJOTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -7149,6 +6998,15 @@ SELECT ORDT_NUMERO, ORDT_CODIGO, ORDP_NUMERO, EORD_CODIGO, PART_NUMERO, ORDT_ORI
                     if (this._oRDENES_TRABAJOTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._oRDENES_TRABAJOTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._oRDENES_TRABAJOTableAdapter.Adapter);
+                    }
+                }
+                if ((this._cIERRE_ORDEN_TRABAJOTableAdapter != null)) {
+                    revertConnections.Add(this._cIERRE_ORDEN_TRABAJOTableAdapter, this._cIERRE_ORDEN_TRABAJOTableAdapter.Connection);
+                    this._cIERRE_ORDEN_TRABAJOTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._cIERRE_ORDEN_TRABAJOTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._cIERRE_ORDEN_TRABAJOTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._cIERRE_ORDEN_TRABAJOTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._cIERRE_ORDEN_TRABAJOTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -7221,13 +7079,13 @@ SELECT ORDT_NUMERO, ORDT_CODIGO, ORDP_NUMERO, EORD_CODIGO, PART_NUMERO, ORDT_ORI
                     this._lOTES_COCINATableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._lOTES_COCINATableAdapter]));
                     this._lOTES_COCINATableAdapter.Transaction = null;
                 }
-                if ((this._cIERRE_ORDEN_TRABAJOTableAdapter != null)) {
-                    this._cIERRE_ORDEN_TRABAJOTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cIERRE_ORDEN_TRABAJOTableAdapter]));
-                    this._cIERRE_ORDEN_TRABAJOTableAdapter.Transaction = null;
-                }
                 if ((this._oRDENES_TRABAJOTableAdapter != null)) {
                     this._oRDENES_TRABAJOTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._oRDENES_TRABAJOTableAdapter]));
                     this._oRDENES_TRABAJOTableAdapter.Transaction = null;
+                }
+                if ((this._cIERRE_ORDEN_TRABAJOTableAdapter != null)) {
+                    this._cIERRE_ORDEN_TRABAJOTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cIERRE_ORDEN_TRABAJOTableAdapter]));
+                    this._cIERRE_ORDEN_TRABAJOTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

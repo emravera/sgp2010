@@ -263,6 +263,8 @@ namespace GyCAP.BLL
             UnidadMedidaBLL.ObtenerTodos(dsHoja.UNIDADES_MEDIDA);
             TipoUnidadMedidaBLL.ObtenerTodos(dsHoja.TIPOS_UNIDADES_MEDIDA);
             TipoCentroTrabajoBLL.GetAll(dsHoja.TIPOS_CENTRO_TRABAJO);
+            TurnoTrabajoBLL.ObtenerTurnos(dsHoja.TURNOS_TRABAJO);
+            TurnoTrabajoBLL.ObtenerTurnosPorCentros(dsHoja.TURNOSXCENTROTRABAJO);
 
             IList<ParteNecesidadCombinada> listaPartes = arbol.AsListOfParts();
 

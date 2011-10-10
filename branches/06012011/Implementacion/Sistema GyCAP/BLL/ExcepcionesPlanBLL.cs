@@ -68,6 +68,16 @@ namespace GyCAP.BLL
             };
         }
 
+        public static ExcepcionesPlan Add_ExcepcionStockInsuficiente(string stock)
+        {
+            return new ExcepcionesPlan()
+            {
+                Tipo = ExcepcionesPlan.TipoExcepcion.StockInsuficiente,
+                Nombre = "STOCK INSUFICIENTE",
+                Descripcion = string.Format("La ubicación de stock {0} no posee la cantidad necesaria.", stock)
+            };
+        }
+
         public static string GetTipoElementoFriendlyName(ExcepcionesPlan.TipoElemento tipo)
         {
             switch (tipo)

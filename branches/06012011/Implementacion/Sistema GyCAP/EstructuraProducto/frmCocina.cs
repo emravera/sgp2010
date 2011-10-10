@@ -259,7 +259,7 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.CocinaBaseException ex)
                     {
-                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
+                        MensajesABM.MsjValidacion(ex.Message, this.Text);
                     }
                 }
                 else
@@ -296,7 +296,7 @@ namespace GyCAP.UI.EstructuraProducto
                     }
                     catch (Entidades.Excepciones.CocinaBaseException ex)
                     {
-                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Modificación);
+                        MensajesABM.MsjValidacion(ex.Message, this.Text);
                     }
                 }
                 dgvListaCocina.Refresh();
@@ -370,7 +370,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbDesignacion.SetTexto("Seleccione...");
                     cbColor.SetTexto("Seleccione...");
                     cbTerminacion.SetTexto("Seleccione...");
-                    cbEstado.SetTexto("Seleccione...");
+                    cbEstado.SetSelectedValue(1);
                     chkBase.Checked = false;
                     chkBase.Enabled = true;
                     pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;
@@ -401,7 +401,7 @@ namespace GyCAP.UI.EstructuraProducto
                     cbDesignacion.SetTexto("Seleccione");
                     cbColor.SetTexto("Seleccione");
                     cbTerminacion.SetTexto("Seleccione");
-                    cbEstado.SetTexto("Seleccione");
+                    cbEstado.SetSelectedValue(1);
                     chkBase.Checked = false;
                     chkBase.Enabled = true;
                     pbImagen.Image = EstructuraProducto.Properties.Resources.sinimagen;

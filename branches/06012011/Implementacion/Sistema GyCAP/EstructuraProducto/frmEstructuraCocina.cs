@@ -233,7 +233,7 @@ namespace GyCAP.UI.EstructuraProducto
                             else { rowEstructura.E_CODIGO = cbResponsable.GetSelectedValueInt(); }
                             if (dtpFechaModificacion.IsValueNull()) { rowEstructura.SetESTR_FECHA_MODIFICACIONNull(); }
                             else { rowEstructura.ESTR_FECHA_MODIFICACION = (DateTime)dtpFechaModificacion.GetFecha(); }
-                            rowEstructura.ESTR_COSTO = nudcosto.Value;
+                            rowEstructura.ESTR_COSTO = Convert.ToDecimal(txtCosto.Text);
                             rowEstructura.ESTR_DESCRIPCION = txtDescripcion.Text;
                             rowEstructura.EndEdit();
                             dsEstructura.ESTRUCTURAS.AddESTRUCTURASRow(rowEstructura);
@@ -285,7 +285,7 @@ namespace GyCAP.UI.EstructuraProducto
                             if (dtpFechaModificacion.IsValueNull()) { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).SetESTR_FECHA_MODIFICACIONNull(); }
                             else { dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_FECHA_MODIFICACION = (DateTime)dtpFechaModificacion.GetFecha(); }
                             dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_DESCRIPCION = txtDescripcion.Text;
-                            dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_COSTO = nudcosto.Value;
+                            dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codigoEstructura).ESTR_COSTO = Convert.ToDecimal(txtCosto.Text);
                             BLL.EstructuraBLL.Actualizar(dsEstructura);
                             MensajesABM.MsjConfirmaGuardar("Estructura", this.Text, MensajesABM.Operaciones.Modificación);
 
@@ -446,7 +446,7 @@ namespace GyCAP.UI.EstructuraProducto
                 }
                 
                 arbolEstructura = BLL.EstructuraBLL.ArmarArbol(codigoEstructura, dsEstructura);
-                nudcosto.Value = arbolEstructura.GetCostoEstructura();
+                txtCosto.Text = arbolEstructura.GetCostoEstructura().ToString();
             }
             else
             {
@@ -538,7 +538,7 @@ namespace GyCAP.UI.EstructuraProducto
                 
                 dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(Convert.ToInt32(tvEstructura.SelectedNode.Name)).Delete();
                 tvEstructura.SelectedNode.Remove();                
-                nudcosto.Value = arbolEstructura.GetCostoEstructura();
+                txtCosto.Text = arbolEstructura.GetCostoEstructura().ToString();
             }
             else
             {
@@ -598,7 +598,7 @@ namespace GyCAP.UI.EstructuraProducto
                 tvEstructura.SelectedNode.Text = nodeText;
                 tvEstructura.EndUpdate();
 
-                nudcosto.Value = arbolEstructura.GetCostoEstructura();
+                txtCosto.Text = arbolEstructura.GetCostoEstructura().ToString();
             }
             else
             {
@@ -644,7 +644,7 @@ namespace GyCAP.UI.EstructuraProducto
                 tvEstructura.SelectedNode.Text = nodeText;
                 tvEstructura.EndUpdate();
 
-                nudcosto.Value = arbolEstructura.GetCostoEstructura();
+                txtCosto.Text = arbolEstructura.GetCostoEstructura().ToString();
             }
             else
             {
@@ -705,8 +705,7 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaModificacion.Enabled = true;
                     dtpFechaModificacion.SetFechaNull();
                     txtDescripcion.ReadOnly = false;
-                    nudcosto.Value = 0;
-                    //nudcosto.Enabled = true;
+                    txtCosto.Text = "0";
                     txtDescripcion.Clear();
                     panelAccionesArbol.Enabled = true;
                     gbAgregarParteMP.Enabled = true;
@@ -744,8 +743,7 @@ namespace GyCAP.UI.EstructuraProducto
                     dtpFechaModificacion.SetFechaNull();
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
-                    //nudcosto.Enabled = true;
-                    nudcosto.Value = 0;
+                    txtCosto.Text = "0";
                     panelAccionesArbol.Enabled = true;
                     gbAgregarParteMP.Enabled = true;
                     btnGuardar.Enabled = true;
@@ -1017,6 +1015,9 @@ namespace GyCAP.UI.EstructuraProducto
                         if (Convert.ToInt32(e.Value) == 1) { nombre = "Si"; }
                         e.Value = nombre;
                         break;
+                    case "ESTR_FECHA_ALTA":
+                        nombre = DateTime.Parse(e.Value.ToString()).ToShortDateString();
+                        break;
                     default:
                         break;
                 }
@@ -1098,13 +1099,13 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else { dtpFechaModificacion.SetFechaNull(); }
             txtDescripcion.Text = dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_DESCRIPCION;
-            nudcosto.Value = dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_COSTO;
+            txtCosto.Text = dsEstructura.ESTRUCTURAS.FindByESTR_CODIGO(codEstructura).ESTR_COSTO.ToString();
             tvEstructura.BeginUpdate();
             if (dsEstructura.COMPUESTOS_PARTES.Select("estr_codigo = " + codEstructura).Length > 0) 
             { 
                 BLL.EstructuraBLL.CrearArbolEstructura(codEstructura, dsEstructura, tvEstructura, false, out compId);
                 arbolEstructura = BLL.EstructuraBLL.ArmarArbol(codEstructura, dsEstructura);
-                nudcosto.Value = arbolEstructura.GetCostoEstructura();
+                txtCosto.Text = arbolEstructura.GetCostoEstructura().ToString();
             }
             else { tvEstructura.Nodes.Clear(); }
             tvEstructura.EndUpdate();

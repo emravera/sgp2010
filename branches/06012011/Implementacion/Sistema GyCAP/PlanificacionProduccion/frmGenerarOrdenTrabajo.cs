@@ -377,13 +377,11 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                 if (validaciones.Count == 0)
                 {
-                    
-
                     if (cbModoFecha.GetSelectedValueInt() == 0)
                     {
                         //Planeamos hacia adelante                        
                         DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
-                        arbol.GetFechaFinalizacion(fecha);
+                        arbol.GetFechaInicio(arbol.GetFechaFinalizacion(fecha));
                     }
                     else
                     {

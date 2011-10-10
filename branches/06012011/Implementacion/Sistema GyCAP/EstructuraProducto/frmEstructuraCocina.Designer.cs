@@ -53,9 +53,9 @@
             this.btnDatos = new System.Windows.Forms.Button();
             this.btnPartes = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.txtCosto = new System.Windows.Forms.TextBox();
             this.cbEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label17 = new System.Windows.Forms.Label();
-            this.nudcosto = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
             this.dtpFechaModificacion = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.dtpFechaAlta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
@@ -121,7 +121,6 @@
             this.tpDatos.SuspendLayout();
             this.gbBtnDatosPartes.SuspendLayout();
             this.gbDatos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudcosto)).BeginInit();
             this.gbArbolEstructura.SuspendLayout();
             this.panelAccionesArbol.SuspendLayout();
             this.gbGuardarVolver.SuspendLayout();
@@ -421,9 +420,9 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.txtCosto);
             this.gbDatos.Controls.Add(this.cbEstado);
             this.gbDatos.Controls.Add(this.label17);
-            this.gbDatos.Controls.Add(this.nudcosto);
             this.gbDatos.Controls.Add(this.label15);
             this.gbDatos.Controls.Add(this.dtpFechaModificacion);
             this.gbDatos.Controls.Add(this.dtpFechaAlta);
@@ -446,6 +445,15 @@
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos de la Estructura de Producto";
             // 
+            // txtCosto
+            // 
+            this.txtCosto.Location = new System.Drawing.Point(150, 216);
+            this.txtCosto.Name = "txtCosto";
+            this.txtCosto.ReadOnly = true;
+            this.txtCosto.Size = new System.Drawing.Size(254, 20);
+            this.txtCosto.TabIndex = 29;
+            this.txtCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // cbEstado
             // 
             this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -464,27 +472,6 @@
             this.label17.Size = new System.Drawing.Size(44, 13);
             this.label17.TabIndex = 28;
             this.label17.Text = "Estado:";
-            // 
-            // nudcosto
-            // 
-            this.nudcosto.CausesValidation = false;
-            this.nudcosto.DecimalPlaces = 2;
-            this.nudcosto.Enabled = false;
-            this.nudcosto.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.nudcosto.Location = new System.Drawing.Point(150, 217);
-            this.nudcosto.Maximum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.nudcosto.Name = "nudcosto";
-            this.nudcosto.Size = new System.Drawing.Size(254, 20);
-            this.nudcosto.TabIndex = 15;
-            this.nudcosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label15
             // 
@@ -661,10 +648,10 @@
             this.panelAccionesArbol.Controls.Add(this.btnRestarParte);
             this.panelAccionesArbol.Controls.Add(this.btnSumarParte);
             this.panelAccionesArbol.Controls.Add(this.btnDeleteParte);
-            this.panelAccionesArbol.Location = new System.Drawing.Point(57, 394);
+            this.panelAccionesArbol.Location = new System.Drawing.Point(6, 394);
             this.panelAccionesArbol.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelAccionesArbol.Name = "panelAccionesArbol";
-            this.panelAccionesArbol.Size = new System.Drawing.Size(211, 43);
+            this.panelAccionesArbol.Size = new System.Drawing.Size(337, 43);
             this.panelAccionesArbol.TabIndex = 12;
             // 
             // btnRestarParte
@@ -675,7 +662,7 @@
             this.btnRestarParte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnRestarParte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestarParte.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Restar_Gris_25;
-            this.btnRestarParte.Location = new System.Drawing.Point(134, -3);
+            this.btnRestarParte.Location = new System.Drawing.Point(232, -3);
             this.btnRestarParte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRestarParte.Name = "btnRestarParte";
             this.btnRestarParte.Size = new System.Drawing.Size(60, 48);
@@ -695,7 +682,7 @@
             this.btnSumarParte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnSumarParte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSumarParte.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Sumar_Gris_25;
-            this.btnSumarParte.Location = new System.Drawing.Point(54, -3);
+            this.btnSumarParte.Location = new System.Drawing.Point(145, -3);
             this.btnSumarParte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSumarParte.Name = "btnSumarParte";
             this.btnSumarParte.Size = new System.Drawing.Size(85, 48);
@@ -715,7 +702,7 @@
             this.btnDeleteParte.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnDeleteParte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteParte.Image = global::GyCAP.UI.EstructuraProducto.Properties.Resources.Delete_25;
-            this.btnDeleteParte.Location = new System.Drawing.Point(9, -3);
+            this.btnDeleteParte.Location = new System.Drawing.Point(61, -3);
             this.btnDeleteParte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDeleteParte.Name = "btnDeleteParte";
             this.btnDeleteParte.Size = new System.Drawing.Size(53, 48);
@@ -733,7 +720,7 @@
             this.tvEstructura.HideSelection = false;
             this.tvEstructura.Location = new System.Drawing.Point(3, 19);
             this.tvEstructura.Name = "tvEstructura";
-            this.tvEstructura.Size = new System.Drawing.Size(323, 369);
+            this.tvEstructura.Size = new System.Drawing.Size(340, 369);
             this.tvEstructura.TabIndex = 18;
             // 
             // gbGuardarVolver
@@ -1115,7 +1102,6 @@
             this.gbBtnDatosPartes.ResumeLayout(false);
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudcosto)).EndInit();
             this.gbArbolEstructura.ResumeLayout(false);
             this.panelAccionesArbol.ResumeLayout(false);
             this.panelAccionesArbol.PerformLayout();
@@ -1200,7 +1186,6 @@
         private System.Windows.Forms.GroupBox gbDatos;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbEstado;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.NumericUpDown nudcosto;
         private System.Windows.Forms.Label label15;
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpFechaModificacion;
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpFechaAlta;
@@ -1224,5 +1209,6 @@
         private System.Windows.Forms.Button btnPartes;
         private System.Windows.Forms.ToolStripButton btnClonar;
         private System.Windows.Forms.ToolTip toolTipFechaFiltro;
+        private System.Windows.Forms.TextBox txtCosto;
     }
 }

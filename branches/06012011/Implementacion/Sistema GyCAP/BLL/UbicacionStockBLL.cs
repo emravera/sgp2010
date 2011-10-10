@@ -6,6 +6,7 @@ using System.Data;
 using GyCAP.Entidades;
 using GyCAP.Entidades.Enumeraciones;
 using GyCAP.Entidades.BindingEntity;
+using System.Data.SqlClient;
 
 namespace GyCAP.BLL
 {
@@ -155,10 +156,19 @@ namespace GyCAP.BLL
             return lista;
         }
 
-        public static void ActualizarCantidadesStock(int numeroUbicacion, decimal cantidadReal)
+        public static void ActualizarCantidadesStock(int numero, decimal cantidad)
         {
-            DAL.UbicacionStockDAL.ActualizarCantidadesStock(numeroUbicacion, cantidadReal, null);
-            // que eventos deberia disparar ?? - gonzalo
+            DAL.UbicacionStockDAL.ActualizarCantidadesStock(numero, cantidad, null);
+        }
+        
+        public static void SumarCantidad(int numeroStock, decimal cantidad, SqlTransaction transaccion)
+        {
+            DAL.UbicacionStockDAL.ActualizarCantidadesStockAndParents(numeroStock, cantidad, transaccion);
+        }
+
+        public static void RestarCantidad(int numeroStock, decimal cantidad, SqlTransaction transaccion)
+        {
+            DAL.UbicacionStockDAL.ActualizarCantidadesStockAndParents(numeroStock, cantidad * -1, transaccion);
         }
         
         public static decimal CantidadMateriaPrima(Entidades.MateriaPrima materiaPrima)
