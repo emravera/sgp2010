@@ -45,13 +45,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvLista.Columns.Add("PSEM_CODIGO", "N° Semana");
             dgvLista.Columns.Add("DIAPSEM_DIA", "Día");
             dgvLista.Columns.Add("DIAPSEM_FECHA", "Fecha");
-
-            //Seteamos el modo de tamaño de las columnas
-            dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
+                      
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["DIAPSEM_CODIGO"].DataPropertyName = "DIAPSEM_CODIGO";
             dgvLista.Columns["PSEM_CODIGO"].DataPropertyName = "PSEM_CODIGO";
@@ -81,13 +75,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
             dgvDetalle.Columns["DPSEM_CANTIDADESTIMADA"].DataPropertyName = "DPSEM_CANTIDADESTIMADA";
             dgvDetalle.Columns["DPSEM_CANTIDADREAL"].DataPropertyName = "DPSEM_CANTIDADREAL";
-
-            //Seteamos el modo de tamaño de las columnas
-            dgvDetalle.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetalle.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetalle.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetalle.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
+                       
             //Ponemos las columnas de las grillas en visible false
             dgvDetalle.Columns["DIAPSEM_CODIGO"].Visible = false;
             dgvDetalle.Columns["DPSEM_CODIGO"].Visible = false;
@@ -120,16 +108,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvPlanMensual.Columns["DPMES_CANTIDADREAL"].DataPropertyName = "DPMES_CANTIDADREAL";
             dgvPlanMensual.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
             
-
-            //Seteamos el modo de tamaño de las columnas
-            dgvPlanMensual.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPlanMensual.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPlanMensual.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPlanMensual.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvPlanMensual.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvPlanMensual.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvPlanMensual.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
             //Alineamos las columnas que hacen falta
             dgvPlanMensual.Columns["DPMES_CANTPLANIFICADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvPlanMensual.Columns["DPMES_CANTIDADESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -161,17 +139,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDatos.Columns["DPSEM_CANTIDADREAL"].DataPropertyName = "DPSEM_CANTIDADREAL";
             dgvDatos.Columns["DPSEM_ESTADO"].DataPropertyName = "DPSEM_ESTADO";
             dgvDatos.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
-
-            //Seteamos el modo de tamaño de las columnas
-            dgvDatos.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDatos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDatos.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDatos.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDatos.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDatos.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDatos.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDatos.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            
+                       
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDatos = new DataView(dsPlanSemanal.DETALLE_PLANES_SEMANALES);
             dgvDatos.DataSource = dvListaDatos;
@@ -198,7 +166,6 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             //Setemoa el valor de la interface
             SetInterface(estadoUI.inicio);
-
         }
 
         #endregion
@@ -442,11 +409,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Valido que la semana que se quiere cargar no exista 
             if (BLL.PlanSemanalBLL.validarDetalle(pmes, numeroSemana) == false) msjerror = msjerror + "-Ya existe un plan semanal generado para esa semana del año\n";
 
-            if (msjerror != string.Empty)
-            {
-                msjerror = "Los errores de Validación encontrados son:\n" + msjerror;
-            }
-
             return msjerror; 
         }
 
@@ -528,14 +490,9 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Valido que no exista un plan para el dia que selecciono
             if (BLL.PlanSemanalBLL.validarDia(Convert.ToDateTime(dtpFechaDia.Value)) == false) msjerror = msjerror + "-El día que intenta agregar ya esta incluido en otro plan semanal\n"; ;
             
-            //Verifico si hay errores y les agrego una cabecera
-            if (msjerror != string.Empty)
-            {
-                msjerror = "Los errores de Validación encontrados son:\n" + msjerror;
-            }
-
             return msjerror;
         }
+       
         //Metodo que devuelve las semanas que tiene cada uno de los meses dependiendo del año
         private int[] SemanasAño(int año)
         {
@@ -597,6 +554,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         #endregion
 
         #region Pestaña Buscar
+
         private void cbAnio_DropDownClosed(object sender, EventArgs e)
         {
             try
@@ -629,7 +587,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                 Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
             }
         }
-
         
         private void cbMes_DropDownClosed(object sender, EventArgs e)
         {
@@ -653,16 +610,14 @@ namespace GyCAP.UI.PlanificacionProduccion
                     else
                     {
                         cbSemana.Enabled = false;
-                        Entidades.Mensajes.MensajesABM.MsjValidacion("No hay planes Semanales creados para ese mes", this.Text);
-                        SetInterface(estadoUI.inicio);
+                        Entidades.Mensajes.MensajesABM.MsjValidacion("No hay planes semanales creados para ese mes", this.Text);                       
                     }
 
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
-                SetInterface(estadoUI.inicio);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);                
             }
         }       
 
@@ -685,15 +640,14 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                 if (dsPlanSemanal.DIAS_PLAN_SEMANAL.Rows.Count == 0)
                 {
-                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Dias Planificados", this.Text);
+                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Días planificados", this.Text);
                 }
 
                 SetInterface(estadoUI.buscar);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
-                SetInterface(estadoUI.inicio);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);                
             }
         }    
 
@@ -727,8 +681,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
-                SetInterface(estadoUI.inicio);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);                
             }
         }
 #endregion
@@ -1510,7 +1463,6 @@ namespace GyCAP.UI.PlanificacionProduccion
         }       
 
         #endregion
-
        
     }
 }

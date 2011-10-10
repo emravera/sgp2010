@@ -18,9 +18,8 @@ namespace GyCAP.UI.PlanificacionProduccion
         private enum estadoUI { inicio, nuevo, buscar, modificar, cargaDetalle };
         private static estadoUI estadoActual;
         private static int cantidadPlanificada; int codigoDetalle = -1;
-        private static bool seleccionPestaña = false;
-        private static bool checkeoExcepciones = false;
-        
+        private static bool seleccionPestaña = false, checkeoExcepciones = false;
+                
         #region Inicio
 
         public frmPlanMensual()
@@ -299,6 +298,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     txtCantAPlanificar.ReadOnly = true;
                     txtCantPlanificada.ReadOnly=true;
                     txtRestaPlanificar.ReadOnly=true;
+                    txtCapMes.ReadOnly = true;
                     //Combo
                     cbCocinas.SetSelectedIndex(-1);
                     //Numeric 
@@ -312,7 +312,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     //Escondo las columnas que no quiero mostrar de la grilla
                     dgvDatos.Columns["DPMES_CODIGO"].Visible = false;
                     dgvDatos.Columns["PMES_CODIGO"].Visible = false;
-                    dgvDatos.Columns["DPMES_CANTIDADREAL"].Visible = false;                   
+                    dgvDatos.Columns["DPMES_CANTIDADREAL"].Visible = false;
                     break;
                     
                 case estadoUI.modificar:
@@ -345,7 +345,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     gbDetalleGrilla.Visible = false;
                     gbBotones.Visible = false;
                     estadoActual = estadoUI.nuevo;
-
                     break;               
 
                 default:
@@ -660,10 +659,19 @@ namespace GyCAP.UI.PlanificacionProduccion
             if (rbUnidades.Checked == true)
             {
                 if (numUnidades.Value == 0) msjerror = msjerror + "-La cantidad en unidades debe ser mayor a cero\n";
+                else if (numUnidades.Value > Convert.ToInt32(txtCapMes.Text))
+                {
+                    msjerror = msjerror + "-La cantidad de unidades no puede superar la capacidad del mes.\n";
+                }
             }
             if (rbPorcentaje.Checked == true)
             {
+                int cantidadPorcentaje = Convert.ToInt32(Math.Round(Convert.ToDecimal(txtCantAPlanificar.Text) * (numPorcentaje.Value / 100),0));
                 if (numPorcentaje.Value == 0) msjerror = msjerror + "-El porcentaje debe ser mayor a cero\n";
+                else if (cantidadPorcentaje > Convert.ToInt32(txtCapMes.Text))
+                {
+                    msjerror = msjerror + "-La cantidad de unidades no puede superar la capacidad del mes.\nCAPACIDAD: " + txtCapMes.Text + "\n" + "CANT. INGRESADA: " + cantidadPorcentaje.ToString();
+                }                
             }
 
             //Validamos que no se quiera agregar un modelo que ya está en el dataset como planificado
@@ -676,12 +684,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                         msjerror = msjerror + "-El modelo de cocina que intenta agregar ya se encuentra en la planificación\n";
                     }
                 }
-            }            
-
-            if (msjerror.Length > 0)
-            {
-                msjerror = "Los errores encontrados son:\n" + msjerror;                
-            }
+            }       
 
             return msjerror;
         }
@@ -699,10 +702,11 @@ namespace GyCAP.UI.PlanificacionProduccion
                 }
             }
 
-           if (msjerror.Length > 0)
+            //Validamos que la cantidad que se quiere agregar no sea mayor a la capacidad del mes
+            if (Convert.ToInt32(dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(codigoDetallePedido).DPED_CANTIDAD) > Convert.ToInt32(txtCapMes.Text))
             {
-                msjerror = "Los errores encontrados son:\n" + msjerror;
-            }
+                msjerror = msjerror + "-La cantidad que desea ingresar es mayor a la capacidad disponible para el mes. \n";
+            }    
 
             return msjerror;
         }
@@ -765,6 +769,11 @@ namespace GyCAP.UI.PlanificacionProduccion
                         txtCantPlanificada.Text =Convert.ToString(0);
                         txtRestaPlanificar.Text = cantidad.ToString();
 
+                        //Calculamos la capacidad de ese mes
+                        int[] semanasMeses = new int[12];
+                        semanasMeses = BLL.DemandaAnualBLL.SemanasAño(anio);
+                        txtCapMes.Text = (BLL.FabricaBLL.GetCapacidadSemanalBruta(null, GyCAP.Entidades.Enumeraciones.RecursosFabricacionEnum.TipoHorario.Normal) * semanasMeses[cont]).ToString();
+                        
                         //Borro los detalles del dataset
                         dsPlanMensual.DETALLE_PLANES_MENSUALES.Clear();
                     }
@@ -1050,7 +1059,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 //Validamos lo que quiere planificar
                 string msjValidacion = ValidarAgregarPedido(Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_codigo"]));
 
-                if( msjValidacion == string.Empty)
+                if(msjValidacion == string.Empty)
                 {
                     int codigoPlan = -1; int cantidad;
 
@@ -1158,10 +1167,18 @@ namespace GyCAP.UI.PlanificacionProduccion
                     if (dgvDatos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
                     {
                         int codigo = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dpmes_codigo"]);
-                        dsPlanMensual.DETALLE_PLANES_MENSUALES.FindByDPMES_CODIGO(codigo).DPMES_CANTIDADESTIMADA += 1;
 
-                        //Llamo a la función que recalcula los valores
-                        CalcularCantidades(1);
+                        if (dsPlanMensual.DETALLE_PLANES_MENSUALES.FindByDPMES_CODIGO(codigo).DPMES_CANTIDADESTIMADA < Convert.ToInt32(txtCapMes.Text))
+                        {
+                            dsPlanMensual.DETALLE_PLANES_MENSUALES.FindByDPMES_CODIGO(codigo).DPMES_CANTIDADESTIMADA += 1;
+
+                            //Llamo a la función que recalcula los valores
+                            CalcularCantidades(1);
+                        }
+                        else
+                        {
+                            Entidades.Mensajes.MensajesABM.MsjValidacion("La cantidad no puede ser mayor a la capacidad de fabricación.", this.Text);
+                        }
                     }
                     else
                     {
@@ -1188,10 +1205,18 @@ namespace GyCAP.UI.PlanificacionProduccion
                     if (dgvDatos.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
                     {
                         int codigo = Convert.ToInt32(dvListaDatos[dgvDatos.SelectedRows[0].Index]["dpmes_codigo"]);
-                        dsPlanMensual.DETALLE_PLANES_MENSUALES.FindByDPMES_CODIGO(codigo).DPMES_CANTIDADESTIMADA -= 1;
 
-                        //Llamo a la función que recalcula los valores
-                        CalcularCantidades(-1);
+                        if (dsPlanMensual.DETALLE_PLANES_MENSUALES.FindByDPMES_CODIGO(codigo).DPMES_CANTIDADESTIMADA <= Convert.ToInt32(txtCapMes.Text))
+                        {
+                            dsPlanMensual.DETALLE_PLANES_MENSUALES.FindByDPMES_CODIGO(codigo).DPMES_CANTIDADESTIMADA -= 1;
+
+                            //Llamo a la función que recalcula los valores
+                            CalcularCantidades(-1);
+                        }
+                        else
+                        {
+                            Entidades.Mensajes.MensajesABM.MsjValidacion("La cantidad no puede ser mayor a la capacidad de fabricación.", this.Text);
+                        }
                     }
                     else
                     {
@@ -1264,7 +1289,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                 Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
         }
-
         #endregion       
    
     }

@@ -56,6 +56,7 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
+        
         public static int ObtenerCantidad(int anio, string mes)
         {
             int cantidad=0;
@@ -63,8 +64,7 @@ namespace GyCAP.DAL
             string sql = @"SELECT det.dpan_cantidadmes
                         FROM PLANES_ANUALES as pa, DETALLE_PLAN_ANUAL as det
                         WHERE pa.pan_codigo=det.pan_codigo and pa.pan_anio=@p0 and det.dpan_mes LIKE @p1";
-            
-            
+                        
             mes = "%" + mes + "%";
             object[] parametros = { anio, mes };
 
@@ -114,6 +114,7 @@ namespace GyCAP.DAL
             return detalle;
 
         }
+       
         //MODIFICAR 
         //Metodo que modifica en la base de datos
         public static void Actualizar(Entidades.PlanAnual planAnual, IList<Entidades.DetallePlanAnual> detalle)
@@ -214,8 +215,5 @@ namespace GyCAP.DAL
             }
 
         }
-
-
-
     }
 }
