@@ -30,9 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPlanSemanal));
             this.gbCargaDetalle = new System.Windows.Forms.GroupBox();
+            this.txtCapDiaria = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnAgregar = new System.Windows.Forms.Button();
             this.gbPlanMensual = new System.Windows.Forms.GroupBox();
             this.dgvPlanMensual = new System.Windows.Forms.DataGridView();
-            this.btnAgregar = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.numUnidades = new System.Windows.Forms.NumericUpDown();
             this.numPorcentaje = new System.Windows.Forms.NumericUpDown();
@@ -84,8 +86,6 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtCapDiaria = new System.Windows.Forms.TextBox();
             this.gbCargaDetalle.SuspendLayout();
             this.gbPlanMensual.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlanMensual)).BeginInit();
@@ -129,6 +129,35 @@
             this.gbCargaDetalle.TabStop = false;
             this.gbCargaDetalle.Text = "Carga de Día del Plan Semanal";
             // 
+            // txtCapDiaria
+            // 
+            this.txtCapDiaria.Enabled = false;
+            this.txtCapDiaria.Location = new System.Drawing.Point(128, 47);
+            this.txtCapDiaria.Name = "txtCapDiaria";
+            this.txtCapDiaria.Size = new System.Drawing.Size(81, 21);
+            this.txtCapDiaria.TabIndex = 18;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 50);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(124, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Capacidad Diaria Planta:";
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAgregar.Location = new System.Drawing.Point(308, 355);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(75, 26);
+            this.btnAgregar.TabIndex = 9;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
             // gbPlanMensual
             // 
             this.gbPlanMensual.Controls.Add(this.dgvPlanMensual);
@@ -156,18 +185,6 @@
             this.dgvPlanMensual.Size = new System.Drawing.Size(373, 186);
             this.dgvPlanMensual.TabIndex = 7;
             this.dgvPlanMensual.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPlanMensual_CellFormatting);
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAgregar.Location = new System.Drawing.Point(308, 355);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 26);
-            this.btnAgregar.TabIndex = 9;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // groupBox3
             // 
@@ -801,23 +818,6 @@
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 50);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(124, 13);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "Capacidad Diaria Planta:";
-            // 
-            // txtCapDiaria
-            // 
-            this.txtCapDiaria.Enabled = false;
-            this.txtCapDiaria.Location = new System.Drawing.Point(128, 47);
-            this.txtCapDiaria.Name = "txtCapDiaria";
-            this.txtCapDiaria.Size = new System.Drawing.Size(81, 21);
-            this.txtCapDiaria.TabIndex = 18;
             // 
             // frmPlanSemanal
             // 
