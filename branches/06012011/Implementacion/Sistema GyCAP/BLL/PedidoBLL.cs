@@ -57,6 +57,7 @@ namespace GyCAP.BLL
                                                                   {
                                                                       CantidadEstimada = Convert.ToInt32(row.DPED_CANTIDAD),
                                                                       Entidad = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, Convert.ToInt32(row.UBICACION_STOCK), transaccion),
+                                                                      FechaPrevista = Convert.ToDateTime(row.DPED_FECHA_ENTREGA_PREVISTA),
                                                                   });
                             Entidad detalle = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.DetallePedido, Convert.ToInt32(row.DPED_CODIGO), transaccion);
                             movimiento.Destino = detalle;
