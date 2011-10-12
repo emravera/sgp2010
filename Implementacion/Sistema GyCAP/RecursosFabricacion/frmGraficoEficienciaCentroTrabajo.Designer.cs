@@ -1,6 +1,6 @@
-﻿namespace GyCAP.UI.GestionStock
+﻿namespace GyCAP.UI.RecursosFabricacion
 {
-    partial class frmGraficoVariacionStock
+    partial class frmGraficoEficienciaCentroTrabajo
     {
         /// <summary>
         /// Required designer variable.
@@ -28,42 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.gbListadoBusqueda = new System.Windows.Forms.GroupBox();
-            this.chartStock = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.gbBusqueda = new System.Windows.Forms.GroupBox();
-            this.cboContenido = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cboCentro = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
-            this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.dtpFechaHasta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.dtpFechaDesde = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.cboStock = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label1 = new System.Windows.Forms.Label();
-            this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.tsMenu = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tcMovimiento = new System.Windows.Forms.TabControl();
+            this.tpDatos = new System.Windows.Forms.TabPage();
+            this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsMenu = new System.Windows.Forms.ToolStrip();
-            this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
-            this.tpDatos = new System.Windows.Forms.TabPage();
-            this.tcMovimiento = new System.Windows.Forms.TabControl();
+            this.gbDatos = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.chartEficiencia = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tpBuscar.SuspendLayout();
             this.gbListadoBusqueda.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartStock)).BeginInit();
             this.gbBusqueda.SuspendLayout();
             this.tsMenu.SuspendLayout();
-            this.gbGuardarCancelar.SuspendLayout();
-            this.tpDatos.SuspendLayout();
             this.tcMovimiento.SuspendLayout();
+            this.tpDatos.SuspendLayout();
+            this.gbGuardarCancelar.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartEficiencia)).BeginInit();
             this.SuspendLayout();
             // 
             // tpBuscar
@@ -82,101 +78,50 @@
             this.gbListadoBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbListadoBusqueda.Controls.Add(this.chartStock);
-            this.gbListadoBusqueda.Location = new System.Drawing.Point(3, 96);
+            this.gbListadoBusqueda.Controls.Add(this.chartEficiencia);
+            this.gbListadoBusqueda.Location = new System.Drawing.Point(3, 75);
             this.gbListadoBusqueda.Name = "gbListadoBusqueda";
             this.gbListadoBusqueda.Padding = new System.Windows.Forms.Padding(9);
-            this.gbListadoBusqueda.Size = new System.Drawing.Size(776, 408);
+            this.gbListadoBusqueda.Size = new System.Drawing.Size(776, 429);
             this.gbListadoBusqueda.TabIndex = 1;
             this.gbListadoBusqueda.TabStop = false;
-            this.gbListadoBusqueda.Text = "Variación de Stock";
-            // 
-            // chartStock
-            // 
-            chartArea2.Name = "ChartArea1";
-            this.chartStock.ChartAreas.Add(chartArea2);
-            this.chartStock.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.chartStock.Legends.Add(legend2);
-            this.chartStock.Location = new System.Drawing.Point(9, 23);
-            this.chartStock.Name = "chartStock";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartStock.Series.Add(series2);
-            this.chartStock.Size = new System.Drawing.Size(758, 376);
-            this.chartStock.TabIndex = 0;
-            this.chartStock.Text = "chart1";
-            this.chartStock.Visible = false;
+            this.gbListadoBusqueda.Text = "Eficiencia histórica";
             // 
             // gbBusqueda
             // 
             this.gbBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbBusqueda.Controls.Add(this.cboContenido);
+            this.gbBusqueda.Controls.Add(this.cboCentro);
             this.gbBusqueda.Controls.Add(this.label4);
-            this.gbBusqueda.Controls.Add(this.cboEstado);
-            this.gbBusqueda.Controls.Add(this.label3);
-            this.gbBusqueda.Controls.Add(this.label2);
             this.gbBusqueda.Controls.Add(this.dtpFechaHasta);
             this.gbBusqueda.Controls.Add(this.dtpFechaDesde);
-            this.gbBusqueda.Controls.Add(this.cboStock);
             this.gbBusqueda.Controls.Add(this.btnBuscar);
             this.gbBusqueda.Controls.Add(this.label1);
             this.gbBusqueda.Location = new System.Drawing.Point(3, 3);
             this.gbBusqueda.Name = "gbBusqueda";
-            this.gbBusqueda.Size = new System.Drawing.Size(776, 87);
+            this.gbBusqueda.Size = new System.Drawing.Size(776, 66);
             this.gbBusqueda.TabIndex = 0;
             this.gbBusqueda.TabStop = false;
             this.gbBusqueda.Text = "Filtro de búsqueda";
             // 
-            // cboContenido
+            // cboCentro
             // 
-            this.cboContenido.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboContenido.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboContenido.FormattingEnabled = true;
-            this.cboContenido.Location = new System.Drawing.Point(392, 22);
-            this.cboContenido.Name = "cboContenido";
-            this.cboContenido.Size = new System.Drawing.Size(250, 21);
-            this.cboContenido.TabIndex = 13;
-            this.cboContenido.SelectionChangeCommitted += new System.EventHandler(this.cboContenido_SelectionChangeCommitted);
+            this.cboCentro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCentro.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboCentro.FormattingEnabled = true;
+            this.cboCentro.Location = new System.Drawing.Point(376, 22);
+            this.cboCentro.Name = "cboCentro";
+            this.cboCentro.Size = new System.Drawing.Size(266, 21);
+            this.cboCentro.TabIndex = 13;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(326, 25);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 13);
+            this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Contenido:";
-            // 
-            // cboEstado
-            // 
-            this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEstado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEstado.FormattingEnabled = true;
-            this.cboEstado.Location = new System.Drawing.Point(122, 48);
-            this.cboEstado.Name = "cboEstado";
-            this.cboEstado.Size = new System.Drawing.Size(198, 21);
-            this.cboEstado.TabIndex = 11;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 51);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Estado movimiento:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(326, 51);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Stock:";
+            this.label4.Text = "Centro:";
             // 
             // dtpFechaHasta
             // 
@@ -196,16 +141,6 @@
             this.dtpFechaDesde.Size = new System.Drawing.Size(97, 21);
             this.dtpFechaDesde.TabIndex = 7;
             // 
-            // cboStock
-            // 
-            this.cboStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboStock.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboStock.FormattingEnabled = true;
-            this.cboStock.Location = new System.Drawing.Point(392, 48);
-            this.cboStock.Name = "cboStock";
-            this.cboStock.Size = new System.Drawing.Size(250, 21);
-            this.cboStock.TabIndex = 6;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -215,18 +150,71 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Intervalo de fechas:";
             // 
-            // gbDatos
+            // tsMenu
             // 
-            this.gbDatos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.tsMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbDatos.Location = new System.Drawing.Point(4, 3);
-            this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
-            this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(773, 440);
-            this.gbDatos.TabIndex = 0;
-            this.gbDatos.TabStop = false;
-            this.gbDatos.Text = "Gráfica de stock";
+            this.tsMenu.BackColor = System.Drawing.Color.Silver;
+            this.tsMenu.Dock = System.Windows.Forms.DockStyle.None;
+            this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator1,
+            this.btnSalir});
+            this.tsMenu.Location = new System.Drawing.Point(2, 2);
+            this.tsMenu.Name = "tsMenu";
+            this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
+            this.tsMenu.Size = new System.Drawing.Size(790, 50);
+            this.tsMenu.TabIndex = 7;
+            this.tsMenu.Text = "toolStrip1";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
+            // tcMovimiento
+            // 
+            this.tcMovimiento.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.tcMovimiento.Controls.Add(this.tpBuscar);
+            this.tcMovimiento.Controls.Add(this.tpDatos);
+            this.tcMovimiento.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcMovimiento.ItemSize = new System.Drawing.Size(0, 1);
+            this.tcMovimiento.Location = new System.Drawing.Point(2, 54);
+            this.tcMovimiento.Margin = new System.Windows.Forms.Padding(0);
+            this.tcMovimiento.Multiline = true;
+            this.tcMovimiento.Name = "tcMovimiento";
+            this.tcMovimiento.Padding = new System.Drawing.Point(0, 0);
+            this.tcMovimiento.SelectedIndex = 0;
+            this.tcMovimiento.Size = new System.Drawing.Size(790, 516);
+            this.tcMovimiento.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tcMovimiento.TabIndex = 8;
+            // 
+            // tpDatos
+            // 
+            this.tpDatos.Controls.Add(this.gbGuardarCancelar);
+            this.tpDatos.Controls.Add(this.gbDatos);
+            this.tpDatos.Location = new System.Drawing.Point(4, 5);
+            this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
+            this.tpDatos.Name = "tpDatos";
+            this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
+            this.tpDatos.Size = new System.Drawing.Size(782, 507);
+            this.tpDatos.TabIndex = 1;
+            this.tpDatos.UseVisualStyleBackColor = true;
+            // 
+            // gbGuardarCancelar
+            // 
+            this.gbGuardarCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbGuardarCancelar.Controls.Add(this.btnVolver);
+            this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
+            this.gbGuardarCancelar.Location = new System.Drawing.Point(177, 445);
+            this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
+            this.gbGuardarCancelar.Name = "gbGuardarCancelar";
+            this.gbGuardarCancelar.Size = new System.Drawing.Size(600, 57);
+            this.gbGuardarCancelar.TabIndex = 1;
+            this.gbGuardarCancelar.TabStop = false;
             // 
             // btnVolver
             // 
@@ -248,71 +236,18 @@
             this.btnGuardar.Text = "&Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             // 
-            // toolStripSeparator1
+            // gbDatos
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
-            // 
-            // tsMenu
-            // 
-            this.tsMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.gbDatos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.tsMenu.BackColor = System.Drawing.Color.Silver;
-            this.tsMenu.Dock = System.Windows.Forms.DockStyle.None;
-            this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator1,
-            this.btnSalir});
-            this.tsMenu.Location = new System.Drawing.Point(2, 2);
-            this.tsMenu.Name = "tsMenu";
-            this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(790, 50);
-            this.tsMenu.TabIndex = 7;
-            this.tsMenu.Text = "toolStrip1";
-            // 
-            // gbGuardarCancelar
-            // 
-            this.gbGuardarCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbGuardarCancelar.Controls.Add(this.btnVolver);
-            this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
-            this.gbGuardarCancelar.Location = new System.Drawing.Point(177, 445);
-            this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
-            this.gbGuardarCancelar.Name = "gbGuardarCancelar";
-            this.gbGuardarCancelar.Size = new System.Drawing.Size(600, 57);
-            this.gbGuardarCancelar.TabIndex = 1;
-            this.gbGuardarCancelar.TabStop = false;
-            // 
-            // tpDatos
-            // 
-            this.tpDatos.Controls.Add(this.gbGuardarCancelar);
-            this.tpDatos.Controls.Add(this.gbDatos);
-            this.tpDatos.Location = new System.Drawing.Point(4, 5);
-            this.tpDatos.Margin = new System.Windows.Forms.Padding(1);
-            this.tpDatos.Name = "tpDatos";
-            this.tpDatos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatos.Size = new System.Drawing.Size(782, 507);
-            this.tpDatos.TabIndex = 1;
-            this.tpDatos.UseVisualStyleBackColor = true;
-            // 
-            // tcMovimiento
-            // 
-            this.tcMovimiento.Appearance = System.Windows.Forms.TabAppearance.Buttons;
-            this.tcMovimiento.Controls.Add(this.tpBuscar);
-            this.tcMovimiento.Controls.Add(this.tpDatos);
-            this.tcMovimiento.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tcMovimiento.ItemSize = new System.Drawing.Size(0, 1);
-            this.tcMovimiento.Location = new System.Drawing.Point(2, 54);
-            this.tcMovimiento.Margin = new System.Windows.Forms.Padding(0);
-            this.tcMovimiento.Multiline = true;
-            this.tcMovimiento.Name = "tcMovimiento";
-            this.tcMovimiento.Padding = new System.Drawing.Point(0, 0);
-            this.tcMovimiento.SelectedIndex = 0;
-            this.tcMovimiento.Size = new System.Drawing.Size(790, 516);
-            this.tcMovimiento.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tcMovimiento.TabIndex = 8;
+            this.gbDatos.Location = new System.Drawing.Point(4, 3);
+            this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
+            this.gbDatos.Name = "gbDatos";
+            this.gbDatos.Size = new System.Drawing.Size(773, 440);
+            this.gbDatos.TabIndex = 0;
+            this.gbDatos.TabStop = false;
+            this.gbDatos.Text = "Gráfica de stock";
             // 
             // tableLayoutPanel1
             // 
@@ -328,14 +263,14 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(794, 572);
-            this.tableLayoutPanel1.TabIndex = 12;
+            this.tableLayoutPanel1.TabIndex = 13;
             // 
             // btnBuscar
             // 
             this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBuscar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.System_25;
+            this.btnBuscar.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.System_25;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(679, 32);
+            this.btnBuscar.Location = new System.Drawing.Point(670, 15);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(82, 32);
             this.btnBuscar.TabIndex = 5;
@@ -346,7 +281,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Salir_25;
+            this.btnSalir.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Salir_25;
             this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
@@ -355,7 +290,24 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // frmGraficoVariacionStock
+            // chartEficiencia
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.chartEficiencia.ChartAreas.Add(chartArea3);
+            this.chartEficiencia.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend3.Name = "Legend1";
+            this.chartEficiencia.Legends.Add(legend3);
+            this.chartEficiencia.Location = new System.Drawing.Point(9, 23);
+            this.chartEficiencia.Name = "chartEficiencia";
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartEficiencia.Series.Add(series3);
+            this.chartEficiencia.Size = new System.Drawing.Size(758, 397);
+            this.chartEficiencia.TabIndex = 0;
+            this.chartEficiencia.Text = "chart1";
+            // 
+            // frmGraficoEficienciaCentroTrabajo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -363,22 +315,22 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "frmGraficoVariacionStock";
+            this.Name = "frmGraficoEficienciaCentroTrabajo";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Variación de Stock";
+            this.Text = "Eficiencia de Centro de Trabajo";
             this.tpBuscar.ResumeLayout(false);
             this.gbListadoBusqueda.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chartStock)).EndInit();
             this.gbBusqueda.ResumeLayout(false);
             this.gbBusqueda.PerformLayout();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
-            this.gbGuardarCancelar.ResumeLayout(false);
-            this.tpDatos.ResumeLayout(false);
             this.tcMovimiento.ResumeLayout(false);
+            this.tpDatos.ResumeLayout(false);
+            this.gbGuardarCancelar.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartEficiencia)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -388,26 +340,22 @@
         private System.Windows.Forms.TabPage tpBuscar;
         private System.Windows.Forms.GroupBox gbListadoBusqueda;
         private System.Windows.Forms.GroupBox gbBusqueda;
-        private System.Windows.Forms.Label label2;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboCentro;
+        private System.Windows.Forms.Label label4;
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpFechaHasta;
         private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dtpFechaDesde;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboStock;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox gbDatos;
+        private System.Windows.Forms.ToolStrip tsMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton btnSalir;
+        private System.Windows.Forms.TabControl tcMovimiento;
+        private System.Windows.Forms.TabPage tpDatos;
+        private System.Windows.Forms.GroupBox gbGuardarCancelar;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.ToolStripButton btnSalir;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStrip tsMenu;
-        private System.Windows.Forms.GroupBox gbGuardarCancelar;
-        private System.Windows.Forms.TabPage tpDatos;
-        private System.Windows.Forms.TabControl tcMovimiento;
+        private System.Windows.Forms.GroupBox gbDatos;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartStock;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboEstado;
-        private System.Windows.Forms.Label label3;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboContenido;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartEficiencia;
     }
 }

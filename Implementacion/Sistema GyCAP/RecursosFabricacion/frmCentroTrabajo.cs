@@ -250,6 +250,7 @@ namespace GyCAP.UI.RecursosFabricacion
                         rowCentro.CTO_TIEMPODESPUES = nudTiempoDespues.Value;
                         rowCentro.CT_TIPO = cbTipo.GetSelectedValueInt();
                         rowCentro.CTO_CAPACIDADUNIDADHORA = nudCapacidadUnidadHora.Value;
+                        rowCentro.CTO_EFICIENCIAINICIAL = nudEficiencia.Value;
                         rowCentro.EndEdit();
                         dsCentroTrabajo.CENTROS_TRABAJOS.AddCENTROS_TRABAJOSRow(rowCentro);
 

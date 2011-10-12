@@ -321,7 +321,7 @@ namespace GyCAP.BLL
                 EstadoOrdenTrabajo estadoEnProceso = EstadoOrdenTrabajoBLL.GetEstado(OrdenesTrabajoEnum.EstadoOrdenEnum.EnProceso);
                 EstadoOrdenTrabajo estadoFinalizada = EstadoOrdenTrabajoBLL.GetEstado(OrdenesTrabajoEnum.EstadoOrdenEnum.Finalizada);
                 EstadoMovimientoStock estadoMvtoProceso = EstadoMovimientoStockBLL.GetEstadoEntity(StockEnum.EstadoMovimientoStock.EnProceso);
-                EstadoMovimientoStock estadoMvtoFinalizado = EstadoMovimientoStockBLL.GetEstadoEntity(StockEnum.EstadoMovimientoStock.EnProceso);
+                EstadoMovimientoStock estadoMvtoFinalizado = EstadoMovimientoStockBLL.GetEstadoEntity(StockEnum.EstadoMovimientoStock.Finalizado);
 
                 transaccion = DAL.DB.IniciarTransaccion();
 
@@ -422,6 +422,18 @@ namespace GyCAP.BLL
                     }
                     
                     OrdenTrabajoBLL.Finalizar(ordenT, transaccion);
+                }
+
+                //Actualizamos la eficiencia de los centros involucrados
+                foreach (OrdenTrabajo ordenT in ordenP.OrdenesTrabajo)
+                {
+                    int operacionesFallidas = 0;
+                    foreach (CierreParcialOrdenTrabajo cierre in ordenT.CierresParciales)
+                    {
+                        operacionesFallidas += cierre.OperacionesFallidas;
+                    }
+
+                    BLL.CentroTrabajoBLL.ActualizarEficiencia(ordenT.DetalleHojaRuta.CentroTrabajo, ordenT.CantidadReal, operacionesFallidas, transaccion);
                 }
 
                 transaccion.Commit();

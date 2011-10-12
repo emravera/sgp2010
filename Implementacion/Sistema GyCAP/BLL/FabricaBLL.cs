@@ -157,5 +157,12 @@ namespace GyCAP.BLL
 
             return costo;
         }
+
+        public static IList<HistoricoEficienciaCentro> GetHistoricoEficienciaCentroTrabajo(int codigoCentro, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            if (codigoCentro <= 0 || fechaDesde > fechaHasta) { return new List<HistoricoEficienciaCentro>(); }
+
+            return DAL.FabricaDAL.GetHistoricoEficienciaCentroTrabajo(codigoCentro, fechaDesde, fechaHasta);
+        }
     }
 }

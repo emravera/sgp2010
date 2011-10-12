@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using GyCAP.Entidades;
 using GyCAP.Entidades.Enumeraciones;
 
 namespace GyCAP.DAL
@@ -27,8 +28,9 @@ namespace GyCAP.DAL
                             [cto_eficiencia], 
                             [cto_costohora], 
                             [cto_costociclo],
-                            [cto_capacidadunidadhora])
-                            VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14) SELECT @@Identity";
+                            [cto_capacidadunidadhora],
+                            [cto_eficienciainicial])
+                            VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15) SELECT @@Identity";
 
             Data.dsHojaRuta.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsHojaRuta.CENTROS_TRABAJOSRow;
             object[] valoresParametros = { row.CTO_NOMBRE,
@@ -45,7 +47,8 @@ namespace GyCAP.DAL
                                            row.CTO_EFICIENCIA,
                                            row.CTO_COSTOHORA,
                                            row.CTO_COSTOCICLO,
-                                           row.CTO_CAPACIDADUNIDADHORA };
+                                           row.CTO_CAPACIDADUNIDADHORA,
+                                           row.CTO_EFICIENCIAINICIAL };
 
             string sqlTurnos = "INSERT INTO [TURNOSXCENTROTRABAJO] ([tur_codigo], [cto_codigo]) VALUES(@p0, @p1) SELECT @@Identity";
             
@@ -96,8 +99,9 @@ namespace GyCAP.DAL
                                 cto_eficiencia = @p11, 
                                 cto_costohora = @p12, 
                                 cto_costociclo = @p13,
-                                cto_capacidadunidadhora = @p14  
-                                WHERE cto_codigo = @p15";
+                                cto_capacidadunidadhora = @p14,
+                                cto_eficienciainicial = @p15  
+                                WHERE cto_codigo = @p16";
 
             Data.dsHojaRuta.CENTROS_TRABAJOSRow row = ds.CENTROS_TRABAJOS.GetChanges(System.Data.DataRowState.Modified).Rows[0] as Data.dsHojaRuta.CENTROS_TRABAJOSRow;
             object[] valorParametros = { row.CTO_NOMBRE, 
@@ -115,6 +119,7 @@ namespace GyCAP.DAL
                                            row.CTO_COSTOHORA,
                                            row.CTO_COSTOCICLO,
                                            row.CTO_CAPACIDADUNIDADHORA,
+                                           row.CTO_EFICIENCIAINICIAL,
                                            row.CTO_CODIGO };
 
             string sqlITurnos = "INSERT INTO [TURNOSXCENTROTRABAJO] ([tur_codigo], [cto_codigo]) VALUES(@p0, @p1) SELECT @@Identity";
@@ -215,7 +220,8 @@ namespace GyCAP.DAL
         {
             string sql = @"SELECT cto_codigo, cto_nombre, sec_codigo, ct_tipo, cto_horastrabajonormal, cto_horastrabajoextendido,
                                   cto_activo, cto_descripcion, cto_capacidadciclo, cto_horasciclo, cto_tiempoantes, cto_tiempodespues, 
-                                  cto_eficiencia, cto_costohora, cto_costociclo, cto_capacidadunidadhora FROM CENTROS_TRABAJOS WHERE 1=1 ";
+                                  cto_eficiencia, cto_costohora, cto_costociclo, cto_capacidadunidadhora, cto_eficienciainicial 
+                           FROM CENTROS_TRABAJOS WHERE 1=1 ";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -286,7 +292,8 @@ namespace GyCAP.DAL
         {
             string sql = @"SELECT cto_codigo, cto_nombre, sec_codigo, ct_tipo, cto_horastrabajonormal, cto_horastrabajoextendido,
                                   cto_activo, cto_descripcion, cto_capacidadciclo, cto_horasciclo, cto_tiempoantes, cto_tiempodespues, 
-                                  cto_eficiencia, cto_costohora, cto_costociclo, cto_capacidadunidadhora FROM CENTROS_TRABAJOS WHERE 1=1 ";
+                                  cto_eficiencia, cto_costohora, cto_costociclo, cto_capacidadunidadhora, cto_eficienciainicial 
+                           FROM CENTROS_TRABAJOS WHERE 1=1 ";
 
             //Sirve para armar el nombre de los parámetros
             int cantidadParametros = 0;
@@ -358,7 +365,8 @@ namespace GyCAP.DAL
         {
             string sql = @"SELECT cto_codigo, cto_nombre, sec_codigo, ct_tipo, cto_horastrabajonormal, cto_horastrabajoextendido,
                                   cto_activo, cto_descripcion, cto_capacidadciclo, cto_horasciclo, cto_tiempoantes, cto_tiempodespues, 
-                                  cto_eficiencia, cto_costohora, cto_costociclo, cto_capacidadunidadhora FROM CENTROS_TRABAJOS WHERE cto_codigo = @p0";
+                                  cto_eficiencia, cto_costohora, cto_costociclo, cto_capacidadunidadhora, cto_eficienciainicial  
+                           FROM CENTROS_TRABAJOS WHERE cto_codigo = @p0";
 
             object[] valoresParametros = { codigoCentro };
 
@@ -394,6 +402,15 @@ namespace GyCAP.DAL
             {
                 TurnoTrabajoDAL.ObtenerTurno(Convert.ToInt32(rowTxCTO.TUR_CODIGO), ds);
             }
+        }
+
+        public static void ActualizarEficiencia(int centro, decimal eficiencia, SqlTransaction transaccion)
+        {
+            string sql = "UPDATE CENTROS_TRABAJOS SET cto_eficiencia = @p0 WHERE cto_codigo = @p1";
+
+            object[] parametros = { eficiencia, centro };
+
+            DB.executeNonQuery(sql, parametros, transaccion);
         }
     }
 }

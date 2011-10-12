@@ -381,7 +381,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     {
                         //Planeamos hacia adelante                        
                         DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
-                        arbol.GetFechaInicio(arbol.GetFechaFinalizacion(fecha));
+                        arbol.GetFechaInicio(arbol.GetFechaFinalizacion(fecha));                        
                     }
                     else
                     {

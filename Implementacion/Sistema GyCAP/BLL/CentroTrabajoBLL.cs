@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Data.SqlClient;
 using GyCAP.Entidades;
 using GyCAP.Entidades.Enumeraciones;
 using GyCAP.Entidades.BindingEntity;
@@ -78,6 +79,7 @@ namespace GyCAP.BLL
                 TiempoAntes = row.CTO_TIEMPOANTES,
                 TiempoDespues = row.CTO_TIEMPODESPUES,
                 Tipo = TipoCentroTrabajoBLL.AsTipoEntity(Convert.ToInt32(row.CT_TIPO), ds),
+                EficienciaInicial = row.CTO_EFICIENCIAINICIAL,
                 TurnosTrabajo = null
             };
 
@@ -116,11 +118,19 @@ namespace GyCAP.BLL
                     TiempoAntes = row.CTO_TIEMPOANTES,
                     TiempoDespues = row.CTO_TIEMPODESPUES,
                     Tipo = tipos.Where(p => p.Codigo == Convert.ToInt32(row.CT_TIPO)).Single(),
+                    EficienciaInicial = row.CTO_EFICIENCIAINICIAL,
                     TurnosTrabajo = null
                 });
             }
 
             return lista;
+        }
+
+        public static void ActualizarEficiencia(CentroTrabajo centro, int operacionesEsperadas, int operacionesFallidas, SqlTransaction transaccion)
+        {
+            decimal eficiencia = operacionesEsperadas / (operacionesEsperadas + operacionesFallidas);
+            DAL.CentroTrabajoDAL.ActualizarEficiencia(centro.Codigo, eficiencia, transaccion);
+            centro.Eficiencia = eficiencia;
         }
     }
 }

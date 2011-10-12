@@ -165,6 +165,13 @@ namespace GyCAP.UI.GestionStock.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap System_25 {
+            get {
+                object obj = ResourceManager.GetObject("System_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Text_Editor_25 {
             get {
                 object obj = ResourceManager.GetObject("Text_Editor_25", resourceCulture);
