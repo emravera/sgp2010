@@ -74,6 +74,20 @@ namespace GyCAP.UI.Principal.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap imagenLogin {
+            get {
+                object obj = ResourceManager.GetObject("imagenLogin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap llave {
+            get {
+                object obj = ResourceManager.GetObject("llave", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Logo_Florencia {
             get {
                 object obj = ResourceManager.GetObject("Logo_Florencia", resourceCulture);

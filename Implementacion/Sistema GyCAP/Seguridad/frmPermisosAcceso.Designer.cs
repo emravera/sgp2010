@@ -52,6 +52,7 @@
             this.treeMenu.Name = "treeMenu";
             this.treeMenu.Size = new System.Drawing.Size(428, 409);
             this.treeMenu.TabIndex = 14;
+            this.treeMenu.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeMenu_AfterCheck);
             this.treeMenu.BeforeCheck += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeMenu_BeforeCheck);
             this.treeMenu.Click += new System.EventHandler(this.treeMenu_Click);
             // 
