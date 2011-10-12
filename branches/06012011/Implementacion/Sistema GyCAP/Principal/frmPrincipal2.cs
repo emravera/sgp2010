@@ -325,7 +325,7 @@ namespace GyCAP.UI.Principal
 
         #endregion
 
-        #region ProcesosFabricacion
+        #region Menú ProcesosFabricacion
 
         private void holaDeRutaToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -341,7 +341,145 @@ namespace GyCAP.UI.Principal
 
         #endregion
 
-        
+        #region Menú RecursoFabricacion
+
+        private void capacidadDeEmpleadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Soporte.frmCapacidadEmpleado.Instancia.MdiParent = this;
+            GyCAP.UI.Soporte.frmCapacidadEmpleado.Instancia.Show();
+        }
+
+        private void centrosDeTrabajoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.RecursosFabricacion.frmCentroTrabajo.Instancia.MdiParent = this;
+            GyCAP.UI.RecursosFabricacion.frmCentroTrabajo.Instancia.Show();
+        }
+
+        private void empleadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.RecursosFabricacion.frmEmpleado.Instancia.MdiParent = this;
+            GyCAP.UI.RecursosFabricacion.frmEmpleado.Instancia.Show();
+        }
+
+        private void maquinasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.RecursosFabricacion.frmRFMaquina.Instancia.MdiParent = this;
+            GyCAP.UI.RecursosFabricacion.frmRFMaquina.Instancia.Show();
+        }
+
+        private void sectorDeTrabajoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.RecursosFabricacion.frmSectorTrabajo.Instancia.MdiParent = this;
+            GyCAP.UI.RecursosFabricacion.frmSectorTrabajo.Instancia.Show();
+        }
+
+        private void turnosDeTrabajoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.RecursosFabricacion.frmTurnoTrabajo.Instancia.MdiParent = this;
+            GyCAP.UI.RecursosFabricacion.frmTurnoTrabajo.Instancia.Show();
+        }
+
+        #endregion
+
+        #region Menú Soporte
+
+        private void colorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.EstructuraProducto.frmColor.Instancia.MdiParent = this;
+            GyCAP.UI.EstructuraProducto.frmColor.Instancia.Show();
+        }
+
+        private void localidadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Soporte.frmLocalidad.Instancia.MdiParent = this;
+            GyCAP.UI.Soporte.frmLocalidad.Instancia.Show();
+        }
+
+        private void provinciaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Soporte.frmProvincia.Instancia.MdiParent = this;
+            GyCAP.UI.Soporte.frmProvincia.Instancia.Show();
+        }
+
+        private void tiposDeUnidadDeMedidaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Soporte.frmTipoUnidadMedida.Instancia.MdiParent = this;
+            GyCAP.UI.Soporte.frmTipoUnidadMedida.Instancia.Show();
+        }
+
+        private void unidadDeMedidaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.EstructuraProducto.frmUnidadMedida.Instancia.MdiParent = this;
+            GyCAP.UI.EstructuraProducto.frmUnidadMedida.Instancia.Show();
+        }
+
+        #endregion
+
+        #region Menú Stock
+
+        private void actualizarStockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionStock.frmActualizacionStock.Instancia.MdiParent = this;
+            GyCAP.UI.GestionStock.frmActualizacionStock.Instancia.Show();
+        }
+
+        private void entregaDeProductoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionStock.frmEntregaProducto.Instancia.MdiParent = this;
+            GyCAP.UI.GestionStock.frmEntregaProducto.Instancia.Show();
+        }
+
+        private void graficoDeVariacionDeStockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionStock.frmGraficoVariacionStock.Instancia.MdiParent = this;
+            GyCAP.UI.GestionStock.frmGraficoVariacionStock.Instancia.Show();
+        }
+
+        private void movimientosDeStockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionStock.frmMovimientoStock.Instancia.MdiParent = this;
+            GyCAP.UI.GestionStock.frmMovimientoStock.Instancia.Show();
+        }
+
+        private void proveedorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionStock.frmProveedor.Instancia.MdiParent = this;
+            GyCAP.UI.GestionStock.frmProveedor.Instancia.Show();
+        }
+
+        private void ubicacionDeStockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionStock.frmUbicacionStock.Instancia.MdiParent = this;
+            GyCAP.UI.GestionStock.frmUbicacionStock.Instancia.Show();
+        }
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 }

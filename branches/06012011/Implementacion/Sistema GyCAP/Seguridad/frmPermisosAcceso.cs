@@ -16,6 +16,7 @@ namespace GyCAP.UI.Seguridad
         private DataView dvUsuario, dvMenu, dvMenuUsuario;
         public static readonly int estadoInicialNuevo = 1; //Indica que debe iniciar como nuevo
         public static readonly int estadoInicialConsultar = 2; //Indica que debe inicial como buscar
+        private Boolean ejecutaAccion = true;
 
         public frmPermisosAcceso()
         {
@@ -190,7 +191,9 @@ namespace GyCAP.UI.Seguridad
 
         private void setPermisosUsuarios()
         {
+            ejecutaAccion = false;
             RecorrerNodosPermisos(treeMenu.Nodes[0]);
+            ejecutaAccion = true;
         }
 
         private void Insertar() 
@@ -225,9 +228,12 @@ namespace GyCAP.UI.Seguridad
 
         private void treeMenu_BeforeCheck(object sender, TreeViewCancelEventArgs e)
         {
+            if (ejecutaAccion== true)
+            {
+                if (e.Node.Parent != null)
+                    e.Node.Parent.Checked = true;    
+            }
             
-            //if (e.Node.Parent != null)
-            //    e.Node.Parent.Checked = true;
         }
 
         private void cboUsuarios_SelectedIndexChanged(object sender, EventArgs e)
@@ -337,6 +343,16 @@ namespace GyCAP.UI.Seguridad
 
             Insertar();
             btnSalir.PerformClick();
+        }
+
+        private void treeMenu_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            //if (e.Node.Parent != null) 
+            //{
+            //    if(e.Node.Checked == true)
+            //        e.Node.Parent.Checked = true;        
+            //}
+                
         }
     }
 }
