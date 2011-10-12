@@ -128,5 +128,13 @@ namespace GyCAP.Entidades
             get { return turnosTrabajo; }
             set { turnosTrabajo = value; }
         }
+
+        private decimal eficienciaInicial;
+
+        public decimal EficienciaInicial
+        {
+            get { return eficienciaInicial; }
+            set { eficienciaInicial = value; }
+        }
     }
 }

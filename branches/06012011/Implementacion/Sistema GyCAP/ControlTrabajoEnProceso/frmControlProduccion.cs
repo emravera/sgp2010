@@ -126,6 +126,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                 {
                     OrdenProduccion ordenP = (OrdenProduccion)dgvOrdenesProduccion.SelectedRows[0].DataBoundItem;
                     BLL.OrdenProduccionBLL.FinalizarOrdenProduccion(ordenP);
+                    dgvOrdenesProduccion.Refresh();
                 }
                 catch (Entidades.Excepciones.BaseDeDatosException ex)
                 {
@@ -172,6 +173,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                 else
                 {
                     dgvOrdenesProduccion.DataSource = listaOrdenesProduccion;
+                    if (dgvOrdenesProduccion.SelectedRows.Count > 0) { dgvOrdenesProduccion.SelectedRows[0].Selected = false; }
                 }
                 SetInterface(estadoUI.pestañaProduccion);
             }

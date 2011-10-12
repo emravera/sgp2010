@@ -204,12 +204,7 @@ namespace GyCAP.DAL
         {
             string sql = @"WHILE (@p0 IS NOT NULL) 
                             BEGIN 
-	                            UPDATE UBICACIONES_STOCK SET ustck_cantidadreal = ( 
-                                                                                     CASE 
-                                                                                       WHEN ((ustck_cantidadreal + @p1) < 0) THEN 0 
-                                                                                       ELSE (ustck_cantidadreal + @p1)
-                                                                                     END
-                                                                                   )
+	                            UPDATE UBICACIONES_STOCK SET ustck_cantidadreal = ustck_cantidadreal + @p1
                                 WHERE ustck_numero = @p0
 
 	                            SET @p0 = (SELECT ustck_padre FROM UBICACIONES_STOCK WHERE ustck_numero = @p0)

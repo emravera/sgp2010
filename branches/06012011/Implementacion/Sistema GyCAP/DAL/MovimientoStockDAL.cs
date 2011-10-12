@@ -73,14 +73,19 @@ namespace GyCAP.DAL
                             ,[om_cantidad_estimada]
                             ,[om_cantidad_real]
                             ,[mvto_numero]
-                            ,[om_fechaprevista])
-                            VALUES (@p0, @p1, @p2, @p3, @p4) SELECT @@Identity";
+                            ,[om_fechaprevista]
+                            ,[om_fechareal])
+                            VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
+
+            object fechaReal = DBNull.Value;
+            if (origen.FechaReal.HasValue) { fechaReal = origen.FechaReal.Value.ToString("yyyyMMdd"); }
 
             object[] parametros = { origen.Entidad.Codigo, 
                                       origen.CantidadEstimada, 
                                       origen.CantidadReal, 
                                       origen.MovimientoStock, 
-                                      origen.FechaPrevista.ToString("yyyyMMdd") };
+                                      origen.FechaPrevista.ToString("yyyyMMdd"),
+                                      fechaReal };
 
             origen.Codigo = Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion));
         }
@@ -356,13 +361,13 @@ namespace GyCAP.DAL
             {
                 if (tipoFecha == StockEnum.TipoFecha.FechaReal)
                 {
-                    sql += " AND M.mvto_fechareal <= @p" + cantidadParametros;
+                    sql += " AND (M.mvto_fechareal <= @p" + cantidadParametros + " OR O.om_fechareal <= @p" + cantidadParametros + ")";
                     valoresFiltros[cantidadParametros] = fechaHasta;
                     cantidadParametros++;
                 }
                 else
                 {
-                    sql += " AND M.mvto_fechaprevista <= @p" + cantidadParametros;
+                    sql += " AND (M.mvto_fechaprevista <= @p" + cantidadParametros + " OR O.om_fechaprevista <= @p" + cantidadParametros + ")";
                     valoresFiltros[cantidadParametros] = fechaHasta;
                     cantidadParametros++;
                 }
@@ -385,8 +390,8 @@ namespace GyCAP.DAL
                 cantidadParametros++;
             }
 
-            if (codigoEstado != null && Convert.ToInt32(codigoEstado) == (int)StockEnum.EstadoMovimientoStock.Finalizado) { sql += " ORDER BY M.mvto_fechareal ASC"; }
-            if (codigoEstado != null && Convert.ToInt32(codigoEstado) == (int)StockEnum.EstadoMovimientoStock.Planificado) { sql += " ORDER BY M.mvto_fechaprevista ASC"; }
+            if (codigoEstado != null && Convert.ToInt32(codigoEstado) == (int)StockEnum.EstadoMovimientoStock.Finalizado) { sql += " ORDER BY M.mvto_fechareal DESC"; }
+            if (codigoEstado != null && Convert.ToInt32(codigoEstado) == (int)StockEnum.EstadoMovimientoStock.Planificado) { sql += " ORDER BY M.mvto_fechaprevista DESC"; }
 
             if (cantidadParametros > 0)
             {

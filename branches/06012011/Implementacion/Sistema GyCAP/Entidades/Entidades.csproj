@@ -119,6 +119,7 @@
     <Compile Include="Excepciones\UsuarioException.cs" />
     <Compile Include="Excepciones\ValorNoNegativoException.cs" />
     <Compile Include="FabricanteMaquina.cs" />
+    <Compile Include="HistoricoEficienciaCentro.cs" />
     <Compile Include="HojaRuta.cs" />
     <Compile Include="Localidad.cs" />
     <Compile Include="Lote.cs" />

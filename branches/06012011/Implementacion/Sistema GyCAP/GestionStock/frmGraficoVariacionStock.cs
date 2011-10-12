@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using GyCAP.Entidades.Mensajes;
 using GyCAP.Entidades;
+using GyCAP.Entidades.Enumeraciones;
 using GyCAP.Data;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -70,42 +71,38 @@ namespace GyCAP.UI.GestionStock
 
                     if (listaMovimientos.Count > 0)
                     {
-                        decimal[] valores = new decimal[listaMovimientos.Count + 1];
-                        string[] fechas = new string[listaMovimientos.Count + 1];
+                        IList<decimal> valores = new List<decimal>();
+                        IList<string> fechas = new List<string>();
+                        valores.Add(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(cboStock.GetSelectedValueInt()).USTCK_CANTIDADREAL);
+                        fechas.Add(listaMovimientos[0].FechaPrevista.Value.Subtract(new TimeSpan(24, 0 , 0)).ToShortDateString());
 
-                        if (listaMovimientos.Count > 0)
+                        foreach (MovimientoStock mvto in listaMovimientos)
                         {
-                            //Buscar el ultimo valor real y usarlo como inicio - gonzalo
-                            valores[0] = 500;
-                            fechas[0] = string.Empty;
-                        }
-
-                        for (int i = 0; i < listaMovimientos.Count; i++)
-                        {
-                            //Sin terminar - gonzalo
-                            /*switch (listaMovimientos[i].Estado.Nombre)
+                            if (mvto.Destino.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
                             {
-                                case BLL.EstadoMovimientoStockBLL.Planificado:
-                                    //valores[i+1] = 50 + listaMovimientos[i].CantidadOrigenEstimada;
-                                    fechas[i+1] = listaMovimientos[i].FechaPrevista.Value.ToShortDateString();
-                                    break;
-                                case BLL.EstadoMovimientoStockBLL.Finalizado:
-                                    //if (listaMovimientos[i].Origen.TipoEntidad.Nombre == BLL.TipoEntidadBLL.UbicacionStockNombre)
-                                    //{
-                                    //    valores[i+1] = 50 + listaMovimientos[i].CantidadOrigenReal;
-                                    //}
-                                    //else if (listaMovimientos[i].Destino.TipoEntidad.Nombre == BLL.TipoEntidadBLL.UbicacionStockNombre)
-                                    //{
-                                    //    valores[i+1] = 50 + listaMovimientos[i].CantidadDestinoReal;
-                                    //}
-                                    fechas[i+1] = listaMovimientos[i].FechaReal.Value.ToShortDateString();
-                                    break;
-                                default:
-                                    break;
-                            }*/
+                                if ((mvto.Destino.EntidadExterna as UbicacionStock).Numero == cboStock.GetSelectedValueInt())
+                                {
+                                    valores.Add(mvto.CantidadDestinoEstimada);
+                                    fechas.Add(mvto.FechaPrevista.Value.ToShortDateString());
+                                    valores[0] -= mvto.CantidadDestinoEstimada;
+                                }
+                            }
+
+                            foreach (OrigenMovimiento origen in mvto.OrigenesMultiples)
+                            {
+                                if (origen.Entidad.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
+                                {
+                                    if ((origen.Entidad.EntidadExterna as UbicacionStock).Numero == cboStock.GetSelectedValueInt())
+                                    {
+                                        valores.Add(origen.CantidadEstimada);
+                                        fechas.Add(origen.FechaPrevista.ToShortDateString());
+                                        valores[0] += origen.CantidadEstimada;
+                                    }
+                                }
+                            }
                         }
 
-                        GenerarGrafico(valores, fechas, dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(cboStock.GetSelectedValueInt()).USTCK_NOMBRE);
+                        GenerarGrafico(valores.ToArray(), fechas.ToArray(), dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(cboStock.GetSelectedValueInt()).USTCK_NOMBRE);
                     }
                     else
                     {
