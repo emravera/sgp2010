@@ -25,9 +25,9 @@ namespace GyCAP.BLL
         }
 
         //Metodo que obtiene los pedidos a partir de una fecha
-        public static void ObtenerPedidoFecha(DateTime fecha, DataTable dtPedidos)
+        public static void ObtenerPedidoFecha(DataTable dtPedidos)
         {
-            DAL.PedidoDAL.ObtenerPedidoFecha(fecha, dtPedidos);
+            DAL.PedidoDAL.ObtenerPedidoFecha(dtPedidos);
         }
         
         //Metodo para insertar un pedido y su detalle

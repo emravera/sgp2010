@@ -412,9 +412,9 @@
             // btnCargaDetalle
             // 
             this.btnCargaDetalle.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnCargaDetalle.Location = new System.Drawing.Point(657, 16);
+            this.btnCargaDetalle.Location = new System.Drawing.Point(655, 18);
             this.btnCargaDetalle.Name = "btnCargaDetalle";
-            this.btnCargaDetalle.Size = new System.Drawing.Size(75, 26);
+            this.btnCargaDetalle.Size = new System.Drawing.Size(75, 25);
             this.btnCargaDetalle.TabIndex = 4;
             this.btnCargaDetalle.Text = "Cargar Detalle";
             this.btnCargaDetalle.UseVisualStyleBackColor = true;

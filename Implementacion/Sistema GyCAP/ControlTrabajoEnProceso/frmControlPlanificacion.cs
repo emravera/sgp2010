@@ -111,9 +111,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
             dgvDetalleMensual.Columns["DPSEM_CANTIDADESTIMADA"].DataPropertyName = "DPSEM_CANTIDADESTIMADA";
             dgvDetalleMensual.Columns["DPSEM_CANTIDADREAL"].DataPropertyName = "DPSEM_CANTIDADREAL";
             dgvDetalleMensual.Columns["DPSEM_CANTIDADENPROCESO"].DataPropertyName = "DPSEM_CANTIDADENPROCESO";
-
-            
-            
+                   
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetallePA = new DataView(dsPlanSemanal.DETALLE_PLANES_SEMANALES);
             dgvDetalleMensual.DataSource = dvListaDetallePA;
@@ -429,6 +427,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                 SetInterface(estadoUI.inicio);
             }
         }
+
         private void GenerarDetalleDiario(int codigo, bool limpiar)
         {
             try

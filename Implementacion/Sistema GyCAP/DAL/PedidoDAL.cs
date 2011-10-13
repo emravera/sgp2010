@@ -105,15 +105,15 @@ namespace GyCAP.DAL
         }
 
         //Metodo que obtiene el pedido
-        public static void ObtenerPedidoFecha(DateTime fecha, DataTable dtPedidos)
+        public static void ObtenerPedidoFecha(DataTable dtPedidos)
         {
             //Hay que buscar los pedidos cuyo estado 
             int codigoPedido = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("Pendiente");
 
             string sql = @"SELECT ped_codigo, cli_codigo, eped_codigo, ped_fechaentregareal, ped_fecha_alta, ped_numero
-                           FROM PEDIDOS WHERE ped_fecha_alta >= @p0 and eped_codigo = @p1";
-            string dia = "'" + fecha.ToString() + "'";
-            object[] valorParametros = { fecha, codigoPedido };
+                           FROM PEDIDOS WHERE eped_codigo = @p0";
+            
+            object[] valorParametros = { codigoPedido };
             
             try
             {
