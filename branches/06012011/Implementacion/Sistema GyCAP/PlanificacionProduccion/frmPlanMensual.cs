@@ -61,7 +61,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Agregamos la columnas
             dgvDetalle.Columns.Add("DPMES_CODIGO", "Código");
             dgvDetalle.Columns.Add("PMES_CODIGO", "Mes");
-            dgvDetalle.Columns.Add("COC_CODIGO", "Cocina Código");
+            dgvDetalle.Columns.Add("COC_CODIGO", "Cocina");
             dgvDetalle.Columns.Add("DPMES_CANTIDADESTIMADA", "Cantidad Estimada");
             dgvDetalle.Columns.Add("DPMES_CANTIDADREAL", "Cantidad Real");
             dgvDetalle.Columns.Add("DPED_CODIGO", "Pedido");
@@ -95,7 +95,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             //Agregamos la columnas
             dgvDatos.Columns.Add("DPMES_CODIGO", "Código");
             dgvDatos.Columns.Add("PMES_CODIGO", "Mes");
-            dgvDatos.Columns.Add("COC_CODIGO", "Cocina Código");
+            dgvDatos.Columns.Add("COC_CODIGO", "Cocina");
             dgvDatos.Columns.Add("DPMES_CANTIDADESTIMADA", "Cantidad Estimada");
             dgvDatos.Columns.Add("DPMES_CANTIDADREAL", "Cantidad Real");
             dgvDatos.Columns.Add("DPED_CODIGO", "Pedido");
@@ -739,11 +739,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                     }
                     cont += 1;
                                        
-                    //Verifico si existen pedidos para ese mes
-                    DateTime fechaPedidos = Convert.ToDateTime("01/" + cont.ToString() + "/" + anio.ToString());
-                    
                     //Busco los pedidos para esa fecha
-                    BLL.PedidoBLL.ObtenerPedidoFecha(fechaPedidos,dsPlanMensual.PEDIDOS);
+                    BLL.PedidoBLL.ObtenerPedidoFecha(dsPlanMensual.PEDIDOS);
 
                     if (dsPlanMensual.PEDIDOS.Rows.Count == 0)
                     {
@@ -945,12 +942,9 @@ namespace GyCAP.UI.PlanificacionProduccion
            if (cbPlanAnual.SelectedIndex != -1 && cbMesDatos.SelectedIndex != -1)
             {
                 cont += 1;
-
-                //Verifico si existen pedidos para ese mes
-                DateTime fechaPedidos = Convert.ToDateTime("01/" + cont.ToString() + "/" + anio.ToString());
-
+               
                 //Busco los pedidos para esa fecha
-                BLL.PedidoBLL.ObtenerPedidoFecha(fechaPedidos, dsPlanMensual.PEDIDOS);
+                BLL.PedidoBLL.ObtenerPedidoFecha(dsPlanMensual.PEDIDOS);
 
                 if (dsPlanMensual.PEDIDOS.Rows.Count == 0)
                 {
