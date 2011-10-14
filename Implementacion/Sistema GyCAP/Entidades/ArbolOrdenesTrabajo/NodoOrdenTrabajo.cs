@@ -71,7 +71,7 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
         public TreeNode AsTreeNode()
         {
             TreeNode nodo = new TreeNode();
-            nodo.Text = this.ordenTrabajo.Origen + ((this.NodoPadre != null) ? " - " + this.NodoPadre.ordenTrabajo.Origen : string.Empty);
+            nodo.Text = string.Concat(this.ordenTrabajo.Codigo, " / ",this.OrdenTrabajo.Parte.Codigo);
             nodo.Name = this.ordenTrabajo.Numero.ToString();
 
             foreach (NodoOrdenTrabajo item in this.NodosHijos)

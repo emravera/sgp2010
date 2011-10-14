@@ -173,7 +173,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                 else
                 {
                     dgvOrdenesProduccion.DataSource = listaOrdenesProduccion;
-                    if (dgvOrdenesProduccion.SelectedRows.Count > 0) { dgvOrdenesProduccion.SelectedRows[0].Selected = false; }
+                    //if (dgvOrdenesProduccion.SelectedRows.Count > 0) { dgvOrdenesProduccion.SelectedRows[0].Selected = false; }
                 }
                 SetInterface(estadoUI.pestañaProduccion);
             }
@@ -332,19 +332,10 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
 
         private void SetInterface(estadoUI estado)
         {
-            bool hayDatos;
+            bool hayDatos = true;
             switch (estado)
             {
                 case estadoUI.pestañaProduccion:
-                    if (dgvOrdenesProduccion.RowCount == 0)
-                    {
-                        hayDatos = false;
-                    }
-                    else
-                    {
-                        hayDatos = true;
-                    }
-
                     btnIniciar.Enabled = hayDatos;
                     btnFinalizar.Enabled = hayDatos;
                     btnCancelar.Enabled = hayDatos;
@@ -353,15 +344,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                     tcOrdenTrabajo.SelectedTab = tpOrdenesProduccion;
                     txtCodigoOPBuscar.Focus();
                     break;
-                case estadoUI.pestañaTrabajo:
-                    if (dgvOrdenesTrabajo.RowCount == 0)
-                    {
-                        hayDatos = false;
-                    }
-                    else
-                    {
-                        hayDatos = true;
-                    }
+                case estadoUI.pestañaTrabajo:                   
                     btnIniciar.Enabled = hayDatos;
                     btnFinalizar.Enabled = hayDatos;
                     btnCancelar.Enabled = hayDatos;
@@ -678,6 +661,16 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
 
         private void dgvOrdenesProduccion_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
+            //Cambiado a SelectiongChanged para evitar comportamiento extraño
+        }
+
+        private void dgvOrdenesTrabajo_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            //Cambiado a SelectiongChanged para evitar exception indexOutOfRange
+        }
+
+        private void dgvOrdenesProduccion_SelectionChanged(object sender, EventArgs e)
+        {
             if (dgvOrdenesProduccion.SelectedRows.Count > 0)
             {
                 try
@@ -687,8 +680,8 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                                                               listaEstadosOrden,
                                                               listaPartes,
                                                               listaHojasRuta,
-                                                              false);                    
-                    
+                                                              false);
+
                     dgvOrdenesTrabajo.DataSource = orden.OrdenesTrabajo;
                 }
                 catch (BaseDeDatosException ex)
@@ -696,13 +689,12 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                     MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Búsqueda);
                 }
             }
+            else
+            {
+                dgvOrdenesTrabajo.DataSource = null;
+            }
         }
-
-        private void dgvOrdenesTrabajo_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            //Cambiado a SelectiongChanged para evitar exception indexOutOfRange
-        }
-
+        
         private void dgvOrdenesTrabajo_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvOrdenesTrabajo.SelectedRows.Count > 0)
@@ -862,6 +854,8 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
         } 
 
         #endregion Servicios  
+
+        
 
     }
 }

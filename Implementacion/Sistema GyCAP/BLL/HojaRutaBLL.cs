@@ -71,7 +71,9 @@ namespace GyCAP.BLL
         {
             Data.dsHojaRuta.HOJAS_RUTARow rowhoja = dsHojaRuta.HOJAS_RUTA.GetChanges(System.Data.DataRowState.Added).Rows[0] as Data.dsHojaRuta.HOJAS_RUTARow;
             if (DAL.HojaRutaDAL.EsHojaRuta(rowhoja.HR_NOMBRE, Convert.ToInt32(rowhoja.HR_CODIGO))) { throw new Entidades.Excepciones.ElementoExistenteException(); }
-            return DAL.HojaRutaDAL.Insertar(dsHojaRuta);
+            int codigo = DAL.HojaRutaDAL.Insertar(dsHojaRuta);
+            //asignar a la parte de la cocina creada en la presentación
+            return codigo;
         }
         
         public static void Actualizar(Data.dsHojaRuta dsHojaRuta)

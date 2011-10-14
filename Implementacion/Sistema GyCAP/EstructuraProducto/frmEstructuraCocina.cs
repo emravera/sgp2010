@@ -585,14 +585,23 @@ namespace GyCAP.UI.EstructuraProducto
                     arbolEstructura.Find(null, codigoComp).SumarCantidad(1);
                 }
                 else
-                {                    
-                    dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD += Convert.ToDecimal("0,05");
+                {
+                    decimal cantidad = 0;
+                    if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_NOMBRE.ToLower().Equals("unidad"))
+                    {
+                        cantidad = 1;                        
+                    }
+                    else
+                    {
+                        cantidad = Convert.ToDecimal("0,5");
+                    }
+                    dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD += cantidad;
                     nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).MATERIAS_PRIMASRow.MP_NOMBRE;
                     nodeText += " / #";
                     nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
                     nodeText += " ";
                     nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_ABREVIATURA;
-                    arbolEstructura.Find(null, codigoComp).SumarCantidad(Convert.ToDecimal("0,05"));
+                    arbolEstructura.Find(null, codigoComp).SumarCantidad(cantidad);
                 }
                 tvEstructura.BeginUpdate();
                 tvEstructura.SelectedNode.Text = nodeText;
@@ -629,15 +638,24 @@ namespace GyCAP.UI.EstructuraProducto
                 }
                 else
                 {
-                    if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD > Convert.ToDecimal("0,05"))
+                    decimal cantidad = 0;
+                    if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_NOMBRE.ToLower().Equals("unidad"))
                     {
-                        dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD -= Convert.ToDecimal("0,05");
+                        cantidad = 1;
+                    }
+                    else
+                    {
+                        cantidad = Convert.ToDecimal("0,5");
+                    }
+                    if (dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD > cantidad)
+                    {
+                        dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD -= cantidad;
                         nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).MATERIAS_PRIMASRow.MP_NOMBRE;
                         nodeText += " / #";
                         nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
                         nodeText += " ";
                         nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_ABREVIATURA;
-                        arbolEstructura.Find(null, codigoComp).RestarCantidad(Convert.ToDecimal("0,05"));
+                        arbolEstructura.Find(null, codigoComp).RestarCantidad(cantidad);
                     }
                 }
                 tvEstructura.BeginUpdate();
