@@ -34,7 +34,7 @@ namespace GyCAP.BLL
             {
                 Tipo = ExcepcionesPlan.TipoExcepcion.CocinaSinEstructuraActiva,
                 Nombre = "ESTRUCTURA INACTIVA",
-                Descripcion = string.Format("La cocina {0} no posee una estructura activa", cocina)
+                Descripcion = string.Format("Cocina {0} sin estructura activa", cocina)
             };
         }
 
@@ -44,7 +44,7 @@ namespace GyCAP.BLL
             {
                 Tipo = ExcepcionesPlan.TipoExcepcion.CentroTrabajoInactivo,
                 Nombre = "CENTRO DE TRABAJO INACTIVO",
-                Descripcion = string.Format("El centro de trabajo {0} se encuentra inactivo", centro)
+                Descripcion = string.Format("Centro de trabajo {0} inactivo", centro)
             };
         }
 
@@ -54,7 +54,7 @@ namespace GyCAP.BLL
             {
                 Tipo = ExcepcionesPlan.TipoExcepcion.SinUbicacionStock,
                 Nombre = "SIN UBICACIÓN DE STOCK",
-                Descripcion = string.Format("El elemento {0} no posee una ubicación de stock definida.", GetTipoElementoFriendlyName(tipo))
+                Descripcion = string.Format("{0} no posee un stock definido.", GetTipoElementoFriendlyName(tipo))
             };
         }
 
@@ -64,7 +64,7 @@ namespace GyCAP.BLL
             {
                 Tipo = ExcepcionesPlan.TipoExcepcion.ParteSinHojaRuta,
                 Nombre = "SIN HOJA DE RUTA",
-                Descripcion = string.Format("La parte {0} no posee una hoja de ruta definida.", parte)
+                Descripcion = string.Format("Sin hoja de ruta, parte {0}.", parte)
             };
         }
 
@@ -74,7 +74,7 @@ namespace GyCAP.BLL
             {
                 Tipo = ExcepcionesPlan.TipoExcepcion.StockInsuficiente,
                 Nombre = "STOCK INSUFICIENTE",
-                Descripcion = string.Format("La ubicación de stock {0} no posee la cantidad necesaria.", stock)
+                Descripcion = string.Format("Falta stock: {0}.", stock)
             };
         }
 

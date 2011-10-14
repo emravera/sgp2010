@@ -296,21 +296,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
         }
 
-        private void btnAsignarCantidad_Click(object sender, EventArgs e)
-        {
-            if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
-            {
-                ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].CantidadEstimada = (int)nudCantidadOrdenP.Value;
-                txtCantidadOrdenP.Text = nudCantidadOrdenP.Value.ToString();
-                nudCantidadOrdenP.Value = 0;
-                dgvListaOrdenProduccion.Refresh();
-            }
-            else
-            {
-                MensajesABM.MsjSinSeleccion("Orden de Producción", MensajesABM.Generos.Femenino, this.Text);
-            }
-        }
-
         private void btnGenerarOrdenT_Click(object sender, EventArgs e)
         {
             try
@@ -355,51 +340,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         #endregion
 
         #region Pestaña Orden Producción
-
-        private void btnCalcularFechas_Click(object sender, EventArgs e)
-        {
-            if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
-            {
-                IList<ItemValidacion> validaciones = new List<ItemValidacion>();
-                string mensaje = string.Empty;
-                if (cbModoFecha.GetSelectedIndex() == -1) { validaciones.Add(new ItemValidacion(MensajesABM.Validaciones.Seleccion, "Modo de planeación")); }
-                if (dtpFechaPlanear.EsFechaNull()) { validaciones.Add(new ItemValidacion(MensajesABM.Validaciones.Seleccion, "Fecha")); }
-                else
-                {
-                    DateTime fecha = DateTime.Parse(dtpFechaPlanear.GetFecha().ToString());
-                    if (fecha < DateTime.Today) { validaciones.Add(new ItemValidacion(MensajesABM.Validaciones.Logica, "La fecha seleccionada no es válida")); }
-                }
-
-                int codigoOrdenP = ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].Numero;
-                ArbolProduccion arbol = ordenesProduccion.First(p => p.OrdenProduccion.Numero == codigoOrdenP);
-
-                if (arbol.OrdenesTrabajo.Count == 0) { validaciones.Add(new ItemValidacion(MensajesABM.Validaciones.Logica, "La Orden de Producción seleccionada no posee Órdenes de Trabajo generadas")); }
-
-                if (validaciones.Count == 0)
-                {
-                    if (cbModoFecha.GetSelectedValueInt() == 0)
-                    {
-                        //Planeamos hacia adelante                        
-                        DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
-                        arbol.GetFechaInicio(arbol.GetFechaFinalizacion(fecha));                        
-                    }
-                    else
-                    {
-                        //Planeamos hacia atrás
-                        DateTime fecha = DateTime.Parse(DateTime.Parse(dtpFechaPlanear.GetFecha().ToString()).ToShortDateString());
-                        arbol.GetFechaInicio(fecha);
-                    }
-
-                    sourceOrdenTrabajo.DataSource = arbol.AsOrdenesTrabajoList();
-                    CompletarDatosOrdenTrabajo();
-                    txtFechaInicioOrdenP.Text = arbol.OrdenProduccion.FechaInicioEstimada.Value.ToShortDateString();
-                    txtFechaFinOrdenP.Text = arbol.OrdenProduccion.FechaFinEstimada.Value.ToShortDateString();
-                }
-                else { MensajesABM.MsjValidacion(MensajesABM.EscribirValidacion(validaciones), this.Text); }
-            }
-            else { MensajesABM.MsjSinSeleccion("Orden de Producción", MensajesABM.Generos.Femenino, this.Text); }
-        }
-
+        
         private void btnAplicarCambios_Click(object sender, EventArgs e)
         {
             if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
@@ -635,9 +576,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             dvMensual = new DataView(dsPlanSemanal.PLANES_MENSUALES);
             dvPlanSemanal = new DataView(dsPlanSemanal.PLANES_SEMANALES);
             dvStockDestino = new DataView(dsStock.UBICACIONES_STOCK);
-            string[] nombres = { "Hacia adelante", "Hacia atrás" };
-            int[] valores = { 0, 1 };
-            cbModoFecha.SetDatos(nombres, valores, "Seleccione", false);            
             lblMensajeOP = new Label();
             lblMensajeOT = new Label();
             lblMensajeOP.Text = "Seleccione una Orden de Producción";
@@ -919,7 +857,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                 if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
                 {
                     gbDatosOrdenP.Visible = true;
-                    gbFechas.Visible = true;
                     gbOpcionesOP.Visible = true;
                     lblMensajeOP.Visible = false;
                     CompletarDatosOrdenProduccion();
@@ -927,7 +864,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                 else 
                 { 
                     gbDatosOrdenP.Visible = false;
-                    gbFechas.Visible = false;
                     gbOpcionesOP.Visible = false;
                     lblMensajeOP.Visible = true;
                 }

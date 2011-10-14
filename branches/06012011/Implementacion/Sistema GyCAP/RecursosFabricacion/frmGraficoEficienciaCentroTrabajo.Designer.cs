@@ -28,19 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.gbListadoBusqueda = new System.Windows.Forms.GroupBox();
+            this.chartEficiencia = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.gbBusqueda = new System.Windows.Forms.GroupBox();
             this.cboCentro = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
             this.dtpFechaHasta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.dtpFechaDesde = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tcMovimiento = new System.Windows.Forms.TabControl();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
@@ -48,18 +51,16 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.chartEficiencia = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.btnImprimir = new System.Windows.Forms.ToolStripButton();
             this.tpBuscar.SuspendLayout();
             this.gbListadoBusqueda.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartEficiencia)).BeginInit();
             this.gbBusqueda.SuspendLayout();
             this.tsMenu.SuspendLayout();
             this.tcMovimiento.SuspendLayout();
             this.tpDatos.SuspendLayout();
             this.gbGuardarCancelar.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartEficiencia)).BeginInit();
             this.SuspendLayout();
             // 
             // tpBuscar
@@ -86,6 +87,23 @@
             this.gbListadoBusqueda.TabIndex = 1;
             this.gbListadoBusqueda.TabStop = false;
             this.gbListadoBusqueda.Text = "Eficiencia histórica";
+            // 
+            // chartEficiencia
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chartEficiencia.ChartAreas.Add(chartArea2);
+            this.chartEficiencia.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend2.Name = "Legend1";
+            this.chartEficiencia.Legends.Add(legend2);
+            this.chartEficiencia.Location = new System.Drawing.Point(9, 23);
+            this.chartEficiencia.Name = "chartEficiencia";
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartEficiencia.Series.Add(series2);
+            this.chartEficiencia.Size = new System.Drawing.Size(758, 397);
+            this.chartEficiencia.TabIndex = 0;
+            this.chartEficiencia.Text = "chart1";
             // 
             // gbBusqueda
             // 
@@ -141,6 +159,20 @@
             this.dtpFechaDesde.Size = new System.Drawing.Size(97, 21);
             this.dtpFechaDesde.TabIndex = 7;
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBuscar.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.System_25;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(670, 15);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(82, 32);
+            this.btnBuscar.TabIndex = 5;
+            this.btnBuscar.Text = "&Generar";
+            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -160,6 +192,7 @@
             this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnImprimir,
             this.toolStripSeparator1,
             this.btnSalir});
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
@@ -173,6 +206,17 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Salir_25;
+            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(31, 47);
+            this.btnSalir.Text = "&Salir";
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // tcMovimiento
             // 
@@ -265,47 +309,15 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(794, 572);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
-            // btnBuscar
+            // btnImprimir
             // 
-            this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBuscar.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.System_25;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(670, 15);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(82, 32);
-            this.btnBuscar.TabIndex = 5;
-            this.btnBuscar.Text = "&Generar";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Salir_25;
-            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(31, 47);
-            this.btnSalir.Text = "&Salir";
-            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // chartEficiencia
-            // 
-            chartArea3.Name = "ChartArea1";
-            this.chartEficiencia.ChartAreas.Add(chartArea3);
-            this.chartEficiencia.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.Name = "Legend1";
-            this.chartEficiencia.Legends.Add(legend3);
-            this.chartEficiencia.Location = new System.Drawing.Point(9, 23);
-            this.chartEficiencia.Name = "chartEficiencia";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chartEficiencia.Series.Add(series3);
-            this.chartEficiencia.Size = new System.Drawing.Size(758, 397);
-            this.chartEficiencia.TabIndex = 0;
-            this.chartEficiencia.Text = "chart1";
+            this.btnImprimir.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Printer_25;
+            this.btnImprimir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnImprimir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(49, 47);
+            this.btnImprimir.Text = "Imprimir";
+            this.btnImprimir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // frmGraficoEficienciaCentroTrabajo
             // 
@@ -321,6 +333,7 @@
             this.Text = "Eficiencia de Centro de Trabajo";
             this.tpBuscar.ResumeLayout(false);
             this.gbListadoBusqueda.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartEficiencia)).EndInit();
             this.gbBusqueda.ResumeLayout(false);
             this.gbBusqueda.PerformLayout();
             this.tsMenu.ResumeLayout(false);
@@ -330,7 +343,6 @@
             this.gbGuardarCancelar.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartEficiencia)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -357,5 +369,6 @@
         private System.Windows.Forms.GroupBox gbDatos;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartEficiencia;
+        private System.Windows.Forms.ToolStripButton btnImprimir;
     }
 }

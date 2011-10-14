@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using GyCAP.Entidades;
 using GyCAP.Entidades.ArbolEstructura;
+using GyCAP.Entidades.ArbolOrdenesTrabajo;
 using GyCAP.Entidades.Excepciones;
 using GyCAP.Entidades.Enumeraciones;
 using System.Data;
@@ -163,6 +164,94 @@ namespace GyCAP.BLL
             if (codigoCentro <= 0 || fechaDesde > fechaHasta) { return new List<HistoricoEficienciaCentro>(); }
 
             return DAL.FabricaDAL.GetHistoricoEficienciaCentroTrabajo(codigoCentro, fechaDesde, fechaHasta);
+        }
+
+        public static SimulacionProduccion SimularProduccion(int codigoCocina, int cantidad, DateTime fechaNecesidad)
+        {
+            SimulacionProduccion simulacion = new SimulacionProduccion();
+            simulacion.CodigoCocina = codigoCocina;
+            simulacion.CantidadNecesidad = cantidad;
+            simulacion.FechaNecesidad = DateTime.Parse(fechaNecesidad.ToShortDateString());
+
+            try
+            {
+                int estructura = CocinaBLL.ObtenerCodigoEstructuraActiva(simulacion.CodigoCocina);
+
+                if(estructura > 0)
+                {
+                    ArbolProduccion arbolProduccion = new ArbolProduccion()
+                        {
+                            OrdenProduccion = new OrdenProduccion()
+                                                {
+                                                    Numero = 0,
+                                                    Codigo = string.Empty,
+                                                    Estado = new EstadoOrdenTrabajo() { Codigo = 0 },
+                                                    FechaAlta = DateTime.Today,
+                                                    DetallePlanSemanal = new DetallePlanSemanal() { Codigo = 0 },
+                                                    Origen = string.Empty,
+                                                    FechaInicioReal = null,
+                                                    FechaFinReal = null,
+                                                    FechaInicioEstimada = null,
+                                                    FechaFinEstimada = fechaNecesidad,
+                                                    Prioridad = 0,
+                                                    Observaciones = string.Empty,
+                                                    Cocina = new Cocina() { CodigoCocina = codigoCocina },
+                                                    CantidadEstimada = cantidad,
+                                                    CantidadReal = 0,
+                                                    Estructura = estructura
+                                                },
+                            OrdenesTrabajo = new List<NodoOrdenTrabajo>()
+                        };
+
+                    OrdenTrabajoBLL.GenerarOrdenesTrabajo(arbolProduccion, new List<ExcepcionesPlan>());
+
+                    simulacion.FechaInicio = arbolProduccion.GetFechaInicio(simulacion.FechaNecesidad);
+                    simulacion.IsValid = true;
+
+                    DateTime fechaCalculo = DBBLL.GetFechaServidor();
+
+                    if (simulacion.FechaInicio > fechaCalculo) { simulacion.EsPosible = true; }
+                    else
+                    {
+                        simulacion.EsPosible = false;
+                        fechaCalculo = fechaCalculo.AddDays(1);
+                        simulacion.FechaSugerida = arbolProduccion.GetFechaFinalizacion(fechaCalculo);
+                        int capacidad = FabricaBLL.GetCapacidadSemanalBruta(simulacion.CodigoCocina, RecursosFabricacionEnum.TipoHorario.Normal);
+                        
+                        while (fechaCalculo < simulacion.FechaNecesidad)
+                        {
+                            if(IsWorkableDay(fechaCalculo))
+                            {
+                                simulacion.CantidadSugerida += capacidad;                                
+                            }
+                            fechaCalculo = fechaCalculo.AddDays(1);
+                        }
+                    }
+                }
+                else
+                {
+                    simulacion.IsValid = false;
+                    simulacion.ErrorMessage = "La cocina seleccionada no tiene una estructura activa.";
+                }
+            }
+            catch (Exception ex)
+            {
+                simulacion.IsValid = false;
+                simulacion.ErrorMessage = ex.Message;
+            }
+
+
+            return simulacion;
+        }
+
+        private static bool IsWorkableDay(DateTime fecha)
+        {
+            bool isWorkable = true;
+            if (fecha.DayOfWeek.ToString().Equals(OrdenesTrabajoEnum.NonWorkingDays.Sábado.ToString(), StringComparison.InvariantCultureIgnoreCase)) { isWorkable = false; }
+            if (fecha.DayOfWeek.ToString().Equals(OrdenesTrabajoEnum.NonWorkingDays.Domingo.ToString(), StringComparison.InvariantCultureIgnoreCase)) { isWorkable = false; }
+            if (fecha.DayOfWeek.ToString().Equals(OrdenesTrabajoEnum.NonWorkingDays.Saturday.ToString(), StringComparison.InvariantCultureIgnoreCase)) { isWorkable = false; }
+            if (fecha.DayOfWeek.ToString().Equals(OrdenesTrabajoEnum.NonWorkingDays.Sunday.ToString(), StringComparison.InvariantCultureIgnoreCase)) { isWorkable = false; }
+            return isWorkable;
         }
     }
 }

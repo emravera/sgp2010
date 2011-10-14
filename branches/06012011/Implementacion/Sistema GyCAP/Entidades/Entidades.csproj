@@ -160,6 +160,7 @@
     <Compile Include="RepuestosRegistroMantenimiento.cs" />
     <Compile Include="Rol.cs" />
     <Compile Include="SectorTrabajo.cs" />
+    <Compile Include="SimulacionProduccion.cs" />
     <Compile Include="Sistema.cs" />
     <Compile Include="Tarea.cs" />
     <Compile Include="Terminacion.cs" />
