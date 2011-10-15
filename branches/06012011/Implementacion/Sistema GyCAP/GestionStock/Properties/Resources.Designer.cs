@@ -67,6 +67,13 @@ namespace GyCAP.UI.GestionStock.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Cancelar_25 {
+            get {
+                object obj = ResourceManager.GetObject("Cancelar_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Delete_25 {
             get {
                 object obj = ResourceManager.GetObject("Delete_25", resourceCulture);
