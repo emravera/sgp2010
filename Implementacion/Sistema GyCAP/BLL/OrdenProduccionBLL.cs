@@ -469,6 +469,9 @@ namespace GyCAP.BLL
                         listaExcepciones.Add(ExcepcionesPlanBLL.Add_ExcepcionCocinaSinEstructura(cocina.CodigoProducto));
                     }
 
+                    DateTime fecha = dsPlanSemanal.DIAS_PLAN_SEMANAL.FindByDIAPSEM_CODIGO(codigoDia).DIAPSEM_FECHA;
+                    fecha = DateTime.Parse(string.Concat(fecha.ToShortDateString(), " 08:00:00"));
+
                     ordenesProduccion.Add(new ArbolProduccion()
                     {
                         OrdenProduccion = new OrdenProduccion()
@@ -484,8 +487,8 @@ namespace GyCAP.BLL
                                                 Origen = string.Concat("GA / ", (rowDetalle.IsDPED_CODIGONull()) ? "Planificación" : string.Concat("Pedido ", rowDetalle.DPED_CODIGO)),
                                                 FechaInicioReal = null,
                                                 FechaFinReal = null,
-                                                FechaInicioEstimada = dsPlanSemanal.DIAS_PLAN_SEMANAL.FindByDIAPSEM_CODIGO(codigoDia).DIAPSEM_FECHA,
-                                                FechaFinEstimada = dsPlanSemanal.DIAS_PLAN_SEMANAL.FindByDIAPSEM_CODIGO(codigoDia).DIAPSEM_FECHA,
+                                                FechaInicioEstimada = fecha,
+                                                FechaFinEstimada = fecha,
                                                 Prioridad = 0,
                                                 Observaciones = string.Empty,
                                                 Cocina = cocina,

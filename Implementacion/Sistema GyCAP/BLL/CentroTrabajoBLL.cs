@@ -128,7 +128,7 @@ namespace GyCAP.BLL
 
         public static void ActualizarEficiencia(CentroTrabajo centro, int operacionesEsperadas, int operacionesFallidas, SqlTransaction transaccion)
         {
-            decimal eficiencia = operacionesEsperadas / (operacionesEsperadas + operacionesFallidas);
+            decimal eficiencia = Convert.ToDecimal(operacionesEsperadas) / Convert.ToDecimal((operacionesEsperadas + operacionesFallidas));
             DAL.CentroTrabajoDAL.ActualizarEficiencia(centro.Codigo, eficiencia, transaccion);
             centro.Eficiencia = eficiencia;
         }

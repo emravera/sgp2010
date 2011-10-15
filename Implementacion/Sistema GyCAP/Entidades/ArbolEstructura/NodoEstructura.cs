@@ -176,7 +176,7 @@ namespace GyCAP.Entidades.ArbolEstructura
                                       compuesto.Cantidad.ToString(), 
                                       compuesto.UnidadMedida.Abreviatura, 
                                       string.Format("{0:0.000}", Convert.ToDouble(costo / compuesto.Cantidad)),
-                                      costo.ToString() 
+                                      costo.ToString()
                                     };
 
             foreach (NodoEstructura item in this.nodosHijos)

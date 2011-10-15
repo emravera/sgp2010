@@ -604,7 +604,8 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                     case "ORDT_FECHAINICIOREAL":
                     case "ORDT_FECHAFINESTIMADA":
                     case "ORDT_FECHAFINREAL":
-                        nombre = DateTime.Parse(e.Value.ToString()).ToShortDateString();
+                        DateTime fecha = DateTime.Parse(e.Value.ToString());
+                        nombre = fecha.ToString("hh:mm");
                         e.Value = nombre;
                         break;
                     case "EORD_CODIGO":
