@@ -16,22 +16,45 @@ namespace GyCAP.DAL
         //Metodo para insertar el detalle de pedido
         public static int Insertar(Data.dsCliente.DETALLE_PEDIDOSRow row, SqlTransaction transaccion)
         {
-            string sqlInsert = @"INSERT INTO [DETALLE_PEDIDOS] 
+            string sqlInsert = string.Empty;
+            int codigoDetalle = 0;
+
+            if (row.DPED_FECHA_INICIO.ToString() != string.Empty)
+            {
+                sqlInsert = @"INSERT INTO [DETALLE_PEDIDOS] 
+                                        ([PED_CODIGO]
+                                        ,[EDPED_CODIGO]
+                                        ,[COC_CODIGO]
+                                        ,[DPED_CANTIDAD]
+                                        ,[DPED_CODIGONEMONICO]
+                                        ,[DPED_FECHA_ENTREGA_PREVISTA]
+                                        ,[DPED_FECHA_INICIO])
+                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6) 
+                                        SELECT @@Identity";
+                object[] valorParametros = {row.PED_CODIGO, row.EDPED_CODIGO, row.COC_CODIGO, row.DPED_CANTIDAD,
+                                        row.DPED_CODIGONEMONICO, row.DPED_FECHA_ENTREGA_PREVISTA, Convert.ToDateTime(row.DPED_FECHA_INICIO)};
+                
+                //Ejecutamos la consulta y obtenemos el codigo
+                codigoDetalle = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParametros, transaccion));
+            }
+            else
+            {
+                sqlInsert = @"INSERT INTO [DETALLE_PEDIDOS] 
                                         ([PED_CODIGO]
                                         ,[EDPED_CODIGO]
                                         ,[COC_CODIGO]
                                         ,[DPED_CANTIDAD]
                                         ,[DPED_CODIGONEMONICO]
                                         ,[DPED_FECHA_ENTREGA_PREVISTA])
-                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
-
-            object[] valorParametros = {row.PED_CODIGO, row.EDPED_CODIGO, row.COC_CODIGO, row.DPED_CANTIDAD,
+                                        VALUES (@p0, @p1, @p2, @p3, @p4, @p5) 
+                                        SELECT @@Identity";
+                object[] valorParam = {row.PED_CODIGO, row.EDPED_CODIGO, row.COC_CODIGO, row.DPED_CANTIDAD,
                                         row.DPED_CODIGONEMONICO, row.DPED_FECHA_ENTREGA_PREVISTA};
 
-            int codigoDetalle = 0;
+                //Ejecutamos la consulta y obtenemos el codigo
+                codigoDetalle = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParam, transaccion));
 
-            //Ejecutamos la consulta y obtenemos el codigo
-            codigoDetalle = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParametros, transaccion));
+            }       
 
             return codigoDetalle;
         }

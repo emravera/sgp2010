@@ -94,6 +94,7 @@ namespace GyCAP.UI.GestionPedido
             dgvDetallePedido.Columns.Add("DPED_CANTIDAD", "Cantidad");
             dgvDetallePedido.Columns.Add("EDPED_CODIGO", "Estado");
             dgvDetallePedido.Columns.Add("DPED_FECHA_ENTREGA_PREVISTA", "Fecha Entrega");
+            dgvDetallePedido.Columns.Add("DPED_FECHA_INICIO", "Fecha Inicio Prod.");
             dgvDetallePedido.Columns.Add("DPED_CODIGONEMONICO", "Cod. Nemónico");
             dgvDetallePedido.Columns.Add("DPED_FECHA_CANCELACION", "Fecha Cancelación");
                         
@@ -105,6 +106,7 @@ namespace GyCAP.UI.GestionPedido
             dgvDetallePedido.Columns["DPED_CANTIDAD"].DataPropertyName = "DPED_CANTIDAD";
             dgvDetallePedido.Columns["EDPED_CODIGO"].DataPropertyName = "EDPED_CODIGO";
             dgvDetallePedido.Columns["DPED_FECHA_ENTREGA_PREVISTA"].DataPropertyName = "DPED_FECHA_ENTREGA_PREVISTA";
+            dgvDetallePedido.Columns["DPED_FECHA_INICIO"].DataPropertyName = "DPED_FECHA_INICIO";
             dgvDetallePedido.Columns["DPED_CODIGONEMONICO"].DataPropertyName = "DPED_CODIGONEMONICO";
             dgvDetallePedido.Columns["DPED_FECHA_CANCELACION"].DataPropertyName = "DPED_FECHA_CANCELACION";
 
@@ -253,7 +255,7 @@ namespace GyCAP.UI.GestionPedido
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
-                    btnCancelarPedido.Enabled = false;
+                    btnCancelarPedido.Enabled = true;
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.nuevo;
                     dvDetallePedido.RowFilter = "DPED_CODIGO < 0";
@@ -273,7 +275,7 @@ namespace GyCAP.UI.GestionPedido
                     btnConsultar.Enabled = false;
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = false;
-                    btnCancelarPedido.Enabled = false;
+                    btnCancelarPedido.Enabled = true;
                     panelAcciones.Enabled = true;
                     estadoInterface = estadoUI.nuevoExterno;
                     dvDetallePedido.RowFilter = "DPED_CODIGO < 0";
@@ -309,25 +311,32 @@ namespace GyCAP.UI.GestionPedido
 
                 case estadoUI.cargarDetalle:
                     btnAgregar.Enabled = false;
-                    btnValidar.Enabled = true;
-                    btnCancelarPedido.Enabled = false;
+                    btnValidarStock.Enabled = true;
                     lblCantProducir.Visible = false;
                     lblCantStock.Visible = false;
                     numCantProducir.Visible = false;
                     numCantStock.Visible = false;
                     nudCantidad.Enabled = true;
                     lblTotalCocina.Enabled = true;
+                    dpfechaInicio.Visible = false;
+                    dpfechaInicio.Enabled = false;
+                    btnValidarCapacidad.Visible = false;
+                    lblVerificarCapacidad.Visible = false;
+                    lblFechaInicio.Visible = false;
+                    btnAgregar.Enabled = false;
 
                     //Escondemos los numeros y reseteamos los controles
                     numCantProducir.Value=0;
                     numCantStock.Value=0;
+                    cbUbicacionStock.SetSelectedIndex(-1);
+
                     estadoInterface = estadoUI.cargarDetalle;
                     tcPedido.SelectedTab = tpDatos;
                     break;
 
                 case estadoUI.modificarDetalle:
                     btnAgregar.Enabled = true;
-                    btnValidar.Enabled = false;
+                    btnValidarStock.Enabled = false;
                     btnCancelarPedido.Enabled = true;
                     lblCantProducir.Visible = true;
                     lblCantStock.Visible = true;
@@ -429,6 +438,10 @@ namespace GyCAP.UI.GestionPedido
                         break;
                     case "EDPED_CODIGO":
                         nombre = dsCliente.ESTADO_DETALLE_PEDIDOS.FindByEDPED_CODIGO(Convert.ToInt32(e.Value.ToString())).EDPED_NOMBRE;
+                        e.Value = nombre;
+                        break;
+                    case "DPED_FECHA_INICIO":
+                        nombre = Convert.ToDateTime(e.Value).ToShortDateString();
                         e.Value = nombre;
                         break;
                     default:
@@ -565,7 +578,7 @@ namespace GyCAP.UI.GestionPedido
             }
             else
             {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion("Debe seleccionar una Cocina de la lista.", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación );
+                Entidades.Mensajes.MensajesABM.MsjValidacion("Debe seleccionar un Detalle de Pedido de la lista.", this.Text);
             }
         }
         
@@ -591,10 +604,8 @@ namespace GyCAP.UI.GestionPedido
                     pedido.Numero = string.Empty;
                     
                     //Revisamos que está haciendo
-                    if (estadoInterface == estadoUI.cargarDetalle)
-                    {
-                        //Esta guardando un Pedido Nuevo
-                        
+                    if (estadoInterface == estadoUI.cargarDetalle) //Esta guardando un Pedido Nuevo
+                    {                   
                         //Guardamos el objeto y su detalle completo
                         int codigoPedido = BLL.PedidoBLL.Insertar(pedido, dsCliente.DETALLE_PEDIDOS);
 
@@ -787,9 +798,11 @@ namespace GyCAP.UI.GestionPedido
                 //Obtenemos el código de la cocina
                 int cocinaCodigo = Convert.ToInt32(dvCocinas[dgvCocinas.SelectedRows[0].Index]["coc_codigo"]);
 
-                //Obtenemos la cantidad a cargar de stock y la de produccion
+                //Obtenemos la cantidad a cargar de stock y la de produccion, tambien la fecha de inicio de producción
                 int cantidadStock = Convert.ToInt32(numCantStock.Value);
                 int cantidadProduccion = Convert.ToInt32(numCantProducir.Value);
+                DateTime fechaInicio = Convert.ToDateTime(dpfechaInicio.Value);
+               
 
                 //Si esta en modo de cargar detalle
                 if (estadoInterface == estadoUI.cargarDetalle)
@@ -813,6 +826,7 @@ namespace GyCAP.UI.GestionPedido
                         row.DPED_CANTIDAD = Convert.ToInt32(numCantStock.Value);
                         row.DPED_CODIGONEMONICO = string.Empty;
                         row.DPED_FECHA_ENTREGA_PREVISTA = Convert.ToDateTime(sfFechaPrevista.Value.ToShortDateString());
+                        row.DPED_FECHA_INICIO = string.Empty;
                         row.UBICACION_STOCK = cbUbicacionStock.GetSelectedValue().ToString();
                         row.EndEdit();
 
@@ -855,6 +869,7 @@ namespace GyCAP.UI.GestionPedido
                             row.EDPED_CODIGO = codigoEstado;
                             row.DPED_CANTIDAD = Convert.ToInt32(numCantProducir.Value);
                             row.DPED_CODIGONEMONICO = string.Empty;
+                            row.DPED_FECHA_INICIO = fechaInicio.ToString();
                             row.DPED_FECHA_ENTREGA_PREVISTA = Convert.ToDateTime(sfFechaPrevista.Value.ToShortDateString());
                             row.EndEdit();
 
@@ -864,30 +879,9 @@ namespace GyCAP.UI.GestionPedido
                         }
                     }
                 }
-                //Si esta modificando un detalle de pedido
-                else if (estadoInterface == estadoUI.modificarDetalle)
-                {
-                    //Hay que modificar el datatable con los datos nuevos
-                    Data.dsCliente.DETALLE_PEDIDOSRow row = dsCliente.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToDecimal(codigoDetalleModificado));
-                    
-                    row.BeginEdit();
-                    //Modificamos solo aquellos valores que se pueden cambiar
-                    row.COC_CODIGO = cocinaCodigo;
-                    if (numCantProducir.Value > 0) row.DPED_CANTIDAD = Convert.ToInt32(numCantProducir.Value);
-                    else row.DPED_CANTIDAD = Convert.ToInt32(numCantStock.Value);
-                    row.DPED_FECHA_ENTREGA_PREVISTA = Convert.ToDateTime(sfFechaPrevista.Value.ToShortDateString());
-                    row.EndEdit();                    
-                }
-
+                
                 //Se vuelve a la pantalla principal del pedido
-                btnVolver.PerformClick();
-
-                //Volvemos la interfaz para que cargue mas detalles
-                nudCantidad.Value = 0;
-                sfFechaPrevista.Value = DateTime.Now;
-                cbUbicacionStock.SetSelectedIndex(-1);
-                btnValidar.Enabled = true;
-                btnAgregar.Enabled = false;                
+                btnVolver.PerformClick();                               
             }
             else
             {
@@ -897,68 +891,179 @@ namespace GyCAP.UI.GestionPedido
 
         private void btnValidar_Click(object sender, EventArgs e)
         {
-            //Defino un que determine la validacion
-            string validacion = string.Empty;
-
-            //Hay que validar que se ingrese una fecha y una cantidad total de cocinas
-            if (nudCantidad.Value > 0 && sfFechaPrevista.Value != null && cbUbicacionStock.GetSelectedIndex() != -1)
+            try
             {
-                //Obtenemos la ubicacion de stock, la fecha de necesidad y la cantidad
-                int ubicacionStock = Convert.ToInt32(cbUbicacionStock.GetSelectedValue());
-                DateTime fechaNecesidad = Convert.ToDateTime(sfFechaPrevista.Value);
-                int cantidad = Convert.ToInt32(nudCantidad.Value);
+                //***************************************************************************************
+                //                              VALIDACION DE STOCK
+                //***************************************************************************************
+                
+                //Defino un que determine la validacion
+                string validacion = string.Empty;
 
-                //Verificamos si hay stock para una cocina determinada para esa fecha
-                decimal cantidadStock = Math.Round(BLL.FabricaBLL.GetStockForDay(ubicacionStock, fechaNecesidad), 0);
-
-                if (cantidadStock > 0)
+                //Hay que validar que se ingrese una fecha y una cantidad total de cocinas
+                if (nudCantidad.Value > 0 && sfFechaPrevista.Value != null && cbUbicacionStock.GetSelectedIndex() != -1)
                 {
-                    //La diferencia hay que colocarla para planificar
-                    if (cantidadStock < cantidad)
-                    {
-                        //Si hay stock lo cargamos en el numeric de cantidad Stock
-                        numCantStock.Value = cantidadStock;
-                        validacion = validacion + "STOCK: Hay " + cantidadStock + " unidades disponibles para la fecha " + fechaNecesidad.ToShortDateString() + "\n";
+                    //Obtenemos la ubicacion de stock, la fecha de necesidad y la cantidad
+                    int ubicacionStock = Convert.ToInt32(cbUbicacionStock.GetSelectedValue());
+                    DateTime fechaNecesidad = Convert.ToDateTime(sfFechaPrevista.Value);
+                    int cantidad = Convert.ToInt32(nudCantidad.Value);
+                    
+                    decimal cantidadStock = Math.Round(BLL.FabricaBLL.GetStockForDay(ubicacionStock, fechaNecesidad), 0);
 
-                        numCantProducir.Value = (nudCantidad.Value - numCantStock.Value);
-                        validacion = validacion + "PLANIFICACION PRODUCCION: " + (nudCantidad.Value - numCantStock.Value).ToString() + " Unidades \n";
+                    if (cantidadStock > 0)
+                    {
+                        //La diferencia hay que colocarla para planificar
+                        if (cantidadStock < cantidad)
+                        {
+                            //Si hay stock lo cargamos en el numeric de cantidad Stock
+                            numCantStock.Value = cantidadStock;
+                            validacion = validacion + "STOCK: Hay " + cantidadStock + " unidades disponibles para la fecha " + fechaNecesidad.ToShortDateString() + "\n";
+
+                            numCantProducir.Value = (nudCantidad.Value - numCantStock.Value);
+                            validacion = validacion + "PLANIFICACION PRODUCCION: " + (nudCantidad.Value - numCantStock.Value).ToString() + " Unidades \n";
+                        }
+                        else
+                        {
+                            numCantStock.Value = cantidad;
+                            validacion = validacion + "STOCK: Hay " + cantidadStock + " unidades disponibles para la fecha " + fechaNecesidad.ToShortDateString() + "\n";
+                        }
                     }
                     else
                     {
-                        numCantStock.Value = cantidad;
-                        validacion = validacion + "STOCK: Hay " + cantidadStock + " unidades disponibles para la fecha " + fechaNecesidad.ToShortDateString() + "\n";
+                        //No hay stock disponible por eso se coloca cero
+                        numCantStock.Value = 0;
+
+                        //Escribimos el mensaje que avisa que no hay stock
+                        validacion = validacion + "STOCK: No hay stock disponible para la fecha " + fechaNecesidad.ToShortDateString() + "\n";
+
+                        //La diferencia hay que colocarla para planificar
+                        numCantProducir.Value = nudCantidad.Value;
+                        validacion = validacion + "PLANIFICACION PRODUCCION: " + nudCantidad.Value.ToString() + " Unidades \n";
                     }
+
+                    if (validacion.Length > 0)
+                    {
+                        //Mostramos el mensaje resultado de la validación
+                        Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
+                    }
+
+                    //Habilito los controles que se tienen que ver
+                    lblCantProducir.Visible = true;
+                    numCantProducir.Visible = true;
+                    lblCantStock.Visible = true;
+                    numCantStock.Visible = true;
+                    lblVerificarCapacidad.Visible = true;
+                    btnValidarCapacidad.Visible = true;
+                    btnAgregar.Enabled = true;
                 }
                 else
                 {
-                    //No hay stock disponible por eso se coloca cero
-                    numCantStock.Value = 0;
-
-                    //Escribimos el mensaje que avisa que no hay stock
-                    validacion = validacion + "STOCK: No hay stock disponible para la fecha " + fechaNecesidad.ToShortDateString() + "\n";
-
-                    //La diferencia hay que colocarla para planificar
-                    numCantProducir.Value = nudCantidad.Value;
-                    validacion = validacion + "PLANIFICACION PRODUCCION: " + nudCantidad.Value.ToString() + " Unidades \n";
+                    Entidades.Mensajes.MensajesABM.MsjValidacion("Debe completar los datos obligatorios", this.Text);
                 }
-
-                //Mostramos el mensaje resultado de la validación
-                Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
-
-                //Habilito los controles que se tienen que ver
-                lblCantProducir.Visible = true;
-                numCantProducir.Visible = true;
-                lblCantStock.Visible = true;
-                numCantStock.Visible = true;
-                btnAgregar.Enabled = true;
-                btnValidar.Enabled = false;
             }
-            else
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                Entidades.Mensajes.MensajesABM.MsjValidacion("Debe completar los datos obligatorios", this.Text);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Validación);
             }
         }
 
+        private void btnValidarCapacidad_Click(object sender, EventArgs e)
+        {
+            //***************************************************************************************
+            //                              VALIDACION DE CAPACIDAD PRODUCCION
+            //***************************************************************************************
+                        
+            //Defino un que determine la validacion
+            string validacion = string.Empty;
+
+            try
+            {
+                if (cbUbicacionStock.GetSelectedIndex() != -1 && nudCantidad.Value > 0)
+                {
+                    //Obtenemos el codigo de la cocina, la fecha de necesidad y la cantidad
+                    int codigoCocina = Convert.ToInt32(dvCocinas[dgvCocinas.SelectedRows[0].Index]["coc_codigo"]);
+                    DateTime fechaNecesidad = Convert.ToDateTime(sfFechaPrevista.Value);
+                    int cantidadProducir = Convert.ToInt32(numCantProducir.Value);
+                    
+                    //Creamos el objeto de simulacion de producción
+                    Entidades.SimulacionProduccion simulacion = new GyCAP.Entidades.SimulacionProduccion();
+
+                    //Realizamos la simulación
+                    simulacion = BLL.FabricaBLL.SimularProduccion(codigoCocina, cantidadProducir, fechaNecesidad);
+
+                    //Interpretamos los resultados de la simulación
+                    //Se analiza si es válida
+                    if (simulacion.IsValid == true)
+                    {
+                        if (simulacion.EsPosible == true)
+                        {
+                            //Si es posible entonces obtengo la fecha de comienzo de produccion.
+                            validacion = validacion + "RESULTADO SIMULACIÓN: Es posible producir la cantidad deseada para ese tiempo.\n";
+                            validacion = validacion + "FECHA INICIO PRODUCCION: " + simulacion.FechaInicio.ToShortDateString() + "\nCANTIDAD A PRODUCIR: " + simulacion.CantidadNecesidad.ToString() + "\n";
+                        }
+                        else
+                        {
+                            if (simulacion.CantidadSugerida < cantidadProducir)
+                            {
+                                //No es posible producir esa cantidad para esa fecha
+                                validacion = validacion + "RESULTADO SIMULACIÓN: No es posible producir la cantidad deseada para ese tiempo.\n";
+
+                                //Armamos el mensaje con las cantidades sugeridas para la fecha
+                                validacion = validacion + "CANTIDAD SUGERIDA para la FECHA DE NECESIDAD: " + simulacion.CantidadSugerida.ToString() + "\n";
+                                validacion = validacion + "FECHA SUGERIDA para la CANTIDAD INGRESADA: " + simulacion.FechaSugerida.ToShortDateString() + "\n";
+
+                                //Le preguntamos al usuario si quiere producir la cantidad suguerida, si responde que no cambia la fecha de incio
+                                string pregunta = "¿Desea cambiar la cantidad del pedido por la estimada por el sistema?\n" + validacion + "\n NOTA: al seleccionar la opción NO cambiará la fecha de necesidad por la recomendada por el sistema.";
+                                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjPreguntaAlUsuario(pregunta, this.Text);
+
+                                //Limpio el mensaje de validación
+                                validacion = string.Empty;
+
+                                if (respuesta == DialogResult.Yes)
+                                {
+                                    dpfechaInicio.Value = simulacion.FechaInicio;
+                                    numCantProducir.Value = simulacion.CantidadSugerida;
+                                }
+                                else if (respuesta == DialogResult.No)
+                                {
+                                    dpfechaInicio.Value = simulacion.FechaInicio;
+                                    sfFechaPrevista.Value = simulacion.FechaSugerida;
+                                }
+                            }
+                            else
+                            {
+                                //Si es posible entonces obtengo la fecha de comienzo de produccion.
+                                validacion = validacion + "RESULTADO SIMULACIÓN: Es posible producir la cantidad deseada para ese tiempo.\n";
+                                validacion = validacion + "FECHA INICIO PRODUCCION: " + simulacion.FechaInicio.ToShortDateString() + "\nCANTIDAD A PRODUCIR: " + simulacion.CantidadNecesidad.ToString() + "\n";
+                            }
+                        }
+                    }
+                    else
+                    {
+                        validacion = validacion + "-" + simulacion.ErrorMessage + "\n";
+                    }
+                    
+                    //Mostramos los mensajes correspondientes a los usuarios
+                    if(validacion.Length > 0)
+                    {
+                        Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
+                    }
+
+                    //Muestro el valor de la fecha de inicio de producción y habilito el boton agregar
+                    dpfechaInicio.Visible = true;
+                    lblFechaInicio.Visible = true;
+                    btnAgregar.Enabled = true;
+                }
+
+
+            }
+            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            {
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Validación);
+            }
+        }
+
+        /*
         private void btnModificarDetalle_Click(object sender, EventArgs e)
         {
             if (dgvDetallePedido.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
@@ -997,7 +1102,7 @@ namespace GyCAP.UI.GestionPedido
             {
                 Entidades.Mensajes.MensajesABM.MsjValidacion("Debe seleccionar un Detalle de Pedido", this.Text);
             }
-        }
+        }*/
 
         private void btnCancelarPedido_Click(object sender, EventArgs e)
         {
@@ -1052,8 +1157,9 @@ namespace GyCAP.UI.GestionPedido
                 Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
         }       
+        #endregion         
 
-        #endregion     
+       
     }
 }
 

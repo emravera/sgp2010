@@ -448,7 +448,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             seriesGraficos += 1;
 
             //Calculo la capacidad de la fabrica
-            int capacidadFabrica = (BLL.FabricaBLL.GetCapacidadSemanalBruta(null, GyCAP.Entidades.Enumeraciones.RecursosFabricacionEnum.TipoHorario.Normal));
+            int capacidadFabrica = Convert.ToInt32(numCapacidadProducción.Value);
             int[] semanasMes = new int[12];
             semanasMes = SemanasAño(Convert.ToInt32(txtAnio.Text));            
 

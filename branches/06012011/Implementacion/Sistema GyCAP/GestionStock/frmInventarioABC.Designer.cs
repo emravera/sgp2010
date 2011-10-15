@@ -39,10 +39,7 @@
             this.gbDatosCocinas = new System.Windows.Forms.GroupBox();
             this.panelAcciones = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.btnRestar = new System.Windows.Forms.Button();
-            this.btnSumar = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnCalcularABC = new System.Windows.Forms.Button();
             this.dgvModelos = new System.Windows.Forms.DataGridView();
@@ -56,6 +53,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gbMateriasPrimas = new System.Windows.Forms.GroupBox();
             this.dgvMP = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tsMenu = new System.Windows.Forms.ToolStrip();
+            this.btnImprimirInforme = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.btnRestar = new System.Windows.Forms.Button();
+            this.btnSumar = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.gbDatosPrincipales.SuspendLayout();
             this.gbDatosCocinas.SuspendLayout();
             this.panelAcciones.SuspendLayout();
@@ -64,6 +69,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numPorcentaje)).BeginInit();
             this.gbMateriasPrimas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMP)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.tsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDatosPrincipales
@@ -76,7 +83,7 @@
             this.gbDatosPrincipales.Controls.Add(this.cbAñoInventario);
             this.gbDatosPrincipales.Controls.Add(this.btnGenerarInventario);
             this.gbDatosPrincipales.Controls.Add(this.label3);
-            this.gbDatosPrincipales.Location = new System.Drawing.Point(3, 9);
+            this.gbDatosPrincipales.Location = new System.Drawing.Point(3, 60);
             this.gbDatosPrincipales.Name = "gbDatosPrincipales";
             this.gbDatosPrincipales.Size = new System.Drawing.Size(807, 53);
             this.gbDatosPrincipales.TabIndex = 16;
@@ -130,9 +137,9 @@
             // btnGenerarInventario
             // 
             this.btnGenerarInventario.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnGenerarInventario.Location = new System.Drawing.Point(705, 19);
+            this.btnGenerarInventario.Location = new System.Drawing.Point(681, 18);
             this.btnGenerarInventario.Name = "btnGenerarInventario";
-            this.btnGenerarInventario.Size = new System.Drawing.Size(82, 23);
+            this.btnGenerarInventario.Size = new System.Drawing.Size(90, 25);
             this.btnGenerarInventario.TabIndex = 4;
             this.btnGenerarInventario.Text = "Generar";
             this.btnGenerarInventario.UseVisualStyleBackColor = true;
@@ -158,9 +165,9 @@
             this.gbDatosCocinas.Controls.Add(this.gbCargaPorcentaje);
             this.gbDatosCocinas.Controls.Add(this.txtCantAnual);
             this.gbDatosCocinas.Controls.Add(this.label1);
-            this.gbDatosCocinas.Location = new System.Drawing.Point(3, 68);
+            this.gbDatosCocinas.Location = new System.Drawing.Point(3, 119);
             this.gbDatosCocinas.Name = "gbDatosCocinas";
-            this.gbDatosCocinas.Size = new System.Drawing.Size(342, 384);
+            this.gbDatosCocinas.Size = new System.Drawing.Size(342, 377);
             this.gbDatosCocinas.TabIndex = 17;
             this.gbDatosCocinas.TabStop = false;
             this.gbDatosCocinas.Text = "Datos Cocinas a Producir";
@@ -173,54 +180,20 @@
             this.panelAcciones.Controls.Add(this.btnSumar);
             this.panelAcciones.Controls.Add(this.label6);
             this.panelAcciones.Controls.Add(this.btnDelete);
-            this.panelAcciones.Location = new System.Drawing.Point(6, 295);
+            this.panelAcciones.Location = new System.Drawing.Point(6, 284);
             this.panelAcciones.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelAcciones.Name = "panelAcciones";
-            this.panelAcciones.Size = new System.Drawing.Size(325, 47);
+            this.panelAcciones.Size = new System.Drawing.Size(325, 48);
             this.panelAcciones.TabIndex = 31;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(186, 27);
+            this.label7.Location = new System.Drawing.Point(203, 27);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(58, 13);
             this.label7.TabIndex = 20;
             this.label7.Text = "Porcentaje";
-            // 
-            // btnRestar
-            // 
-            this.btnRestar.FlatAppearance.BorderSize = 0;
-            this.btnRestar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnRestar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRestar.Image = ((System.Drawing.Image)(resources.GetObject("btnRestar.Image")));
-            this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestar.Location = new System.Drawing.Point(216, -2);
-            this.btnRestar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnRestar.Name = "btnRestar";
-            this.btnRestar.Size = new System.Drawing.Size(30, 30);
-            this.btnRestar.TabIndex = 19;
-            this.btnRestar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRestar.UseVisualStyleBackColor = true;
-            this.btnRestar.Click += new System.EventHandler(this.btnRestar_Click);
-            // 
-            // btnSumar
-            // 
-            this.btnSumar.FlatAppearance.BorderSize = 0;
-            this.btnSumar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnSumar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSumar.Image = ((System.Drawing.Image)(resources.GetObject("btnSumar.Image")));
-            this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSumar.Location = new System.Drawing.Point(180, -2);
-            this.btnSumar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSumar.Name = "btnSumar";
-            this.btnSumar.Size = new System.Drawing.Size(30, 30);
-            this.btnSumar.TabIndex = 18;
-            this.btnSumar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSumar.UseVisualStyleBackColor = true;
-            this.btnSumar.Click += new System.EventHandler(this.btnSumar_Click);
             // 
             // label6
             // 
@@ -231,26 +204,9 @@
             this.label6.TabIndex = 17;
             this.label6.Text = "Eliminar";
             // 
-            // btnDelete
-            // 
-            this.btnDelete.FlatAppearance.BorderSize = 0;
-            this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Delete_25;
-            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(53, -2);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(30, 30);
-            this.btnDelete.TabIndex = 15;
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(144, 353);
+            this.btnVolver.Location = new System.Drawing.Point(144, 346);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(90, 25);
             this.btnVolver.TabIndex = 30;
@@ -260,7 +216,7 @@
             // 
             // btnCalcularABC
             // 
-            this.btnCalcularABC.Location = new System.Drawing.Point(241, 353);
+            this.btnCalcularABC.Location = new System.Drawing.Point(241, 346);
             this.btnCalcularABC.Name = "btnCalcularABC";
             this.btnCalcularABC.Size = new System.Drawing.Size(90, 25);
             this.btnCalcularABC.TabIndex = 29;
@@ -274,7 +230,7 @@
             this.dgvModelos.AllowUserToDeleteRows = false;
             this.dgvModelos.AllowUserToResizeRows = false;
             this.dgvModelos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvModelos.Location = new System.Drawing.Point(6, 136);
+            this.dgvModelos.Location = new System.Drawing.Point(6, 129);
             this.dgvModelos.Name = "dgvModelos";
             this.dgvModelos.ReadOnly = true;
             this.dgvModelos.RowHeadersVisible = false;
@@ -291,7 +247,7 @@
             this.gbCargaPorcentaje.Controls.Add(this.btnAgregar);
             this.gbCargaPorcentaje.Controls.Add(this.cbCocinas);
             this.gbCargaPorcentaje.Controls.Add(this.label5);
-            this.gbCargaPorcentaje.Location = new System.Drawing.Point(6, 51);
+            this.gbCargaPorcentaje.Location = new System.Drawing.Point(6, 45);
             this.gbCargaPorcentaje.Name = "gbCargaPorcentaje";
             this.gbCargaPorcentaje.Size = new System.Drawing.Size(325, 79);
             this.gbCargaPorcentaje.TabIndex = 27;
@@ -301,15 +257,15 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 49);
+            this.label2.Location = new System.Drawing.Point(22, 50);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 13);
+            this.label2.Size = new System.Drawing.Size(78, 13);
             this.label2.TabIndex = 16;
-            this.label2.Text = "Porcentaje (%)";
+            this.label2.Text = "Porcentaje (%):";
             // 
             // numPorcentaje
             // 
-            this.numPorcentaje.Location = new System.Drawing.Point(106, 45);
+            this.numPorcentaje.Location = new System.Drawing.Point(108, 46);
             this.numPorcentaje.Name = "numPorcentaje";
             this.numPorcentaje.Size = new System.Drawing.Size(99, 20);
             this.numPorcentaje.TabIndex = 15;
@@ -317,9 +273,9 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(240, 44);
+            this.btnAgregar.Location = new System.Drawing.Point(236, 44);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(76, 23);
+            this.btnAgregar.Size = new System.Drawing.Size(80, 25);
             this.btnAgregar.TabIndex = 13;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -346,7 +302,7 @@
             // 
             // txtCantAnual
             // 
-            this.txtCantAnual.Location = new System.Drawing.Point(195, 25);
+            this.txtCantAnual.Location = new System.Drawing.Point(195, 19);
             this.txtCantAnual.Name = "txtCantAnual";
             this.txtCantAnual.Size = new System.Drawing.Size(136, 20);
             this.txtCantAnual.TabIndex = 26;
@@ -354,7 +310,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 28);
+            this.label1.Location = new System.Drawing.Point(11, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(178, 13);
             this.label1.TabIndex = 25;
@@ -366,9 +322,9 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.gbMateriasPrimas.Controls.Add(this.dgvMP);
-            this.gbMateriasPrimas.Location = new System.Drawing.Point(351, 68);
+            this.gbMateriasPrimas.Location = new System.Drawing.Point(351, 119);
             this.gbMateriasPrimas.Name = "gbMateriasPrimas";
-            this.gbMateriasPrimas.Size = new System.Drawing.Size(459, 384);
+            this.gbMateriasPrimas.Size = new System.Drawing.Size(459, 377);
             this.gbMateriasPrimas.TabIndex = 18;
             this.gbMateriasPrimas.TabStop = false;
             this.gbMateriasPrimas.Text = "Clasificación Inventario ABC";
@@ -385,15 +341,118 @@
             this.dgvMP.ReadOnly = true;
             this.dgvMP.RowHeadersVisible = false;
             this.dgvMP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMP.Size = new System.Drawing.Size(453, 365);
+            this.dgvMP.Size = new System.Drawing.Size(453, 358);
             this.dgvMP.TabIndex = 29;
             this.dgvMP.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvMP_CellFormatting);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.tsMenu);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(814, 59);
+            this.panel1.TabIndex = 19;
+            // 
+            // tsMenu
+            // 
+            this.tsMenu.BackColor = System.Drawing.Color.Silver;
+            this.tsMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnImprimirInforme,
+            this.toolStripSeparator1,
+            this.btnSalir});
+            this.tsMenu.Location = new System.Drawing.Point(0, 0);
+            this.tsMenu.Name = "tsMenu";
+            this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
+            this.tsMenu.Size = new System.Drawing.Size(814, 59);
+            this.tsMenu.TabIndex = 9;
+            this.tsMenu.Text = "toolStrip1";
+            // 
+            // btnImprimirInforme
+            // 
+            this.btnImprimirInforme.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Printer_25;
+            this.btnImprimirInforme.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnImprimirInforme.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnImprimirInforme.Name = "btnImprimirInforme";
+            this.btnImprimirInforme.Size = new System.Drawing.Size(49, 56);
+            this.btnImprimirInforme.Text = "&Imprimir";
+            this.btnImprimirInforme.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 59);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Salir_25;
+            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(31, 56);
+            this.btnSalir.Text = "&Salir";
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btnRestar
+            // 
+            this.btnRestar.FlatAppearance.BorderSize = 0;
+            this.btnRestar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnRestar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRestar.Image = ((System.Drawing.Image)(resources.GetObject("btnRestar.Image")));
+            this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRestar.Location = new System.Drawing.Point(233, -2);
+            this.btnRestar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRestar.Name = "btnRestar";
+            this.btnRestar.Size = new System.Drawing.Size(30, 30);
+            this.btnRestar.TabIndex = 19;
+            this.btnRestar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRestar.UseVisualStyleBackColor = true;
+            this.btnRestar.Click += new System.EventHandler(this.btnRestar_Click);
+            // 
+            // btnSumar
+            // 
+            this.btnSumar.FlatAppearance.BorderSize = 0;
+            this.btnSumar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnSumar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSumar.Image = ((System.Drawing.Image)(resources.GetObject("btnSumar.Image")));
+            this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSumar.Location = new System.Drawing.Point(197, -2);
+            this.btnSumar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSumar.Name = "btnSumar";
+            this.btnSumar.Size = new System.Drawing.Size(30, 30);
+            this.btnSumar.TabIndex = 18;
+            this.btnSumar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSumar.UseVisualStyleBackColor = true;
+            this.btnSumar.Click += new System.EventHandler(this.btnSumar_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Delete_25;
+            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDelete.Location = new System.Drawing.Point(53, -2);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(30, 30);
+            this.btnDelete.TabIndex = 15;
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // frmInventarioABC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 464);
+            this.ClientSize = new System.Drawing.Size(814, 508);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.gbMateriasPrimas);
             this.Controls.Add(this.gbDatosCocinas);
             this.Controls.Add(this.gbDatosPrincipales);
@@ -414,6 +473,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numPorcentaje)).EndInit();
             this.gbMateriasPrimas.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMP)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.tsMenu.ResumeLayout(false);
+            this.tsMenu.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -447,6 +510,11 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridView dgvModelos;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ToolStrip tsMenu;
+        private System.Windows.Forms.ToolStripButton btnImprimirInforme;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton btnSalir;
 
     }
 }
