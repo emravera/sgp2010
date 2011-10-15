@@ -455,31 +455,22 @@ namespace GyCAP.UI.Principal
 
         #endregion
 
+        #region Menú Pedidos
 
+        private void clienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionPedido.frmCliente.Instancia.MdiParent = this;
+            GyCAP.UI.GestionPedido.frmCliente.Instancia.Show();
+        }
 
+        private void pedidoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionPedido.frmPedidos.Instancia.MdiParent = this;
+            GyCAP.UI.GestionPedido.frmPedidos.Instancia.Show();
+        }
 
+        #endregion
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+       
     }
 }
