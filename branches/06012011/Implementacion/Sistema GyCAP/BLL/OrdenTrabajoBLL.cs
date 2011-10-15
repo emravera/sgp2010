@@ -34,6 +34,8 @@ namespace GyCAP.BLL
                 EstadoOrdenTrabajo estadoGenerado = EstadoOrdenTrabajoBLL.GetEstado(OrdenesTrabajoEnum.EstadoOrdenEnum.Generada);
 
                 ProcessNodo(arbolEstructura.NodoRaiz, arbolProduccion, ref numeroOrdenT, estadoGenerado, null, listaExcepciones);
+
+                arbolProduccion.GetFechaInicio(arbolProduccion.GetFechaFinalizacion(arbolProduccion.OrdenProduccion.FechaInicioEstimada.Value));
             }
             else
             {
@@ -42,7 +44,7 @@ namespace GyCAP.BLL
         }
 
         private static void ProcessNodo(NodoEstructura nodoEstructura, ArbolProduccion arbolProduccion, ref int numeroOrdenT, EstadoOrdenTrabajo estadoGenerado, NodoOrdenTrabajo lastNodoOT, IList<ExcepcionesPlan> listaExcepciones)
-        {            
+        {
             if (nodoEstructura.Contenido != NodoEstructura.tipoContenido.MateriaPrima)
             {
                 if (nodoEstructura.Compuesto.Parte.HojaRuta != null)

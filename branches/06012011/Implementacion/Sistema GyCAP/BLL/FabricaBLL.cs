@@ -191,7 +191,7 @@ namespace GyCAP.BLL
                                                     Origen = string.Empty,
                                                     FechaInicioReal = null,
                                                     FechaFinReal = null,
-                                                    FechaInicioEstimada = null,
+                                                    FechaInicioEstimada = fechaNecesidad,
                                                     FechaFinEstimada = fechaNecesidad,
                                                     Prioridad = 0,
                                                     Observaciones = string.Empty,
