@@ -19,7 +19,7 @@ namespace GyCAP.DAL
             string sqlInsert = string.Empty;
             int codigoDetalle = 0;
 
-            if (row.DPED_FECHA_INICIO.ToString() != string.Empty)
+            if (!row.IsDPED_FECHA_INICIONull())
             {
                 sqlInsert = @"INSERT INTO [DETALLE_PEDIDOS] 
                                         ([PED_CODIGO]
@@ -53,7 +53,6 @@ namespace GyCAP.DAL
 
                 //Ejecutamos la consulta y obtenemos el codigo
                 codigoDetalle = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParam, transaccion));
-
             }       
 
             return codigoDetalle;
@@ -144,7 +143,8 @@ namespace GyCAP.DAL
 
         public static void ObtenerUnDetallePedido(DataTable dtDetallePedidos, int codigoDetalle)
         {
-            string sql = @"SELECT dped_codigo, ped_codigo, edped_codigo, coc_codigo, dped_cantidad, dped_fecha_cancelacion
+            string sql = @"SELECT dped_codigo, ped_codigo, edped_codigo, coc_codigo, dped_cantidad, 
+                           dped_fecha_cancelacion, dped_fecha_inicio
                            FROM DETALLE_PEDIDOS WHERE dped_codigo = @p0";
 
             object[] valorParametros = { codigoDetalle };
@@ -163,7 +163,7 @@ namespace GyCAP.DAL
         {
             string sql = @"SELECT dped_codigo, ped_codigo, edped_codigo, coc_codigo, 
                                   dped_cantidad, dped_fecha_cancelacion, dped_codigonemonico,
-                                  dped_fecha_entrega_prevista, dped_fecha_entrega_real 
+                                  dped_fecha_entrega_prevista, dped_fecha_entrega_real, dped_fecha_inicio 
                            FROM DETALLE_PEDIDOS WHERE ped_codigo = @p0";
 
             object[] valorParametros = { codigoPedido };
@@ -180,7 +180,7 @@ namespace GyCAP.DAL
         {
             string sql = @"SELECT dped_codigo, ped_codigo, edped_codigo, coc_codigo, 
                                   dped_cantidad, dped_fecha_cancelacion, dped_codigonemonico,
-                                  dped_fecha_entrega_prevista, dped_fecha_entrega_real 
+                                  dped_fecha_entrega_prevista, dped_fecha_entrega_real, dped_fecha_inicio 
                            FROM DETALLE_PEDIDOS WHERE ped_codigo = @p0 and edped_codigo = @p1";
 
             object[] valorParametros = { codigoPedido, codigoEstado };
@@ -191,7 +191,6 @@ namespace GyCAP.DAL
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
-
 
         public static bool PuedeEliminarse(int codigo)
         {
