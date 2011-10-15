@@ -32,7 +32,6 @@
             this.dgvDetallePedido = new System.Windows.Forms.DataGridView();
             this.panelAcciones = new System.Windows.Forms.Panel();
             this.btnCancelarPedido = new System.Windows.Forms.Button();
-            this.btnModificarDetalle = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
@@ -43,6 +42,12 @@
             this.tpCocinas = new System.Windows.Forms.TabPage();
             this.gbCocinas = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dpfechaInicio = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.lblFechaInicio = new System.Windows.Forms.Label();
+            this.lblVerificarCapacidad = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnValidarCapacidad = new System.Windows.Forms.Button();
+            this.btnValidarStock = new System.Windows.Forms.Button();
             this.cbUbicacionStock = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label14 = new System.Windows.Forms.Label();
             this.lblCantProducir = new System.Windows.Forms.Label();
@@ -53,7 +58,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.lblTotalCocina = new System.Windows.Forms.Label();
-            this.btnValidar = new System.Windows.Forms.Button();
             this.nudCantidad = new System.Windows.Forms.NumericUpDown();
             this.dgvCocinas = new System.Windows.Forms.DataGridView();
             this.slideAgregar = new SlickInterface.Slide();
@@ -128,7 +132,7 @@
             this.groupBox3.Size = new System.Drawing.Size(698, 210);
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Detalle del pedido";
+            this.groupBox3.Text = "Detalle del Pedido";
             // 
             // dgvDetallePedido
             // 
@@ -155,7 +159,6 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panelAcciones.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelAcciones.Controls.Add(this.btnCancelarPedido);
-            this.panelAcciones.Controls.Add(this.btnModificarDetalle);
             this.panelAcciones.Controls.Add(this.label6);
             this.panelAcciones.Controls.Add(this.btnDelete);
             this.panelAcciones.Controls.Add(this.btnNew);
@@ -172,7 +175,7 @@
             this.btnCancelarPedido.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnCancelarPedido.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelarPedido.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Warning_25;
-            this.btnCancelarPedido.Location = new System.Drawing.Point(7, 137);
+            this.btnCancelarPedido.Location = new System.Drawing.Point(7, 136);
             this.btnCancelarPedido.Name = "btnCancelarPedido";
             this.btnCancelarPedido.Size = new System.Drawing.Size(66, 44);
             this.btnCancelarPedido.TabIndex = 18;
@@ -181,32 +184,15 @@
             this.btnCancelarPedido.UseVisualStyleBackColor = true;
             this.btnCancelarPedido.Click += new System.EventHandler(this.btnCancelarPedido_Click);
             // 
-            // btnModificarDetalle
-            // 
-            this.btnModificarDetalle.CausesValidation = false;
-            this.btnModificarDetalle.FlatAppearance.BorderSize = 0;
-            this.btnModificarDetalle.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnModificarDetalle.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnModificarDetalle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModificarDetalle.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Text_Editor_25;
-            this.btnModificarDetalle.Location = new System.Drawing.Point(7, 97);
-            this.btnModificarDetalle.Name = "btnModificarDetalle";
-            this.btnModificarDetalle.Size = new System.Drawing.Size(66, 44);
-            this.btnModificarDetalle.TabIndex = 17;
-            this.btnModificarDetalle.Text = "Modificar";
-            this.btnModificarDetalle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnModificarDetalle.UseVisualStyleBackColor = true;
-            this.btnModificarDetalle.Click += new System.EventHandler(this.btnModificarDetalle_Click);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(20, 3);
+            this.label6.Location = new System.Drawing.Point(13, 4);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 13);
+            this.label6.Size = new System.Drawing.Size(54, 26);
             this.label6.TabIndex = 13;
-            this.label6.Text = "Detalle";
+            this.label6.Text = "Detalles \r\nde Pedido";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnDelete
@@ -217,9 +203,9 @@
             this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Delete_25;
-            this.btnDelete.Location = new System.Drawing.Point(15, 58);
+            this.btnDelete.Location = new System.Drawing.Point(7, 85);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(53, 44);
+            this.btnDelete.Size = new System.Drawing.Size(66, 44);
             this.btnDelete.TabIndex = 14;
             this.btnDelete.Text = "Eliminar";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -236,9 +222,9 @@
             this.btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
             this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNew.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.New_25;
-            this.btnNew.Location = new System.Drawing.Point(18, 14);
+            this.btnNew.Location = new System.Drawing.Point(7, 34);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(47, 47);
+            this.btnNew.Size = new System.Drawing.Size(66, 44);
             this.btnNew.TabIndex = 13;
             this.btnNew.Text = "Nuevo";
             this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -304,7 +290,7 @@
             this.gbCocinas.Controls.Add(this.dgvCocinas);
             this.gbCocinas.Location = new System.Drawing.Point(0, 0);
             this.gbCocinas.Name = "gbCocinas";
-            this.gbCocinas.Size = new System.Drawing.Size(704, 190);
+            this.gbCocinas.Size = new System.Drawing.Size(704, 201);
             this.gbCocinas.TabIndex = 13;
             this.gbCocinas.TabStop = false;
             this.gbCocinas.Text = "Carga de Detalle";
@@ -314,6 +300,12 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.dpfechaInicio);
+            this.panel1.Controls.Add(this.lblFechaInicio);
+            this.panel1.Controls.Add(this.lblVerificarCapacidad);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.btnValidarCapacidad);
+            this.panel1.Controls.Add(this.btnValidarStock);
             this.panel1.Controls.Add(this.cbUbicacionStock);
             this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.lblCantProducir);
@@ -324,12 +316,70 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnAgregar);
             this.panel1.Controls.Add(this.lblTotalCocina);
-            this.panel1.Controls.Add(this.btnValidar);
             this.panel1.Controls.Add(this.nudCantidad);
-            this.panel1.Location = new System.Drawing.Point(471, 17);
+            this.panel1.Location = new System.Drawing.Point(414, 17);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(227, 167);
+            this.panel1.Size = new System.Drawing.Size(284, 178);
             this.panel1.TabIndex = 6;
+            // 
+            // dpfechaInicio
+            // 
+            this.dpfechaInicio.CausesValidation = false;
+            this.dpfechaInicio.CustomFormat = " ";
+            this.dpfechaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dpfechaInicio.Location = new System.Drawing.Point(95, 123);
+            this.dpfechaInicio.Name = "dpfechaInicio";
+            this.dpfechaInicio.Size = new System.Drawing.Size(131, 20);
+            this.dpfechaInicio.TabIndex = 44;
+            // 
+            // lblFechaInicio
+            // 
+            this.lblFechaInicio.AutoSize = true;
+            this.lblFechaInicio.Location = new System.Drawing.Point(1, 127);
+            this.lblFechaInicio.Name = "lblFechaInicio";
+            this.lblFechaInicio.Size = new System.Drawing.Size(97, 13);
+            this.lblFechaInicio.TabIndex = 45;
+            this.lblFechaInicio.Text = "Fecha Inicio Prod.:";
+            // 
+            // lblVerificarCapacidad
+            // 
+            this.lblVerificarCapacidad.AutoSize = true;
+            this.lblVerificarCapacidad.Location = new System.Drawing.Point(226, 117);
+            this.lblVerificarCapacidad.Name = "lblVerificarCapacidad";
+            this.lblVerificarCapacidad.Size = new System.Drawing.Size(59, 26);
+            this.lblVerificarCapacidad.TabIndex = 43;
+            this.lblVerificarCapacidad.Text = "Simular\r\nProducción";
+            this.lblVerificarCapacidad.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(231, 44);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 26);
+            this.label7.TabIndex = 42;
+            this.label7.Text = "Verificar \r\nStock";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnValidarCapacidad
+            // 
+            this.btnValidarCapacidad.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.System_25;
+            this.btnValidarCapacidad.Location = new System.Drawing.Point(231, 76);
+            this.btnValidarCapacidad.Name = "btnValidarCapacidad";
+            this.btnValidarCapacidad.Size = new System.Drawing.Size(46, 41);
+            this.btnValidarCapacidad.TabIndex = 41;
+            this.btnValidarCapacidad.UseVisualStyleBackColor = true;
+            this.btnValidarCapacidad.Click += new System.EventHandler(this.btnValidarCapacidad_Click);
+            // 
+            // btnValidarStock
+            // 
+            this.btnValidarStock.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Apply_25;
+            this.btnValidarStock.Location = new System.Drawing.Point(231, 4);
+            this.btnValidarStock.Name = "btnValidarStock";
+            this.btnValidarStock.Size = new System.Drawing.Size(46, 41);
+            this.btnValidarStock.TabIndex = 40;
+            this.btnValidarStock.UseVisualStyleBackColor = true;
+            this.btnValidarStock.Click += new System.EventHandler(this.btnValidar_Click);
             // 
             // cbUbicacionStock
             // 
@@ -337,7 +387,7 @@
             this.cbUbicacionStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbUbicacionStock.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbUbicacionStock.FormattingEnabled = true;
-            this.cbUbicacionStock.Location = new System.Drawing.Point(91, 62);
+            this.cbUbicacionStock.Location = new System.Drawing.Point(94, 52);
             this.cbUbicacionStock.Name = "cbUbicacionStock";
             this.cbUbicacionStock.Size = new System.Drawing.Size(131, 21);
             this.cbUbicacionStock.TabIndex = 32;
@@ -345,7 +395,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(19, 65);
+            this.label14.Location = new System.Drawing.Point(1, 55);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(72, 13);
             this.label14.TabIndex = 39;
@@ -355,7 +405,7 @@
             // 
             this.lblCantProducir.AutoSize = true;
             this.lblCantProducir.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.lblCantProducir.Location = new System.Drawing.Point(2, 114);
+            this.lblCantProducir.Location = new System.Drawing.Point(0, 102);
             this.lblCantProducir.Name = "lblCantProducir";
             this.lblCantProducir.Size = new System.Drawing.Size(89, 13);
             this.lblCantProducir.TabIndex = 37;
@@ -365,7 +415,7 @@
             // 
             this.numCantProducir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numCantProducir.CausesValidation = false;
-            this.numCantProducir.Location = new System.Drawing.Point(91, 112);
+            this.numCantProducir.Location = new System.Drawing.Point(94, 100);
             this.numCantProducir.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -380,7 +430,7 @@
             // 
             this.lblCantStock.AutoSize = true;
             this.lblCantStock.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.lblCantStock.Location = new System.Drawing.Point(9, 88);
+            this.lblCantStock.Location = new System.Drawing.Point(0, 78);
             this.lblCantStock.Name = "lblCantStock";
             this.lblCantStock.Size = new System.Drawing.Size(82, 13);
             this.lblCantStock.TabIndex = 35;
@@ -390,7 +440,7 @@
             // 
             this.numCantStock.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.numCantStock.CausesValidation = false;
-            this.numCantStock.Location = new System.Drawing.Point(91, 86);
+            this.numCantStock.Location = new System.Drawing.Point(94, 76);
             this.numCantStock.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -406,7 +456,7 @@
             this.sfFechaPrevista.CausesValidation = false;
             this.sfFechaPrevista.CustomFormat = " ";
             this.sfFechaPrevista.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.sfFechaPrevista.Location = new System.Drawing.Point(91, 38);
+            this.sfFechaPrevista.Location = new System.Drawing.Point(94, 28);
             this.sfFechaPrevista.Name = "sfFechaPrevista";
             this.sfFechaPrevista.Size = new System.Drawing.Size(131, 20);
             this.sfFechaPrevista.TabIndex = 31;
@@ -414,7 +464,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(-1, 42);
+            this.label1.Location = new System.Drawing.Point(2, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 13);
             this.label1.TabIndex = 34;
@@ -423,9 +473,9 @@
             // btnAgregar
             // 
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAgregar.Location = new System.Drawing.Point(118, 138);
+            this.btnAgregar.Location = new System.Drawing.Point(94, 151);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(102, 22);
+            this.btnAgregar.Size = new System.Drawing.Size(131, 22);
             this.btnAgregar.TabIndex = 37;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -435,28 +485,17 @@
             // 
             this.lblTotalCocina.AutoSize = true;
             this.lblTotalCocina.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.lblTotalCocina.Location = new System.Drawing.Point(21, 14);
+            this.lblTotalCocina.Location = new System.Drawing.Point(1, 11);
             this.lblTotalCocina.Name = "lblTotalCocina";
-            this.lblTotalCocina.Size = new System.Drawing.Size(70, 13);
+            this.lblTotalCocina.Size = new System.Drawing.Size(54, 13);
             this.lblTotalCocina.TabIndex = 1;
-            this.lblTotalCocina.Text = "Total Cocina:";
-            // 
-            // btnValidar
-            // 
-            this.btnValidar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnValidar.Location = new System.Drawing.Point(3, 138);
-            this.btnValidar.Name = "btnValidar";
-            this.btnValidar.Size = new System.Drawing.Size(109, 22);
-            this.btnValidar.TabIndex = 36;
-            this.btnValidar.Text = "Validar";
-            this.btnValidar.UseVisualStyleBackColor = true;
-            this.btnValidar.Click += new System.EventHandler(this.btnValidar_Click);
+            this.lblTotalCocina.Text = "Cantidad:";
             // 
             // nudCantidad
             // 
             this.nudCantidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.nudCantidad.CausesValidation = false;
-            this.nudCantidad.Location = new System.Drawing.Point(91, 12);
+            this.nudCantidad.Location = new System.Drawing.Point(94, 4);
             this.nudCantidad.Maximum = new decimal(new int[] {
             100000000,
             0,
@@ -482,7 +521,7 @@
             this.dgvCocinas.ReadOnly = true;
             this.dgvCocinas.RowHeadersVisible = false;
             this.dgvCocinas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCocinas.Size = new System.Drawing.Size(459, 164);
+            this.dgvCocinas.Size = new System.Drawing.Size(402, 175);
             this.dgvCocinas.TabIndex = 0;
             this.dgvCocinas.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCocinas_CellFormatting);
             this.dgvCocinas.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCocinas_DataBindingComplete);
@@ -543,7 +582,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(246, 59);
+            this.label10.Location = new System.Drawing.Point(222, 59);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(44, 13);
             this.label10.TabIndex = 6;
@@ -695,7 +734,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(31, 59);
+            this.label5.Location = new System.Drawing.Point(6, 59);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 13);
             this.label5.TabIndex = 10;
@@ -716,7 +755,7 @@
             this.cboEstadoBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboEstadoBuscar.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboEstadoBuscar.FormattingEnabled = true;
-            this.cboEstadoBuscar.Location = new System.Drawing.Point(491, 20);
+            this.cboEstadoBuscar.Location = new System.Drawing.Point(491, 21);
             this.cboEstadoBuscar.Name = "cboEstadoBuscar";
             this.cboEstadoBuscar.Size = new System.Drawing.Size(133, 21);
             this.cboEstadoBuscar.TabIndex = 3;
@@ -726,7 +765,7 @@
             this.btnBuscar.CausesValidation = false;
             this.btnBuscar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(592, 50);
+            this.btnBuscar.Location = new System.Drawing.Point(549, 50);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
             this.btnBuscar.TabIndex = 5;
@@ -778,7 +817,7 @@
             this.gbDatos.Size = new System.Drawing.Size(703, 194);
             this.gbDatos.TabIndex = 16;
             this.gbDatos.TabStop = false;
-            this.gbDatos.Text = "Datos del pedido";
+            this.gbDatos.Text = "Datos del Pedido";
             // 
             // btnNewCliente
             // 
@@ -788,10 +827,9 @@
             this.btnNewCliente.FlatAppearance.BorderSize = 0;
             this.btnNewCliente.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
             this.btnNewCliente.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnNewCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNewCliente.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNewCliente.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.New_25;
-            this.btnNewCliente.Location = new System.Drawing.Point(340, 38);
+            this.btnNewCliente.Location = new System.Drawing.Point(329, 38);
             this.btnNewCliente.Name = "btnNewCliente";
             this.btnNewCliente.Size = new System.Drawing.Size(109, 31);
             this.btnNewCliente.TabIndex = 20;
@@ -815,7 +853,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(28, 22);
+            this.label9.Location = new System.Drawing.Point(6, 19);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(48, 13);
             this.label9.TabIndex = 7;
@@ -844,7 +882,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(32, 74);
+            this.label4.Location = new System.Drawing.Point(6, 71);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 19;
@@ -853,10 +891,10 @@
             // txtObservacion
             // 
             this.txtObservacion.CausesValidation = false;
-            this.txtObservacion.Location = new System.Drawing.Point(82, 98);
+            this.txtObservacion.Location = new System.Drawing.Point(82, 101);
             this.txtObservacion.MaxLength = 200;
             this.txtObservacion.Name = "txtObservacion";
-            this.txtObservacion.Size = new System.Drawing.Size(424, 79);
+            this.txtObservacion.Size = new System.Drawing.Size(356, 79);
             this.txtObservacion.TabIndex = 11;
             this.txtObservacion.Text = "";
             // 
@@ -872,7 +910,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(32, 47);
+            this.label3.Location = new System.Drawing.Point(6, 47);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 14;
@@ -1028,7 +1066,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Label lblTotalCocina;
-        private System.Windows.Forms.Button btnValidar;
         private System.Windows.Forms.NumericUpDown nudCantidad;
         private System.Windows.Forms.DataGridView dgvCocinas;
         private SlickInterface.Slide slideAgregar;
@@ -1052,7 +1089,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label14;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbUbicacionStock;
-        private System.Windows.Forms.Button btnModificarDetalle;
         private System.Windows.Forms.Button btnCancelarPedido;
+        private System.Windows.Forms.Button btnValidarStock;
+        private System.Windows.Forms.Button btnValidarCapacidad;
+        private System.Windows.Forms.Label label7;
+        private GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha dpfechaInicio;
+        private System.Windows.Forms.Label lblFechaInicio;
+        private System.Windows.Forms.Label lblVerificarCapacidad;
     }
 }

@@ -216,10 +216,6 @@ namespace GyCAP.UI.GestionStock
                 }
             }
 
-            if (msjerror.Length > 0)
-            {
-                msjerror = "Los errores encontrados son:\n" + msjerror;
-            }
             return msjerror;
         }
 
@@ -241,12 +237,7 @@ namespace GyCAP.UI.GestionStock
             if (Porcentaje != 100)
             {
                 msjerror = msjerror + "-El porcentaje debe ser igual 100\n";
-            }
-
-            if (msjerror.Length > 0)
-            {
-                msjerror = "Los errores encontrados son:\n" + msjerror;
-            }
+            }          
 
             return msjerror;
         }

@@ -172,9 +172,7 @@ namespace GyCAP.DAL
                                          pedido.EstadoPedido.Codigo, 
                                          pedido.FechaAlta, 
                                          pedido.Observaciones, 
-                                         pedido.Numero };
-
-          
+                                         pedido.Numero };         
             
             //Insertamos la pieza y obtenemos su codigo
             pedido.Codigo = Convert.ToInt32(DB.executeScalar(sqlInsert, valorParametros, transaccion));

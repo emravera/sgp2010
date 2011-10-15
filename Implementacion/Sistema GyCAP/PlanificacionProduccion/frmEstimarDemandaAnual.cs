@@ -39,12 +39,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvLista.Columns.Add("DEMAN_NOMBRE", "Denominación");
             dgvLista.Columns.Add("DEMAN_FECHACREACION", "Fecha Creación");
 
-            //Seteamos el modo de tamaño de las columnas
-            dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvLista.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvLista.Columns["DEMAN_CODIGO"].DataPropertyName = "DEMAN_CODIGO";
             dgvLista.Columns["DEMAN_ANIO"].DataPropertyName = "DEMAN_ANIO";
@@ -63,11 +57,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns.Add("DDEMAN_CANTIDADMES", "Cantidad Mensual");
             dgvDetalle.Columns["DDEMAN_CODIGO"].Visible = false;
             //Seteamos el modo de tamaño de las columnas
-            
-            dgvDetalle.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetalle.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvDetalle.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
+  
             dgvDetalle.Columns["DDEMAN_CANTIDADMES"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
@@ -124,11 +114,15 @@ namespace GyCAP.UI.PlanificacionProduccion
                     btnConsultar.Enabled = false;
                     btnEliminar.Enabled = false;
                     btnModificar.Enabled = false;
+                                  
+                    //Limpiamos los datatables
+                    dsEstimarDemanda.DEMANDAS_ANUALES.Clear();
+                    dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Clear();
 
                     //Seteo campos invisibles en las grillas
                     dgvDetalle.Columns["DDEMAN_CODIGO"].Visible = false;
                     dgvLista.Columns["DEMAN_CODIGO"].Visible = false;
-                                        
+
                     estadoActual = estadoUI.inicio;
                     tcDemanda.SelectedTab= tpBuscar;
                     break;
@@ -734,34 +728,41 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             try
             {
-                //Se programa la busqueda del detalle
-                //Limpiamos el Dataset
-                dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Clear();
-
-                int codigo = Convert.ToInt32(dvListaDemanda[dgvLista.SelectedRows[0].Index]["deman_codigo"]);
-
-                //Se llama a la funcion de busqueda con todos los parametros
-                BLL.DetalleDemandaAnualBLL.ObtenerDetalle(codigo, dsEstimarDemanda);
-
-                //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
-                //por una consulta a la BD
-                dvListaDetalle.Table = dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES;
-
-                if (dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Rows.Count == 0)
+                if (dsEstimarDemanda.DEMANDAS_ANUALES.Count > 0)
                 {
-                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Detalle de Estimación de Demanda Anual", this.Text);
+                    //Se programa la busqueda del detalle
+                    //Limpiamos el Dataset
+                    dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Clear();
+
+                    int codigo = Convert.ToInt32(dvListaDemanda[dgvLista.SelectedRows[0].Index]["deman_codigo"]);
+
+                    //Se llama a la funcion de busqueda con todos los parametros
+                    BLL.DetalleDemandaAnualBLL.ObtenerDetalle(codigo, dsEstimarDemanda);
+
+                    //Es necesario volver a asignar al dataview cada vez que cambien los datos de la tabla del dataset
+                    //por una consulta a la BD
+                    dvListaDetalle.Table = dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES;
+
+                    if (dsEstimarDemanda.DETALLE_DEMANDAS_ANUALES.Rows.Count == 0)
+                    {
+                        Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Detalle de Estimación de Demanda Anual", this.Text);
+                    }
+                    else
+                    {
+                        SetInterface(estadoUI.buscar);
+                        gbGrillaDetalle.Visible = true;
+                    }
                 }
                 else
                 {
-                    SetInterface(estadoUI.buscar);
-                    gbGrillaDetalle.Visible = true;
+                    Entidades.Mensajes.MensajesABM.MsjValidacion("Debe seleccionar una demanda Anual", this.Text);
                 }
 
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
                 Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
-            }
+            }        
         }
 
         private void CargarAñosBase()

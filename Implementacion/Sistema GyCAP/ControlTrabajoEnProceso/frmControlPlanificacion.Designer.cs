@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tcPlanes = new System.Windows.Forms.TabControl();
             this.tpPlanSemanal = new System.Windows.Forms.TabPage();
             this.gbDetallePlanSemanal = new System.Windows.Forms.GroupBox();
@@ -360,16 +360,16 @@
             // 
             // chartAvance
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartAvance.ChartAreas.Add(chartArea3);
-            legend3.Name = "LeyendaPS";
-            this.chartAvance.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chartAvance.ChartAreas.Add(chartArea1);
+            legend1.Name = "LeyendaPS";
+            this.chartAvance.Legends.Add(legend1);
             this.chartAvance.Location = new System.Drawing.Point(32, 19);
             this.chartAvance.Name = "chartAvance";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "LeyendaPS";
-            series3.Name = "Series1";
-            this.chartAvance.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "LeyendaPS";
+            series1.Name = "Series1";
+            this.chartAvance.Series.Add(series1);
             this.chartAvance.Size = new System.Drawing.Size(663, 270);
             this.chartAvance.TabIndex = 1;
             this.chartAvance.Text = "chart1";
@@ -574,16 +574,16 @@
             // 
             // chartPlanAnual
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartPlanAnual.ChartAreas.Add(chartArea4);
-            legend4.Name = "LeyendaPA";
-            this.chartPlanAnual.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            this.chartPlanAnual.ChartAreas.Add(chartArea2);
+            legend2.Name = "LeyendaPA";
+            this.chartPlanAnual.Legends.Add(legend2);
             this.chartPlanAnual.Location = new System.Drawing.Point(11, 19);
             this.chartPlanAnual.Name = "chartPlanAnual";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "LeyendaPA";
-            series4.Name = "Series1";
-            this.chartPlanAnual.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "LeyendaPA";
+            series2.Name = "Series1";
+            this.chartPlanAnual.Series.Add(series2);
             this.chartPlanAnual.Size = new System.Drawing.Size(680, 281);
             this.chartPlanAnual.TabIndex = 1;
             this.chartPlanAnual.Text = "chart1";

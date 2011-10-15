@@ -36,12 +36,10 @@ namespace GyCAP.Entidades.Mensajes
     public class MensajesABM
     {
         //Los siguientes son metodos que muestran mensajes estandares para los formularios de ABM
-
-
         //***************************************************************************************
         //                                  Enumeraciones Publicas
         //***************************************************************************************
-        public enum Operaciones { Inicio, Búsqueda, Eliminación, Guardado, Modificación, Generación }
+        public enum Operaciones { Inicio, Búsqueda, Eliminación, Guardado, Modificación, Generación, Validación }
         public enum Generos { Femenino, Masculino }
         public enum Validaciones { Seleccion, CompletarDatos, SoloEspacios, Logica }
 
@@ -252,6 +250,5 @@ namespace GyCAP.Entidades.Mensajes
         {            
             return MessageBox.Show(pregunta, nombreFormulario + " - Pregunta: Seleccionar opción", MessageBoxButtons.YesNo, MessageBoxIcon.Question);            
         }
-
     }
 }

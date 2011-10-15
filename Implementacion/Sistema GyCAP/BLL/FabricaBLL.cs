@@ -165,7 +165,7 @@ namespace GyCAP.BLL
 
             return DAL.FabricaDAL.GetHistoricoEficienciaCentroTrabajo(codigoCentro, fechaDesde, fechaHasta);
         }
-
+                
         public static SimulacionProduccion SimularProduccion(int codigoCocina, int cantidad, DateTime fechaNecesidad)
         {
             SimulacionProduccion simulacion = new SimulacionProduccion();
@@ -239,7 +239,6 @@ namespace GyCAP.BLL
                 simulacion.IsValid = false;
                 simulacion.ErrorMessage = ex.Message;
             }
-
 
             return simulacion;
         }
