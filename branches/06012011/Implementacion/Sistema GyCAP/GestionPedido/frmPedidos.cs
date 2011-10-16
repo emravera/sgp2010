@@ -926,7 +926,7 @@ namespace GyCAP.UI.GestionPedido
 
                         //La diferencia hay que colocarla para planificar
                         numCantProducir.Value = nudCantidad.Value;
-                        validacion = validacion + "PLANIFICACION PRODUCCION: " + nudCantidad.Value.ToString() + " Unidades \n";
+                        validacion = validacion + "PLANIFICACIÓN PRODUCCIÓN: " + nudCantidad.Value.ToString() + " Unidades \n";
                     }
 
                     if (validacion.Length > 0)
@@ -983,36 +983,37 @@ namespace GyCAP.UI.GestionPedido
                     //Se analiza si es válida
                     if (simulacion.IsValid == true)
                     {
-                        if (simulacion.EsPosible == true)
+                        if (simulacion.EsPosible)
                         {
                             //Si es posible entonces obtengo la fecha de comienzo de produccion.
-                            validacion = validacion + "RESULTADO SIMULACIÓN: Es posible producir la cantidad deseada para ese tiempo.\n";
-                            validacion = validacion + "FECHA INICIO PRODUCCION: " + simulacion.FechaInicio.ToShortDateString() + "\nCANTIDAD A PRODUCIR: " + simulacion.CantidadNecesidad.ToString() + "\n";
+                            validacion = validacion + "Es posible producir la cantidad deseada para la fecha prevista.\n\n";
+                            validacion = validacion + "FECHA INICIO PRODUCCIÓN: " + simulacion.FechaInicio.ToShortDateString() + "\nCANTIDAD A PRODUCIR: " + simulacion.CantidadNecesidad.ToString() + "\n";
                         }
                         else
                         {
                             if (simulacion.CantidadSugerida < cantidadProducir)
                             {
                                 //No es posible producir esa cantidad para esa fecha
-                                validacion = validacion + "RESULTADO SIMULACIÓN: No es posible producir la cantidad deseada para ese tiempo.\n";
+                                validacion = validacion + "No es posible producir la cantidad deseada para la fecha prevista.\n\n";
 
                                 //Armamos el mensaje con las cantidades sugeridas para la fecha
                                 validacion = validacion + "CANTIDAD SUGERIDA para la FECHA DE NECESIDAD: " + simulacion.CantidadSugerida.ToString() + "\n";
                                 validacion = validacion + "FECHA SUGERIDA para la CANTIDAD INGRESADA: " + simulacion.FechaSugerida.ToShortDateString() + "\n";
 
-                                //Le preguntamos al usuario si quiere producir la cantidad suguerida, si responde que no cambia la fecha de incio
-                                string pregunta = "¿Desea cambiar la cantidad del pedido por la estimada por el sistema?\n" + validacion + "\n NOTA: al seleccionar la opción NO cambiará la fecha de necesidad por la recomendada por el sistema.";
-                                DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjPreguntaAlUsuario(pregunta, this.Text);
+                                //Le preguntamos al usuario si quiere producir la cantidad suguerida, si responde que no cambia la fecha de inicio
+                                string pregunta = validacion + "\n\n¿Desea asignar la cantidad estimada por el sistema?";
+                                frmDialogResult frm = new frmDialogResult(validacion, this.Text);
+                                DialogResult respuesta = frm.ShowDialog(this);
 
                                 //Limpio el mensaje de validación
                                 validacion = string.Empty;
-
-                                if (respuesta == DialogResult.Yes)
+                                
+                                if (respuesta == DialogResult.No)
                                 {
                                     dpfechaInicio.Value = simulacion.FechaInicio;
                                     numCantProducir.Value = simulacion.CantidadSugerida;
                                 }
-                                else if (respuesta == DialogResult.No)
+                                else if (respuesta == DialogResult.Yes)
                                 {
                                     dpfechaInicio.Value = simulacion.FechaInicio;
                                     sfFechaPrevista.Value = simulacion.FechaSugerida;
@@ -1021,8 +1022,8 @@ namespace GyCAP.UI.GestionPedido
                             else
                             {
                                 //Si es posible entonces obtengo la fecha de comienzo de produccion.
-                                validacion = validacion + "RESULTADO SIMULACIÓN: Es posible producir la cantidad deseada para ese tiempo.\n";
-                                validacion = validacion + "FECHA INICIO PRODUCCION: " + simulacion.FechaInicio.ToShortDateString() + "\nCANTIDAD A PRODUCIR: " + simulacion.CantidadNecesidad.ToString() + "\n";
+                                validacion = validacion + "Es posible producir la cantidad deseada para la fecha prevista.\n\n";
+                                validacion = validacion + "FECHA INICIO PRODUCCIÓN: " + simulacion.FechaInicio.ToShortDateString() + "\nCANTIDAD A PRODUCIR: " + simulacion.CantidadNecesidad.ToString() + "\n";
                             }
                         }
                     }

@@ -566,8 +566,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
             {                
                 string nombre = string.Empty;
                 switch (dgvOrdenesProduccion.Columns[e.ColumnIndex].Name)
-                {
-                    
+                {                    
                     case "COC_CODIGO":
                         nombre = (e.Value as Cocina).CodigoProducto;
                         e.Value = nombre;
@@ -605,7 +604,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                     case "ORDT_FECHAFINESTIMADA":
                     case "ORDT_FECHAFINREAL":
                         DateTime fecha = DateTime.Parse(e.Value.ToString());
-                        nombre = fecha.ToString("hh:mm");
+                        nombre = fecha.ToString("t");
                         e.Value = nombre;
                         break;
                     case "EORD_CODIGO":

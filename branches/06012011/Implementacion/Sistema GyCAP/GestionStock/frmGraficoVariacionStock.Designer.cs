@@ -37,24 +37,23 @@
             this.gbBusqueda = new System.Windows.Forms.GroupBox();
             this.cboContenido = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
-            this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpFechaHasta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.dtpFechaDesde = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.cboStock = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.gbDatos = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.tcMovimiento = new System.Windows.Forms.TabControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.label3 = new System.Windows.Forms.Label();
             this.tpBuscar.SuspendLayout();
             this.gbListadoBusqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartStock)).BeginInit();
@@ -113,10 +112,9 @@
             // 
             this.gbBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbBusqueda.Controls.Add(this.label3);
             this.gbBusqueda.Controls.Add(this.cboContenido);
             this.gbBusqueda.Controls.Add(this.label4);
-            this.gbBusqueda.Controls.Add(this.cboEstado);
-            this.gbBusqueda.Controls.Add(this.label3);
             this.gbBusqueda.Controls.Add(this.label2);
             this.gbBusqueda.Controls.Add(this.dtpFechaHasta);
             this.gbBusqueda.Controls.Add(this.dtpFechaDesde);
@@ -135,44 +133,25 @@
             this.cboContenido.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboContenido.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboContenido.FormattingEnabled = true;
-            this.cboContenido.Location = new System.Drawing.Point(392, 22);
+            this.cboContenido.Location = new System.Drawing.Point(349, 22);
             this.cboContenido.Name = "cboContenido";
-            this.cboContenido.Size = new System.Drawing.Size(250, 21);
+            this.cboContenido.Size = new System.Drawing.Size(230, 21);
             this.cboContenido.TabIndex = 13;
             this.cboContenido.SelectionChangeCommitted += new System.EventHandler(this.cboContenido_SelectionChangeCommitted);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(326, 25);
+            this.label4.Location = new System.Drawing.Point(283, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 13);
             this.label4.TabIndex = 12;
             this.label4.Text = "Contenido:";
             // 
-            // cboEstado
-            // 
-            this.cboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboEstado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cboEstado.FormattingEnabled = true;
-            this.cboEstado.Location = new System.Drawing.Point(122, 48);
-            this.cboEstado.Name = "cboEstado";
-            this.cboEstado.Size = new System.Drawing.Size(198, 21);
-            this.cboEstado.TabIndex = 11;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 51);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Estado movimiento:";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(326, 51);
+            this.label2.Location = new System.Drawing.Point(283, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 9;
@@ -182,18 +161,18 @@
             // 
             this.dtpFechaHasta.CustomFormat = " ";
             this.dtpFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaHasta.Location = new System.Drawing.Point(225, 21);
+            this.dtpFechaHasta.Location = new System.Drawing.Point(89, 52);
             this.dtpFechaHasta.Name = "dtpFechaHasta";
-            this.dtpFechaHasta.Size = new System.Drawing.Size(95, 21);
+            this.dtpFechaHasta.Size = new System.Drawing.Size(175, 21);
             this.dtpFechaHasta.TabIndex = 8;
             // 
             // dtpFechaDesde
             // 
             this.dtpFechaDesde.CustomFormat = " ";
             this.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaDesde.Location = new System.Drawing.Point(122, 21);
+            this.dtpFechaDesde.Location = new System.Drawing.Point(89, 21);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
-            this.dtpFechaDesde.Size = new System.Drawing.Size(97, 21);
+            this.dtpFechaDesde.Size = new System.Drawing.Size(175, 21);
             this.dtpFechaDesde.TabIndex = 7;
             // 
             // cboStock
@@ -201,19 +180,33 @@
             this.cboStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboStock.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboStock.FormattingEnabled = true;
-            this.cboStock.Location = new System.Drawing.Point(392, 48);
+            this.cboStock.Location = new System.Drawing.Point(349, 53);
             this.cboStock.Name = "cboStock";
-            this.cboStock.Size = new System.Drawing.Size(250, 21);
+            this.cboStock.Size = new System.Drawing.Size(230, 21);
             this.cboStock.TabIndex = 6;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBuscar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.System_25;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(638, 30);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(82, 32);
+            this.btnBuscar.TabIndex = 5;
+            this.btnBuscar.Text = "&Generar";
+            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(11, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 13);
+            this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Intervalo de fechas:";
+            this.label1.Text = "Fecha desde:";
             // 
             // gbDatos
             // 
@@ -271,6 +264,17 @@
             this.tsMenu.Size = new System.Drawing.Size(790, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Salir_25;
+            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(31, 47);
+            this.btnSalir.Text = "&Salir";
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // gbGuardarCancelar
             // 
@@ -330,30 +334,14 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(794, 572);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
-            // btnBuscar
+            // label3
             // 
-            this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBuscar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.System_25;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(679, 32);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(82, 32);
-            this.btnBuscar.TabIndex = 5;
-            this.btnBuscar.Text = "&Generar";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Salir_25;
-            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(31, 47);
-            this.btnSalir.Text = "&Salir";
-            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(11, 56);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(70, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Fecha hasta:";
             // 
             // frmGraficoVariacionStock
             // 
@@ -405,9 +393,8 @@
         private System.Windows.Forms.TabControl tcMovimiento;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartStock;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboEstado;
-        private System.Windows.Forms.Label label3;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboContenido;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }

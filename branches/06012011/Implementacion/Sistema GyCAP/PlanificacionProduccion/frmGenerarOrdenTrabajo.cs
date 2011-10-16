@@ -684,8 +684,8 @@ namespace GyCAP.UI.PlanificacionProduccion
                 txtCentroTrabajo.Text = orden.DetalleHojaRuta.CentroTrabajo.Nombre;
                 txtOperacion.Text = orden.DetalleHojaRuta.Operacion.Nombre;
                 txtObservacionesOrdenT.Text = orden.Observaciones;
-                txtFechaInicioOrdenT.Text = (orden.FechaInicioEstimada.HasValue) ? orden.FechaInicioEstimada.Value.ToShortDateString() : string.Empty;
-                txtFechaFinOrdenT.Text = (orden.FechaFinEstimada.HasValue) ? orden.FechaFinEstimada.Value.ToShortDateString() : string.Empty;
+                txtFechaInicioOrdenT.Text = (orden.FechaInicioEstimada.HasValue) ? orden.FechaInicioEstimada.Value.ToString("t") : string.Empty;
+                txtFechaFinOrdenT.Text = (orden.FechaFinEstimada.HasValue) ? orden.FechaFinEstimada.Value.ToString("t") : string.Empty;
                 txtTipoOrden.Text = (orden.Tipo == (int)OrdenesTrabajoEnum.TipoOrden.Fabricación) ? "Fabricación" : "Adquisición";
             }
         }

@@ -31,7 +31,10 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgvDetallePedido = new System.Windows.Forms.DataGridView();
             this.panelAcciones = new System.Windows.Forms.Panel();
+            this.btnCancelarPedido = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -43,6 +46,8 @@
             this.lblFechaInicio = new System.Windows.Forms.Label();
             this.lblVerificarCapacidad = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnValidarCapacidad = new System.Windows.Forms.Button();
+            this.btnValidarStock = new System.Windows.Forms.Button();
             this.cbUbicacionStock = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label14 = new System.Windows.Forms.Label();
             this.lblCantProducir = new System.Windows.Forms.Label();
@@ -61,7 +66,12 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
+            this.btnNuevo = new System.Windows.Forms.ToolStripButton();
+            this.btnConsultar = new System.Windows.Forms.ToolStripButton();
+            this.btnModificar = new System.Windows.Forms.ToolStripButton();
+            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.sfFechaHasta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
             this.label13 = new System.Windows.Forms.Label();
@@ -70,9 +80,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtNroPedidoBuscar = new System.Windows.Forms.TextBox();
             this.cboEstadoBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.btnNewCliente = new System.Windows.Forms.Button();
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.cboEstado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
@@ -86,18 +98,6 @@
             this.tpBuscar = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcPedido = new System.Windows.Forms.TabControl();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.btnNewCliente = new System.Windows.Forms.Button();
-            this.btnCancelarPedido = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.btnValidarCapacidad = new System.Windows.Forms.Button();
-            this.btnValidarStock = new System.Windows.Forms.Button();
-            this.btnNuevo = new System.Windows.Forms.ToolStripButton();
-            this.btnConsultar = new System.Windows.Forms.ToolStripButton();
-            this.btnModificar = new System.Windows.Forms.ToolStripButton();
-            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePedido)).BeginInit();
             this.panelAcciones.SuspendLayout();
@@ -167,6 +167,23 @@
             this.panelAcciones.Size = new System.Drawing.Size(78, 188);
             this.panelAcciones.TabIndex = 11;
             // 
+            // btnCancelarPedido
+            // 
+            this.btnCancelarPedido.CausesValidation = false;
+            this.btnCancelarPedido.FlatAppearance.BorderSize = 0;
+            this.btnCancelarPedido.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnCancelarPedido.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnCancelarPedido.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelarPedido.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Cancelar_25;
+            this.btnCancelarPedido.Location = new System.Drawing.Point(7, 136);
+            this.btnCancelarPedido.Name = "btnCancelarPedido";
+            this.btnCancelarPedido.Size = new System.Drawing.Size(66, 44);
+            this.btnCancelarPedido.TabIndex = 18;
+            this.btnCancelarPedido.Text = "Cancelar";
+            this.btnCancelarPedido.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancelarPedido.UseVisualStyleBackColor = true;
+            this.btnCancelarPedido.Click += new System.EventHandler(this.btnCancelarPedido_Click);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -177,6 +194,44 @@
             this.label6.TabIndex = 13;
             this.label6.Text = "Detalles \r\nde Pedido";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.CausesValidation = false;
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Delete_25;
+            this.btnDelete.Location = new System.Drawing.Point(7, 85);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(66, 44);
+            this.btnDelete.TabIndex = 14;
+            this.btnDelete.Text = "Eliminar";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnDelete.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
+            // 
+            // btnNew
+            // 
+            this.btnNew.CausesValidation = false;
+            this.btnNew.FlatAppearance.BorderSize = 0;
+            this.btnNew.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNew.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.New_25;
+            this.btnNew.Location = new System.Drawing.Point(7, 34);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(66, 44);
+            this.btnNew.TabIndex = 13;
+            this.btnNew.Text = "Nuevo";
+            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            this.btnNew.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnNew.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // gbGuardarCancelar
             // 
@@ -299,12 +354,32 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(231, 44);
+            this.label7.Location = new System.Drawing.Point(231, 45);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(49, 26);
             this.label7.TabIndex = 42;
             this.label7.Text = "Verificar \r\nStock";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnValidarCapacidad
+            // 
+            this.btnValidarCapacidad.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.System_25;
+            this.btnValidarCapacidad.Location = new System.Drawing.Point(231, 76);
+            this.btnValidarCapacidad.Name = "btnValidarCapacidad";
+            this.btnValidarCapacidad.Size = new System.Drawing.Size(46, 41);
+            this.btnValidarCapacidad.TabIndex = 41;
+            this.btnValidarCapacidad.UseVisualStyleBackColor = true;
+            this.btnValidarCapacidad.Click += new System.EventHandler(this.btnValidarCapacidad_Click);
+            // 
+            // btnValidarStock
+            // 
+            this.btnValidarStock.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Apply_25;
+            this.btnValidarStock.Location = new System.Drawing.Point(231, 4);
+            this.btnValidarStock.Name = "btnValidarStock";
+            this.btnValidarStock.Size = new System.Drawing.Size(46, 41);
+            this.btnValidarStock.TabIndex = 40;
+            this.btnValidarStock.UseVisualStyleBackColor = true;
+            this.btnValidarStock.Click += new System.EventHandler(this.btnValidar_Click);
             // 
             // cbUbicacionStock
             // 
@@ -536,10 +611,65 @@
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
+            // btnNuevo
+            // 
+            this.btnNuevo.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.New_25;
+            this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(42, 47);
+            this.btnNuevo.Text = "&Nuevo";
+            this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
+            // 
+            // btnConsultar
+            // 
+            this.btnConsultar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Find_25;
+            this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnConsultar.Name = "btnConsultar";
+            this.btnConsultar.Size = new System.Drawing.Size(57, 47);
+            this.btnConsultar.Text = "&Consultar";
+            this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Text_Editor_25;
+            this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(54, 47);
+            this.btnModificar.Text = "&Modificar";
+            this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Delete_25;
+            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(47, 47);
+            this.btnEliminar.Text = "&Eliminar";
+            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Salir_25;
+            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(31, 47);
+            this.btnSalir.Text = "&Salir";
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // groupBox1
             // 
@@ -630,6 +760,20 @@
             this.cboEstadoBuscar.Size = new System.Drawing.Size(133, 21);
             this.cboEstadoBuscar.TabIndex = 3;
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.CausesValidation = false;
+            this.btnBuscar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.lupa_20;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(549, 50);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
+            this.btnBuscar.TabIndex = 5;
+            this.btnBuscar.Text = "&Buscar";
+            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
             // txtNombreBuscar
             // 
             this.txtNombreBuscar.CausesValidation = false;
@@ -674,6 +818,28 @@
             this.gbDatos.TabIndex = 16;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Datos del Pedido";
+            // 
+            // btnNewCliente
+            // 
+            this.btnNewCliente.AutoSize = true;
+            this.btnNewCliente.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNewCliente.CausesValidation = false;
+            this.btnNewCliente.FlatAppearance.BorderSize = 0;
+            this.btnNewCliente.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnNewCliente.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnNewCliente.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewCliente.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.New_25;
+            this.btnNewCliente.Location = new System.Drawing.Point(329, 38);
+            this.btnNewCliente.Name = "btnNewCliente";
+            this.btnNewCliente.Size = new System.Drawing.Size(109, 31);
+            this.btnNewCliente.TabIndex = 20;
+            this.btnNewCliente.TabStop = false;
+            this.btnNewCliente.Text = "Nuevo Cliente";
+            this.btnNewCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnNewCliente.UseVisualStyleBackColor = true;
+            this.btnNewCliente.Click += new System.EventHandler(this.btnNewCliente_Click);
+            this.btnNewCliente.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
+            this.btnNewCliente.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
             // 
             // txtNumero
             // 
@@ -815,172 +981,6 @@
             this.tcPedido.Size = new System.Drawing.Size(718, 472);
             this.tcPedido.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcPedido.TabIndex = 8;
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.CausesValidation = false;
-            this.btnBuscar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.lupa_20;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(549, 50);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 5;
-            this.btnBuscar.Text = "&Buscar";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // btnNewCliente
-            // 
-            this.btnNewCliente.AutoSize = true;
-            this.btnNewCliente.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNewCliente.CausesValidation = false;
-            this.btnNewCliente.FlatAppearance.BorderSize = 0;
-            this.btnNewCliente.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnNewCliente.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnNewCliente.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewCliente.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.New_25;
-            this.btnNewCliente.Location = new System.Drawing.Point(329, 38);
-            this.btnNewCliente.Name = "btnNewCliente";
-            this.btnNewCliente.Size = new System.Drawing.Size(109, 31);
-            this.btnNewCliente.TabIndex = 20;
-            this.btnNewCliente.TabStop = false;
-            this.btnNewCliente.Text = "Nuevo Cliente";
-            this.btnNewCliente.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnNewCliente.UseVisualStyleBackColor = true;
-            this.btnNewCliente.Click += new System.EventHandler(this.btnNewCliente_Click);
-            this.btnNewCliente.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnNewCliente.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnCancelarPedido
-            // 
-            this.btnCancelarPedido.CausesValidation = false;
-            this.btnCancelarPedido.FlatAppearance.BorderSize = 0;
-            this.btnCancelarPedido.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnCancelarPedido.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnCancelarPedido.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelarPedido.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Cancelar_25;
-            this.btnCancelarPedido.Location = new System.Drawing.Point(7, 136);
-            this.btnCancelarPedido.Name = "btnCancelarPedido";
-            this.btnCancelarPedido.Size = new System.Drawing.Size(66, 44);
-            this.btnCancelarPedido.TabIndex = 18;
-            this.btnCancelarPedido.Text = "Cancelar";
-            this.btnCancelarPedido.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCancelarPedido.UseVisualStyleBackColor = true;
-            this.btnCancelarPedido.Click += new System.EventHandler(this.btnCancelarPedido_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.CausesValidation = false;
-            this.btnDelete.FlatAppearance.BorderSize = 0;
-            this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Delete_25;
-            this.btnDelete.Location = new System.Drawing.Point(7, 85);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(66, 44);
-            this.btnDelete.TabIndex = 14;
-            this.btnDelete.Text = "Eliminar";
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            this.btnDelete.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnDelete.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnNew
-            // 
-            this.btnNew.CausesValidation = false;
-            this.btnNew.FlatAppearance.BorderSize = 0;
-            this.btnNew.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNew.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.New_25;
-            this.btnNew.Location = new System.Drawing.Point(7, 34);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(66, 44);
-            this.btnNew.TabIndex = 13;
-            this.btnNew.Text = "Nuevo";
-            this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            this.btnNew.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button_MouseDown);
-            this.btnNew.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button_MouseUp);
-            // 
-            // btnValidarCapacidad
-            // 
-            this.btnValidarCapacidad.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.System_25;
-            this.btnValidarCapacidad.Location = new System.Drawing.Point(231, 76);
-            this.btnValidarCapacidad.Name = "btnValidarCapacidad";
-            this.btnValidarCapacidad.Size = new System.Drawing.Size(46, 41);
-            this.btnValidarCapacidad.TabIndex = 41;
-            this.btnValidarCapacidad.UseVisualStyleBackColor = true;
-            this.btnValidarCapacidad.Click += new System.EventHandler(this.btnValidarCapacidad_Click);
-            // 
-            // btnValidarStock
-            // 
-            this.btnValidarStock.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Apply_25;
-            this.btnValidarStock.Location = new System.Drawing.Point(231, 4);
-            this.btnValidarStock.Name = "btnValidarStock";
-            this.btnValidarStock.Size = new System.Drawing.Size(46, 41);
-            this.btnValidarStock.TabIndex = 40;
-            this.btnValidarStock.UseVisualStyleBackColor = true;
-            this.btnValidarStock.Click += new System.EventHandler(this.btnValidar_Click);
-            // 
-            // btnNuevo
-            // 
-            this.btnNuevo.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.New_25;
-            this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(42, 47);
-            this.btnNuevo.Text = "&Nuevo";
-            this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
-            // 
-            // btnConsultar
-            // 
-            this.btnConsultar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Find_25;
-            this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(57, 47);
-            this.btnConsultar.Text = "&Consultar";
-            this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Text_Editor_25;
-            this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(54, 47);
-            this.btnModificar.Text = "&Modificar";
-            this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Delete_25;
-            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(47, 47);
-            this.btnEliminar.Text = "&Eliminar";
-            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Image = global::GyCAP.UI.GestionPedido.Properties.Resources.Salir_25;
-            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(31, 47);
-            this.btnSalir.Text = "&Salir";
-            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // frmPedidos
             // 

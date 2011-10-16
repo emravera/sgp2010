@@ -63,6 +63,12 @@
     <Compile Include="frmCliente.Designer.cs">
       <DependentUpon>frmCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDialogResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDialogResult.Designer.cs">
+      <DependentUpon>frmDialogResult.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmGestionPedido.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +85,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmCliente.resx">
       <DependentUpon>frmCliente.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDialogResult.resx">
+      <DependentUpon>frmDialogResult.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGestionPedido.resx">
@@ -203,6 +213,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cancelar-25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MessageBoxIcon_Question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question.Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

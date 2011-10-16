@@ -65,12 +65,18 @@ namespace GyCAP.UI.RecursosFabricacion
                 {                    
                     IList<decimal> valores = new List<decimal>();
                     IList<string> fechas = new List<string>();
+                    valores.Add(1);
+                    fechas.Add(" ");
 
                     IList<HistoricoEficienciaCentro> datos = BLL.FabricaBLL.GetHistoricoEficienciaCentroTrabajo(cboCentro.GetSelectedValueInt(), DateTime.Parse(dtpFechaDesde.GetFecha().ToString()), DateTime.Parse(dtpFechaHasta.GetFecha().ToString()));
 
                     if (datos.Count > 0)
                     {
-                        //realizar calculos - gonzalo
+                        foreach (HistoricoEficienciaCentro dato in datos)
+                        {
+                            valores.Add(dato.Eficiencia);
+                            fechas.Add(dato.Fecha.ToShortDateString());
+                        }                        
                     }
                     else
                     {
