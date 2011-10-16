@@ -143,8 +143,8 @@ namespace GyCAP.UI.GestionStock
                     movimiento.Codigo = StockEnum.CodigoMovimiento.Manual.ToString();
                     movimiento.Descripcion = txtDescripcion.Text;
                     movimiento.FechaAlta = BLL.DBBLL.GetFechaServidor();
-                    movimiento.FechaPrevista = null;
-                    movimiento.FechaReal = DateTime.Parse(dtpFecha.GetFecha().ToString());
+                    movimiento.FechaPrevista = DateTime.Parse(dtpFecha.GetFecha().ToString());
+                    movimiento.FechaReal = movimiento.FechaPrevista;
                     movimiento.Estado = BLL.EstadoMovimientoStockBLL.GetEstadoEntity(StockEnum.EstadoMovimientoStock.Finalizado);
 
                     decimal cantidadMovimiento = nudCantidadNueva.Value - dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(numero).USTCK_CANTIDADREAL;
@@ -152,6 +152,7 @@ namespace GyCAP.UI.GestionStock
 
                     if (cantidadMovimiento < 0)
                     {
+                        cantidadMovimiento *= -1;
                         //origen es la ubicacion stock, se le está restando cantidad                        
                         origenMvto.Entidad = BLL.EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, numero, null);
                         origenMvto.Entidad.EntidadExterna = BLL.UbicacionStockBLL.GetUbicacionStock(numero);
@@ -161,8 +162,8 @@ namespace GyCAP.UI.GestionStock
                         movimiento.Duenio = movimiento.Destino;
                         origenMvto.CantidadReal = cantidadMovimiento;
                         origenMvto.CantidadEstimada = cantidadMovimiento;
-                        origenMvto.FechaPrevista = DateTime.Parse(dtpFecha.GetFecha().ToString());
-                        origenMvto.FechaReal = origenMvto.FechaPrevista;
+                        origenMvto.FechaPrevista = movimiento.FechaPrevista.Value;
+                        origenMvto.FechaReal = movimiento.FechaPrevista;
                         movimiento.OrigenesMultiples.Add(origenMvto);
                         movimiento.CantidadDestinoReal = cantidadMovimiento;
                         movimiento.CantidadDestinoEstimada = cantidadMovimiento;
@@ -175,8 +176,8 @@ namespace GyCAP.UI.GestionStock
                         movimiento.Destino.EntidadExterna = BLL.UbicacionStockBLL.GetUbicacionStock(numero);                        
                         origenMvto.CantidadEstimada = cantidadMovimiento;
                         origenMvto.CantidadReal = cantidadMovimiento;
-                        origenMvto.FechaPrevista = DateTime.Parse(dtpFecha.GetFecha().ToString());
-                        origenMvto.FechaReal = origenMvto.FechaPrevista;
+                        origenMvto.FechaPrevista = movimiento.FechaPrevista.Value;
+                        origenMvto.FechaReal = movimiento.FechaPrevista;
                         movimiento.OrigenesMultiples.Add(origenMvto);
                         movimiento.CantidadDestinoReal = cantidadMovimiento;
                         movimiento.CantidadDestinoEstimada = cantidadMovimiento;

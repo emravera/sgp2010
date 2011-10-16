@@ -139,7 +139,7 @@ namespace GyCAP.BLL
             return lista;
         }
 
-        public static IList<MovimientoStock> ObtenerMovimientosUbicacionStock(object fechaDesde, object fechaHasta, object numeroStock, object estado, Entidades.Enumeraciones.StockEnum.TipoFecha tipoFecha)
+        public static IList<MovimientoStock> ObtenerMovimientosUbicacionStock(object fechaDesde, object fechaHasta, object numeroStock)
         {
             IList<MovimientoStock> lista = new List<MovimientoStock>();
 
@@ -147,7 +147,7 @@ namespace GyCAP.BLL
 
             int codigoEntidad = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, Convert.ToInt32(numeroStock), null).Codigo;
             
-            Data.dsStock.MOVIMIENTOS_STOCKDataTable dt = DAL.MovimientoStockDAL.ObtenerMovimientosUbicacionStock(fechaDesde, fechaHasta, codigoEntidad, estado, tipoFecha);
+            Data.dsStock.MOVIMIENTOS_STOCKDataTable dt = DAL.MovimientoStockDAL.ObtenerMovimientosUbicacionStock(fechaDesde, fechaHasta, codigoEntidad);
 
             if (dt.Rows.Count > 0)
             {

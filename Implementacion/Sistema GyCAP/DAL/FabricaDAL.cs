@@ -39,13 +39,15 @@ namespace GyCAP.DAL
             IList<HistoricoEficienciaCentro> lista = new List<HistoricoEficienciaCentro>();
             DataTable dt = new DataTable();
 
-            string sql = @"SELECT DHR.cto_codigo, CI.opr_fallidas, OP.ordp_fechafinreal, OT.ordt_cantidadreal
+            string sql = @"SELECT DHR.cto_codigo, CI.opr_fallidas, OP.ordp_fechafinreal, OT.ordt_cantidadreal, OT.ordt_numero
                             FROM centros_trabajos CTO, ordenes_trabajo OT, cierre_orden_trabajo CI, ordenes_produccion OP, detalle_hojaruta DHR
                             WHERE OP.ordp_fechafinreal >= @p0 AND OP.ordp_fechafinreal <= @p1
                             AND OP.ordp_numero = OT.ordp_numero
                             AND OT.dhr_codigo = DHR.dhr_codigo
                             AND DHR.cto_codigo = @p2
-                            AND OT.ordt_numero = CI.ordt_numero";
+                            AND OT.ordt_numero = CI.ordt_numero
+                            GROUP BY DHR.cto_codigo, CI.opr_fallidas, OP.ordp_fechafinreal, OT.ordt_cantidadreal, OT.ordt_numero
+                            ORDER BY OP.ordp_fechafinreal ASC";
 
             object[] parametros = { fechaDesde.ToString("yyyyMMdd"), fechaHasta.ToString("yyyyMMdd"), codigoCentro };
 
@@ -55,12 +57,27 @@ namespace GyCAP.DAL
 
                 foreach (DataRow row in dt.Rows)
                 {
-                    //lista.Add
+                    lista.Add(new HistoricoEficienciaCentro()
+                    {
+                        CentroTrabajo = Convert.ToInt32(row["cto_codigo"]),
+                        Eficiencia = Convert.ToDecimal(row["ordt_cantidadreal"]) / (Convert.ToDecimal(row["ordt_cantidadreal"]) + Convert.ToDecimal(row["opr_fallidas"])),
+                        Fecha = DateTime.Parse(row["ordp_fechafinreal"].ToString())
+                    });
                 }
 
                 return lista;
             }
             catch (SqlException ex) { throw new BaseDeDatosException(ex.Message); }
+        }
+
+        public static object GetFirstFreeDay(DateTime fechaFinalizacion)
+        {
+            string sql = "SELECT max(diapsem_fecha) FROM dias_plan_semanal where year(diapsem_fecha) = @p0";
+            object[] parametros = { fechaFinalizacion.Year };
+
+            object result = DB.executeScalar(sql, parametros, null);
+
+            return result;
         }
     }
 }

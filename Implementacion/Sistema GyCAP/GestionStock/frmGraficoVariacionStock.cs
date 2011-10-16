@@ -18,7 +18,7 @@ namespace GyCAP.UI.GestionStock
     {
         private static frmGraficoVariacionStock _frmGraficoVariacionStock = null;
         private dsStock dsStock = new dsStock();
-        private DataView dvStock, dvEstado, dvContenido;
+        private DataView dvStock, dvContenido;
         private IList<MovimientoStock> listaMovimientos = new List<MovimientoStock>();
 
         #region Inicio
@@ -63,40 +63,88 @@ namespace GyCAP.UI.GestionStock
         {
             try
             {
-                if (!dtpFechaDesde.EsFechaNull() && !dtpFechaHasta.EsFechaNull() && cboStock.GetSelectedIndex() != -1 && cboEstado.GetSelectedIndex() != -1)
+                if (!dtpFechaDesde.EsFechaNull() && !dtpFechaHasta.EsFechaNull() && cboStock.GetSelectedIndex() != -1)
                 {
                     listaMovimientos.Clear();
 
-                    listaMovimientos = BLL.MovimientoStockBLL.ObtenerMovimientosUbicacionStock(dtpFechaDesde.GetFecha(), dtpFechaHasta.GetFecha(), cboStock.GetSelectedValueInt(), cboEstado.GetSelectedValueInt(), Entidades.Enumeraciones.StockEnum.TipoFecha.FechaReal);
-
+                    listaMovimientos = BLL.MovimientoStockBLL.ObtenerMovimientosUbicacionStock(dtpFechaDesde.GetFecha(), dtpFechaHasta.GetFecha(), cboStock.GetSelectedValueInt());
+                    
                     if (listaMovimientos.Count > 0)
                     {
                         IList<decimal> valores = new List<decimal>();
-                        IList<string> fechas = new List<string>();
-                        valores.Add(dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(cboStock.GetSelectedValueInt()).USTCK_CANTIDADREAL);
-                        fechas.Add(listaMovimientos[0].FechaPrevista.Value.Subtract(new TimeSpan(24, 0 , 0)).ToShortDateString());
+                        IList<string> fechas = new List<string>();   
+                        
+                        //Armamos los movimientos con fecha inicio hasta hoy                                                                     
+                        decimal actual = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(cboStock.GetSelectedValueInt()).USTCK_CANTIDADREAL;
+                        valores.Add(actual);
+                        fechas.Add(DateTime.Parse(dtpFechaHasta.GetFecha().ToString()).ToShortDateString());
 
-                        foreach (MovimientoStock mvto in listaMovimientos)
+                        foreach (MovimientoStock mvto in listaMovimientos.Where(p => p.FechaPrevista <= DateTime.Today).Reverse())
                         {
                             if (mvto.Destino.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
                             {
-                                if ((mvto.Destino.EntidadExterna as UbicacionStock).Numero == cboStock.GetSelectedValueInt())
+                                if (mvto.Estado.Codigo == (int)StockEnum.EstadoMovimientoStock.Finalizado)
                                 {
-                                    valores.Add(mvto.CantidadDestinoEstimada);
-                                    fechas.Add(mvto.FechaPrevista.Value.ToShortDateString());
-                                    valores[0] -= mvto.CantidadDestinoEstimada;
+                                    if ((mvto.Destino.EntidadExterna as UbicacionStock).Numero == cboStock.GetSelectedValueInt())
+                                    {
+                                        actual -= mvto.CantidadDestinoEstimada;
+                                        valores.Add(actual);
+                                        fechas.Add(mvto.FechaPrevista.Value.ToShortDateString());
+                                    }
                                 }
                             }
 
                             foreach (OrigenMovimiento origen in mvto.OrigenesMultiples)
                             {
-                                if (origen.Entidad.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
+                                if (mvto.Estado.Codigo == (int)StockEnum.EstadoMovimientoStock.EnProceso
+                                    || mvto.Estado.Codigo == (int)StockEnum.EstadoMovimientoStock.Finalizado)
                                 {
-                                    if ((origen.Entidad.EntidadExterna as UbicacionStock).Numero == cboStock.GetSelectedValueInt())
+                                    if (origen.Entidad.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
                                     {
-                                        valores.Add(origen.CantidadEstimada);
-                                        fechas.Add(origen.FechaPrevista.ToShortDateString());
-                                        valores[0] += origen.CantidadEstimada;
+                                        if ((origen.Entidad.EntidadExterna as UbicacionStock).Numero == cboStock.GetSelectedValueInt())
+                                        {
+                                            actual += origen.CantidadEstimada;
+                                            valores.Add(actual);
+                                            fechas.Add(origen.FechaPrevista.ToShortDateString());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        valores = valores.Reverse().ToList();
+                        fechas = fechas.Reverse().ToList();
+                        actual = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(cboStock.GetSelectedValueInt()).USTCK_CANTIDADREAL;
+
+                        //Armamos los movimientos desde hoy hasta fecha final                        
+                        foreach (MovimientoStock mvto in listaMovimientos.Where(p => p.FechaPrevista >= DateTime.Today))
+                        {
+                            if (mvto.Destino.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
+                            {
+                                if (mvto.Estado.Codigo == (int)StockEnum.EstadoMovimientoStock.Planificado
+                                    || mvto.Estado.Codigo == (int)StockEnum.EstadoMovimientoStock.EnProceso)
+                                {
+                                    if ((mvto.Destino.EntidadExterna as UbicacionStock).Numero == cboStock.GetSelectedValueInt())
+                                    {
+                                        actual += mvto.CantidadDestinoEstimada;
+                                        valores.Add(actual);
+                                        fechas.Add(mvto.FechaPrevista.Value.ToShortDateString());
+                                    }
+                                }
+                            }
+
+                            foreach (OrigenMovimiento origen in mvto.OrigenesMultiples)
+                            {
+                                if (mvto.Estado.Codigo == (int)StockEnum.EstadoMovimientoStock.Planificado)
+                                {
+                                    if (origen.Entidad.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
+                                    {
+                                        if ((origen.Entidad.EntidadExterna as UbicacionStock).Numero == cboStock.GetSelectedValueInt())
+                                        {
+                                            actual -= origen.CantidadEstimada;
+                                            valores.Add(actual);
+                                            fechas.Add(origen.FechaPrevista.ToShortDateString());
+                                        }
                                     }
                                 }
                             }
@@ -140,8 +188,6 @@ namespace GyCAP.UI.GestionStock
             dvStock = new DataView(dsStock.UBICACIONES_STOCK);
             dvStock.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;            
             cboStock.SetDatos(dvStock, "ustck_numero", "ustck_nombre", "ustck_nombre ASC", "Seleccione...", false);
-            dvEstado = new DataView(dsStock.ESTADO_MOVIMIENTOS_STOCK);
-            cboEstado.SetDatos(dvEstado, "emvto_codigo", "emvto_nombre", "Seleccione...", false);
             dvContenido = new DataView(dsStock.CONTENIDO_UBICACION_STOCK);
             cboContenido.SetDatos(dvContenido, "con_codigo", "con_nombre", "--TODOS--", true);
         }        

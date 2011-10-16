@@ -115,9 +115,9 @@ namespace GyCAP.BLL
             UbicacionStock ubicacion = UbicacionStockBLL.GetUbicacionStock(stock);
             if (ubicacion == null) { throw new Entidades.Excepciones.ElementoInexistenteException(); }
             
-            IList<MovimientoStock> lista = MovimientoStockBLL.ObtenerMovimientosUbicacionStock(DateTime.Today, fecha, stock, (int)StockEnum.EstadoMovimientoStock.Planificado, StockEnum.TipoFecha.FechaPrevista);
+            IList<MovimientoStock> lista = MovimientoStockBLL.ObtenerMovimientosUbicacionStock(DateTime.Today, fecha, stock);
 
-            foreach (MovimientoStock item in lista)
+            foreach (MovimientoStock item in lista.Where(p => p.Estado.Codigo == (int)StockEnum.EstadoMovimientoStock.Planificado))
             {
                 if (item.Destino.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
                 {
@@ -208,23 +208,23 @@ namespace GyCAP.BLL
                     simulacion.FechaInicio = arbolProduccion.GetFechaInicio(simulacion.FechaNecesidad);
                     simulacion.IsValid = true;
 
-                    DateTime fechaCalculo = DBBLL.GetFechaServidor();
+                    DateTime minFechaInicio = GetFirstFreeDay(simulacion.FechaNecesidad);
 
-                    if (simulacion.FechaInicio > fechaCalculo) { simulacion.EsPosible = true; }
+                    if (simulacion.FechaInicio >= minFechaInicio) { simulacion.EsPosible = true; }
                     else
                     {
                         simulacion.EsPosible = false;
-                        fechaCalculo = fechaCalculo.AddDays(1);
-                        simulacion.FechaSugerida = arbolProduccion.GetFechaFinalizacion(fechaCalculo);
+                        simulacion.FechaSugerida = arbolProduccion.GetFechaFinalizacion(minFechaInicio);
                         int capacidad = FabricaBLL.GetCapacidadSemanalBruta(simulacion.CodigoCocina, RecursosFabricacionEnum.TipoHorario.Normal);
-                        
-                        while (fechaCalculo < simulacion.FechaNecesidad)
+                        simulacion.FechaInicio = minFechaInicio;
+
+                        while (minFechaInicio < simulacion.FechaNecesidad)
                         {
-                            if(IsWorkableDay(fechaCalculo))
+                            if (IsWorkableDay(minFechaInicio))
                             {
                                 simulacion.CantidadSugerida += capacidad;                                
                             }
-                            fechaCalculo = fechaCalculo.AddDays(1);
+                            minFechaInicio = minFechaInicio.AddDays(1);
                         }
                     }
                 }
@@ -251,6 +251,23 @@ namespace GyCAP.BLL
             if (fecha.DayOfWeek.ToString().Equals(OrdenesTrabajoEnum.NonWorkingDays.Saturday.ToString(), StringComparison.InvariantCultureIgnoreCase)) { isWorkable = false; }
             if (fecha.DayOfWeek.ToString().Equals(OrdenesTrabajoEnum.NonWorkingDays.Sunday.ToString(), StringComparison.InvariantCultureIgnoreCase)) { isWorkable = false; }
             return isWorkable;
+        }
+
+        private static DateTime GetFirstFreeDay(DateTime fechaFinalizacion)
+        {
+            object fecha = DAL.FabricaDAL.GetFirstFreeDay(fechaFinalizacion);
+
+            if (fecha.ToString() != string.Empty) { return DateTime.Parse(fecha.ToString()).AddDays(1); }
+
+            fechaFinalizacion = new DateTime(fechaFinalizacion.Year, 1, 1);
+
+            while (!IsWorkableDay(fechaFinalizacion)) { fechaFinalizacion = fechaFinalizacion.AddDays(1); }
+
+            DateTime today = DBBLL.GetFechaServidor();
+
+            if (fechaFinalizacion < today) { fechaFinalizacion = today; }
+
+            return fechaFinalizacion;
         }
     }
 }

@@ -47,7 +47,7 @@ namespace GyCAP.UI.Sistema.ControlesUsuarios
                 animador.Duration = 0;
                 animador.Form.Show();
                 animador.Duration = duracion;
-                animador.Form.Parent = formularioParent.Parent;
+                animador.Form.MdiParent = formularioParent.MdiParent;
                 animador.Direction = DeterminarDireccionOpuesta(direAnimacion);
             }
             else { animador.Form.Show(); }

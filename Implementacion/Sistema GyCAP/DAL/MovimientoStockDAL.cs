@@ -20,6 +20,7 @@ namespace GyCAP.DAL
         public static void InsertarFinalizado(MovimientoStock movimientoStock, SqlTransaction transaccion)
         {
             Insertar(movimientoStock, transaccion);
+            IniciarMovimiento(movimientoStock, transaccion);
             FinalizarMovimiento(movimientoStock, transaccion);
         }
 
@@ -329,7 +330,7 @@ namespace GyCAP.DAL
             return dt;
         }
 
-        public static Data.dsStock.MOVIMIENTOS_STOCKDataTable ObtenerMovimientosUbicacionStock(object fechaDesde, object fechaHasta, object codigoEntidad, object codigoEstado, StockEnum.TipoFecha tipoFecha)
+        public static Data.dsStock.MOVIMIENTOS_STOCKDataTable ObtenerMovimientosUbicacionStock(object fechaDesde, object fechaHasta, object codigoEntidad)
         {
             string sql = @"SELECT M.mvto_numero, M.mvto_codigo, M.mvto_descripcion, M.mvto_fechaalta, M.mvto_fechaprevista, 
                             M.mvto_fechareal, M.mvto_cantidad_destino_estimada, M.mvto_cantidad_destino_real, M.emvto_codigo, 
@@ -337,61 +338,35 @@ namespace GyCAP.DAL
                             FROM MOVIMIENTOS_STOCK M, ORIGENES_MOVIMIENTO_STOCK O WHERE 1=1 ";
 
             int cantidadParametros = 0;
-            object[] valoresFiltros = new object[5];
+            object[] valoresFiltros = new object[3];
 
             Data.dsStock.MOVIMIENTOS_STOCKDataTable dt = new GyCAP.Data.dsStock.MOVIMIENTOS_STOCKDataTable();
 
             if (fechaDesde != null && !string.IsNullOrEmpty(fechaDesde.ToString()))
-            {
-                if (tipoFecha == StockEnum.TipoFecha.FechaReal)
-                {
-                    sql += " AND M.mvto_fechareal >= @p" + cantidadParametros;
-                    valoresFiltros[cantidadParametros] = fechaDesde;
-                    cantidadParametros++;
-                }
-                else
-                {
-                    sql += " AND M.mvto_fechaprevista >= @p" + cantidadParametros;
-                    valoresFiltros[cantidadParametros] = fechaDesde;
-                    cantidadParametros++;
-                }
+            {                
+                sql += " AND M.mvto_fechaprevista >= @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = fechaDesde;
+                cantidadParametros++;
             }
 
             if (fechaHasta != null && !string.IsNullOrEmpty(fechaHasta.ToString()))
             {
-                if (tipoFecha == StockEnum.TipoFecha.FechaReal)
-                {
-                    sql += " AND (M.mvto_fechareal <= @p" + cantidadParametros + " OR O.om_fechareal <= @p" + cantidadParametros + ")";
-                    valoresFiltros[cantidadParametros] = fechaHasta;
-                    cantidadParametros++;
-                }
-                else
-                {
-                    sql += " AND (M.mvto_fechaprevista <= @p" + cantidadParametros + " OR O.om_fechaprevista <= @p" + cantidadParametros + ")";
-                    valoresFiltros[cantidadParametros] = fechaHasta;
-                    cantidadParametros++;
-                }
+                sql += " AND (M.mvto_fechaprevista <= @p" + cantidadParametros + " OR O.om_fechaprevista <= @p" + cantidadParametros + ")";
+                valoresFiltros[cantidadParametros] = fechaHasta;
+                cantidadParametros++;
             }
 
             if (codigoEntidad != null)
             {
                 sql += " AND M.entd_destino = @p" + cantidadParametros;
                 valoresFiltros[cantidadParametros] = Convert.ToInt32(codigoEntidad);
-                cantidadParametros++;
                 sql += " OR (M.mvto_numero = O.mvto_numero AND O.entd_codigo = @p" + cantidadParametros + ")";
-                valoresFiltros[cantidadParametros] = Convert.ToInt32(codigoEntidad);
                 cantidadParametros++;
             }
 
-            if (codigoEstado != null)
-            {
-                sql += " AND M.emvto_codigo = @p" + cantidadParametros; ;
-                valoresFiltros[cantidadParametros] = codigoEstado;
-                cantidadParametros++;
-            }
-
-            if (codigoEstado != null && Convert.ToInt32(codigoEstado) == (int)StockEnum.EstadoMovimientoStock.Finalizado) { sql += " ORDER BY M.mvto_fechareal DESC"; }
-            if (codigoEstado != null && Convert.ToInt32(codigoEstado) == (int)StockEnum.EstadoMovimientoStock.Planificado) { sql += " ORDER BY M.mvto_fechaprevista DESC"; }
+            sql += @" GROUP BY M.mvto_numero, M.mvto_codigo, M.mvto_descripcion, M.mvto_fechaalta, M.mvto_fechaprevista, 
+                    M.mvto_fechareal, M.mvto_cantidad_destino_estimada, M.mvto_cantidad_destino_real, M.emvto_codigo, 
+                    M.entd_destino, M.entd_duenio ORDER BY M.mvto_fechaprevista ASC";
 
             if (cantidadParametros > 0)
             {
