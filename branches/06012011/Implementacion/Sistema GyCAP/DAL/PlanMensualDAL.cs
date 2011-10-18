@@ -165,10 +165,10 @@ namespace GyCAP.DAL
                 {
                     if (row.DPED_CODIGO != 0)
                     {
-                        sql = @"INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada], [dpmes_cantidadreal], [dped_codigo]) 
-                                       VALUES (@p0, @p1, @p2, @p3, @p4) SELECT @@Identity";
+                        sql = @"INSERT INTO [DETALLE_PLANES_MENSUALES] ([pmes_codigo], [coc_codigo], [dpmes_cantidadestimada], [dpmes_cantidadreal], [dped_codigo], [dped_fecha_inicio]) 
+                                       VALUES (@p0, @p1, @p2, @p3, @p4, @p5) SELECT @@Identity";
 
-                        object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA, Convert.ToInt32(0), row.DPED_CODIGO };
+                        object[] valorParam = { plan.Codigo, row.COC_CODIGO, row.DPMES_CANTIDADESTIMADA, Convert.ToInt32(0), row.DPED_CODIGO, row.DPED_FECHA_INICIO };
                         row.BeginEdit();
                         row.DPMES_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
                         row.PMES_CODIGO = plan.Codigo;

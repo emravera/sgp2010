@@ -988,6 +988,7 @@ namespace GyCAP.UI.GestionPedido
                             //Si es posible entonces obtengo la fecha de comienzo de produccion.
                             validacion = validacion + "Es posible producir la cantidad deseada para la fecha prevista.\n\n";
                             validacion = validacion + "FECHA INICIO PRODUCCIÓN: " + simulacion.FechaInicio.ToShortDateString() + "\nCANTIDAD A PRODUCIR: " + simulacion.CantidadNecesidad.ToString() + "\n";
+                            dpfechaInicio.Value = simulacion.FechaInicio;
                         }
                         else
                         {
@@ -1015,15 +1016,17 @@ namespace GyCAP.UI.GestionPedido
                                 }
                                 else if (respuesta == DialogResult.Yes)
                                 {
-                                    dpfechaInicio.Value = simulacion.FechaInicio;
+                                    dpfechaInicio.Value = simulacion.FechaSugerida;
                                     sfFechaPrevista.Value = simulacion.FechaSugerida;
                                 }
                             }
                             else
+
                             {
                                 //Si es posible entonces obtengo la fecha de comienzo de produccion.
                                 validacion = validacion + "Es posible producir la cantidad deseada para la fecha prevista.\n\n";
                                 validacion = validacion + "FECHA INICIO PRODUCCIÓN: " + simulacion.FechaInicio.ToShortDateString() + "\nCANTIDAD A PRODUCIR: " + simulacion.CantidadNecesidad.ToString() + "\n";
+                                dpfechaInicio.Value = simulacion.FechaInicio;
                             }
                         }
                     }

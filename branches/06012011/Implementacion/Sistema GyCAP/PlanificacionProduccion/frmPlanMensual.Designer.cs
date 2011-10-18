@@ -31,7 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPlanMensual));
             this.gbDatosPrincipales = new System.Windows.Forms.GroupBox();
             this.btnCargaDetalle = new System.Windows.Forms.Button();
+            this.cbPlanAnual = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label3 = new System.Windows.Forms.Label();
+            this.cbMesDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
             this.btnConsultar = new System.Windows.Forms.ToolStripButton();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
@@ -43,6 +45,7 @@
             this.gbGrillaDemanda = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbMes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label2 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtAnioBuscar = new System.Windows.Forms.TextBox();
@@ -57,6 +60,7 @@
             this.numPorcentaje = new System.Windows.Forms.NumericUpDown();
             this.rbPorcentaje = new System.Windows.Forms.RadioButton();
             this.rbUnidades = new System.Windows.Forms.RadioButton();
+            this.cbCocinas = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label5 = new System.Windows.Forms.Label();
             this.tpPedidos = new System.Windows.Forms.TabPage();
             this.btnVerDetalle = new System.Windows.Forms.Button();
@@ -70,6 +74,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.lblMensajeDetalle = new System.Windows.Forms.Label();
             this.gbCantidades = new System.Windows.Forms.GroupBox();
+            this.txtCapMes = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.txtRestaPlanificar = new System.Windows.Forms.TextBox();
             this.txtCantPlanificada = new System.Windows.Forms.TextBox();
             this.txtCantAPlanificar = new System.Windows.Forms.TextBox();
@@ -92,12 +98,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tcPlanAnual = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
-            this.txtCapMes = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.cbMes = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbCocinas = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbPlanAnual = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbMesDatos = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.gbDatosPrincipales.SuspendLayout();
             this.tsMenu.SuspendLayout();
             this.gbGrillaDemanda.SuspendLayout();
@@ -155,6 +155,16 @@
             this.btnCargaDetalle.UseVisualStyleBackColor = true;
             this.btnCargaDetalle.Click += new System.EventHandler(this.btnCargaDetalle_Click);
             // 
+            // cbPlanAnual
+            // 
+            this.cbPlanAnual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbPlanAnual.FormattingEnabled = true;
+            this.cbPlanAnual.Location = new System.Drawing.Point(160, 25);
+            this.cbPlanAnual.Name = "cbPlanAnual";
+            this.cbPlanAnual.Size = new System.Drawing.Size(94, 21);
+            this.cbPlanAnual.TabIndex = 23;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -163,6 +173,16 @@
             this.label3.Size = new System.Drawing.Size(122, 13);
             this.label3.TabIndex = 24;
             this.label3.Text = "Plan Anual Planificación:";
+            // 
+            // cbMesDatos
+            // 
+            this.cbMesDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMesDatos.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbMesDatos.FormattingEnabled = true;
+            this.cbMesDatos.Location = new System.Drawing.Point(418, 25);
+            this.cbMesDatos.Name = "cbMesDatos";
+            this.cbMesDatos.Size = new System.Drawing.Size(135, 21);
+            this.cbMesDatos.TabIndex = 2;
             // 
             // label4
             // 
@@ -175,7 +195,7 @@
             // 
             // btnConsultar
             // 
-            this.btnConsultar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.Find_25;
+            this.btnConsultar.Image = global::GyCAP.UI.PlanificacionProduccion.Properties.Resources.lupa_25;
             this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnConsultar.Name = "btnConsultar";
@@ -300,6 +320,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criterios de búsqueda";
+            // 
+            // cbMes
+            // 
+            this.cbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMes.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbMes.FormattingEnabled = true;
+            this.cbMes.Location = new System.Drawing.Point(245, 27);
+            this.cbMes.Name = "cbMes";
+            this.cbMes.Size = new System.Drawing.Size(128, 21);
+            this.cbMes.TabIndex = 3;
             // 
             // label2
             // 
@@ -465,6 +495,16 @@
             this.rbUnidades.UseVisualStyleBackColor = true;
             this.rbUnidades.CheckedChanged += new System.EventHandler(this.rbUnidades_CheckedChanged);
             // 
+            // cbCocinas
+            // 
+            this.cbCocinas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCocinas.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbCocinas.FormattingEnabled = true;
+            this.cbCocinas.Location = new System.Drawing.Point(103, 39);
+            this.cbCocinas.Name = "cbCocinas";
+            this.cbCocinas.Size = new System.Drawing.Size(219, 21);
+            this.cbCocinas.TabIndex = 1;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -628,6 +668,22 @@
             this.gbCantidades.TabIndex = 18;
             this.gbCantidades.TabStop = false;
             this.gbCantidades.Text = "Cantidades a Planificar";
+            // 
+            // txtCapMes
+            // 
+            this.txtCapMes.Location = new System.Drawing.Point(155, 89);
+            this.txtCapMes.Name = "txtCapMes";
+            this.txtCapMes.Size = new System.Drawing.Size(135, 21);
+            this.txtCapMes.TabIndex = 11;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(25, 92);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(111, 13);
+            this.label12.TabIndex = 10;
+            this.label12.Text = "Cap. Producción Mes:";
             // 
             // txtRestaPlanificar
             // 
@@ -911,62 +967,6 @@
             this.tpBuscar.Size = new System.Drawing.Size(762, 463);
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.UseVisualStyleBackColor = true;
-            // 
-            // txtCapMes
-            // 
-            this.txtCapMes.Location = new System.Drawing.Point(155, 89);
-            this.txtCapMes.Name = "txtCapMes";
-            this.txtCapMes.Size = new System.Drawing.Size(135, 21);
-            this.txtCapMes.TabIndex = 11;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(25, 92);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(111, 13);
-            this.label12.TabIndex = 10;
-            this.label12.Text = "Cap. Producción Mes:";
-            // 
-            // cbMes
-            // 
-            this.cbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMes.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbMes.FormattingEnabled = true;
-            this.cbMes.Location = new System.Drawing.Point(245, 27);
-            this.cbMes.Name = "cbMes";
-            this.cbMes.Size = new System.Drawing.Size(128, 21);
-            this.cbMes.TabIndex = 3;
-            // 
-            // cbCocinas
-            // 
-            this.cbCocinas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCocinas.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbCocinas.FormattingEnabled = true;
-            this.cbCocinas.Location = new System.Drawing.Point(103, 39);
-            this.cbCocinas.Name = "cbCocinas";
-            this.cbCocinas.Size = new System.Drawing.Size(219, 21);
-            this.cbCocinas.TabIndex = 1;
-            // 
-            // cbPlanAnual
-            // 
-            this.cbPlanAnual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPlanAnual.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbPlanAnual.FormattingEnabled = true;
-            this.cbPlanAnual.Location = new System.Drawing.Point(160, 25);
-            this.cbPlanAnual.Name = "cbPlanAnual";
-            this.cbPlanAnual.Size = new System.Drawing.Size(94, 21);
-            this.cbPlanAnual.TabIndex = 23;
-            // 
-            // cbMesDatos
-            // 
-            this.cbMesDatos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMesDatos.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbMesDatos.FormattingEnabled = true;
-            this.cbMesDatos.Location = new System.Drawing.Point(418, 25);
-            this.cbMesDatos.Name = "cbMesDatos";
-            this.cbMesDatos.Size = new System.Drawing.Size(135, 21);
-            this.cbMesDatos.TabIndex = 2;
             // 
             // frmPlanMensual
             // 

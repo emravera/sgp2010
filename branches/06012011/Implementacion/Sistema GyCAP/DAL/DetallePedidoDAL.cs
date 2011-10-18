@@ -155,9 +155,29 @@ namespace GyCAP.DAL
                 DB.FillDataTable(dtDetallePedidos, sql, valorParametros);
             }
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
-
         }
 
+        //Obtengo los detalles cuya fecha de inicio esta en ese mes
+        public static int ValidarDetallesPedidos(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            string sql = @"SELECT count(dped_codigo)
+                           FROM DETALLE_PEDIDOS 
+                           WHERE dped_fecha_inicio >= @p0 and 
+                           dped_fecha_inicio <= @p1";
+
+            int cantidad =0;
+            object[] valorParametros = { fechaDesde, fechaHasta };
+
+            try
+            {
+                //Se llena el Datatable
+               cantidad = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+            return cantidad;
+        }
+        
         //Metodo que obtiene el detalle de pedido
         public static void ObtenerDetallePedido(DataTable dtDetallePedidos, int codigoPedido)
         {

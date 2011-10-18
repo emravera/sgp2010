@@ -76,7 +76,7 @@ namespace GyCAP.UI.GestionStock
             //**************************************** LISTAS DE DATOS **********************************
             //Lista de
             //Agregamos la columnas
-            dgvStock.Columns.Add("USTCK_NUMERO", "Numero");
+            dgvStock.Columns.Add("USTCK_NUMERO", "Número");
             dgvStock.Columns.Add("USTCK_CODIGO", "Código");
             dgvStock.Columns.Add("USTCK_NOMBRE", "Stock");
             dgvStock.Columns.Add("USTCK_CANTIDADREAL", "Cantidad");
@@ -96,7 +96,7 @@ namespace GyCAP.UI.GestionStock
             //*********************************** Lista de Pedidos *****************************************
             //Agregamos la columnas
             dgvPedidos.Columns.Add("PED_CODIGO", "Código");
-            dgvPedidos.Columns.Add("PED_NUMERO", "Numero");
+            dgvPedidos.Columns.Add("PED_NUMERO", "Número");
             dgvPedidos.Columns.Add("CLI_CODIGO", "Cliente");
             dgvPedidos.Columns.Add("EPED_CODIGO", "Estado");
             dgvPedidos.Columns.Add("PED_FECHA_ALTA", "Fecha Alta");
@@ -498,6 +498,25 @@ namespace GyCAP.UI.GestionStock
             Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
         }
 
+        private void dgvStock_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
+        private void dgvPedidos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
+        private void dgvDetallePedido_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
+
+        private void dgvDatosEntrega_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        }
         #endregion
         
         #region Pestaña Busqueda
@@ -1161,5 +1180,6 @@ namespace GyCAP.UI.GestionStock
         }
      
         #endregion           
+       
     }
 }
