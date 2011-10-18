@@ -185,6 +185,7 @@
             this.dgvPlanMensual.Size = new System.Drawing.Size(373, 186);
             this.dgvPlanMensual.TabIndex = 7;
             this.dgvPlanMensual.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPlanMensual_CellFormatting);
+            this.dgvPlanMensual.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPlanMensual_DataBindingComplete);
             // 
             // groupBox3
             // 

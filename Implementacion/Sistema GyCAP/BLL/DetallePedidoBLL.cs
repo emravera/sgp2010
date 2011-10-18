@@ -8,7 +8,23 @@ using System.Data.SqlClient;
 namespace GyCAP.BLL
 {
     public class DetallePedidoBLL
-    {        
+    {
+        //Metodos de búsqueda de Detalles de Pedido
+        public static void ObtenerDetallePedido(DataTable dtDetallePedido, int codigoPedido)
+        {
+            DAL.DetallePedidoDAL.ObtenerDetallePedido(dtDetallePedido, codigoPedido);
+        }
+
+        public static void ObtenerDetallePedidoEstado(DataTable dtDetallePedido, int codigoPedido, int codigoEstado)
+        {
+            DAL.DetallePedidoDAL.ObtenerDetallePedidoEstado(dtDetallePedido, codigoPedido, codigoEstado);
+        }
+
+        public static int ValidarDetallesFecha(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            return DAL.DetallePedidoDAL.ValidarDetallesPedidos(fechaDesde, fechaHasta);
+        }
+
         public static void Eliminar(Entidades.DetallePedido detalle, SqlTransaction transaccion)
         {
             DAL.DetallePedidoDAL.Eliminar(detalle, transaccion); 
@@ -22,16 +38,6 @@ namespace GyCAP.BLL
         public static void EliminarDetallePedido(long codigoPedido, SqlTransaction transaccion)
         {
             DAL.DetallePedidoDAL.EliminarDetallePedido(codigoPedido, transaccion);    
-        }
-
-        public static void ObtenerDetallePedido(DataTable dtDetallePedido, int codigoPedido)
-        {
-            DAL.DetallePedidoDAL.ObtenerDetallePedido(dtDetallePedido, codigoPedido);
-        }
-
-        public static void ObtenerDetallePedidoEstado(DataTable dtDetallePedido, int codigoPedido, int codigoEstado)
-        {
-            DAL.DetallePedidoDAL.ObtenerDetallePedidoEstado(dtDetallePedido, codigoPedido, codigoEstado);
         }
 
         //Metodo para cancelar un detalle de pedido

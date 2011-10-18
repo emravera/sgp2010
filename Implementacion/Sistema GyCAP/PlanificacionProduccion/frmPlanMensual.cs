@@ -34,7 +34,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetallePedido.AutoGenerateColumns = false;
 
             //Para cada Lista
-            //Lista de Demandas
             //Agregamos la columnas
             dgvLista.Columns.Add("PMES_CODIGO", "Código");
             dgvLista.Columns.Add("PAN_CODIGO", "Plan Anual");
@@ -65,6 +64,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns.Add("DPMES_CANTIDADESTIMADA", "Cantidad Estimada");
             dgvDetalle.Columns.Add("DPMES_CANTIDADREAL", "Cantidad Real");
             dgvDetalle.Columns.Add("DPED_CODIGO", "Pedido");
+            dgvDetalle.Columns.Add("DPED_FECHA_INICIO", "Fecha Prod.");
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvDetalle.Columns["DPMES_CODIGO"].DataPropertyName = "DPMES_CODIGO";
@@ -73,6 +73,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDetalle.Columns["DPMES_CANTIDADESTIMADA"].DataPropertyName = "DPMES_CANTIDADESTIMADA";
             dgvDetalle.Columns["DPMES_CANTIDADREAL"].DataPropertyName = "DPMES_CANTIDADREAL";
             dgvDetalle.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
+            dgvDetalle.Columns["DPED_FECHA_INICIO"].DataPropertyName = "DPED_FECHA_INICIO";
      
             //Seteamos las alineaciones de las columnas
             dgvDetalle.Columns["DPMES_CANTIDADESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -99,6 +100,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDatos.Columns.Add("DPMES_CANTIDADESTIMADA", "Cantidad Estimada");
             dgvDatos.Columns.Add("DPMES_CANTIDADREAL", "Cantidad Real");
             dgvDatos.Columns.Add("DPED_CODIGO", "Pedido");
+            dgvDatos.Columns.Add("DPED_FECHA_INICIO", "Fecha Prod.");
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvDatos.Columns["DPMES_CODIGO"].DataPropertyName = "DPMES_CODIGO";
@@ -107,6 +109,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvDatos.Columns["DPMES_CANTIDADESTIMADA"].DataPropertyName = "DPMES_CANTIDADESTIMADA";
             dgvDatos.Columns["DPMES_CANTIDADREAL"].DataPropertyName = "DPMES_CANTIDADREAL";
             dgvDatos.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
+            dgvDatos.Columns["DPED_FECHA_INICIO"].DataPropertyName = "DPED_FECHA_INICIO";
 
             //Seteamos la alineacion de las columnas numericas
             dgvDatos.Columns["DPMES_CANTIDADESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -130,7 +133,6 @@ namespace GyCAP.UI.PlanificacionProduccion
             dgvPedidos.Columns["EPED_CODIGO"].DataPropertyName = "EPED_CODIGO";
             dgvPedidos.Columns["PED_FECHA_ALTA"].DataPropertyName = "PED_FECHA_ALTA";
             
-
             //Seteamos la alineacion de las columnas numericas
             dgvPedidos.Columns["PED_NUMERO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
@@ -141,15 +143,15 @@ namespace GyCAP.UI.PlanificacionProduccion
             //*********************************** Lista de Detalle de Pedidos *****************************************
             //Agregamos la columnas
             dgvDetallePedido.Columns.Add("DPED_CODIGO", "Núm. Detalle");
-            dgvDetallePedido.Columns.Add("EDPED_CODIGO", "Estado");
             dgvDetallePedido.Columns.Add("COC_CODIGO", "Cocina");
             dgvDetallePedido.Columns.Add("DPED_CANTIDAD", "Cantidad");
+            dgvDetallePedido.Columns.Add("DPED_FECHA_INICIO", "Fecha Inicio");
             
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvDetallePedido.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
-            dgvDetallePedido.Columns["EDPED_CODIGO"].DataPropertyName = "EDPED_CODIGO";
             dgvDetallePedido.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
             dgvDetallePedido.Columns["DPED_CANTIDAD"].DataPropertyName = "DPED_CANTIDAD";
+            dgvDetallePedido.Columns["DPED_FECHA_INICIO"].DataPropertyName = "DPED_FECHA_INICIO";
                        
             //Seteamos la alineación de las columnas numéricas
             dgvDetallePedido.Columns["DPED_CODIGO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -358,12 +360,18 @@ namespace GyCAP.UI.PlanificacionProduccion
         //Detalle de Planes Mensuales Busqueda
         private void dgvDetalle_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value.ToString() != String.Empty)
+            string nombre;
+
+            if (e.Value != null)
             {
                 switch (dgvDetalle.Columns[e.ColumnIndex].Name)
                 {
                     case "COC_CODIGO":
-                        string nombre = dsPlanMensual.COCINAS.FindByCOC_CODIGO(Convert.ToInt32(e.Value)).COC_CODIGO_PRODUCTO;
+                        nombre = dsPlanMensual.COCINAS.FindByCOC_CODIGO(Convert.ToInt32(e.Value)).COC_CODIGO_PRODUCTO;
+                        e.Value = nombre;
+                        break;
+                    case "DPED_FECHA_INICIO":
+                        nombre = Convert.ToDateTime(e.Value).ToShortDateString();
                         e.Value = nombre;
                         break;
                     default:
@@ -374,16 +382,19 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void dgvDatos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            string nombre;
+
             if (e.Value != null)
             {
                 switch (dgvDatos.Columns[e.ColumnIndex].Name)
                 {
                     case "COC_CODIGO":
-                        string nombre = dsPlanMensual.COCINAS.FindByCOC_CODIGO(Convert.ToInt32(e.Value)).COC_CODIGO_PRODUCTO;
+                        nombre = dsPlanMensual.COCINAS.FindByCOC_CODIGO(Convert.ToInt32(e.Value)).COC_CODIGO_PRODUCTO;
                         e.Value = nombre;
                         break;
-                    case "DPED_CODIGO":
-                        //if(e.Value.ToString()== string.Empty) e.Value = 0;
+                    case "DPED_FECHA_INICIO":
+                        nombre = Convert.ToDateTime(e.Value).ToShortDateString();
+                        e.Value = nombre;
                         break;
                     default:
                         break;
@@ -789,14 +800,71 @@ namespace GyCAP.UI.PlanificacionProduccion
                 Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                 SetInterface(estadoUI.cargaDetalle);
             }
-        }                
+        }
         
+        private string Validar()
+        {
+            string validacion = string.Empty;
+
+            //Validamos que existan detalles a guardar
+            if (dsPlanMensual.DETALLE_PLANES_MENSUALES.Rows.Count == 0)
+            { validacion = validacion + "-No hay Detalles de Plan Mensual que guardar\n"; }
+
+            //Validamos que no queden detalles de pedido que se tengan que planificar en ese mes
+            
+            string mes = cbMesDatos.GetSelectedText().ToString();
+            int anio = Convert.ToInt32(cbPlanAnual.GetSelectedText());
+
+            //Metodo que me busca el valuemember de un mes
+            string[] Meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
+            
+            int cont = 0;
+            foreach (string l in Meses)
+            {
+                if (mes == Meses[cont]) break;
+                cont++;
+            }
+            cont += 1;
+
+            //Convertimos y creamos las fechas desde y hasta
+            DateTime fechaDesde = Convert.ToDateTime("01/" + cont.ToString() + "/" + anio.ToString());
+            DateTime fechaHasta;
+            if (cont < 12)
+            {
+                cont += 1;
+                fechaHasta = Convert.ToDateTime("01/" + cont.ToString() + "/" + anio.ToString());
+            }
+            else
+            {
+                anio += 1; cont = 1;
+                fechaHasta = Convert.ToDateTime("01/" + cont.ToString() + "/" + anio.ToString());
+            }
+
+            int cantidadDetalles = BLL.DetallePedidoBLL.ValidarDetallesFecha(fechaDesde,fechaHasta);
+            
+            //Contamos la cantidad de detalles que se planificaron
+            cont = 0;
+            foreach (DataRow row in dsPlanMensual.DETALLE_PLANES_MENSUALES.Select("DPED_CODIGO > 0"))
+            {
+                cont += 1;
+            }
+
+            //Verificamos las cantidades que salieron
+            if (cantidadDetalles != cont)
+            {
+                validacion = validacion + "-Existen Detalles de Pedidos que deben comenzar este mes y no se Planificaron\n";
+            }
+
+            return validacion;           
+        }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
-                //Chequeamos que exista un detalle de pedido
-                if (dsPlanMensual.DETALLE_PLANES_MENSUALES.Rows.Count > 0)
+              string validar = Validar();
+
+              if (validar == string.Empty)
                 {
                     //Checkeo las excepciones relacionadas con el Plan Mensual
                     List<Entidades.ExcepcionesPlan> excepciones = new List<GyCAP.Entidades.ExcepcionesPlan>();
@@ -878,6 +946,9 @@ namespace GyCAP.UI.PlanificacionProduccion
                             }
                         }
 
+                        //Limpiamos la tabla de detalles de pedidos
+                        dsPlanMensual.DETALLE_PEDIDOS.Clear();
+
                         //Vuelvo al estado inicial de la interface
                         SetInterface(estadoUI.inicio);
                     }
@@ -893,11 +964,11 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                         //Cambio el valor de checkeo excepciones a TRUE para que pase una vez
                         checkeoExcepciones = true;
-                    }
+                    }                   
                 }
                 else
                 {
-                    Entidades.Mensajes.MensajesABM.MsjValidacion("No hay detalles de Plan Mensual", this.Text);
+                    Entidades.Mensajes.MensajesABM.MsjValidacion(validar, this.Text);
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -1066,11 +1137,12 @@ namespace GyCAP.UI.PlanificacionProduccion
                     cantidad = Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_cantidad"]);
                     row.DPMES_CANTIDADESTIMADA = cantidad;
                     row.DPED_CODIGO = Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_codigo"]);
+                    row.DPED_FECHA_INICIO = Convert.ToDateTime(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["dped_fecha_inicio"]);
                     row.EndEdit();
                     dsPlanMensual.DETALLE_PLANES_MENSUALES.AddDETALLE_PLANES_MENSUALESRow(row);
 
                     //Metodo que recalcula los valores Ingresados
-                    CalcularCantidades(cantidad);
+                    CalcularCantidades(cantidad);                  
 
                     //Seteamos la interface
                     tcDatos.SelectedTab = tpPlanificacion;

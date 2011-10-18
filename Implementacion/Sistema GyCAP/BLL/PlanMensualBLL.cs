@@ -113,7 +113,7 @@ namespace GyCAP.BLL
             return detallePlan;
         }
 
-        private static List<Entidades.ExcepcionesPlan> Checkeo_MP(List<Entidades.DetallePlanMensual> detallePlanMes)
+       private static List<Entidades.ExcepcionesPlan> Checkeo_MP(List<Entidades.DetallePlanMensual> detallePlanMes)
         {
             //Defino la lista que va a devolver las excepciones
             List<Entidades.ExcepcionesPlan> listaExcepciones = new List<GyCAP.Entidades.ExcepcionesPlan>();

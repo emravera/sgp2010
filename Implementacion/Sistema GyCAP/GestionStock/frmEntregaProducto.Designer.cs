@@ -66,8 +66,8 @@
             this.tpPedidos = new System.Windows.Forms.TabPage();
             this.gbPedidos = new System.Windows.Forms.GroupBox();
             this.dgvPedidos = new System.Windows.Forms.DataGridView();
-            this.btnVerDetalle = new System.Windows.Forms.Button();
             this.lblMsj = new System.Windows.Forms.Label();
+            this.btnVerDetalle = new System.Windows.Forms.Button();
             this.tpDetallePedido = new System.Windows.Forms.TabPage();
             this.gbDetallePedido = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -159,6 +159,7 @@
             this.dgvDatosEntrega.Size = new System.Drawing.Size(334, 246);
             this.dgvDatosEntrega.TabIndex = 5;
             this.dgvDatosEntrega.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDatosEntrega_CellFormatting);
+            this.dgvDatosEntrega.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDatosEntrega_DataBindingComplete);
             // 
             // panelAcciones
             // 
@@ -177,7 +178,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(234, 32);
+            this.label7.Location = new System.Drawing.Point(225, 34);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(60, 13);
             this.label7.TabIndex = 20;
@@ -191,7 +192,7 @@
             this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestar.Image = ((System.Drawing.Image)(resources.GetObject("btnRestar.Image")));
             this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestar.Location = new System.Drawing.Point(267, 2);
+            this.btnRestar.Location = new System.Drawing.Point(258, 4);
             this.btnRestar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRestar.Name = "btnRestar";
             this.btnRestar.Size = new System.Drawing.Size(30, 30);
@@ -208,7 +209,7 @@
             this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSumar.Image = ((System.Drawing.Image)(resources.GetObject("btnSumar.Image")));
             this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSumar.Location = new System.Drawing.Point(228, 2);
+            this.btnSumar.Location = new System.Drawing.Point(219, 4);
             this.btnSumar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSumar.Name = "btnSumar";
             this.btnSumar.Size = new System.Drawing.Size(30, 30);
@@ -275,9 +276,9 @@
             // gbGrillaDetalleBus
             // 
             this.gbGrillaDetalleBus.Controls.Add(this.dgvDetalleBusqueda);
-            this.gbGrillaDetalleBus.Location = new System.Drawing.Point(364, 75);
+            this.gbGrillaDetalleBus.Location = new System.Drawing.Point(380, 75);
             this.gbGrillaDetalleBus.Name = "gbGrillaDetalleBus";
-            this.gbGrillaDetalleBus.Size = new System.Drawing.Size(360, 320);
+            this.gbGrillaDetalleBus.Size = new System.Drawing.Size(374, 380);
             this.gbGrillaDetalleBus.TabIndex = 2;
             this.gbGrillaDetalleBus.TabStop = false;
             this.gbGrillaDetalleBus.Text = "Listado Detalle Entrega";
@@ -296,7 +297,7 @@
             this.dgvDetalleBusqueda.ReadOnly = true;
             this.dgvDetalleBusqueda.RowHeadersVisible = false;
             this.dgvDetalleBusqueda.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalleBusqueda.Size = new System.Drawing.Size(354, 301);
+            this.dgvDetalleBusqueda.Size = new System.Drawing.Size(368, 361);
             this.dgvDetalleBusqueda.TabIndex = 1;
             this.dgvDetalleBusqueda.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetalleBusqueda_CellFormatting);
             this.dgvDetalleBusqueda.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDetalleBusqueda_DataBindingComplete);
@@ -306,7 +307,7 @@
             this.gbGrillaEntregasBus.Controls.Add(this.dgvListaEntregas);
             this.gbGrillaEntregasBus.Location = new System.Drawing.Point(6, 75);
             this.gbGrillaEntregasBus.Name = "gbGrillaEntregasBus";
-            this.gbGrillaEntregasBus.Size = new System.Drawing.Size(355, 320);
+            this.gbGrillaEntregasBus.Size = new System.Drawing.Size(368, 380);
             this.gbGrillaEntregasBus.TabIndex = 1;
             this.gbGrillaEntregasBus.TabStop = false;
             this.gbGrillaEntregasBus.Text = "Listado de Entregas";
@@ -323,7 +324,7 @@
             this.dgvListaEntregas.ReadOnly = true;
             this.dgvListaEntregas.RowHeadersVisible = false;
             this.dgvListaEntregas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvListaEntregas.Size = new System.Drawing.Size(349, 301);
+            this.dgvListaEntregas.Size = new System.Drawing.Size(362, 361);
             this.dgvListaEntregas.TabIndex = 1;
             this.dgvListaEntregas.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvListaEntregas_CellFormatting);
             this.dgvListaEntregas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListaEntregas_CellClick);
@@ -539,6 +540,7 @@
             this.dgvStock.Size = new System.Drawing.Size(348, 188);
             this.dgvStock.TabIndex = 14;
             this.dgvStock.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvStock_CellFormatting);
+            this.dgvStock.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvStock_DataBindingComplete);
             // 
             // tpPedidos
             // 
@@ -577,6 +579,16 @@
             this.dgvPedidos.Size = new System.Drawing.Size(351, 213);
             this.dgvPedidos.TabIndex = 16;
             this.dgvPedidos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPedidos_CellFormatting);
+            this.dgvPedidos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPedidos_DataBindingComplete);
+            // 
+            // lblMsj
+            // 
+            this.lblMsj.Location = new System.Drawing.Point(33, 83);
+            this.lblMsj.Name = "lblMsj";
+            this.lblMsj.Size = new System.Drawing.Size(273, 32);
+            this.lblMsj.TabIndex = 17;
+            this.lblMsj.Text = "El cliente seleccionado no tiene Pedidos en Estado Finalizado para Entregar";
+            this.lblMsj.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnVerDetalle
             // 
@@ -587,15 +599,6 @@
             this.btnVerDetalle.Text = "Ver Detalle";
             this.btnVerDetalle.UseVisualStyleBackColor = true;
             this.btnVerDetalle.Click += new System.EventHandler(this.btnVerDetalle_Click);
-            // 
-            // lblMsj
-            // 
-            this.lblMsj.Location = new System.Drawing.Point(33, 83);
-            this.lblMsj.Name = "lblMsj";
-            this.lblMsj.Size = new System.Drawing.Size(273, 32);
-            this.lblMsj.TabIndex = 17;
-            this.lblMsj.Text = "El cliente seleccionado no tiene Pedidos en Estado Finalizado para Entregar";
-            this.lblMsj.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tpDetallePedido
             // 
@@ -636,15 +639,15 @@
             this.cbUbicacionesStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbUbicacionesStock.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbUbicacionesStock.FormattingEnabled = true;
-            this.cbUbicacionesStock.Location = new System.Drawing.Point(139, 17);
+            this.cbUbicacionesStock.Location = new System.Drawing.Point(118, 17);
             this.cbUbicacionesStock.Name = "cbUbicacionesStock";
-            this.cbUbicacionesStock.Size = new System.Drawing.Size(175, 21);
+            this.cbUbicacionesStock.Size = new System.Drawing.Size(186, 21);
             this.cbUbicacionesStock.TabIndex = 28;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(41, 20);
+            this.label8.Location = new System.Drawing.Point(20, 20);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(92, 13);
             this.label8.TabIndex = 26;
@@ -674,6 +677,7 @@
             this.dgvDetallePedido.Size = new System.Drawing.Size(343, 153);
             this.dgvDetallePedido.TabIndex = 7;
             this.dgvDetallePedido.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetallePedido_CellFormatting);
+            this.dgvDetallePedido.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDetallePedido_DataBindingComplete);
             // 
             // gbBotones
             // 
@@ -715,7 +719,7 @@
             // 
             this.dtpFechaEntrega.CustomFormat = "dd/MM/yyyy";
             this.dtpFechaEntrega.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaEntrega.Location = new System.Drawing.Point(285, 22);
+            this.dtpFechaEntrega.Location = new System.Drawing.Point(285, 24);
             this.dtpFechaEntrega.Name = "dtpFechaEntrega";
             this.dtpFechaEntrega.Size = new System.Drawing.Size(86, 20);
             this.dtpFechaEntrega.TabIndex = 27;
@@ -723,7 +727,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(381, 27);
+            this.label12.Location = new System.Drawing.Point(381, 28);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(112, 13);
             this.label12.TabIndex = 26;
@@ -731,7 +735,7 @@
             // 
             // btnCargaDetalle
             // 
-            this.btnCargaDetalle.Location = new System.Drawing.Point(659, 20);
+            this.btnCargaDetalle.Location = new System.Drawing.Point(659, 21);
             this.btnCargaDetalle.Name = "btnCargaDetalle";
             this.btnCargaDetalle.Size = new System.Drawing.Size(85, 26);
             this.btnCargaDetalle.TabIndex = 25;
@@ -752,7 +756,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 28);
+            this.label3.Location = new System.Drawing.Point(6, 28);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 24;
@@ -763,7 +767,7 @@
             this.cbEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEmpleado.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cbEmpleado.FormattingEnabled = true;
-            this.cbEmpleado.Location = new System.Drawing.Point(499, 23);
+            this.cbEmpleado.Location = new System.Drawing.Point(499, 24);
             this.cbEmpleado.Name = "cbEmpleado";
             this.cbEmpleado.Size = new System.Drawing.Size(145, 21);
             this.cbEmpleado.TabIndex = 2;
@@ -771,7 +775,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(208, 26);
+            this.label4.Location = new System.Drawing.Point(199, 28);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 13);
             this.label4.TabIndex = 8;
@@ -885,7 +889,7 @@
             this.Name = "frmEntregaProducto";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Entrega de Producto Terminados";
+            this.Text = "Entrega de Productos Terminados";
             this.gbDetalleGrilla.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatosEntrega)).EndInit();
             this.panelAcciones.ResumeLayout(false);
