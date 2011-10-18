@@ -699,7 +699,7 @@ namespace GyCAP.UI.GestionPedido
                 {
                     // No se puede borrar pedidos que no esten pendientes
                     string lEstado = dsCliente.ESTADO_DETALLE_PEDIDOS.FindByEDPED_CODIGO(Convert.ToDecimal( dvPedido[dgvLista.SelectedRows[0].Index]["eped_codigo"])).EDPED_NOMBRE;
-                    Entidades.Mensajes.MensajesABM.MsjExcepcion("No puede eliminar un pedido con estado: " + lEstado, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
+                    Entidades.Mensajes.MensajesABM.MsjValidacion("No puede eliminar un pedido con estado: " + lEstado, this.Text);
                 }
             }
             else

@@ -197,6 +197,7 @@ namespace GyCAP.UI.GestionStock
         #endregion
 
         #region Funciones Formulario
+        
         private string ValidarDetalle()
         {
             string msjerror = string.Empty;
@@ -295,6 +296,7 @@ namespace GyCAP.UI.GestionStock
             }
 
         }
+        
         //Funcion que determina la Clase ABC de cada materia Prima
         private void determinarABC()
         {
@@ -325,6 +327,11 @@ namespace GyCAP.UI.GestionStock
         #endregion
 
         #region Formulario
+        
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
 
         private void btnGenerarInventario_Click(object sender, EventArgs e)
         {
@@ -729,7 +736,7 @@ namespace GyCAP.UI.GestionStock
             }
         }
 
-        #endregion  
+        #endregion          
     
     }
 }

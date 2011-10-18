@@ -39,7 +39,10 @@
             this.gbDatosCocinas = new System.Windows.Forms.GroupBox();
             this.panelAcciones = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnRestar = new System.Windows.Forms.Button();
+            this.btnSumar = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnCalcularABC = new System.Windows.Forms.Button();
             this.dgvModelos = new System.Windows.Forms.DataGridView();
@@ -58,9 +61,6 @@
             this.btnImprimirInforme = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.btnRestar = new System.Windows.Forms.Button();
-            this.btnSumar = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.gbDatosPrincipales.SuspendLayout();
             this.gbDatosCocinas.SuspendLayout();
             this.panelAcciones.SuspendLayout();
@@ -195,6 +195,40 @@
             this.label7.TabIndex = 20;
             this.label7.Text = "Porcentaje";
             // 
+            // btnRestar
+            // 
+            this.btnRestar.FlatAppearance.BorderSize = 0;
+            this.btnRestar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnRestar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRestar.Image = ((System.Drawing.Image)(resources.GetObject("btnRestar.Image")));
+            this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRestar.Location = new System.Drawing.Point(233, -2);
+            this.btnRestar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRestar.Name = "btnRestar";
+            this.btnRestar.Size = new System.Drawing.Size(30, 30);
+            this.btnRestar.TabIndex = 19;
+            this.btnRestar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRestar.UseVisualStyleBackColor = true;
+            this.btnRestar.Click += new System.EventHandler(this.btnRestar_Click);
+            // 
+            // btnSumar
+            // 
+            this.btnSumar.FlatAppearance.BorderSize = 0;
+            this.btnSumar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnSumar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSumar.Image = ((System.Drawing.Image)(resources.GetObject("btnSumar.Image")));
+            this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSumar.Location = new System.Drawing.Point(197, -2);
+            this.btnSumar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSumar.Name = "btnSumar";
+            this.btnSumar.Size = new System.Drawing.Size(30, 30);
+            this.btnSumar.TabIndex = 18;
+            this.btnSumar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSumar.UseVisualStyleBackColor = true;
+            this.btnSumar.Click += new System.EventHandler(this.btnSumar_Click);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -203,6 +237,23 @@
             this.label6.Size = new System.Drawing.Size(43, 13);
             this.label6.TabIndex = 17;
             this.label6.Text = "Eliminar";
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
+            this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Delete_25;
+            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDelete.Location = new System.Drawing.Point(53, -2);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(30, 30);
+            this.btnDelete.TabIndex = 15;
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnVolver
             // 
@@ -395,57 +446,7 @@
             this.btnSalir.Size = new System.Drawing.Size(31, 56);
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnRestar
-            // 
-            this.btnRestar.FlatAppearance.BorderSize = 0;
-            this.btnRestar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnRestar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRestar.Image = ((System.Drawing.Image)(resources.GetObject("btnRestar.Image")));
-            this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestar.Location = new System.Drawing.Point(233, -2);
-            this.btnRestar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnRestar.Name = "btnRestar";
-            this.btnRestar.Size = new System.Drawing.Size(30, 30);
-            this.btnRestar.TabIndex = 19;
-            this.btnRestar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRestar.UseVisualStyleBackColor = true;
-            this.btnRestar.Click += new System.EventHandler(this.btnRestar_Click);
-            // 
-            // btnSumar
-            // 
-            this.btnSumar.FlatAppearance.BorderSize = 0;
-            this.btnSumar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnSumar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSumar.Image = ((System.Drawing.Image)(resources.GetObject("btnSumar.Image")));
-            this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSumar.Location = new System.Drawing.Point(197, -2);
-            this.btnSumar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSumar.Name = "btnSumar";
-            this.btnSumar.Size = new System.Drawing.Size(30, 30);
-            this.btnSumar.TabIndex = 18;
-            this.btnSumar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSumar.UseVisualStyleBackColor = true;
-            this.btnSumar.Click += new System.EventHandler(this.btnSumar_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.FlatAppearance.BorderSize = 0;
-            this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Image = global::GyCAP.UI.GestionStock.Properties.Resources.Delete_25;
-            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(53, -2);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(30, 30);
-            this.btnDelete.TabIndex = 15;
-            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // frmInventarioABC
             // 
