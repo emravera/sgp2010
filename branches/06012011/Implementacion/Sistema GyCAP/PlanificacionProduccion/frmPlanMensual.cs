@@ -1063,7 +1063,6 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-
             if (dgvLista.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
                 //Preguntamos si está seguro

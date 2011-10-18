@@ -367,16 +367,9 @@ namespace GyCAP.UI.GestionStock
                     break;
             }
         }
+        #endregion
 
-        private void btnNuevo_Click(object sender, EventArgs e)
-        {
-            SetInterface(estadoUI.nuevo);
-        }
-
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-        }
+        #region Controles
 
         //************************************************************************************
         //                                      METODO DE PARSEO DE GRILLAS
@@ -398,6 +391,27 @@ namespace GyCAP.UI.GestionStock
                         e.Value = Math.Round(Convert.ToDecimal(e.Value), 0);
                         break;
 
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void dgvListaEntregas_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value.ToString() != String.Empty)
+            {
+                switch (dgvListaEntregas.Columns[e.ColumnIndex].Name)
+                {
+                    case "CLI_CODIGO":
+                        string nombre = dsEntregaProducto.CLIENTES.FindByCLI_CODIGO(Convert.ToInt32(e.Value)).CLI_RAZONSOCIAL;
+                        e.Value = nombre;
+                        break;
+                    case "E_CODIGO":
+                        string nom = dsEntregaProducto.EMPLEADOS.FindByE_CODIGO(Convert.ToInt32(e.Value)).E_NOMBRE;
+                        string ape = dsEntregaProducto.EMPLEADOS.FindByE_CODIGO(Convert.ToInt32(e.Value)).E_APELLIDO;
+                        e.Value = ape + "," + nom;
+                        break;
                     default:
                         break;
                 }
@@ -517,28 +531,24 @@ namespace GyCAP.UI.GestionStock
         {
             Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
         }
+
         #endregion
         
         #region Pestaña Busqueda
-        private string validarBusqueda ()
+        
+        private void btnConsultar_Click(object sender, EventArgs e)
         {
-            string msjerror = string.Empty;
+            SetInterface(estadoUI.inicio);
+        }
 
-            if (chCliente.Checked == false && chFechaEntrega.Checked == false ) 
-            {
-                msjerror = msjerror +"-Debe seleccionar un criterio de Busqueda\n";
-            }
-            if(chCliente.Checked==true && cbClienteBus.GetSelectedIndex() ==-1)
-            {
-                msjerror = msjerror +"-Debe seleccionar un cliente del combo\n";
-            }
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.nuevo);
+        }
 
-            if(msjerror.Length > 0)
-            {
-                msjerror="Los errores de Validación encontrados son:\n" + msjerror;
-            }
-
-            return msjerror;
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -592,8 +602,7 @@ namespace GyCAP.UI.GestionStock
 
                     if (dsEntregaProducto.ENTREGA_PRODUCTO.Rows.Count == 0)
                     {
-                        MessageBox.Show("No se encontraron Entregas de productos con los datos ingresados.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        SetInterface(estadoUI.inicio);
+                        Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Entregas de Productos Terminados", this.Text);                        
                     }
                     else
                     {
@@ -602,47 +611,22 @@ namespace GyCAP.UI.GestionStock
                 }
                 else
                 {
-                    MessageBox.Show(validacion, "Informacion: Entrega Producto - Validación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
                 }
 
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Entrega Producto - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
                 SetInterface(estadoUI.inicio);
             }
-
-
-
-
-        }
-
-        private void dgvListaEntregas_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.Value.ToString() != String.Empty)
-            {
-                switch (dgvListaEntregas.Columns[e.ColumnIndex].Name)
-                {
-                    case "CLI_CODIGO":
-                        string nombre = dsEntregaProducto.CLIENTES.FindByCLI_CODIGO(Convert.ToInt32(e.Value)).CLI_RAZONSOCIAL;
-                        e.Value = nombre;
-                        break;
-                    case "E_CODIGO":
-                        string nom = dsEntregaProducto.EMPLEADOS.FindByE_CODIGO(Convert.ToInt32(e.Value)).E_NOMBRE;
-                        string ape = dsEntregaProducto.EMPLEADOS.FindByE_CODIGO(Convert.ToInt32(e.Value)).E_APELLIDO;
-                        e.Value = ape + "," + nom;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
+        }       
 
         private void dgvListaEntregas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-               try
+            try
             {
-                //Se programa la busqueda del detalle
+                //Se programa la busqueda del detalle de entrega del producto
                 //Limpiamos el Dataset
                 dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO.Clear();
 
@@ -657,22 +641,18 @@ namespace GyCAP.UI.GestionStock
 
                 if (dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO.Rows.Count == 0)
                 {
-                    MessageBox.Show("No se encontraron Detalles para esa entrega.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Detalles de Entrega de Producto", this.Text);
                 }
                 else
                 {
                     //muestro el groupbox del detalle
                     SetInterface(estadoUI.buscar);
-                    gbGrillaDetalleBus.Visible = true;
-                    dgvDetalleBusqueda.Columns["DENT_CODIGO"].Visible = false;
-                    dgvDetalleBusqueda.Columns["ENTREGA_CODIGO"].Visible = false;
+                    gbGrillaDetalleBus.Visible = true;                    
                 }
-
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Entrega Producto - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                SetInterface(estadoUI.inicio);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);   
             }
         }
        
@@ -680,17 +660,27 @@ namespace GyCAP.UI.GestionStock
 
         #region Funciones Formulario
 
+        private string validarBusqueda()
+        {
+            string msjerror = string.Empty;
+
+            if (chCliente.Checked == false && chFechaEntrega.Checked == false)
+            {
+                msjerror = msjerror + "-Debe seleccionar un criterio de búsqueda\n";
+            }
+            if (chCliente.Checked == true && cbClienteBus.GetSelectedIndex() == -1)
+            {
+                msjerror = msjerror + "-Debe seleccionar un cliente del combo\n";
+            }
+            return msjerror;
+        }
+
         private string ValidarCargaDetalle()
         {
             string msjerror = string.Empty;
 
             if (cbCliente.GetSelectedIndex() == -1) msjerror = msjerror + "-Debe seleccionar un cliente para la entrega\n";
             if (cbEmpleado.GetSelectedIndex() == -1) msjerror = msjerror + "-Debe seleccionar un responsable de la entrega\n";
-
-            if (msjerror.Length > 0)
-            {
-                msjerror = "Los errores de validacion encontrados son:\n" + msjerror;
-            }
 
             return msjerror;
         }
@@ -707,24 +697,18 @@ namespace GyCAP.UI.GestionStock
                 {
                     if (ubicacion == row.DENT_CONTENIDO && row.DPED_CODIGO == 0)
                     {
-                        msjerror = msjerror + "-La ubicación que intenta agregar ya se encuentra en el detalle de entrega de producto \n";
+                        msjerror = msjerror + "-La ubicación que intenta agregar ya se encuentra en el detalle de entrega de producto\n";
                     }
                 }
-
             }
-            else msjerror = msjerror + "-Debe Seleccionar una fila de Stock para agregar\n";
+            else msjerror = msjerror + "-Debe seleccionar una fila de stock para agregar\n";
 
             //Validamos las cantidades
             decimal cantidad = Convert.ToInt32(dvListaStock[dgvStock.SelectedRows[0].Index]["ustck_cantidadreal"]);
             int cantidadEntrega = Convert.ToInt32(numCantidad.Value);
 
-            if (cantidadEntrega > cantidad) msjerror = msjerror + "-La cantidad a entregar no puede ser mayor de lo que hay en stock\n";
-
-            if (msjerror.Length > 0)
-            {
-                msjerror = "Los errores de validacion encontrados son:\n" + msjerror;
-            }
-
+            if (cantidadEntrega > cantidad) msjerror = msjerror + "-La cantidad a entregar no puede ser mayor a las existencias de stock.\n";
+            
             return msjerror;
         }
 
@@ -732,7 +716,7 @@ namespace GyCAP.UI.GestionStock
         
         #region Pestaña Datos
 
-       private void btnCargaDetalle_Click(object sender, EventArgs e)
+        private void btnCargaDetalle_Click(object sender, EventArgs e)
         {
             string validacion = ValidarCargaDetalle();
 
@@ -748,7 +732,7 @@ namespace GyCAP.UI.GestionStock
             }
             else
             {
-                MessageBox.Show(validacion, "Informacion: Entrega Producto - Validación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjValidacion(validacion, this.Text);
             }
         }
         
@@ -777,13 +761,12 @@ namespace GyCAP.UI.GestionStock
                 {
                     gbDetallePedido.Visible = false;
                     btnEntregar.Enabled = false;
-                    MessageBox.Show("El Pedido Seleccionado no tiene Detalle", "Información: Pedido Sin Detalle", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjValidacion("El Pedido seleccionado no tiene detalle", this.Text);                    
                 }
-
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Entrega Producto - Carga Detalle Pedidos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Validación);
             }
         }       
 
@@ -824,12 +807,12 @@ namespace GyCAP.UI.GestionStock
                 }
                 else
                 {
-                    MessageBox.Show(validar, "Error: Entrega Producto - Validación Detalle Entrega", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Entidades.Mensajes.MensajesABM.MsjValidacion(validar, this.Text);
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Entrega Producto - Carga Detalle Entrega", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Validación);
             }
         }
 
@@ -850,7 +833,7 @@ namespace GyCAP.UI.GestionStock
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un detalle de entrega de producto para poder eliminarlo.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Detalle de Entrega de Producto", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);                
             }
         }
 
@@ -872,12 +855,12 @@ namespace GyCAP.UI.GestionStock
                 }
                 else
                 {
-                    MessageBox.Show("No se pueden modificar las cantidades en una entrega de pedido", "Información: Entrega Pedido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjValidacion("No se pueden modificar las cantidades en una entrega de pedido", this.Text);                    
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un detalle de entrega de producto para poder modificar sus cantidades.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Detalle de Entrega de Producto", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);                
             }
         }
 
@@ -899,12 +882,12 @@ namespace GyCAP.UI.GestionStock
                 }
                 else
                 {
-                    MessageBox.Show("No se pueden modificar las cantidades en una entrega de pedido", "Información: Entrega Pedido", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjValidacion("No se pueden modificar las cantidades en una entrega de pedido", this.Text);                    
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un detalle de entrega de producto para poder modificar sus cantidades.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Detalle de Entrega de Producto", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);                
             }
         }
 
@@ -916,7 +899,7 @@ namespace GyCAP.UI.GestionStock
             {
                 if (cbUbicacionesStock.GetSelectedIndex() == -1)
                 {
-                    MessageBox.Show("Debe seleccionar una ubicación de stock para poder descontarlo.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Ubicación de Stock", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);                    
                 }
                 else
                 {
@@ -944,14 +927,12 @@ namespace GyCAP.UI.GestionStock
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un detalle de pedido para poder agregarlo.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Detalle de Pedido", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Masculino, this.Text);                
             }
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            //Volvemos al estado de Nuevo
-
             //Primero limpiamos los Datasets
             dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO.Clear();
             dsEntregaProducto.PEDIDOS.Clear();
@@ -960,19 +941,13 @@ namespace GyCAP.UI.GestionStock
 
             //Seteamos la interface
             SetInterface(estadoUI.nuevo);
-        }
-
-        private void btnConsultar_Click(object sender, EventArgs e)
-        {
-            SetInterface(estadoUI.inicio);
-        }
+        }        
 
         //Metodo que guarda tanto la entrega como el detalle de la misma y actualiza los stocks
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
-
                 //Se genera la cabecera de Entrega Producto
                 Entidades.EntregaProducto entrega = new GyCAP.Entidades.EntregaProducto();
                 Entidades.Cliente cliente = new GyCAP.Entidades.Cliente();
@@ -1001,8 +976,8 @@ namespace GyCAP.UI.GestionStock
                 }
 
                 //Mostramos el mensaje informando que se guardaron los datos
-                MessageBox.Show("Los datos se han almacenado correctamente", "Informacion: Plan Mensual - Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Entrega de Producto Terminado", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+               
                 //********************************************** ACTUALIZACIONES POSTERIORES ****************************************************************************
                 //Metodo que actualiza el estado de los pedidos deacuerdo a lo que se guardo
                 if (estadoActual == estadoUI.cargaDetalle || estadoActual == estadoUI.modificar)
@@ -1092,7 +1067,7 @@ namespace GyCAP.UI.GestionStock
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Entrega Producto - Carga Detalle Entrega", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
         }
 
@@ -1133,7 +1108,7 @@ namespace GyCAP.UI.GestionStock
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Entrega Producto - Modificación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);                
             }
         }
 
@@ -1144,10 +1119,9 @@ namespace GyCAP.UI.GestionStock
                 if (dgvListaEntregas.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
                 {
                     //Preguntamos si está seguro
-                    DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la entrega de producto seleccionada y todo su detalle ?", "Pregunta: Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult respuesta = Entidades.Mensajes.MensajesABM.MsjConfirmaEliminarDatos("Entrega de Producto Terminado", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
                     if (respuesta == DialogResult.Yes)
                     {
-
                         //Obtengo el Codigo del plan
                         int codigo = Convert.ToInt32(dvListaEntregaBus[dgvListaEntregas.SelectedRows[0].Index]["entrega_codigo"]);
 
@@ -1162,7 +1136,7 @@ namespace GyCAP.UI.GestionStock
                         dsEntregaProducto.ENTREGA_PRODUCTO.AcceptChanges();
 
                         //Avisamos que se elimino 
-                        MessageBox.Show("Se han eliminado los datos correctamente", "Información: Elemento Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Entidades.Mensajes.MensajesABM.MsjConfirmaEliminar(this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Eliminación);
 
                         //Ponemos la ventana en el estado inicial
                         SetInterface(estadoUI.inicio);
@@ -1170,16 +1144,15 @@ namespace GyCAP.UI.GestionStock
                 }
                 else
                 {
-                    MessageBox.Show("Debe seleccionar una entrega de producto de la lista.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Entidades.Mensajes.MensajesABM.MsjSinSeleccion("Entrega de Producto Terminado", GyCAP.Entidades.Mensajes.MensajesABM.Generos.Femenino, this.Text);
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: Entrega Producto - Modificación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
         }
      
-        #endregion           
-       
+        #endregion                  
     }
 }
