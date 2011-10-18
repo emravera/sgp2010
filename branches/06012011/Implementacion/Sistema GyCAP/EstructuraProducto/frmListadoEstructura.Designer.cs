@@ -39,9 +39,7 @@
             this.btnGenerar = new System.Windows.Forms.Button();
             this.chkMateriaPrima = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.chkPieza = new System.Windows.Forms.CheckBox();
-            this.chkConjunto = new System.Windows.Forms.CheckBox();
-            this.chkSubconjunto = new System.Windows.Forms.CheckBox();
+            this.chkPartes = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbCocinaBuscar = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -114,9 +112,7 @@
             this.groupBox3.Controls.Add(this.btnGenerar);
             this.groupBox3.Controls.Add(this.chkMateriaPrima);
             this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.chkPieza);
-            this.groupBox3.Controls.Add(this.chkConjunto);
-            this.groupBox3.Controls.Add(this.chkSubconjunto);
+            this.groupBox3.Controls.Add(this.chkPartes);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Location = new System.Drawing.Point(5, 377);
             this.groupBox3.Name = "groupBox3";
@@ -180,11 +176,11 @@
             this.chkMateriaPrima.AutoSize = true;
             this.chkMateriaPrima.Checked = true;
             this.chkMateriaPrima.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMateriaPrima.Location = new System.Drawing.Point(333, 24);
+            this.chkMateriaPrima.Location = new System.Drawing.Point(174, 24);
             this.chkMateriaPrima.Name = "chkMateriaPrima";
-            this.chkMateriaPrima.Size = new System.Drawing.Size(91, 17);
+            this.chkMateriaPrima.Size = new System.Drawing.Size(101, 17);
             this.chkMateriaPrima.TabIndex = 15;
-            this.chkMateriaPrima.Text = "Materia Prima";
+            this.chkMateriaPrima.Text = "Materias Primas";
             this.chkMateriaPrima.UseVisualStyleBackColor = true;
             // 
             // label2
@@ -196,41 +192,17 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Mostrar:";
             // 
-            // chkPieza
+            // chkPartes
             // 
-            this.chkPieza.AutoSize = true;
-            this.chkPieza.Checked = true;
-            this.chkPieza.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPieza.Location = new System.Drawing.Point(271, 24);
-            this.chkPieza.Name = "chkPieza";
-            this.chkPieza.Size = new System.Drawing.Size(56, 17);
-            this.chkPieza.TabIndex = 14;
-            this.chkPieza.Text = "Piezas";
-            this.chkPieza.UseVisualStyleBackColor = true;
-            // 
-            // chkConjunto
-            // 
-            this.chkConjunto.AutoSize = true;
-            this.chkConjunto.Checked = true;
-            this.chkConjunto.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkConjunto.Location = new System.Drawing.Point(95, 24);
-            this.chkConjunto.Name = "chkConjunto";
-            this.chkConjunto.Size = new System.Drawing.Size(75, 17);
-            this.chkConjunto.TabIndex = 12;
-            this.chkConjunto.Text = "Conjuntos";
-            this.chkConjunto.UseVisualStyleBackColor = true;
-            // 
-            // chkSubconjunto
-            // 
-            this.chkSubconjunto.AutoSize = true;
-            this.chkSubconjunto.Checked = true;
-            this.chkSubconjunto.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSubconjunto.Location = new System.Drawing.Point(174, 24);
-            this.chkSubconjunto.Name = "chkSubconjunto";
-            this.chkSubconjunto.Size = new System.Drawing.Size(91, 17);
-            this.chkSubconjunto.TabIndex = 13;
-            this.chkSubconjunto.Text = "Subconjuntos";
-            this.chkSubconjunto.UseVisualStyleBackColor = true;
+            this.chkPartes.AutoSize = true;
+            this.chkPartes.Checked = true;
+            this.chkPartes.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPartes.Location = new System.Drawing.Point(95, 24);
+            this.chkPartes.Name = "chkPartes";
+            this.chkPartes.Size = new System.Drawing.Size(57, 17);
+            this.chkPartes.TabIndex = 12;
+            this.chkPartes.Text = "Partes";
+            this.chkPartes.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -346,9 +318,7 @@
         private System.Windows.Forms.Button btnGenerar;
         private System.Windows.Forms.CheckBox chkMateriaPrima;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox chkPieza;
-        private System.Windows.Forms.CheckBox chkConjunto;
-        private System.Windows.Forms.CheckBox chkSubconjunto;
+        private System.Windows.Forms.CheckBox chkPartes;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbOrdenPor;

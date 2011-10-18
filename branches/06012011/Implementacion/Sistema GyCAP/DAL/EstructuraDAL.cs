@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
+using GyCAP.Entidades;
+using GyCAP.Entidades.Excepciones;
 
 namespace GyCAP.DAL
 {
@@ -193,6 +195,37 @@ namespace GyCAP.DAL
                 //En cualquier caso finalizamos la transaccion para que se cierre la conexion
                 DB.FinalizarTransaccion();
             }
+        }
+
+        public static Data.dsEstructuraProducto.ESTRUCTURASDataTable GetAll(int codigoCocina)
+        {
+            string sql = @"SELECT estr_codigo, estr_nombre, coc_codigo, pno_codigo, estr_descripcion, estr_activo, estr_fecha_alta, 
+                           estr_fecha_modificacion, e_codigo, estr_costo FROM ESTRUCTURAS WHERE coc_codigo = @p0 ";
+
+            object[] parametros = { codigoCocina };
+
+            try
+            {
+                Data.dsEstructuraProducto.ESTRUCTURASDataTable dt = new GyCAP.Data.dsEstructuraProducto.ESTRUCTURASDataTable();
+                DB.FillDataTable(dt, sql, parametros);
+                return dt;
+            }
+            catch (SqlException ex) { throw new BaseDeDatosException(ex.Message); }
+        }
+        
+        public static void ObtenerEstructura(int codigoEstructura, Data.dsEstructuraProducto ds)
+        {
+            string sql = @"SELECT estr_codigo, estr_nombre, coc_codigo, pno_codigo, estr_descripcion, estr_activo, estr_fecha_alta, 
+                           estr_fecha_modificacion, e_codigo, estr_costo FROM ESTRUCTURAS WHERE estr_codigo = @p0 ";
+            
+            object[] parametros = { codigoEstructura };
+
+            try
+            {
+                DB.FillDataSet(ds, "ESTRUCTURAS", sql, parametros);
+                ObtenerDetalleEstructura(ds);
+            }
+            catch (SqlException ex) { throw new BaseDeDatosException(ex.Message); }
         }
         
         public static void ObtenerEstructuras(object nombre, object codPlano, object fechaCreacion, object codCocina, object codResponsable, object activoSiNo, Data.dsEstructuraProducto ds)

@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using GyCAP.Entidades;
 using GyCAP.Entidades.ArbolEstructura;
+using GyCAP.Entidades.BindingEntity;
 
 namespace GyCAP.BLL
 {
@@ -222,7 +223,7 @@ namespace GyCAP.BLL
             }
         }
 
-        public static ArbolEstructura GetArbolEstructura(int codigoCocina, bool fillHojaRuta)
+        public static ArbolEstructura GetArbolEstructuraByCocina(int codigoCocina, bool fillHojaRuta)
         {
             ArbolEstructura arbol = new ArbolEstructura(-1);
 
@@ -245,6 +246,35 @@ namespace GyCAP.BLL
                 ds.Dispose();
 
                 if (fillHojaRuta) { FillHojasRutas(arbol); }
+            }
+
+            return arbol;
+        }
+
+        public static ArbolEstructura GetArbolEstructuraByEstructura(int codigoEstructura, bool fillHojaRuta)
+        {
+            ArbolEstructura arbol = new ArbolEstructura(codigoEstructura);
+
+            Data.dsEstructuraProducto ds = new GyCAP.Data.dsEstructuraProducto();
+            DAL.EstructuraDAL.ObtenerEstructura(codigoEstructura, ds);
+
+            if (ds.ESTRUCTURAS.Rows.Count > 0)
+            {
+                UnidadMedidaBLL.ObtenerTodos(ds.UNIDADES_MEDIDA);
+                TipoUnidadMedidaBLL.ObtenerTodos(ds.TIPOS_UNIDADES_MEDIDA);
+                MateriaPrimaBLL.ObtenerMP(ds.MATERIAS_PRIMAS);
+                ParteBLL.ObtenerPartes(null, null, null, null, null, null, ds.PARTES);
+                EstadoParteBLL.ObtenerTodos(ds.ESTADO_PARTES);
+                TipoParteBLL.ObtenerTodos(ds.TIPOS_PARTES);
+                UbicacionStockBLL.ObtenerUbicacionesStock(ds.UBICACIONES_STOCK);
+                TipoUbicacionStockBLL.ObtenerTiposUbicacionStock(ds.TIPOS_UBICACIONES_STOCK);
+                ContenidoUbicacionStockBLL.ObtenerContenidosUbicacionStock(ds.CONTENIDO_UBICACION_STOCK);
+                TerminacionBLL.ObtenerTodos(null, ds.TERMINACIONES);
+                arbol = ArmarArbol(Convert.ToInt32(ds.ESTRUCTURAS.Rows[0]["estr_codigo"].ToString()), ds);
+
+                if (fillHojaRuta) { FillHojasRutas(arbol); }
+
+                ds.Dispose();
             }
 
             return arbol;
@@ -278,7 +308,7 @@ namespace GyCAP.BLL
         
         public static IList<CapacidadNecesidadCombinada> AsListForCapacity(int codigoCocina)
         {
-            return GetArbolEstructura(codigoCocina, false).AsListForCapacity();
+            return GetArbolEstructuraByCocina(codigoCocina, false).AsListForCapacity();
         }
     }
 }

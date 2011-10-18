@@ -64,5 +64,13 @@ namespace GyCAP.Entidades
             get { return operacionesFallidas; }
             set { operacionesFallidas = value; }
         }
+
+        private decimal hora;
+
+        public decimal Hora
+        {
+            get { return hora; }
+            set { hora = value; }
+        }
     }
 }

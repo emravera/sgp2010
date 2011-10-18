@@ -114,6 +114,11 @@ namespace GyCAP.BLL
                 Terminacion = null
             };
 
+            if (dsEstructura.TERMINACIONES.FindByTE_CODIGO(row.TE_CODIGO) != null)
+            {
+                parte.Terminacion = TerminacionBLL.AsTerminacionEntity(row.TERMINACIONESRow);
+            }
+
             return parte;
         }
 

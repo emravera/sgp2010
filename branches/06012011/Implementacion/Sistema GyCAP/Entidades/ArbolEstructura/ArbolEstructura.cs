@@ -232,6 +232,28 @@ namespace GyCAP.Entidades.ArbolEstructura
             return treeReturn;
         }
 
+        public TreeView AsExtendedTreeViewWithMaterialsWithoutCost()
+        {
+            TreeView treeReturn = new TreeView();
+            treeReturn.BeginUpdate();
+            TreeNode nodoInicio = new TreeNode();
+            nodoInicio.Text = nodoRaiz.Compuesto.Parte.Nombre;
+            nodoInicio.Name = nodoRaiz.CodigoNodo.ToString();
+            nodoInicio.Tag = new string[] { 
+                                            nodoRaiz.Compuesto.Cantidad.ToString(), 
+                                            nodoRaiz.Compuesto.UnidadMedida.Nombre
+                                          };
+
+            foreach (NodoEstructura item in nodoRaiz.NodosHijos)
+            {
+                nodoInicio.Nodes.Add(item.AsExtendedTreeNodeWithMaterials());
+            }
+
+            treeReturn.Nodes.Add(nodoInicio);
+            treeReturn.EndUpdate();
+            return treeReturn;
+        }
+
         public TreeView AsExtendedTreeViewWithCentros(out decimal CostoTotal)
         {
             IList<ParteNecesidadCombinada> listaPartes = AsListOfParts();
@@ -292,6 +314,45 @@ namespace GyCAP.Entidades.ArbolEstructura
             return treeReturn;
         }
 
+        public TreeView AsExtendedTreeViewWithCentrosWithoutCost()
+        {
+            IList<ParteNecesidadCombinada> listaPartes = AsListOfParts();
+            TreeView treeReturn = new TreeView();
+            treeReturn.BeginUpdate();
+
+            foreach (ParteNecesidadCombinada parte in listaPartes)
+            {
+                TreeNode nodoParte = new TreeNode();
+                nodoParte.Text = parte.Parte.Nombre;
+                nodoParte.Name = parte.Parte.Numero.ToString();
+
+                if (parte.Parte.HojaRuta != null)
+                {
+                    foreach (DetalleHojaRuta detalle in parte.Parte.HojaRuta.Detalle)
+                    {
+                        TreeNode nodoDetalle = new TreeNode();
+                        nodoDetalle.Text = string.Empty;
+                        nodoDetalle.Name = detalle.Codigo.ToString();
+
+                        nodoDetalle.Tag = new string[] {
+                                                            detalle.CentroTrabajo.Nombre,
+                                                            detalle.Operacion.Nombre
+                                                       };
+                        nodoParte.Nodes.Add(nodoDetalle);
+                    }
+
+                    nodoParte.Tag = new string[] { 
+                                                string.Empty, 
+                                                string.Empty
+                                              };
+                    treeReturn.Nodes.Add(nodoParte);
+                }
+            }
+
+            treeReturn.EndUpdate();
+            return treeReturn;
+        }
+
         public IList<CapacidadNecesidadCombinada> AsListForCapacity()
         {
             IList<CapacidadNecesidadCombinada> lista = new List<CapacidadNecesidadCombinada>();
@@ -306,14 +367,13 @@ namespace GyCAP.Entidades.ArbolEstructura
 
         public IList<NodoEstructura> AsList(NodoEstructura.tipoContenido tipoContenido, bool includeRaiz)
         {
-            //No terminado - gonzalo
             IList<NodoEstructura> lista = new List<NodoEstructura>();
 
             if (includeRaiz) { lista.Add(this.nodoRaiz); }
 
             foreach (NodoEstructura nodo in this.nodoRaiz.NodosHijos)
             {
-                
+                nodo.AsList(tipoContenido, lista);
             }
 
             return lista;

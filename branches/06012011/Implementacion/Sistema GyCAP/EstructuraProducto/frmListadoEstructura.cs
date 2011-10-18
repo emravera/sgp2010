@@ -6,17 +6,22 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades;
+using GyCAP.Entidades.Excepciones;
+using GyCAP.Entidades.Mensajes;
+using GyCAP.Entidades.ArbolEstructura;
 
 namespace GyCAP.UI.EstructuraProducto
 {
     public partial class frmListadoEstructura : Form
     {
         private static frmListadoEstructura _frmListadoEstructura = null;
-        //private Data.dsEstructura dsEstructura = new GyCAP.Data.dsEstructura();
+        private Data.dsEstructuraProducto dsEstructura = new GyCAP.Data.dsEstructuraProducto();
         private Data.dsCocina dsCocina = new GyCAP.Data.dsCocina();
         private Data.dsEmpleado dsEmpleado = new GyCAP.Data.dsEmpleado();
         private Data.dsPlanMP dsUnidadMedida = new GyCAP.Data.dsPlanMP();
         DataView dvPartes, dvCocinaBuscar, dvEstructuras;
+        private ArbolEstructura arbolEstructura;
         
         public frmListadoEstructura()
         {
@@ -50,25 +55,24 @@ namespace GyCAP.UI.EstructuraProducto
             {
                 try
                 {
-                    //dsEstructura.PIEZASXESTRUCTURA.Clear();
-                    //dsEstructura.CONJUNTOSXESTRUCTURA.Clear();
-                    //dsEstructura.ESTRUCTURAS.Clear();
-                    //BLL.EstructuraBLL.ObtenerEstructura(cbCocinaBuscar.GetSelectedValueInt(), dsEstructura, true);
-                    //dvEstructuras.Table = dsEstructura.ESTRUCTURAS;
-                    //if (dsEstructura.ESTRUCTURAS.Rows.Count == 0)
-                    //{
-                    //    MessageBox.Show("No se encontraron Estructuras para la cocina seleccionada.", "Información: No hay Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //}
+                    dsEstructura.ESTRUCTURAS.Clear();
+                    BLL.EstructuraBLL.ObtenerEstructuras(null, null, null, cbCocinaBuscar.GetSelectedValueInt(), null, null, dsEstructura);
+                    dvEstructuras.Table = dsEstructura.ESTRUCTURAS;
+
+                    if (dsEstructura.ESTRUCTURAS.Rows.Count == 0)
+                    {
+                        MensajesABM.MsjBuscarNoEncontrado("Estructuras", this.Text);
+                    }
                                         
                 }
-                catch (Entidades.Excepciones.BaseDeDatosException ex)
+                catch (BaseDeDatosException ex)
                 {
-                    MessageBox.Show(ex.Message, "Error: Estructuras - Búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
                 }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Cocina.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Cocina", MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
@@ -76,19 +80,16 @@ namespace GyCAP.UI.EstructuraProducto
         {
             try
             {
-                //BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsEstructura.TERMINACIONES);
-                //BLL.PlanoBLL.ObtenerTodos(dsEstructura.PLANOS);
+                BLL.TerminacionBLL.ObtenerTodos(string.Empty, dsEstructura.TERMINACIONES);
+                BLL.PlanoBLL.ObtenerTodos(dsEstructura.PLANOS);
                 BLL.CocinaBLL.ObtenerCocinas(dsCocina.COCINAS);
-                BLL.EmpleadoBLL.ObtenerEmpleados(dsEmpleado.EMPLEADOS);
-                //BLL.ConjuntoBLL.ObtenerConjuntos(dsEstructura.CONJUNTOS);
-                //BLL.SubConjuntoBLL.ObtenerSubconjuntos(dsEstructura.SUBCONJUNTOS);
-                //BLL.PiezaBLL.ObtenerPiezas(dsEstructura.PIEZAS);
-                //BLL.MateriaPrimaBLL.ObtenerMP(dsEstructura.MATERIAS_PRIMAS);
+                BLL.EmpleadoBLL.ObtenerEmpleados(dsEmpleado.EMPLEADOS);                
+                BLL.MateriaPrimaBLL.ObtenerMP(dsEstructura.MATERIAS_PRIMAS);
                 BLL.UnidadMedidaBLL.ObtenerTodos(dsUnidadMedida.UNIDADES_MEDIDA);
             }
-            catch (Entidades.Excepciones.BaseDeDatosException ex)
+            catch (BaseDeDatosException ex)
             {
-                MessageBox.Show(ex.Message, "Error: " + this.Text + " - Inicio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio);
             }
 
             //Grilla
@@ -100,7 +101,6 @@ namespace GyCAP.UI.EstructuraProducto
             dgvEstructuras.Columns.Add("ESTR_ACTIVO", "Activo");
             dgvEstructuras.Columns.Add("ESTR_FECHA_ALTA", "Fecha creación");
             dgvEstructuras.Columns["ESTR_FECHA_ALTA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvEstructuras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvEstructuras.Columns["ESTR_NOMBRE"].DataPropertyName = "ESTR_NOMBRE";
             dgvEstructuras.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
             dgvEstructuras.Columns["PNO_CODIGO"].DataPropertyName = "PNO_CODIGO";
@@ -110,15 +110,15 @@ namespace GyCAP.UI.EstructuraProducto
             
             //Dataviews
             dvCocinaBuscar = new DataView(dsCocina.COCINAS);
-            //dvPartes = new DataView(dsEstructura.LISTA_PARTES);
-            //dvEstructuras = new DataView(dsEstructura.ESTRUCTURAS);
+            dvPartes = new DataView(dsEstructura.LISTA_PARTES);
+            dvEstructuras = new DataView(dsEstructura.ESTRUCTURAS);
             dvEstructuras.Sort = "ESTR_NOMBRE ASC";
             dgvEstructuras.DataSource = dvEstructuras;
 
             //ComboBoxs
-            cbCocinaBuscar.SetDatos(dvCocinaBuscar, "COC_CODIGO", "COC_CODIGO_PRODUCTO", "Seleccione", false);
+            cbCocinaBuscar.SetDatos(dvCocinaBuscar, "COC_CODIGO", "COC_CODIGO_PRODUCTO", "Seleccione...", false);
             IList<Sistema.Item> listaPor = new List<Sistema.Item>();
-            listaPor.Add(new Sistema.Item("Sin selección", 0));
+            listaPor.Add(new Sistema.Item("--Sin selección--", 0));
             listaPor.Add(new Sistema.Item("Nombre", 1));
             listaPor.Add(new Sistema.Item("Tipo de parte", 2));
             listaPor.Add(new Sistema.Item("Cantidad", 3));
@@ -127,7 +127,7 @@ namespace GyCAP.UI.EstructuraProducto
             cbOrdenPor.ValueMember = "Value";
             cbOrdenPor.SetSelectedValue(0);
             IList<Sistema.Item> listaForma = new List<Sistema.Item>();
-            listaForma.Add(new Sistema.Item("Sin selección", 0));
+            listaForma.Add(new Sistema.Item("--Sin selección--", 0));
             listaForma.Add(new Sistema.Item("Ascendente", 1));
             listaForma.Add(new Sistema.Item("Descendente", 2));
             cbOrdenForma.DataSource = listaForma;
@@ -138,36 +138,7 @@ namespace GyCAP.UI.EstructuraProducto
 
         private void CargarListaPartes()
         {
-            /*dsEstructura.LISTA_PARTES.Clear();
-            foreach (Data.dsEstructura.CONJUNTOSXESTRUCTURARow row in dsEstructura.CONJUNTOSXESTRUCTURA)
-            {
-                Data.dsEstructura.LISTA_PARTESRow rowParte = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
-                rowParte.BeginEdit();
-                rowParte.PAR_TIPO = "Conjunto";
-                rowParte.PAR_CODIGO = row.CONJUNTOSRow.CONJ_CODIGOPARTE;
-                rowParte.PAR_NOMBRE = row.CONJUNTOSRow.CONJ_NOMBRE;
-                rowParte.PAR_TERMINACION = string.Empty;
-                rowParte.PAR_CANTIDAD = row.CXE_CANTIDAD.ToString();
-                rowParte.PAR_UMED = "Unidad";
-               rowParte.EndEdit();
-                dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
-            }
-
-            foreach (Data.dsEstructura.PIEZASXESTRUCTURARow row in dsEstructura.PIEZASXESTRUCTURA)
-            {
-                Data.dsEstructura.LISTA_PARTESRow rowParte = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
-                rowParte.BeginEdit();
-                rowParte.PAR_TIPO = "Pieza";
-                rowParte.PAR_CODIGO = row.PIEZASRow.PZA_CODIGOPARTE;
-                rowParte.PAR_NOMBRE = row.PIEZASRow.PZA_NOMBRE;
-                rowParte.PAR_TERMINACION = dsEstructura.TERMINACIONES.FindByTE_CODIGO(row.PIEZASRow.TE_CODIGO).TE_NOMBRE;
-                rowParte.PAR_CANTIDAD = row.PXE_CANTIDAD.ToString();
-                rowParte.PAR_UMED = "Unidad";
-                rowParte.EndEdit();
-                dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(rowParte);
-            }
-
-            dvPartes.Table = dsEstructura.LISTA_PARTES;*/
+            
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -187,7 +158,7 @@ namespace GyCAP.UI.EstructuraProducto
                         e.Value = nombre;
                         break;
                     case "PNO_CODIGO":
-                        //nombre = dsEstructura.PLANOS.FindByPNO_CODIGO(Convert.ToInt32(e.Value)).PNO_NOMBRE;
+                        nombre = dsEstructura.PLANOS.FindByPNO_CODIGO(Convert.ToInt32(e.Value)).PNO_NOMBRE;
                         e.Value = nombre;
                         break;
                     case "E_CODIGO":
@@ -210,56 +181,99 @@ namespace GyCAP.UI.EstructuraProducto
         {
             if (dgvEstructuras.Rows.GetRowCount(DataGridViewElementStates.Selected) != 0)
             {
-                //Armemos el filtro según las selecciones realizadas
-                string filtro = string.Empty, mostrar = string.Empty;
-                if (chkConjunto.Checked) { mostrar += "'Conjunto'"; }
-                if (chkSubconjunto.Checked && mostrar != string.Empty) { mostrar += ",'Subconjunto'"; }
-                else if (chkSubconjunto.Checked && mostrar == string.Empty) { mostrar += "'Subconjunto'"; }
-                if (chkPieza.Checked && mostrar != string.Empty) { mostrar += ",'Pieza'"; }
-                else if (chkPieza.Checked && mostrar == string.Empty) { mostrar += "'Pieza'"; }
-                if (chkMateriaPrima.Checked && mostrar != string.Empty) { mostrar += ",'Materia Prima'"; }
-                else if (chkMateriaPrima.Checked && mostrar == string.Empty) { mostrar += "'Materia Prima'"; }
-                if (mostrar != string.Empty) { filtro = "PAR_TIPO IN (" + mostrar + ")"; }
-                else { filtro = "PAR_TIPO = 'ocultar todo'"; }
+                dsEstructura.LISTA_PARTES.Clear();
 
-                //Ahora armemos el orden
-                string columnaOrden = string.Empty, formaOrden = string.Empty;
-                switch (cbOrdenPor.GetSelectedValueInt())
+                try
                 {
-                    case 1: //Por nombre
-                        columnaOrden = "PAR_NOMBRE ";
-                        break;
-                    case 2: //Por tipo de parte
-                        columnaOrden = "PAR_TIPO ";
-                        break;
-                    case 3: //Por cantidad
-                        columnaOrden = "PAR_CANTIDAD ";
-                        break;
-                    default: //Nada, para cuando seleccione sin orden - valor 0 -
-                        columnaOrden = string.Empty;
-                        break;
+                    arbolEstructura = BLL.EstructuraBLL.GetArbolEstructuraByEstructura(Convert.ToInt32(dvEstructuras[dgvEstructuras.SelectedRows[0].Index]["estr_codigo"]), false);
+
+                    IList<NodoEstructura> listaNodos = new List<NodoEstructura>();
+
+                    if (chkPartes.Checked && chkMateriaPrima.Checked)
+                    {
+                        listaNodos = arbolEstructura.AsList(NodoEstructura.tipoContenido.Todos, true);
+                    }
+
+                    if (chkPartes.Checked && !chkMateriaPrima.Checked)
+                    {
+                        listaNodos = arbolEstructura.AsList(NodoEstructura.tipoContenido.Parte, true);
+                    }
+
+                    if (!chkPartes.Checked && chkMateriaPrima.Checked)
+                    {
+                        listaNodos = arbolEstructura.AsList(NodoEstructura.tipoContenido.MateriaPrima, false);
+                    }
+
+                    switch (cbOrdenPor.GetSelectedValueInt())
+                    {
+                        case 1: //Por nombre
+                            if(cbOrdenForma.GetSelectedValueInt() == 2)
+                            {
+                                //descendente
+                                listaNodos = listaNodos.OrderByDescending(p => p.CompuestoFriendlyName).ToList();
+                            }
+                            else
+                            {
+                                //Ascendente o default
+                                listaNodos = listaNodos.OrderBy(p => p.CompuestoFriendlyName).ToList();
+                            }
+                            break;
+                        case 2: //Por tipo de parte
+                            if (cbOrdenForma.GetSelectedValueInt() == 2)
+                            {
+                                //descendente
+                                listaNodos = listaNodos.OrderByDescending(p => p.Contenido).ToList();
+                            }
+                            else
+                            {
+                                //Ascendente o default
+                                listaNodos = listaNodos.OrderBy(p => p.Contenido).ToList();
+                            }
+                            break;
+                        case 3: //Por cantidad
+                            if (cbOrdenForma.GetSelectedValueInt() == 2)
+                            {
+                                //descendente
+                                listaNodos = listaNodos.OrderByDescending(p => p.Compuesto.Cantidad).ToList();
+                            }
+                            else
+                            {
+                                //Ascendente o default
+                                listaNodos = listaNodos.OrderBy(p => p.Compuesto.Cantidad).ToList();
+                            }
+                            break;
+                        default: //Nada, para cuando seleccione sin orden - valor 0 -                            
+                            break;
+                    }
+                    
+                    foreach (NodoEstructura nodo in listaNodos)
+                    {
+                        Data.dsEstructuraProducto.LISTA_PARTESRow row = dsEstructura.LISTA_PARTES.NewLISTA_PARTESRow();
+                        row.BeginEdit();
+
+                        row.PAR_CANTIDAD = nodo.Compuesto.Cantidad.ToString();
+                        row.PAR_CODIGO = (nodo.Contenido == NodoEstructura.tipoContenido.MateriaPrima) ? nodo.Compuesto.MateriaPrima.Nombre : nodo.Compuesto.Parte.Codigo;
+                        row.PAR_NOMBRE = (nodo.Contenido == NodoEstructura.tipoContenido.MateriaPrima) ? nodo.Compuesto.MateriaPrima.Nombre : nodo.Compuesto.Parte.Nombre;
+                        row.PAR_TERMINACION = (nodo.Contenido == NodoEstructura.tipoContenido.MateriaPrima) ? string.Empty : nodo.Compuesto.Parte.Terminacion.Nombre;
+                        row.PAR_TIPO = (nodo.Contenido == NodoEstructura.tipoContenido.MateriaPrima) ? "Materia Prima" : nodo.Compuesto.Parte.Tipo.Nombre;
+                        row.PAR_UMED = nodo.Compuesto.UnidadMedida.Nombre;
+
+                        row.EndEdit();
+                        dsEstructura.LISTA_PARTES.AddLISTA_PARTESRow(row);
+                    }
+
+                    dsEstructura.LISTA_PARTES.AcceptChanges();
+                }
+                catch (BaseDeDatosException ex)
+                {
+                    MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Generación);
                 }
 
-                switch (cbOrdenForma.GetSelectedValueInt())
-                {
-                    case 1: // ASC
-                        if (columnaOrden != string.Empty) { formaOrden = " ASC"; }
-                        break;
-                    case 2: //DESC
-                        if (columnaOrden != string.Empty) { formaOrden = " DESC"; }
-                        break;
-                    default: //NADA
-                        formaOrden = string.Empty;
-                        break;
-                }
-
-                //Carguemos los datos al dataview y asignemos el orden y filtro
-                CargarListaPartes();
-                dvPartes.Sort = columnaOrden + formaOrden;
-                dvPartes.RowFilter = filtro;
+                dvPartes.Table = dsEstructura.LISTA_PARTES;                
+                
                 //Creamos el reporte y le asignamos el source
                 Data.Reportes.crPartesEstructura2 reporte = new GyCAP.Data.Reportes.crPartesEstructura2();
-
+                reporte.SummaryInfo.ReportTitle = dsCocina.COCINAS.FindByCOC_CODIGO(cbCocinaBuscar.GetSelectedValueInt()).COC_CODIGO_PRODUCTO;
                 reporte.SetDataSource(dvPartes);
                 //Creamos la pantalla que muestra todos los reportes y le asignamos el reporte
                 Sistema.frmVisorReporte visor = new GyCAP.UI.Sistema.frmVisorReporte();
@@ -270,7 +284,7 @@ namespace GyCAP.UI.EstructuraProducto
             }
             else
             {
-                MessageBox.Show("Debe seleccionar una Estructura.", "Información: Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MensajesABM.MsjSinSeleccion("Estructura", MensajesABM.Generos.Femenino, this.Text);
             }
         }
     }

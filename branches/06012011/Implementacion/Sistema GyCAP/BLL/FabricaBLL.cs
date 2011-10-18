@@ -149,7 +149,7 @@ namespace GyCAP.BLL
             {
                 if (!codigoCocina.HasValue) { codigoCocina = CocinaBLL.GetCodigoCocinaBase(); }
 
-                ArbolEstructura arbol = EstructuraBLL.GetArbolEstructura(codigoCocina.Value, true);
+                ArbolEstructura arbol = EstructuraBLL.GetArbolEstructuraByCocina(codigoCocina.Value, true);
 
                 costo = (arbol == null) ? 0 : arbol.GetCostoEstructura() + arbol.GetCostoProceso();
             }

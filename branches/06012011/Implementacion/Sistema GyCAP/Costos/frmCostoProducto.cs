@@ -63,7 +63,7 @@ namespace GyCAP.UI.Costos
                 tvcCostosMateriales.TreeView.Nodes.Clear();
                 tvcCostosCentros.TreeView.Nodes.Clear();
                 txtCostoTotal.Text = string.Empty;
-                arbol = BLL.EstructuraBLL.GetArbolEstructura(cboCocina.GetSelectedValueInt(), true);
+                arbol = BLL.EstructuraBLL.GetArbolEstructuraByCocina(cboCocina.GetSelectedValueInt(), true);
 
                 if (arbol != null && arbol.CodigoEstructura > 0)
                 {                    

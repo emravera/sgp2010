@@ -63,7 +63,7 @@ namespace GyCAP.BLL
             {
                 transaccion = DAL.DB.IniciarTransaccion();
 
-                ArbolEstructura arbolEstructura = EstructuraBLL.GetArbolEstructura(arbol.OrdenProduccion.Cocina.CodigoCocina, true);
+                ArbolEstructura arbolEstructura = EstructuraBLL.GetArbolEstructuraByCocina(arbol.OrdenProduccion.Cocina.CodigoCocina, true);
                 arbolEstructura.SetProductQuantity(arbol.OrdenProduccion.CantidadEstimada);
                 
                 //Guardamos la orden de producción y de trabajo
@@ -239,7 +239,7 @@ namespace GyCAP.BLL
 
                 EstadoOrdenTrabajo estadoEnEspera = EstadoOrdenTrabajoBLL.GetEstado(OrdenesTrabajoEnum.EstadoOrdenEnum.EnEspera);
                 EstadoMovimientoStock estadoMvto = EstadoMovimientoStockBLL.GetEstadoEntity(StockEnum.EstadoMovimientoStock.EnProceso);
-                ArbolEstructura arbolEstructura = EstructuraBLL.GetArbolEstructura(ordenP.Cocina.CodigoCocina, false);
+                ArbolEstructura arbolEstructura = EstructuraBLL.GetArbolEstructuraByCocina(ordenP.Cocina.CodigoCocina, false);
 
                 DateTime minDate = ordenP.OrdenesTrabajo.Min(p => p.FechaInicioEstimada).Value;
                 

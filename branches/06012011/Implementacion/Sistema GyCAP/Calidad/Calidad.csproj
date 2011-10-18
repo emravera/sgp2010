@@ -31,6 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Sistema, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Sistema\obj\Debug\Sistema.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -49,6 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmEficienciaProceso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEficienciaProceso.Designer.cs">
+      <DependentUpon>frmEficienciaProceso.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmModuloCalidad.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,6 +68,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmEficienciaProceso.resx">
+      <DependentUpon>frmEficienciaProceso.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmModuloCalidad.resx">
       <DependentUpon>frmModuloCalidad.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -85,6 +100,10 @@
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{A0EA0794-16BA-4988-BCFF-00204902B7AA}</Project>
       <Name>BLL %28BLL\BLL%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{B288FFDF-AF2E-41DA-AB2F-C17A4944E272}</Project>
+      <Name>Data %28Data\Data%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
       <Project>{BF769C01-D311-4BC9-813A-C63DC3B89319}</Project>

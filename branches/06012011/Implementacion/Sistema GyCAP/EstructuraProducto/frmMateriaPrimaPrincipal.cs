@@ -230,7 +230,7 @@ namespace GyCAP.UI.EstructuraProducto
                 cbTipoUnMedida.SetSelectedValue(Convert.ToInt32(dsMateriaPrima.UNIDADES_MEDIDA.FindByUMED_CODIGO(Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["umed_codigo"])).TUMED_CODIGO));
                 cbUnidadMedida.SetSelectedValue(Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["umed_codigo"]));
                 cbUbicacionStock.SetSelectedValue(Convert.ToInt32(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["ustck_numero"]));
-                numCosto.Value = Convert.ToDecimal(dvListaBusqueda[dgvLista.SelectedRows[0].Index]["ustck_numero"]);
+                
 
                 if (dvListaBusqueda[dgvLista.SelectedRows[0].Index]["mp_esprincipal"].ToString() == "1")
                 {
@@ -569,7 +569,7 @@ namespace GyCAP.UI.EstructuraProducto
                     if (cbTipoUnMedida.GetSelectedIndex() != -1)
                     {
                         //Obtengo el tipo de unidad de medida seleccionado
-                        int tipo = Convert.ToInt32(cbTipoUnMedida.GetSelectedValue());
+                        int tipo = Convert.ToInt32(cbTipoUnMedida.GetSelectedValueInt());
 
                         //Limpio el Datatable 
                         dsMateriaPrima.UNIDADES_MEDIDA.Clear();
