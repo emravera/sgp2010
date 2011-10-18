@@ -232,8 +232,8 @@ namespace Principal
 
         private void toolStripRepuestos_Click(object sender, EventArgs e)
         {
-            GyCAP.UI.RecursosFabricacion.frmGraficoEficienciaCentroTrabajo.Instancia.MdiParent = this;
-            GyCAP.UI.RecursosFabricacion.frmGraficoEficienciaCentroTrabajo.Instancia.Show();
+            GyCAP.UI.Calidad.frmEficienciaProceso.Instancia.MdiParent = this;
+            GyCAP.UI.Calidad.frmEficienciaProceso.Instancia.Show();
         }
 
         private void toolStripTipoMantenimiento_Click(object sender, EventArgs e)

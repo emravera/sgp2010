@@ -579,9 +579,9 @@ namespace GyCAP.UI.EstructuraProducto
                     nodeText += " - ";
                     nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).PARTESRow.PART_CODIGO;
                     nodeText += " / #";
-                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
-                    nodeText += " ";
-                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                    string cantidad = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
+                    cantidad = (cantidad.Split(',').Count() == 1) ? string.Concat(cantidad, ",000") : cantidad;
+                    nodeText += string.Concat(cantidad, " ", dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_ABREVIATURA);
                     arbolEstructura.Find(null, codigoComp).SumarCantidad(1);
                 }
                 else
@@ -598,9 +598,9 @@ namespace GyCAP.UI.EstructuraProducto
                     dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD += cantidad;
                     nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).MATERIAS_PRIMASRow.MP_NOMBRE;
                     nodeText += " / #";
-                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
-                    nodeText += " ";
-                    nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                    string cantidadText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
+                    cantidadText = (cantidadText.Split(',').Count() == 1) ? string.Concat(cantidadText, ",000") : cantidadText;
+                    nodeText += string.Concat(cantidadText, " ", dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_ABREVIATURA);
                     arbolEstructura.Find(null, codigoComp).SumarCantidad(cantidad);
                 }
                 tvEstructura.BeginUpdate();
@@ -630,9 +630,9 @@ namespace GyCAP.UI.EstructuraProducto
                         nodeText += " - ";
                         nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).PARTESRow.PART_CODIGO;
                         nodeText += " / #";
-                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
-                        nodeText += " ";
-                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                        string cantidad = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
+                        cantidad = (cantidad.Split(',').Count() == 1) ? string.Concat(cantidad, ",000") : cantidad;
+                        nodeText += string.Concat(cantidad, " ", dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_ABREVIATURA);
                         arbolEstructura.Find(null, codigoComp).RestarCantidad(1);
                     }
                 }
@@ -652,9 +652,9 @@ namespace GyCAP.UI.EstructuraProducto
                         dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD -= cantidad;
                         nodeText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).MATERIAS_PRIMASRow.MP_NOMBRE;
                         nodeText += " / #";
-                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
-                        nodeText += " ";
-                        nodeText += dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_ABREVIATURA;
+                        string cantidadText = dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).COMP_CANTIDAD.ToString();
+                        cantidadText = (cantidadText.Split(',').Count() == 1) ? string.Concat(cantidadText, ",000") : cantidadText;
+                        nodeText += string.Concat(cantidadText, " ", dsEstructura.COMPUESTOS_PARTES.FindByCOMP_CODIGO(codigoComp).UNIDADES_MEDIDARow.UMED_ABREVIATURA);
                         arbolEstructura.Find(null, codigoComp).RestarCantidad(cantidad);
                     }
                 }

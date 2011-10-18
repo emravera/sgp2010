@@ -297,7 +297,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
             if (cboMaquinaCierre.GetSelectedIndex() == -1) { validaciones.Add("Máquina"); }
             if (nudCantidadCierre.Value == 0) { validaciones.Add("Cantidad"); }
             if (dtpFechaCierre.EsFechaNull()) { validaciones.Add("Fecha"); }
-            
+
             if (validaciones.Count == 0)
             {
                 try
@@ -308,9 +308,11 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                     cierre.Cantidad = Convert.ToInt32(nudCantidadCierre.Value);
                     cierre.Codigo = -1;
                     cierre.Fecha = DateTime.Parse(dtpFechaCierre.GetFecha().ToString());
+                    cierre.Fecha = dtpHoraCierre.Value;
                     cierre.OperacionesFallidas = Convert.ToInt32(nudOperacionesFallidas.Value);
                     cierre.Observaciones = txtObservacionesCierre.Text;
                     cierre.OrdenTrabajo = (OrdenTrabajo)dgvOrdenesTrabajo.SelectedRows[0].DataBoundItem;
+
                     BLL.OrdenTrabajoBLL.RegistrarCierreParcial(cierre, null);
                 }
                 catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -468,7 +470,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
             dgvCierresParciales.Columns.Add("E_CODIGO", "Empleado");
             dgvCierresParciales.Columns.Add("MAQ_CODIGO", "Máquina");
             dgvCierresParciales.Columns.Add("CORD_CANTIDAD", "Cantidad");
-            dgvCierresParciales.Columns.Add("CORD_FECHACIERRE", "Fecha");
+            dgvCierresParciales.Columns.Add("CORD_FECHACIERRE", "Fecha y hora");
             dgvCierresParciales.Columns.Add("OPR_FALLIDAS", "Operaciones fallidas");
             dgvCierresParciales.Columns.Add("CORD_OBSERVACIONES", "Observaciones");
             dgvCierresParciales.Columns["ORDT_NUMERO"].DataPropertyName = "OrdenTrabajo";
@@ -650,7 +652,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                         e.Value = nombre;
                         break;
                     case "CORD_FECHACIERRE":
-                        nombre = DateTime.Parse(e.Value.ToString()).ToShortDateString();
+                        nombre = DateTime.Parse(e.Value.ToString()).ToString();
                         e.Value = nombre;
                         break;
                     default:
@@ -721,6 +723,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                 cboMaquinaCierre.SetSelectedValue(cierre.Maquina.Codigo);
                 nudCantidadCierre.Value = cierre.Cantidad;
                 dtpFechaCierre.SetFecha(cierre.Fecha.Value);
+                dtpHoraCierre.Value = cierre.Fecha.Value;
                 txtObservacionesCierre.Text = cierre.Observaciones;
                 nudOperacionesFallidas.Value = cierre.OperacionesFallidas;
             }
@@ -837,8 +840,9 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
             cboMaquinaCierre.SetSelectedIndex(-1);
             nudCantidadCierre.Value = 0;
             txtObservacionesCierre.Clear();
-            dtpFechaCierre.SetFechaNull();
+            dtpFechaCierre.SetFecha(DateTime.Today);
             nudOperacionesFallidas.Value = 0;
+            dtpHoraCierre.Value = DateTime.Today;
         }
 
         private void control_Enter(object sender, EventArgs e)

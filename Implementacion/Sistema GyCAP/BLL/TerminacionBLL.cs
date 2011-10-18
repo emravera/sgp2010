@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GyCAP.Entidades;
 
 namespace GyCAP.BLL
 {
@@ -49,6 +50,17 @@ namespace GyCAP.BLL
         public static void ObtenerTodos(string nombre, Data.dsCocina dsTerminacion)
         {
             DAL.TerminacionDAL.ObtenerTerminacion(nombre, dsTerminacion);            
+        }
+
+        public static Terminacion AsTerminacionEntity(Data.dsEstructuraProducto.TERMINACIONESRow row)
+        {
+            return new Terminacion()
+            {
+                Abreviatura = row.TE_ABREVIATURA,
+                Codigo = long.Parse(row.TE_CODIGO.ToString()),
+                Descripcion = row.TE_DESCRIPCION,
+                Nombre = row.TE_NOMBRE
+            };
         }
     }
 }

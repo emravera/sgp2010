@@ -17,7 +17,8 @@ namespace GyCAP.Entidades.ArbolEstructura
         private tipoContenido contenido;
         private object tag;
         private CompuestoParte compuesto;
-
+        private string compuestoFriendlyName;
+        
         public NodoEstructura() 
         {
             this.nodosHijos = new List<NodoEstructura>();
@@ -63,7 +64,13 @@ namespace GyCAP.Entidades.ArbolEstructura
         {
             get { return compuesto; }
             set { compuesto = value; }
-        }       
+        }
+
+        public string CompuestoFriendlyName
+        {
+            get { return compuestoFriendlyName; }
+            set { compuestoFriendlyName = value; }
+        }
         
         public decimal GetCosto()
         {
@@ -187,6 +194,20 @@ namespace GyCAP.Entidades.ArbolEstructura
             return nodo;
         }
 
+        public void AsList(NodoEstructura.tipoContenido tipo, IList<NodoEstructura> listaNodos)
+        {
+            if (this.contenido == tipo || tipo == tipoContenido.Todos) 
+            {
+                this.compuestoFriendlyName = (this.contenido == tipoContenido.MateriaPrima) ? this.compuesto.MateriaPrima.Nombre : this.compuesto.Parte.Nombre;
+                listaNodos.Add(this); 
+            }
+
+            foreach (NodoEstructura nodo in this.nodosHijos)
+            {
+                nodo.AsList(tipo, listaNodos);
+            }
+        }
+        
         public void AsListForCapacity(IList<CapacidadNecesidadCombinada> lista, int multiplicador)
         {
             if (this.contenido == tipoContenido.Parte)

@@ -29,7 +29,7 @@ namespace GyCAP.BLL
             int numeroOrdenT = -1;
             if (arbolProduccion.OrdenProduccion.Estructura > 0)
             {
-                ArbolEstructura arbolEstructura = EstructuraBLL.GetArbolEstructura(arbolProduccion.OrdenProduccion.Cocina.CodigoCocina, true);
+                ArbolEstructura arbolEstructura = EstructuraBLL.GetArbolEstructuraByCocina(arbolProduccion.OrdenProduccion.Cocina.CodigoCocina, true);
                 arbolEstructura.SetProductQuantity(arbolProduccion.OrdenProduccion.CantidadEstimada);
                 EstadoOrdenTrabajo estadoGenerado = EstadoOrdenTrabajoBLL.GetEstado(OrdenesTrabajoEnum.EstadoOrdenEnum.Generada);
 

@@ -1468,6 +1468,18 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="LISTA_PARTES" msprop:Generator_UserTableName="LISTA_PARTES" msprop:Generator_RowDeletedName="LISTA_PARTESRowDeleted" msprop:Generator_RowChangedName="LISTA_PARTESRowChanged" msprop:Generator_RowClassName="LISTA_PARTESRow" msprop:Generator_RowChangingName="LISTA_PARTESRowChanging" msprop:Generator_RowEvArgName="LISTA_PARTESRowChangeEvent" msprop:Generator_RowEvHandlerName="LISTA_PARTESRowChangeEventHandler" msprop:Generator_TableClassName="LISTA_PARTESDataTable" msprop:Generator_TableVarName="tableLISTA_PARTES" msprop:Generator_RowDeletingName="LISTA_PARTESRowDeleting" msprop:Generator_TablePropName="LISTA_PARTES">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PAR_TIPO" msprop:Generator_UserColumnName="PAR_TIPO" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="PAR_TIPO" msprop:Generator_ColumnPropNameInTable="PAR_TIPOColumn" msprop:Generator_ColumnVarNameInTable="columnPAR_TIPO" type="xs:string" />
+              <xs:element name="PAR_CODIGO" msprop:Generator_UserColumnName="PAR_CODIGO" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="PAR_CODIGO" msprop:Generator_ColumnPropNameInTable="PAR_CODIGOColumn" msprop:Generator_ColumnVarNameInTable="columnPAR_CODIGO" type="xs:string" />
+              <xs:element name="PAR_TERMINACION" msprop:Generator_UserColumnName="PAR_TERMINACION" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="PAR_TERMINACION" msprop:Generator_ColumnPropNameInTable="PAR_TERMINACIONColumn" msprop:Generator_ColumnVarNameInTable="columnPAR_TERMINACION" type="xs:string" />
+              <xs:element name="PAR_CANTIDAD" msprop:Generator_UserColumnName="PAR_CANTIDAD" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="PAR_CANTIDAD" msprop:Generator_ColumnPropNameInTable="PAR_CANTIDADColumn" msprop:Generator_ColumnVarNameInTable="columnPAR_CANTIDAD" type="xs:string" />
+              <xs:element name="PAR_UMED" msprop:Generator_UserColumnName="PAR_UMED" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="PAR_UMED" msprop:Generator_ColumnPropNameInTable="PAR_UMEDColumn" msprop:Generator_ColumnVarNameInTable="columnPAR_UMED" type="xs:string" />
+              <xs:element name="PAR_NOMBRE" msprop:Generator_UserColumnName="PAR_NOMBRE" msprop:Generator_ColumnPropNameInRow="PAR_NOMBRE" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnPAR_NOMBRE" msprop:Generator_ColumnPropNameInTable="PAR_NOMBREColumn" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">

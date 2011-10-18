@@ -53,6 +53,8 @@ namespace GyCAP.Data {
         
         private TIPOS_UBICACIONES_STOCKDataTable tableTIPOS_UBICACIONES_STOCK;
         
+        private LISTA_PARTESDataTable tableLISTA_PARTES;
+        
         private global::System.Data.DataRelation relationestructura_plano_fk;
         
         private global::System.Data.DataRelation relationUNIDADES_MEDIDA_MATERIAS_PRIMAS;
@@ -158,6 +160,9 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["TIPOS_UBICACIONES_STOCK"] != null)) {
                     base.Tables.Add(new TIPOS_UBICACIONES_STOCKDataTable(ds.Tables["TIPOS_UBICACIONES_STOCK"]));
+                }
+                if ((ds.Tables["LISTA_PARTES"] != null)) {
+                    base.Tables.Add(new LISTA_PARTESDataTable(ds.Tables["LISTA_PARTES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -304,6 +309,15 @@ namespace GyCAP.Data {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public LISTA_PARTESDataTable LISTA_PARTES {
+            get {
+                return this.tableLISTA_PARTES;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -403,6 +417,9 @@ namespace GyCAP.Data {
                 }
                 if ((ds.Tables["TIPOS_UBICACIONES_STOCK"] != null)) {
                     base.Tables.Add(new TIPOS_UBICACIONES_STOCKDataTable(ds.Tables["TIPOS_UBICACIONES_STOCK"]));
+                }
+                if ((ds.Tables["LISTA_PARTES"] != null)) {
+                    base.Tables.Add(new LISTA_PARTESDataTable(ds.Tables["LISTA_PARTES"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -518,6 +535,12 @@ namespace GyCAP.Data {
                     this.tableTIPOS_UBICACIONES_STOCK.InitVars();
                 }
             }
+            this.tableLISTA_PARTES = ((LISTA_PARTESDataTable)(base.Tables["LISTA_PARTES"]));
+            if ((initTable == true)) {
+                if ((this.tableLISTA_PARTES != null)) {
+                    this.tableLISTA_PARTES.InitVars();
+                }
+            }
             this.relationestructura_plano_fk = this.Relations["estructura_plano_fk"];
             this.relationUNIDADES_MEDIDA_MATERIAS_PRIMAS = this.Relations["UNIDADES_MEDIDA_MATERIAS_PRIMAS"];
             this.relationTIPOS_UNIDADES_MEDIDA_UNIDADES_MEDIDA = this.Relations["TIPOS_UNIDADES_MEDIDA_UNIDADES_MEDIDA"];
@@ -574,6 +597,8 @@ namespace GyCAP.Data {
             base.Tables.Add(this.tableUBICACIONES_STOCK);
             this.tableTIPOS_UBICACIONES_STOCK = new TIPOS_UBICACIONES_STOCKDataTable();
             base.Tables.Add(this.tableTIPOS_UBICACIONES_STOCK);
+            this.tableLISTA_PARTES = new LISTA_PARTESDataTable();
+            base.Tables.Add(this.tableLISTA_PARTES);
             this.relationestructura_plano_fk = new global::System.Data.DataRelation("estructura_plano_fk", new global::System.Data.DataColumn[] {
                         this.tablePLANOS.PNO_CODIGOColumn}, new global::System.Data.DataColumn[] {
                         this.tableESTRUCTURAS.PNO_CODIGOColumn}, false);
@@ -723,6 +748,11 @@ namespace GyCAP.Data {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeLISTA_PARTES() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -802,6 +832,8 @@ namespace GyCAP.Data {
         public delegate void UBICACIONES_STOCKRowChangeEventHandler(object sender, UBICACIONES_STOCKRowChangeEvent e);
         
         public delegate void TIPOS_UBICACIONES_STOCKRowChangeEventHandler(object sender, TIPOS_UBICACIONES_STOCKRowChangeEvent e);
+        
+        public delegate void LISTA_PARTESRowChangeEventHandler(object sender, LISTA_PARTESRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -5236,6 +5268,300 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class LISTA_PARTESDataTable : global::System.Data.TypedTableBase<LISTA_PARTESRow> {
+            
+            private global::System.Data.DataColumn columnPAR_TIPO;
+            
+            private global::System.Data.DataColumn columnPAR_CODIGO;
+            
+            private global::System.Data.DataColumn columnPAR_TERMINACION;
+            
+            private global::System.Data.DataColumn columnPAR_CANTIDAD;
+            
+            private global::System.Data.DataColumn columnPAR_UMED;
+            
+            private global::System.Data.DataColumn columnPAR_NOMBRE;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public LISTA_PARTESDataTable() {
+                this.TableName = "LISTA_PARTES";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal LISTA_PARTESDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected LISTA_PARTESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PAR_TIPOColumn {
+                get {
+                    return this.columnPAR_TIPO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PAR_CODIGOColumn {
+                get {
+                    return this.columnPAR_CODIGO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PAR_TERMINACIONColumn {
+                get {
+                    return this.columnPAR_TERMINACION;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PAR_CANTIDADColumn {
+                get {
+                    return this.columnPAR_CANTIDAD;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PAR_UMEDColumn {
+                get {
+                    return this.columnPAR_UMED;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PAR_NOMBREColumn {
+                get {
+                    return this.columnPAR_NOMBRE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public LISTA_PARTESRow this[int index] {
+                get {
+                    return ((LISTA_PARTESRow)(this.Rows[index]));
+                }
+            }
+            
+            public event LISTA_PARTESRowChangeEventHandler LISTA_PARTESRowChanging;
+            
+            public event LISTA_PARTESRowChangeEventHandler LISTA_PARTESRowChanged;
+            
+            public event LISTA_PARTESRowChangeEventHandler LISTA_PARTESRowDeleting;
+            
+            public event LISTA_PARTESRowChangeEventHandler LISTA_PARTESRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddLISTA_PARTESRow(LISTA_PARTESRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public LISTA_PARTESRow AddLISTA_PARTESRow(string PAR_TIPO, string PAR_CODIGO, string PAR_TERMINACION, string PAR_CANTIDAD, string PAR_UMED, string PAR_NOMBRE) {
+                LISTA_PARTESRow rowLISTA_PARTESRow = ((LISTA_PARTESRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        PAR_TIPO,
+                        PAR_CODIGO,
+                        PAR_TERMINACION,
+                        PAR_CANTIDAD,
+                        PAR_UMED,
+                        PAR_NOMBRE};
+                rowLISTA_PARTESRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowLISTA_PARTESRow);
+                return rowLISTA_PARTESRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                LISTA_PARTESDataTable cln = ((LISTA_PARTESDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new LISTA_PARTESDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnPAR_TIPO = base.Columns["PAR_TIPO"];
+                this.columnPAR_CODIGO = base.Columns["PAR_CODIGO"];
+                this.columnPAR_TERMINACION = base.Columns["PAR_TERMINACION"];
+                this.columnPAR_CANTIDAD = base.Columns["PAR_CANTIDAD"];
+                this.columnPAR_UMED = base.Columns["PAR_UMED"];
+                this.columnPAR_NOMBRE = base.Columns["PAR_NOMBRE"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnPAR_TIPO = new global::System.Data.DataColumn("PAR_TIPO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPAR_TIPO);
+                this.columnPAR_CODIGO = new global::System.Data.DataColumn("PAR_CODIGO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPAR_CODIGO);
+                this.columnPAR_TERMINACION = new global::System.Data.DataColumn("PAR_TERMINACION", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPAR_TERMINACION);
+                this.columnPAR_CANTIDAD = new global::System.Data.DataColumn("PAR_CANTIDAD", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPAR_CANTIDAD);
+                this.columnPAR_UMED = new global::System.Data.DataColumn("PAR_UMED", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPAR_UMED);
+                this.columnPAR_NOMBRE = new global::System.Data.DataColumn("PAR_NOMBRE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPAR_NOMBRE);
+                this.columnPAR_TIPO.AllowDBNull = false;
+                this.columnPAR_CODIGO.AllowDBNull = false;
+                this.columnPAR_TERMINACION.AllowDBNull = false;
+                this.columnPAR_CANTIDAD.AllowDBNull = false;
+                this.columnPAR_UMED.AllowDBNull = false;
+                this.columnPAR_NOMBRE.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public LISTA_PARTESRow NewLISTA_PARTESRow() {
+                return ((LISTA_PARTESRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new LISTA_PARTESRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(LISTA_PARTESRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.LISTA_PARTESRowChanged != null)) {
+                    this.LISTA_PARTESRowChanged(this, new LISTA_PARTESRowChangeEvent(((LISTA_PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.LISTA_PARTESRowChanging != null)) {
+                    this.LISTA_PARTESRowChanging(this, new LISTA_PARTESRowChangeEvent(((LISTA_PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.LISTA_PARTESRowDeleted != null)) {
+                    this.LISTA_PARTESRowDeleted(this, new LISTA_PARTESRowChangeEvent(((LISTA_PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.LISTA_PARTESRowDeleting != null)) {
+                    this.LISTA_PARTESRowDeleting(this, new LISTA_PARTESRowChangeEvent(((LISTA_PARTESRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveLISTA_PARTESRow(LISTA_PARTESRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsEstructuraProducto ds = new dsEstructuraProducto();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "LISTA_PARTESDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -7588,6 +7914,81 @@ namespace GyCAP.Data {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class LISTA_PARTESRow : global::System.Data.DataRow {
+            
+            private LISTA_PARTESDataTable tableLISTA_PARTES;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal LISTA_PARTESRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableLISTA_PARTES = ((LISTA_PARTESDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PAR_TIPO {
+                get {
+                    return ((string)(this[this.tableLISTA_PARTES.PAR_TIPOColumn]));
+                }
+                set {
+                    this[this.tableLISTA_PARTES.PAR_TIPOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PAR_CODIGO {
+                get {
+                    return ((string)(this[this.tableLISTA_PARTES.PAR_CODIGOColumn]));
+                }
+                set {
+                    this[this.tableLISTA_PARTES.PAR_CODIGOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PAR_TERMINACION {
+                get {
+                    return ((string)(this[this.tableLISTA_PARTES.PAR_TERMINACIONColumn]));
+                }
+                set {
+                    this[this.tableLISTA_PARTES.PAR_TERMINACIONColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PAR_CANTIDAD {
+                get {
+                    return ((string)(this[this.tableLISTA_PARTES.PAR_CANTIDADColumn]));
+                }
+                set {
+                    this[this.tableLISTA_PARTES.PAR_CANTIDADColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PAR_UMED {
+                get {
+                    return ((string)(this[this.tableLISTA_PARTES.PAR_UMEDColumn]));
+                }
+                set {
+                    this[this.tableLISTA_PARTES.PAR_UMEDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string PAR_NOMBRE {
+                get {
+                    return ((string)(this[this.tableLISTA_PARTES.PAR_NOMBREColumn]));
+                }
+                set {
+                    this[this.tableLISTA_PARTES.PAR_NOMBREColumn] = value;
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -8008,6 +8409,37 @@ namespace GyCAP.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public TIPOS_UBICACIONES_STOCKRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class LISTA_PARTESRowChangeEvent : global::System.EventArgs {
+            
+            private LISTA_PARTESRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public LISTA_PARTESRowChangeEvent(LISTA_PARTESRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public LISTA_PARTESRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -14658,6 +15090,15 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._tIPOS_UBICACIONES_STOCKTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.TIPOS_UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._tIPOS_UBICACIONES_STOCKTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._uNIDADES_MEDIDATableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.UNIDADES_MEDIDA.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -14673,15 +15114,6 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._cONTENIDO_UBICACION_STOCKTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._tIPOS_UBICACIONES_STOCKTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.TIPOS_UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._tIPOS_UBICACIONES_STOCKTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -14704,15 +15136,6 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._pLANOSTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.PLANOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._pLANOSTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._tERMINACIONESTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.TERMINACIONES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -14722,12 +15145,12 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._hOJAS_RUTATableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.HOJAS_RUTA.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._pLANOSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.PLANOS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._hOJAS_RUTATableAdapter.Update(updatedRows));
+                    result = (result + this._pLANOSTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -14740,6 +15163,15 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._hOJAS_RUTATableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.HOJAS_RUTA.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._hOJAS_RUTATableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._eSTRUCTURASTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.ESTRUCTURAS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -14749,21 +15181,21 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._mATERIAS_PRIMASTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.MATERIAS_PRIMAS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._mATERIAS_PRIMASTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._pARTESTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.PARTES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._pARTESTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._mATERIAS_PRIMASTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.MATERIAS_PRIMAS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._mATERIAS_PRIMASTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -14794,6 +15226,14 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._tIPOS_UBICACIONES_STOCKTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.TIPOS_UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._tIPOS_UBICACIONES_STOCKTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._uNIDADES_MEDIDATableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.UNIDADES_MEDIDA.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -14807,14 +15247,6 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._cONTENIDO_UBICACION_STOCKTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._tIPOS_UBICACIONES_STOCKTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.TIPOS_UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._tIPOS_UBICACIONES_STOCKTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -14835,14 +15267,6 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._pLANOSTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.PLANOS.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._pLANOSTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._tERMINACIONESTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.TERMINACIONES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -14851,11 +15275,11 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._hOJAS_RUTATableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.HOJAS_RUTA.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._pLANOSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.PLANOS.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._hOJAS_RUTATableAdapter.Update(addedRows));
+                    result = (result + this._pLANOSTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -14867,6 +15291,14 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._hOJAS_RUTATableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.HOJAS_RUTA.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._hOJAS_RUTATableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._eSTRUCTURASTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.ESTRUCTURAS.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -14875,19 +15307,19 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._mATERIAS_PRIMASTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.MATERIAS_PRIMAS.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._mATERIAS_PRIMASTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._pARTESTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.PARTES.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._pARTESTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._mATERIAS_PRIMASTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.MATERIAS_PRIMAS.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._mATERIAS_PRIMASTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -14918,19 +15350,19 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._pARTESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.PARTES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._pARTESTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._mATERIAS_PRIMASTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.MATERIAS_PRIMAS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._mATERIAS_PRIMASTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._pARTESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.PARTES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._pARTESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -14942,14 +15374,6 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._tIPOS_PARTESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.TIPOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._tIPOS_PARTESTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._hOJAS_RUTATableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.HOJAS_RUTA.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -14958,11 +15382,11 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._tERMINACIONESTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.TERMINACIONES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._tIPOS_PARTESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.TIPOS_PARTES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._tERMINACIONESTableAdapter.Update(deletedRows));
+                    result = (result + this._tIPOS_PARTESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -14971,6 +15395,14 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._pLANOSTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._tERMINACIONESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.TERMINACIONES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tERMINACIONESTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -14991,14 +15423,6 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._tIPOS_UBICACIONES_STOCKTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.TIPOS_UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._tIPOS_UBICACIONES_STOCKTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._cONTENIDO_UBICACION_STOCKTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.CONTENIDO_UBICACION_STOCK.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -15012,6 +15436,14 @@ SELECT TUS_CODIGO, TUS_NOMBRE, TUS_DESCRIPCION FROM TIPOS_UBICACIONES_STOCK WHER
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._uNIDADES_MEDIDATableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._tIPOS_UBICACIONES_STOCKTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.TIPOS_UBICACIONES_STOCK.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tIPOS_UBICACIONES_STOCKTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

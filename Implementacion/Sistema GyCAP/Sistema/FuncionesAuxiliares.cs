@@ -175,7 +175,7 @@ namespace GyCAP.UI.Sistema
         public static decimal StringHourToDecimal(string hora)
         {
             if (string.IsNullOrEmpty(hora)) return 0;
-            string[] temp = hora.Replace("am", "").Replace("pm", "").Replace(" ","").Split(':');
+            string[] temp = hora.Replace("a.m.", "").Replace("p.m.", "").Replace(" ","").Split(':');
             decimal horas = decimal.Parse(temp[0]);
             decimal minutos = decimal.Parse(temp[1]) / 60;
             return horas + minutos;
