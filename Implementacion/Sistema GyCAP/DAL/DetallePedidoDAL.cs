@@ -157,16 +157,35 @@ namespace GyCAP.DAL
             catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
         }
 
+        //Metodo para obtener el ID de pedido
+        public static int ObtenerIDPedidoDetalle(int codigoDetalle)
+        {
+            string sql = @"SELECT ped_codigo
+                           FROM DETALLE_PEDIDOS WHERE dped_codigo = @p0";
+
+            object[] valorParametros = { codigoDetalle };
+            int codigoPedido = 0;
+
+            try
+            {
+                //Se llena el Datatable
+                codigoPedido = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+            return codigoPedido;
+        }
+
         //Obtengo los detalles cuya fecha de inicio esta en ese mes
         public static int ValidarDetallesPedidos(DateTime fechaDesde, DateTime fechaHasta)
         {
             string sql = @"SELECT count(dped_codigo)
                            FROM DETALLE_PEDIDOS 
                            WHERE dped_fecha_inicio >= @p0 and 
-                           dped_fecha_inicio <= @p1";
+                           dped_fecha_inicio <= @p1 and edped_codigo = @p2";
 
             int cantidad =0;
-            object[] valorParametros = { fechaDesde, fechaHasta };
+            object[] valorParametros = { fechaDesde, fechaHasta, DAL.EstadoDetallePedidoDAL.ObtenerCodigoEstado("Pendiente") };
 
             try
             {

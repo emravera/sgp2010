@@ -11,7 +11,8 @@ namespace GyCAP.BLL
         public static readonly int EstadoEnCurso = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("En Curso");
         public static readonly int EstadoFinalizado = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("Finalizado");
         public static readonly int EstadoEntregado = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("Entregado");
-        
+        public static readonly int EstadoPendiente = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("Pendiente");
+
         public static long Insertar(Entidades.EstadoPedido estadoPedido)
         {
             //Si existe lanzamos la excepción correspondiente

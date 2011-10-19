@@ -917,19 +917,14 @@ namespace GyCAP.UI.PlanificacionProduccion
                             }
 
                             //Cambio el estado del pedido que fue planificado si todos los detalles lo fueron
-                            int cont = 0; int cantfilas = 0;
+                            int cont = 0;
                             foreach (Data.dsPlanMensual.PEDIDOSRow pm in dsPlanMensual.PEDIDOS.Rows)
                             {
-                                foreach (Data.dsPlanMensual.DETALLE_PEDIDOSRow row in (Data.dsPlanMensual.DETALLE_PEDIDOSRow[])dsPlanMensual.DETALLE_PEDIDOS.Select("ped_codigo=" + pm.PED_CODIGO.ToString()))
+                                foreach (Data.dsPlanMensual.DETALLE_PEDIDOSRow row in (Data.dsPlanMensual.DETALLE_PEDIDOSRow[])dsPlanMensual.DETALLE_PEDIDOS.Select("ped_codigo=" + pm.PED_CODIGO.ToString() + "and edped_codigo=" + BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Pendiente").ToString()))
                                 {
-                                    if (Convert.ToInt32(row["EDPED_CODIGO"]) == BLL.EstadoPedidoBLL.EstadoEnCurso)
-                                    {
-                                        cont++;
-                                    }
-                                    cantfilas++;
+                                   cont++;                                                                     
                                 }
-
-                                if (cont == cantfilas)
+                                if (cont == 0)
                                 {
                                     //Cambio el estado del pedido en la bd
                                     BLL.PedidoBLL.CambiarEstadoPedido(Convert.ToInt32(pm.PED_CODIGO), BLL.EstadoPedidoBLL.EstadoEnCurso);
@@ -941,14 +936,10 @@ namespace GyCAP.UI.PlanificacionProduccion
                                     pm.AcceptChanges();
                                 }
                                 //pongo los contadores en cero
-                                cont = 0;
-                                cantfilas = 0;
+                                cont = 0;                               
                             }
                         }
-
-                        //Limpiamos la tabla de detalles de pedidos
-                        dsPlanMensual.DETALLE_PEDIDOS.Clear();
-
+                        
                         //Vuelvo al estado inicial de la interface
                         SetInterface(estadoUI.inicio);
                     }
@@ -1077,6 +1068,24 @@ namespace GyCAP.UI.PlanificacionProduccion
                         //Pregunto si se puede eliminar
                         if (BLL.PlanMensualBLL.ExistePlanSemanal(codigo) == true)
                         {
+                            int codigoPedido = 0, pedido = 0;
+
+                            //Si existen pedidos de planes mensuales planificados les actualizo el estado
+                            foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in dsPlanMensual.DETALLE_PLANES_MENSUALES.Rows)
+                            {
+                                if (Convert.ToInt32(row.DPED_CODIGO) > 0)
+                                {
+                                    BLL.DetallePedidoBLL.CambiarEstado(Convert.ToInt32(row.DPED_CODIGO), BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Pendiente"));
+                                    pedido = BLL.DetallePedidoBLL.ObtenerIDPedidoDetalle(Convert.ToInt32(row.DPED_CODIGO));
+                                }                                
+                            }
+                            
+                            //Cambio el estado del pedido
+                            if (pedido != 0)
+                            {
+                                BLL.PedidoBLL.CambiarEstadoPedido(pedido, BLL.EstadoPedidoBLL.EstadoPendiente);
+                            }
+
                             //Elimino el plan anual y su detalle de la BD
                             BLL.PlanMensualBLL.EliminarPlan(codigo);
 
@@ -1165,6 +1174,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 int codigoPedido = Convert.ToInt32(dvListaPedidos[dgvPedidos.SelectedRows[0].Index]["ped_numero"]);
 
                 //Obtengo el detalle del pedido
+                dsPlanMensual.DETALLE_PEDIDOS.Clear();
                 BLL.DetallePedidoBLL.ObtenerDetallePedidoEstado(dsPlanMensual.DETALLE_PEDIDOS, codigoPedido, BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Pendiente"));
 
                 if (dsPlanMensual.DETALLE_PEDIDOS.Rows.Count > 0)

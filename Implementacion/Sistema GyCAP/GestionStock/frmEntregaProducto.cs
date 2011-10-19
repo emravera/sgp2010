@@ -35,10 +35,12 @@ namespace GyCAP.UI.GestionStock
             dgvPedidos.AutoGenerateColumns = false;
             dgvStock.AutoGenerateColumns = false;
 
-            //Para cada Lista
-            //**************************************** LISTAS BUSQUEDA **********************************
+            
+            //*******************************************************************************
+            //                                      LISTAS BUSQUEDA
+            //*******************************************************************************
+
             //Lista de Entregas
-            //Agregamos la columnas
             dgvListaEntregas.Columns.Add("ENTREGA_CODIGO", "Código");
             dgvListaEntregas.Columns.Add("ENTREGA_FECHA", "Fecha Entrega");
             dgvListaEntregas.Columns.Add("CLI_CODIGO", "Cliente");
@@ -55,7 +57,6 @@ namespace GyCAP.UI.GestionStock
             dgvListaEntregas.DataSource = dvListaEntregaBus;
 
             //Lista de Detalles de Entregas
-            //Agregamos la columnas
             dgvDetalleBusqueda.Columns.Add("DENT_CODIGO", "Código");
             dgvDetalleBusqueda.Columns.Add("ENTREGA_CODIGO", "Entrega");
             dgvDetalleBusqueda.Columns.Add("DENT_CONTENIDO", "Stock");
@@ -73,72 +74,76 @@ namespace GyCAP.UI.GestionStock
             dvListadetalleBus = new DataView(dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO);
             dgvDetalleBusqueda.DataSource = dvListadetalleBus;
 
-            //**************************************** LISTAS DE DATOS **********************************
-            //Lista de
-            //Agregamos la columnas
+            //*******************************************************************************
+            //                                      LISTAS DE DATOS
+            //*******************************************************************************
+            
+            //=================================
+            //Lista de Ubicaciones de Stock
+            //=================================
             dgvStock.Columns.Add("USTCK_NUMERO", "Número");
-            dgvStock.Columns.Add("USTCK_CODIGO", "Código");
             dgvStock.Columns.Add("USTCK_NOMBRE", "Stock");
             dgvStock.Columns.Add("USTCK_CANTIDADREAL", "Cantidad");
             dgvStock.Columns.Add("UMED_CODIGO", "Unidad Medida");
 
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvStock.Columns["USTCK_NUMERO"].DataPropertyName = "USTCK_NUMERO";
-            dgvStock.Columns["USTCK_CODIGO"].DataPropertyName = "USTCK_CODIGO";
             dgvStock.Columns["USTCK_NOMBRE"].DataPropertyName = "USTCK_NOMBRE";
             dgvStock.Columns["USTCK_CANTIDADREAL"].DataPropertyName = "USTCK_CANTIDADREAL";
             dgvStock.Columns["UMED_CODIGO"].DataPropertyName = "UMED_CODIGO";
+
+            //Alineamos las columnas a la derecha
+            dgvStock.Columns["USTCK_NUMERO"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvStock.Columns["USTCK_CANTIDADREAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListaStock = new DataView(dsEntregaProducto.UBICACIONES_STOCK);
             dgvStock.DataSource = dvListaStock;
 
-            //*********************************** Lista de Pedidos *****************************************
-            //Agregamos la columnas
-            dgvPedidos.Columns.Add("PED_CODIGO", "Código");
+            //=================================
+            //Lista de Pedidos
+            //=================================
             dgvPedidos.Columns.Add("PED_NUMERO", "Número");
             dgvPedidos.Columns.Add("CLI_CODIGO", "Cliente");
             dgvPedidos.Columns.Add("EPED_CODIGO", "Estado");
             dgvPedidos.Columns.Add("PED_FECHA_ALTA", "Fecha Alta");
-            dgvPedidos.Columns.Add("PED_FECHAENTREGAPREVISTA", "Fecha Entrega");
             dgvPedidos.Columns.Add("PED_FECHAENTREGAREAL", "Fecha Real Entrega");
             
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
-            dgvPedidos.Columns["PED_CODIGO"].DataPropertyName = "PED_CODIGO";
             dgvPedidos.Columns["PED_NUMERO"].DataPropertyName = "PED_NUMERO";
             dgvPedidos.Columns["CLI_CODIGO"].DataPropertyName = "CLI_CODIGO";
             dgvPedidos.Columns["EPED_CODIGO"].DataPropertyName = "EPED_CODIGO";
             dgvPedidos.Columns["PED_FECHA_ALTA"].DataPropertyName = "PED_FECHA_ALTA";
-            dgvPedidos.Columns["PED_FECHAENTREGAPREVISTA"].DataPropertyName = "PED_FECHAENTREGAPREVISTA";
             dgvPedidos.Columns["PED_FECHAENTREGAREAL"].DataPropertyName = "PED_FECHAENTREGAREAL";
                         
             //Creamos el dataview y lo asignamos a la grilla
             dvListaPedidos = new DataView(dsEntregaProducto.PEDIDOS);
             dgvPedidos.DataSource = dvListaPedidos;
 
-            //*********************************** Lista de Detalle de Pedidos *****************************************
-            //Agregamos la columnas
-            dgvDetallePedido.Columns.Add("DPED_CODIGO", "Código");
-            dgvDetallePedido.Columns.Add("PED_CODIGO", "Pedido");
+            //=================================
+            //Lista de Detalles de Pedido
+            //=================================
+            dgvDetallePedido.Columns.Add("DPED_CODIGO", "Número");
             dgvDetallePedido.Columns.Add("EDPED_CODIGO", "Estado");
             dgvDetallePedido.Columns.Add("COC_CODIGO", "Cocina");
             dgvDetallePedido.Columns.Add("DPED_CANTIDAD", "Cantidad");
-            dgvDetallePedido.Columns.Add("DPED_FECHA_CANCELACION", "Fecha Cancelación");
-
+            
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvDetallePedido.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
-            dgvDetallePedido.Columns["PED_CODIGO"].DataPropertyName = "PED_CODIGO";
             dgvDetallePedido.Columns["EDPED_CODIGO"].DataPropertyName = "EDPED_CODIGO";
             dgvDetallePedido.Columns["COC_CODIGO"].DataPropertyName = "COC_CODIGO";
             dgvDetallePedido.Columns["DPED_CANTIDAD"].DataPropertyName = "DPED_CANTIDAD";
-            dgvDetallePedido.Columns["DPED_FECHA_CANCELACION"].DataPropertyName = "DPED_FECHA_CANCELACION";
-                      
+            
+            //Alineamos las columnas a la derecha
+            dgvDetallePedido.Columns["DPED_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetallePedido = new DataView(dsEntregaProducto.DETALLE_PEDIDOS);
             dgvDetallePedido.DataSource = dvListaDetallePedido;
 
-            //*************************************************** Lista de DETALLE ENTREGA ***************************+
-            //Agregamos la columnas
+            //=================================
+            // Lista de Detalle de Entregas
+            //=================================
             dgvDatosEntrega.Columns.Add("DENT_CODIGO", "Código");
             dgvDatosEntrega.Columns.Add("ENTREGA_CODIGO", "Entrega");
             dgvDatosEntrega.Columns.Add("DENT_CONTENIDO", "Contenido");
@@ -152,13 +157,17 @@ namespace GyCAP.UI.GestionStock
             dgvDatosEntrega.Columns["DENT_CANTIDAD"].DataPropertyName = "DENT_CANTIDAD";
             dgvDatosEntrega.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
             
+            //Alineamos las columnas que sean necesarias
+            dgvDatosEntrega.Columns["DENT_CANTIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
             //Creamos el dataview y lo asignamos a la grilla
             dvListaDetalleEntrega = new DataView(dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO);
             dgvDatosEntrega.DataSource = dvListaDetalleEntrega;
 
-            //************************************************************************************************
-            //Se llenan los DataTable
-            
+            //**************************************************************************************
+            //                              Cargamos los  DataTable
+            //**************************************************************************************
+
             //Llenamos el dataset de Clientes
             BLL.ClienteBLL.ObtenerTodos(dsEntregaProducto.CLIENTES);
 
@@ -310,22 +319,6 @@ namespace GyCAP.UI.GestionStock
                         dgvPedidos.Visible = false;
                     }
 
-                    //Escondo las columnas de las grillas
-                    dgvStock.Columns["USTCK_NUMERO"].Visible = false;
-                    dgvStock.Columns["USTCK_CODIGO"].Visible = false;
-
-                    //Escondo las columnas de las grillas de pedidos
-                    dgvPedidos.Columns["PED_CODIGO"].Visible = false;
-                    dgvPedidos.Columns["PED_FECHAENTREGAREAL"].Visible = false;
-                    dgvPedidos.Columns["PED_FECHA_ALTA"].Visible = false;
-                    
-                    dgvDetallePedido.Columns["PED_CODIGO"].Visible = false;
-                    dgvDetallePedido.Columns["DPED_FECHA_CANCELACION"].Visible = false;
-
-                    //Lista del Detalle
-                    dgvDatosEntrega.Columns["DENT_CODIGO"].Visible = false;
-                    dgvDatosEntrega.Columns["ENTREGA_CODIGO"].Visible = false;
-
                     //Selecciono el tabcontrol
                     tcEntregaProducto.SelectedTab = tpDatos;
                     estadoActual = estadoUI.cargaDetalle;
@@ -343,24 +336,8 @@ namespace GyCAP.UI.GestionStock
                     {
                         btnVerDetalle.Enabled = false;
                         dgvPedidos.Visible = false;
-                    }
-
-                    //Escondo las columnas de las grillas
-                    dgvStock.Columns["USTCK_NUMERO"].Visible = false;
-                    dgvStock.Columns["USTCK_CODIGO"].Visible = false;
-
-                    //Escondo las columnas de las grillas de pedidos
-                    dgvPedidos.Columns["PED_CODIGO"].Visible = false;
-                    dgvPedidos.Columns["PED_FECHAENTREGAREAL"].Visible = false;
-                    dgvPedidos.Columns["PED_FECHA_ALTA"].Visible = false;
-
-                    dgvDetallePedido.Columns["PED_CODIGO"].Visible = false;
-                    dgvDetallePedido.Columns["DPED_FECHA_CANCELACION"].Visible = false;
-
-                    //Lista del Detalle
-                    dgvDatosEntrega.Columns["DENT_CODIGO"].Visible = false;
-                    dgvDatosEntrega.Columns["ENTREGA_CODIGO"].Visible = false;
-
+                    } 
+                    
                     //Selecciono el tabcontrol
                     tcEntregaProducto.SelectedTab = tpDatos;
                     estadoActual = estadoUI.modificar;
@@ -752,10 +729,7 @@ namespace GyCAP.UI.GestionStock
                     gbDetallePedido.Visible = true;
                     btnEntregar.Enabled = true;
                     seleccionPestaña = true;
-                    tcDatos.SelectedTab = tpDetallePedido;
-
-                    //Escondo las columnas que no quiero que se vean
-                    dgvDetallePedido.Columns["DPED_CODIGO"].Visible = false;
+                    tcDatos.SelectedTab = tpDetallePedido;                    
                 }
                 else
                 {
