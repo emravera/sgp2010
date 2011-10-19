@@ -48,7 +48,6 @@
             this.chFechaEntrega = new System.Windows.Forms.CheckBox();
             this.chCliente = new System.Windows.Forms.CheckBox();
             this.dtpFechaBusqueda = new System.Windows.Forms.DateTimePicker();
-            this.cbClienteBus = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -71,7 +70,6 @@
             this.tpDetallePedido = new System.Windows.Forms.TabPage();
             this.gbDetallePedido = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cbUbicacionesStock = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label8 = new System.Windows.Forms.Label();
             this.btnEntregar = new System.Windows.Forms.Button();
             this.dgvDetallePedido = new System.Windows.Forms.DataGridView();
@@ -81,9 +79,7 @@
             this.dtpFechaEntrega = new System.Windows.Forms.DateTimePicker();
             this.label12 = new System.Windows.Forms.Label();
             this.btnCargaDetalle = new System.Windows.Forms.Button();
-            this.cbCliente = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label3 = new System.Windows.Forms.Label();
-            this.cbEmpleado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
@@ -93,6 +89,10 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.cbClienteBus = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbUbicacionesStock = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbCliente = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.cbEmpleado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.gbDetalleGrilla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatosEntrega)).BeginInit();
             this.panelAcciones.SuspendLayout();
@@ -350,7 +350,7 @@
             // chFechaEntrega
             // 
             this.chFechaEntrega.AutoSize = true;
-            this.chFechaEntrega.Location = new System.Drawing.Point(232, 27);
+            this.chFechaEntrega.Location = new System.Drawing.Point(242, 28);
             this.chFechaEntrega.Name = "chFechaEntrega";
             this.chFechaEntrega.Size = new System.Drawing.Size(15, 14);
             this.chFechaEntrega.TabIndex = 33;
@@ -373,16 +373,6 @@
             this.dtpFechaBusqueda.Name = "dtpFechaBusqueda";
             this.dtpFechaBusqueda.Size = new System.Drawing.Size(86, 20);
             this.dtpFechaBusqueda.TabIndex = 31;
-            // 
-            // cbClienteBus
-            // 
-            this.cbClienteBus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbClienteBus.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbClienteBus.FormattingEnabled = true;
-            this.cbClienteBus.Location = new System.Drawing.Point(85, 24);
-            this.cbClienteBus.Name = "cbClienteBus";
-            this.cbClienteBus.Size = new System.Drawing.Size(122, 21);
-            this.cbClienteBus.TabIndex = 29;
             // 
             // label1
             // 
@@ -434,7 +424,7 @@
             // 
             this.groupBox3.Location = new System.Drawing.Point(8, 406);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(388, 50);
+            this.groupBox3.Size = new System.Drawing.Size(388, 52);
             this.groupBox3.TabIndex = 19;
             this.groupBox3.TabStop = false;
             // 
@@ -522,7 +512,7 @@
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 26);
             this.btnAgregar.TabIndex = 13;
-            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.Text = "Entregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
@@ -574,6 +564,7 @@
             this.dgvPedidos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPedidos.Location = new System.Drawing.Point(3, 16);
             this.dgvPedidos.Name = "dgvPedidos";
+            this.dgvPedidos.ReadOnly = true;
             this.dgvPedidos.RowHeadersVisible = false;
             this.dgvPedidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPedidos.Size = new System.Drawing.Size(351, 213);
@@ -633,16 +624,6 @@
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ubicación de Stock";
-            // 
-            // cbUbicacionesStock
-            // 
-            this.cbUbicacionesStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbUbicacionesStock.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbUbicacionesStock.FormattingEnabled = true;
-            this.cbUbicacionesStock.Location = new System.Drawing.Point(118, 17);
-            this.cbUbicacionesStock.Name = "cbUbicacionesStock";
-            this.cbUbicacionesStock.Size = new System.Drawing.Size(186, 21);
-            this.cbUbicacionesStock.TabIndex = 28;
             // 
             // label8
             // 
@@ -743,16 +724,6 @@
             this.btnCargaDetalle.UseVisualStyleBackColor = true;
             this.btnCargaDetalle.Click += new System.EventHandler(this.btnCargaDetalle_Click);
             // 
-            // cbCliente
-            // 
-            this.cbCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCliente.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbCliente.FormattingEnabled = true;
-            this.cbCliente.Location = new System.Drawing.Point(51, 24);
-            this.cbCliente.Name = "cbCliente";
-            this.cbCliente.Size = new System.Drawing.Size(133, 21);
-            this.cbCliente.TabIndex = 23;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -761,16 +732,6 @@
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 24;
             this.label3.Text = "Cliente:";
-            // 
-            // cbEmpleado
-            // 
-            this.cbEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEmpleado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEmpleado.FormattingEnabled = true;
-            this.cbEmpleado.Location = new System.Drawing.Point(499, 24);
-            this.cbEmpleado.Name = "cbEmpleado";
-            this.cbEmpleado.Size = new System.Drawing.Size(145, 21);
-            this.cbEmpleado.TabIndex = 2;
             // 
             // label4
             // 
@@ -879,6 +840,46 @@
             this.btnSalir.Text = "&Salir";
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // cbClienteBus
+            // 
+            this.cbClienteBus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbClienteBus.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbClienteBus.FormattingEnabled = true;
+            this.cbClienteBus.Location = new System.Drawing.Point(85, 24);
+            this.cbClienteBus.Name = "cbClienteBus";
+            this.cbClienteBus.Size = new System.Drawing.Size(122, 21);
+            this.cbClienteBus.TabIndex = 29;
+            // 
+            // cbUbicacionesStock
+            // 
+            this.cbUbicacionesStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbUbicacionesStock.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbUbicacionesStock.FormattingEnabled = true;
+            this.cbUbicacionesStock.Location = new System.Drawing.Point(118, 17);
+            this.cbUbicacionesStock.Name = "cbUbicacionesStock";
+            this.cbUbicacionesStock.Size = new System.Drawing.Size(186, 21);
+            this.cbUbicacionesStock.TabIndex = 28;
+            // 
+            // cbCliente
+            // 
+            this.cbCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCliente.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbCliente.FormattingEnabled = true;
+            this.cbCliente.Location = new System.Drawing.Point(51, 24);
+            this.cbCliente.Name = "cbCliente";
+            this.cbCliente.Size = new System.Drawing.Size(133, 21);
+            this.cbCliente.TabIndex = 23;
+            // 
+            // cbEmpleado
+            // 
+            this.cbEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEmpleado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEmpleado.FormattingEnabled = true;
+            this.cbEmpleado.Location = new System.Drawing.Point(499, 24);
+            this.cbEmpleado.Name = "cbEmpleado";
+            this.cbEmpleado.Size = new System.Drawing.Size(145, 21);
+            this.cbEmpleado.TabIndex = 2;
             // 
             // frmEntregaProducto
             // 

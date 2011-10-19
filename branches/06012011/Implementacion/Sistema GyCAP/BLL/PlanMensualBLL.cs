@@ -56,6 +56,7 @@ namespace GyCAP.BLL
         //METODO DE ELIMINACION
         public static void EliminarPlan(int codigoPlan)
         {
+            //Primero se cambian los estados de los detalles de pedido planificados
             DAL.PlanMensualDAL.EliminarPlan(codigoPlan);
         }
 
