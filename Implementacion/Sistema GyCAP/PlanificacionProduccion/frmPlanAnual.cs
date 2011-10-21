@@ -167,7 +167,6 @@ namespace GyCAP.UI.PlanificacionProduccion
 
                 case estadoUI.modificar:
                     btnNuevo.Enabled = true;
-                    txtTotal.Enabled = false;
                     numAdelantamiento.Enabled = false;
                     btnConsultar.Enabled = false;
                     btnEliminar.Enabled = false;
@@ -222,7 +221,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     //Manejo los controles
                     txtAnio.Focus();
                     numPuntoEquilibrio.Enabled = false;
-                    txtTotal.Enabled = false;
                     numPrecioVenta.Value = 0;
                     numPuntoEquilibrio.Value = 0;
                     numPuntoEquilibrio.Enabled = false;
@@ -423,7 +421,7 @@ namespace GyCAP.UI.PlanificacionProduccion
             totalActual += Convert.ToDecimal(numDiciembre.Value);
 
             //Se lo asigno al texbox que lo muestra por pantalla
-            txtTotal.Text = totalActual.ToString();
+            lblTotal.Text = totalActual.ToString();
 
             //Se calculan los valores de demanda no cubierta y de sobreproduccion
             decimal result = totalDemanda - totalActual;
@@ -921,11 +919,11 @@ namespace GyCAP.UI.PlanificacionProduccion
                     numDiciembre.Value = planMeses[11];
 
                     //Calculamos el Total de la Planificación
-                    txtTotal.Text = planMeses.Sum().ToString();
+                    lblTotal.Text = planMeses.Sum().ToString();
                     lblTotalSistema.Text = planMeses.Sum().ToString();
 
                     //Muestro lo que no se pudo asignar
-                    txtDemandaNoCubierta.Text =(BLL.DetalleDemandaAnualBLL.ObtenerTotal(demandaActual.Codigo)- Convert.ToInt32(txtTotal.Text)).ToString(); ;
+                    txtDemandaNoCubierta.Text =(BLL.DetalleDemandaAnualBLL.ObtenerTotal(demandaActual.Codigo)- Convert.ToInt32(lblTotal.Text)).ToString(); ;
 
                     //Generamos el Grafico de Planificacion
                     GenerarGrafico(planMeses);
@@ -1258,9 +1256,9 @@ namespace GyCAP.UI.PlanificacionProduccion
                 txtAnio.Text = dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).PAN_ANIO.ToString();
                 cbEstimacionDemanda.SetSelectedValue(Convert.ToInt32(dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).DEMAN_CODIGO));
 
-                if (txtTotal.Text == string.Empty)
+                if (lblTotal.Text == string.Empty)
                 {
-                    txtTotal.Text = "0";
+                    lblTotal.Text = "0";
                     //Muestro lo que no se pudo asignar
                     txtDemandaNoCubierta.Text = BLL.DetalleDemandaAnualBLL.ObtenerTotal(Convert.ToInt32(dsPlanAnual.PLANES_ANUALES.FindByPAN_CODIGO(codigo).DEMAN_CODIGO)).ToString();
                 }

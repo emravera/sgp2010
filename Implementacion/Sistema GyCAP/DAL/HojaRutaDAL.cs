@@ -294,5 +294,23 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
+
+        public static int ObtenerUbicacionStockHoja(string nombreCocina)
+        {
+            string sql = @"SELECT ustck_numero 
+                           FROM HOJAS_RUTA 
+                           WHERE hr_nombre = @p0";
+            
+            object[] parametros = { nombreCocina };
+            int ubicacionStock = 0;
+
+            try
+            {
+                ubicacionStock = Convert.ToInt32(DB.executeScalar(sql, parametros, null));                
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+
+            return ubicacionStock;
+        }
     }
 }

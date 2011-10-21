@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace GyCAP.BLL
 {
@@ -29,10 +30,24 @@ namespace GyCAP.BLL
             DAL.EntregaProductoDAL.ObtenerDetalleEntrega(idEntrega, dtEntregas);
         }
 
-        //Metodo que guarda la entrega
+        //Metodo que guarda la entrega del producto
         public static void GuardarEntrega(Entidades.EntregaProducto entrega, Data.dsEntregaProducto dsEntregaProducto)
         {
-            DAL.EntregaProductoDAL.GuardarEntrega(entrega, dsEntregaProducto);
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                transaccion = DAL.DB.IniciarTransaccion();
+                
+                DAL.EntregaProductoDAL.GuardarEntrega(entrega, dsEntregaProducto);
+            
+            }
+            catch (SqlException ex)
+            {
+
+            }
+
+            
         }
         //Metodo que guarda la entrega modificada
         public static void GuardarEntregaModificada(Entidades.EntregaProducto entrega, Data.dsEntregaProducto dsEntregaProducto)

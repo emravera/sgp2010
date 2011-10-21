@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.numDiciembre = new System.Windows.Forms.NumericUpDown();
             this.tcPlanAnual = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
@@ -49,7 +49,6 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbModificacion = new System.Windows.Forms.GroupBox();
             this.lblTotalSistema = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
             this.gbEstimacionMes = new System.Windows.Forms.GroupBox();
             this.txtSobreproduccion = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -66,8 +65,7 @@
             this.numFebrero = new System.Windows.Forms.NumericUpDown();
             this.numJulio = new System.Windows.Forms.NumericUpDown();
             this.numEnero = new System.Windows.Forms.NumericUpDown();
-            this.txtTotal = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -92,6 +90,7 @@
             this.lblCapacidadStock = new System.Windows.Forms.Label();
             this.lblCapacidadProduccion = new System.Windows.Forms.Label();
             this.gbPuntoEquilibrio = new System.Windows.Forms.GroupBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.chPuntoEquilibrio = new System.Windows.Forms.CheckBox();
             this.btnPuntoEquilibrio = new System.Windows.Forms.Button();
@@ -109,7 +108,6 @@
             this.rbDemandaActual = new System.Windows.Forms.RadioButton();
             this.rbOtraDemanda = new System.Windows.Forms.RadioButton();
             this.chListAnios = new System.Windows.Forms.CheckedListBox();
-            this.cbEstimacionDemanda = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
             this.txtAnio = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -122,7 +120,9 @@
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.btnPlanificar = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label19 = new System.Windows.Forms.Label();
+            this.cbEstimacionDemanda = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numDiciembre)).BeginInit();
             this.tcPlanAnual.SuspendLayout();
             this.tpBuscar.SuspendLayout();
@@ -341,14 +341,14 @@
             // 
             // chartDemanda
             // 
-            chartArea6.Name = "ChartArea1";
-            this.chartDemanda.ChartAreas.Add(chartArea6);
+            chartArea5.Name = "ChartArea1";
+            this.chartDemanda.ChartAreas.Add(chartArea5);
             this.chartDemanda.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartDemanda.Location = new System.Drawing.Point(3, 17);
             this.chartDemanda.Name = "chartDemanda";
-            series6.ChartArea = "ChartArea1";
-            series6.Name = "Series1";
-            this.chartDemanda.Series.Add(series6);
+            series5.ChartArea = "ChartArea1";
+            series5.Name = "Series1";
+            this.chartDemanda.Series.Add(series5);
             this.chartDemanda.Size = new System.Drawing.Size(438, 226);
             this.chartDemanda.TabIndex = 0;
             this.chartDemanda.Text = "chart1";
@@ -390,8 +390,10 @@
             // gbModificacion
             // 
             this.gbModificacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbModificacion.Controls.Add(this.label20);
+            this.gbModificacion.Controls.Add(this.label18);
             this.gbModificacion.Controls.Add(this.lblTotalSistema);
-            this.gbModificacion.Controls.Add(this.label21);
+            this.gbModificacion.Controls.Add(this.lblTotal);
             this.gbModificacion.Location = new System.Drawing.Point(6, 418);
             this.gbModificacion.Name = "gbModificacion";
             this.gbModificacion.Size = new System.Drawing.Size(302, 46);
@@ -401,19 +403,11 @@
             // lblTotalSistema
             // 
             this.lblTotalSistema.AutoSize = true;
-            this.lblTotalSistema.Location = new System.Drawing.Point(150, 21);
+            this.lblTotalSistema.Location = new System.Drawing.Point(158, 30);
             this.lblTotalSistema.Name = "lblTotalSistema";
-            this.lblTotalSistema.Size = new System.Drawing.Size(0, 13);
-            this.lblTotalSistema.TabIndex = 24;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(2, 21);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(148, 13);
-            this.label21.TabIndex = 23;
-            this.label21.Text = "Total Planificado por Sistema:";
+            this.lblTotalSistema.Size = new System.Drawing.Size(85, 13);
+            this.lblTotalSistema.TabIndex = 23;
+            this.lblTotalSistema.Text = "TOTAL SISTEMA";
             // 
             // gbEstimacionMes
             // 
@@ -435,8 +429,6 @@
             this.gbEstimacionMes.Controls.Add(this.numFebrero);
             this.gbEstimacionMes.Controls.Add(this.numJulio);
             this.gbEstimacionMes.Controls.Add(this.numEnero);
-            this.gbEstimacionMes.Controls.Add(this.txtTotal);
-            this.gbEstimacionMes.Controls.Add(this.label18);
             this.gbEstimacionMes.Controls.Add(this.label16);
             this.gbEstimacionMes.Controls.Add(this.label15);
             this.gbEstimacionMes.Controls.Add(this.label14);
@@ -459,7 +451,7 @@
             // txtSobreproduccion
             // 
             this.txtSobreproduccion.Enabled = false;
-            this.txtSobreproduccion.Location = new System.Drawing.Point(6, 222);
+            this.txtSobreproduccion.Location = new System.Drawing.Point(147, 185);
             this.txtSobreproduccion.Name = "txtSobreproduccion";
             this.txtSobreproduccion.Size = new System.Drawing.Size(132, 21);
             this.txtSobreproduccion.TabIndex = 27;
@@ -467,28 +459,28 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 207);
+            this.label3.Location = new System.Drawing.Point(7, 185);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(137, 13);
+            this.label3.Size = new System.Drawing.Size(141, 13);
             this.label3.TabIndex = 28;
-            this.label3.Text = "Producción sobre Demanda";
+            this.label3.Text = "Producción sobre Demanda:";
             // 
             // txtDemandaNoCubierta
             // 
             this.txtDemandaNoCubierta.Enabled = false;
-            this.txtDemandaNoCubierta.Location = new System.Drawing.Point(159, 222);
+            this.txtDemandaNoCubierta.Location = new System.Drawing.Point(147, 214);
             this.txtDemandaNoCubierta.Name = "txtDemandaNoCubierta";
-            this.txtDemandaNoCubierta.Size = new System.Drawing.Size(135, 21);
+            this.txtDemandaNoCubierta.Size = new System.Drawing.Size(132, 21);
             this.txtDemandaNoCubierta.TabIndex = 25;
             // 
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(172, 207);
+            this.label31.Location = new System.Drawing.Point(7, 222);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(112, 13);
+            this.label31.Size = new System.Drawing.Size(116, 13);
             this.label31.TabIndex = 26;
-            this.label31.Text = "Demanda No Cubierta";
+            this.label31.Text = "Demanda No Cubierta:";
             // 
             // numNoviembre
             // 
@@ -655,21 +647,14 @@
             this.numEnero.ValueChanged += new System.EventHandler(this.numEnero_ValueChanged);
             this.numEnero.Enter += new System.EventHandler(this.numEnero_Enter);
             // 
-            // txtTotal
+            // lblTotal
             // 
-            this.txtTotal.Location = new System.Drawing.Point(159, 182);
-            this.txtTotal.Name = "txtTotal";
-            this.txtTotal.Size = new System.Drawing.Size(135, 21);
-            this.txtTotal.TabIndex = 18;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(214, 167);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(31, 13);
-            this.label18.TabIndex = 24;
-            this.label18.Text = "Total";
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(158, 12);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(39, 13);
+            this.lblTotal.TabIndex = 24;
+            this.lblTotal.Text = "TOTAL";
             // 
             // label16
             // 
@@ -935,6 +920,16 @@
             this.gbPuntoEquilibrio.TabStop = false;
             this.gbPuntoEquilibrio.Text = "Cálculo Punto de Equilibrio";
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(343, 40);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(52, 13);
+            this.label19.TabIndex = 27;
+            this.label19.Text = "Un./Sem.";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -1122,16 +1117,6 @@
             this.chListAnios.Size = new System.Drawing.Size(167, 20);
             this.chListAnios.TabIndex = 9;
             // 
-            // cbEstimacionDemanda
-            // 
-            this.cbEstimacionDemanda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEstimacionDemanda.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEstimacionDemanda.FormattingEnabled = true;
-            this.cbEstimacionDemanda.Location = new System.Drawing.Point(177, 44);
-            this.cbEstimacionDemanda.Name = "cbEstimacionDemanda";
-            this.cbEstimacionDemanda.Size = new System.Drawing.Size(139, 21);
-            this.cbEstimacionDemanda.TabIndex = 2;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -1268,15 +1253,33 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 532);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
-            // label19
+            // cbEstimacionDemanda
             // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(343, 40);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(52, 13);
-            this.label19.TabIndex = 27;
-            this.label19.Text = "Un./Sem.";
+            this.cbEstimacionDemanda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstimacionDemanda.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEstimacionDemanda.FormattingEnabled = true;
+            this.cbEstimacionDemanda.Location = new System.Drawing.Point(177, 44);
+            this.cbEstimacionDemanda.Name = "cbEstimacionDemanda";
+            this.cbEstimacionDemanda.Size = new System.Drawing.Size(139, 21);
+            this.cbEstimacionDemanda.TabIndex = 2;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(117, 12);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(35, 13);
+            this.label18.TabIndex = 25;
+            this.label18.Text = "Total:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(4, 30);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(148, 13);
+            this.label20.TabIndex = 26;
+            this.label20.Text = "Total Planificado por Sistema:";
             // 
             // frmPlanAnual
             // 
@@ -1362,7 +1365,6 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.GroupBox gbModificacion;
         private System.Windows.Forms.Label lblTotalSistema;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.GroupBox gbEstimacionMes;
         private System.Windows.Forms.NumericUpDown numNoviembre;
         private System.Windows.Forms.NumericUpDown numOctubre;
@@ -1375,8 +1377,7 @@
         private System.Windows.Forms.NumericUpDown numFebrero;
         private System.Windows.Forms.NumericUpDown numJulio;
         private System.Windows.Forms.NumericUpDown numEnero;
-        private System.Windows.Forms.TextBox txtTotal;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
@@ -1436,6 +1437,8 @@
         private System.Windows.Forms.TextBox txtSobreproduccion;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label18;
 
 
 

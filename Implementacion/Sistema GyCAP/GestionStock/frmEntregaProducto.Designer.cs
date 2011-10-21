@@ -48,6 +48,7 @@
             this.chFechaEntrega = new System.Windows.Forms.CheckBox();
             this.chCliente = new System.Windows.Forms.CheckBox();
             this.dtpFechaBusqueda = new System.Windows.Forms.DateTimePicker();
+            this.cbClienteBus = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -55,13 +56,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.gbStock = new System.Windows.Forms.GroupBox();
             this.tcDatos = new System.Windows.Forms.TabControl();
-            this.tpPlanificacion = new System.Windows.Forms.TabPage();
-            this.gbCargaDetalle = new System.Windows.Forms.GroupBox();
-            this.gbCantidad = new System.Windows.Forms.GroupBox();
-            this.numCantidad = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.dgvStock = new System.Windows.Forms.DataGridView();
             this.tpPedidos = new System.Windows.Forms.TabPage();
             this.gbPedidos = new System.Windows.Forms.GroupBox();
             this.dgvPedidos = new System.Windows.Forms.DataGridView();
@@ -69,8 +63,6 @@
             this.btnVerDetalle = new System.Windows.Forms.Button();
             this.tpDetallePedido = new System.Windows.Forms.TabPage();
             this.gbDetallePedido = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.btnEntregar = new System.Windows.Forms.Button();
             this.dgvDetallePedido = new System.Windows.Forms.DataGridView();
             this.gbBotones = new System.Windows.Forms.GroupBox();
@@ -79,7 +71,9 @@
             this.dtpFechaEntrega = new System.Windows.Forms.DateTimePicker();
             this.label12 = new System.Windows.Forms.Label();
             this.btnCargaDetalle = new System.Windows.Forms.Button();
+            this.cbCliente = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label3 = new System.Windows.Forms.Label();
+            this.cbEmpleado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
@@ -89,10 +83,6 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
-            this.cbClienteBus = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbUbicacionesStock = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbCliente = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
-            this.cbEmpleado = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.gbDetalleGrilla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatosEntrega)).BeginInit();
             this.panelAcciones.SuspendLayout();
@@ -106,17 +96,11 @@
             this.tpDatos.SuspendLayout();
             this.gbStock.SuspendLayout();
             this.tcDatos.SuspendLayout();
-            this.tpPlanificacion.SuspendLayout();
-            this.gbCargaDetalle.SuspendLayout();
-            this.gbCantidad.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numCantidad)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).BeginInit();
             this.tpPedidos.SuspendLayout();
             this.gbPedidos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).BeginInit();
             this.tpDetallePedido.SuspendLayout();
             this.gbDetallePedido.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePedido)).BeginInit();
             this.gbBotones.SuspendLayout();
             this.gbDatosPrincipales.SuspendLayout();
@@ -126,7 +110,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(271, 16);
+            this.btnGuardar.Location = new System.Drawing.Point(188, 17);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 26);
             this.btnGuardar.TabIndex = 21;
@@ -178,7 +162,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(225, 34);
+            this.label7.Location = new System.Drawing.Point(220, 32);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(60, 13);
             this.label7.TabIndex = 20;
@@ -192,7 +176,7 @@
             this.btnRestar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRestar.Image = ((System.Drawing.Image)(resources.GetObject("btnRestar.Image")));
             this.btnRestar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRestar.Location = new System.Drawing.Point(258, 4);
+            this.btnRestar.Location = new System.Drawing.Point(253, 2);
             this.btnRestar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRestar.Name = "btnRestar";
             this.btnRestar.Size = new System.Drawing.Size(30, 30);
@@ -209,7 +193,7 @@
             this.btnSumar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSumar.Image = ((System.Drawing.Image)(resources.GetObject("btnSumar.Image")));
             this.btnSumar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSumar.Location = new System.Drawing.Point(219, 4);
+            this.btnSumar.Location = new System.Drawing.Point(214, 2);
             this.btnSumar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSumar.Name = "btnSumar";
             this.btnSumar.Size = new System.Drawing.Size(30, 30);
@@ -350,7 +334,7 @@
             // chFechaEntrega
             // 
             this.chFechaEntrega.AutoSize = true;
-            this.chFechaEntrega.Location = new System.Drawing.Point(242, 28);
+            this.chFechaEntrega.Location = new System.Drawing.Point(268, 27);
             this.chFechaEntrega.Name = "chFechaEntrega";
             this.chFechaEntrega.Size = new System.Drawing.Size(15, 14);
             this.chFechaEntrega.TabIndex = 33;
@@ -369,10 +353,20 @@
             // 
             this.dtpFechaBusqueda.CustomFormat = "dd/MM/yyyy";
             this.dtpFechaBusqueda.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaBusqueda.Location = new System.Drawing.Point(354, 24);
+            this.dtpFechaBusqueda.Location = new System.Drawing.Point(380, 23);
             this.dtpFechaBusqueda.Name = "dtpFechaBusqueda";
             this.dtpFechaBusqueda.Size = new System.Drawing.Size(86, 20);
             this.dtpFechaBusqueda.TabIndex = 31;
+            // 
+            // cbClienteBus
+            // 
+            this.cbClienteBus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbClienteBus.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbClienteBus.FormattingEnabled = true;
+            this.cbClienteBus.Location = new System.Drawing.Point(85, 24);
+            this.cbClienteBus.Name = "cbClienteBus";
+            this.cbClienteBus.Size = new System.Drawing.Size(139, 21);
+            this.cbClienteBus.TabIndex = 29;
             // 
             // label1
             // 
@@ -386,7 +380,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(253, 28);
+            this.label2.Location = new System.Drawing.Point(285, 27);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(95, 13);
             this.label2.TabIndex = 28;
@@ -396,7 +390,7 @@
             // 
             this.btnBuscar.Image = global::GyCAP.UI.GestionStock.Properties.Resources.lupa_20;
             this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(566, 20);
+            this.btnBuscar.Location = new System.Drawing.Point(560, 21);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 26);
             this.btnBuscar.TabIndex = 4;
@@ -440,7 +434,6 @@
             // 
             // tcDatos
             // 
-            this.tcDatos.Controls.Add(this.tpPlanificacion);
             this.tcDatos.Controls.Add(this.tpPedidos);
             this.tcDatos.Controls.Add(this.tpDetallePedido);
             this.tcDatos.Location = new System.Drawing.Point(6, 17);
@@ -450,91 +443,9 @@
             this.tcDatos.TabIndex = 20;
             this.tcDatos.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tcDatos_Selecting);
             // 
-            // tpPlanificacion
-            // 
-            this.tpPlanificacion.BackColor = System.Drawing.SystemColors.Control;
-            this.tpPlanificacion.Controls.Add(this.gbCargaDetalle);
-            this.tpPlanificacion.Location = new System.Drawing.Point(4, 22);
-            this.tpPlanificacion.Name = "tpPlanificacion";
-            this.tpPlanificacion.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPlanificacion.Size = new System.Drawing.Size(368, 276);
-            this.tpPlanificacion.TabIndex = 0;
-            this.tpPlanificacion.Text = "Stock";
-            // 
-            // gbCargaDetalle
-            // 
-            this.gbCargaDetalle.Controls.Add(this.gbCantidad);
-            this.gbCargaDetalle.Controls.Add(this.dgvStock);
-            this.gbCargaDetalle.Location = new System.Drawing.Point(3, 6);
-            this.gbCargaDetalle.Name = "gbCargaDetalle";
-            this.gbCargaDetalle.Size = new System.Drawing.Size(359, 273);
-            this.gbCargaDetalle.TabIndex = 17;
-            this.gbCargaDetalle.TabStop = false;
-            this.gbCargaDetalle.Text = "Ubicaciones de Stock";
-            // 
-            // gbCantidad
-            // 
-            this.gbCantidad.Controls.Add(this.numCantidad);
-            this.gbCantidad.Controls.Add(this.label5);
-            this.gbCantidad.Controls.Add(this.btnAgregar);
-            this.gbCantidad.Location = new System.Drawing.Point(6, 210);
-            this.gbCantidad.Name = "gbCantidad";
-            this.gbCantidad.Size = new System.Drawing.Size(347, 54);
-            this.gbCantidad.TabIndex = 16;
-            this.gbCantidad.TabStop = false;
-            this.gbCantidad.Text = "Cantidad";
-            // 
-            // numCantidad
-            // 
-            this.numCantidad.Location = new System.Drawing.Point(85, 22);
-            this.numCantidad.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.numCantidad.Name = "numCantidad";
-            this.numCantidad.Size = new System.Drawing.Size(95, 20);
-            this.numCantidad.TabIndex = 27;
-            this.numCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(24, 26);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 13);
-            this.label5.TabIndex = 26;
-            this.label5.Text = "Cantidad :";
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Location = new System.Drawing.Point(261, 19);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 26);
-            this.btnAgregar.TabIndex = 13;
-            this.btnAgregar.Text = "Entregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // dgvStock
-            // 
-            this.dgvStock.AllowUserToAddRows = false;
-            this.dgvStock.AllowUserToDeleteRows = false;
-            this.dgvStock.AllowUserToResizeRows = false;
-            this.dgvStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStock.Location = new System.Drawing.Point(6, 19);
-            this.dgvStock.Name = "dgvStock";
-            this.dgvStock.ReadOnly = true;
-            this.dgvStock.RowHeadersVisible = false;
-            this.dgvStock.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvStock.Size = new System.Drawing.Size(348, 188);
-            this.dgvStock.TabIndex = 14;
-            this.dgvStock.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvStock_CellFormatting);
-            this.dgvStock.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvStock_DataBindingComplete);
-            // 
             // tpPedidos
             // 
-            this.tpPedidos.BackColor = System.Drawing.SystemColors.Control;
+            this.tpPedidos.BackColor = System.Drawing.Color.Transparent;
             this.tpPedidos.Controls.Add(this.gbPedidos);
             this.tpPedidos.Controls.Add(this.btnVerDetalle);
             this.tpPedidos.Location = new System.Drawing.Point(4, 22);
@@ -543,14 +454,15 @@
             this.tpPedidos.Size = new System.Drawing.Size(368, 276);
             this.tpPedidos.TabIndex = 1;
             this.tpPedidos.Text = "Pedidos Cliente";
+            this.tpPedidos.UseVisualStyleBackColor = true;
             // 
             // gbPedidos
             // 
             this.gbPedidos.Controls.Add(this.dgvPedidos);
             this.gbPedidos.Controls.Add(this.lblMsj);
-            this.gbPedidos.Location = new System.Drawing.Point(8, 6);
+            this.gbPedidos.Location = new System.Drawing.Point(3, 3);
             this.gbPedidos.Name = "gbPedidos";
-            this.gbPedidos.Size = new System.Drawing.Size(357, 232);
+            this.gbPedidos.Size = new System.Drawing.Size(359, 235);
             this.gbPedidos.TabIndex = 0;
             this.gbPedidos.TabStop = false;
             this.gbPedidos.Text = "Pedidos Cliente";
@@ -567,7 +479,7 @@
             this.dgvPedidos.ReadOnly = true;
             this.dgvPedidos.RowHeadersVisible = false;
             this.dgvPedidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPedidos.Size = new System.Drawing.Size(351, 213);
+            this.dgvPedidos.Size = new System.Drawing.Size(353, 216);
             this.dgvPedidos.TabIndex = 16;
             this.dgvPedidos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPedidos_CellFormatting);
             this.dgvPedidos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvPedidos_DataBindingComplete);
@@ -593,18 +505,18 @@
             // 
             // tpDetallePedido
             // 
-            this.tpDetallePedido.BackColor = System.Drawing.SystemColors.Control;
+            this.tpDetallePedido.BackColor = System.Drawing.Color.Transparent;
             this.tpDetallePedido.Controls.Add(this.gbDetallePedido);
             this.tpDetallePedido.Location = new System.Drawing.Point(4, 22);
             this.tpDetallePedido.Name = "tpDetallePedido";
             this.tpDetallePedido.Size = new System.Drawing.Size(368, 276);
             this.tpDetallePedido.TabIndex = 2;
             this.tpDetallePedido.Text = "DetallePedido";
+            this.tpDetallePedido.UseVisualStyleBackColor = true;
             // 
             // gbDetallePedido
             // 
             this.gbDetallePedido.BackColor = System.Drawing.SystemColors.Control;
-            this.gbDetallePedido.Controls.Add(this.groupBox2);
             this.gbDetallePedido.Controls.Add(this.btnEntregar);
             this.gbDetallePedido.Controls.Add(this.dgvDetallePedido);
             this.gbDetallePedido.Location = new System.Drawing.Point(7, 6);
@@ -614,29 +526,9 @@
             this.gbDetallePedido.TabStop = false;
             this.gbDetallePedido.Text = "Detalle Pedido";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.cbUbicacionesStock);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Location = new System.Drawing.Point(6, 181);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(347, 48);
-            this.groupBox2.TabIndex = 17;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Ubicación de Stock";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(20, 20);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(92, 13);
-            this.label8.TabIndex = 26;
-            this.label8.Text = "Ubicación Stock :";
-            // 
             // btnEntregar
             // 
-            this.btnEntregar.Location = new System.Drawing.Point(278, 235);
+            this.btnEntregar.Location = new System.Drawing.Point(274, 235);
             this.btnEntregar.Name = "btnEntregar";
             this.btnEntregar.Size = new System.Drawing.Size(75, 26);
             this.btnEntregar.TabIndex = 14;
@@ -650,12 +542,12 @@
             this.dgvDetallePedido.AllowUserToDeleteRows = false;
             this.dgvDetallePedido.AllowUserToResizeRows = false;
             this.dgvDetallePedido.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetallePedido.Location = new System.Drawing.Point(6, 22);
+            this.dgvDetallePedido.Location = new System.Drawing.Point(6, 19);
             this.dgvDetallePedido.Name = "dgvDetallePedido";
             this.dgvDetallePedido.ReadOnly = true;
             this.dgvDetallePedido.RowHeadersVisible = false;
             this.dgvDetallePedido.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetallePedido.Size = new System.Drawing.Size(343, 153);
+            this.dgvDetallePedido.Size = new System.Drawing.Size(343, 199);
             this.dgvDetallePedido.TabIndex = 7;
             this.dgvDetallePedido.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDetallePedido_CellFormatting);
             this.dgvDetallePedido.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDetallePedido_DataBindingComplete);
@@ -672,7 +564,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(190, 16);
+            this.btnVolver.Location = new System.Drawing.Point(267, 17);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 26);
             this.btnVolver.TabIndex = 22;
@@ -724,6 +616,16 @@
             this.btnCargaDetalle.UseVisualStyleBackColor = true;
             this.btnCargaDetalle.Click += new System.EventHandler(this.btnCargaDetalle_Click);
             // 
+            // cbCliente
+            // 
+            this.cbCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCliente.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbCliente.FormattingEnabled = true;
+            this.cbCliente.Location = new System.Drawing.Point(51, 24);
+            this.cbCliente.Name = "cbCliente";
+            this.cbCliente.Size = new System.Drawing.Size(133, 21);
+            this.cbCliente.TabIndex = 23;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -732,6 +634,16 @@
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 24;
             this.label3.Text = "Cliente:";
+            // 
+            // cbEmpleado
+            // 
+            this.cbEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEmpleado.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cbEmpleado.FormattingEnabled = true;
+            this.cbEmpleado.Location = new System.Drawing.Point(499, 24);
+            this.cbEmpleado.Name = "cbEmpleado";
+            this.cbEmpleado.Size = new System.Drawing.Size(145, 21);
+            this.cbEmpleado.TabIndex = 2;
             // 
             // label4
             // 
@@ -841,46 +753,6 @@
             this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // cbClienteBus
-            // 
-            this.cbClienteBus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbClienteBus.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbClienteBus.FormattingEnabled = true;
-            this.cbClienteBus.Location = new System.Drawing.Point(85, 24);
-            this.cbClienteBus.Name = "cbClienteBus";
-            this.cbClienteBus.Size = new System.Drawing.Size(122, 21);
-            this.cbClienteBus.TabIndex = 29;
-            // 
-            // cbUbicacionesStock
-            // 
-            this.cbUbicacionesStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbUbicacionesStock.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbUbicacionesStock.FormattingEnabled = true;
-            this.cbUbicacionesStock.Location = new System.Drawing.Point(118, 17);
-            this.cbUbicacionesStock.Name = "cbUbicacionesStock";
-            this.cbUbicacionesStock.Size = new System.Drawing.Size(186, 21);
-            this.cbUbicacionesStock.TabIndex = 28;
-            // 
-            // cbCliente
-            // 
-            this.cbCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCliente.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbCliente.FormattingEnabled = true;
-            this.cbCliente.Location = new System.Drawing.Point(51, 24);
-            this.cbCliente.Name = "cbCliente";
-            this.cbCliente.Size = new System.Drawing.Size(133, 21);
-            this.cbCliente.TabIndex = 23;
-            // 
-            // cbEmpleado
-            // 
-            this.cbEmpleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEmpleado.Font = new System.Drawing.Font("Tahoma", 8F);
-            this.cbEmpleado.FormattingEnabled = true;
-            this.cbEmpleado.Location = new System.Drawing.Point(499, 24);
-            this.cbEmpleado.Name = "cbEmpleado";
-            this.cbEmpleado.Size = new System.Drawing.Size(145, 21);
-            this.cbEmpleado.TabIndex = 2;
-            // 
             // frmEntregaProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -906,19 +778,11 @@
             this.tpDatos.ResumeLayout(false);
             this.gbStock.ResumeLayout(false);
             this.tcDatos.ResumeLayout(false);
-            this.tpPlanificacion.ResumeLayout(false);
-            this.gbCargaDetalle.ResumeLayout(false);
-            this.gbCantidad.ResumeLayout(false);
-            this.gbCantidad.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numCantidad)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).EndInit();
             this.tpPedidos.ResumeLayout(false);
             this.gbPedidos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).EndInit();
             this.tpDetallePedido.ResumeLayout(false);
             this.gbDetallePedido.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePedido)).EndInit();
             this.gbBotones.ResumeLayout(false);
             this.gbDatosPrincipales.ResumeLayout(false);
@@ -977,13 +841,6 @@
         private System.Windows.Forms.CheckBox chCliente;
         private System.Windows.Forms.GroupBox gbStock;
         private System.Windows.Forms.TabControl tcDatos;
-        private System.Windows.Forms.TabPage tpPlanificacion;
-        private System.Windows.Forms.GroupBox gbCargaDetalle;
-        private System.Windows.Forms.GroupBox gbCantidad;
-        private System.Windows.Forms.NumericUpDown numCantidad;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.DataGridView dgvStock;
         private System.Windows.Forms.TabPage tpPedidos;
         private System.Windows.Forms.GroupBox gbPedidos;
         private System.Windows.Forms.Button btnVerDetalle;
@@ -993,9 +850,6 @@
         private System.Windows.Forms.DataGridView dgvDetallePedido;
         private System.Windows.Forms.DataGridView dgvPedidos;
         private System.Windows.Forms.Label lblMsj;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cbUbicacionesStock;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox3;
     }
 }
