@@ -113,8 +113,7 @@ namespace GyCAP.DAL
             {
                 transaccion.Rollback();
                 throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
-            }       
-
+            }
         }
 
         //Metodo que guarda la entrega del producto modificada

@@ -539,7 +539,7 @@ namespace GyCAP.UI.GestionPedido
                 nudCantidad.Value = 0;
                 panelAcciones.Enabled = true;
             }
-            else
+            else 
             {
                 //Descartamos los cambios realizamos hasta el momento sin guardar
                 dsCliente.PEDIDOS.RejectChanges();
@@ -1106,9 +1106,7 @@ namespace GyCAP.UI.GestionPedido
                 Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
             }
         }       
-        #endregion         
-
-       
+        #endregion                
     }
 }
 

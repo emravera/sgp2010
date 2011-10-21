@@ -76,6 +76,20 @@ namespace GyCAP.DAL
             DB.executeNonQuery(sqlUpdate, valorParametros, transaccion);
         }
 
+        public static void CancelarPedido(Data.dsCliente.DETALLE_PEDIDOSRow row, SqlTransaction transaccion)
+        {
+            string sqlUpdate = @"UPDATE DETALLE_PEDIDOS SET 
+                                        DPED_CANTIDAD = @p0, 
+                                        DPED_FECHA_ENTREGA_PREVISTA = @p1,
+                                        COC_CODIGO = @p2
+                                        EDPED_CODIGO = @p3
+                                        DPED_FECHA_CANCELACION = @p4
+                               WHERE DPED_CODIGO = @p5";
+            object[] valorParametros = { row.DPED_CANTIDAD, row.DPED_FECHA_ENTREGA_PREVISTA, row.COC_CODIGO, row.EDPED_CODIGO, row.DPED_FECHA_CANCELACION, row.DPED_CODIGO };
+                        
+            DB.executeNonQuery(sqlUpdate, valorParametros, transaccion);
+        }
+
         public static void EliminarDetallePedido(long codigoPedido, SqlTransaction transaccion)
         {
             string sql = "DELETE FROM DETALLE_PEDIDOS WHERE PED_CODIGO = @p0";

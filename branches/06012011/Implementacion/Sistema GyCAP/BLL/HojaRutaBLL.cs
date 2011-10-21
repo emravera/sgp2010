@@ -29,6 +29,11 @@ namespace GyCAP.BLL
             DAL.HojaRutaDAL.ObtenerHojasRuta(dtHojasRuta);
         }
 
+        public static int ObtenerUbicacionStockHoja(string nombreCocina)
+        {
+            return DAL.HojaRutaDAL.ObtenerUbicacionStockHoja(nombreCocina);
+        }
+
         public static SortableBindingList<HojaRuta> GetAll()
         {
             Data.dsHojaRuta ds = new GyCAP.Data.dsHojaRuta();

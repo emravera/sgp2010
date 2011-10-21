@@ -454,7 +454,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                         //Busco si el Codigo de detalle esta en proceso
                         int estado = Convert.ToInt32(BLL.PlanSemanalBLL.ObtenerEstado(codigoDetalle));
 
-                        //si esta en proceso entonces tomo la cantidad y la pongo como cantidad en proceso
+                        //Si esta en proceso entonces tomo la cantidad y la pongo como cantidad en proceso
                         if (estado == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.EnProceso)
                         {
                             row.BeginEdit();

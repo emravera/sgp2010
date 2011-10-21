@@ -29,7 +29,8 @@ namespace GyCAP.DAL
 
         public static void ActualizarEstado(int codigoDetalle, int codigoEstado)
         {
-            string sql = @"UPDATE DETALLE_PLANES_SEMANALES SET dpsem_estado = @p0 WHERE dpsem_codigo = @p1";
+            string sql = @"UPDATE DETALLE_PLANES_SEMANALES 
+                           SET dpsem_estado = @p0 WHERE dpsem_codigo = @p1";
 
             object[] parametros = { codigoEstado, codigoDetalle };
 

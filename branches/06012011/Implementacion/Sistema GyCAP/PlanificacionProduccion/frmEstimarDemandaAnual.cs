@@ -472,7 +472,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                             Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Estimación de Demanda Anual", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                             
                             //Seteo el estado de la interface a nuevo
-                            SetInterface(estadoUI.nuevo);
+                            SetInterface(estadoUI.inicio);
                         }
                         else if (estadoActual == estadoUI.modificar)
                         {
