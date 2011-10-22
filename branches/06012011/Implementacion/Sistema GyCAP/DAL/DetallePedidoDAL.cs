@@ -193,13 +193,14 @@ namespace GyCAP.DAL
         //Obtengo los detalles cuya fecha de inicio esta en ese mes
         public static int ValidarDetallesPedidos(DateTime fechaDesde, DateTime fechaHasta)
         {
-            string sql = @"SELECT count(dped_codigo)
-                           FROM DETALLE_PEDIDOS 
-                           WHERE dped_fecha_inicio >= @p0 and 
-                           dped_fecha_inicio <= @p1 and edped_codigo = @p2";
+            string sql = @"SELECT count(dp.dped_codigo)
+                           FROM DETALLE_PEDIDOS as dp, PEDIDOS as p
+                           WHERE dp.PED_CODIGO = p.PED_CODIGO and
+                           dp.dped_fecha_inicio >= @p0 and dp.dped_fecha_inicio <= @p1 
+                           and dp.edped_codigo = @p2 and p.eped_codigo = @p3";
 
             int cantidad =0;
-            object[] valorParametros = { fechaDesde, fechaHasta, DAL.EstadoDetallePedidoDAL.ObtenerCodigoEstado("Pendiente") };
+            object[] valorParametros = { fechaDesde, fechaHasta, DAL.EstadoDetallePedidoDAL.ObtenerCodigoEstado("Pendiente"), DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("Pendiente")};
 
             try
             {
