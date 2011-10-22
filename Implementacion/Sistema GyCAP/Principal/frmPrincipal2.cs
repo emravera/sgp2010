@@ -236,6 +236,12 @@ namespace GyCAP.UI.Principal
             GyCAP.UI.EstructuraProducto.frmTipoParte.Instancia.Show();
         }
 
+        private void marcasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Soporte.frmMarca.Instancia.MdiParent = this;
+            GyCAP.UI.Soporte.frmMarca.Instancia.Show();
+        }
+
         #endregion
 
         #region Menú Seguridad
@@ -458,6 +464,12 @@ namespace GyCAP.UI.Principal
             GyCAP.UI.GestionStock.frmInventarioABC.Instancia.Show();
         }
 
+        private void estructuraDeStockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionStock.frmEstructuraStock.Instancia.MdiParent = this;
+            GyCAP.UI.GestionStock.frmEstructuraStock.Instancia.Show();
+        }
+
         #endregion
 
         #region Menú Pedidos
@@ -503,5 +515,6 @@ namespace GyCAP.UI.Principal
         #endregion
 
         
+                
     }
 }

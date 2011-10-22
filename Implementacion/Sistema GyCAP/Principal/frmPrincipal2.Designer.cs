@@ -51,7 +51,14 @@
             this.terminaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoDeEstructuraDelProductoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.producciónSemanalRealToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.variaciónDeStockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.listadoDeClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeEmpleadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeMateriasPrimasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDePartesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listadoDeProveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mantenimeintoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pedidosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -109,13 +116,16 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.producciónSemanalRealToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeProveedoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeMateriasPrimasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDePartesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listadoDeEmpleadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.estructuraDeStockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.averiasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.causasFallosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.repuestosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mantenimientoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.planDeMantenimientoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.tipoRepuestosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipoDeMantenimientoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.marcasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -218,6 +228,7 @@
             this.tipoDeParteToolStripMenuItem,
             this.toolStripSeparator2,
             this.designaciónToolStripMenuItem,
+            this.marcasToolStripMenuItem,
             this.modeloDeCocinaToolStripMenuItem,
             this.terminaciónToolStripMenuItem});
             this.estructuraProductoToolStripMenuItem.Name = "estructuraProductoToolStripMenuItem";
@@ -303,6 +314,7 @@
             // 
             this.informesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.listadoDeEstructuraDelProductoToolStripMenuItem,
+            this.estructuraDeStockToolStripMenuItem,
             this.producciónSemanalRealToolStripMenuItem,
             this.variaciónDeStockToolStripMenuItem,
             this.toolStripSeparator11,
@@ -324,16 +336,72 @@
             this.listadoDeEstructuraDelProductoToolStripMenuItem.Text = "Estructura del producto";
             this.listadoDeEstructuraDelProductoToolStripMenuItem.Click += new System.EventHandler(this.listadoDeEstructuraDelProductoToolStripMenuItem_Click);
             // 
+            // producciónSemanalRealToolStripMenuItem
+            // 
+            this.producciónSemanalRealToolStripMenuItem.Name = "producciónSemanalRealToolStripMenuItem";
+            this.producciónSemanalRealToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.producciónSemanalRealToolStripMenuItem.Tag = "0";
+            this.producciónSemanalRealToolStripMenuItem.Text = "Producción semanal real";
+            // 
             // variaciónDeStockToolStripMenuItem
             // 
             this.variaciónDeStockToolStripMenuItem.Name = "variaciónDeStockToolStripMenuItem";
-            this.variaciónDeStockToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.variaciónDeStockToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.variaciónDeStockToolStripMenuItem.Tag = "51";
             this.variaciónDeStockToolStripMenuItem.Text = "Variación de stock";
             this.variaciónDeStockToolStripMenuItem.Click += new System.EventHandler(this.variaciónDeStockToolStripMenuItem_Click);
             // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(209, 6);
+            // 
+            // listadoDeClientesToolStripMenuItem
+            // 
+            this.listadoDeClientesToolStripMenuItem.Name = "listadoDeClientesToolStripMenuItem";
+            this.listadoDeClientesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.listadoDeClientesToolStripMenuItem.Tag = "0";
+            this.listadoDeClientesToolStripMenuItem.Text = "Listado de clientes";
+            // 
+            // listadoDeEmpleadosToolStripMenuItem
+            // 
+            this.listadoDeEmpleadosToolStripMenuItem.Name = "listadoDeEmpleadosToolStripMenuItem";
+            this.listadoDeEmpleadosToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.listadoDeEmpleadosToolStripMenuItem.Tag = "0";
+            this.listadoDeEmpleadosToolStripMenuItem.Text = "Listado de empleados";
+            // 
+            // listadoDeMateriasPrimasToolStripMenuItem
+            // 
+            this.listadoDeMateriasPrimasToolStripMenuItem.Name = "listadoDeMateriasPrimasToolStripMenuItem";
+            this.listadoDeMateriasPrimasToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.listadoDeMateriasPrimasToolStripMenuItem.Tag = "0";
+            this.listadoDeMateriasPrimasToolStripMenuItem.Text = "Listado de materias primas";
+            // 
+            // listadoDePartesToolStripMenuItem
+            // 
+            this.listadoDePartesToolStripMenuItem.Name = "listadoDePartesToolStripMenuItem";
+            this.listadoDePartesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.listadoDePartesToolStripMenuItem.Tag = "0";
+            this.listadoDePartesToolStripMenuItem.Text = "Listado de partes";
+            // 
+            // listadoDeProveedoresToolStripMenuItem
+            // 
+            this.listadoDeProveedoresToolStripMenuItem.Name = "listadoDeProveedoresToolStripMenuItem";
+            this.listadoDeProveedoresToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.listadoDeProveedoresToolStripMenuItem.Tag = "0";
+            this.listadoDeProveedoresToolStripMenuItem.Text = "Listado de proveedores";
+            // 
             // mantenimeintoToolStripMenuItem
             // 
+            this.mantenimeintoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.planDeMantenimientoToolStripMenuItem,
+            this.toolStripSeparator12,
+            this.averiasToolStripMenuItem,
+            this.causasFallosToolStripMenuItem,
+            this.mantenimientoToolStripMenuItem,
+            this.repuestosToolStripMenuItem,
+            this.tipoDeMantenimientoToolStripMenuItem,
+            this.tipoRepuestosToolStripMenuItem});
             this.mantenimeintoToolStripMenuItem.Name = "mantenimeintoToolStripMenuItem";
             this.mantenimeintoToolStripMenuItem.Size = new System.Drawing.Size(89, 17);
             this.mantenimeintoToolStripMenuItem.Tag = "0";
@@ -800,52 +868,75 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(40, 17);
             this.toolStripStatusLabel.Text = "Estado";
             // 
-            // producciónSemanalRealToolStripMenuItem
+            // estructuraDeStockToolStripMenuItem
             // 
-            this.producciónSemanalRealToolStripMenuItem.Name = "producciónSemanalRealToolStripMenuItem";
-            this.producciónSemanalRealToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.producciónSemanalRealToolStripMenuItem.Tag = "0";
-            this.producciónSemanalRealToolStripMenuItem.Text = "Producción semanal real";
+            this.estructuraDeStockToolStripMenuItem.Name = "estructuraDeStockToolStripMenuItem";
+            this.estructuraDeStockToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.estructuraDeStockToolStripMenuItem.Tag = "74";
+            this.estructuraDeStockToolStripMenuItem.Text = "Estructura del stock";
+            this.estructuraDeStockToolStripMenuItem.Click += new System.EventHandler(this.estructuraDeStockToolStripMenuItem_Click);
             // 
-            // listadoDeClientesToolStripMenuItem
+            // averiasToolStripMenuItem
             // 
-            this.listadoDeClientesToolStripMenuItem.Name = "listadoDeClientesToolStripMenuItem";
-            this.listadoDeClientesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.listadoDeClientesToolStripMenuItem.Tag = "0";
-            this.listadoDeClientesToolStripMenuItem.Text = "Listado de clientes";
+            this.averiasToolStripMenuItem.Name = "averiasToolStripMenuItem";
+            this.averiasToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.averiasToolStripMenuItem.Tag = "23";
+            this.averiasToolStripMenuItem.Text = "Averias";
             // 
-            // listadoDeProveedoresToolStripMenuItem
+            // causasFallosToolStripMenuItem
             // 
-            this.listadoDeProveedoresToolStripMenuItem.Name = "listadoDeProveedoresToolStripMenuItem";
-            this.listadoDeProveedoresToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.listadoDeProveedoresToolStripMenuItem.Tag = "0";
-            this.listadoDeProveedoresToolStripMenuItem.Text = "Listado de proveedores";
+            this.causasFallosToolStripMenuItem.Name = "causasFallosToolStripMenuItem";
+            this.causasFallosToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.causasFallosToolStripMenuItem.Tag = "24";
+            this.causasFallosToolStripMenuItem.Text = "Causas fallos";
             // 
-            // listadoDeMateriasPrimasToolStripMenuItem
+            // repuestosToolStripMenuItem
             // 
-            this.listadoDeMateriasPrimasToolStripMenuItem.Name = "listadoDeMateriasPrimasToolStripMenuItem";
-            this.listadoDeMateriasPrimasToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.listadoDeMateriasPrimasToolStripMenuItem.Tag = "0";
-            this.listadoDeMateriasPrimasToolStripMenuItem.Text = "Listado de materias primas";
+            this.repuestosToolStripMenuItem.Name = "repuestosToolStripMenuItem";
+            this.repuestosToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.repuestosToolStripMenuItem.Tag = "25";
+            this.repuestosToolStripMenuItem.Text = "Repuestos";
             // 
-            // listadoDePartesToolStripMenuItem
+            // mantenimientoToolStripMenuItem
             // 
-            this.listadoDePartesToolStripMenuItem.Name = "listadoDePartesToolStripMenuItem";
-            this.listadoDePartesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.listadoDePartesToolStripMenuItem.Tag = "0";
-            this.listadoDePartesToolStripMenuItem.Text = "Listado de partes";
+            this.mantenimientoToolStripMenuItem.Name = "mantenimientoToolStripMenuItem";
+            this.mantenimientoToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.mantenimientoToolStripMenuItem.Tag = "26";
+            this.mantenimientoToolStripMenuItem.Text = "Mantenimiento";
             // 
-            // listadoDeEmpleadosToolStripMenuItem
+            // planDeMantenimientoToolStripMenuItem
             // 
-            this.listadoDeEmpleadosToolStripMenuItem.Name = "listadoDeEmpleadosToolStripMenuItem";
-            this.listadoDeEmpleadosToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.listadoDeEmpleadosToolStripMenuItem.Tag = "0";
-            this.listadoDeEmpleadosToolStripMenuItem.Text = "Listado de empleados";
+            this.planDeMantenimientoToolStripMenuItem.Name = "planDeMantenimientoToolStripMenuItem";
+            this.planDeMantenimientoToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.planDeMantenimientoToolStripMenuItem.Tag = "76";
+            this.planDeMantenimientoToolStripMenuItem.Text = "Plan de Mantenimiento";
             // 
-            // toolStripSeparator11
+            // toolStripSeparator12
             // 
-            this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(209, 6);
+            this.toolStripSeparator12.Name = "toolStripSeparator12";
+            this.toolStripSeparator12.Size = new System.Drawing.Size(190, 6);
+            // 
+            // tipoRepuestosToolStripMenuItem
+            // 
+            this.tipoRepuestosToolStripMenuItem.Name = "tipoRepuestosToolStripMenuItem";
+            this.tipoRepuestosToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.tipoRepuestosToolStripMenuItem.Tag = "78";
+            this.tipoRepuestosToolStripMenuItem.Text = "Tipo de Repuesto";
+            // 
+            // tipoDeMantenimientoToolStripMenuItem
+            // 
+            this.tipoDeMantenimientoToolStripMenuItem.Name = "tipoDeMantenimientoToolStripMenuItem";
+            this.tipoDeMantenimientoToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.tipoDeMantenimientoToolStripMenuItem.Tag = "77";
+            this.tipoDeMantenimientoToolStripMenuItem.Text = "Tipo de Mantenimiento";
+            // 
+            // marcasToolStripMenuItem
+            // 
+            this.marcasToolStripMenuItem.Name = "marcasToolStripMenuItem";
+            this.marcasToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.marcasToolStripMenuItem.Tag = "75";
+            this.marcasToolStripMenuItem.Text = "Marcas";
+            this.marcasToolStripMenuItem.Click += new System.EventHandler(this.marcasToolStripMenuItem_Click);
             // 
             // frmPrincipal2
             // 
@@ -959,6 +1050,16 @@
         private System.Windows.Forms.ToolStripMenuItem listadoDeMateriasPrimasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listadoDePartesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listadoDeEmpleadosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem estructuraDeStockToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem marcasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem planDeMantenimientoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+        private System.Windows.Forms.ToolStripMenuItem averiasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem causasFallosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mantenimientoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem repuestosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tipoDeMantenimientoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tipoRepuestosToolStripMenuItem;
     }
 }
 
