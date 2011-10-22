@@ -41,7 +41,6 @@ namespace GyCAP.BLL
             }
             else
             {
-                transaccion = DAL.DB.IniciarTransaccion();
                 ValidarMovimiento(movimientoStock);
                 DAL.MovimientoStockDAL.InsertarFinalizado(movimientoStock, transaccion);
             }

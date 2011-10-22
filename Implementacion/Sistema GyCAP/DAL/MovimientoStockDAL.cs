@@ -80,7 +80,7 @@ namespace GyCAP.DAL
 
             object fechaReal = DBNull.Value;
             if (origen.FechaReal.HasValue) { fechaReal = origen.FechaReal.Value.ToString("yyyyMMdd"); }
-
+            
             object[] parametros = { origen.Entidad.Codigo, 
                                       origen.CantidadEstimada, 
                                       origen.CantidadReal, 

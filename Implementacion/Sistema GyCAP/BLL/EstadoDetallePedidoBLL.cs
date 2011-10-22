@@ -32,7 +32,6 @@ namespace GyCAP.BLL
                 //No puede eliminarse, lanzamos nuestra excepción
                 throw new Entidades.Excepciones.ElementoEnTransaccionException();
             }
-
         }
 
         public static void Actualizar(Entidades.EstadoDetallePedido estadoDetallePedido)
@@ -53,6 +52,11 @@ namespace GyCAP.BLL
         public static int ObtenerCodigoEstado(string nombre)
         {
             return DAL.EstadoDetallePedidoDAL.ObtenerCodigoEstado(nombre);
+        }
+
+        public static int ObtenerEstadoDetalle(int codigoDetalle)
+        {
+            return DAL.EstadoDetallePedidoDAL.ObtenerEstadoDetalle(codigoDetalle);
         }
 
         public static void ObtenerTodos(DataTable dtEstadoDetallePedido)
