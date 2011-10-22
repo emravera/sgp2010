@@ -60,6 +60,13 @@ namespace GyCAP.UI.Principal.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap background {
+            get {
+                object obj = ResourceManager.GetObject("background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap calidad {
             get {
                 object obj = ResourceManager.GetObject("calidad", resourceCulture);
@@ -74,23 +81,9 @@ namespace GyCAP.UI.Principal.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap imagenLogin {
+        internal static System.Drawing.Bitmap fondo_login {
             get {
-                object obj = ResourceManager.GetObject("imagenLogin", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap Logo_Florencia {
-            get {
-                object obj = ResourceManager.GetObject("Logo_Florencia", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap macoser {
-            get {
-                object obj = ResourceManager.GetObject("macoser", resourceCulture);
+                object obj = ResourceManager.GetObject("fondo_login", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -77,7 +77,7 @@ namespace GyCAP.UI.GestionStock
                         //Armamos los movimientos con fecha inicio hasta hoy                                                                     
                         decimal actual = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(cboStock.GetSelectedValueInt()).USTCK_CANTIDADREAL;
                         valores.Add(actual);
-                        fechas.Add(DateTime.Parse(dtpFechaHasta.GetFecha().ToString()).ToShortDateString());
+                        fechas.Add(string.Empty);
 
                         foreach (MovimientoStock mvto in listaMovimientos.Where(p => p.FechaPrevista <= DateTime.Today).Reverse())
                         {

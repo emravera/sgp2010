@@ -74,7 +74,7 @@ namespace GyCAP.BLL
             {
                 Tipo = ExcepcionesPlan.TipoExcepcion.StockInsuficiente,
                 Nombre = "STOCK INSUFICIENTE",
-                Descripcion = string.Format("Falta stock: {0}.", stock)
+                Descripcion = string.Format("Stock: {0}.", stock)
             };
         }
 

@@ -124,12 +124,6 @@
   <data name="estructura_producto" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\estructura-producto.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Logo_Florencia" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Logo Florencia.JPG;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="macoser" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\macoser.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="mantenimiento" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mantenimiento.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -172,7 +166,10 @@
   <data name="User_Login_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\User-Login-128.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imagenLogin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagenLogin.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="fondo_login" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fondo.login.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\background.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

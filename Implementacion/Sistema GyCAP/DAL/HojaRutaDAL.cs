@@ -141,18 +141,14 @@ namespace GyCAP.DAL
         public static bool PuedeEliminarse(int codigoHoja)
         {
             //agregar las comprobaciones de las ordenes de trabajo - gonzalo
-            string sqlC = "SELECT count(conj_codigo) FROM CONJUNTOS WHERE hr_codigo = @p0";
-            string sqlSC = "SELECT count(sconj_codigo) FROM SUBCONJUNTOS WHERE hr_codigo = @p0";
-            string sqlP = "SELECT count(pza_codigo) FROM PIEZAS WHERE hr_codigo = @p0";
+            string sqlP = "SELECT count(hr_codigo) FROM PARTES WHERE hr_codigo = @p0";
             object[] valorParametros = { codigoHoja };
-            int resultC = 0, resultSC = 0, resultP = 0;
+            int resultP = 0;
             try
             {
-                resultC = Convert.ToInt32(DB.executeScalar(sqlC, valorParametros, null));
-                resultSC = Convert.ToInt32(DB.executeScalar(sqlSC, valorParametros, null));
                 resultP = Convert.ToInt32(DB.executeScalar(sqlP, valorParametros, null));
 
-                if (resultC == 0 && resultSC == 0 && resultP == 0) { return true; }
+                if (resultP == 0) { return true; }
                 else { return false; }
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }

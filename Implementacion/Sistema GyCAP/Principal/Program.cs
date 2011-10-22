@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using GyCAP.UI.Principal;
+using GyCAP.BLL;
 
 namespace Principal
 {
@@ -16,9 +17,12 @@ namespace Principal
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new frmLogin());
-            Application.Run(new frmPrincipal());
-
+                        
+            DBBLL.SetTipoConexion(DBBLL.tipoLocal);
+            
+            Application.Run(new frmLogin());
+            //Application.Run(new frmPrincipal());
+            
         }
     }
 }

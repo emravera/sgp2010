@@ -6,13 +6,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GyCAP.Entidades.Excepciones;
+using GyCAP.Entidades.Mensajes;
 
 namespace GyCAP.UI.Principal
 {
     public partial class frmPrincipal2 : Form
     {
         private GyCAP.Data.dsSeguridad dsSeguridad = new GyCAP.Data.dsSeguridad();
-        private DataView dvUsuario, dvMenuUsuario, dvMenu;
+        private DataView dvMenuUsuario, dvMenu;
         frmLogin frm;
 
         private int childFormNumber = 0;
@@ -94,7 +96,7 @@ namespace GyCAP.UI.Principal
 
                 }
             }
-            catch (Entidades.Excepciones.BaseDeDatosException ex) { Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Inicio); }
+            catch (BaseDeDatosException ex) { MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Inicio); }
 
         }
 
@@ -103,14 +105,16 @@ namespace GyCAP.UI.Principal
             // recorrer el submenú
             foreach (ToolStripItem itmOpcion in colOpcionesMenu)
             {
-                
-                itmOpcion.Enabled = pActivo;
-                
-                // si esta opción a su vez despliega un nuevo submenú
-                // llamar recursivamente a este método para cambiar sus opciones
-                if (((ToolStripMenuItem)itmOpcion).DropDownItems.Count > 0)
+                if (!itmOpcion.GetType().Equals(typeof(ToolStripSeparator)))
                 {
-                    this.recorrerItemsMenu(((ToolStripMenuItem)itmOpcion).DropDownItems, pActivo);
+                    itmOpcion.Enabled = pActivo;
+
+                    // si esta opción a su vez despliega un nuevo submenú
+                    // llamar recursivamente a este método para cambiar sus opciones
+                    if (((ToolStripMenuItem)itmOpcion).DropDownItems.Count > 0)
+                    {
+                        this.recorrerItemsMenu(((ToolStripMenuItem)itmOpcion).DropDownItems, pActivo);
+                    }
                 }
             }
         }
@@ -120,18 +124,20 @@ namespace GyCAP.UI.Principal
             // recorrer el submenú
             foreach (ToolStripItem itmOpcion in colOpcionesMenu)
             {
-
-                if (itmOpcion.Tag.ToString() == codMenuUsuario.ToString())
+                if (!itmOpcion.GetType().Equals(typeof(ToolStripSeparator)))
                 {
-                    itmOpcion.Enabled = pActivo;
-                }
+                    if (itmOpcion.Tag.ToString() == codMenuUsuario.ToString())
+                    {
+                        itmOpcion.Enabled = pActivo;
+                    }
 
-                // si esta opción a su vez despliega un nuevo submenú
-                // llamar recursivamente a este método para cambiar sus opciones
-                //if (((ToolStripMenuItem)itmOpcion).DropDownItems.Count > 0)
-                //{
-                //    this.recorrerItemsMenu(((ToolStripMenuItem)itmOpcion).DropDownItems, pActivo, codMenuUsuario);
-                //}
+                    // si esta opción a su vez despliega un nuevo submenú
+                    // llamar recursivamente a este método para cambiar sus opciones
+                    //if (((ToolStripMenuItem)itmOpcion).DropDownItems.Count > 0)
+                    //{
+                    //    this.recorrerItemsMenu(((ToolStripMenuItem)itmOpcion).DropDownItems, pActivo, codMenuUsuario);
+                    //}
+                }
             }
         }
 
@@ -170,16 +176,9 @@ namespace GyCAP.UI.Principal
 
         private void frmPrincipal2_Load(object sender, EventArgs e)
         {
-            try
-            {
-                this.BackgroundImage = new Bitmap("C:\\LogoFlorencia.jpg");
-                //this.BackgroundImage = new Bitmap(Application.StartupPath. +"\\LogoFlorencia.jpg");
-                
-            }
-            catch
-            {
-                this.BackgroundImage = null;
-            }
+            this.BackgroundImage = GyCAP.UI.Principal.Properties.Resources.background;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+            this.BackColor = Color.White;
         }
 
         private void frmPrincipal2_FormClosing(object sender, FormClosingEventArgs e)
@@ -205,12 +204,6 @@ namespace GyCAP.UI.Principal
         {
             GyCAP.UI.EstructuraProducto.frmEstructuraCocina.Instancia.MdiParent = this;
             GyCAP.UI.EstructuraProducto.frmEstructuraCocina.Instancia.Show();
-        }
-
-        private void listadoDeEstructuraToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.EstructuraProducto.frmListadoEstructura.Instancia.MdiParent = this;
-            GyCAP.UI.EstructuraProducto.frmListadoEstructura.Instancia.Show();
         }
 
         private void materiaPrimaPrincipalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -257,6 +250,12 @@ namespace GyCAP.UI.Principal
         {
             GyCAP.UI.Seguridad.frmPermisosAcceso.Instancia.MdiParent = this;
             GyCAP.UI.Seguridad.frmPermisosAcceso.Instancia.Show();
+        }
+
+        private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frm.Show();
+            this.Dispose();
         }
 
         #endregion
@@ -319,8 +318,8 @@ namespace GyCAP.UI.Principal
 
         private void generarOrdenesTrabajoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GyCAP.UI.PlanificacionProduccion.frmGenerarOrdenTrabajo.InstanciaManual.MdiParent = this;
-            GyCAP.UI.PlanificacionProduccion.frmGenerarOrdenTrabajo.InstanciaManual.Show();
+            GyCAP.UI.PlanificacionProduccion.frmGenerarOrdenTrabajo.Instancia.MdiParent = this;
+            GyCAP.UI.PlanificacionProduccion.frmGenerarOrdenTrabajo.Instancia.Show();
         }
 
         #endregion
@@ -413,6 +412,12 @@ namespace GyCAP.UI.Principal
             GyCAP.UI.EstructuraProducto.frmUnidadMedida.Instancia.Show();
         }
 
+        private void opcionesSistemaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Principal.frmOpciones.Instancia.MdiParent = this;
+            GyCAP.UI.Principal.frmOpciones.Instancia.Show();
+        }
+
         #endregion
 
         #region Menú Stock
@@ -427,12 +432,6 @@ namespace GyCAP.UI.Principal
         {
             GyCAP.UI.GestionStock.frmEntregaProducto.Instancia.MdiParent = this;
             GyCAP.UI.GestionStock.frmEntregaProducto.Instancia.Show();
-        }
-
-        private void graficoDeVariacionDeStockToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            GyCAP.UI.GestionStock.frmGraficoVariacionStock.Instancia.MdiParent = this;
-            GyCAP.UI.GestionStock.frmGraficoVariacionStock.Instancia.Show();
         }
 
         private void movimientosDeStockToolStripMenuItem_Click(object sender, EventArgs e)
@@ -453,6 +452,12 @@ namespace GyCAP.UI.Principal
             GyCAP.UI.GestionStock.frmUbicacionStock.Instancia.Show();
         }
 
+        private void inventarioABCToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionStock.frmInventarioABC.Instancia.MdiParent = this;
+            GyCAP.UI.GestionStock.frmInventarioABC.Instancia.Show();
+        }
+
         #endregion
 
         #region Menú Pedidos
@@ -471,6 +476,32 @@ namespace GyCAP.UI.Principal
 
         #endregion
 
-       
+        #region Menú Calidad
+
+        private void eficienciaProcesoProductivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Calidad.frmEficienciaProceso.Instancia.MdiParent = this;
+            GyCAP.UI.Calidad.frmEficienciaProceso.Instancia.Show();
+        }
+
+        #endregion
+
+        #region Menú Informes
+
+        private void listadoDeEstructuraDelProductoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.EstructuraProducto.frmListadoEstructura.Instancia.MdiParent = this;
+            GyCAP.UI.EstructuraProducto.frmListadoEstructura.Instancia.Show();
+        }        
+
+        private void variaciónDeStockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.GestionStock.frmGraficoVariacionStock.Instancia.MdiParent = this;
+            GyCAP.UI.GestionStock.frmGraficoVariacionStock.Instancia.Show();
+        }
+
+        #endregion
+
+        
     }
 }

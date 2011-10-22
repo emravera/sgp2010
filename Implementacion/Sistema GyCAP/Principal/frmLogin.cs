@@ -75,7 +75,7 @@ namespace GyCAP.UI.Principal
                 else
                 {
                     //Logueo INCORRECTO
-                    MessageBox.Show("Logueo in correcto");
+                    MessageBox.Show("Usuario o contraseña incorrecta.", "Login");
                     return;
                 }
 

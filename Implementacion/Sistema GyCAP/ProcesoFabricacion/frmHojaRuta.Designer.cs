@@ -90,6 +90,7 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cboFiltroStockPrincipal = new GyCAP.UI.Sistema.ControlesUsuarios.DropDownList();
             this.panelAcciones.SuspendLayout();
             this.gbDatos.SuspendLayout();
             this.tpDatos.SuspendLayout();
@@ -238,6 +239,7 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.Controls.Add(this.cboFiltroStockPrincipal);
             this.gbDatos.Controls.Add(this.label14);
             this.gbDatos.Controls.Add(this.cboUbicacionStock);
             this.gbDatos.Controls.Add(this.label1);
@@ -271,7 +273,7 @@
             this.cboUbicacionStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboUbicacionStock.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboUbicacionStock.FormattingEnabled = true;
-            this.cboUbicacionStock.Location = new System.Drawing.Point(97, 102);
+            this.cboUbicacionStock.Location = new System.Drawing.Point(311, 102);
             this.cboUbicacionStock.Name = "cboUbicacionStock";
             this.cboUbicacionStock.Size = new System.Drawing.Size(200, 21);
             this.cboUbicacionStock.TabIndex = 8;
@@ -852,6 +854,17 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(586, 570);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
+            // cboFiltroStockPrincipal
+            // 
+            this.cboFiltroStockPrincipal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFiltroStockPrincipal.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.cboFiltroStockPrincipal.FormattingEnabled = true;
+            this.cboFiltroStockPrincipal.Location = new System.Drawing.Point(97, 102);
+            this.cboFiltroStockPrincipal.Name = "cboFiltroStockPrincipal";
+            this.cboFiltroStockPrincipal.Size = new System.Drawing.Size(200, 21);
+            this.cboFiltroStockPrincipal.TabIndex = 33;
+            this.cboFiltroStockPrincipal.SelectedIndexChanged += new System.EventHandler(this.cboFiltroStockPrincipal_SelectedIndexChanged);
+            // 
             // frmHojaRuta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -956,5 +969,6 @@
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboUbicacionStock;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboFiltroDestino;
         private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboFiltroOrigen;
+        private GyCAP.UI.Sistema.ControlesUsuarios.DropDownList cboFiltroStockPrincipal;
     }
 }

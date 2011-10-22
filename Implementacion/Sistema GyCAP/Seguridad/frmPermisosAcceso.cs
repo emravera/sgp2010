@@ -328,7 +328,7 @@ namespace GyCAP.UI.Seguridad
             usuario = cboUsuarios.GetSelectedValueInt();
             Insertar();
 
-            MessageBox.Show("Los permisos fueron actualizados con exito.", "Mensaje",
+            MessageBox.Show("Los permisos fueron actualizados con éxito.", "Información",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

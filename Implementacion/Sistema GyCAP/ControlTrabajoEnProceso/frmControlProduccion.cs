@@ -82,8 +82,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                         if (excepciones.Count > 0)
                         {
                             PlanificacionProduccion.frmExcepcionesPlan frmExcepciones = new PlanificacionProduccion.frmExcepcionesPlan();
-                            frmExcepciones.TopLevel = false;
-                            frmExcepciones.Parent = this.Parent;
+                            frmExcepciones.MdiParent = this.MdiParent;
                             frmExcepciones.CargarGrilla(excepciones.ToList());
                             frmExcepciones.Show();
                             frmExcepciones.BringToFront();
@@ -458,6 +457,11 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
             dgvOrdenesTrabajo.Columns["ORDT_FECHAINICIOREAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvOrdenesTrabajo.Columns["ORDT_FECHAFINESTIMADA"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvOrdenesTrabajo.Columns["ORDT_FECHAFINREAL"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvOrdenesTrabajo.Columns["ORDT_FECHAINICIOESTIMADA"].Visible = false;
+            dgvOrdenesTrabajo.Columns["ORDT_FECHAINICIOREAL"].Visible = false;
+            dgvOrdenesTrabajo.Columns["ORDT_FECHAFINESTIMADA"].Visible = false;
+            dgvOrdenesTrabajo.Columns["ORDT_FECHAFINREAL"].Visible = false;
+
             chkSeleccionarOT.Parent = dgvOrdenesTrabajo;
             chkSeleccionarOT.Location = new Point(7, 10);
             chkSeleccionarOT.Text = string.Empty;
@@ -470,7 +474,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
             dgvCierresParciales.Columns.Add("E_CODIGO", "Empleado");
             dgvCierresParciales.Columns.Add("MAQ_CODIGO", "Máquina");
             dgvCierresParciales.Columns.Add("CORD_CANTIDAD", "Cantidad");
-            dgvCierresParciales.Columns.Add("CORD_FECHACIERRE", "Fecha y hora");
+            dgvCierresParciales.Columns.Add("CORD_FECHACIERRE", "Fecha");
             dgvCierresParciales.Columns.Add("OPR_FALLIDAS", "Operaciones fallidas");
             dgvCierresParciales.Columns.Add("CORD_OBSERVACIONES", "Observaciones");
             dgvCierresParciales.Columns["ORDT_NUMERO"].DataPropertyName = "OrdenTrabajo";
@@ -652,7 +656,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                         e.Value = nombre;
                         break;
                     case "CORD_FECHACIERRE":
-                        nombre = DateTime.Parse(e.Value.ToString()).ToString();
+                        nombre = DateTime.Parse(e.Value.ToString()).ToShortDateString();
                         e.Value = nombre;
                         break;
                     default:

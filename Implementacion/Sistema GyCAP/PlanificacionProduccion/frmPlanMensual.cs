@@ -948,7 +948,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                         //Si existen excepciones relacionadas con el Plan mensual
                         PlanificacionProduccion.frmExcepcionesPlan frmExcepciones = new frmExcepcionesPlan();
                         frmExcepciones.TopLevel = false;
-                        frmExcepciones.Parent = this.Parent;
+                        frmExcepciones.MdiParent = this.MdiParent;
                         frmExcepciones.CargarGrilla(excepciones);
                         frmExcepciones.Show();
                         frmExcepciones.BringToFront();
