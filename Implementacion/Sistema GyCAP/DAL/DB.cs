@@ -19,6 +19,7 @@ namespace GyCAP.DAL
         private static string conexionGonzaloD = "Data Source=DGA\\GONZALO;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionEmanuel = "Data Source=HP-EMA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionMarcelo = "Data Source=HOMERO;Initial Catalog=Proyecto;User ID=sa";
+        private static string conexionMarceloN = "Data Source=CHATO-NBK\\SQLSERVER2008;Initial Catalog=Proyecto;User ID=sa;Password=sasa";
         private static string conexionRaulD = "Data Source=DTR\\SQLSERVER;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionRaulN = "Data Source=NBR;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionRemota = "Data Source=proyecto.dyndns.org,2555\\Proyecto;Initial Catalog=Proyecto;User ID=sa;Password=spg2010";
@@ -70,7 +71,7 @@ namespace GyCAP.DAL
                         cadenaConexion = conexionSabrina;
                         break;
                     case "CHATO-NBK": //notebook - marcelo
-                        cadenaConexion = conexionRemota;
+                        cadenaConexion = conexionMarceloN;
                         break;
                     default:
                         throw new Entidades.Excepciones.BaseDeDatosException();
@@ -88,6 +89,9 @@ namespace GyCAP.DAL
                         break;
                     case "HOMERO": //pc - marcelo
                         cadenaConexion = conexionMarcelo;
+                        break;
+                    case "CHATO-NBK": //pc - marcelo
+                        cadenaConexion = conexionMarceloN;
                         break;
                     case "DTR": //desktop - raul
                         cadenaConexion = conexionRaulD;
