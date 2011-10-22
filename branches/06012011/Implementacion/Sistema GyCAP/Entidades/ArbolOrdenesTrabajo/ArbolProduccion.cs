@@ -72,14 +72,14 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
             return treeReturn;
         }
 
-        public DateTime GetFechaFinalizacion(DateTime fechaInicio)
+        public DateTime GetFechaFinalizacion(DateTime fechaInicio, bool forPedido)
         {
             this.ordenProduccion.FechaInicioEstimada = fechaInicio;
             DateTime fechaReturn = fechaInicio;
 
             foreach (NodoOrdenTrabajo nodo in ordenesTrabajo)
             {
-                DateTime fechaTemp = nodo.GetFechaFinalizacion(fechaInicio);
+                DateTime fechaTemp = nodo.GetFechaFinalizacion(fechaInicio, forPedido);
                 if (fechaTemp > fechaReturn) { fechaReturn = fechaTemp; }
             }
             
@@ -87,14 +87,14 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
             return fechaReturn;
         }
 
-        public DateTime GetFechaInicio(DateTime fechaFinalizacion)
+        public DateTime GetFechaInicio(DateTime fechaFinalizacion, bool forPedido)
         {
             this.ordenProduccion.FechaFinEstimada = fechaFinalizacion;
             DateTime fechaReturn = fechaFinalizacion;
 
             foreach (NodoOrdenTrabajo nodo in ordenesTrabajo)
             {
-                DateTime fechaTemp = nodo.GetFechaInicio(fechaFinalizacion);
+                DateTime fechaTemp = nodo.GetFechaInicio(fechaFinalizacion, forPedido);
                 if (fechaTemp < fechaReturn) { fechaReturn = fechaTemp; }
             }
 

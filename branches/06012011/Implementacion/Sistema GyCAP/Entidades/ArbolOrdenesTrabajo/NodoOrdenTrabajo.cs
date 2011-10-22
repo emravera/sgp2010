@@ -9,6 +9,8 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
 {
     public class NodoOrdenTrabajo
     {
+        private const double tiempoFijo = 1;
+        
         private int codigoNodo;
 
         public int CodigoNodo
@@ -82,7 +84,7 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
             return nodo;
         }
 
-        public DateTime GetFechaFinalizacion(DateTime fechaInicio)
+        public DateTime GetFechaFinalizacion(DateTime fechaInicio, bool forPedido)
         {
             while (!this.IsWorkableDay(fechaInicio)) { fechaInicio = fechaInicio.AddDays(Convert.ToDouble(1)); }            
 
@@ -90,12 +92,20 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
 
             foreach (NodoOrdenTrabajo nodo in nodosHijos)
             {
-                DateTime fechaTemp = nodo.GetFechaFinalizacion(fechaInicio);
+                DateTime fechaTemp = nodo.GetFechaFinalizacion(fechaInicio, forPedido);
                 if (fechaTemp > fechaMayor) { fechaMayor = fechaTemp; }
             }
 
             this.ordenTrabajo.FechaInicioEstimada = fechaMayor;
-            this.ordenTrabajo.FechaFinEstimada = fechaMayor.AddMinutes(GetOperationTime() * this.ordenTrabajo.CantidadEstimada);
+
+            if (forPedido)
+            {
+                this.ordenTrabajo.FechaFinEstimada = fechaMayor.AddMinutes(GetOperationTime() * this.ordenTrabajo.CantidadEstimada);
+            }
+            else
+            {
+                this.ordenTrabajo.FechaFinEstimada = fechaMayor.AddMinutes(tiempoFijo);
+            }
 
             while(!this.IsWorkableDay(this.ordenTrabajo.FechaFinEstimada.Value)) { this.ordenTrabajo.FechaFinEstimada = this.ordenTrabajo.FechaFinEstimada.Value.AddDays(Convert.ToDouble(1)); }            
 
@@ -112,17 +122,27 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
             }
             else
             {
-                double temp = (double)(1 / (this.ordenTrabajo.DetalleHojaRuta.CentroTrabajo.CapacidadCiclo * this.ordenTrabajo.DetalleHojaRuta.CentroTrabajo.Eficiencia)) * 60;
+                double temp = (double)((1 / (this.ordenTrabajo.DetalleHojaRuta.CentroTrabajo.CapacidadCiclo * this.ordenTrabajo.DetalleHojaRuta.CentroTrabajo.Eficiencia)) * this.ordenTrabajo.DetalleHojaRuta.CentroTrabajo.HorasCiclo);
                 return temp;
             }
         }
 
-        public DateTime GetFechaInicio(DateTime fechaFinalizacion)
+        public DateTime GetFechaInicio(DateTime fechaFinalizacion, bool forPedido)
         {
             while (!this.IsWorkableDay(fechaFinalizacion)) { fechaFinalizacion = fechaFinalizacion.Subtract(new TimeSpan(24, 0, 0)); }
                         
             this.ordenTrabajo.FechaFinEstimada = fechaFinalizacion;
-            double tiempo = GetOperationTime() * this.ordenTrabajo.CantidadEstimada;
+            double tiempo = 0;
+            
+            if (forPedido)
+            {
+                tiempo = GetOperationTime() * this.ordenTrabajo.CantidadEstimada;
+            }
+            else
+            {
+                tiempo = tiempoFijo;
+            }
+
             this.ordenTrabajo.FechaInicioEstimada = fechaFinalizacion.Subtract(TimeSpan.FromMinutes(tiempo));
 
             while (!this.IsWorkableDay(this.ordenTrabajo.FechaInicioEstimada.Value)) { this.ordenTrabajo.FechaInicioEstimada = this.ordenTrabajo.FechaInicioEstimada.Value.Subtract(new TimeSpan(24, 0, 0)); }
@@ -131,7 +151,7 @@ namespace GyCAP.Entidades.ArbolOrdenesTrabajo
 
             foreach (NodoOrdenTrabajo nodo in nodosHijos)
             {
-                DateTime fechaTemp = nodo.GetFechaInicio(this.ordenTrabajo.FechaInicioEstimada.Value);
+                DateTime fechaTemp = nodo.GetFechaInicio(this.ordenTrabajo.FechaInicioEstimada.Value, forPedido);
                 if (fechaTemp < fechaMenor) { fechaMenor = fechaTemp; }
             }
             

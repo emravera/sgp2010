@@ -57,7 +57,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             if (e.Node.Parent != null)
             {
-                frmGenerarOrdenTrabajo.InstanciaAutomatica.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
+                frmGenerarOrdenTrabajo.Instancia.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
                 SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
             }
         }
@@ -66,7 +66,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             if (e.Node.Parent != null)
             {
-                frmGenerarOrdenTrabajo.InstanciaAutomatica.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
+                frmGenerarOrdenTrabajo.Instancia.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
                 SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
             }
         }

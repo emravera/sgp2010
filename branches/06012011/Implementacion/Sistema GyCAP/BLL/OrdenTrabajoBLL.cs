@@ -23,7 +23,6 @@ namespace GyCAP.BLL
         {
             //Si la orden de producción tiene órdenes de trabajo generadas las eliminamos
             //Y si ya estan en la DB ??? - gonzalo
-            //Crear excepciones
             arbolProduccion.OrdenesTrabajo = new List<NodoOrdenTrabajo>();
                        
             int numeroOrdenT = -1;
@@ -35,7 +34,7 @@ namespace GyCAP.BLL
 
                 ProcessNodo(arbolEstructura.NodoRaiz, arbolProduccion, ref numeroOrdenT, estadoGenerado, null, listaExcepciones);
 
-                arbolProduccion.GetFechaInicio(arbolProduccion.GetFechaFinalizacion(arbolProduccion.OrdenProduccion.FechaInicioEstimada.Value));
+                arbolProduccion.GetFechaInicio(arbolProduccion.GetFechaFinalizacion(arbolProduccion.OrdenProduccion.FechaInicioEstimada.Value, false), false);
             }
             else
             {
@@ -49,7 +48,7 @@ namespace GyCAP.BLL
             {
                 if (nodoEstructura.Compuesto.Parte.HojaRuta != null)
                 {
-                    foreach (DetalleHojaRuta detalleHR in nodoEstructura.Compuesto.Parte.HojaRuta.Detalle)
+                    foreach (DetalleHojaRuta detalleHR in nodoEstructura.Compuesto.Parte.HojaRuta.Detalle.Reverse())
                     {
                         NodoOrdenTrabajo nodoOT = new NodoOrdenTrabajo()
                         {

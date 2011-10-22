@@ -61,7 +61,7 @@ namespace GyCAP.BLL
 
         public static void EliminarMovimientosPedido(int codigoEntidad)
         {
-            //DAL.MovimientoStockDAL.EliminarMovimientosPedido(codigoEntidad, null);
+            DAL.MovimientoStockDAL.EliminarMovimientosPedido(codigoEntidad, null);
         }
 
         public static void Cancelar(int numeroMovimiento)
@@ -187,7 +187,7 @@ namespace GyCAP.BLL
             if (movimiento.Destino == null) { throw new MovimientoMalConfiguradoException("El destino es nulo."); }
             foreach (OrigenMovimiento item in movimiento.OrigenesMultiples)
             {
-                if (item.Entidad.Equals(movimiento.Destino)) { throw new MovimientoMalConfiguradoException("El origen y el destino son iguales."); }
+                //if (item.Entidad.Equals(movimiento.Destino)) { throw new MovimientoMalConfiguradoException("El origen y el destino son iguales."); }
             }
             
             if (movimiento.Duenio == null) { throw new MovimientoMalConfiguradoException("El dueño es nulo."); }

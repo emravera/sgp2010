@@ -19,13 +19,10 @@ namespace GyCAP.UI.PlanificacionProduccion
 {
     public partial class frmGenerarOrdenTrabajo : Form
     {        
-        private static frmGenerarOrdenTrabajo _frmGenerarOrdenTrabajoA = null;
-        private static frmGenerarOrdenTrabajo _frmGenerarOrdenTrabajoM = null;
-        private enum estadoUI { nuevoAutomatico, nuevoManual };
+        private static frmGenerarOrdenTrabajo _frmGenerarOrdenTrabajo = null;
+        private enum estadoUI { nuevoAutomatico };
         private estadoUI estadoInterface;
         private enum tipoNodo { anio, mes, semana, dia, detalleDia };
-        public static readonly int estadoInicialNuevoAutomatico = 1; //Para generar las OT de forma automática
-        public static readonly int estadoInicialNuevoManual = 2; //Para generar OT de forma manual
         Data.dsPlanSemanal dsPlanSemanal = new GyCAP.Data.dsPlanSemanal();
         Data.dsStock dsStock = new GyCAP.Data.dsStock();
         DataView dvPlanAnual, dvMensual, dvPlanSemanal, dvStockDestino;
@@ -48,59 +45,23 @@ namespace GyCAP.UI.PlanificacionProduccion
             InicializarDatos();
         }
 
-        public static frmGenerarOrdenTrabajo InstanciaAutomatica
+        public static frmGenerarOrdenTrabajo Instancia
         {
             get
             {
-                if (_frmGenerarOrdenTrabajoA == null || _frmGenerarOrdenTrabajoA.IsDisposed)
+                if (_frmGenerarOrdenTrabajo == null || _frmGenerarOrdenTrabajo.IsDisposed)
                 {
-                    _frmGenerarOrdenTrabajoA = new frmGenerarOrdenTrabajo();
+                    _frmGenerarOrdenTrabajo = new frmGenerarOrdenTrabajo();
                 }
                 else
                 {
-                    _frmGenerarOrdenTrabajoA.BringToFront();
+                    _frmGenerarOrdenTrabajo.BringToFront();
                 }
-                return _frmGenerarOrdenTrabajoA;
+                return _frmGenerarOrdenTrabajo;
             }
             set
             {
-                _frmGenerarOrdenTrabajoA = value;
-            }
-        }
-
-        public static frmGenerarOrdenTrabajo InstanciaManual
-        {
-            get
-            {
-                if (_frmGenerarOrdenTrabajoM == null || _frmGenerarOrdenTrabajoM.IsDisposed)
-                {
-                    _frmGenerarOrdenTrabajoM = new frmGenerarOrdenTrabajo();
-                }
-                else
-                {
-                    _frmGenerarOrdenTrabajoM.BringToFront();
-                }
-                return _frmGenerarOrdenTrabajoM;
-            }
-            set
-            {
-                _frmGenerarOrdenTrabajoM = value;
-            }
-        }
-
-        public void SetEstadoInicial(int estado)
-        {
-            if (estado == estadoInicialNuevoAutomatico) 
-            {
-                tcOrdenTrabajo.TabPages.Remove(tpManual);
-                this.Text = "Generar Orden de Trabajo Automática";
-                estadoInterface = estadoUI.nuevoAutomatico;
-            }
-            if (estado == estadoInicialNuevoManual) 
-            {
-                tcOrdenTrabajo.TabPages.Remove(tpAutomatico);
-                this.Text = "Generar Orden de Trabajo Manual";
-                estadoInterface = estadoUI.nuevoManual;
+                _frmGenerarOrdenTrabajo = value;
             }
         }
 

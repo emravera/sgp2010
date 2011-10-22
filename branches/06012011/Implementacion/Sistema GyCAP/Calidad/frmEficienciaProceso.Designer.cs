@@ -33,6 +33,8 @@
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tcMovimiento = new System.Windows.Forms.TabControl();
             this.tpBuscar = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tvcCostosMateriales = new TreeViewColumnsProject.TreeViewColumns();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tvcCostosCentros = new TreeViewColumnsProject.TreeViewColumns();
             this.gbBusqueda = new System.Windows.Forms.GroupBox();
@@ -42,32 +44,30 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tpDatos = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dtpFechaHasta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.dtpFechaDesde = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
+            this.btnGenerar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
+            this.chartEficiencia = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnImprimir = new System.Windows.Forms.ToolStripButton();
             this.tsMenu = new System.Windows.Forms.ToolStrip();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tvcCostosMateriales = new TreeViewColumnsProject.TreeViewColumns();
-            this.chartEficiencia = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dtpFechaHasta = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.dtpFechaDesde = new GyCAP.UI.Sistema.ControlesUsuarios.seleccionadorFecha();
-            this.btnGenerar = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.tcMovimiento.SuspendLayout();
             this.tpBuscar.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.gbBusqueda.SuspendLayout();
             this.tpDatos.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.gbDatos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartEficiencia)).BeginInit();
             this.tsMenu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartEficiencia)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcMovimiento
@@ -96,6 +96,26 @@
             this.tpBuscar.TabIndex = 0;
             this.tpBuscar.Text = "Información Proceso";
             this.tpBuscar.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.tvcCostosMateriales);
+            this.groupBox1.Location = new System.Drawing.Point(3, 66);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(762, 195);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Materiales";
+            // 
+            // tvcCostosMateriales
+            // 
+            this.tvcCostosMateriales.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(166)))), ((int)(((byte)(170)))));
+            this.tvcCostosMateriales.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvcCostosMateriales.Location = new System.Drawing.Point(3, 17);
+            this.tvcCostosMateriales.Name = "tvcCostosMateriales";
+            this.tvcCostosMateriales.Padding = new System.Windows.Forms.Padding(1);
+            this.tvcCostosMateriales.Size = new System.Drawing.Size(756, 175);
+            this.tvcCostosMateriales.TabIndex = 0;
             // 
             // groupBox3
             // 
@@ -199,6 +219,72 @@
             this.tpDatos.Text = "Eficiencia centros";
             this.tpDatos.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.dtpFechaHasta);
+            this.groupBox2.Controls.Add(this.dtpFechaDesde);
+            this.groupBox2.Controls.Add(this.btnGenerar);
+            this.groupBox2.Location = new System.Drawing.Point(4, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(763, 50);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Fechas";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(337, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(70, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Fecha hasta:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(112, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Fecha desde:";
+            // 
+            // dtpFechaHasta
+            // 
+            this.dtpFechaHasta.CustomFormat = " ";
+            this.dtpFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaHasta.Location = new System.Drawing.Point(413, 18);
+            this.dtpFechaHasta.Name = "dtpFechaHasta";
+            this.dtpFechaHasta.Size = new System.Drawing.Size(128, 21);
+            this.dtpFechaHasta.TabIndex = 8;
+            // 
+            // dtpFechaDesde
+            // 
+            this.dtpFechaDesde.CustomFormat = " ";
+            this.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaDesde.Location = new System.Drawing.Point(190, 18);
+            this.dtpFechaDesde.Name = "dtpFechaDesde";
+            this.dtpFechaDesde.Size = new System.Drawing.Size(141, 21);
+            this.dtpFechaDesde.TabIndex = 7;
+            // 
+            // btnGenerar
+            // 
+            this.btnGenerar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGenerar.Image = global::GyCAP.UI.Calidad.Properties.Resources.System_25;
+            this.btnGenerar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGenerar.Location = new System.Drawing.Point(645, 12);
+            this.btnGenerar.Name = "btnGenerar";
+            this.btnGenerar.Size = new System.Drawing.Size(82, 32);
+            this.btnGenerar.TabIndex = 5;
+            this.btnGenerar.Text = "&Generar";
+            this.btnGenerar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnGenerar.UseVisualStyleBackColor = true;
+            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
+            // 
             // gbDatos
             // 
             this.gbDatos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -212,6 +298,23 @@
             this.gbDatos.TabIndex = 0;
             this.gbDatos.TabStop = false;
             this.gbDatos.Text = "Gráfico de eficiencia";
+            // 
+            // chartEficiencia
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartEficiencia.ChartAreas.Add(chartArea1);
+            this.chartEficiencia.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend1.Name = "Legend1";
+            this.chartEficiencia.Legends.Add(legend1);
+            this.chartEficiencia.Location = new System.Drawing.Point(3, 17);
+            this.chartEficiencia.Name = "chartEficiencia";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartEficiencia.Series.Add(series1);
+            this.chartEficiencia.Size = new System.Drawing.Size(760, 396);
+            this.chartEficiencia.TabIndex = 0;
+            this.chartEficiencia.Text = "chart1";
             // 
             // btnSalir
             // 
@@ -275,109 +378,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(792, 570);
             this.tableLayoutPanel1.TabIndex = 14;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.tvcCostosMateriales);
-            this.groupBox1.Location = new System.Drawing.Point(3, 66);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(762, 195);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Materiales";
-            // 
-            // tvcCostosMateriales
-            // 
-            this.tvcCostosMateriales.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(166)))), ((int)(((byte)(170)))));
-            this.tvcCostosMateriales.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvcCostosMateriales.Location = new System.Drawing.Point(3, 17);
-            this.tvcCostosMateriales.Name = "tvcCostosMateriales";
-            this.tvcCostosMateriales.Padding = new System.Windows.Forms.Padding(1);
-            this.tvcCostosMateriales.Size = new System.Drawing.Size(756, 175);
-            this.tvcCostosMateriales.TabIndex = 0;
-            // 
-            // chartEficiencia
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chartEficiencia.ChartAreas.Add(chartArea1);
-            this.chartEficiencia.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chartEficiencia.Legends.Add(legend1);
-            this.chartEficiencia.Location = new System.Drawing.Point(3, 17);
-            this.chartEficiencia.Name = "chartEficiencia";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartEficiencia.Series.Add(series1);
-            this.chartEficiencia.Size = new System.Drawing.Size(760, 396);
-            this.chartEficiencia.TabIndex = 0;
-            this.chartEficiencia.Text = "chart1";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.dtpFechaHasta);
-            this.groupBox2.Controls.Add(this.dtpFechaDesde);
-            this.groupBox2.Controls.Add(this.btnGenerar);
-            this.groupBox2.Location = new System.Drawing.Point(4, 6);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(763, 50);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Fechas";
-            // 
-            // dtpFechaHasta
-            // 
-            this.dtpFechaHasta.CustomFormat = " ";
-            this.dtpFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaHasta.Location = new System.Drawing.Point(413, 18);
-            this.dtpFechaHasta.Name = "dtpFechaHasta";
-            this.dtpFechaHasta.Size = new System.Drawing.Size(128, 21);
-            this.dtpFechaHasta.TabIndex = 8;
-            // 
-            // dtpFechaDesde
-            // 
-            this.dtpFechaDesde.CustomFormat = " ";
-            this.dtpFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFechaDesde.Location = new System.Drawing.Point(190, 18);
-            this.dtpFechaDesde.Name = "dtpFechaDesde";
-            this.dtpFechaDesde.Size = new System.Drawing.Size(141, 21);
-            this.dtpFechaDesde.TabIndex = 7;
-            // 
-            // btnGenerar
-            // 
-            this.btnGenerar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerar.Image = global::GyCAP.UI.Calidad.Properties.Resources.System_25;
-            this.btnGenerar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGenerar.Location = new System.Drawing.Point(645, 12);
-            this.btnGenerar.Name = "btnGenerar";
-            this.btnGenerar.Size = new System.Drawing.Size(82, 32);
-            this.btnGenerar.TabIndex = 5;
-            this.btnGenerar.Text = "&Generar";
-            this.btnGenerar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGenerar.UseVisualStyleBackColor = true;
-            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(112, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Fecha desde:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(337, 22);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Fecha hasta:";
-            // 
             // frmEficienciaProceso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -389,22 +389,22 @@
             this.Name = "frmEficienciaProceso";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Eficiencia proceso productivo";
+            this.Text = "Eficiencia del proceso productivo";
             this.tcMovimiento.ResumeLayout(false);
             this.tpBuscar.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.gbBusqueda.ResumeLayout(false);
             this.gbBusqueda.PerformLayout();
             this.tpDatos.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.gbDatos.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartEficiencia)).EndInit();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chartEficiencia)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }

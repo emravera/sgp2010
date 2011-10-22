@@ -121,6 +121,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
             this.Name = "frmPermisosAcceso";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Permisos de Acceso";
             this.ResumeLayout(false);
             this.PerformLayout();

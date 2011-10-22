@@ -226,87 +226,113 @@ namespace GyCAP.BLL
         public static IList<ExcepcionesPlan> IniciarOrdenProduccion(OrdenProduccion ordenP, DateTime fechaInicioReal)
         {
             SqlTransaction transaccion = null;
-            IList<ExcepcionesPlan> excepciones = new List<ExcepcionesPlan>();
+            IList<ExcepcionesPlan> excepciones = CheckExceptions(ordenP);
 
-            try
+            if (excepciones.Count == 0)
             {
-                EstadoOrdenTrabajo estadoEnProceso = EstadoOrdenTrabajoBLL.GetEstado(OrdenesTrabajoEnum.EstadoOrdenEnum.EnProceso);
-                if (ordenP.Estado.Codigo == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.Generada)
+                try
                 {
-                    ordenP.Estado = estadoEnProceso;
-                    ordenP.FechaInicioReal = fechaInicioReal;
-                }
-
-                EstadoOrdenTrabajo estadoEnEspera = EstadoOrdenTrabajoBLL.GetEstado(OrdenesTrabajoEnum.EstadoOrdenEnum.EnEspera);
-                EstadoMovimientoStock estadoMvto = EstadoMovimientoStockBLL.GetEstadoEntity(StockEnum.EstadoMovimientoStock.EnProceso);
-                ArbolEstructura arbolEstructura = EstructuraBLL.GetArbolEstructuraByCocina(ordenP.Cocina.CodigoCocina, false);
-
-                DateTime minDate = ordenP.OrdenesTrabajo.Min(p => p.FechaInicioEstimada).Value;
-                
-                foreach (OrdenTrabajo ordenT in ordenP.OrdenesTrabajo.Where(p => p.FechaInicioEstimada == minDate).ToList())
-                {
-                    ordenT.MovimientosStock = MovimientoStockBLL.GetMovimientosByOwner(EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.OrdenTrabajo, ordenT.Numero, transaccion));
-                }
-                            
-                transaccion = DAL.DB.IniciarTransaccion();
-
-                DAL.OrdenProduccionDAL.IniciarOrdenProduccion(ordenP, transaccion);
-                if (ordenP.DetallePlanSemanal.DetallePedido != null)
-                {
-                    DAL.PedidoDAL.ActualizarDetallePedidoAEnCurso(Convert.ToInt32(ordenP.DetallePlanSemanal.DetallePedido.Codigo), transaccion);
-                }
-
-                foreach (OrdenTrabajo ordenT in ordenP.OrdenesTrabajo.Where(p => p.FechaInicioEstimada == minDate).ToList())
-                {
-                    ordenT.Estado = estadoEnProceso;
-                    ordenT.FechaInicioReal = fechaInicioReal;
-
-                    OrdenTrabajoBLL.IniciarOrdenTrabajo(ordenT, transaccion);
-                                        
-                    foreach (MovimientoStock mvto in ordenT.MovimientosStock)
+                    EstadoOrdenTrabajo estadoEnProceso = EstadoOrdenTrabajoBLL.GetEstado(OrdenesTrabajoEnum.EstadoOrdenEnum.EnProceso);
+                    if (ordenP.Estado.Codigo == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.Generada)
                     {
-                        mvto.Estado = estadoMvto;
-
-                        foreach (OrigenMovimiento origenMvto in mvto.OrigenesMultiples)
-                        {
-                            origenMvto.CantidadReal = origenMvto.CantidadEstimada;
-                            origenMvto.FechaReal = origenMvto.FechaPrevista;
-
-                            if (origenMvto.Entidad.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
-                            {
-                                if ((origenMvto.Entidad.EntidadExterna as UbicacionStock).CantidadReal < origenMvto.CantidadEstimada)
-                                {
-                                    excepciones.Add(ExcepcionesPlanBLL.Add_ExcepcionStockInsuficiente((origenMvto.Entidad.EntidadExterna as UbicacionStock).Nombre));
-                                }
-                            }
-                        }
-
-                        MovimientoStockBLL.Iniciar(mvto, transaccion);
+                        ordenP.Estado = estadoEnProceso;
+                        ordenP.FechaInicioReal = fechaInicioReal;
                     }
-                }
 
-                foreach (OrdenTrabajo ordenT in ordenP.OrdenesTrabajo.Where(p => p.FechaInicioEstimada != minDate).ToList())
+                    EstadoOrdenTrabajo estadoEnEspera = EstadoOrdenTrabajoBLL.GetEstado(OrdenesTrabajoEnum.EstadoOrdenEnum.EnEspera);
+                    EstadoMovimientoStock estadoMvto = EstadoMovimientoStockBLL.GetEstadoEntity(StockEnum.EstadoMovimientoStock.EnProceso);
+                    ArbolEstructura arbolEstructura = EstructuraBLL.GetArbolEstructuraByCocina(ordenP.Cocina.CodigoCocina, false);
+
+                    DateTime minDate = ordenP.OrdenesTrabajo.Min(p => p.FechaInicioEstimada).Value;
+
+                    foreach (OrdenTrabajo ordenT in ordenP.OrdenesTrabajo.Where(p => p.FechaInicioEstimada == minDate).ToList())
+                    {
+                        ordenT.MovimientosStock = MovimientoStockBLL.GetMovimientosByOwner(EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.OrdenTrabajo, ordenT.Numero, transaccion));
+                    }
+
+                    transaccion = DAL.DB.IniciarTransaccion();
+
+                    DAL.OrdenProduccionDAL.IniciarOrdenProduccion(ordenP, transaccion);
+                    
+                    if (ordenP.DetallePlanSemanal.DetallePedido != null)
+                    {
+                        DAL.PedidoDAL.ActualizarDetallePedidoAEnCurso(Convert.ToInt32(ordenP.DetallePlanSemanal.DetallePedido.Codigo), transaccion);
+                    }
+
+                    foreach (OrdenTrabajo ordenT in ordenP.OrdenesTrabajo.Where(p => p.FechaInicioEstimada == minDate).ToList())
+                    {
+                        ordenT.Estado = estadoEnProceso;
+                        ordenT.FechaInicioReal = fechaInicioReal;
+
+                        OrdenTrabajoBLL.IniciarOrdenTrabajo(ordenT, transaccion);
+
+                        foreach (MovimientoStock mvto in ordenT.MovimientosStock)
+                        {
+                            mvto.Estado = estadoMvto;
+
+                            foreach (OrigenMovimiento origenMvto in mvto.OrigenesMultiples)
+                            {
+                                origenMvto.CantidadReal = origenMvto.CantidadEstimada;
+                                origenMvto.FechaReal = origenMvto.FechaPrevista;
+                            }
+
+                            MovimientoStockBLL.Iniciar(mvto, transaccion);
+                        }
+                    }
+
+                    foreach (OrdenTrabajo ordenT in ordenP.OrdenesTrabajo.Where(p => p.FechaInicioEstimada != minDate).ToList())
+                    {
+                        ordenT.Estado = estadoEnEspera;
+                        OrdenTrabajoBLL.ActualizarEstado(ordenT, transaccion);
+                    }
+
+                    transaccion.Commit();
+                }
+                catch (SqlException ex)
                 {
-                    ordenT.Estado = estadoEnEspera;
-                    OrdenTrabajoBLL.ActualizarEstado(ordenT, transaccion);
+                    transaccion.Rollback();
+                    throw new BaseDeDatosException(ex.Message);
                 }
-
-                if (excepciones.Count > 0) { transaccion.Rollback(); }
-                else { transaccion.Commit(); }
-            }
-            catch (SqlException ex)
-            {
-                transaccion.Rollback();
-                throw new BaseDeDatosException(ex.Message);
-            }
-            finally
-            {
-                DAL.DB.FinalizarTransaccion();
+                finally
+                {
+                    DAL.DB.FinalizarTransaccion();
+                }
             }
 
             return excepciones;
         }
 
+        private static IList<ExcepcionesPlan> CheckExceptions(OrdenProduccion ordenP)
+        {
+            IList<ExcepcionesPlan> excepciones = new List<ExcepcionesPlan>();
+            
+            DateTime minDate = ordenP.OrdenesTrabajo.Min(p => p.FechaInicioEstimada).Value;
+
+            foreach (OrdenTrabajo ordenT in ordenP.OrdenesTrabajo.Where(p => p.FechaInicioEstimada == minDate).ToList())
+            {
+                ordenT.MovimientosStock = MovimientoStockBLL.GetMovimientosByOwner(EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.OrdenTrabajo, ordenT.Numero, null));
+            }
+
+            foreach (OrdenTrabajo ordenT in ordenP.OrdenesTrabajo.Where(p => p.FechaInicioEstimada == minDate).ToList())
+            {
+                foreach (MovimientoStock mvto in ordenT.MovimientosStock)
+                {
+                    foreach (OrigenMovimiento origenMvto in mvto.OrigenesMultiples)
+                    {
+                        if (origenMvto.Entidad.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
+                        {
+                            if ((origenMvto.Entidad.EntidadExterna as UbicacionStock).CantidadReal < origenMvto.CantidadEstimada)
+                            {
+                                excepciones.Add(ExcepcionesPlanBLL.Add_ExcepcionStockInsuficiente((origenMvto.Entidad.EntidadExterna as UbicacionStock).Nombre));
+                            }
+                        }
+                    }
+                }
+            }
+
+            return excepciones;
+        }
+        
         public static void FinalizarOrdenProduccion(OrdenProduccion ordenP)
         {
             SqlTransaction transaccion = null;            

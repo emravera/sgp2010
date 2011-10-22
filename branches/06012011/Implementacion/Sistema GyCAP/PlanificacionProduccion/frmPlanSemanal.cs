@@ -587,7 +587,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 {
                     //Se deben cargar los planes Mensuales ya creados
                     int codigo = Convert.ToInt32(cbMes.GetSelectedValue());
-                    
+
                     BLL.PlanSemanalBLL.obtenerPS(dsPlanSemanal.PLANES_SEMANALES, codigo);
 
                     if (dsPlanSemanal.PLANES_SEMANALES.Rows.Count > 0)
@@ -601,15 +601,16 @@ namespace GyCAP.UI.PlanificacionProduccion
                     else
                     {
                         cbSemana.Enabled = false;
-                        Entidades.Mensajes.MensajesABM.MsjValidacion("No hay planes semanales creados para ese mes", this.Text);                       
+                        Entidades.Mensajes.MensajesABM.MsjValidacion("No hay planes semanales creados para ese mes", this.Text);
                     }
 
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
-                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);                
+                Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Búsqueda);
             }
+            catch (Exception) { }
         }       
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -786,54 +787,58 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void cbMesDatos_DropDownClosed(object sender, EventArgs e)
         {
-            //Se busca el mes y el año que quedaron seleccionados
-            int anio = Convert.ToInt32(cbPlanAnual.GetSelectedText());
-            string mes = cbMesDatos.GetSelectedText().ToString();
-            int numeroMes = -1;
-
-            //Verifico que numero de mes es            
-            string[] Meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
-            int cont = 0;
-
-            foreach (string l in Meses)
+            try
             {
-                if (cbMesDatos.GetSelectedText().ToString() == Meses[cont])
+                //Se busca el mes y el año que quedaron seleccionados
+                int anio = Convert.ToInt32(cbPlanAnual.GetSelectedText());
+                string mes = cbMesDatos.GetSelectedText().ToString();
+                int numeroMes = -1;
+
+                //Verifico que numero de mes es            
+                string[] Meses = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
+                int cont = 0;
+
+                foreach (string l in Meses)
                 {
-                    numeroMes = cont;
-                    break;
+                    if (cbMesDatos.GetSelectedText().ToString() == Meses[cont])
+                    {
+                        numeroMes = cont;
+                        break;
+                    }
+                    cont++;
                 }
-                cont++;
+
+                //Calculo las semanas que tine cada mes en el año
+                int[] SemanasXMes = new int[12];
+                SemanasXMes = SemanasAño(anio);
+
+                //Sumo las semanas hasta el contador
+                int semanasAcum = 0;
+                for (int i = 0; i < cont; i++)
+                {
+                    semanasAcum = semanasAcum + SemanasXMes[i];
+                }
+
+                //Defino la cantidad de semanas que tiene el mes
+                int cantidadSemanas = SemanasXMes[numeroMes];
+
+                //Creo las estructuras para cargar el combo
+                int[] valoresSemanas = new int[cantidadSemanas];
+                string[] textoSemanas = new string[cantidadSemanas];
+
+                for (int i = 0; i < cantidadSemanas; i++)
+                {
+                    valoresSemanas[i] = (semanasAcum + i + 1);
+                    textoSemanas[i] = (semanasAcum + i + 1).ToString();
+                }
+                //Deshabilito el Combo de Meses
+                cbMesDatos.Enabled = false;
+
+                //Cargo el combo con las semanas
+                cbSemanaDatos.SetDatos(textoSemanas, valoresSemanas, "Seleccione", false);
+                cbSemanaDatos.Enabled = true;
             }
-
-            //Calculo las semanas que tine cada mes en el año
-            int[] SemanasXMes = new int[12];
-            SemanasXMes = SemanasAño(anio);
-
-            //Sumo las semanas hasta el contador
-            int semanasAcum = 0;
-            for (int i = 0; i < cont; i++)
-            {
-                semanasAcum = semanasAcum + SemanasXMes[i];
-            }
-
-            //Defino la cantidad de semanas que tiene el mes
-            int cantidadSemanas = SemanasXMes[numeroMes];
-
-            //Creo las estructuras para cargar el combo
-            int[] valoresSemanas = new int[cantidadSemanas];
-            string[] textoSemanas = new string[cantidadSemanas];
-
-            for (int i = 0; i < cantidadSemanas; i++)
-            {
-                valoresSemanas[i] = (semanasAcum + i + 1);
-                textoSemanas[i] = (semanasAcum + i + 1).ToString();
-            }
-            //Deshabilito el Combo de Meses
-            cbMesDatos.Enabled = false;
-
-            //Cargo el combo con las semanas
-            cbSemanaDatos.SetDatos(textoSemanas, valoresSemanas, "Seleccione", false);
-            cbSemanaDatos.Enabled = true;
+            catch (Exception) { }
         }
 
         private void button_MouseDown(object sender, MouseEventArgs e)
@@ -1341,7 +1346,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                         //Si existen excepciones relacionadas con el Plan Semanal
                         PlanificacionProduccion.frmExcepcionesPlan frmExcepciones = new frmExcepcionesPlan();
                         frmExcepciones.TopLevel = false;
-                        frmExcepciones.Parent = this.Parent;
+                        frmExcepciones.MdiParent = this.MdiParent;
                         frmExcepciones.CargarGrilla(excepciones);
                         frmExcepciones.Show();
                         frmExcepciones.BringToFront();

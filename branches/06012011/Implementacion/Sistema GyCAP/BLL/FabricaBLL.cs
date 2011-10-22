@@ -205,7 +205,7 @@ namespace GyCAP.BLL
 
                     OrdenTrabajoBLL.GenerarOrdenesTrabajo(arbolProduccion, new List<ExcepcionesPlan>());
 
-                    simulacion.FechaInicio = arbolProduccion.GetFechaInicio(simulacion.FechaNecesidad);
+                    simulacion.FechaInicio = arbolProduccion.GetFechaInicio(simulacion.FechaNecesidad, true);
                     simulacion.IsValid = true;
 
                     DateTime minFechaInicio = GetFirstFreeDay(simulacion.FechaNecesidad);
@@ -214,8 +214,9 @@ namespace GyCAP.BLL
                     else
                     {
                         simulacion.EsPosible = false;
-                        simulacion.FechaSugerida = arbolProduccion.GetFechaFinalizacion(minFechaInicio);
+                        simulacion.FechaSugerida = arbolProduccion.GetFechaFinalizacion(minFechaInicio, true);
                         int capacidad = FabricaBLL.GetCapacidadSemanalBruta(simulacion.CodigoCocina, RecursosFabricacionEnum.TipoHorario.Normal);
+                        capacidad = capacidad / ConfiguracionSistemaBLL.GetConfiguracion<int>("DiasLaborales");
                         simulacion.FechaInicio = minFechaInicio;
 
                         while (minFechaInicio < simulacion.FechaNecesidad)

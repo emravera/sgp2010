@@ -15,7 +15,7 @@ namespace GyCAP.UI.ProcesoFabricacion
     {
         private static frmHojaRuta _frmHojaRuta = null;
         private Data.dsHojaRuta dsHojaRuta = new GyCAP.Data.dsHojaRuta();
-        private DataView dvHojasRuta, dvDetalleHoja, dvCentrosTrabajo, dvOperaciones, dvStockOrigen, dvStockDestino, dvUbicacionStock;
+        private DataView dvHojasRuta, dvDetalleHoja, dvCentrosTrabajo, dvOperaciones, dvStockOrigen, dvStockDestino, dvUbicacionStock, dvFiltroStockPrincipal;
         private DataView dvFiltroOrigen, dvFiltroDestino;
         private enum estadoUI { inicio, nuevo, nuevoExterno, consultar, modificar };
         private estadoUI estadoInterface;
@@ -446,7 +446,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                     chkActivo.Enabled = true;
                     chkActivo.Checked = false;
                     cboUbicacionStock.Enabled = true;
-                    cboUbicacionStock.SetSelectedValue(-1);
+                    cboUbicacionStock.SetTexto("Seleccione...");
                     txtDescripcion.ReadOnly = false;
                     txtDescripcion.Clear();
                     dvDetalleHoja.RowFilter = "HR_CODIGO = -1";
@@ -459,6 +459,8 @@ namespace GyCAP.UI.ProcesoFabricacion
                     panelAcciones.Enabled = true;
                     cboStockOrigen.Enabled = true;
                     cboStockDestino.Enabled = true;
+                    cboFiltroStockPrincipal.Enabled = true;
+                    cboFiltroStockPrincipal.SetSelectedValue(-1);
                     estadoInterface = estadoUI.nuevo;
                     tcHojaRuta.SelectedTab = tpDatos;
                     txtNombre.Focus();
@@ -484,6 +486,8 @@ namespace GyCAP.UI.ProcesoFabricacion
                     panelAcciones.Enabled = true;
                     cboStockOrigen.Enabled = true;
                     cboStockDestino.Enabled = true;
+                    cboFiltroStockPrincipal.Enabled = true;
+                    cboFiltroStockPrincipal.SetSelectedValue(-1);
                     estadoInterface = estadoUI.nuevoExterno;
                     tcHojaRuta.SelectedTab = tpDatos;
                     txtNombre.Focus();
@@ -499,6 +503,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                     panelAcciones.Enabled = false;
                     cboStockOrigen.Enabled = false;
                     cboStockDestino.Enabled = false;
+                    cboFiltroStockPrincipal.Enabled = false;
                     slideControl.Selected = slideDatos;
                     estadoInterface = estadoUI.consultar;
                     tcHojaRuta.SelectedTab = tpDatos;
@@ -519,6 +524,7 @@ namespace GyCAP.UI.ProcesoFabricacion
                     panelAcciones.Enabled = true;
                     cboStockOrigen.Enabled = true;
                     cboStockDestino.Enabled = true;
+                    cboFiltroStockPrincipal.Enabled = true;
                     estadoInterface = estadoUI.modificar;
                     tcHojaRuta.SelectedTab = tpDatos;
                     txtNombre.Focus();
@@ -606,10 +612,13 @@ namespace GyCAP.UI.ProcesoFabricacion
             cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
 
             dvUbicacionStock = new DataView(dsHojaRuta.UBICACIONES_STOCK);
-            cboUbicacionStock.SetDatos(dvUbicacionStock, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
+            dvUbicacionStock.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;
+            cboUbicacionStock.SetDatos(dvUbicacionStock, "USTCK_NUMERO", "USTCK_NOMBRE", "Seleccione...", false);
 
+            dvFiltroStockPrincipal = new DataView(dsHojaRuta.CONTENIDO_UBICACION_STOCK);
             dvFiltroOrigen = new DataView(dsHojaRuta.CONTENIDO_UBICACION_STOCK);
             dvFiltroDestino = new DataView(dsHojaRuta.CONTENIDO_UBICACION_STOCK);
+            cboFiltroStockPrincipal.SetDatos(dvFiltroStockPrincipal, "CON_CODIGO", "CON_NOMBRE", "Filtrar por contenido...", true);
             cboFiltroOrigen.SetDatos(dvFiltroOrigen, "CON_CODIGO", "CON_NOMBRE", "Filtrar por contenido...", true);
             cboFiltroDestino.SetDatos(dvFiltroDestino, "CON_CODIGO", "CON_NOMBRE", "Filtrar por contenido...", true);
         }        
@@ -622,6 +631,7 @@ namespace GyCAP.UI.ProcesoFabricacion
             dtpFechaAlta.SetFecha(dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigo).HR_FECHAALTA);
             if (dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigo).HR_ACTIVO == BLL.HojaRutaBLL.hojaRutaActiva) { chkActivo.Checked = true; }
             else { chkActivo.Checked = false; }
+            cboFiltroStockPrincipal.SetSelectedValue(-1);
             if (dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigo).IsUSTCK_NUMERONull()) { cboUbicacionStock.SetSelectedIndex(-1); }
             else { cboUbicacionStock.SetSelectedValue(Convert.ToInt32(dsHojaRuta.HOJAS_RUTA.FindByHR_CODIGO(codigo).USTCK_NUMERO)); }
             dvDetalleHoja.RowFilter = "hr_codigo = " + codigo;
@@ -723,28 +733,39 @@ namespace GyCAP.UI.ProcesoFabricacion
             {                
                 if ((sender as Sistema.ControlesUsuarios.DropDownList).Equals(cboFiltroOrigen))
                 {
+                    dvStockOrigen.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;
+
                     if (cboFiltroOrigen.GetSelectedValueInt() != -1)
                     {
-                        dvStockOrigen.RowFilter = "CON_CODIGO = " + cboFiltroOrigen.GetSelectedValueInt();
-                    }
-                    else
-                    {
-                        dvStockOrigen.RowFilter = string.Empty;
+                        dvStockOrigen.RowFilter += " AND CON_CODIGO = " + cboFiltroOrigen.GetSelectedValueInt();
                     }
                     cboStockOrigen.SetDatos(dvStockOrigen, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
                 }
                 else
                 {
+                    dvStockDestino.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;
+
                     if (cboFiltroDestino.GetSelectedValueInt() != -1)
                     {
-                        dvStockDestino.RowFilter = "CON_CODIGO = " + cboFiltroDestino.GetSelectedValueInt();
-                    }
-                    else
-                    {
-                        dvStockDestino.RowFilter = string.Empty;
+                        dvStockDestino.RowFilter += " AND CON_CODIGO = " + cboFiltroDestino.GetSelectedValueInt();
                     }
                     cboStockDestino.SetDatos(dvStockDestino, "USTCK_NUMERO", "USTCK_NOMBRE", "--Sin especificar--", true);
                 }
+            }
+            catch (Exception) { }
+        }        
+
+        private void cboFiltroStockPrincipal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                dvUbicacionStock.RowFilter = "TUS_CODIGO <> " + BLL.TipoUbicacionStockBLL.TipoVista;
+
+                if (cboFiltroStockPrincipal.GetSelectedValueInt() != -1)
+                {
+                    dvUbicacionStock.RowFilter += " AND CON_CODIGO = " + cboFiltroStockPrincipal.GetSelectedValueInt();
+                }
+                cboUbicacionStock.SetDatos(dvUbicacionStock, "USTCK_NUMERO", "USTCK_NOMBRE", "Seleccione...", false);                
             }
             catch (Exception) { }
         }
