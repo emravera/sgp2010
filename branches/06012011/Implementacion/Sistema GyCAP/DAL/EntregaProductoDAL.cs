@@ -68,52 +68,29 @@ namespace GyCAP.DAL
         }
 
         //Metodo que guarda la entrega del producto
-        public static void GuardarEntrega(Entidades.EntregaProducto entrega, Data.dsEntregaProducto dsEntregaProducto)
+        public static void GuardarEntrega(Entidades.EntregaProducto entrega, DataTable dtDetalleEntrega, SqlTransaction transaccion)
         {
-            SqlTransaction transaccion = null;
+            //Guardamos la cabecera
+            //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
+            string sql = @"INSERT INTO [ENTREGA_PRODUCTO] 
+                           ([entrega_fecha], [cli_codigo], [e_codigo]) 
+                           VALUES (@p0, @p1, @p2) SELECT @@Identity";
+            object[] valorParametros = { entrega.Fecha, entrega.Cliente.Codigo, entrega.Empleado.Codigo };
+            entrega.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, transaccion));
 
-            try
+            //Inserto el Detalle
+            foreach (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow row in (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow[])dtDetalleEntrega.Select(null, null, System.Data.DataViewRowState.Added))
             {
-                transaccion = DB.IniciarTransaccion();
-
-                //Guardamos la cabecera
-                //Agregamos select identity para que devuelva el código creado, en caso de necesitarlo
-                string sql = "INSERT INTO [ENTREGA_PRODUCTO] ([entrega_fecha], [cli_codigo], [e_codigo]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
-                object[] valorParametros = { entrega.Fecha, entrega.Cliente.Codigo, entrega.Empleado.Codigo };
-                entrega.Codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, transaccion));
-
-                //Inserto el Detalle
-                foreach (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow row in (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow[])dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO.Select(null, null, System.Data.DataViewRowState.Added))
-                {
-                    if (row.DPED_CODIGO != 0)
-                    {
-                        sql = "INSERT INTO [DETALLE_ENTREGA_PRODUCTO] ([entrega_codigo], [dped_codigo], [dent_cantidad], [dent_contenido]) VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
-                        object[] valorParam = { entrega.Codigo, row.DPED_CODIGO, row.DENT_CANTIDAD, row.DENT_CONTENIDO };
-                        row.BeginEdit();
-                        row.DENT_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
-                        row.ENTREGA_CODIGO = entrega.Codigo;
-                        row.EndEdit();
-                    }
-                    else
-                    {
-                        sql = "INSERT INTO [DETALLE_ENTREGA_PRODUCTO] ([entrega_codigo], [dent_cantidad], [dent_contenido]) VALUES (@p0, @p1, @p2) SELECT @@Identity";
-                        object[] valorParam = { entrega.Codigo, row.DENT_CANTIDAD, row.DENT_CONTENIDO };
-                        row.BeginEdit();
-                        row.DENT_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
-                        row.ENTREGA_CODIGO = entrega.Codigo;
-                        row.EndEdit();
-
-                    }
-                }
-
-                transaccion.Commit();
-                DB.FinalizarTransaccion();
-            }
-            catch (SqlException ex)
-            {
-                transaccion.Rollback();
-                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
-            }
+                sql = @"INSERT INTO [DETALLE_ENTREGA_PRODUCTO] 
+                        ([entrega_codigo], [dped_codigo], [dent_cantidad], [dent_contenido]) 
+                        VALUES (@p0, @p1, @p2, @p3) SELECT @@Identity";
+                object[] valorParam = { entrega.Codigo, row.DPED_CODIGO, row.DENT_CANTIDAD, row.DENT_CONTENIDO };
+                
+                row.BeginEdit();
+                row.DENT_CODIGO = Convert.ToInt32(DB.executeScalar(sql, valorParam, transaccion));
+                row.ENTREGA_CODIGO = entrega.Codigo;
+                row.EndEdit();
+            }      
         }
 
         //Metodo que guarda la entrega del producto modificada

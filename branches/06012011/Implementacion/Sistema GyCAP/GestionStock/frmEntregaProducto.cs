@@ -39,7 +39,9 @@ namespace GyCAP.UI.GestionStock
             //                                      LISTAS BUSQUEDA
             //*******************************************************************************
 
+            //=================================
             //Lista de Entregas
+            //=================================
             dgvListaEntregas.Columns.Add("ENTREGA_CODIGO", "Código");
             dgvListaEntregas.Columns.Add("ENTREGA_FECHA", "Fecha Entrega");
             dgvListaEntregas.Columns.Add("CLI_CODIGO", "Cliente");
@@ -51,11 +53,16 @@ namespace GyCAP.UI.GestionStock
             dgvListaEntregas.Columns["CLI_CODIGO"].DataPropertyName = "CLI_CODIGO";
             dgvListaEntregas.Columns["E_CODIGO"].DataPropertyName = "E_CODIGO";
             
+            //Ocultamos las columnas que no queremos que se vean
+            dgvListaEntregas.Columns["ENTREGA_CODIGO"].Visible = false;
+
             //Creamos el dataview y lo asignamos a la grilla
             dvListaEntregaBus = new DataView(dsEntregaProducto.ENTREGA_PRODUCTO);
             dgvListaEntregas.DataSource = dvListaEntregaBus;
 
-            //Lista de Detalles de Entregas
+            //=================================
+            //Lista de Detalle de Entregas
+            //=================================
             dgvDetalleBusqueda.Columns.Add("DENT_CODIGO", "Código");
             dgvDetalleBusqueda.Columns.Add("ENTREGA_CODIGO", "Entrega");
             dgvDetalleBusqueda.Columns.Add("DENT_CONTENIDO", "Stock");
@@ -68,6 +75,10 @@ namespace GyCAP.UI.GestionStock
             dgvDetalleBusqueda.Columns["DENT_CONTENIDO"].DataPropertyName = "DENT_CONTENIDO";
             dgvDetalleBusqueda.Columns["DPED_CODIGO"].DataPropertyName = "DPED_CODIGO";
             dgvDetalleBusqueda.Columns["DENT_CANTIDAD"].DataPropertyName = "DENT_CANTIDAD";
+
+            //Ocultamos las columnas que no se deben ver
+            dgvDetalleBusqueda.Columns["DENT_CODIGO"].Visible = false;
+            dgvDetalleBusqueda.Columns["ENTREGA_CODIGO"].Visible = false;
 
             //Creamos el dataview y lo asignamos a la grilla
             dvListadetalleBus = new DataView(dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO);
@@ -251,18 +262,19 @@ namespace GyCAP.UI.GestionStock
                     //Seteo la fecha actual al control de la fecha
                     dtpFechaBusqueda.Value = BLL.DBBLL.GetFechaServidor();
 
+                    //Limapiamos los datatable
+                    dsEntregaProducto.ENTREGA_PRODUCTO.Clear();
+                    dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO.Clear();
+
                     //Selecciono el tabcontrol
                     tcEntregaProducto.SelectedTab = tpBuscar;
                     estadoActual = estadoUI.inicio;
                     break;
 
                 case estadoUI.buscar:
-                    gbGrillaDetalleBus.Visible = false;
+                    gbGrillaDetalleBus.Visible = true;
                     gbGrillaEntregasBus.Visible = true;
                     
-                    //Escondo las filas en la que esta
-                    dgvListaEntregas.Columns["ENTREGA_CODIGO"].Visible = false;
-
                     //Selecciono el tabcontrol
                     tcEntregaProducto.SelectedTab = tpBuscar;
                     estadoActual = estadoUI.buscar;
@@ -413,8 +425,8 @@ namespace GyCAP.UI.GestionStock
 
                 switch (dgvDatosEntrega.Columns[e.ColumnIndex].Name)
                 {
-                    case "DENT_CONTENIDO":
-                        nombre = dsEntregaProducto.UBICACIONES_STOCK.FindByUSTCK_NUMERO(Convert.ToInt32(e.Value)).USTCK_CODIGO;
+                    case "COC_CODIGO":
+                        nombre = dsEntregaProducto.COCINAS.FindByCOC_CODIGO(Convert.ToInt32(e.Value)).COC_CODIGO_PRODUCTO;
                         e.Value = nombre;
                         break;
                     default:
@@ -517,8 +529,8 @@ namespace GyCAP.UI.GestionStock
                     //Caso de busqueda por cliente
                     if (chCliente.Checked == true && chFechaEntrega.Checked==false)
                     {
-                         //busco el codigo del cliente
-                         codigoCliente = Convert.ToInt32(cbClienteBus.GetSelectedValue());
+                        //busco el codigo del cliente
+                        codigoCliente = Convert.ToInt32(cbClienteBus.GetSelectedValue());
                                                
                         //Llamo a la funcion de búsqueda
                         BLL.EntregaProductoBLL.ObtenerEntregas(codigoCliente, dsEntregaProducto.ENTREGA_PRODUCTO);
@@ -597,8 +609,7 @@ namespace GyCAP.UI.GestionStock
                 else
                 {
                     //muestro el groupbox del detalle
-                    SetInterface(estadoUI.buscar);
-                    gbGrillaDetalleBus.Visible = true;                    
+                    SetInterface(estadoUI.buscar);                                     
                 }
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
@@ -664,6 +675,9 @@ namespace GyCAP.UI.GestionStock
         {
             try
             {
+                //Limpio el Detalle de pedido existente
+                dsEntregaProducto.DETALLE_PEDIDOS.Clear();
+
                 //Busco el Codigo del Pedido
                 int codigoPedido = Convert.ToInt32(dvListaPedidos[dgvPedidos.SelectedRows[0].Index]["ped_codigo"]);
 
@@ -778,9 +792,8 @@ namespace GyCAP.UI.GestionStock
                 int codigoCocina = Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["coc_codigo"]);
 
                 //Tomamos los datos de la fila seleccionada
-                if (Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["edped_codigo"]) == Convert.ToInt32(BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("En Curso")))
-                {
-                    
+                if (Convert.ToInt32(dvListaDetallePedido[dgvDetallePedido.SelectedRows[0].Index]["edped_codigo"]) == Convert.ToInt32(BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Finalizado")))
+                {                    
                     string nombreCocina = dsEntregaProducto.COCINAS.FindByCOC_CODIGO(codigoCocina).ToString();
                     
                     //Obtenemos la ubicacion de stock sobre la que vamos a generar el movimiento
@@ -823,8 +836,7 @@ namespace GyCAP.UI.GestionStock
                 else
                 {
                     Entidades.Mensajes.MensajesABM.MsjValidacion("El detalle de pedido no se encuentra terminado.", this.Text);
-                }
-           
+                }           
             }
             else
             {
@@ -864,10 +876,11 @@ namespace GyCAP.UI.GestionStock
                 entrega.Cliente = cliente;
                 entrega.Empleado = empleado;
                 entrega.Fecha = Convert.ToDateTime(dtpFechaEntrega.Value);
+                
                 if (estadoActual == estadoUI.cargaDetalle)
                 {
                     //Metodo que la cabecera y el detalle de la Entrega del producto
-                    BLL.EntregaProductoBLL.GuardarEntrega(entrega, dsEntregaProducto);
+                    BLL.EntregaProductoBLL.GuardarEntrega(entrega, dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO);
                 }
                 else if (estadoActual == estadoUI.modificar)
                 {
@@ -878,7 +891,7 @@ namespace GyCAP.UI.GestionStock
 
                 //Mostramos el mensaje informando que se guardaron los datos
                 Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Entrega de Producto Terminado", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
-               
+
                 //********************************************** ACTUALIZACIONES POSTERIORES ****************************************************************************
                 //Metodo que actualiza el estado de los pedidos deacuerdo a lo que se guardo
                 if (estadoActual == estadoUI.cargaDetalle || estadoActual == estadoUI.modificar)
@@ -898,6 +911,7 @@ namespace GyCAP.UI.GestionStock
                             dsEntregaProducto.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).AcceptChanges();
                         }
                     }
+
                     //Cambio el estado del pedido que fue entregado si todos los detalles lo fueron
                     int cont = 0; int cantfilas = 0;
                     foreach (Data.dsEntregaProducto.PEDIDOSRow pm in dsEntregaProducto.PEDIDOS.Rows)
@@ -927,37 +941,6 @@ namespace GyCAP.UI.GestionStock
                         cantfilas = 0;
                     }
                 }
-
-                //Se deben actualizar las cantidades de stock en las filas agregadas o nuevas
-                foreach (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow row in (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow[])dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO.Select(null, null, System.Data.DataViewRowState.Added))
-                {
-                    //Actualizo la cantidad de stock
-                    //Generar movimiento - Emanuel
-                    //BLL.UbicacionStockBLL.ActualizarCantidadesStock(Convert.ToInt32(row.DENT_CONTENIDO), (Convert.ToDecimal(row.DENT_CANTIDAD) * -1),(Convert.ToDecimal(row.DENT_CANTIDAD) * -1));
-                }
-
-                //Si se modificaron filas entonces SUMO las cantidades anteriores y luego resto las cantidades actuales
-                foreach (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow row in (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow[])dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO.Select(null, null, System.Data.DataViewRowState.ModifiedOriginal))
-                {
-                    //Actualizo la cantidad de stock
-                    //Generar movimiento - Emanuel
-                    //BLL.UbicacionStockBLL.ActualizarCantidadesStock(Convert.ToInt32(row.DENT_CONTENIDO), Convert.ToDecimal(row.DENT_CANTIDAD), Convert.ToDecimal(row.DENT_CANTIDAD));
-                }
-                foreach (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow row in (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow[])dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO.Select(null, null, System.Data.DataViewRowState.ModifiedCurrent))
-                {
-                    //Actualizo la cantidad de stock
-                    //Generar movimiento - Emanuel
-                    //BLL.UbicacionStockBLL.ActualizarCantidadesStock(Convert.ToInt32(row.DENT_CONTENIDO), Convert.ToDecimal(row.DENT_CANTIDAD), Convert.ToDecimal(row.DENT_CANTIDAD));
-                }
-
-                //Sumo las cantidades de las filas que fueron eliminadas
-                foreach (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow row in (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow[])dsEntregaProducto.DETALLE_ENTREGA_PRODUCTO.Select(null, null, System.Data.DataViewRowState.Deleted))
-                {
-                    //Actualizo la cantidad de stock
-                    //Generar movimiento - Emanuel
-                    //BLL.UbicacionStockBLL.ActualizarCantidadesStock(Convert.ToInt32(row.DENT_CONTENIDO), Convert.ToDecimal(row.DENT_CANTIDAD), Convert.ToDecimal(row.DENT_CANTIDAD));
-                }
-                //******************************************************************** FIN ACTUALIZACIONES ****************************************************************************************************************************************
 
                 //Si esta todo bien aceptamos los cambios que se le hacen al dataset
                 dsEntregaProducto.AcceptChanges();
@@ -1054,6 +1037,8 @@ namespace GyCAP.UI.GestionStock
         }
      
         #endregion                  
+
+       
 
         
     }

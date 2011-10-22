@@ -108,6 +108,25 @@ namespace GyCAP.DAL
             return codigo;
         }
 
+        public static int ObtenerEstadoDetalle(int codigoDetalle)
+        {
+            string sql = @"SELECT EDPED_CODIGO
+                          FROM DETALLE_PEDIDOS
+                          WHERE DPED_CODIGO = @p0";
+            int codigo = 0;
+
+           
+            object[] valorParametros = { codigoDetalle };
+            
+            try
+            {
+                codigo = Convert.ToInt32(DB.executeScalar(sql, valorParametros, null));
+            }
+            catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+
+            return codigo;
+        }
+        
         public static void ObtenerEstadosDetallePedido(DataTable dtEstadoDetallePedido)
         {
             string sql = @"SELECT EDPED_CODIGO, EDPED_NOMBRE, EDPED_DESCRIPCION
