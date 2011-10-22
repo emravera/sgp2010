@@ -681,8 +681,8 @@ namespace GyCAP.UI.PlanificacionProduccion
         #region Controles
 
         private void dgvDetalle_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {            
-            if (e.Value != null)
+        {
+            if (e.Value != null && e.Value != DBNull.Value)
             {
                 switch (dgvDetalle.Columns[e.ColumnIndex].Name)
                 {
@@ -697,7 +697,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
         private void dgvLista_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value.ToString() != String.Empty)
+            if (e.Value != null && e.Value != DBNull.Value)
             {
                 switch (dgvLista.Columns[e.ColumnIndex].Name)
                 {
@@ -712,7 +712,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         }
         private void dgvDatos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.Value != null)
+            if (e.Value != null && e.Value != DBNull.Value)
             {
                 switch (dgvDatos.Columns[e.ColumnIndex].Name)
                 {
@@ -730,7 +730,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             string nombre;
 
-            if (e.Value != null)
+            if (e.Value != null && e.Value != DBNull.Value)
             {
                 switch (dgvPlanMensual.Columns[e.ColumnIndex].Name)
                 {
@@ -1033,7 +1033,6 @@ namespace GyCAP.UI.PlanificacionProduccion
                     if (dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["dped_codigo"].ToString() != string.Empty)
                     {
                         pedido = Convert.ToString(dvListaPlanesMensuales[dgvPlanMensual.SelectedRows[0].Index]["dped_codigo"]);
-
                     }
 
                     //Se calcula la cantidad ya planificada para cada cocina
@@ -1243,13 +1242,16 @@ namespace GyCAP.UI.PlanificacionProduccion
 
             foreach (Data.dsPlanSemanal.DETALLE_PLANES_MENSUALESRow row in dsPlanSemanal.DETALLE_PLANES_MENSUALES)
             {
-                if (Convert.ToDateTime(row.DPED_FECHA_INICIO) < diaPlan)
+                if (!row.IsDPED_FECHA_INICIONull())
                 {
-                    if (Convert.ToInt32(row.DPMES_CANTPLANIFICADA) == 0)
+                    if (Convert.ToDateTime(row.DPED_FECHA_INICIO) < diaPlan)
                     {
-                        msjerror = msjerror + "-Hay detalles de Planes Mensuales que deben ser planificados.\n";
+                        if (Convert.ToInt32(row.DPMES_CANTPLANIFICADA) == 0)
+                        {
+                            msjerror = msjerror + "-Hay detalles de Planes Mensuales que deben ser planificados.\n";
+                        }
                     }
-                }               
+                }
             }
 
             return msjerror;

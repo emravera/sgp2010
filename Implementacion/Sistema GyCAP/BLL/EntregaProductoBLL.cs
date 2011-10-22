@@ -46,44 +46,16 @@ namespace GyCAP.BLL
                 
                 //Se generan los movimientos de stock pertinentes
                 foreach (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow row in (Data.dsEntregaProducto.DETALLE_ENTREGA_PRODUCTORow[])dtDetalleEntrega.Select(null, null, System.Data.DataViewRowState.Added))
-                {
-                    int estadoDetalle = BLL.EstadoDetallePedidoBLL.ObtenerEstadoDetalle(Convert.ToInt32(row.DPED_CODIGO));
+                {                    
+                    //Obtenemos el detalle del pedido 
+                    Entidades.Entidad detalle = BLL.EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.DetallePedido, Convert.ToInt32(row.DPED_CODIGO) , null);
 
-                    if(estadoDetalle == BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Finalizado"))
-                    {
-                        //Se tiene que generar un nuevo movimiento de stock para la entrega de pedido
-                        MovimientoStock movimiento = MovimientoStockBLL.GetMovimientoConfigurado(StockEnum.CodigoMovimiento.DetallePedido, StockEnum.EstadoMovimientoStock.Finalizado);
-                        movimiento.OrigenesMultiples.Add(new OrigenMovimiento()
-                        {
-                            CantidadEstimada = Convert.ToInt32(row.DENT_CANTIDAD),
-                            CantidadReal = Convert.ToInt32(row.DENT_CANTIDAD),
-                            Entidad = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, Convert.ToInt32(row.DENT_CONTENIDO), transaccion),
-                            FechaReal = DBBLL.GetFechaServidor(),
-                            FechaPrevista = DBBLL.GetFechaServidor(),
-                        });
-                        
-                        Entidad detalle = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.DetallePedido, Convert.ToInt32(row.DPED_CODIGO), transaccion);
-                        movimiento.Destino = detalle;
-                        movimiento.CantidadDestinoReal = row.DENT_CANTIDAD;
-                        movimiento.Codigo = StockEnum.CodigoMovimiento.DetallePedido.ToString();
-                        movimiento.Duenio = detalle;
-                        movimiento.FechaReal = DBBLL.GetFechaServidor();
-                        movimiento.Descripcion = "Entrega de Detalle Pedido Número:" + row.DPED_CODIGO.ToString();
+                    IList<Entidades.MovimientoStock> movimiento = BLL.MovimientoStockBLL.GetMovimientosByOwner(detalle);
+                    movimiento.First().CantidadDestinoReal = movimiento.First().CantidadDestinoEstimada;
+                    movimiento.First().FechaReal = DBBLL.GetFechaServidor();
 
-                        MovimientoStockBLL.InsertarFinalizado(movimiento, transaccion);
-                    }
-                    else if(estadoDetalle == BLL.EstadoDetallePedidoBLL.ObtenerCodigoEstado("Entrega Stock"))
-                    {
-                        //Obtenemos el detalle del pedido 
-                        Entidades.Entidad detalle = BLL.EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.DetallePedido, Convert.ToInt32(row.DPED_CODIGO) , null);
-
-                        IList<Entidades.MovimientoStock> movimiento = BLL.MovimientoStockBLL.GetMovimientosByOwner(detalle);
-                        movimiento.First().CantidadDestinoReal = movimiento.First().CantidadDestinoEstimada;
-                        movimiento.First().FechaReal = DBBLL.GetFechaServidor();
-
-                        //Finalizamos el movimiento de stock que ya fue generado
-                        BLL.MovimientoStockBLL.Finalizar(movimiento.First(), transaccion);
-                    }
+                    //Finalizamos el movimiento de stock que ya fue generado
+                    BLL.MovimientoStockBLL.Finalizar(movimiento.First(), transaccion);               
                 }             
 
 

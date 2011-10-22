@@ -362,7 +362,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             string nombre;
 
-            if (e.Value != null)
+            if (e.Value != null && e.Value != DBNull.Value)
             {
                 switch (dgvDetalle.Columns[e.ColumnIndex].Name)
                 {
@@ -384,7 +384,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             string nombre;
 
-            if (e.Value != null)
+            if (e.Value != null && e.Value != DBNull.Value)
             {
                 switch (dgvDatos.Columns[e.ColumnIndex].Name)
                 {
