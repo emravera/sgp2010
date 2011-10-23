@@ -15,7 +15,7 @@ namespace GyCAP.BLL
         //metodo para traer el detalle de una cabecera
         public static void ObtenerDetalle(int idPlan, DataTable dtDetalle)
         {
-            DAL.DetallePlanSemanalDAL.ObtenerDetalle(dtDetalle,idPlan);
+            DAL.DetallePlanSemanalDAL.ObtenerDetalle(dtDetalle, idPlan);
         }
 
         public static void ActualizarEstado(int codigoDetalle, int codigoEstado)

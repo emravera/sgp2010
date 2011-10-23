@@ -100,6 +100,7 @@
             this.cmsCierres = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiBloquearCierre = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDesbloquearCierre = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblOrdenTSelected = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcOrdenTrabajo.SuspendLayout();
             this.tpOrdenesProduccion.SuspendLayout();
@@ -683,6 +684,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblOrdenTSelected);
             this.groupBox1.Controls.Add(this.btnEliminarCierre);
             this.groupBox1.Controls.Add(this.btnModificarCierre);
             this.groupBox1.Controls.Add(this.dgvCierresParciales);
@@ -895,6 +897,16 @@
             this.tsmiDesbloquearCierre.Text = "Desbloquear columna";
             this.tsmiDesbloquearCierre.Click += new System.EventHandler(this.tsmiDesbloquearCierre_Click);
             // 
+            // lblOrdenTSelected
+            // 
+            this.lblOrdenTSelected.AutoSize = true;
+            this.lblOrdenTSelected.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrdenTSelected.Location = new System.Drawing.Point(6, 258);
+            this.lblOrdenTSelected.Name = "lblOrdenTSelected";
+            this.lblOrdenTSelected.Size = new System.Drawing.Size(57, 17);
+            this.lblOrdenTSelected.TabIndex = 18;
+            this.lblOrdenTSelected.Text = "label16";
+            // 
             // frmControlProduccion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -929,6 +941,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudOperacionesFallidas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidadCierre)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCierresParciales)).EndInit();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
@@ -1012,5 +1025,6 @@
         private System.Windows.Forms.NumericUpDown nudOperacionesFallidas;
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.DateTimePicker dtpHoraCierre;
+        private System.Windows.Forms.Label lblOrdenTSelected;
     }
 }

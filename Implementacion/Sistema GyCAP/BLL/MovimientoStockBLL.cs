@@ -198,7 +198,7 @@ namespace GyCAP.BLL
             MovimientoStock movimiento = new MovimientoStock();
             movimiento.Numero = 0;
             movimiento.Codigo = codigo.ToString();
-            movimiento.Descripcion = "poner descripcion gonzalo";
+            movimiento.Descripcion = codigo.ToString();
             movimiento.CantidadDestinoReal = 0;
             movimiento.Estado = EstadoMovimientoStockBLL.GetEstadoEntity(estado);
             movimiento.FechaAlta = DAL.DB.GetFechaServidor();

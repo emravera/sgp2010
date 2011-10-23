@@ -104,6 +104,91 @@ namespace GyCAP.DAL
             }
         }
 
+        public static void ObtenerPedido(object nombre, object numero, int idEstadoPedido, object fechaDesde, object fechaHasta, Data.dsPlanSemanal ds, bool obtenerDetalle)
+        {
+            string sql = @"SELECT PED_CODIGO, PEDIDOS.CLI_CODIGO, EPED_CODIGO, PED_FECHAENTREGAREAL, 
+                          PED_FECHA_ALTA, PED_OBSERVACIONES, PED_NUMERO
+                          FROM PEDIDOS, CLIENTES WHERE PEDIDOS.CLI_CODIGO = CLIENTES.CLI_CODIGO ";
+
+            //Sirve para armar el nombre de los parámetros
+            int cantidadParametros = 0;
+
+            //Un array de object para ir guardando los valores de los filtros, con tamaño = cantidad de filtros disponibles
+            object[] valoresFiltros = new object[5];
+
+            //Empecemos a armar la consulta, revisemos que filtros aplican
+            if (nombre != null && nombre.ToString() != string.Empty)
+            {
+                //si aplica el filtro lo usamos
+                sql += " AND CLI_RAZONSOCIAL LIKE @p" + cantidadParametros + " ";
+
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                nombre = "%" + nombre + "%";
+                valoresFiltros[cantidadParametros] = nombre;
+                cantidadParametros++;
+            }
+
+            if (numero != null && numero.ToString() != string.Empty)
+            {
+                //si aplica el filtro lo usamos
+                sql += " AND PED_NUMERO LIKE @p" + cantidadParametros + " ";
+
+                //Reacomodamos el valor porque hay problemas entre el uso del LIKE y parámetros
+                numero = "%" + numero + "%";
+                valoresFiltros[cantidadParametros] = numero;
+                cantidadParametros++;
+            }
+
+            //ESTADO - Revisamos si es distinto de 0, o sea "todos"
+            if (idEstadoPedido != -1)
+            {
+                sql += " AND EPED_CODIGO = @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = Convert.ToInt32(idEstadoPedido);
+                cantidadParametros++;
+            }
+
+            if (fechaDesde != null)
+            {
+                sql += " AND PED_FECHA_ALTA >= @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = ((DateTime)fechaDesde).ToShortDateString();
+                cantidadParametros++;
+            }
+
+            if (fechaHasta != null)
+            {
+
+                sql += " AND PED_FECHA_ALTA <= @p" + cantidadParametros;
+                valoresFiltros[cantidadParametros] = ((DateTime)fechaHasta).ToShortDateString() + " 23:59:59";
+                cantidadParametros++;
+            }
+
+            if (cantidadParametros > 0)
+            {
+                //Buscamos con filtro, armemos el array de los valores de los parametros
+                object[] valorParametros = new object[cantidadParametros];
+                for (int i = 0; i < cantidadParametros; i++)
+                {
+                    valorParametros[i] = valoresFiltros[i];
+                }
+                try
+                {
+                    DB.FillDataSet(ds, "PEDIDOS", sql, valorParametros);
+                    if (obtenerDetalle) { ObtenerDetallePedido(ds); }
+                }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            }
+            else
+            {
+                //Buscamos sin filtro
+                try
+                {
+                    DB.FillDataSet(ds, "PEDIDOS", sql, null);
+                    if (obtenerDetalle) { ObtenerDetallePedido(ds); }
+                }
+                catch (SqlException) { throw new Entidades.Excepciones.BaseDeDatosException(); }
+            }
+        }
+
         //Metodo que obtiene el pedido
         public static void ObtenerPedidoFecha(DataTable dtPedidos)
         {
@@ -147,6 +232,22 @@ namespace GyCAP.DAL
             object[] valorParametros; ;
 
             foreach (Data.dsCliente.PEDIDOSRow rowPedido in ds.PEDIDOS)
+            {
+                valorParametros = new object[] { rowPedido.PED_CODIGO };
+                DB.FillDataTable(ds.DETALLE_PEDIDOS, sql, valorParametros);
+            }
+        }
+
+        private static void ObtenerDetallePedido(Data.dsPlanSemanal ds)
+        {
+            string sql = @"SELECT DPED_CODIGO, PED_CODIGO, EDPED_CODIGO, COC_CODIGO, 
+                         DPED_CANTIDAD, DPED_FECHA_CANCELACION, DPED_CODIGONEMONICO,
+                         DPED_FECHA_ENTREGA_PREVISTA, DPED_FECHA_ENTREGA_REAL
+                         FROM DETALLE_PEDIDOS WHERE PED_CODIGO = @p0";
+
+            object[] valorParametros; ;
+
+            foreach (Data.dsPlanSemanal.PEDIDOSRow rowPedido in ds.PEDIDOS)
             {
                 valorParametros = new object[] { rowPedido.PED_CODIGO };
                 DB.FillDataTable(ds.DETALLE_PEDIDOS, sql, valorParametros);
@@ -444,8 +545,8 @@ namespace GyCAP.DAL
 
         private static bool EsPedidoConDetalleFinalizado(int codigoPedido, SqlTransaction transaccion)
         {
-            string sql = "SELECT COUNT(dped_codigo) FROM DETALLE_PEDIDOS WHERE ped_codigo = @p0 AND edped_codigo <> @p1";
-            object[] parametros = { codigoPedido, DetallePedidoDAL.EstadoFinalizado };
+            string sql = "SELECT COUNT(dped_codigo) FROM DETALLE_PEDIDOS WHERE ped_codigo = @p0 AND edped_codigo <> @p1 AND edped_codigo <> @p2)";
+            object[] parametros = { codigoPedido, DetallePedidoDAL.EstadoFinalizado, DetallePedidoDAL.EstadoEntregaStock };
 
             if (Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion)) == 0) { return true; }
             else { return false; }
