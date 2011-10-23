@@ -116,22 +116,7 @@ namespace GyCAP.DAL
                 DB.FinalizarTransaccion();
             }
         }
-
-        //Metodo para eliminar el/los movimientos de stock de un pedido
-        public static void EliminarMovimientosPedido(int numeroEntidadPedido, SqlTransaction transaccion)
-        {
-            string sql = @"DELETE FROM MOVIMIENTOS_STOCK 
-                                  WHERE mvto_codigo = 'Pedido' AND entd_duenio = @p0";
-
-            object[] parametros = { numeroEntidadPedido };
-
-            try
-            {
-                DB.executeNonQuery(sql, parametros, transaccion);
-            }
-            catch (SqlException ex) { throw new BaseDeDatosException(ex.Message); }
-        }
-
+        
         public static void IniciarMovimiento(MovimientoStock movimiento, SqlTransaction transaccion)
         {
             string sql = "UPDATE MOVIMIENTOS_STOCK SET emvto_codigo = @p0 WHERE mvto_numero = @p1";

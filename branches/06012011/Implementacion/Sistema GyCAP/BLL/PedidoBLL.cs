@@ -149,8 +149,7 @@ namespace GyCAP.BLL
             {
                 DAL.DB.FinalizarTransaccion();
             }
-        }          
-        
+        }         
 
         //Metodo que elimina un pedido y su detalle
         public static void Eliminar(int codigo, DataTable dtDetallePedido)
