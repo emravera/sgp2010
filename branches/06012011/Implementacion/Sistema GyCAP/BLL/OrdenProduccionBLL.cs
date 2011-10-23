@@ -393,7 +393,7 @@ namespace GyCAP.BLL
                 {
                     ordenT.CantidadReal = ordenT.CantidadEstimada;
                     ordenT.Estado = estadoFinalizada;
-                    ordenT.FechaFinReal = ordenT.FechaFinEstimada;
+                    ordenT.FechaFinReal = ordenT.FechaFinEstimada.Value;
 
                     if (ordenT.CierresParciales == null || (ordenT.CierresParciales != null && ordenT.CierresParciales.Count == 0))
                     {
@@ -448,7 +448,7 @@ namespace GyCAP.BLL
                 {
                     //ordenT.CantidadReal = ordenT.CantidadEstimada;
                     ordenT.Estado = estadoFinalizada;
-                    ordenT.FechaFinReal = ordenT.FechaFinEstimada;
+                    ordenT.FechaFinReal = ordenT.FechaFinEstimada.Value;
 
                     if (ordenT.CierresParciales == null || (ordenT.CierresParciales != null && ordenT.CierresParciales.Count == 0))
                     {
