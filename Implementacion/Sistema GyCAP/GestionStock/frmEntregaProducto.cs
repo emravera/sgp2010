@@ -33,8 +33,7 @@ namespace GyCAP.UI.GestionStock
             dgvDetallePedido.AutoGenerateColumns = false;
             dgvListaEntregas.AutoGenerateColumns = false;
             dgvPedidos.AutoGenerateColumns = false;
-            
-            
+                        
             //*******************************************************************************
             //                                      LISTAS BUSQUEDA
             //*******************************************************************************
