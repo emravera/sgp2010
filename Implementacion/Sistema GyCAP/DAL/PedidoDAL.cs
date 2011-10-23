@@ -545,7 +545,7 @@ namespace GyCAP.DAL
 
         private static bool EsPedidoConDetalleFinalizado(int codigoPedido, SqlTransaction transaccion)
         {
-            string sql = "SELECT COUNT(dped_codigo) FROM DETALLE_PEDIDOS WHERE ped_codigo = @p0 AND edped_codigo <> @p1 AND edped_codigo <> @p2)";
+            string sql = "SELECT COUNT(dped_codigo) FROM DETALLE_PEDIDOS WHERE ped_codigo = @p0 AND edped_codigo <> @p1 AND edped_codigo <> @p2";
             object[] parametros = { codigoPedido, DetallePedidoDAL.EstadoFinalizado, DetallePedidoDAL.EstadoEntregaStock };
 
             if (Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion)) == 0) { return true; }
