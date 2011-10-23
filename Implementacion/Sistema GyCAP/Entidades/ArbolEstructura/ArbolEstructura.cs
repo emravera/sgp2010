@@ -237,6 +237,7 @@ namespace GyCAP.Entidades.ArbolEstructura
             TreeView treeReturn = new TreeView();
             treeReturn.BeginUpdate();
             TreeNode nodoInicio = new TreeNode();
+            if (nodoRaiz.EsCritico) { nodoInicio.ForeColor = System.Drawing.Color.Red; }
             nodoInicio.Text = nodoRaiz.Compuesto.Parte.Nombre;
             nodoInicio.Name = nodoRaiz.CodigoNodo.ToString();
             nodoInicio.Tag = new string[] { 

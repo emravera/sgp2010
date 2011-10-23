@@ -289,7 +289,7 @@
             this.dgvModelos.Size = new System.Drawing.Size(325, 154);
             this.dgvModelos.TabIndex = 28;
             this.dgvModelos.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvModelos_CellFormatting);
-            this.dgvModelos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvModelos_DataBindingComplete);
+            this.dgvModelos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // gbCargaPorcentaje
             // 
@@ -395,6 +395,7 @@
             this.dgvMP.Size = new System.Drawing.Size(453, 358);
             this.dgvMP.TabIndex = 29;
             this.dgvMP.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvMP_CellFormatting);
+            this.dgvMP.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvLista_DataBindingComplete);
             // 
             // panel1
             // 

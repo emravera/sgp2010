@@ -86,8 +86,6 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(213, 20);
             this.txtPassword.TabIndex = 38;
-            this.txtPassword.Text = "123";
-            this.txtPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
             // 
             // label7
             // 
@@ -105,8 +103,6 @@
             this.txtLogin.Name = "txtLogin";
             this.txtLogin.Size = new System.Drawing.Size(214, 20);
             this.txtLogin.TabIndex = 37;
-            this.txtLogin.Text = "marce";
-            this.txtLogin.Enter += new System.EventHandler(this.txtLogin_Enter);
             // 
             // label8
             // 
@@ -129,6 +125,7 @@
             // 
             // frmLogin
             // 
+            this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(325, 347);
@@ -139,8 +136,6 @@
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Logueo";
-            this.Load += new System.EventHandler(this.frmLogin_Load);
-            this.Activated += new System.EventHandler(this.frmLogin_Activated);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

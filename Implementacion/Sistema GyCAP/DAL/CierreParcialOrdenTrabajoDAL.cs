@@ -28,7 +28,7 @@ namespace GyCAP.DAL
                                       cierreOrdenTrabajo.Empleado.Codigo,
                                       cierreOrdenTrabajo.Maquina.Codigo,
                                       cierreOrdenTrabajo.Cantidad,
-                                      cierreOrdenTrabajo.Fecha,
+                                      cierreOrdenTrabajo.Fecha.Value.ToString("yyyyMMdd"),
                                       cierreOrdenTrabajo.Observaciones,
                                       cierreOrdenTrabajo.OperacionesFallidas};
 
@@ -61,7 +61,7 @@ namespace GyCAP.DAL
             object[] parametros = { cierreOrdenTrabajo.Empleado.Codigo,
                                       cierreOrdenTrabajo.Maquina.Codigo,
                                       cierreOrdenTrabajo.Cantidad,
-                                      cierreOrdenTrabajo.Fecha,
+                                      cierreOrdenTrabajo.Fecha.Value.ToString("yyyyMMdd"),
                                       cierreOrdenTrabajo.Observaciones,
                                       cierreOrdenTrabajo.OperacionesFallidas};
 

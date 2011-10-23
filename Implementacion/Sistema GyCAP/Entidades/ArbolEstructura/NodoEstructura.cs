@@ -18,6 +18,7 @@ namespace GyCAP.Entidades.ArbolEstructura
         private object tag;
         private CompuestoParte compuesto;
         private string compuestoFriendlyName;
+        private bool esCritico;
         
         public NodoEstructura() 
         {
@@ -64,6 +65,12 @@ namespace GyCAP.Entidades.ArbolEstructura
         {
             get { return compuesto; }
             set { compuesto = value; }
+        }
+
+        public bool EsCritico
+        {
+            get { return esCritico; }
+            set { esCritico = value; }
         }
 
         public string CompuestoFriendlyName
@@ -178,10 +185,11 @@ namespace GyCAP.Entidades.ArbolEstructura
             TreeNode nodo = new TreeNode();
             nodo.Text = (compuesto.Parte != null) ? compuesto.Parte.Nombre : compuesto.MateriaPrima.Nombre;
             nodo.Name = this.codigoNodo.ToString();
+            if (this.esCritico) { nodo.ForeColor = System.Drawing.Color.Red; }
             decimal costo = this.GetCosto();
             nodo.Tag = new string[] { 
                                       compuesto.Cantidad.ToString(), 
-                                      compuesto.UnidadMedida.Abreviatura, 
+                                      compuesto.UnidadMedida.Nombre, 
                                       string.Format("{0:0.000}", Convert.ToDouble(costo / compuesto.Cantidad)),
                                       costo.ToString()
                                     };

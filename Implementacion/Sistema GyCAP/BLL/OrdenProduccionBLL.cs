@@ -16,6 +16,9 @@ namespace GyCAP.BLL
 {
     public class OrdenProduccionBLL
     {
+        private const int limiteInferior = 5;
+        private const int limiteSuperior = 20;
+
         public static SortableBindingList<OrdenProduccion> ObtenerOrdenesProduccion(object codigo, object estado, object modo, object fechaGeneracion, object fechaDesde, object fechaHasta, 
                                                 SortableBindingList<Cocina> cocinas, SortableBindingList<EstadoOrdenTrabajo> estadosOrden, SortableBindingList<UbicacionStock> ubicaciones)
         {
@@ -359,7 +362,8 @@ namespace GyCAP.BLL
         
         public static void FinalizarOrdenProduccion(OrdenProduccion ordenP)
         {
-            SqlTransaction transaccion = null;            
+            SqlTransaction transaccion = null;
+            Random fallos = new Random();
 
             try
             {
@@ -405,7 +409,7 @@ namespace GyCAP.BLL
                         cierre.Fecha = ordenT.FechaInicioEstimada.Value;
                         cierre.Maquina = new Maquina() { Codigo = 2 };
                         cierre.Observaciones = "";
-                        cierre.OperacionesFallidas = 10;
+                        cierre.OperacionesFallidas = fallos.Next(limiteInferior, limiteSuperior);
                         cierre.OrdenTrabajo = ordenT;
 
                         OrdenTrabajoBLL.RegistrarCierreParcial(cierre, transaccion);
@@ -460,7 +464,7 @@ namespace GyCAP.BLL
                         cierre.Fecha = ordenT.FechaInicioEstimada.Value;
                         cierre.Maquina = new Maquina() { Codigo = 2 };
                         cierre.Observaciones = "";
-                        cierre.OperacionesFallidas = 10;
+                        cierre.OperacionesFallidas = fallos.Next(limiteInferior, limiteSuperior);
                         cierre.OrdenTrabajo = ordenT;
 
                         OrdenTrabajoBLL.RegistrarCierreParcial(cierre, transaccion);
@@ -535,7 +539,9 @@ namespace GyCAP.BLL
                                                 FechaAlta = DBBLL.GetFechaServidor(),
                                                 DetallePlanSemanal = new DetallePlanSemanal() { 
                                                     Codigo = Convert.ToInt32(rowDetalle.DPSEM_CODIGO), 
-                                                    DetallePedido = (rowDetalle.IsDPED_CODIGONull()) ? null : new DetallePedido() { Codigo = long.Parse(rowDetalle.DPED_CODIGO.ToString()), FechaEntregaPrevista = rowDetalle.DETALLE_PEDIDOSRow.DPED_FECHA_ENTREGA_PREVISTA } 
+                                                    DetallePedido = (rowDetalle.IsDPED_CODIGONull()) ? null : new DetallePedido() { Codigo = long.Parse(rowDetalle.DPED_CODIGO.ToString()), 
+                                                                                                                                    FechaEntregaPrevista = rowDetalle.DETALLE_PEDIDOSRow.DPED_FECHA_ENTREGA_PREVISTA,
+                                                                                                                                     Cantidad = rowDetalle.DETALLE_PEDIDOSRow.DPED_CANTIDAD } 
                                                                                               },
                                                 Origen = string.Concat("GA / ", (rowDetalle.IsDPED_CODIGONull()) ? "Planificación" : string.Concat("Pedido ", rowDetalle.DPED_CODIGO)),
                                                 FechaInicioReal = null,
