@@ -664,6 +664,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private string ValidarDetalle()
         {
             string msjerror = string.Empty;
+            int cantidadPorcentaje=0;
 
             if (cbCocinas.SelectedIndex == -1) msjerror = msjerror + "-Debe seleccionar un modelo de cocina\n";
             
@@ -677,12 +678,27 @@ namespace GyCAP.UI.PlanificacionProduccion
             }
             if (rbPorcentaje.Checked == true)
             {
-                int cantidadPorcentaje = Convert.ToInt32(Math.Round(Convert.ToDecimal(txtCantAPlanificar.Text) * (numPorcentaje.Value / 100),0));
+                cantidadPorcentaje = Convert.ToInt32(Math.Round(Convert.ToDecimal(txtCantAPlanificar.Text) * (numPorcentaje.Value / 100),0));
                 if (numPorcentaje.Value == 0) msjerror = msjerror + "-El porcentaje debe ser mayor a cero\n";
                 else if (cantidadPorcentaje > Convert.ToInt32(txtCapMes.Text))
                 {
                     msjerror = msjerror + "-La cantidad de unidades no puede superar la capacidad del mes.\nCAPACIDAD: " + txtCapMes.Text + "\n" + "CANT. INGRESADA: " + cantidadPorcentaje.ToString();
                 }                
+            }
+
+            //Validamos que la suma de las cantidades no sea mayor a la capacidad de la planta
+            int sumador = 0;
+            foreach (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow row in (Data.dsPlanMensual.DETALLE_PLANES_MENSUALESRow[])dsPlanMensual.DETALLE_PLANES_MENSUALES.Select(null, null, System.Data.DataViewRowState.CurrentRows))
+            {
+                sumador += Convert.ToInt32(row.DPMES_CANTIDADESTIMADA);
+            }
+            if(rbPorcentaje.Checked) { sumador += cantidadPorcentaje;}
+            else if (rbUnidades.Checked) { sumador += Convert.ToInt32(numUnidades.Value); }   
+
+            //Validamos que no sea mayor a la capacidad de la planta
+            if (sumador > Convert.ToInt32(txtCapMes.Text))
+            {
+                msjerror = msjerror + "-La cantidad de unidades no puede superar la capacidad del mes.\nCAPACIDAD: " + txtCapMes.Text + "\n" + "CANT. TOTAL INGRESADA: " + sumador.ToString();
             }
 
             //Validamos que no se quiera agregar un modelo que ya está en el dataset como planificado
@@ -696,6 +712,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                     }
                 }
             }       
+            
 
             return msjerror;
         }
@@ -780,7 +797,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                         //Calculamos la capacidad de ese mes
                         int[] semanasMeses = new int[12];
                         semanasMeses = BLL.DemandaAnualBLL.SemanasAño(anio);
-                        txtCapMes.Text = (BLL.FabricaBLL.GetCapacidadSemanalBruta(null, GyCAP.Entidades.Enumeraciones.RecursosFabricacionEnum.TipoHorario.Normal) * semanasMeses[cont]).ToString();
+                        txtCapMes.Text = (BLL.FabricaBLL.GetCapacidadSemanalBruta(null, GyCAP.Entidades.Enumeraciones.RecursosFabricacionEnum.TipoHorario.Normal) * semanasMeses[cont-1]).ToString();
                         
                         //Borro los detalles del dataset
                         dsPlanMensual.DETALLE_PLANES_MENSUALES.Clear();
