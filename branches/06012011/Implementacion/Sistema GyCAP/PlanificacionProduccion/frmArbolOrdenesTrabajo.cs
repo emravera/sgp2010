@@ -46,29 +46,15 @@ namespace GyCAP.UI.PlanificacionProduccion
         public TreeView GetArbolDependenciaSimple()
         {
             return tvArbolDependenciaSimple;
-        }
-
-        public TreeView GetArbolOrdenesYEstructura()
-        {
-            return tvArbolOrdenesYEstructura;
-        }       
+        }  
 
         private void tvArbolDependenciaSimple_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (e.Node.Parent != null)
-            {
-                frmGenerarOrdenTrabajo.Instancia.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
-                SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
-            }
-        }
-
-        private void tvArbolOrdenesYEstructura_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            if (e.Node.Parent != null)
-            {
-                frmGenerarOrdenTrabajo.Instancia.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
-                SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
-            }
+            //if (e.Node.Parent != null)
+            //{
+                //frmGenerarOrdenTrabajo.Instancia.SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
+                //SeleccionarOrdenTrabajo(Convert.ToInt32(e.Node.Name));
+            //}
         }
 
         public void SeleccionarOrdenTrabajo(int codigoOrdenT)
@@ -79,8 +65,7 @@ namespace GyCAP.UI.PlanificacionProduccion
 
         private void tcArbol_Selected(object sender, TabControlEventArgs e)
         {
-            if (e.TabPage == tpArbol1) { tvArbolDependenciaSimple.Focus(); }
-            else if (e.TabPage == tpArbol3) { tvArbolOrdenesYEstructura.Focus(); }
+            tvArbolDependenciaSimple.Focus();
         }
     }
 }

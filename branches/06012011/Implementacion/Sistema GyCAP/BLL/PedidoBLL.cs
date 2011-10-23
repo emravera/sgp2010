@@ -18,6 +18,11 @@ namespace GyCAP.BLL
             DAL.PedidoDAL.ObtenerPedido(nombre, numero, idEstadoPedido, fechaDesde, fechaHasta, ds, obtenerDetalle);
         }
 
+        public static void ObtenerPedido(object nombre, object numero, int idEstadoPedido, object fechaDesde, object fechaHasta, Data.dsPlanSemanal ds, bool obtenerDetalle)
+        {
+            DAL.PedidoDAL.ObtenerPedido(nombre, numero, idEstadoPedido, fechaDesde, fechaHasta, ds, obtenerDetalle);
+        }
+
         //Metodo que obtiene un pedido a partir de una fecha y para un cliente determinado
         public static void ObtenerPedidoCliente(int codigoCliente, int estadoPedido, DataTable dtPedido)
         {

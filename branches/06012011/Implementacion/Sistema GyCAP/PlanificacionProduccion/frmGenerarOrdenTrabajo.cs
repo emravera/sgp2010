@@ -29,7 +29,7 @@ namespace GyCAP.UI.PlanificacionProduccion
         private int columnIndex = -1;
         BindingSource sourceOrdenTrabajo = new BindingSource();
         private Sistema.ControlesUsuarios.AnimadorFormulario animador = new GyCAP.UI.Sistema.ControlesUsuarios.AnimadorFormulario();
-        private TreeView tvDependenciaSimple, tvOrdenesYEstructura;
+        private TreeView tvDependenciaSimple;
         Label lblMensajeOP, lblMensajeOT;
         private CheckBox chkSeleccionarOP = new CheckBox();
         private IList<Cocina> listaCocinas;
@@ -288,6 +288,10 @@ namespace GyCAP.UI.PlanificacionProduccion
                         frmExcepciones.CargarGrilla(listaExcepciones.ToList());
                         frmExcepciones.Show();
                         frmExcepciones.BringToFront();
+                    }
+                    else
+                    {
+                        MensajesABM.MsjValidacion("Las órdenes se generaron correctamente.", this.Text);
                     }
                 }
             }
@@ -558,6 +562,7 @@ namespace GyCAP.UI.PlanificacionProduccion
                 BLL.PlanAnualBLL.ObtenerTodos(dsPlanSemanal.PLANES_ANUALES);
                 BLL.CocinaBLL.ObtenerCocinas(dsPlanSemanal.COCINAS);
                 BLL.UbicacionStockBLL.ObtenerUbicacionesStock(dsStock.UBICACIONES_STOCK, (int)StockEnum.ContenidoUbicacion.Cocina);
+                BLL.PedidoBLL.ObtenerPedido(null, null, BLL.EstadoPedidoBLL.EstadoEnCurso, null, null, dsPlanSemanal, true);
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -782,17 +787,16 @@ namespace GyCAP.UI.PlanificacionProduccion
                 if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
                 {
                     tvDependenciaSimple = frmArbolOrdenesTrabajo.Instancia.GetArbolDependenciaSimple();
-                    tvOrdenesYEstructura = frmArbolOrdenesTrabajo.Instancia.GetArbolOrdenesYEstructura();
                     int codOrdenP = ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].Numero;
                     TreeView tv = ordenesProduccion.FirstOrDefault(p => p.OrdenProduccion.Numero == codOrdenP).AsTreeView();
                     TreeNode nodo = (TreeNode)tv.Nodes[0].Clone();
                     tv.Dispose();
                     tvDependenciaSimple.Nodes.Clear();
-                    tvDependenciaSimple.Nodes.Add(nodo);
-                    tvDependenciaSimple.ExpandAll();
+                    tvDependenciaSimple.Nodes.Add(nodo);                    
                     frmArbolOrdenesTrabajo.Instancia.SetTextoVentana(ordenesProduccion.FirstOrDefault(p => p.OrdenProduccion.Numero == codOrdenP).OrdenProduccion.Origen);
                     animador.SetFormulario(frmArbolOrdenesTrabajo.Instancia, this, Sistema.ControlesUsuarios.AnimadorFormulario.animacionDerecha, 300, false);
                     animador.MostrarFormulario();
+                    tvDependenciaSimple.ExpandAll();
                 }
                 else 
                 {

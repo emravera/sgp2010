@@ -72,9 +72,11 @@ namespace GyCAP.UI.GestionStock
                     if (listaMovimientos.Count > 0)
                     {
                         IList<decimal> valores = new List<decimal>();
-                        IList<string> fechas = new List<string>();   
+                        IList<string> fechas = new List<string>();
+                        IList<DateTime> fechasTemp = new List<DateTime>();
                         
-                        //Armamos los movimientos con fecha inicio hasta hoy                                                                     
+                        //Armamos los movimientos con fecha inicio hasta hoy
+
                         decimal actual = dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(cboStock.GetSelectedValueInt()).USTCK_CANTIDADREAL;
                         valores.Add(actual);
                         fechas.Add(string.Empty);
@@ -148,7 +150,7 @@ namespace GyCAP.UI.GestionStock
                                     }
                                 }
                             }
-                        }
+                        }                        
 
                         GenerarGrafico(valores.ToArray(), fechas.ToArray(), dsStock.UBICACIONES_STOCK.FindByUSTCK_NUMERO(cboStock.GetSelectedValueInt()).USTCK_NOMBRE);
                     }

@@ -87,6 +87,10 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                             frmExcepciones.Show();
                             frmExcepciones.BringToFront();
                         }
+                        else
+                        {
+                            MensajesABM.MsjValidacion("La orden de producción se inició correctamente.", this.Text);
+                        }
 
                         dgvOrdenesProduccion.Refresh();
                     }
@@ -126,6 +130,8 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                     OrdenProduccion ordenP = (OrdenProduccion)dgvOrdenesProduccion.SelectedRows[0].DataBoundItem;
                     BLL.OrdenProduccionBLL.FinalizarOrdenProduccion(ordenP);
                     dgvOrdenesProduccion.Refresh();
+
+                    MensajesABM.MsjValidacion("La orden de producción se finalizó correctamente.", this.Text);
                 }
                 catch (Entidades.Excepciones.BaseDeDatosException ex)
                 {
@@ -708,6 +714,11 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                 OrdenTrabajo orden = (OrdenTrabajo)dgvOrdenesTrabajo.SelectedRows[0].DataBoundItem;
                 BLL.CierreParcialOrdenTrabajoBLL.ObtenerCierresParcialesOrdenTrabajo(orden, listaMaquinas, listaEmpleados);
                 dgvCierresParciales.DataSource = orden.CierresParciales;
+                lblOrdenTSelected.Text = string.Concat("Orden de Trabajo seleccionada: ", orden.Codigo);
+            }
+            else
+            {
+                lblOrdenTSelected.Text = "";
             }
         }
 

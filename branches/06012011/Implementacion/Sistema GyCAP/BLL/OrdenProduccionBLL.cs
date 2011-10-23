@@ -36,6 +36,8 @@ namespace GyCAP.BLL
                 orden.CantidadReal = Convert.ToInt32(row.ORDP_CANTIDADREAL);
                 orden.Cocina = cocinas.Where(p => p.CodigoCocina == Convert.ToInt32(row.COC_CODIGO)).Single();
                 orden.DetallePlanSemanal = new DetallePlanSemanal() { Codigo = Convert.ToInt32(row.DPSEM_CODIGO) };
+                object pedido = DAL.DetallePlanSemanalDAL.ObtenerPedidoClienteDeDetalle(orden.DetallePlanSemanal.Codigo, null);
+                if(pedido != null) { orden.DetallePlanSemanal.DetallePedido = new DetallePedido() { Codigo = long.Parse(pedido.ToString()) }; }
                 orden.Estado = estadosOrden.Where(p => p.Codigo == Convert.ToInt32(row.EORD_CODIGO)).Single();
                 orden.Estructura = Convert.ToInt32(row.ESTR_CODIGO);
                 orden.FechaAlta = row.ORDP_FECHAALTA;
@@ -68,17 +70,39 @@ namespace GyCAP.BLL
                 
                 //Guardamos la orden de producción y de trabajo
                 DAL.OrdenProduccionDAL.Insertar(arbol, transaccion);
-                
-                //Actualizamos los estados del detalle plan y del detalle pedido
+
+                //Creamos los movimientos de stock                
+                IList<MovimientoStock> listaMovimientos = new List<MovimientoStock>();
+
+                //Actualizamos los estados del detalle pedido y agregamos las cantidad al plan
                 DAL.DetallePlanSemanalDAL.ActualizarEstado(new int[] { arbol.OrdenProduccion.DetallePlanSemanal.Codigo }, (int)PlanificacionEnum.EstadoDetallePlanSemanal.ConOrden, transaccion);
+               
                 if (arbol.OrdenProduccion.DetallePlanSemanal.DetallePedido != null)
                 {
                     DAL.DetallePedidoDAL.ActualizarEstadoAEnCurso((int)(arbol.OrdenProduccion.DetallePlanSemanal.DetallePedido.Codigo), transaccion);
+
+                    MovimientoStock movimiento = MovimientoStockBLL.GetMovimientoConfigurado(StockEnum.CodigoMovimiento.DetallePedido, StockEnum.EstadoMovimientoStock.Planificado);
+                    Entidad entidad = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.DetallePedido, arbol.OrdenProduccion.DetallePlanSemanal.Codigo, transaccion);
+
+                    movimiento.OrigenesMultiples.Add(new OrigenMovimiento()
+                    {
+                        Codigo = 0,
+                        CantidadEstimada = arbol.OrdenProduccion.DetallePlanSemanal.DetallePedido.Cantidad,
+                        CantidadReal = 0,
+                        Entidad = EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.UbicacionStock, arbol.OrdenProduccion.UbicacionStock.Numero, transaccion),
+                        MovimientoStock = 0,
+                        FechaPrevista = arbol.OrdenProduccion.DetallePlanSemanal.DetallePedido.FechaEntregaPrevista
+                    });
+
+                    movimiento.CantidadDestinoEstimada = arbol.OrdenProduccion.CantidadEstimada;
+                    movimiento.Destino = entidad;
+                    movimiento.Duenio = entidad;
+                    movimiento.CantidadDestinoEstimada = arbol.OrdenProduccion.DetallePlanSemanal.DetallePedido.Cantidad;
+                    movimiento.FechaPrevista = arbol.OrdenProduccion.DetallePlanSemanal.DetallePedido.FechaEntregaPrevista;
+
+                    listaMovimientos.Add(movimiento);
                 }
-                
-                //Creamos los movimientos de stock                
-                IList<MovimientoStock> listaMovimientos = new List<MovimientoStock>();
-                
+
                 foreach (OrdenTrabajo orden in arbol.AsOrdenesTrabajoList())
                 {                    
                     MovimientoStock movimiento = MovimientoStockBLL.GetMovimientoConfigurado(StockEnum.CodigoMovimiento.OrdenTrabajo, StockEnum.EstadoMovimientoStock.Planificado);
@@ -357,15 +381,17 @@ namespace GyCAP.BLL
 
                 DAL.OrdenProduccionDAL.FinalizarOrdenProduccion(ordenP, transaccion);
 
+                DAL.DetallePlanSemanalDAL.SumarCantidadFinalizada(ordenP.DetallePlanSemanal.Codigo, ordenP.Cocina.CodigoCocina, ordenP.CantidadReal, transaccion);
+
                 if (ordenP.DetallePlanSemanal.DetallePedido != null)
                 {
                     DAL.PedidoDAL.ActualizarDetallePedidoAFinalizado(Convert.ToInt32(ordenP.DetallePlanSemanal.DetallePedido.Codigo), transaccion);
                 }
-
+                
                 //finalizamos las iniciadas
                 foreach (OrdenTrabajo ordenT in ordenP.OrdenesTrabajo.Where(p => p.Estado.Codigo == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.EnProceso))
                 {
-                    //ordenT.CantidadReal = ordenT.CantidadEstimada;
+                    ordenT.CantidadReal = ordenT.CantidadEstimada;
                     ordenT.Estado = estadoFinalizada;
                     ordenT.FechaFinReal = ordenT.FechaFinEstimada;
 
@@ -489,6 +515,7 @@ namespace GyCAP.BLL
                     //No tiene órdenes, controlamos si la cocina tiene una estructura activa
                     Cocina cocina = listaCocinas.First(p => p.CodigoCocina == Convert.ToInt32(rowDetalle.COC_CODIGO));
                     int codigoEstructura = CocinaBLL.ObtenerCodigoEstructuraActiva(cocina.CodigoCocina);
+                    ArbolEstructura arbolEstructura = EstructuraBLL.GetArbolEstructuraByEstructura(codigoEstructura, true);
                     string mensaje = string.Empty;
                     if (codigoEstructura == 0)
                     {
@@ -508,7 +535,7 @@ namespace GyCAP.BLL
                                                 FechaAlta = DBBLL.GetFechaServidor(),
                                                 DetallePlanSemanal = new DetallePlanSemanal() { 
                                                     Codigo = Convert.ToInt32(rowDetalle.DPSEM_CODIGO), 
-                                                    DetallePedido = (rowDetalle.IsDPED_CODIGONull()) ? null : new DetallePedido() { Codigo = long.Parse(rowDetalle.DPED_CODIGO.ToString()) } 
+                                                    DetallePedido = (rowDetalle.IsDPED_CODIGONull()) ? null : new DetallePedido() { Codigo = long.Parse(rowDetalle.DPED_CODIGO.ToString()), FechaEntregaPrevista = rowDetalle.DETALLE_PEDIDOSRow.DPED_FECHA_ENTREGA_PREVISTA } 
                                                                                               },
                                                 Origen = string.Concat("GA / ", (rowDetalle.IsDPED_CODIGONull()) ? "Planificación" : string.Concat("Pedido ", rowDetalle.DPED_CODIGO)),
                                                 FechaInicioReal = null,
@@ -520,7 +547,8 @@ namespace GyCAP.BLL
                                                 Cocina = cocina,
                                                 CantidadEstimada = Convert.ToInt32(rowDetalle.DPSEM_CANTIDADESTIMADA),
                                                 CantidadReal = 0,
-                                                Estructura = codigoEstructura
+                                                Estructura = codigoEstructura, 
+                                                UbicacionStock = arbolEstructura.NodoRaiz.Compuesto.Parte.HojaRuta.UbicacionStock
                                             },
                         OrdenesTrabajo = new List<NodoOrdenTrabajo>()
                     });
