@@ -66,13 +66,13 @@ namespace GyCAP.UI.GestionStock
             dgvMP.Columns.Add("CATEGORIA_ABC", "CAT");
 
             //Seteamos el modo de tamaño de las columnas
-            dgvMP.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvMP.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvMP.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvMP.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvMP.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvMP.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dgvMP.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvMP.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvMP.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvMP.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvMP.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvMP.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvMP.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            //dgvMP.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             
             //Indicamos de dónde van a sacar los datos cada columna, el nombre debe ser exacto al de la DB
             dgvMP.Columns["CODIGO_MATERIA_PRIMA_ABC"].DataPropertyName = "CODIGO_MATERIA_PRIMA_ABC";
@@ -88,6 +88,7 @@ namespace GyCAP.UI.GestionStock
             dgvMP.Columns["PRECIO_UNIDAD"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvMP.Columns["CANTIDAD_INVERSION"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvMP.Columns["PORCENTAJE_INVERSION"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvMP.Columns["CATEGORIA_ABC"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                       
             //Ocultamos las columnas que no queremos que se vean
             dgvMP.Columns["CODIGO_MATERIA_PRIMA_ABC"].Visible = false;
@@ -193,6 +194,11 @@ namespace GyCAP.UI.GestionStock
                     break;
             }
         }
+
+        private void dgvLista_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
+        } 
       
         #endregion
 
@@ -694,16 +700,6 @@ namespace GyCAP.UI.GestionStock
             cbAñoHistorico.Visible = true;
         }
 
-        private void dgvModelos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
-        }
-
-        private void dgvMP_DataBindingComplete(object sender, EventArgs e)
-        {
-            Sistema.FuncionesAuxiliares.SetDataGridViewColumnsSize((sender as DataGridView));
-        }
-
         private void dgvMP_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.Value != null)
@@ -737,6 +733,7 @@ namespace GyCAP.UI.GestionStock
         }
 
         #endregion          
+
     
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using GyCAP.Entidades;
 using GyCAP.Entidades.ArbolEstructura;
+using GyCAP.Entidades.ArbolOrdenesTrabajo;
 using GyCAP.Entidades.BindingEntity;
 
 namespace GyCAP.BLL
@@ -309,6 +310,48 @@ namespace GyCAP.BLL
         public static IList<CapacidadNecesidadCombinada> AsListForCapacity(int codigoCocina)
         {
             return GetArbolEstructuraByCocina(codigoCocina, false).AsListForCapacity();
+        }
+
+        public static void CalcularCaminoCritico(ArbolEstructura arbolEstructura)
+        {
+            ArbolProduccion arbolProduccion = new ArbolProduccion()
+            {
+                OrdenProduccion = new OrdenProduccion()
+                {
+                    Numero = 0,
+                    Codigo = string.Empty,
+                    Estado = new EstadoOrdenTrabajo() { Codigo = 0 },
+                    FechaAlta = DateTime.Today,
+                    DetallePlanSemanal = new DetallePlanSemanal() { Codigo = 0 },
+                    Origen = string.Empty,
+                    FechaInicioReal = null,
+                    FechaFinReal = null,
+                    FechaInicioEstimada = DateTime.Today,
+                    FechaFinEstimada = DateTime.Today,
+                    Prioridad = 0,
+                    Observaciones = string.Empty,
+                    Cocina = new Cocina() { CodigoCocina = 0 },
+                    CantidadEstimada = 500,
+                    CantidadReal = 0,
+                    Estructura = arbolEstructura.CodigoEstructura
+                },
+                OrdenesTrabajo = new List<NodoOrdenTrabajo>()
+            };
+
+            OrdenTrabajoBLL.GenerarOrdenesTrabajo(arbolProduccion, new List<ExcepcionesPlan>());
+
+            arbolProduccion.GetFechaInicio(DateTime.Today.AddDays(100), true);
+
+            IList<NodoOrdenTrabajo> listaNodos = arbolProduccion.AsNodoOrdenTrabajoList();
+
+            DateTime minDate = listaNodos.Min(p => p.OrdenTrabajo.FechaInicioEstimada.Value);
+            NodoOrdenTrabajo nodo = listaNodos.FirstOrDefault(p => p.OrdenTrabajo.FechaInicioEstimada.Value == minDate);
+
+            while (nodo != null)
+            {
+                arbolEstructura.FindByPartNumber(nodo.OrdenTrabajo.Parte.Numero).EsCritico = true;
+                nodo = nodo.NodoPadre;
+            }
         }
     }
 }

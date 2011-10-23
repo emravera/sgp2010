@@ -125,7 +125,7 @@ namespace GyCAP.DAL
             object[] parametros = { ordenT.Estado.Codigo, 
                                       ordenT.FechaInicioReal.Value.ToString("yyyMMdd HH:mm"), 
                                       ordenT.CantidadReal, 
-                                      ordenT.FechaFinReal.Value.ToString("yyyyMMdd Hh:mm"),
+                                      ordenT.FechaFinReal.Value.ToString("yyyyMMdd HH:mm"),
                                       ordenT.Numero };
 
             DB.executeNonQuery(sql, parametros, transaccion);

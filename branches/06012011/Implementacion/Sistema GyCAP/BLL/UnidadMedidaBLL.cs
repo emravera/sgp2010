@@ -74,7 +74,7 @@ namespace GyCAP.BLL
             Entidades.UnidadMedida umed = new GyCAP.Entidades.UnidadMedida()
             {
                 Codigo = Convert.ToInt32(row.UMED_CODIGO),
-                Nombre = row.UMED_ABREVIATURA,
+                Nombre = row.UMED_NOMBRE,
                 Abreviatura = row.UMED_ABREVIATURA,
                 Tipo = BLL.TipoUnidadMedidaBLL.AsTipoUnidadMedidaEntity(row.TIPOS_UNIDADES_MEDIDARow)
             };
@@ -89,7 +89,7 @@ namespace GyCAP.BLL
             Entidades.UnidadMedida umed = new GyCAP.Entidades.UnidadMedida()
             {
                 Codigo = Convert.ToInt32(row.UMED_CODIGO),
-                Nombre = row.UMED_ABREVIATURA,
+                Nombre = row.UMED_NOMBRE,
                 Abreviatura = row.UMED_ABREVIATURA,
                 Tipo = BLL.TipoUnidadMedidaBLL.AsTipoUnidadMedidaEntity(row.TIPOS_UNIDADES_MEDIDARow)
             };
@@ -104,7 +104,7 @@ namespace GyCAP.BLL
             Entidades.UnidadMedida umed = new GyCAP.Entidades.UnidadMedida()
             {
                 Codigo = Convert.ToInt32(row.UMED_CODIGO),
-                Nombre = row.UMED_ABREVIATURA,
+                Nombre = row.UMED_NOMBRE,
                 Abreviatura = row.UMED_ABREVIATURA,
                 Tipo = BLL.TipoUnidadMedidaBLL.AsTipoUnidadMedidaEntity(row.TIPOS_UNIDADES_MEDIDARow)
             };

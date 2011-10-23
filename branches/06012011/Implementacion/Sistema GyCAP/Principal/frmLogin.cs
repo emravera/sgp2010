@@ -18,7 +18,7 @@ namespace GyCAP.UI.Principal
         public frmLogin()
         {
             InitializeComponent();
-
+            txtLogin.Focus();
         }
 
         //Método para evitar la creación de más de una pantalla
@@ -48,11 +48,6 @@ namespace GyCAP.UI.Principal
             this.Close();
         }
 
-        private void txtPassword_Enter(object sender, EventArgs e)
-        {
-            txtPassword.SelectAll();
-        }
-
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             int codUsuario;
@@ -80,26 +75,6 @@ namespace GyCAP.UI.Principal
                 }
 
             }
-        }
-
-        private void txtLogin_Enter(object sender, EventArgs e)
-        {
-            txtLogin.SelectAll();
-        }
-
-        private void frmLogin_Load(object sender, EventArgs e)
-        {
-            //btnAceptar.Focus();
-        }
-
-        private void frmLogin_Activated(object sender, EventArgs e)
-        {
-            btnAceptar.Focus();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
     }

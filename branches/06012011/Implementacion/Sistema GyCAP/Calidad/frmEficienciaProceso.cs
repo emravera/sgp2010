@@ -73,6 +73,7 @@ namespace GyCAP.UI.Calidad
 
                 if (arbol != null)
                 {
+                    BLL.EstructuraBLL.CalcularCaminoCritico(arbol);
                     TreeView tv = arbol.AsExtendedTreeViewWithMaterialsWithoutCost();
                     TreeNode nodo = (TreeNode)tv.Nodes[0].Clone();
                     tvcCostosMateriales.TreeView.Nodes.Add(nodo);
