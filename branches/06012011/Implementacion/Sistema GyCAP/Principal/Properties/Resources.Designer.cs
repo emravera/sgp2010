@@ -88,6 +88,13 @@ namespace GyCAP.UI.Principal.Properties {
             }
         }
         
+        internal static System.Drawing.Icon GyCAP {
+            get {
+                object obj = ResourceManager.GetObject("GyCAP", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap mantenimiento {
             get {
                 object obj = ResourceManager.GetObject("mantenimiento", resourceCulture);

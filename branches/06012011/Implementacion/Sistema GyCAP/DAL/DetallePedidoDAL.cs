@@ -10,9 +10,9 @@ namespace GyCAP.DAL
     public class DetallePedidoDAL
     {
         //Definimos las variables con los estados.
-        public static readonly int EstadoEnCurso = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("En Curso");
-        public static readonly int EstadoFinalizado = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("Finalizado");
-        public static readonly int EstadoEntregaStock = DAL.EstadoPedidoDAL.ObtenerIDEstadosPedido("Entrega Stock");
+        public static readonly int EstadoEnCurso = DAL.EstadoDetallePedidoDAL.ObtenerCodigoEstado("En Curso");
+        public static readonly int EstadoFinalizado = DAL.EstadoDetallePedidoDAL.ObtenerCodigoEstado("Finalizado");
+        public static readonly int EstadoEntregaStock = DAL.EstadoDetallePedidoDAL.ObtenerCodigoEstado("Entrega Stock");
         
         //Metodo para insertar el detalle de pedido
         public static int Insertar(Data.dsCliente.DETALLE_PEDIDOSRow row, SqlTransaction transaccion)
