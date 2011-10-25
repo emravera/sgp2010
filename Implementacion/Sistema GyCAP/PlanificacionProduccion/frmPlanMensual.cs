@@ -923,11 +923,11 @@ namespace GyCAP.UI.PlanificacionProduccion
                                 if (row["DPED_CODIGO"].ToString() != Convert.ToString(0))
                                 {
                                     //Actualizo el valor del estado en la BD
-                                    BLL.DetallePedidoBLL.CambiarEstado(Convert.ToInt32(row.DPED_CODIGO), BLL.EstadoPedidoBLL.EstadoEnCurso);
+                                    BLL.DetallePedidoBLL.CambiarEstado(Convert.ToInt32(row.DPED_CODIGO), BLL.EstadoDetallePedidoBLL.EstadoEnCurso);
 
                                     //Lo actualizo el el dataset
                                     dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).BeginEdit();
-                                    dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).EDPED_CODIGO = BLL.EstadoPedidoBLL.EstadoEnCurso;
+                                    dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).EDPED_CODIGO = BLL.EstadoDetallePedidoBLL.EstadoEnCurso;
                                     dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).EndEdit();
                                     dsPlanMensual.DETALLE_PEDIDOS.FindByDPED_CODIGO(Convert.ToInt32(row.DPED_CODIGO)).AcceptChanges();
                                 }

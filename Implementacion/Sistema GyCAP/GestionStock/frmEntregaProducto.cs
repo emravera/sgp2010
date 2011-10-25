@@ -365,6 +365,10 @@ namespace GyCAP.UI.GestionStock
                         string ape = dsEntregaProducto.EMPLEADOS.FindByE_CODIGO(Convert.ToInt32(e.Value)).E_APELLIDO;
                         e.Value = ape + "," + nom;
                         break;
+                    case "ENTREGA_FECHA":
+                        string valor = DateTime.Parse(e.Value.ToString()).ToShortDateString();
+                        e.Value = valor;
+                        break;
                     default:
                         break;
                 }

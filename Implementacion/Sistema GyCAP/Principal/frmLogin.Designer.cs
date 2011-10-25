@@ -80,11 +80,11 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(79, 40);
+            this.txtPassword.Location = new System.Drawing.Point(78, 40);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(213, 20);
+            this.txtPassword.Size = new System.Drawing.Size(214, 20);
             this.txtPassword.TabIndex = 38;
             // 
             // label7
