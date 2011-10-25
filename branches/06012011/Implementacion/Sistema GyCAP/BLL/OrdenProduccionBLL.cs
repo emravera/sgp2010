@@ -350,7 +350,9 @@ namespace GyCAP.BLL
                         {
                             if ((origenMvto.Entidad.EntidadExterna as UbicacionStock).CantidadReal < origenMvto.CantidadEstimada)
                             {
-                                excepciones.Add(ExcepcionesPlanBLL.Add_ExcepcionStockInsuficiente((origenMvto.Entidad.EntidadExterna as UbicacionStock).Nombre));
+                                UbicacionStock stock = (UbicacionStock)origenMvto.Entidad.EntidadExterna;
+                                string mensaje = string.Concat(stock.Nombre, " ", origenMvto.CantidadEstimada - stock.CantidadReal, " ", stock.UnidadMedida.Nombre);
+                                excepciones.Add(ExcepcionesPlanBLL.Add_ExcepcionStockInsuficiente(mensaje));
                             }
                         }
                     }
