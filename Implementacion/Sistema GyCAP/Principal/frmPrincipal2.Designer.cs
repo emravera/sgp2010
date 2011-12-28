@@ -126,6 +126,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.parámetrosSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -151,7 +152,7 @@
             this.menuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(792, 40);
+            this.menuStrip.Size = new System.Drawing.Size(792, 42);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -735,7 +736,8 @@
             this.provinciaToolStripMenuItem,
             this.tiposDeUnidadDeMedidaToolStripMenuItem,
             this.unidadDeMedidaToolStripMenuItem,
-            this.opcionesSistemaToolStripMenuItem});
+            this.opcionesSistemaToolStripMenuItem,
+            this.parámetrosSistemaToolStripMenuItem});
             this.soporteToolStripMenuItem.Name = "soporteToolStripMenuItem";
             this.soporteToolStripMenuItem.Size = new System.Drawing.Size(57, 17);
             this.soporteToolStripMenuItem.Tag = "0";
@@ -938,6 +940,14 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(40, 17);
             this.toolStripStatusLabel.Text = "Estado";
             // 
+            // parámetrosSistemaToolStripMenuItem
+            // 
+            this.parámetrosSistemaToolStripMenuItem.Name = "parámetrosSistemaToolStripMenuItem";
+            this.parámetrosSistemaToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.parámetrosSistemaToolStripMenuItem.Tag = "79";
+            this.parámetrosSistemaToolStripMenuItem.Text = "Parámetros del Sistema";
+            this.parámetrosSistemaToolStripMenuItem.Click += new System.EventHandler(this.parametrosSistemaToolStripMenuItem_Click);
+            // 
             // frmPrincipal2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1061,6 +1071,7 @@
         private System.Windows.Forms.ToolStripMenuItem repuestosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tipoDeMantenimientoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tipoRepuestosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem parámetrosSistemaToolStripMenuItem;
     }
 }
 

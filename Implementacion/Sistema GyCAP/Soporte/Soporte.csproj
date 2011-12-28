@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E62237F2-4821-4526-BE7C-45263EE307C5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -66,6 +66,12 @@
     <Compile Include="frmMarca.Designer.cs">
       <DependentUpon>frmMarca.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmParametrosSistema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmParametrosSistema.Designer.cs">
+      <DependentUpon>frmParametrosSistema.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmProvincia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMarca.resx">
       <DependentUpon>frmMarca.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmParametrosSistema.resx">
+      <DependentUpon>frmParametrosSistema.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmProvincia.resx">
@@ -277,6 +287,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Repuesto-128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\System-128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\System-Preferences-128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

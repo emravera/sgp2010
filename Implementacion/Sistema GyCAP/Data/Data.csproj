@@ -153,6 +153,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsOrdenTrabajo.xsd</DependentUpon>
     </Compile>
+    <Compile Include="dsParametrosSistema.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsParametrosSistema.xsd</DependentUpon>
+    </Compile>
     <Compile Include="dsPlanAnual.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -417,6 +422,17 @@
     </None>
     <None Include="dsOrdenTrabajo.xss">
       <DependentUpon>dsOrdenTrabajo.xsd</DependentUpon>
+    </None>
+    <None Include="dsParametrosSistema.xsc">
+      <DependentUpon>dsParametrosSistema.xsd</DependentUpon>
+    </None>
+    <None Include="dsParametrosSistema.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsParametrosSistema.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="dsParametrosSistema.xss">
+      <DependentUpon>dsParametrosSistema.xsd</DependentUpon>
     </None>
     <None Include="dsPlanAnual.xsc">
       <DependentUpon>dsPlanAnual.xsd</DependentUpon>

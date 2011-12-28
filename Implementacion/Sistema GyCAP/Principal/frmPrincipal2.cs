@@ -424,6 +424,12 @@ namespace GyCAP.UI.Principal
             GyCAP.UI.Principal.frmOpciones.Instancia.Show();
         }
 
+        private void parametrosSistemaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.Soporte.frmParametrosSistema.Instancia.MdiParent = this;
+            GyCAP.UI.Soporte.frmParametrosSistema.Instancia.Show();
+        }
+
         #endregion
 
         #region Menú Stock
