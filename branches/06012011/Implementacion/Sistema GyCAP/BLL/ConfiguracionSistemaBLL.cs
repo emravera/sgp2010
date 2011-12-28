@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace GyCAP.BLL
 {
@@ -27,5 +28,11 @@ namespace GyCAP.BLL
         {
             DAL.ConfiguracionSistemaDAL.SetConfiguracion(nombre, valor);
         }
+
+        public static void ObtenerTodos(string nombre, string valor, DataTable dtParametros )
+        {
+            DAL.ConfiguracionSistemaDAL.ObtenerTodos(nombre, valor, dtParametros);
+        }
+
     }
 }

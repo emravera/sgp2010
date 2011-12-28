@@ -23,8 +23,7 @@ namespace GyCAP.UI.Soporte
         public frmMarca()
         {
             InitializeComponent();
-
-
+            
             //Para que no genere las columnas automáticamente
             dgvLista.AutoGenerateColumns = false;
             
