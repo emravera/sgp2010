@@ -662,6 +662,7 @@
             // cboStockDestino
             // 
             this.cboStockDestino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboStockDestino.Enabled = false;
             this.cboStockDestino.Font = new System.Drawing.Font("Tahoma", 8F);
             this.cboStockDestino.FormattingEnabled = true;
             this.cboStockDestino.Location = new System.Drawing.Point(602, 25);

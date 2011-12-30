@@ -17,11 +17,11 @@ namespace GyCAP.DAL
             Insertar(movimientoStock, transaccion);
         }
 
-        public static void InsertarFinalizado(MovimientoStock movimientoStock, SqlTransaction transaccion)
+        public static void InsertarFinalizado(MovimientoStock movimientoStock, SqlTransaction transaccion, bool modificarCantidadesStock)
         {
             Insertar(movimientoStock, transaccion);
             IniciarMovimiento(movimientoStock, transaccion);
-            FinalizarMovimiento(movimientoStock, transaccion);
+            FinalizarMovimiento(movimientoStock, transaccion, modificarCantidadesStock);
         }
 
         private static void Insertar(MovimientoStock movimientoStock, SqlTransaction transaccion)
@@ -146,18 +146,77 @@ namespace GyCAP.DAL
             }
         }
 
-        public static void FinalizarMovimiento(MovimientoStock movimiento, SqlTransaction transaccion)
+        public static void FinalizarMovimiento(MovimientoStock movimiento, SqlTransaction transaccion, bool modificarCantidadesStock)
+        {
+            string sql = @"UPDATE MOVIMIENTOS_STOCK SET 
+                         mvto_fechareal = @p0
+                        ,emvto_codigo = @p1 
+                         WHERE mvto_numero = @p2";
+
+            if (modificarCantidadesStock)
+            {
+                sql = @"UPDATE MOVIMIENTOS_STOCK SET 
+                         mvto_fechareal = @p0
+                        ,emvto_codigo = @p1
+                        ,mvto_cantidad_destino_real = @p2 
+                         WHERE mvto_numero = @p3";
+            }
+
+            object[] parametros = { 
+                                      movimiento.FechaReal.Value.ToString("yyyyMMdd"), 
+                                      movimiento.Estado.Codigo,
+                                      movimiento.Numero 
+                                  };
+
+            if (modificarCantidadesStock)
+            {
+                parametros = new object[] { 
+                                            movimiento.FechaReal.Value.ToString("yyyyMMdd"), 
+                                            movimiento.Estado.Codigo,
+                                            movimiento.CantidadDestinoReal,
+                                            movimiento.Numero 
+                                          };
+            }
+            
+            SqlTransaction _transaccion = null;
+
+            try
+            {
+                _transaccion = (transaccion == null) ? DB.IniciarTransaccion() : transaccion;
+
+                DB.executeNonQuery(sql, parametros, _transaccion);
+
+                if (modificarCantidadesStock)
+                {
+                    if (movimiento.Destino.EntidadExterna != null && movimiento.Destino.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
+                    {
+                        UbicacionStockDAL.ActualizarCantidadesStockAndParents((movimiento.Destino.EntidadExterna as Entidades.UbicacionStock).Numero, movimiento.CantidadDestinoReal, _transaccion);
+                    }
+                }
+
+                if (transaccion == null) { _transaccion.Commit(); }
+            }
+            catch (SqlException ex)
+            {
+                if (transaccion != null) { throw ex; }
+
+                _transaccion.Rollback();
+                throw new BaseDeDatosException(ex.Message);
+            }
+            finally
+            {
+                if (transaccion == null) { DB.FinalizarTransaccion(); }
+            }
+        }
+
+        public static void RegistrarAvance(MovimientoStock movimiento, decimal incremento, SqlTransaction transaccion)
         {
             string sql = @"UPDATE MOVIMIENTOS_STOCK SET 
                          mvto_cantidad_destino_real = @p0
-                        ,mvto_fechareal = @p1
-                        ,emvto_codigo = @p2 
-                         WHERE mvto_numero = @p3";
+                         WHERE mvto_numero = @p1";
 
             object[] parametros = { 
-                                      movimiento.CantidadDestinoReal, 
-                                      movimiento.FechaReal.Value.ToString("yyyyMMdd"), 
-                                      movimiento.Estado.Codigo,
+                                      movimiento.CantidadDestinoReal,
                                       movimiento.Numero 
                                   };
 
@@ -171,7 +230,7 @@ namespace GyCAP.DAL
 
                 if (movimiento.Destino.EntidadExterna != null && movimiento.Destino.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
                 {
-                    UbicacionStockDAL.ActualizarCantidadesStockAndParents((movimiento.Destino.EntidadExterna as Entidades.UbicacionStock).Numero, movimiento.CantidadDestinoReal, _transaccion);
+                    UbicacionStockDAL.ActualizarCantidadesStockAndParents((movimiento.Destino.EntidadExterna as Entidades.UbicacionStock).Numero, incremento, _transaccion);
                 }
 
                 if (transaccion == null) { _transaccion.Commit(); }

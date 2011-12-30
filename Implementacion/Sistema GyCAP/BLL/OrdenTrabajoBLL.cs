@@ -147,12 +147,65 @@ namespace GyCAP.BLL
                 lista.Add(orden);
             }
 
+            foreach (OrdenTrabajo ot in lista)
+            {
+                if (lista.Count(p => p.OrdenTrabajoPadre.HasValue && p.OrdenTrabajoPadre.Value == ot.Numero) > 0)
+                {
+                    ot.HasChildren = true;
+                }
+            }
+
             return ordenProduccion.OrdenesTrabajo = lista;
         }
 
-        public static void IniciarOrdenTrabajo(OrdenTrabajo ordenT, SqlTransaction transaccion)
+        public static void IniciarOrdenTrabajo(OrdenTrabajo ordenT)
         {
-            DAL.OrdenTrabajoDAL.IniciarOrdenTrabajo(ordenT, transaccion);
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                EstadoMovimientoStock estadoMvto = EstadoMovimientoStockBLL.GetEstadoEntity(StockEnum.EstadoMovimientoStock.EnProceso);
+                EstadoOrdenTrabajo estadoEnProceso = EstadoOrdenTrabajoBLL.GetEstado(OrdenesTrabajoEnum.EstadoOrdenEnum.EnProceso);
+                DateTime fechaInicioReal = DBBLL.GetFechaServidor();
+
+                ordenT.Estado = estadoEnProceso;
+                ordenT.FechaInicioReal = fechaInicioReal;
+
+                transaccion = DAL.DB.IniciarTransaccion();
+
+                OrdenTrabajoBLL.RegistrarInicioOrdenTrabajo(ordenT, transaccion);
+
+                ordenT.MovimientosStock = MovimientoStockBLL.GetMovimientosByOwner(EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.OrdenTrabajo, ordenT.Numero, transaccion));
+
+                foreach (MovimientoStock mvto in ordenT.MovimientosStock)
+                {
+                    mvto.Estado = estadoMvto;
+
+                    foreach (OrigenMovimiento origenMvto in mvto.OrigenesMultiples)
+                    {
+                        origenMvto.CantidadReal = origenMvto.CantidadEstimada;
+                        origenMvto.FechaReal = fechaInicioReal;
+                    }
+
+                    MovimientoStockBLL.Iniciar(mvto, transaccion);
+                }
+
+                transaccion.Commit();
+            }
+            catch (SqlException ex)
+            {
+                transaccion.Rollback();
+                throw new BaseDeDatosException(ex.Message);
+            }
+            finally
+            {
+                DAL.DB.FinalizarTransaccion();
+            }
+        }
+        
+        public static void RegistrarInicioOrdenTrabajo(OrdenTrabajo ordenT, SqlTransaction transaccion)
+        {
+            DAL.OrdenTrabajoDAL.RegistrarInicioOrdenTrabajo(ordenT, transaccion);
         }
 
         public static void ActualizarEstado(OrdenTrabajo ordenT, SqlTransaction transaccion)
@@ -172,6 +225,15 @@ namespace GyCAP.BLL
                 cierre.OrdenTrabajo.CierresParciales.Add(cierre);
                 cierre.OrdenTrabajo.CantidadReal += cierre.Cantidad;
                 DAL.OrdenTrabajoDAL.RegistrarCierreParcial(cierre, _transaccion);
+
+                cierre.OrdenTrabajo.MovimientosStock = MovimientoStockBLL.GetMovimientosByOwner(EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.OrdenTrabajo, cierre.OrdenTrabajo.Numero, transaccion));
+
+                foreach (MovimientoStock mvto in cierre.OrdenTrabajo.MovimientosStock)
+                {
+                    decimal incremento = (decimal)cierre.Cantidad;
+                    mvto.CantidadDestinoReal += incremento;
+                    MovimientoStockBLL.RegistrarAvance(mvto, incremento, transaccion);
+                }
 
                 if (transaccion == null) { _transaccion.Commit(); }
             }
@@ -193,14 +255,53 @@ namespace GyCAP.BLL
             }            
         }
 
-        public static void Finalizar(OrdenTrabajo ordenT, SqlTransaction transaccion)
-        {            
-            DAL.OrdenTrabajoDAL.FinalizarOrdenTrabajo(ordenT, transaccion);
-
-            foreach (MovimientoStock mvto in ordenT.MovimientosStock)
+        public static void Finalizar(OrdenTrabajo ordenT)
+        {
+            SqlTransaction transaccion = null;
+            
+            try
             {
-                MovimientoStockBLL.Finalizar(mvto, transaccion);
+                EstadoMovimientoStock estadoMvtoFinalizado = EstadoMovimientoStockBLL.GetEstadoEntity(StockEnum.EstadoMovimientoStock.Finalizado);
+                EstadoOrdenTrabajo estadoFinalizada = EstadoOrdenTrabajoBLL.GetEstado(OrdenesTrabajoEnum.EstadoOrdenEnum.Finalizada);
+                DateTime fechaServidor = DBBLL.GetFechaServidor();
+
+                transaccion = DAL.DB.IniciarTransaccion();
+
+                ordenT.Estado = estadoFinalizada;
+                ordenT.FechaFinReal = fechaServidor;
+
+                DAL.OrdenTrabajoDAL.FinalizarOrdenTrabajo(ordenT, transaccion);
+
+                foreach (MovimientoStock mvto in ordenT.MovimientosStock)
+                {
+                    mvto.Estado = estadoMvtoFinalizado;
+                    mvto.FechaReal = fechaServidor;
+                    MovimientoStockBLL.Finalizar(mvto, transaccion, false);
+                }
+
+                //Actualizamos la eficiencia de los centros involucrados
+                if (ordenT.CierresParciales != null)
+                {
+                    int operacionesFallidas = 0;
+                    foreach (CierreParcialOrdenTrabajo cierre in ordenT.CierresParciales)
+                    {
+                        operacionesFallidas += cierre.OperacionesFallidas;
+                    }
+
+                    BLL.CentroTrabajoBLL.ActualizarEficiencia(ordenT.DetalleHojaRuta.CentroTrabajo, ordenT.CantidadReal, operacionesFallidas, transaccion);
+                }
+
+                transaccion.Commit();
             }
+            catch (SqlException ex)
+            {
+                transaccion.Rollback();
+                throw new BaseDeDatosException(ex.Message);
+            }
+            finally
+            {
+                DAL.DB.FinalizarTransaccion();
+            }            
         }
     }
 }

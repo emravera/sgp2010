@@ -77,22 +77,30 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
 
                     try
                     {
-                        excepciones = BLL.OrdenProduccionBLL.IniciarOrdenProduccion(ordenP, BLL.DBBLL.GetFechaServidor());
-
-                        if (excepciones.Count > 0)
+                        if (ordenP.Estado.Codigo == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.Generada)
                         {
-                            PlanificacionProduccion.frmExcepcionesPlan frmExcepciones = new PlanificacionProduccion.frmExcepcionesPlan();
-                            frmExcepciones.MdiParent = this.MdiParent;
-                            frmExcepciones.CargarGrilla(excepciones.ToList());
-                            frmExcepciones.Show();
-                            frmExcepciones.BringToFront();
+
+                            excepciones = BLL.OrdenProduccionBLL.IniciarOrdenProduccion(ordenP, BLL.DBBLL.GetFechaServidor());
+
+                            if (excepciones.Count > 0)
+                            {
+                                PlanificacionProduccion.frmExcepcionesPlan frmExcepciones = new PlanificacionProduccion.frmExcepcionesPlan();
+                                frmExcepciones.MdiParent = this.MdiParent;
+                                frmExcepciones.CargarGrilla(excepciones.ToList());
+                                frmExcepciones.Show();
+                                frmExcepciones.BringToFront();
+                            }
+                            else
+                            {
+                                MensajesABM.MsjValidacion("La orden de producción se inició correctamente.", this.Text);
+                            }
+
+                            dgvOrdenesProduccion.Refresh();
                         }
                         else
                         {
-                            MensajesABM.MsjValidacion("La orden de producción se inició correctamente.", this.Text);
+                            MensajesABM.MsjValidacion("La orden de producción ya se encuentra iniciada.", this.Text);
                         }
-
-                        dgvOrdenesProduccion.Refresh();
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
@@ -108,13 +116,14 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                     OrdenTrabajo orden = (OrdenTrabajo)dgvOrdenesTrabajo.SelectedRows[0].DataBoundItem;
 
                     //Controlamos si está en el estado correcto para iniciarse
-                    if (orden.Estado.Codigo == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.Generada)
+                    if (orden.Estado.Codigo == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.Generada
+                        || orden.Estado.Codigo == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.EnEspera)
                     {
                         //controlamos si hay dependencias con órdenes anteriore
                     }
                     else
                     {
-                        MensajesABM.MsjValidacion("La Orden de Trabajo ya se encuentra iniciada.", this.Text); }
+                        MensajesABM.MsjValidacion("La Orden de Trabajo ya se encuentra iniciada.", this.Text);
                     }
                 }
                 else { MensajesABM.MsjSinSeleccion("Orden de Trabajo", MensajesABM.Generos.Femenino, this.Text); }*/
@@ -123,24 +132,78 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
 
         private void btnFinalizar_Click(object sender, EventArgs e)
         {
-            if (dgvOrdenesProduccion.SelectedRows.Count > 0)
+            if (estadoInterface == estadoUI.pestañaTrabajo)
             {
-                try
+                if (dgvOrdenesTrabajo.SelectedRows.Count > 0)
+                {
+                    OrdenTrabajo orden = (OrdenTrabajo)dgvOrdenesTrabajo.SelectedRows[0].DataBoundItem;
+
+                    if (orden.Estado.Codigo == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.EnProceso)
+                    {
+                        try
+                        {
+                            BLL.OrdenTrabajoBLL.Finalizar(orden);
+                            OrdenProduccion ordenP = listaOrdenesProduccion.First(p => p.Numero == orden.OrdenProduccion);
+
+                            if (orden.OrdenTrabajoPadre.HasValue)
+                            {                                
+                                OrdenTrabajo ordenPadre = ordenP.OrdenesTrabajo.First(p => p.Numero == orden.OrdenTrabajoPadre.Value);
+                                if (ordenPadre.Estado.Codigo == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.EnEspera)
+                                {
+                                    bool iniciar = true;
+
+                                    foreach (OrdenTrabajo ordenT in ordenP.OrdenesTrabajo.Where(p => p.OrdenTrabajoPadre.HasValue && p.OrdenTrabajoPadre.Value == ordenPadre.Numero))
+                                    {
+                                        if (ordenT.Estado.Codigo != (int)OrdenesTrabajoEnum.EstadoOrdenEnum.Finalizada)
+                                        {
+                                            iniciar = false;
+                                        }
+                                    }
+
+                                    if (iniciar)
+                                    {
+                                        BLL.OrdenTrabajoBLL.IniciarOrdenTrabajo(ordenPadre);
+                                    }
+                                }
+                            }                            
+
+                            dgvOrdenesProduccion.Refresh();
+
+                            MensajesABM.MsjValidacion("La Orden de Trabajo se finalizó correctamente.", this.Text);
+                        }
+                        catch (Entidades.Excepciones.BaseDeDatosException ex)
+                        {
+                            MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
+                        }
+                    }
+                    else
+                    {
+                        MensajesABM.MsjValidacion("La Orden de Trabajo no se encuentra en el estado correcto para finalizarse.", this.Text);
+                    }
+                }
+                else { MensajesABM.MsjSinSeleccion("Orden de Trabajo", MensajesABM.Generos.Femenino, this.Text); }
+            }
+            else if (estadoInterface == estadoUI.pestañaProduccion)
+            {
+                if (dgvOrdenesProduccion.SelectedRows.Count > 0)
                 {
                     OrdenProduccion ordenP = (OrdenProduccion)dgvOrdenesProduccion.SelectedRows[0].DataBoundItem;
-                    BLL.OrdenProduccionBLL.FinalizarOrdenProduccion(ordenP);
-                    dgvOrdenesProduccion.Refresh();
 
-                    MensajesABM.MsjValidacion("La orden de producción se finalizó correctamente.", this.Text);
+                    bool finalizada = BLL.OrdenProduccionBLL.FinalizarOrdenProduccion(ordenP);
+
+                    if (finalizada)
+                    {
+                        MensajesABM.MsjValidacion("La Orden de Producción se finalizó correctamente.", this.Text);
+                    }
+                    else
+                    {
+                        MensajesABM.MsjValidacion("Una o más órdenes de trabajo no están finalizadas.", this.Text);
+                    }
                 }
-                catch (Entidades.Excepciones.BaseDeDatosException ex)
-                {
-                    MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Guardado);
-                }
+                else { MensajesABM.MsjSinSeleccion("Orden de Producción", MensajesABM.Generos.Femenino, this.Text); }
             }
-            else { MensajesABM.MsjSinSeleccion("Orden de Producción", MensajesABM.Generos.Femenino, this.Text); }
-        }
-
+        }        
+        
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             //finalizar orden de producción - gonzalo

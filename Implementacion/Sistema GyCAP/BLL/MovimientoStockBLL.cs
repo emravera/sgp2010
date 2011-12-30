@@ -18,7 +18,7 @@ namespace GyCAP.BLL
             DAL.MovimientoStockDAL.InsertarPlanificado(movimientoStock, transaccion);
         }
 
-        public static void InsertarFinalizado(Entidades.MovimientoStock movimientoStock, SqlTransaction transaccion)
+        public static void InsertarFinalizado(Entidades.MovimientoStock movimientoStock, SqlTransaction transaccion, bool modificarCantidadesStock)
         {
             if (transaccion == null)
             {
@@ -26,7 +26,7 @@ namespace GyCAP.BLL
                 {
                     transaccion = DAL.DB.IniciarTransaccion();
                     ValidarMovimiento(movimientoStock);
-                    DAL.MovimientoStockDAL.InsertarFinalizado(movimientoStock, transaccion);
+                    DAL.MovimientoStockDAL.InsertarFinalizado(movimientoStock, transaccion, modificarCantidadesStock);
                     transaccion.Commit();
                 }
                 catch (SqlException ex)
@@ -42,7 +42,7 @@ namespace GyCAP.BLL
             else
             {
                 ValidarMovimiento(movimientoStock);
-                DAL.MovimientoStockDAL.InsertarFinalizado(movimientoStock, transaccion);
+                DAL.MovimientoStockDAL.InsertarFinalizado(movimientoStock, transaccion, modificarCantidadesStock);
             }
         }
 
@@ -52,10 +52,16 @@ namespace GyCAP.BLL
             DAL.MovimientoStockDAL.IniciarMovimiento(movimiento, transaccion);
         }
 
-        public static void Finalizar(MovimientoStock movimientoStock, SqlTransaction transaccion)
+        public static void RegistrarAvance(MovimientoStock movimientoStock, decimal incremento, SqlTransaction transaccion)
         {
             ValidarMovimiento(movimientoStock);
-            DAL.MovimientoStockDAL.FinalizarMovimiento(movimientoStock, transaccion);
+            DAL.MovimientoStockDAL.RegistrarAvance(movimientoStock, incremento, transaccion);
+        }
+
+        public static void Finalizar(MovimientoStock movimientoStock, SqlTransaction transaccion, bool modificarCantidadesStock)
+        {
+            ValidarMovimiento(movimientoStock);
+            DAL.MovimientoStockDAL.FinalizarMovimiento(movimientoStock, transaccion, modificarCantidadesStock);
         }
 
         public static void EliminarMovimientosPedido(int codigoEntidad)

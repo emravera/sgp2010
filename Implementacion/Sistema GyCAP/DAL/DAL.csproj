@@ -109,7 +109,6 @@
     <Compile Include="PlanMensualDAL.cs" />
     <Compile Include="PlanoDAL.cs" />
     <Compile Include="PlanSemanalDAL.cs" />
-    <Compile Include="PresentacionDAL.cs" />
     <Compile Include="ProcesoDAL.cs" />
     <Compile Include="ProductoDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

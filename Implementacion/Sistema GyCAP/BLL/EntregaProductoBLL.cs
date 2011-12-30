@@ -59,7 +59,7 @@ namespace GyCAP.BLL
                     movimiento.FechaReal = DBBLL.GetFechaServidor();
 
                     //Finalizamos el movimiento de stock que ya fue generado
-                    BLL.MovimientoStockBLL.Finalizar(movimiento, transaccion);
+                    BLL.MovimientoStockBLL.Finalizar(movimiento, transaccion, true);
                 }
 
                 transaccion.Commit();                
