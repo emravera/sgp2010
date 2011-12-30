@@ -66,7 +66,7 @@ namespace GyCAP.DAL
             DB.executeNonQuery(sql, parametros, transaccion);
         }
         
-        public static void IniciarOrdenTrabajo(OrdenTrabajo ordenT, SqlTransaction transaccion)
+        public static void RegistrarInicioOrdenTrabajo(OrdenTrabajo ordenT, SqlTransaction transaccion)
         {
             string sql = "UPDATE ORDENES_TRABAJO SET eord_codigo = @p0, ordt_fechainicioreal = @p1 WHERE ordt_numero = @p2";
             
@@ -117,14 +117,10 @@ namespace GyCAP.DAL
         {
             string sql = @"UPDATE ORDENES_TRABAJO SET 
                          eord_codigo = @p0
-                        ,ordt_fechainicioreal = @p1
-                        ,ordt_cantidadreal = @p2
-                        ,ordt_fechafinreal = @p3
-                        WHERE ordt_numero = @p4";
+                        ,ordt_fechafinreal = @p1
+                        WHERE ordt_numero = @p2";
 
-            object[] parametros = { ordenT.Estado.Codigo, 
-                                      ordenT.FechaInicioReal.Value.ToString("yyyMMdd HH:mm"), 
-                                      ordenT.CantidadReal, 
+            object[] parametros = { ordenT.Estado.Codigo,
                                       ordenT.FechaFinReal.Value.ToString("yyyyMMdd HH:mm"),
                                       ordenT.Numero };
 

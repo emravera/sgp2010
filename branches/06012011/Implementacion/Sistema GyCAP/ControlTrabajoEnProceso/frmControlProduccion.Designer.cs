@@ -80,6 +80,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblOrdenTSelected = new System.Windows.Forms.Label();
             this.btnEliminarCierre = new System.Windows.Forms.Button();
             this.btnModificarCierre = new System.Windows.Forms.Button();
             this.dgvCierresParciales = new System.Windows.Forms.DataGridView();
@@ -100,7 +101,6 @@
             this.cmsCierres = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiBloquearCierre = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDesbloquearCierre = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblOrdenTSelected = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tcOrdenTrabajo.SuspendLayout();
             this.tpOrdenesProduccion.SuspendLayout();
@@ -696,6 +696,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Listado de Cierres Parciales";
             // 
+            // lblOrdenTSelected
+            // 
+            this.lblOrdenTSelected.AutoSize = true;
+            this.lblOrdenTSelected.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrdenTSelected.Location = new System.Drawing.Point(6, 258);
+            this.lblOrdenTSelected.Name = "lblOrdenTSelected";
+            this.lblOrdenTSelected.Size = new System.Drawing.Size(57, 17);
+            this.lblOrdenTSelected.TabIndex = 18;
+            this.lblOrdenTSelected.Text = "label16";
+            // 
             // btnEliminarCierre
             // 
             this.btnEliminarCierre.Location = new System.Drawing.Point(689, 254);
@@ -896,16 +906,6 @@
             this.tsmiDesbloquearCierre.Size = new System.Drawing.Size(187, 22);
             this.tsmiDesbloquearCierre.Text = "Desbloquear columna";
             this.tsmiDesbloquearCierre.Click += new System.EventHandler(this.tsmiDesbloquearCierre_Click);
-            // 
-            // lblOrdenTSelected
-            // 
-            this.lblOrdenTSelected.AutoSize = true;
-            this.lblOrdenTSelected.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrdenTSelected.Location = new System.Drawing.Point(6, 258);
-            this.lblOrdenTSelected.Name = "lblOrdenTSelected";
-            this.lblOrdenTSelected.Size = new System.Drawing.Size(57, 17);
-            this.lblOrdenTSelected.TabIndex = 18;
-            this.lblOrdenTSelected.Text = "label16";
             // 
             // frmControlProduccion
             // 

@@ -145,5 +145,13 @@ namespace GyCAP.Entidades
             get { return movimientosStock; }
             set { movimientosStock = value; }
         }
+
+        private bool hasChildren;
+
+        public bool HasChildren
+        {
+            get { return hasChildren; }
+            set { hasChildren = value; }
+        }
     }
 }

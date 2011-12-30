@@ -184,7 +184,7 @@ namespace GyCAP.UI.GestionStock
                         movimiento.Duenio = movimiento.OrigenesMultiples[0].Entidad;
                     }
 
-                    BLL.MovimientoStockBLL.InsertarFinalizado(movimiento, null);                    
+                    BLL.MovimientoStockBLL.InsertarFinalizado(movimiento, null, true);                    
 
                     MensajesABM.MsjConfirmaGuardar("Stock", this.Text, MensajesABM.Operaciones.Guardado);
 

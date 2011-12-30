@@ -78,9 +78,6 @@ namespace GyCAP.BLL
             if (DAL.HojaRutaDAL.EsHojaRuta(rowhoja.HR_NOMBRE, Convert.ToInt32(rowhoja.HR_CODIGO))) { throw new Entidades.Excepciones.ElementoExistenteException(); }
             int codigo = DAL.HojaRutaDAL.Insertar(dsHojaRuta);
             
-            //código temporal para la presentación, quitar - gonzalo
-            DAL.PresentacionDAL.AsignarHojaRutaAParteCocina(codigo);
-
             return codigo;
         }
         
