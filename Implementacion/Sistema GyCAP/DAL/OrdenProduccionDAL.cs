@@ -83,70 +83,16 @@ namespace GyCAP.DAL
 
             DB.executeNonQuery(sql, parametros, transaccion);
         }
-        
-        public static void Eliminar(int numeroOrdenProduccion)
+
+        public static void Eliminar(OrdenProduccion ordenProduccion, SqlTransaction transaccion)
         {
             string sqlOT = "DELETE FROM ORDENES_TRABAJO WHERE ordp_numero = @p0";
             string sqlOP = "DELETE FROM ORDENES_PRODUCCION WHERE ordp_numero = @p0";
 
-            object[] parametros = { numeroOrdenProduccion };
-            SqlTransaction transaccion = null;
+            object[] parametros = { ordenProduccion.Numero };
 
-            try
-            {
-                transaccion = DB.IniciarTransaccion();
-                DB.executeNonQuery(sqlOT, parametros, transaccion);
-                DB.executeNonQuery(sqlOP, parametros, transaccion);
-                transaccion.Commit();
-            }
-            catch (SqlException ex)
-            {
-                //Error en alguna consulta, descartamos los cambios
-                transaccion.Rollback();
-                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
-            }
-            finally
-            {
-                //En cualquier caso finalizamos la transaccion para que se cierre la conexion
-                DB.FinalizarTransaccion();
-            }
-        }
-
-        public static void Eliminar(IList<Entidades.OrdenProduccion> ordenesProduccion)
-        {
-            string sqlOT = "DELETE FROM ORDENES_TRABAJO WHERE ordp_numero IN (@p0)";
-            string sqlOP = "DELETE FROM ORDENES_PRODUCCION WHERE ordp_numero IN (@p0)";
-
-            int[] ordenes = new int[ordenesProduccion.Count];
-            int[] detalles = new int[ordenesProduccion.Count];
-            for (int i = 0; i < ordenesProduccion.Count; i++) 
-            { 
-                ordenes[i] = ordenesProduccion[i].Numero;
-                detalles[i] = ordenesProduccion[i].DetallePlanSemanal.Codigo;
-            }
-
-            object[] parametros = { ordenes };
-            SqlTransaction transaccion = null;
-
-            try
-            {
-                transaccion = DB.IniciarTransaccion();
-                DB.executeNonQuery(sqlOT, parametros, transaccion);
-                DB.executeNonQuery(sqlOP, parametros, transaccion);
-                DetallePlanSemanalDAL.ActualizarEstado(detalles, (int)PlanificacionEnum.EstadoDetallePlanSemanal.Generado, transaccion);
-                transaccion.Commit();
-            }
-            catch (SqlException ex)
-            {
-                //Error en alguna consulta, descartamos los cambios
-                transaccion.Rollback();
-                throw new Entidades.Excepciones.BaseDeDatosException(ex.Message);
-            }
-            finally
-            {
-                //En cualquier caso finalizamos la transaccion para que se cierre la conexion
-                DB.FinalizarTransaccion();
-            }
+            DB.executeNonQuery(sqlOT, parametros, transaccion);
+            DB.executeNonQuery(sqlOP, parametros, transaccion);
         }
 
         public static void IniciarOrdenProduccion(OrdenProduccion ordenP, SqlTransaction transaccion)
@@ -258,5 +204,14 @@ namespace GyCAP.DAL
 
             DB.executeNonQuery(sql, parametros, transaccion);
          }
+
+        public static void Cancelar(OrdenProduccion ordenProduccion, SqlTransaction transaccion)
+        {
+            string sql = "UPDATE ORDENES_PRODUCCION SET eord_codigo = @p0 WHERE ordp_numero = @p1";
+
+            object[] parametros = { ordenProduccion.Estado.Codigo, ordenProduccion.Numero };
+
+            DB.executeNonQuery(sql, parametros, transaccion);
+        }
     }
 }

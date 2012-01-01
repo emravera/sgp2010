@@ -238,16 +238,49 @@ namespace GyCAP.BLL
             else { Actualizar(arbol); }
         }
 
-        public static void Eliminar(int numeroOrdenProduccion)
+        public static bool Eliminar(OrdenProduccion ordenProduccion)
         {
-            //revisar que condiciones hacen faltan para poder elimiarse - gonzalo
-            DAL.OrdenProduccionDAL.Eliminar(numeroOrdenProduccion);
-        }
+            if (ordenProduccion.Estado.Codigo != (int)OrdenesTrabajoEnum.EstadoOrdenEnum.Generada)
+            {
+                return false;
+            }
 
-        public static void Eliminar(IList<Entidades.OrdenProduccion> ordenesProduccion)
-        {
-            //revisar que condiciones hacen faltan para poder elimiarse - gonzalo
-            DAL.OrdenProduccionDAL.Eliminar(ordenesProduccion);
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                transaccion = DAL.DB.IniciarTransaccion();
+
+                if (ordenProduccion.OrdenesTrabajo != null)
+                {
+                    foreach (OrdenTrabajo ot in ordenProduccion.OrdenesTrabajo)
+                    {
+                        ot.MovimientosStock = MovimientoStockBLL.GetMovimientosByOwner(EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.OrdenTrabajo, ot.Numero, transaccion));
+
+                        foreach (MovimientoStock mvto in ot.MovimientosStock)
+                        {
+                            MovimientoStockBLL.Eliminar(mvto.Numero, transaccion);
+                        }
+                    }
+                }
+                
+                DAL.OrdenProduccionDAL.Eliminar(ordenProduccion, transaccion);
+
+                DAL.DetallePlanSemanalDAL.ActualizarEstado(new int[] { ordenProduccion.Numero }, (int)PlanificacionEnum.EstadoDetallePlanSemanal.Generado, transaccion);
+
+                transaccion.Commit();
+
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                transaccion.Rollback();
+                throw new BaseDeDatosException(ex.Message);
+            }
+            finally
+            {
+                DAL.DB.FinalizarTransaccion();
+            }
         }
 
         public static IList<ExcepcionesPlan> IniciarOrdenProduccion(OrdenProduccion ordenP, DateTime fechaInicioReal)
@@ -513,6 +546,43 @@ namespace GyCAP.BLL
         public static ArbolProduccion GetArbolProduccion(OrdenProduccion ordenProduccion)
         {
             return new ArbolProduccion();
+        }
+
+        public static bool Cancelar(OrdenProduccion ordenProduccion)
+        {
+            SqlTransaction transaccion = null;
+
+            if (ordenProduccion.Estado.Codigo != (int)OrdenesTrabajoEnum.EstadoOrdenEnum.Generada)
+            {
+                return false;
+            }
+
+            try
+            {
+                ordenProduccion.Estado = EstadoOrdenTrabajoBLL.GetEstado(OrdenesTrabajoEnum.EstadoOrdenEnum.Cancelada);
+
+                transaccion = DAL.DB.IniciarTransaccion();
+
+                foreach (OrdenTrabajo ordenT in ordenProduccion.OrdenesTrabajo)
+                {
+                    OrdenTrabajoBLL.Cancelar(ordenT, ordenProduccion.Estado, transaccion);
+                }
+
+                DAL.OrdenProduccionDAL.Cancelar(ordenProduccion, transaccion);
+
+                transaccion.Commit();
+
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                transaccion.Rollback();
+                throw new BaseDeDatosException(ex.Message);
+            }
+            finally
+            {
+                DAL.DB.FinalizarTransaccion();
+            }
         }
     }
 }

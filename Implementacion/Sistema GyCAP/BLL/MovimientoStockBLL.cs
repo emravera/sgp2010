@@ -58,6 +58,12 @@ namespace GyCAP.BLL
             DAL.MovimientoStockDAL.RegistrarAvance(movimientoStock, incremento, transaccion);
         }
 
+        public static void EliminarAvance(MovimientoStock movimientoStock, decimal decremento, SqlTransaction transaccion)
+        {
+            ValidarMovimiento(movimientoStock);
+            DAL.MovimientoStockDAL.EliminarAvance(movimientoStock, decremento, transaccion);
+        }
+
         public static void Finalizar(MovimientoStock movimientoStock, SqlTransaction transaccion, bool modificarCantidadesStock)
         {
             ValidarMovimiento(movimientoStock);
@@ -69,16 +75,16 @@ namespace GyCAP.BLL
             DAL.MovimientoStockDAL.EliminarMovimientosPedido(codigoEntidad, null);
         }
 
-        public static void Cancelar(int numeroMovimiento)
+        public static void Cancelar(MovimientoStock movimiento, SqlTransaction transaccion)
         {
-            if (DAL.MovimientoStockDAL.EsFinalizado(numeroMovimiento)) { throw new Entidades.Excepciones.ElementoFinalizadoException(); }
-            DAL.MovimientoStockDAL.Cancelar(numeroMovimiento);
+            if (DAL.MovimientoStockDAL.EsFinalizado(movimiento.Numero)) { throw new Entidades.Excepciones.ElementoFinalizadoException(); }
+            DAL.MovimientoStockDAL.Cancelar(movimiento, transaccion);
         }
         
-        public static void Eliminar(int numeroMovimiento)
+        public static void Eliminar(int numeroMovimiento, SqlTransaction transaccion)
         {
             if (!DAL.MovimientoStockDAL.PuedeEliminarse(numeroMovimiento)) { throw new Entidades.Excepciones.ElementoFinalizadoException(); }
-            DAL.MovimientoStockDAL.Eliminar(numeroMovimiento);
+            DAL.MovimientoStockDAL.Eliminar(numeroMovimiento, transaccion);
         }
 
         public static void ObtenerTodos(object fechaDesde, object fechaHasta, object origen, object destino, object estado, Data.dsStock.MOVIMIENTOS_STOCKDataTable dt)
