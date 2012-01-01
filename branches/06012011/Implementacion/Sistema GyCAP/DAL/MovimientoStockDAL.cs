@@ -91,30 +91,14 @@ namespace GyCAP.DAL
             origen.Codigo = Convert.ToInt32(DB.executeScalar(sql, parametros, transaccion));
         }
 
-        public static void Eliminar(int numeroMovimiento)
+        public static void Eliminar(int numeroMovimiento, SqlTransaction transaccion)
         {
             string sql = "DELETE FROM MOVIMIENTOS_STOCK WHERE mvto_numero = @p0";
             string sqlOrigenes = "DELETE FROM ORIGENES_MOVIMIENTO_STOCK WHERE mvto_numero = @p0";
             object[] parametros = { numeroMovimiento };
-
-            SqlTransaction transaccion = null;
-
-            try
-            {
-                transaccion = DB.IniciarTransaccion();
-                DB.executeNonQuery(sqlOrigenes, parametros, transaccion);
-                DB.executeNonQuery(sql, parametros, transaccion);
-                transaccion.Commit();
-            }
-            catch (SqlException ex)
-            {
-                transaccion.Rollback();
-                throw new BaseDeDatosException(ex.Message);
-            }
-            finally
-            {
-                DB.FinalizarTransaccion();
-            }
+                            
+            DB.executeNonQuery(sqlOrigenes, parametros, transaccion);
+            DB.executeNonQuery(sql, parametros, transaccion);
         }
 
         //Metodo para eliminar el/los movimientos de stock de un pedido
@@ -220,31 +204,30 @@ namespace GyCAP.DAL
                                       movimiento.Numero 
                                   };
 
-            SqlTransaction _transaccion = null;
+            DB.executeNonQuery(sql, parametros, transaccion);
 
-            try
+            if (movimiento.Destino.EntidadExterna != null && movimiento.Destino.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
             {
-                _transaccion = (transaccion == null) ? DB.IniciarTransaccion() : transaccion;
-
-                DB.executeNonQuery(sql, parametros, _transaccion);
-
-                if (movimiento.Destino.EntidadExterna != null && movimiento.Destino.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
-                {
-                    UbicacionStockDAL.ActualizarCantidadesStockAndParents((movimiento.Destino.EntidadExterna as Entidades.UbicacionStock).Numero, incremento, _transaccion);
-                }
-
-                if (transaccion == null) { _transaccion.Commit(); }
+                UbicacionStockDAL.ActualizarCantidadesStockAndParents((movimiento.Destino.EntidadExterna as Entidades.UbicacionStock).Numero, incremento, transaccion);
             }
-            catch (SqlException ex)
-            {
-                if (transaccion != null) { throw ex; }
+        }
 
-                _transaccion.Rollback();
-                throw new BaseDeDatosException(ex.Message);
-            }
-            finally
+        public static void EliminarAvance(MovimientoStock movimiento, decimal decremento, SqlTransaction transaccion)
+        {
+            string sql = @"UPDATE MOVIMIENTOS_STOCK SET 
+                         mvto_cantidad_destino_real = @p0
+                         WHERE mvto_numero = @p1";
+
+            object[] parametros = { 
+                                      movimiento.CantidadDestinoReal,
+                                      movimiento.Numero 
+                                  };
+
+            DB.executeNonQuery(sql, parametros, transaccion);
+
+            if (movimiento.Destino.EntidadExterna != null && movimiento.Destino.TipoEntidad.Codigo == (int)EntidadEnum.TipoEntidadEnum.UbicacionStock)
             {
-                if (transaccion == null) { DB.FinalizarTransaccion(); }
+                UbicacionStockDAL.ActualizarCantidadesStockAndParents((movimiento.Destino.EntidadExterna as Entidades.UbicacionStock).Numero, (decremento * -1), transaccion);
             }
         }
 
@@ -265,20 +248,16 @@ namespace GyCAP.DAL
             DB.executeNonQuery(sql, parametros, transaccion);
         }
 
-        public static void Cancelar(int numeroMovimiento)
+        public static void Cancelar(MovimientoStock movimiento, SqlTransaction transaccion)
         {
             string sql = @"UPDATE MOVIMIENTOS_STOCK SET                          
                         ,mvto_fechareal = @p0
                         ,emvto_codigo = @p1
                          WHERE mvto_numero = @p2";
+                        
+            object[] parametros = { DB.GetFechaServidor().ToString("yyyyMMdd"), movimiento.Estado.Codigo, movimiento.Numero };
 
-            try
-            {
-                object[] parametros = { DB.GetFechaServidor().ToString("yyyyMMdd"), (int)StockEnum.EstadoMovimientoStock.Cancelado, numeroMovimiento };
-
-                DB.executeNonQuery(sql, parametros, null);
-            }
-            catch (SqlException ex) { throw new BaseDeDatosException(ex.Message); }
+            DB.executeNonQuery(sql, parametros, transaccion);
         }
 
         public static bool EsFinalizado(int numeroMovimiento)

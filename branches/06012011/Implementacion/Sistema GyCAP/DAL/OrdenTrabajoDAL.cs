@@ -113,6 +113,15 @@ namespace GyCAP.DAL
             DB.executeNonQuery(sql, parametros, transaccion);            
         }
 
+        public static void EliminarCierreParcial(CierreParcialOrdenTrabajo cierre, SqlTransaction transaccion)
+        {
+            string sql = "UPDATE ORDENES_TRABAJO SET ordt_cantidadreal = ordt_cantidadreal - @p0 WHERE ordt_numero = @p1";
+
+            object[] parametros = { cierre.Cantidad, cierre.OrdenTrabajo.Numero };
+
+            DB.executeNonQuery(sql, parametros, transaccion);
+        }
+
         public static void FinalizarOrdenTrabajo(OrdenTrabajo ordenT, SqlTransaction transaccion)
         {
             string sql = @"UPDATE ORDENES_TRABAJO SET 
@@ -123,6 +132,15 @@ namespace GyCAP.DAL
             object[] parametros = { ordenT.Estado.Codigo,
                                       ordenT.FechaFinReal.Value.ToString("yyyyMMdd HH:mm"),
                                       ordenT.Numero };
+
+            DB.executeNonQuery(sql, parametros, transaccion);
+        }
+
+        public static void Cancelar(OrdenTrabajo ordenTrabajo, SqlTransaction transaccion)
+        {
+            string sql = "UPDATE ORDENES_TRABAJO SET eord_codigo = @p0 WHERE ordt_numero = @p1";
+
+            object[] parametros = { ordenTrabajo.Estado.Codigo, ordenTrabajo.Numero };
 
             DB.executeNonQuery(sql, parametros, transaccion);
         }

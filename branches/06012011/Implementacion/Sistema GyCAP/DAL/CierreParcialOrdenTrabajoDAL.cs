@@ -47,7 +47,7 @@ namespace GyCAP.DAL
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
 
-        public static void Actualizar(Entidades.CierreParcialOrdenTrabajo cierreOrdenTrabajo)
+        /*public static void Modificar(Entidades.CierreParcialOrdenTrabajo cierreOrdenTrabajo, SqlTransaction transaccion)
         {
             string sql = @"UPDATE CIERRE_ORDEN_TRABAJO SET 
                          e_codigo = @p0
@@ -67,10 +67,10 @@ namespace GyCAP.DAL
 
             try
             {
-                DB.executeNonQuery(sql, parametros, null);
+                DB.executeNonQuery(sql, parametros, transaccion);
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
-        }
+        }*/
         
         public static void ObtenerCierresParcialesOrdenTrabajo(int numeroOrdenTrabajo, DataTable dtCierreParcialOrdenTrabajo)
         {

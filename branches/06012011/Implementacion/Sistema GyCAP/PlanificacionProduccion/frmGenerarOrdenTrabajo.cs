@@ -331,31 +331,21 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             if (dgvListaOrdenProduccion.SelectedRows.Count > 0)
             {
-                int codOrdenP = ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].Numero;
-                bool eliminar = true;
-                if (codOrdenP > 0)
+                try
                 {
-                    try
-                    {
-                        BLL.OrdenProduccionBLL.Eliminar(codOrdenP);
-                        BLL.DetallePlanSemanalBLL.ActualizarEstado(codOrdenP, BLL.DetallePlanSemanalBLL.estadoGenerado);
-                    }
-                    catch (Entidades.Excepciones.BaseDeDatosException ex)
-                    {
-                        eliminar = false;
-                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
-                    }
-                }
-
-                if (eliminar)
-                {
-                    int codDPSem = ordenesProduccionSortable[dgvListaOrdenProduccion.SelectedRows[0].Index].DetallePlanSemanal.Codigo;
-                    dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(codDPSem).DPSEM_ESTADO = BLL.DetallePlanSemanalBLL.estadoGenerado;
-                    tvDetallePlan.Nodes.Find(codDPSem.ToString(), true)[0].ForeColor = System.Drawing.Color.Red;
+                    EliminarOrdenProduccion((OrdenProduccion)dgvListaOrdenProduccion.SelectedRows[0].DataBoundItem);
                     ordenesProduccionSortable.RemoveAt(dgvListaOrdenProduccion.SelectedRows[0].Index);
                     MensajesABM.MsjConfirmaEliminar(this.Text, MensajesABM.Operaciones.Eliminación);
                     LimpiarControles();
                 }
+                catch (Entidades.Excepciones.BaseDeDatosException ex)
+                {
+                    MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
+                }
+            }
+            else
+            {
+                MensajesABM.MsjSinSeleccion("Orden de Producción", MensajesABM.Generos.Femenino, this.Text);
             }
         }
 
@@ -363,12 +353,9 @@ namespace GyCAP.UI.PlanificacionProduccion
         {
             try
             {
-                BLL.OrdenProduccionBLL.Eliminar(ordenesProduccionSortable.ToList());
-
                 foreach (OrdenProduccion item in ordenesProduccionSortable)
                 {
-                    dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(item.DetallePlanSemanal.Codigo).DPSEM_ESTADO = Convert.ToDecimal(PlanificacionEnum.EstadoDetallePlanSemanal.Generado);
-                    tvDetallePlan.Nodes.Find(item.DetallePlanSemanal.Codigo.ToString(), true)[0].ForeColor = System.Drawing.Color.Red;
+                    EliminarOrdenProduccion(item);
                 }
 
                 ordenesProduccionSortable.Clear();                
@@ -379,6 +366,18 @@ namespace GyCAP.UI.PlanificacionProduccion
             {
                 MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
             }
+        }
+
+        private void EliminarOrdenProduccion(OrdenProduccion orden)
+        {
+            if (orden.Numero > 0)
+            {
+                BLL.OrdenProduccionBLL.Eliminar(orden);                
+            }
+
+            int codDPSem = orden.DetallePlanSemanal.Codigo;
+            dsPlanSemanal.DETALLE_PLANES_SEMANALES.FindByDPSEM_CODIGO(codDPSem).DPSEM_ESTADO = BLL.DetallePlanSemanalBLL.estadoGenerado;
+            tvDetallePlan.Nodes.Find(codDPSem.ToString(), true)[0].ForeColor = System.Drawing.Color.Red;
         }
 
         private void btnGuardarActual_Click(object sender, EventArgs e)

@@ -213,20 +213,20 @@ namespace GyCAP.BLL
             DAL.OrdenTrabajoDAL.ActualizarEstado(ordenT, transaccion);
         }
 
-        public static void RegistrarCierreParcial(CierreParcialOrdenTrabajo cierre, SqlTransaction transaccion)
+        public static void RegistrarCierreParcial(CierreParcialOrdenTrabajo cierre)
         {
-            SqlTransaction _transaccion = null;
+            SqlTransaction transaccion = null;
 
             try
             {
-                _transaccion = (transaccion == null) ? DAL.DB.IniciarTransaccion() : transaccion;
+                cierre.OrdenTrabajo.MovimientosStock = MovimientoStockBLL.GetMovimientosByOwner(EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.OrdenTrabajo, cierre.OrdenTrabajo.Numero, transaccion));
+                
+                transaccion = DAL.DB.IniciarTransaccion();
 
-                CierreParcialOrdenTrabajoBLL.Insertar(cierre, _transaccion);
+                CierreParcialOrdenTrabajoBLL.Insertar(cierre, transaccion);
                 cierre.OrdenTrabajo.CierresParciales.Add(cierre);
                 cierre.OrdenTrabajo.CantidadReal += cierre.Cantidad;
-                DAL.OrdenTrabajoDAL.RegistrarCierreParcial(cierre, _transaccion);
-
-                cierre.OrdenTrabajo.MovimientosStock = MovimientoStockBLL.GetMovimientosByOwner(EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.OrdenTrabajo, cierre.OrdenTrabajo.Numero, transaccion));
+                DAL.OrdenTrabajoDAL.RegistrarCierreParcial(cierre, transaccion);                
 
                 foreach (MovimientoStock mvto in cierre.OrdenTrabajo.MovimientosStock)
                 {
@@ -235,25 +235,18 @@ namespace GyCAP.BLL
                     MovimientoStockBLL.RegistrarAvance(mvto, incremento, transaccion);
                 }
 
-                if (transaccion == null) { _transaccion.Commit(); }
+                transaccion.Commit();
             }
             catch (SqlException ex)
             {
-                if (transaccion == null)
-                {
-                    _transaccion.Rollback();
-                    throw new BaseDeDatosException(ex.Message);
-                }
-                else
-                {
-                    throw ex;
-                }
+                transaccion.Rollback();
+                throw new BaseDeDatosException(ex.Message);
             }
             finally
             {
-                if (transaccion == null) { DAL.DB.FinalizarTransaccion(); }
-            }            
-        }
+                DAL.DB.FinalizarTransaccion();
+            }
+        }        
 
         public static void Finalizar(OrdenTrabajo ordenT)
         {
@@ -301,7 +294,57 @@ namespace GyCAP.BLL
             finally
             {
                 DAL.DB.FinalizarTransaccion();
-            }            
+            }
+        }
+
+        public static void Cancelar(OrdenTrabajo ordenTrabajo, EstadoOrdenTrabajo estadoCancelado, SqlTransaction transaccion)
+        {
+            ordenTrabajo.MovimientosStock = MovimientoStockBLL.GetMovimientosByOwner(EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.OrdenTrabajo, ordenTrabajo.Numero, transaccion));
+
+            foreach (MovimientoStock mvto in ordenTrabajo.MovimientosStock)
+            {
+                mvto.Estado = EstadoMovimientoStockBLL.GetEstadoEntity(StockEnum.EstadoMovimientoStock.Cancelado);
+                MovimientoStockBLL.Cancelar(mvto, transaccion);
+            }
+
+            ordenTrabajo.Estado = estadoCancelado;
+
+            DAL.OrdenTrabajoDAL.Cancelar(ordenTrabajo, transaccion);            
+        }
+
+        public static void EliminarCierreParcial(CierreParcialOrdenTrabajo cierre)
+        {
+            SqlTransaction transaccion = null;
+
+            try
+            {
+                transaccion = DAL.DB.IniciarTransaccion();
+
+                cierre.OrdenTrabajo.MovimientosStock = MovimientoStockBLL.GetMovimientosByOwner(EntidadBLL.GetEntidad(EntidadEnum.TipoEntidadEnum.OrdenTrabajo, cierre.OrdenTrabajo.Numero, transaccion));
+
+                CierreParcialOrdenTrabajo cierreToRemove = cierre.OrdenTrabajo.CierresParciales.First(p => p.Codigo == cierre.Codigo);
+                cierre.OrdenTrabajo.CierresParciales.Remove(cierreToRemove);                
+                cierre.OrdenTrabajo.CantidadReal -= cierre.Cantidad;
+                DAL.OrdenTrabajoDAL.EliminarCierreParcial(cierre, transaccion);
+
+                foreach (MovimientoStock mvto in cierre.OrdenTrabajo.MovimientosStock)
+                {
+                    decimal decremento = (decimal)cierre.Cantidad;
+                    mvto.CantidadDestinoReal -= decremento;
+                    MovimientoStockBLL.EliminarAvance(mvto, decremento, transaccion);
+                }
+
+                transaccion.Commit();
+            }
+            catch (SqlException ex)
+            {
+                transaccion.Rollback();
+                throw new BaseDeDatosException(ex.Message);
+            }
+            finally
+            {
+                DAL.DB.FinalizarTransaccion();
+            }
         }
     }
 }

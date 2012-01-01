@@ -206,7 +206,53 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
         
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            //finalizar orden de producción - gonzalo
+            if (estadoInterface == estadoUI.pestañaProduccion)
+            {
+                if (dgvOrdenesProduccion.SelectedRows.Count > 0)
+                {
+                    OrdenProduccion ordenP = (OrdenProduccion)dgvOrdenesProduccion.SelectedRows[0].DataBoundItem;
+                    try
+                    {
+                        bool cancelada = BLL.OrdenProduccionBLL.Cancelar(ordenP);
+
+                        if (cancelada)
+                        {
+                            MensajesABM.MsjValidacion("La Orden de Trabajo se canceló correctamente.", this.Text);
+                        }
+                        else
+                        {
+                            MensajesABM.MsjValidacion("Sólo se puede cancelar una Orden de Producción con estado Generada.", this.Text);
+                        }
+                    }
+                    catch (Entidades.Excepciones.BaseDeDatosException ex)
+                    {
+                        MensajesABM.MsjExcepcion(ex.Message, this.Text, MensajesABM.Operaciones.Eliminación);
+                    }
+                }
+                else { MensajesABM.MsjSinSeleccion("Orden de Producción", MensajesABM.Generos.Femenino, this.Text); }
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (estadoInterface == estadoUI.pestañaProduccion)
+            {
+                if (dgvOrdenesProduccion.SelectedRows.Count > 0)
+                {
+                    OrdenProduccion ordenP = (OrdenProduccion)dgvOrdenesProduccion.SelectedRows[0].DataBoundItem;
+                    bool eliminado = BLL.OrdenProduccionBLL.Eliminar(ordenP);
+
+                    if (eliminado)
+                    {
+                        MensajesABM.MsjConfirmaEliminar(this.Text, MensajesABM.Operaciones.Eliminación);
+                    }
+                    else
+                    {
+                        MensajesABM.MsjValidacion("Sólo se puede eliminar una Orden de Producción con estado Generada.", this.Text);
+                    }
+                }
+                else { MensajesABM.MsjSinSeleccion("Orden de Producción", MensajesABM.Generos.Femenino, this.Text); }
+            }
         }
         
         private void btnSalir_Click(object sender, EventArgs e)
@@ -333,21 +379,24 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
             else { MensajesABM.MsjSinSeleccion("Orden de Trabajo", MensajesABM.Generos.Femenino, this.Text); }
         }
 
-        private void btnModificarCierre_Click(object sender, EventArgs e)
-        {
-            if (dgvCierresParciales.SelectedRows.Count > 0)
-            {
-                gbAgregarCierreParcial.Enabled = true;
-            }
-            else { MensajesABM.MsjSinSeleccion("Cierre parcial", MensajesABM.Generos.Masculino, this.Text); }
-        }
-
         private void btnEliminarCierre_Click(object sender, EventArgs e)
         {
             if (dgvCierresParciales.SelectedRows.Count > 0)
             {
-                //Eliminar - gonzalo
-                LimpiarDatosCierre();
+                OrdenTrabajo ot = (OrdenTrabajo)dgvOrdenesTrabajo.SelectedRows[0].DataBoundItem;
+                if (ot.Estado.Codigo == (int)OrdenesTrabajoEnum.EstadoOrdenEnum.EnProceso)
+                {
+                    CierreParcialOrdenTrabajo cierre = (CierreParcialOrdenTrabajo)dgvCierresParciales.SelectedRows[0].DataBoundItem;
+                    cierre.OrdenTrabajo = (OrdenTrabajo)dgvOrdenesTrabajo.SelectedRows[0].DataBoundItem;
+                    
+                    BLL.OrdenTrabajoBLL.EliminarCierreParcial(cierre);
+
+                    LimpiarDatosCierre();
+                }
+                else
+                {
+                    MensajesABM.MsjValidacion("No se pueden eliminar cierres de órdenes de trabajo con estado distinto de En Proceso.", this.Text);
+                }                
             }
             else { MensajesABM.MsjSinSeleccion("Cierre parcial", MensajesABM.Generos.Masculino, this.Text); }
         }
@@ -369,19 +418,19 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
             if (validaciones.Count == 0)
             {
                 try
-                {
+                {                                            
                     CierreParcialOrdenTrabajo cierre = new CierreParcialOrdenTrabajo();
+                    cierre.Codigo = -1;
+                    cierre.OrdenTrabajo = (OrdenTrabajo)dgvOrdenesTrabajo.SelectedRows[0].DataBoundItem;
                     cierre.Empleado = listaEmpleados.Where(p => p.Codigo == long.Parse(cboEmpleadoCierre.GetSelectedValueInt().ToString())).Single();
                     cierre.Maquina = listaMaquinas.Where(p => p.Codigo == cboMaquinaCierre.GetSelectedValueInt()).Single();
                     cierre.Cantidad = Convert.ToInt32(nudCantidadCierre.Value);
-                    cierre.Codigo = -1;
                     cierre.Fecha = DateTime.Parse(dtpFechaCierre.GetFecha().ToString());
                     cierre.Fecha = dtpHoraCierre.Value;
                     cierre.OperacionesFallidas = Convert.ToInt32(nudOperacionesFallidas.Value);
                     cierre.Observaciones = txtObservacionesCierre.Text;
-                    cierre.OrdenTrabajo = (OrdenTrabajo)dgvOrdenesTrabajo.SelectedRows[0].DataBoundItem;
 
-                    BLL.OrdenTrabajoBLL.RegistrarCierreParcial(cierre, null);
+                    BLL.OrdenTrabajoBLL.RegistrarCierreParcial(cierre);                    
                 }
                 catch (Entidades.Excepciones.BaseDeDatosException ex)
                 {
@@ -424,7 +473,6 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                     break;
                 case estadoUI.pestañaCierreParcial:                    
                     btnAgregarCierre.Enabled = true;
-                    btnModificarCierre.Enabled = true;
                     btnEliminarCierre.Enabled = true;
                     gbAgregarCierreParcial.Enabled = false;
                     estadoInterface = estadoUI.pestañaCierreParcial;
@@ -936,6 +984,8 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
         } 
 
         #endregion Servicios  
+
+        
 
         
 
