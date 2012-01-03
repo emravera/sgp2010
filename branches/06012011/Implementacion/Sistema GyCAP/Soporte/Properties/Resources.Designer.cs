@@ -74,6 +74,13 @@ namespace GyCAP.UI.Soporte.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap calculator_large {
+            get {
+                object obj = ResourceManager.GetObject("calculator_large", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap CapacidadEmpleado1 {
             get {
                 object obj = ResourceManager.GetObject("CapacidadEmpleado1", resourceCulture);
