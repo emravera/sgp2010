@@ -134,5 +134,18 @@ namespace GyCAP.DAL
             }
             catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
         }
+
+        public static void Actualizar(Entidades.ConfiguracionesSistema parametro)
+        {
+            string sql = "UPDATE CONFIGURACIONES_SISTEMA SET conf_valor = @p0 WHERE conf_nombre LIKE @p1";
+            object[] valorParametros = { parametro.Valor, parametro.Nombre };
+            try
+            {
+                DB.executeNonQuery(sql, valorParametros, null);
+            }
+            catch (SqlException ex) { throw new Entidades.Excepciones.BaseDeDatosException(ex.Message); }
+        }
+
+
     }
 }

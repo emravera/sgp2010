@@ -14,9 +14,8 @@ namespace GyCAP.UI.Soporte
         private static frmParametrosSistema _frmParametrosSistema = null;
         private Data.dsParametrosSistema dsParametrosSistema = new GyCAP.Data.dsParametrosSistema();
         private DataView dvListaParametros;
-        private enum estadoUI { inicio, nuevo, consultar, modificar, };
-        private estadoUI estadoInterface;
-
+        private enum estadoUI { inicio, actualizar };
+        
         #region Inicio
 
         public frmParametrosSistema()
@@ -29,7 +28,7 @@ namespace GyCAP.UI.Soporte
             //Agregamos las columnas
             dgvLista.Columns.Add("CONF_CODIGO", "Código");
             dgvLista.Columns.Add("CONF_NOMBRE", "Nombre");
-            dgvLista.Columns.Add("CONF_VALOR", "Cliente");
+            dgvLista.Columns.Add("CONF_VALOR", "Valor");
 
             //Se setean los valores de las columnas 
             dgvLista.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -87,39 +86,36 @@ namespace GyCAP.UI.Soporte
             switch (estado)
             {
                 case estadoUI.inicio:
-                    bool hayDatos;
-
-                    if (dsParametrosSistema.CONFIGURACIONES_SISTEMA.Rows.Count == 0)
-                    {
-                        hayDatos = false;
-                    }
-                    else
-                    {
-                        hayDatos = true;
-                    }
+                    //Limpiamos el datatable antes de comenzar
+                    dsParametrosSistema.CONFIGURACIONES_SISTEMA.Clear();
 
                     if (this.Tag != null) { (this.Tag as ErrorProvider).Dispose(); }
 
-                    btnModificar.Enabled = hayDatos;
-                    btnEliminar.Enabled = hayDatos;
-                    btnConsultar.Enabled = hayDatos;
-                    btnNuevo.Enabled = true;
-                    estadoInterface = estadoUI.inicio;
+                    btnActualizar.Enabled = true;
                     tcParametros.SelectedTab = tpBuscar;
 
                     txtNombreBuscar.Text = "";
-                    
+                    txtValorBuscar.Text = "";                    
                     break;
-                case estadoUI.nuevo:
+
+                case estadoUI.actualizar:
+                    txtNombre.Enabled = false;
+                    btnActualizar.Enabled = false;
+                    tcParametros.SelectedTab = tpDatos;
                     break;
 
                 default:
                     break;
             }
         }
-
-
         #endregion
+        
+        #region Pestaña Busqueda
+        
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -138,10 +134,7 @@ namespace GyCAP.UI.Soporte
                 if (dsParametrosSistema.CONFIGURACIONES_SISTEMA.Rows.Count == 0)
                 {
                     Entidades.Mensajes.MensajesABM.MsjBuscarNoEncontrado("Parámetros del Sistema", this.Text);
-                }
-
-                //Seteamos el estado de la interfaz           
-                SetInterface(estadoUI.inicio);
+                }               
             }
             catch (Entidades.Excepciones.BaseDeDatosException ex)
             {
@@ -150,13 +143,52 @@ namespace GyCAP.UI.Soporte
             }
         }
 
-        #region Pestaña Busqueda
-
-
-
-
         #endregion
 
+        #region Pestaña Datos
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.inicio);
+        }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            SetInterface(estadoUI.actualizar);
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            //Se revisa y realiza la validacion de los formularios
+            if (Sistema.Validaciones.FormValidator.ValidarFormulario(this))
+            {
+                //Creamos el objeto con los parametros necesarios
+                Entidades.ConfiguracionesSistema parametro = new GyCAP.Entidades.ConfiguracionesSistema();
+
+                parametro.Nombre = txtNombre.Text;
+                parametro.Valor = Convert.ToInt32(txtValor.Text);
+
+                //Actualizamos el valor del parametro en la base de datos
+                BLL.ConfiguracionSistemaBLL.Actualizar(parametro);
+
+                //Avisamos que se guardo correctamente
+                Entidades.Mensajes.MensajesABM.MsjConfirmaGuardar("Parámetro del Sistema", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
+
+                //Seteamos la interface al inicio
+                SetInterface(estadoUI.inicio);
+
+            }
+        }
+
+        private void dgvLista_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            //Seteamos los valores de la grilla cuando se selecciona
+            int codigoParametro = Convert.ToInt32(dvListaParametros[e.RowIndex]["conf_codigo"]);
+            txtNombre.Text = dsParametrosSistema.CONFIGURACIONES_SISTEMA.FindByCONF_CODIGO(codigoParametro).CONF_NOMBRE;
+            txtValor.Text = dsParametrosSistema.CONFIGURACIONES_SISTEMA.FindByCONF_CODIGO(codigoParametro).CONF_VALOR;
+        }
+
+        #endregion  
 
     }
 }

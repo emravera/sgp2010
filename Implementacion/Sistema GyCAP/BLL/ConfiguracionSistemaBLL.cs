@@ -34,5 +34,10 @@ namespace GyCAP.BLL
             DAL.ConfiguracionSistemaDAL.ObtenerTodos(nombre, valor, dtParametros);
         }
 
+        public static void Actualizar(Entidades.ConfiguracionesSistema parametro)
+        {
+            DAL.ConfiguracionSistemaDAL.Actualizar(parametro);
+        }
+
     }
 }

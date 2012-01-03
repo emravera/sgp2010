@@ -33,32 +33,29 @@
             this.gbListadoBusqueda = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.gbBusqueda = new System.Windows.Forms.GroupBox();
+            this.txtValorBuscar = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.txtNombreBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tcParametros = new System.Windows.Forms.TabControl();
             this.tpDatos = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.gbGuardarCancelar = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.gbDatos = new System.Windows.Forms.GroupBox();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.tsMenu = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnNuevo = new System.Windows.Forms.ToolStripButton();
-            this.btnConsultar = new System.Windows.Forms.ToolStripButton();
-            this.btnModificar = new System.Windows.Forms.ToolStripButton();
-            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
-            this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.txtValor = new System.Windows.Forms.TextBox();
             this.lblValor = new System.Windows.Forms.Label();
-            this.txtValorBuscar = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.tsMenu = new System.Windows.Forms.ToolStrip();
+            this.btnActualizar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSalir = new System.Windows.Forms.ToolStripButton();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tpBuscar.SuspendLayout();
             this.gbListadoBusqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
@@ -66,12 +63,12 @@
             this.tcParametros.SuspendLayout();
             this.tpDatos.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbGuardarCancelar.SuspendLayout();
             this.gbDatos.SuspendLayout();
             this.tsMenu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tpBuscar
@@ -113,6 +110,7 @@
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLista.Size = new System.Drawing.Size(542, 197);
             this.dgvLista.TabIndex = 0;
+            this.dgvLista.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_RowEnter);
             // 
             // gbBusqueda
             // 
@@ -129,6 +127,38 @@
             this.gbBusqueda.TabIndex = 0;
             this.gbBusqueda.TabStop = false;
             this.gbBusqueda.Text = "Criterios de búsqueda";
+            // 
+            // txtValorBuscar
+            // 
+            this.txtValorBuscar.CausesValidation = false;
+            this.txtValorBuscar.Location = new System.Drawing.Point(291, 23);
+            this.txtValorBuscar.MaxLength = 80;
+            this.txtValorBuscar.Name = "txtValorBuscar";
+            this.txtValorBuscar.Size = new System.Drawing.Size(149, 20);
+            this.txtValorBuscar.TabIndex = 7;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(251, 26);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(34, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Valor:";
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBuscar.Image = global::GyCAP.UI.Soporte.Properties.Resources.lupa_20;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(460, 19);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
+            this.btnBuscar.TabIndex = 5;
+            this.btnBuscar.Text = "&Buscar";
+            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // txtNombreBuscar
             // 
@@ -199,122 +229,6 @@
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             // 
-            // gbGuardarCancelar
-            // 
-            this.gbGuardarCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbGuardarCancelar.Controls.Add(this.btnVolver);
-            this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
-            this.gbGuardarCancelar.Location = new System.Drawing.Point(177, 235);
-            this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
-            this.gbGuardarCancelar.Name = "gbGuardarCancelar";
-            this.gbGuardarCancelar.Size = new System.Drawing.Size(386, 57);
-            this.gbGuardarCancelar.TabIndex = 1;
-            this.gbGuardarCancelar.TabStop = false;
-            // 
-            // btnVolver
-            // 
-            this.btnVolver.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnVolver.Location = new System.Drawing.Point(306, 19);
-            this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(64, 26);
-            this.btnVolver.TabIndex = 11;
-            this.btnVolver.Text = "&Volver";
-            this.btnVolver.UseVisualStyleBackColor = true;
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnGuardar.Location = new System.Drawing.Point(236, 19);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(64, 26);
-            this.btnGuardar.TabIndex = 10;
-            this.btnGuardar.Text = "&Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            // 
-            // gbDatos
-            // 
-            this.gbDatos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbDatos.Controls.Add(this.txtValor);
-            this.gbDatos.Controls.Add(this.lblValor);
-            this.gbDatos.Controls.Add(this.txtNombre);
-            this.gbDatos.Controls.Add(this.label3);
-            this.gbDatos.Location = new System.Drawing.Point(177, 3);
-            this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
-            this.gbDatos.Name = "gbDatos";
-            this.gbDatos.Size = new System.Drawing.Size(386, 230);
-            this.gbDatos.TabIndex = 0;
-            this.gbDatos.TabStop = false;
-            this.gbDatos.Text = "Datos del Parámetro del Sistema";
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(103, 35);
-            this.txtNombre.MaxLength = 80;
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(179, 20);
-            this.txtNombre.TabIndex = 7;
-            // 
-            // tsMenu
-            // 
-            this.tsMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.tsMenu.BackColor = System.Drawing.Color.Silver;
-            this.tsMenu.Dock = System.Windows.Forms.DockStyle.None;
-            this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNuevo,
-            this.btnConsultar,
-            this.btnModificar,
-            this.btnEliminar,
-            this.toolStripSeparator1,
-            this.btnSalir});
-            this.tsMenu.Location = new System.Drawing.Point(2, 2);
-            this.tsMenu.Name = "tsMenu";
-            this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(574, 50);
-            this.tsMenu.TabIndex = 7;
-            this.tsMenu.Text = "toolStrip1";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.tcParametros, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(578, 360);
-            this.tableLayoutPanel1.TabIndex = 11;
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBuscar.Image = global::GyCAP.UI.Soporte.Properties.Resources.lupa_20;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(460, 19);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 26);
-            this.btnBuscar.TabIndex = 5;
-            this.btnBuscar.Text = "&Buscar";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
             // pictureBox2
             // 
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
@@ -337,55 +251,57 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // btnNuevo
+            // gbGuardarCancelar
             // 
-            this.btnNuevo.Image = global::GyCAP.UI.Soporte.Properties.Resources.New_25;
-            this.btnNuevo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(42, 47);
-            this.btnNuevo.Text = "&Nuevo";
-            this.btnNuevo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.gbGuardarCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbGuardarCancelar.Controls.Add(this.btnVolver);
+            this.gbGuardarCancelar.Controls.Add(this.btnGuardar);
+            this.gbGuardarCancelar.Location = new System.Drawing.Point(177, 235);
+            this.gbGuardarCancelar.Margin = new System.Windows.Forms.Padding(1);
+            this.gbGuardarCancelar.Name = "gbGuardarCancelar";
+            this.gbGuardarCancelar.Size = new System.Drawing.Size(386, 57);
+            this.gbGuardarCancelar.TabIndex = 1;
+            this.gbGuardarCancelar.TabStop = false;
             // 
-            // btnConsultar
+            // btnVolver
             // 
-            this.btnConsultar.Image = global::GyCAP.UI.Soporte.Properties.Resources.Find_25;
-            this.btnConsultar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnConsultar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(57, 47);
-            this.btnConsultar.Text = "&Consultar";
-            this.btnConsultar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnVolver.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnVolver.Location = new System.Drawing.Point(306, 19);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(64, 26);
+            this.btnVolver.TabIndex = 11;
+            this.btnVolver.Text = "&Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
-            // btnModificar
+            // btnGuardar
             // 
-            this.btnModificar.Image = global::GyCAP.UI.Soporte.Properties.Resources.Text_Editor_25;
-            this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(54, 47);
-            this.btnModificar.Text = "&Modificar";
-            this.btnModificar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnGuardar.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnGuardar.Location = new System.Drawing.Point(236, 19);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(64, 26);
+            this.btnGuardar.TabIndex = 10;
+            this.btnGuardar.Text = "&Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // btnEliminar
+            // gbDatos
             // 
-            this.btnEliminar.Image = global::GyCAP.UI.Soporte.Properties.Resources.Delete_25;
-            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(47, 47);
-            this.btnEliminar.Text = "&Eliminar";
-            this.btnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Image = global::GyCAP.UI.Soporte.Properties.Resources.Salir_25;
-            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(31, 47);
-            this.btnSalir.Text = "&Salir";
-            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.gbDatos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbDatos.Controls.Add(this.txtValor);
+            this.gbDatos.Controls.Add(this.lblValor);
+            this.gbDatos.Controls.Add(this.txtNombre);
+            this.gbDatos.Controls.Add(this.label3);
+            this.gbDatos.Location = new System.Drawing.Point(177, 3);
+            this.gbDatos.Margin = new System.Windows.Forms.Padding(1);
+            this.gbDatos.Name = "gbDatos";
+            this.gbDatos.Size = new System.Drawing.Size(386, 230);
+            this.gbDatos.TabIndex = 0;
+            this.gbDatos.TabStop = false;
+            this.gbDatos.Text = "Datos del Parámetro del Sistema";
             // 
             // txtValor
             // 
@@ -404,23 +320,76 @@
             this.lblValor.TabIndex = 8;
             this.lblValor.Text = "Valor:";
             // 
-            // txtValorBuscar
+            // txtNombre
             // 
-            this.txtValorBuscar.CausesValidation = false;
-            this.txtValorBuscar.Location = new System.Drawing.Point(291, 23);
-            this.txtValorBuscar.MaxLength = 80;
-            this.txtValorBuscar.Name = "txtValorBuscar";
-            this.txtValorBuscar.Size = new System.Drawing.Size(149, 20);
-            this.txtValorBuscar.TabIndex = 7;
+            this.txtNombre.Location = new System.Drawing.Point(103, 35);
+            this.txtNombre.MaxLength = 80;
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(179, 20);
+            this.txtNombre.TabIndex = 7;
             // 
-            // label2
+            // tsMenu
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(251, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Valor:";
+            this.tsMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tsMenu.BackColor = System.Drawing.Color.Silver;
+            this.tsMenu.Dock = System.Windows.Forms.DockStyle.None;
+            this.tsMenu.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnActualizar,
+            this.toolStripSeparator1,
+            this.btnSalir});
+            this.tsMenu.Location = new System.Drawing.Point(2, 2);
+            this.tsMenu.Name = "tsMenu";
+            this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
+            this.tsMenu.Size = new System.Drawing.Size(574, 50);
+            this.tsMenu.TabIndex = 7;
+            this.tsMenu.Text = "toolStrip1";
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Image = global::GyCAP.UI.Soporte.Properties.Resources.calculator_large;
+            this.btnActualizar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnActualizar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(58, 47);
+            this.btnActualizar.Text = "&Actualizar";
+            this.btnActualizar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Image = global::GyCAP.UI.Soporte.Properties.Resources.Salir_25;
+            this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(31, 47);
+            this.btnSalir.Text = "&Salir";
+            this.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.tcParametros, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(578, 360);
+            this.tableLayoutPanel1.TabIndex = 11;
             // 
             // frmParametrosSistema
             // 
@@ -438,6 +407,8 @@
             this.tcParametros.ResumeLayout(false);
             this.tpDatos.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.gbGuardarCancelar.ResumeLayout(false);
             this.gbDatos.ResumeLayout(false);
             this.gbDatos.PerformLayout();
@@ -445,8 +416,6 @@
             this.tsMenu.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -470,11 +439,8 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.GroupBox gbDatos;
         private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.ToolStripButton btnNuevo;
         private System.Windows.Forms.ToolStrip tsMenu;
-        private System.Windows.Forms.ToolStripButton btnConsultar;
-        private System.Windows.Forms.ToolStripButton btnModificar;
-        private System.Windows.Forms.ToolStripButton btnEliminar;
+        private System.Windows.Forms.ToolStripButton btnActualizar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSalir;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

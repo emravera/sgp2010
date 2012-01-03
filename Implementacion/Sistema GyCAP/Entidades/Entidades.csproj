@@ -62,6 +62,7 @@
     <Compile Include="Cocina.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="CompuestoParte.cs" />
+    <Compile Include="ConfiguracionesSistema.cs" />
     <Compile Include="ContenidoUbicacionStock.cs" />
     <Compile Include="DemandaAnual.cs" />
     <Compile Include="Designacion.cs" />
