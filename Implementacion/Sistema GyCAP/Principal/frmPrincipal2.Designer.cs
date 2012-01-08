@@ -102,11 +102,15 @@
             this.permisosDeAccesoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.soporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.localidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.provinciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tiposDeUnidadDeMedidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.unidadDeMedidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tiposDeUnidadDeMedidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.opcionesSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.parámetrosSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.actualizarStockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventarioABCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -126,7 +130,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.parámetrosSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fabricanteMaquinaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -359,6 +363,7 @@
             this.producciónSemanalRealToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.producciónSemanalRealToolStripMenuItem.Tag = "0";
             this.producciónSemanalRealToolStripMenuItem.Text = "Producción semanal real";
+            this.producciónSemanalRealToolStripMenuItem.Visible = false;
             // 
             // variaciónDeStockToolStripMenuItem
             // 
@@ -379,6 +384,7 @@
             this.listadoDeClientesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.listadoDeClientesToolStripMenuItem.Tag = "0";
             this.listadoDeClientesToolStripMenuItem.Text = "Listado de clientes";
+            this.listadoDeClientesToolStripMenuItem.Visible = false;
             // 
             // listadoDeEmpleadosToolStripMenuItem
             // 
@@ -386,6 +392,7 @@
             this.listadoDeEmpleadosToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.listadoDeEmpleadosToolStripMenuItem.Tag = "0";
             this.listadoDeEmpleadosToolStripMenuItem.Text = "Listado de empleados";
+            this.listadoDeEmpleadosToolStripMenuItem.Visible = false;
             // 
             // listadoDeMateriasPrimasToolStripMenuItem
             // 
@@ -393,6 +400,7 @@
             this.listadoDeMateriasPrimasToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.listadoDeMateriasPrimasToolStripMenuItem.Tag = "0";
             this.listadoDeMateriasPrimasToolStripMenuItem.Text = "Listado de materias primas";
+            this.listadoDeMateriasPrimasToolStripMenuItem.Visible = false;
             // 
             // listadoDePartesToolStripMenuItem
             // 
@@ -400,6 +408,7 @@
             this.listadoDePartesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.listadoDePartesToolStripMenuItem.Tag = "0";
             this.listadoDePartesToolStripMenuItem.Text = "Listado de partes";
+            this.listadoDePartesToolStripMenuItem.Visible = false;
             // 
             // listadoDeProveedoresToolStripMenuItem
             // 
@@ -407,6 +416,7 @@
             this.listadoDeProveedoresToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.listadoDeProveedoresToolStripMenuItem.Tag = "0";
             this.listadoDeProveedoresToolStripMenuItem.Text = "Listado de proveedores";
+            this.listadoDeProveedoresToolStripMenuItem.Visible = false;
             // 
             // mantenimeintoToolStripMenuItem
             // 
@@ -614,7 +624,8 @@
             this.capacidadDeEmpleadoToolStripMenuItem,
             this.empleadosToolStripMenuItem,
             this.toolStripSeparator9,
-            this.maquinasToolStripMenuItem});
+            this.maquinasToolStripMenuItem,
+            this.fabricanteMaquinaToolStripMenuItem});
             this.recursosDeFabricaciónToolStripMenuItem.Name = "recursosDeFabricaciónToolStripMenuItem";
             this.recursosDeFabricaciónToolStripMenuItem.Size = new System.Drawing.Size(133, 17);
             this.recursosDeFabricaciónToolStripMenuItem.Tag = "0";
@@ -732,10 +743,13 @@
             // 
             this.soporteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.colorToolStripMenuItem,
+            this.toolStripSeparator13,
             this.localidadToolStripMenuItem,
             this.provinciaToolStripMenuItem,
-            this.tiposDeUnidadDeMedidaToolStripMenuItem,
+            this.toolStripSeparator14,
             this.unidadDeMedidaToolStripMenuItem,
+            this.tiposDeUnidadDeMedidaToolStripMenuItem,
+            this.toolStripSeparator15,
             this.opcionesSistemaToolStripMenuItem,
             this.parámetrosSistemaToolStripMenuItem});
             this.soporteToolStripMenuItem.Name = "soporteToolStripMenuItem";
@@ -750,6 +764,11 @@
             this.colorToolStripMenuItem.Tag = "40";
             this.colorToolStripMenuItem.Text = "Color";
             this.colorToolStripMenuItem.Click += new System.EventHandler(this.colorToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            this.toolStripSeparator13.Size = new System.Drawing.Size(209, 6);
             // 
             // localidadToolStripMenuItem
             // 
@@ -767,13 +786,10 @@
             this.provinciaToolStripMenuItem.Text = "Provincia";
             this.provinciaToolStripMenuItem.Click += new System.EventHandler(this.provinciaToolStripMenuItem_Click);
             // 
-            // tiposDeUnidadDeMedidaToolStripMenuItem
+            // toolStripSeparator14
             // 
-            this.tiposDeUnidadDeMedidaToolStripMenuItem.Name = "tiposDeUnidadDeMedidaToolStripMenuItem";
-            this.tiposDeUnidadDeMedidaToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.tiposDeUnidadDeMedidaToolStripMenuItem.Tag = "43";
-            this.tiposDeUnidadDeMedidaToolStripMenuItem.Text = "Tipos de unidad de medida";
-            this.tiposDeUnidadDeMedidaToolStripMenuItem.Click += new System.EventHandler(this.tiposDeUnidadDeMedidaToolStripMenuItem_Click);
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            this.toolStripSeparator14.Size = new System.Drawing.Size(209, 6);
             // 
             // unidadDeMedidaToolStripMenuItem
             // 
@@ -783,13 +799,35 @@
             this.unidadDeMedidaToolStripMenuItem.Text = "Unidad de medida";
             this.unidadDeMedidaToolStripMenuItem.Click += new System.EventHandler(this.unidadDeMedidaToolStripMenuItem_Click);
             // 
+            // tiposDeUnidadDeMedidaToolStripMenuItem
+            // 
+            this.tiposDeUnidadDeMedidaToolStripMenuItem.Name = "tiposDeUnidadDeMedidaToolStripMenuItem";
+            this.tiposDeUnidadDeMedidaToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.tiposDeUnidadDeMedidaToolStripMenuItem.Tag = "43";
+            this.tiposDeUnidadDeMedidaToolStripMenuItem.Text = "Tipos de unidad de medida";
+            this.tiposDeUnidadDeMedidaToolStripMenuItem.Click += new System.EventHandler(this.tiposDeUnidadDeMedidaToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            this.toolStripSeparator15.Size = new System.Drawing.Size(209, 6);
+            // 
             // opcionesSistemaToolStripMenuItem
             // 
             this.opcionesSistemaToolStripMenuItem.Name = "opcionesSistemaToolStripMenuItem";
             this.opcionesSistemaToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.opcionesSistemaToolStripMenuItem.Tag = "69";
             this.opcionesSistemaToolStripMenuItem.Text = "Opciones de sistema";
+            this.opcionesSistemaToolStripMenuItem.Visible = false;
             this.opcionesSistemaToolStripMenuItem.Click += new System.EventHandler(this.opcionesSistemaToolStripMenuItem_Click);
+            // 
+            // parámetrosSistemaToolStripMenuItem
+            // 
+            this.parámetrosSistemaToolStripMenuItem.Name = "parámetrosSistemaToolStripMenuItem";
+            this.parámetrosSistemaToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.parámetrosSistemaToolStripMenuItem.Tag = "79";
+            this.parámetrosSistemaToolStripMenuItem.Text = "Parámetros del Sistema";
+            this.parámetrosSistemaToolStripMenuItem.Click += new System.EventHandler(this.parametrosSistemaToolStripMenuItem_Click);
             // 
             // stockToolStripMenuItem
             // 
@@ -877,6 +915,7 @@
             this.helpMenu.Size = new System.Drawing.Size(50, 17);
             this.helpMenu.Tag = "0";
             this.helpMenu.Text = "Ay&uda";
+            this.helpMenu.Visible = false;
             // 
             // contentsToolStripMenuItem
             // 
@@ -940,13 +979,13 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(40, 17);
             this.toolStripStatusLabel.Text = "Estado";
             // 
-            // parámetrosSistemaToolStripMenuItem
+            // fabricanteMaquinaToolStripMenuItem
             // 
-            this.parámetrosSistemaToolStripMenuItem.Name = "parámetrosSistemaToolStripMenuItem";
-            this.parámetrosSistemaToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.parámetrosSistemaToolStripMenuItem.Tag = "79";
-            this.parámetrosSistemaToolStripMenuItem.Text = "Parámetros del Sistema";
-            this.parámetrosSistemaToolStripMenuItem.Click += new System.EventHandler(this.parametrosSistemaToolStripMenuItem_Click);
+            this.fabricanteMaquinaToolStripMenuItem.Name = "fabricanteMaquinaToolStripMenuItem";
+            this.fabricanteMaquinaToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.fabricanteMaquinaToolStripMenuItem.Tag = "80";
+            this.fabricanteMaquinaToolStripMenuItem.Text = "Fabricante Máquina";
+            this.fabricanteMaquinaToolStripMenuItem.Click += new System.EventHandler(this.fabricanteMaquinaToolStripMenuItem_Click);
             // 
             // frmPrincipal2
             // 
@@ -1072,6 +1111,10 @@
         private System.Windows.Forms.ToolStripMenuItem tipoDeMantenimientoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tipoRepuestosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem parámetrosSistemaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
+        private System.Windows.Forms.ToolStripMenuItem fabricanteMaquinaToolStripMenuItem;
     }
 }
 

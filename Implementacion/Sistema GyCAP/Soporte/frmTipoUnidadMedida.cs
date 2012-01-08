@@ -178,6 +178,7 @@ namespace GyCAP.UI.Soporte
                     }
                     catch (Entidades.Excepciones.BaseDeDatosException ex)
                     {
+                        dsUnidadMedida.TIPOS_UNIDADES_MEDIDA.RejectChanges();
                         Entidades.Mensajes.MensajesABM.MsjExcepcion(ex.Message, this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Guardado);
                     }
                 }
@@ -270,11 +271,6 @@ namespace GyCAP.UI.Soporte
             {
                 txtNombre.Focus();
             }
-        }
-
-        private void txtNombre_Enter(object sender, EventArgs e)
-        {
-            txtNombre.SelectAll();
         }
 
         #endregion
