@@ -59,21 +59,27 @@ namespace GyCAP.UI.Principal
                 u.Login = txtLogin.Text.Trim();
                 u.Password = txtPassword.Text.Trim();
 
-                if (BLL.UsuarioBLL.validarUsuario(u))
+                try
                 {
-                    //Logueo CORRECTO
-                    codUsuario = BLL.UsuarioBLL.GetCodigoUsuario(u);
-                    frmPrincipal2 frm = new frmPrincipal2(this, codUsuario);
-                    this.Hide();
-                    frm.Show();
+                    if (BLL.UsuarioBLL.validarUsuario(u))
+                    {
+                        //Logueo CORRECTO
+                        codUsuario = BLL.UsuarioBLL.GetCodigoUsuario(u);
+                        frmPrincipal2 frm = new frmPrincipal2(this, codUsuario);
+                        this.Hide();
+                        frm.Show();
+                    }
+                    else
+                    {
+                        //Logueo INCORRECTO
+                        MessageBox.Show("Usuario o contraseña incorrecta.", "Login");
+                        return;
+                    }
                 }
-                else
+                catch (Entidades.Excepciones.BaseDeDatosException)
                 {
-                    //Logueo INCORRECTO
-                    MessageBox.Show("Usuario o contraseña incorrecta.", "Login");
-                    return;
+                    Entidades.Mensajes.MensajesABM.MsjExcepcion("Ocurrió un error al comunicarse con la base de datos.", this.Text, GyCAP.Entidades.Mensajes.MensajesABM.Operaciones.Inicio);                    
                 }
-
             }
         }
 
