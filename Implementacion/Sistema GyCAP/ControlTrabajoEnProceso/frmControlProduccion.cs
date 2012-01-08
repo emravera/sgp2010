@@ -168,6 +168,7 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                             }                            
 
                             dgvOrdenesProduccion.Refresh();
+                            dgvOrdenesTrabajo.Refresh();
 
                             MensajesABM.MsjValidacion("La Orden de Trabajo se finalizó correctamente.", this.Text);
                         }
@@ -194,6 +195,8 @@ namespace GyCAP.UI.ControlTrabajoEnProceso
                     if (finalizada)
                     {
                         MensajesABM.MsjValidacion("La Orden de Producción se finalizó correctamente.", this.Text);
+                        dgvOrdenesProduccion.Refresh();
+                        dgvOrdenesTrabajo.Refresh();
                     }
                     else
                     {

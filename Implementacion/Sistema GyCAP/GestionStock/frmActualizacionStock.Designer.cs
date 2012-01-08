@@ -539,6 +539,11 @@
             0,
             0,
             0});
+            this.nudRealActual.Minimum = new decimal(new int[] {
+            100000000,
+            0,
+            0,
+            -2147483648});
             this.nudRealActual.Name = "nudRealActual";
             this.nudRealActual.ReadOnly = true;
             this.nudRealActual.Size = new System.Drawing.Size(133, 21);

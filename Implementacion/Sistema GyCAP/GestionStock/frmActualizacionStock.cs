@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using GyCAP.Entidades.Mensajes;
 using GyCAP.Entidades;
 using GyCAP.Entidades.Enumeraciones;
+using GyCAP.UI.Sistema.Validaciones;
 
 
 namespace GyCAP.UI.GestionStock
@@ -308,7 +309,9 @@ namespace GyCAP.UI.GestionStock
             cboEstadoBuscar.SetDatos(nombres, valores, "--TODOS--", true);            
             
             dvContenidoBuscar = new DataView(dsStock.CONTENIDO_UBICACION_STOCK);            
-            cboContenidoBuscar.SetDatos(dvContenidoBuscar, "CON_CODIGO", "CON_NOMBRE", "--TODOS--", true);            
+            cboContenidoBuscar.SetDatos(dvContenidoBuscar, "CON_CODIGO", "CON_NOMBRE", "--TODOS--", true);
+
+            nudCantidadNueva.Tag = new NumericLimitValues("0", NumericLimitValues.IncludeExclude.Inclusivo, "1000000", NumericLimitValues.IncludeExclude.Inclusivo);
 
             SetInterface(estadoUI.inicio);
         }        

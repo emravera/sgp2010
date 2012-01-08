@@ -366,14 +366,24 @@
             65536});
             this.nudCantidadReal.Location = new System.Drawing.Point(406, 24);
             this.nudCantidadReal.Maximum = new decimal(new int[] {
-            1000000,
+            10000000,
             0,
             0,
             0});
+            this.nudCantidadReal.Minimum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            -2147483648});
             this.nudCantidadReal.Name = "nudCantidadReal";
             this.nudCantidadReal.Size = new System.Drawing.Size(185, 21);
             this.nudCantidadReal.TabIndex = 12;
             this.nudCantidadReal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nudCantidadReal.Value = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             this.nudCantidadReal.Enter += new System.EventHandler(this.control_Enter);
             // 
             // cboPadre
