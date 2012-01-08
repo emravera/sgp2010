@@ -1,6 +1,6 @@
-﻿namespace GyCAP.UI.Soporte
+﻿namespace GyCAP.UI.RecursosFabricacion
 {
-    partial class frmTipoUnidadMedida
+    partial class frmFabricanteMaquina
     {
         /// <summary>
         /// Required designer variable.
@@ -35,10 +35,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.gbImagenes = new System.Windows.Forms.GroupBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -49,10 +45,6 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tsMenu.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.gbImagenes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -66,13 +58,13 @@
             this.tableLayoutPanel1.Controls.Add(this.tsMenu, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(628, 476);
-            this.tableLayoutPanel1.TabIndex = 8;
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(488, 449);
+            this.tableLayoutPanel1.TabIndex = 9;
             // 
             // tsMenu
             // 
@@ -91,13 +83,13 @@
             this.tsMenu.Location = new System.Drawing.Point(2, 2);
             this.tsMenu.Name = "tsMenu";
             this.tsMenu.Padding = new System.Windows.Forms.Padding(0);
-            this.tsMenu.Size = new System.Drawing.Size(624, 50);
+            this.tsMenu.Size = new System.Drawing.Size(484, 50);
             this.tsMenu.TabIndex = 7;
             this.tsMenu.Text = "toolStrip1";
             // 
             // btnModificar
             // 
-            this.btnModificar.Image = global::GyCAP.UI.Soporte.Properties.Resources.Text_Editor_25;
+            this.btnModificar.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Text_Editor_25;
             this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnModificar.Name = "btnModificar";
@@ -108,7 +100,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Image = global::GyCAP.UI.Soporte.Properties.Resources.Delete_25;
+            this.btnEliminar.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Delete_25;
             this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
@@ -124,7 +116,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Image = global::GyCAP.UI.Soporte.Properties.Resources.Salir_25;
+            this.btnSalir.Image = global::GyCAP.UI.RecursosFabricacion.Properties.Resources.Salir_25;
             this.btnSalir.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSalir.Name = "btnSalir";
@@ -135,71 +127,24 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.gbImagenes);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(5, 57);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(618, 414);
+            this.panel1.Size = new System.Drawing.Size(478, 387);
             this.panel1.TabIndex = 8;
-            // 
-            // gbImagenes
-            // 
-            this.gbImagenes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.gbImagenes.Controls.Add(this.pictureBox2);
-            this.gbImagenes.Controls.Add(this.pictureBox1);
-            this.gbImagenes.Controls.Add(this.pictureBox3);
-            this.gbImagenes.Location = new System.Drawing.Point(4, 0);
-            this.gbImagenes.Name = "gbImagenes";
-            this.gbImagenes.Size = new System.Drawing.Size(145, 407);
-            this.gbImagenes.TabIndex = 4;
-            this.gbImagenes.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::GyCAP.UI.Soporte.Properties.Resources.TipoMedida2;
-            this.pictureBox2.InitialImage = global::GyCAP.UI.Soporte.Properties.Resources.TipoMedida1;
-            this.pictureBox2.Location = new System.Drawing.Point(8, 138);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(120, 124);
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::GyCAP.UI.Soporte.Properties.Resources.TipoMedida1;
-            this.pictureBox1.InitialImage = global::GyCAP.UI.Soporte.Properties.Resources.TipoMedida1;
-            this.pictureBox1.Location = new System.Drawing.Point(20, 13);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(102, 131);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::GyCAP.UI.Soporte.Properties.Resources.TipoMedida3;
-            this.pictureBox3.InitialImage = global::GyCAP.UI.Soporte.Properties.Resources.TipoMedida1;
-            this.pictureBox3.Location = new System.Drawing.Point(10, 266);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(121, 131);
-            this.pictureBox3.TabIndex = 2;
-            this.pictureBox3.TabStop = false;
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.dgvLista);
-            this.groupBox2.Location = new System.Drawing.Point(155, 65);
+            this.groupBox2.Location = new System.Drawing.Point(7, 78);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(9);
-            this.groupBox2.Size = new System.Drawing.Size(460, 346);
+            this.groupBox2.Size = new System.Drawing.Size(462, 295);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Listado de Tipo de Unidad de Medida";
+            this.groupBox2.Text = "Listado de Fabricantes";
             // 
             // dgvLista
             // 
@@ -215,23 +160,21 @@
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(442, 314);
+            this.dgvLista.Size = new System.Drawing.Size(444, 263);
             this.dgvLista.TabIndex = 0;
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btnCancelar);
             this.groupBox1.Controls.Add(this.btnGuardar);
             this.groupBox1.Controls.Add(this.txtNombre);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(155, 0);
+            this.groupBox1.Location = new System.Drawing.Point(7, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(460, 59);
+            this.groupBox1.Size = new System.Drawing.Size(462, 59);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Datos del Tipo de Unidad de Medida";
+            this.groupBox1.Text = "Datos del Fabricante";
             // 
             // btnCancelar
             // 
@@ -256,10 +199,10 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(68, 22);
+            this.txtNombre.Location = new System.Drawing.Point(90, 22);
             this.txtNombre.MaxLength = 80;
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(196, 21);
+            this.txtNombre.Size = new System.Drawing.Size(213, 21);
             this.txtNombre.TabIndex = 1;
             // 
             // label1
@@ -267,34 +210,28 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 13);
+            this.label1.Size = new System.Drawing.Size(71, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Nombre:";
+            this.label1.Text = "Razón Social:";
             // 
-            // frmTipoUnidadMedida
+            // frmFabricanteMaquina
             // 
-            this.AcceptButton = this.btnGuardar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 482);
+            this.ClientSize = new System.Drawing.Size(488, 449);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "frmTipoUnidadMedida";
-            this.Padding = new System.Windows.Forms.Padding(3);
+            this.MaximizeBox = false;
+            this.Name = "frmFabricanteMaquina";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Tipos de Unidades de Medidas";
-            this.Activated += new System.EventHandler(this.frmTipoUnidadMedida_Activated);
+            this.Text = "Fabricante Máquina";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.gbImagenes.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -319,12 +256,5 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox gbImagenes;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox2;
-
-
-
     }
 }

@@ -384,6 +384,12 @@ namespace GyCAP.UI.Principal
             GyCAP.UI.RecursosFabricacion.frmTurnoTrabajo.Instancia.Show();
         }
 
+        private void fabricanteMaquinaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GyCAP.UI.RecursosFabricacion.frmFabricanteMaquina.Instancia.MdiParent = this;
+            GyCAP.UI.RecursosFabricacion.frmFabricanteMaquina.Instancia.Show();
+        }
+
         #endregion
 
         #region Menú Soporte
@@ -519,6 +525,8 @@ namespace GyCAP.UI.Principal
         }
 
         #endregion
+
+        
 
         
                 

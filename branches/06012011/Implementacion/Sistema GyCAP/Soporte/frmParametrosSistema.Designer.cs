@@ -398,6 +398,8 @@
             this.ClientSize = new System.Drawing.Size(578, 360);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmParametrosSistema";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Parámetros del Sistema";
             this.tpBuscar.ResumeLayout(false);
             this.gbListadoBusqueda.ResumeLayout(false);
