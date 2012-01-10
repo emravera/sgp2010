@@ -18,7 +18,7 @@ namespace Principal
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
                         
-            DBBLL.SetTipoConexion(DBBLL.tipoLocal);
+            DBBLL.SetTipoConexion(DBBLL.tipoFabrica);
             
             Application.Run(new frmLogin());
             //Application.Run(new frmPrincipal());

@@ -15,6 +15,9 @@ namespace GyCAP.DAL
 {
     public class DB
     {
+        //Devuelve el nombre de la PC
+        static String nombrePC = System.Environment.MachineName;
+        
         private static string conexionGonzaloN = "Data Source=NGA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionGonzaloD = "Data Source=DGA\\GONZALO;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionEmanuel = "Data Source=HP-EMA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True";
@@ -25,6 +28,7 @@ namespace GyCAP.DAL
         private static string conexionRemota = "Data Source=proyecto.dyndns.org,2555\\Proyecto;Initial Catalog=Proyecto;User ID=sa;Password=spg2010";
         private static string conexionSabrina = "Data Source=SABRINA-PC;Initial Catalog=Proyecto;Integrated Security=True";
         private static string conexionInterna = "Data Source=Proyecto,2555;Initial Catalog=Proyecto;User ID=sa;Password=spg2010";
+        private static string conexionMacoser = "Data Source=G-PRODUCCION\\MACOSER;Initial Catalog=Proyecto;User ID=sa;Password=123gycap321";
         private static string cadenaConexion;
         private static SqlTransaction transaccion = null;
         private static SqlCommand cmdReader = null;
@@ -32,9 +36,7 @@ namespace GyCAP.DAL
         public static readonly int tipoLocal = 0;        
         public static readonly int tipoInterna = 1;
         public static readonly int tipoRemota = 2;
-
-        //Devuelve el nombre de la PC
-        static String nombrePC = System.Environment.MachineName;
+        public static readonly int tipoFabrica = 3;
 
         //Setea el tipo de conexión
         public static void SetTipoConexion(int tipo)
@@ -111,8 +113,9 @@ namespace GyCAP.DAL
             }
             else
             {
-                if (tipoConexion == 1) { cadenaConexion = conexionInterna; }
-                else { cadenaConexion = conexionRemota; }
+                if (tipoConexion == 1) { cadenaConexion = conexionInterna; }                
+                else if(tipoConexion == 2) { cadenaConexion = conexionRemota; }
+                else if (tipoConexion == 3) { cadenaConexion = conexionMacoser; }
             }
             
             return new SqlConnection(cadenaConexion);
