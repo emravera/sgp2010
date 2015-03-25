@@ -1,0 +1,21 @@
+# Introducción #
+
+Nomenclatura para codificar los issues.
+
+# Detalle #
+
+UC-CODIGO + / + letra-categoría - TITULO de la TAREA
+
+**UC:** poner UC seguido del código que tiene el caso de uso en el excel. Si no está relacionado a un uc especifico poner ALL.
+
+**Letras categoría**
+
+_M_ : mejora
+_B_ : bug, error, etc
+_R_ : requerimiento
+_T_ : Tarea
+
+**Número:** debe ser secuencial y de tres dígitos
+
+**Ejemplo**
+UC-SO34/B
